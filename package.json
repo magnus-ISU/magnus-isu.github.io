@@ -11,7 +11,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 
-    "deploy": "pnpm run build && touch build/.nojekyll && pnpx gh-pages -d build"
+    "deploy": "pnpm run build && touch build/.nojekyll && pnpx gh-pages -d build -t true"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
