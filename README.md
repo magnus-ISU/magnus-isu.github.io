@@ -1,37 +1,40 @@
-## Welcome to GitHub Pages
+# Magnus' Github Page
 
-You can use the [editor on GitHub](https://github.com/magnus-ISU/magnus-isu.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Made with create-svelte
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
 
-### Markdown
+## Creating a project
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+If you're seeing this, you've probably already done this step. Congrats!
 
-```markdown
-Syntax highlighted code block
+```bash
+# create a new project in the current directory
+npm init svelte@next
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# create a new project in my-app
+npm init svelte@next my-app
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+> Note: the `@next` is temporary
 
-### Jekyll Themes
+## Developing
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/magnus-ISU/magnus-isu.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-### Support or Contact
+```bash
+npm run dev
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+
+```bash
+npm run build
+```
+
+> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
