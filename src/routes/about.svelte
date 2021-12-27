@@ -27,7 +27,7 @@
 	</p>
 
 	<!-- TODO lose the @next! -->
-	<pre>npm init svelte@next</pre>
+	<pre>npm init svelte@next # TODO lose the next, but currently we cannot do that for reasons and stuff</pre>
 
 	<p>
 		The page you're looking at is purely static HTML, with no client-side interactivity needed.

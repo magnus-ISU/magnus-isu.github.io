@@ -5,20 +5,35 @@
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
 	--pure-white: #ffffff;
+
 	--primary-color: #b9c6d2;
 	--secondary-color: #d0dde9;
 	--tertiary-color: #edf0f8;
 	--accent-color: #ff3e00;
 	--heading-color: rgba(0, 0, 0, 0.7);
 	--text-color: #444444;
-	--background-without-opacity: rgba(255, 255, 255, 0.7);
+	--border-color: rgba(0, 0, 0, 0.2);
+
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--primary-color: #181818;
+		--secondary-color: #282830;
+		--tertiary-color: #383848;
+		--accent-color: #ff3e00;
+		--heading-color: #bbffdd;
+		--text-color: #eeddcc;
+		--border-color: rgba(240, 220, 200, 0.3);
+	}
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
+	color: var(--text-color);
 	background-color: var(--primary-color);
 	background: linear-gradient(
 		180deg,
