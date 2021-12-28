@@ -24,7 +24,7 @@
 		--secondary-color: #282830;
 		--tertiary-color: #383848;
 		--accent-color: #ff3e00;
-		--heading-color: #bbffdd;
+		--heading-color: #99ffbb;
 		--text-color: #eeddcc;
 		--border-color: rgba(240, 220, 200, 0.3);
 	}
@@ -67,11 +67,14 @@ body::before {
 
 h1,
 h2,
-p {
+h3 {
 	font-weight: 400;
 	color: var(--heading-color);
 }
 
+h1 {
+	text-align: center;
+}
 p {
 	line-height: 1.5;
 }
@@ -83,15 +86,6 @@ a {
 
 a:hover {
 	text-decoration: underline;
-}
-
-h1 {
-	font-size: 2rem;
-	text-align: center;
-}
-
-h2 {
-	font-size: 1rem;
 }
 
 pre {
