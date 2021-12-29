@@ -13,7 +13,7 @@
 	// it so that it gets served as a static asset in prod
 	export const prerender = true;
 
-	import About from "./about.md";
+	import About from "./README.md";
 </script>
 
 <svelte:head>
