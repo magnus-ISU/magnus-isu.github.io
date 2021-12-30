@@ -23,11 +23,11 @@ I've also got some projects I plan to eventually make:
  - qoi-wuffs: I think the [Quite Okay Image](https://github.com/phoboslab/qoi) format is a very interesting project, and think that creating a `wuffs` encoder/decoder could be a fun way to learn that language.
  - magish: Miraculous Amazing Graphical Incomplete Shell, a GUI program which would allow you to run shell commands without a keyboard. Mostly an idea, would be a fun way to learn Qt or Gtk.
  - CorrodedReader: I speak Portuguese and am learning Japanese, and while the [Foreign Language Text Reader](https://github.com/magnus-ISU/foreign-language-text-reader) is a useful tool, it is a Java Swing GUI straight out of 2010. I would like to make something closer to LingQ, but free.
- - Select Default Application: I want to substantially improve [this tool](https://github.com/magnus-ISU/selectdefaultapplication), so it can help users understand all the default applications on their computers rather than being a semi-useful tool without search functionality.
 
 I've contributed to the following projects as well:
 
  - [rust-lolcat-git](https://github.com/ur0/lolcat): Made it handle escape sequences properly. Became a maintainer.
+ - [Select Default Application](https://github.com/magnus-ISU/selectdefaultapplication): I have substantially improved this utility, adding search, more rich information about the default applications on their system, better navigation and some bugfixes.
  - [CoreKeyboard](https://gitlab.com/cubocore/coreapps/corekeyboard): Autostart in tray, add interpreting command-line options, properly distinguish the target platform and use `enum`s rather than magic integers to do so.
  - [antidot](https://github.com/doron-cohen/antidot/pull/172): Antidot generates some scripts to be run by different shells from a configuration file. I made it generate these on-the-fly rather than having every shell script be generated and written to disk every time you ran the program. I also added support to a new shell, and improved some command-line information it gives you.
  - [πmenu](https://github.com/phillbush/pmenu): Added a command-line option which makes it much easier to configure πmenu for its intended purpose.
