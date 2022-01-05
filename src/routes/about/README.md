@@ -32,6 +32,7 @@ I've contributed to the following projects as well:
  - [antidot](https://github.com/doron-cohen/antidot/pull/172): Antidot generates some scripts to be run by different shells from a configuration file. I made it generate these on-the-fly rather than having every shell script be generated and written to disk every time you ran the program. I also added support to a new shell, and improved some command-line information it gives you.
  - [πmenu](https://github.com/phillbush/pmenu): Added a command-line option which makes it much easier to configure πmenu for its intended purpose.
  - [Sweet Theme](https://github.com/EliverLara/Sweet): Fixed theme parsing errors from GTK
+ - [Anki-touch](https://github.com/magnus-ISU/anki-touch): Reimplemented an old Anki extension from 8 years ago in the new 2.1 addon API
  - [Shitpost](https://github.com/magnus-ISU/shitpost): A fun little command-line script to make memes. Improved the design and interface, and became the maintainer.
  - [Runtime Terror bot](https://github.com/magnus-ISU/RT-bot): A discord bot for a server I'm in. Added Poll functionality, so we could remove a different (inferior) bot we were using for that purpose.
  - [SysMonTask](https://github.com/magnus-ISU/SysMonTask): Removed some calls to `popen` which could be implemented easily in python code; fixed the way it counted open threads on a system; removed some dead code.
