@@ -221,7 +221,7 @@
 		<li>Build Barracks: Gain 1 Barracks</li>
 		<li>Recruit Soldiers: You gain soldiers equal to the number of Barracks in your city</li>
 		<li>Defend: Double your Wall stat until your next turn</li>
-		<li>Attack TARGET_NAME
+		<li>Attack
 			<ul>
 				<li>Choose another player.</li>
 				<li>If any other player has attacked that player, you lose one soldier for each soldier of the attacker with the highest number of soldiers.</li>
