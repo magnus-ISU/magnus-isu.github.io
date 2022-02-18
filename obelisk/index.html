@@ -12,9 +12,12 @@
 		<link rel="modulepreload" href="/_app/start-c2e3aed6.js">
 		<link rel="modulepreload" href="/_app/chunks/vendor-219f1c8b.js">
 		<link rel="modulepreload" href="/_app/pages/__layout.svelte-77c65cf5.js">
-		<link rel="modulepreload" href="/_app/pages/egg.svelte-8bb6342f.js">
+		<link rel="modulepreload" href="/_app/pages/obelisk/index.svelte-6c2cbe95.js">
+		<link rel="modulepreload" href="/_app/pages/obelisk/city.svelte-ad217cbe.js">
 		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
 		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-d1017ca8.css">
+		<link rel="stylesheet" href="/_app/assets/pages/obelisk/index.svelte-1cfc700c.css">
+		<link rel="stylesheet" href="/_app/assets/pages/obelisk/city.svelte-f15bec2f.css">
 
 		<script type="module">
 			import { start } from "/_app/start-c2e3aed6.js";
@@ -31,11 +34,11 @@
 					error: null,
 					nodes: [
 						import("/_app/pages/__layout.svelte-77c65cf5.js"),
-						import("/_app/pages/egg.svelte-8bb6342f.js")
+						import("/_app/pages/obelisk/index.svelte-6c2cbe95.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
-						path: "\u002Fegg",
+						path: "\u002Fobelisk",
 						query: new URLSearchParams(""),
 						params: {}
 					}
@@ -63,7 +66,48 @@
 		<a href="https://aur.archlinux.org/account/magnus-tesshu" class="svelte-1sm6jb1"><img src="/_app/assets/Archlinux-icon-crystal-64-80516d40.svg" alt="Arch User Repository" class="svelte-1sm6jb1"></a></div>
 </header>
 
-<main class="svelte-1l5lemn">Hi Ron!
+<main class="svelte-1l5lemn"><pre class="centered svelte-1a09293">u/revesvan&#39;s
+                                  ╱╲
+                                  ||
+   ________ ___.          .__     ||          ____  __.
+   \_____  \\_ |__   ____ |  |    ||    _____|    |/ _|
+    /   |   \| __ \_/ __ \|  |    ||   /  ___/      ‹ 
+   /    |    \ \_\ \  ___/|  |__ |  |  \___ \|    |  \ 
+   \_______  /___  /\___  ›____/_|__|_/____  ›____|__ \
+           \/    \/     \/     ╱______╲    \/        \/
+</pre>
+
+<div id="cities" class="svelte-1a09293"></div>
+
+<button class="svelte-1a09293">Begin the Obelisk...
+	</button>
+
+<p class="lore svelte-1a09293">King, you must now gather your masons and bolster your defenses, for you have heard the plea of the gods. You must build an Obelisk.
+</p>
+<p class="lore svelte-1a09293">It will scrape the heavens and be immortal in its glory, and your name will be forever carved among its great stones. But hurry, for across the lands, the lords of strange lands have also heard the call. And should their efforts succeed while you tarry, your worship will go unheard, and your name die with you.
+</p>
+
+<div id="rules" class="svelte-1a09293"><p>You rule a city-state, with the following stats:</p>
+	<ul><li>Obelisk: Your progress towards winning the game.</li>
+		<li>Walls: These help you defend your obelisk from other players</li>
+		<li>Barracks: These help you raise an army to prevent other players from completing their obelisks</li>
+		<li>Soldiers: This is the number of soldiers in your army</li></ul>
+	<p>Resources have a minimum of 0, and a maximum of 10 (except soldiers).</p>
+	<p>Each turn you select one action to take from the following list:</p>
+	<ul><li>Declare a Holiday: Gain 1 Soldier</li>
+		<li>Build Obelisk: Gain 1 Obelisk</li>
+		<li>Build Wall: Gain 1 Wall</li>
+		<li>Build Barracks: Gain 1 Barracks</li>
+		<li>Recruit Soldiers: You gain soldiers equal to the number of Barracks in your city</li>
+		<li>Defend: Double your Wall stat until your next turn</li>
+		<li>Attack TARGET_NAME
+			<ul><li>Choose another player.</li>
+				<li>If any other player has attacked that player, you lose one soldier for each soldier of the attacker with the highest number of soldiers.</li>
+				<li>You then lose one soldier for each of your target’s Walls.</li>
+				<li>If your target is not Attacking, Recruiting, or on Holiday, you lose one soldier for each of their Soldiers. They also lose 1 soldier for each of your soldiers lost this way.</li>
+				<li>For each soldier you have remaining, remove one of your target’s Obelisk. If they reach 0, they lose the game.</li></ul></li></ul>
+	<p>You win if you get to 10 Obelisk or all your opponents have 0 Obelisk.</p>
+</div>
 </main>
 
 </div>
