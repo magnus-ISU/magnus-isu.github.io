@@ -22,4 +22,6 @@ Each turn you select one action to take from the following list:
 	* If your target is not Attacking, Recruiting, or on Holiday, you lose one soldier for each of their Soldiers. They also lose 1 soldier for each of your soldiers lost this way.
 	* For each soldier you have remaining, remove one of your target's Obelisk. If they reach 0, they lose the game.
 
+You gain a soldier from your Holiday feast immediately. Then attacks are processed. Finally, all other actions are taken.
+
 You win if you get to 10 Obelisk or all your opponents have 0 Obelisk.

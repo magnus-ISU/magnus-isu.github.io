@@ -34,36 +34,28 @@
 	function gameTick() {
 		let cityEntries = Object.entries(cities);
 		let deadMen = {};
+		// Gain troops from an emergency Holiday first
 		for (let i = 0; i < cityEntries.length; i++) {
 			let cityName = cityEntries[i][0];
 			// This has values corresponding to the index in actions[]
-			switch(cities[cityName].action) {
-			case 0:
+			if (cities[cityName].action === 0) {
 				cities[cityName].soldiers++;
 				break;
-			case 1:
-				// wait for building of the Obelisk, as we must see if it gets destroyed first.
-				// cities[cityName].obelisk++;
-				break;
-			case 2:
-				// wait for building of the Walls, as we must see if we get attacked first.
-				// cities[cityName].walls++;
-				break;
-			case 3:
-				cities[cityName].barracks++;
-				break;
-			case 4:
-				cities[cityName].soldiers += cities[cityName].barracks;
-				break;
-			case 5:
-				// Determined by looking at action in attack
-				break;
-			case 6:
+			// Now ensure that we did a legal move
+			} else if (cities[cityName].action < 0 || cities[cityName].action >= actions.length) {
+				alert("Illegal game state reached! action was '" + cities[cityName].action + "'");
+			}
+		}
+		// Next, process attacks
+		for (let i = 0; i < cityEntries.length; i++) {
+			let cityName = cityEntries[i][0];
+			// This has values corresponding to the index in actions[]
+			if (cities[cityName].action === 6) {
 				// Find the highest other attacking army
 				let targetName = cities[cityName].target;
 				// If they didn't select a target at the start - this is difficult to change and also funny if it happens so I think we should leave it in
 				if (!(targetName in cities)) {
-					break;
+					continue;
 				}
 				let blockingSoldiers = 0;
 				for (let j = 0; j < cityEntries.length; j++) {
@@ -112,12 +104,6 @@
 					cities[targetName].obelisk = 0;
 					alert(targetName + "'s Obelisk has been demolished!")
 				}
-				break;
-			case 7:
-				// Cheating!
-				break;
-			default:
-				alert("Illegal game state reached! action was '" + cities[cityName].action + "'");
 			}
 		}
 		// Remove the dead now that we don't need the old numbers any longer. You cannot train soldiers and lose soldiers, so that is no issue
@@ -139,6 +125,12 @@
 				break;
 			case 2:
 				cities[cityName].walls++;
+				break;
+			case 3:
+				cities[cityName].barracks++;
+				break;
+			case 4:
+				cities[cityName].soldiers += cities[cityName].barracks;
 				break;
 			case 7:
 				// Cheat after we get attacked to always set to the right values
@@ -165,7 +157,7 @@
 	}
 </script>
 
-<pre class="centered">u/revesvan's
+<pre class="centered">u/revesvans'
                                   ╱╲
                                   ||
    ________ ___.          .__     ||          ____  __.
@@ -226,11 +218,12 @@
 				<li>Choose another player.</li>
 				<li>If any other player has attacked that player, you lose one soldier for each soldier of the attacker with the highest number of soldiers.</li>
 				<li>You then lose one soldier for each of your target’s Walls.</li>
-				<li>If your target is not Attacking, Recruiting, or on Holiday, you lose one soldier for each of their Soldiers. They also lose 1 soldier for each of your soldiers lost this way.</li>
+				<li>If your target is not Attacking or Recruiting, you lose one soldier for each of their Soldiers. They also lose 1 soldier for each of your soldiers lost this way.</li>
 				<li>For each soldier you have remaining, remove one of your target’s Obelisk. If they reach 0, they lose the game.</li>
 			</ul>
 		</li>
 	</ul>
+	<p>You gain a soldier from your Holiday feast immediately. Then attacks are processed. Finally, all other actions are taken.</p>
 	<p>You win if you get to 10 Obelisk or all your opponents have 0 Obelisk.</p>
 </div>
 
