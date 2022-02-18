@@ -7,4 +7,6 @@ read commitmsg
 [ -z "$commitmsg" ] && exit 1
 git commit -m "$commitmsg"
 
+git push
+
 pnpm run deploy
