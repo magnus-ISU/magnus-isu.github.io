@@ -73,7 +73,7 @@
 				}
 				// Find the number of defending soldiers
 				let defendingSoldiers = cities[targetName].soldiers;
-				let defenseless_actions = {0: true, 4: true, 6: true};
+				let defenseless_actions = {4: true, 6: true};
 				if (defenseless_actions[cities[targetName].action]) {
 					defendingSoldiers = 0;
 				}
