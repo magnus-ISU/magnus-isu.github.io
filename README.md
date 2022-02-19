@@ -1,4 +1,4 @@
-# Magnus' Github Page
+# [Magnus' Github Page](magnus-isu.github.io)
 
 ## Made with create-svelte
 
