@@ -7,8 +7,8 @@
 	export let action;
 	export let target;
 	export let lore;
-	export let cities;
-	export let actions;
+	export let cities = {};
+	export let actions = {};
 
 </script>
 
