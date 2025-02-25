@@ -48,7 +48,7 @@ On your turn, you may perform up to two actions in any order of the following fo
 Now, if you have created certain structures all of the same color of tiles, you may build and receive building rewards.
 
 - If there is a 2x2, you may place a Monument of the same color on the tiles.
-  At the end of a player's turn, each of their leaders in the Monuments' kingdom gets a point if they control the Monument's color(s).
+  At turns end, a monument gives the leaders controlling its colors a point if it is their turn.
 - (Optional) If there are 5 tiles in a cross, you may place the Wonder on the tiles.
   When the king ends his turn in the Wondrous kingdom, his player chooses any point to gain.
 - (Optional) If there is a 3x1 or longer, you may place a Landmark on one of the tiles.
