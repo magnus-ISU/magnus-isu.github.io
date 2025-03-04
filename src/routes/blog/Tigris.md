@@ -31,7 +31,7 @@ On your turn, you may perform up to two actions in any order of the following fo
   3. You win if you have more influence than the ruler.
   4. Whoever won the Revolt gets one red point, and the loser withdraws their leader.
 - Place one of your tiles; farms on rivers, tiles on other spaces.
-  If there is no War, the leader controlling that color in the kingdom gets a point.
+  If two kingdoms are not connected, the leader controlling that color in the kingdom gets a point.
   If the colored leader is in the kingdom, they control it. Otherwise, if the (black) King is in the kingdom, the King controls it.
   You cannot unite more than two kingdoms.
   If you unite two kingdoms and any color has more than one leader in the kingdom, War breaks out.
@@ -41,19 +41,20 @@ On your turn, you may perform up to two actions in any order of the following fo
   4. One's supporters are same-colored tiles in one's leader's kingdom.
   5. The attacker discards any number of tiles of the contested leader's color, gaining that many supporters; then the defender does.
   6. The attacker wins if they have more supporters than the defender.
-  7. The winner removes the loser's leader and supporters from the board, each piece removed gives a point of the leader's color.
+  7. The winner removes the loser's leader and supporters (except temples granting red leader Priests influence) from the board, each piece removed gives a point of the leader's color.
 
 ## End of an action
 
-Now, if you have created certain structures all of the same color of tiles, you may build and receive building rewards.
+Now:
 
-- If there is a 2x2, you may place a Monument of the same color on the tiles.
-  At turns end, a monument gives the leaders controlling its colors a point if it is their turn.
+- If a kingdom has two treasures, the green leader within takes a treasure. Remove special treasures first.
+- If there is a 2x2 of the same color, you may place a Monument of the same color on the tiles.
+  At turns end, a monument gives the leaders of its colors a point if it is their turn.
 - (Optional) If there are 5 tiles in a cross, you may place the Wonder on the tiles.
   When the king ends his turn in the Wondrous kingdom, his player chooses any point to gain.
 - (Optional) If there is a 3x1 or longer, you may place a Landmark on one of the tiles.
   When a tile of the Landmark's color is placed in its kingdom, the leader gets double points.
-  Landmarks count as supporters and temples but are not removed in wars.
+  Landmarks count for wars and revolts but are not removed in wars.
 
 The tiles under a Monument or Wonder do not count for wars and revolts.
 If a Monument or Wonder removes all of a leader's adjacent temples, the leader is withdrawn.
@@ -70,3 +71,4 @@ The game ends when a player cannot draw because there are no more tiles, or at t
 
 - On the advanced board, remove 4 temples from the main game.
 - In a war, the attacker is always chosen as the player who would go soonest.
+- Wars cannot connect 3 kingdoms.
