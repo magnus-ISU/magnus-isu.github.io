@@ -1,7 +1,6 @@
 header,
 footer {
 	font-family: var(--primaryFont);
-	padding: 2.5rem 2rem;
 }
 
 :where(header, footer) a {
@@ -150,6 +149,7 @@ header {
 	position: absolute;
 	top: 2rem;
 	right: 2rem;
+	z-index: 1;
 }
 
 .main nav ul li {

@@ -1,4 +1,3 @@
-<!-- This file renders each individual blog post for reading. Be sure to update the svelte:head below -->
 <script>
 	let { data } = $props();
 
@@ -8,7 +7,6 @@
 </script>
 
 <svelte:head>
-	<!-- Be sure to add your image files and un-comment the lines below -->
 	<title>{title}</title>
 	<meta data-key="description" name="description" content={excerpt} />
 	<meta property="og:type" content="article" />
@@ -35,15 +33,29 @@
 
 	<h1>{title}</h1>
 
-	<div class="meta">
-		<b>Published:</b>
-		{date}
-		<br />
-		<b>Updated:</b>
-		{updated}
-	</div>
-
 	<PostContent />
+
+	<div class="meta">
+		{#if date}
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<b>Published:</b>
+			{date}
+		{/if}
+		{#if updated}
+			<br />
+			<b>Updated:</b>
+			{updated}
+		{/if}
+	</div>
 
 	{#if categories}
 		<aside class="post-footer">

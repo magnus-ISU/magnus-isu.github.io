@@ -1,9 +1,7 @@
 ---
 date: '2025-01-05'
-title: Tigris rules
+title: Tigris and Euphrates
 ---
-
-# Tigris and Euphrates
 
 - 1 board, customizable (10 additional temples are part of the board)
 - 143 tiles in bag: 47 red temples, 36 blue farms, 30 green markets, 30 black strongholds

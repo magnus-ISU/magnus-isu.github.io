@@ -15,7 +15,7 @@ body {
 }
 
 :where(h1, h2, h3, h4, h5, h6) {
-	margin: 4.5rem 0 1rem;
+	margin: 1rem 0 1rem;
 	line-height: 1.1;
 	font-family: var(--accentFont);
 	font-weight: bold;
@@ -40,12 +40,10 @@ h3 {
 
 h4 {
 	font-size: clamp(1.5rem, calc(1.5rem + 1vw), 1.8rem);
-	;
 }
 
 h5 {
 	font-size: clamp(1.35rem, calc(1.35rem + 1vw), 1.5rem);
-	;
 }
 
 h6 {
