@@ -1,3 +1,0 @@
-King, you must now gather your masons and bolster your defenses, for you have heard the plea of the gods. You must build an Obelisk.
-
-It will scrape the heavens and be immortal in its glory, and your name will be forever carved among its great stones. But hurry, for across the lands, the lords of strange lands have also heard the call. And should their efforts succeed while you tarry, your worship will go unheard, and your name die with you.
