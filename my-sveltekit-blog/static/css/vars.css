@@ -1,18 +1,19 @@
 :root {
-	/* Colors */
-	--accent: #E63946;
-	--background: #FAF9F8;
-	--lightAccent: #A8DAE5;
-	--lighterAccent: #E6E8E4;
-	--dark: #457B9D;
-	--darker: #1D3557;
-	--slate: #2F3948;
+	--accent: #e63946;
+	--background: #faf9f8;
+	--lightAccent: #0a0;
+	--dark: #aaa;
+	--darker: #0f0;
+	--slate: #f00;
 
 	--white: #fff;
 	--black: #152030;
 
-	--ink: var(--slate);
-	--paper: var(--background);
+	--ink: #fff;
+	--paper: #111;
+	--footer-background: #000;
+	--header-background: #000;
+	--code-background: #808;
 
 	/**
 	 * These fonts are broken out into two separate variables from a previous iteration. I left

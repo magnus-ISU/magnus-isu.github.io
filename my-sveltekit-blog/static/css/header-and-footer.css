@@ -31,7 +31,7 @@ footer {
 }
 
 header {
-	background: var(--lightAccent);
+	background: var(--header-background);
 	color: var(--darker);
 	display: flex;
 	justify-content: space-between;
@@ -190,8 +190,8 @@ header {
 }
 
 footer {
-	background: var(--darker);
-	color: var(--paper);
+	background: var(--footer-background);
+	color: var(--ink);
 	display: grid;
 	grid-template-columns: 100%;
 	align-items: stretch;
