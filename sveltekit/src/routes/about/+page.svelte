@@ -1,5 +1,4 @@
 <script context="module">
-	export const prerender = true
 	// import About from "./README.md";
 </script>
 
