@@ -38,20 +38,10 @@
 	<div class="meta">
 		{#if date}
 			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
 			<b>Published:</b>
 			{date}
 		{/if}
 		{#if updated}
-			<br />
 			<b>Updated:</b>
 			{updated}
 		{/if}

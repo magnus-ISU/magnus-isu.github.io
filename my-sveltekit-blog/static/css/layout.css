@@ -27,10 +27,6 @@ img {
 }
 
 .post {
-	h1 {
-		margin-bottom: 1rem;
-	}
-
 	.meta {
 		font-size: 0.8rem;
 		margin-bottom: 4rem;
@@ -42,20 +38,12 @@ img {
 }
 
 li {
-	margin-bottom: 0.25rem;
+	margin-bottom: 0.1rem;
 }
 
 .posts-list {
 	list-style-type: none;
 	padding: 0;
-
-	li {
-		margin-bottom: 6rem;
-	}
-
-	img + h2 {
-		margin-top: 1rem;
-	}
 
 	a {
 		display: block;
