@@ -1,5 +1,5 @@
 <script context="module">
-	// import About from "./README.md";
+	import About from './README.md'
 </script>
 
 <svelte:head>
@@ -7,7 +7,7 @@
 </svelte:head>
 
 <div class="content">
-	<!-- <About /> -->
+	<About />
 </div>
 
 <style>

@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-static'
+import { mdsvex } from 'mdsvex'
 
 export default {
 	kit: {
@@ -14,4 +15,10 @@ export default {
 			base: process.env.NODE_ENV === 'production' ? '/magnus-isu.github.io/' : '',
 		},
 	},
+	preprocess: [
+		mdsvex({
+			extensions: ['.md'],
+			smartypants: true,
+		}),
+	],
 }
