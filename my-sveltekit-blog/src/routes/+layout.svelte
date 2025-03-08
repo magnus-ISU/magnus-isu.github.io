@@ -46,12 +46,7 @@
 	/>
 </svelte:head>
 
-<!--
-	The below markup is used on every page in the site. The <slot> is where the page's
-	actual contents will show up.
--->
 <div class="layout" class:open={$isMenuOpen}>
-	<Header />
 	{#key data.path}
 		<main id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
 			{@render children?.()}
@@ -59,3 +54,10 @@
 	{/key}
 	<Footer />
 </div>
+
+<style>
+	main {
+		width: 100vw;
+		min-height: 100vh;
+	}
+</style>

@@ -1,22 +1,20 @@
 <!-- This file handles any /blog/page/x route for pagination -->
 <script>
-	import PostsList from '$lib/components/PostsList.svelte'
-	import Pagination from '$lib/components/Pagination.svelte'
-  import { postsPerPage, siteDescription } from '$lib/config'
+	import PostsList from '$lib/components/PostsList.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
+	import { postsPerPage, siteDescription } from '$lib/config';
 
 	let { data } = $props();
-	const { page, totalPosts, posts } = data
+	const { page, totalPosts, posts } = data;
 
-	let lowerBound = $derived((page * postsPerPage) - (postsPerPage - 1) || 1)
-	let upperBound = $derived(Math.min(page * postsPerPage, totalPosts))
+	let lowerBound = $derived(page * postsPerPage - (postsPerPage - 1) || 1);
+	let upperBound = $derived(Math.min(page * postsPerPage, totalPosts));
 </script>
-
 
 <svelte:head>
 	<title>Blog - page {page}</title>
 	<meta data-key="description" name="description" content={siteDescription} />
 </svelte:head>
-
 
 <!-- TODO: this is duplicated across multiple `+page.svelte` files -->
 {#if posts.length}
