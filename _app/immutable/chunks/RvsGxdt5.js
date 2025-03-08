@@ -1,0 +1,1 @@
+const t="A Magnus Archive",s="Built with the SvelteKit Static Blog Starter",e="magnus-isu.github.io",i=100,a=[{title:"Blog",route:"/blog"},{title:"Games",route:"/games"}];export{t as a,e as b,a as n,i as p,s};
