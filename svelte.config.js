@@ -8,6 +8,7 @@ const config = {
 	extensions: ['.svelte', '.md'],
 
 	kit: {
+		appDir: 'app', // Required as the default is _app
 		adapter: adapter(),
 		prerender: {
 			entries: [
