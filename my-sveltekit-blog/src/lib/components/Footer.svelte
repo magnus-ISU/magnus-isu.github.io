@@ -1,20 +1,33 @@
 <script>
-	import NavItems from './NavItems.svelte';
+	import { navItems } from '$lib/config';
+
+	import { currentPage, isMenuOpen } from '../assets/js/store';
+
+	const maybeCloseMenu = () => {
+		if (href != $currentPage) {
+			isMenuOpen.set(false);
+		}
+	};
 </script>
 
 <footer>
 	<nav>
 		<ul>
 			<li>
-				<a href="/api/rss.xml" data-sveltekit-reload>RSS</a>
-			</li>
-			<li>
 				<a href="/">Home</a>
 			</li>
+			{#each navItems as page}
+				<li>
+					<a
+						href={page.route}
+						onclick={maybeCloseMenu}
+						class:active={$currentPage.startsWith(page.route)}
+					>
+						{page.title}
+					</a>
+				</li>
+			{/each}
 		</ul>
-	</nav>
-	<nav>
-		<NavItems />
 	</nav>
 
 	<p>
@@ -31,3 +44,41 @@
 		say, eighty."
 	</p>
 </footer>
+
+<style>
+	footer {
+		background: var(--footer-background);
+		color: var(--paper);
+		padding: 1rem;
+		bottom: 0;
+		width: 100%;
+		border-top: 1px solid var(--dark);
+	}
+
+	nav {
+		display: grid;
+		place-items: center;
+	}
+
+	nav ul {
+		display: flex;
+		gap: 1.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	a {
+		color: var(--paper);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	a:hover {
+		color: #aabbff;
+	}
+
+	.active {
+		color: #ffaaaa !important;
+	}
+</style>

@@ -1,19 +1,13 @@
-<script>
-	import MainNav from './MainNav.svelte';
-	import HamburgerMenuButton from './HamburgerMenuButton.svelte';
-	import { siteTitle } from '$lib/config';
-
-	const focusMain = () => {
-		const main = document.querySelector('main');
-		main.focus();
-	};
-</script>
-
 <header>
-	<a href="/" class="site-title">
-		{siteTitle}
-	</a>
+	<h1>A Magnus Archive</h1>
 
-	<HamburgerMenuButton />
-	<MainNav />
+	<!-- <HamburgerMenuButton /> -->
+	<!-- <MainNav /> -->
 </header>
+
+<style>
+	h1 {
+		display: grid;
+		place-content: center;
+	}
+</style>
