@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>A Magnus Archive</title>
+<description>Built with the SvelteKit Static Blog Starter</description>
+<link>https://github.com/josh-collinsworth/sveltekit-blog-starter</link>
+<atom:link href="https://magnus-isu.github.io/api/rss.xml" rel="self" type="application/rss+xml"/>
+<item>
+<guid isPermaLink="true">https://magnus-isu.github.io/blog/tigris</guid>
+<title>Tigris and Euphrates</title>
+<link>https://magnus-isu.github.io/blog/tigris</link>
+<description>undefined</description>
+<pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://magnus-isu.github.io/blog/whoami</guid>
+<title>whoami</title>
+<link>https://magnus-isu.github.io/blog/whoami</link>
+<description>undefined</description>
+<pubDate>Sun, 01 Jan 2023 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
