@@ -15,25 +15,26 @@ export const nodes = [
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
 	() => import('./nodes/13'),
-	() => import('./nodes/14')
+	() => import('./nodes/14'),
+	() => import('./nodes/15')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
-		"/": [2],
-		"/blog": [~3],
-		"/blog/category": [~5],
-		"/blog/category/page/[page]": [~9],
-		"/blog/category/[category]": [~6],
-		"/blog/category/[category]/page": [~7],
-		"/blog/category/[category]/page/[page]": [~8],
-		"/blog/page": [~10],
-		"/blog/page/[page]": [~11],
-		"/blog/[post]": [4],
-		"/games": [12],
-		"/games/obelisk": [13],
-		"/games/perfect-pitch": [14]
+		"/": [3],
+		"/blog": [~4,[2]],
+		"/blog/category": [~6,[2]],
+		"/blog/category/page/[page]": [~10,[2]],
+		"/blog/category/[category]": [~7,[2]],
+		"/blog/category/[category]/page": [~8,[2]],
+		"/blog/category/[category]/page/[page]": [~9,[2]],
+		"/blog/page": [~11,[2]],
+		"/blog/page/[page]": [~12,[2]],
+		"/blog/[post]": [5,[2]],
+		"/games": [13],
+		"/games/obelisk": [14],
+		"/games/perfect-pitch": [15]
 	};
 
 export const hooks = {
