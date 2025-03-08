@@ -5,7 +5,6 @@
 	type Level = {
 		points: number;
 		notes: string[];
-		octaves: number[];
 		noteToGuess: string;
 		isPlaying: boolean;
 		userGuess: undefined | string;
@@ -26,42 +25,155 @@
 		name: string;
 		description: string;
 		notes: string[];
-		octaves: number[];
 	}[] = [
 		{
 			points: 1,
 			name: 'Level 1: Basic C Notes',
 			description: 'Distinguish between middle C (C4), C5 (octave above), and C3 (octave below)',
-			notes: ['C'],
-			octaves: [3, 4, 5]
+			notes: ['C3', 'C4', 'C5']
 		},
 		{
 			points: 2,
 			name: 'Level 2: Extended C Range',
 			description: 'Adds C3.5 and C4.5 (E notes, which are halfway between these octaves)',
-			notes: ['C', 'E'],
-			octaves: [3, 4, 5]
+			notes: ['C3', 'E3', 'C4', 'E4', 'C5']
 		},
 		{
 			points: 3,
 			name: 'Level 3: More Intermediate Notes',
 			description: 'Adds more notes between octaves (C, D, E, F, G, A, B)',
-			notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
-			octaves: [3, 4, 5]
+			notes: [
+				'C3',
+				'D3',
+				'E3',
+				'F3',
+				'G3',
+				'A3',
+				'B3',
+				'C4',
+				'D4',
+				'E4',
+				'F4',
+				'G4',
+				'A4',
+				'B4',
+				'C5',
+				'D5',
+				'E5',
+				'F5',
+				'G5',
+				'A5',
+				'B5'
+			]
 		},
 		{
 			points: 4,
 			name: 'Level 4: All Natural Notes',
 			description: 'All natural notes across 3 octaves',
-			notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
-			octaves: [2, 3, 4, 5, 6]
+			notes: [
+				'C2',
+				'D2',
+				'E2',
+				'F2',
+				'G2',
+				'A2',
+				'B2',
+				'C3',
+				'D3',
+				'E3',
+				'F3',
+				'G3',
+				'A3',
+				'B3',
+				'C4',
+				'D4',
+				'E4',
+				'F4',
+				'G4',
+				'A4',
+				'B4',
+				'C5',
+				'D5',
+				'E5',
+				'F5',
+				'G5',
+				'A5',
+				'B5',
+				'C6',
+				'D6',
+				'E6',
+				'F6',
+				'G6',
+				'A6',
+				'B6'
+			]
 		},
 		{
 			points: 5,
 			name: 'Level 5: All Notes (Sharps and Flats)',
 			description: 'All notes including sharps and flats across 3 octaves',
-			notes: ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'],
-			octaves: [2, 3, 4, 5, 6]
+			notes: [
+				'C2',
+				'Db2',
+				'D2',
+				'Eb2',
+				'E2',
+				'F2',
+				'Gb2',
+				'G2',
+				'Ab2',
+				'A2',
+				'Bb2',
+				'B2',
+				'C3',
+				'Db3',
+				'D3',
+				'Eb3',
+				'E3',
+				'F3',
+				'Gb3',
+				'G3',
+				'Ab3',
+				'A3',
+				'Bb3',
+				'B3',
+				'C4',
+				'Db4',
+				'D4',
+				'Eb4',
+				'E4',
+				'F4',
+				'Gb4',
+				'G4',
+				'Ab4',
+				'A4',
+				'Bb4',
+				'B4',
+				'C5',
+				'Db5',
+				'D5',
+				'Eb5',
+				'E5',
+				'F5',
+				'Gb5',
+				'G5',
+				'Ab5',
+				'A5',
+				'Bb5',
+				'B5',
+				'C6',
+				'Db6',
+				'D6',
+				'Eb6',
+				'E6',
+				'F6',
+				'Gb6',
+				'G6',
+				'Ab6',
+				'A6',
+				'Bb6',
+				'B6'
+			]
 		}
 	];
 
@@ -75,7 +187,6 @@
 		level = {
 			points: levelConfig.points,
 			notes: levelConfig.notes,
-			octaves: levelConfig.octaves,
 			noteToGuess: '',
 			isPlaying: false,
 			userGuess: undefined,
@@ -94,12 +205,8 @@
 		if (!level) return;
 
 		const randomNoteIndex = Math.floor(Math.random() * level.notes.length);
-		const randomOctaveIndex = Math.floor(Math.random() * level.octaves.length);
+		const noteToGuess = level.notes[randomNoteIndex];
 
-		const note = level.notes[randomNoteIndex];
-		const octave = level.octaves[randomOctaveIndex];
-
-		const noteToGuess = `${note}${octave}`;
 		level.noteToGuess = noteToGuess;
 		level.isPlaying = false;
 		level.userGuess = undefined;
@@ -339,14 +446,16 @@
 			</div>
 
 			<div class="keyboard-container">
-				{#each level.octaves as octave}
+				{#each [...new Set(level.notes.map((note) => note.slice(-1)))] as octave}
 					<div class="octave-row">
 						<div class="octave-label">Octave {octave}</div>
 						<div class="keyboard">
-							{#each level.notes as note}
+							{#each [...new Set(level.notes
+										.filter((n) => n.endsWith(octave))
+										.map((n) => n.slice(0, -1)))] as note}
 								<button
-									class="note-btn {getFeedbackClass(note, octave)}"
-									onclick={() => makeGuess(note, octave)}
+									class="note-btn {getFeedbackClass(note, parseInt(octave))}"
+									onclick={() => makeGuess(note, parseInt(octave))}
 									disabled={level.userGuess !== undefined}
 								>
 									{note}{octave}
@@ -581,7 +690,7 @@
 	}
 
 	.feedback-container {
-		min-height: 60px; /* Fixed height to prevent DOM shifting */
+		min-height: 60px;
 	}
 
 	.feedback {
