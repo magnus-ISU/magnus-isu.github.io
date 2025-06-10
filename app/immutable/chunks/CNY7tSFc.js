@@ -1,0 +1,1 @@
+import{o as c,q as i,u as _,b as h,h as r,e as u,p as d,a as k,c as y,U as b}from"./Bebrl_GB.js";function p(f,n,o){r&&u();var e=f,s=b,a,t=c()?i:_;h(()=>{t(s,s=n())&&(a&&d(a),a=k(()=>o(e)))}),r&&(e=y)}export{p as k};
