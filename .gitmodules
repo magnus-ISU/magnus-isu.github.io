@@ -1,0 +1,3 @@
+[submodule "src/lib/components/character_sheet"]
+	path = src/lib/components/character_sheet
+	url = git@github.com:magnus-ISU/character_sheet.git
