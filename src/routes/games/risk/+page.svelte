@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import paths from './paths.json';
 	import background from './background.json';
+	import connections from './connections.json';
 
 	let territories = [
 		{ id: 'eastern_australia', name: 'Eastern Australia' },
@@ -51,7 +52,8 @@
 	let centers = {};
 	let state = {};
 	let selectedId = null;
-	const colors = ['#FF4D4D', '#4D4DFF', '#4DFF4D', '#FFFF4D', '#FF4DFF', '#FFB347'];
+	let activeColor = null;
+	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#000000', '#008000', '#C0C0C0'];
 
 	let svgElement;
 
@@ -62,7 +64,7 @@
 		} else {
 			territories.forEach((t) => {
 				state[t.id] = {
-					armies: 1,
+					armies: 0,
 					owner: colors[0],
 					isCard: false
 				};
@@ -75,13 +77,24 @@
 	}
 
 	function handleCountryClick(id) {
-		if (selectedId === id) {
-			state[id].armies += 1;
-		} else {
+		if (activeColor) {
+			state[id].owner = activeColor;
+			state[id].armies = 1;
 			selectedId = id;
+		} else {
+			if (selectedId === id) {
+				state[id].armies += 1;
+			} else {
+				selectedId = id;
+			}
 		}
 		state = { ...state };
 		saveState();
+	}
+
+	function handleOceanClick() {
+		selectedId = null;
+		activeColor = null;
 	}
 
 	function handleRightClick(e, id) {
@@ -94,12 +107,43 @@
 	}
 
 	function changeColor(color) {
-		if (selectedId) {
-			state[selectedId].owner = color;
-			state[selectedId].armies = 1;
-			state = { ...state };
-			saveState();
+		if (activeColor === color) {
+			activeColor = null;
+		} else {
+			activeColor = color;
+			if (selectedId) {
+				state[selectedId].owner = color;
+				state[selectedId].armies = 1;
+				state = { ...state };
+				saveState();
+			}
 		}
+	}
+
+	function exportState() {
+		const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+		const downloadAnchorNode = document.createElement('a');
+		downloadAnchorNode.setAttribute("href",     dataStr);
+		downloadAnchorNode.setAttribute("download", "risk_state.json");
+		document.body.appendChild(downloadAnchorNode);
+		downloadAnchorNode.click();
+		downloadAnchorNode.remove();
+	}
+
+	function importState(event) {
+		const file = event.target.files[0];
+		if (!file) return;
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			try {
+				const imported = JSON.parse(e.target.result);
+				state = imported;
+				saveState();
+			} catch (err) {
+				alert("Failed to import: Invalid JSON");
+			}
+		};
+		reader.readAsText(file);
 	}
 
 	onMount(() => {
@@ -124,6 +168,23 @@
 	});
 
 	$: cards = territories.filter((t) => state[t.id]?.isCard);
+
+	$: stats = colors.reduce((acc, color) => {
+		const teamTerritories = Object.values(state).filter((s) => s.owner === color && s.armies > 0);
+		acc[color] = {
+			territories: teamTerritories.length,
+			armies: teamTerritories.reduce((sum, s) => sum + s.armies, 0)
+		};
+		return acc;
+	}, {});
+
+	function getContrastColor(hex) {
+		const r = parseInt(hex.substring(1, 3), 16);
+		const g = parseInt(hex.substring(3, 5), 16);
+		const b = parseInt(hex.substring(5, 7), 16);
+		const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+		return yiq >= 128 ? 'black' : 'white';
+	}
 </script>
 
 <div class="game-container">
@@ -131,10 +192,14 @@
 		{#each colors as color}
 			<button
 				class="color-btn"
-				class:selected={selectedId && state[selectedId].owner === color}
-				style="background-color: {color};"
+				class:selected={activeColor === color}
+				style="background-color: {color}; color: {getContrastColor(color)};"
 				on:click={() => changeColor(color)}
-			/>
+			>
+				<span class="stat-t">{stats[color].territories}</span>
+				<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;" />
+				<span class="stat-a">{stats[color].armies}</span>
+			</button>
 		{/each}
 	</div>
 
@@ -142,12 +207,19 @@
 		<svg
 			viewBox="0 0 750 520"
 			bind:this={svgElement}
+			on:click={handleOceanClick}
 			on:contextmenu|preventDefault={() => {}}
 		>
 			<g transform="translate(-167.99651,-118.55507)">
-				<g id="background" opacity="0.3">
+				<g id="background" opacity="0.1" on:click|stopPropagation={handleOceanClick}>
 					{#each background as bg}
 						<path d={bg.d} fill={bg.fill} style={bg.style} />
+					{/each}
+				</g>
+
+				<g id="connections" on:click|stopPropagation={handleOceanClick}>
+					{#each connections as conn}
+						<path d={conn.d} style={conn.style} stroke="#000" fill="none" stroke-dasharray="none" />
 					{/each}
 				</g>
 
@@ -158,11 +230,13 @@
 								id={t.id}
 								d={paths[t.id]}
 								fill={state[t.id]?.owner || '#ccc'}
-								fill-opacity="0.7"
-								stroke={selectedId === t.id ? 'white' : '#000'}
-								stroke-width={selectedId === t.id ? '2.5' : '0.5'}
+								fill-opacity="1.0"
+								stroke={selectedId === t.id 
+									? (state[t.id]?.owner === '#000000' ? '#FF0000' : '#000000') 
+									: (state[t.id]?.isCard ? 'gold' : '#000')}
+								stroke-width={selectedId === t.id || state[t.id]?.isCard ? '3' : '0.5'}
 								class:glowing={state[t.id]?.isCard}
-								on:click={() => handleCountryClick(t.id)}
+								on:click|stopPropagation={() => handleCountryClick(t.id)}
 								on:contextmenu={(e) => handleRightClick(e, t.id)}
 							/>
 						{/if}
@@ -173,17 +247,19 @@
 					{#each territories as t (t.id)}
 						{#if centers[t.id]}
 							<circle cx={centers[t.id].x} cy={centers[t.id].y} r="8" fill="white" opacity="0.9" />
-							<text
-								x={centers[t.id].x}
-								y={centers[t.id].y}
-								text-anchor="middle"
-								dominant-baseline="central"
-								font-size="10"
-								font-weight="bold"
-								fill="black"
-							>
-								{state[t.id]?.armies || 0}
-							</text>
+							{#if state[t.id]?.armies > 0}
+								<text
+									x={centers[t.id].x}
+									y={centers[t.id].y}
+									text-anchor="middle"
+									dominant-baseline="central"
+									font-size="10"
+									font-weight="bold"
+									fill="black"
+								>
+									{state[t.id].armies}
+								</text>
+							{/if}
 						{/if}
 					{/each}
 				</g>
@@ -202,6 +278,22 @@
 			{#if cards.length === 0}
 				<p>No cards held. Right-click a selected country to hold its card.</p>
 			{/if}
+		</div>
+
+		<div class="game-actions">
+			<button class="action-btn" on:click={exportState}>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+				</svg>
+				Export Game
+			</button>
+			<label class="action-btn">
+				<input type="file" accept=".json" on:change={importState} style="display: none;" />
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+				</svg>
+				Import Game
+			</label>
 		</div>
 	</div>
 </div>
@@ -229,12 +321,33 @@
 	}
 
 	.color-btn {
-		width: 35px;
-		height: 35px;
+		width: 45px;
+		height: 45px;
 		border-radius: 50%;
 		border: 3px solid transparent;
 		cursor: pointer;
 		transition: transform 0.2s, border-color 0.2s;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		line-height: 1;
+	}
+
+	.stat-t {
+		font-size: 0.8rem;
+	}
+
+	.stat-a {
+		font-size: 0.7rem;
+		opacity: 0.9;
+	}
+
+	.stat-divider {
+		width: 60%;
+		height: 1px;
+		margin: 2px 0;
 	}
 
 	.color-btn:hover {
@@ -246,10 +359,39 @@
 		transform: scale(1.2);
 	}
 
+	.game-actions {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		margin-top: 30px;
+		padding-top: 20px;
+		border-top: 1px solid #333;
+	}
+
+	.action-btn {
+		padding: 10px 20px;
+		background: #1e1e1e;
+		border: 1px solid #333;
+		border-radius: 6px;
+		color: #888;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		cursor: pointer;
+		font-size: 0.9rem;
+		transition: all 0.2s;
+	}
+
+	.action-btn:hover {
+		background: #2a2a2a;
+		border-color: #444;
+		color: white;
+	}
+
 	.svg-container {
 		width: 100%;
 		max-width: 900px;
-		background-color: #1a1a1a;
+		background-color: white;
 		border: 1px solid #333;
 		border-radius: 12px;
 		overflow: hidden;
@@ -273,9 +415,6 @@
 
 	.glowing {
 		filter: drop-shadow(0 0 12px gold);
-		stroke: gold !important;
-		stroke-width: 3 !important;
-		fill-opacity: 0.9 !important;
 	}
 
 	.cards-container {
