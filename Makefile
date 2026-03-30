@@ -1,4 +1,4 @@
-.PHONY: all build publish
+.PHONY: all build publish localhost
 
 all: build publish
 
@@ -7,3 +7,6 @@ build:
 
 publish: build
 	bun run deploy
+
+localhost:
+	bun run dev
