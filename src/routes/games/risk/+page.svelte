@@ -197,27 +197,44 @@
 				on:click={() => changeColor(color)}
 			>
 				<span class="stat-t">{stats[color].territories}</span>
-				<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;" />
+				<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;"></span>
 				<span class="stat-a">{stats[color].armies}</span>
 			</button>
 		{/each}
 	</div>
 
-	<div class="svg-container">
+	<div
+		class="svg-container"
+		on:click={handleOceanClick}
+		on:keydown={(e) => e.key === 'Escape' && handleOceanClick()}
+		role="presentation"
+	>
 		<svg
 			viewBox="0 0 750 520"
 			bind:this={svgElement}
-			on:click={handleOceanClick}
 			on:contextmenu|preventDefault={() => {}}
+			role="application"
+			aria-label="Risk Board"
 		>
 			<g transform="translate(-167.99651,-118.55507)">
-				<g id="background" opacity="0.1" on:click|stopPropagation={handleOceanClick}>
+				<g
+					id="background"
+					opacity="0.1"
+					on:click|stopPropagation={handleOceanClick}
+					on:keydown|stopPropagation={(e) => e.key === 'Escape' && handleOceanClick()}
+					role="presentation"
+				>
 					{#each background as bg}
 						<path d={bg.d} fill={bg.fill} style={bg.style} />
 					{/each}
 				</g>
 
-				<g id="connections" on:click|stopPropagation={handleOceanClick}>
+				<g
+					id="connections"
+					on:click|stopPropagation={handleOceanClick}
+					on:keydown|stopPropagation={(e) => e.key === 'Escape' && handleOceanClick()}
+					role="presentation"
+				>
 					{#each connections as conn}
 						<path d={conn.d} style={conn.style} stroke="#000" fill="none" stroke-dasharray="none" />
 					{/each}
@@ -231,13 +248,22 @@
 								d={paths[t.id]}
 								fill={state[t.id]?.owner || '#ccc'}
 								fill-opacity="1.0"
-								stroke={selectedId === t.id 
-									? (state[t.id]?.owner === '#000000' ? '#FF0000' : '#000000') 
-									: (state[t.id]?.isCard ? 'gold' : '#000')}
+								stroke={selectedId === t.id
+									? state[t.id]?.owner === '#000000'
+										? '#FF0000'
+										: '#000000'
+									: state[t.id]?.isCard
+										? 'gold'
+										: '#000'}
 								stroke-width={selectedId === t.id || state[t.id]?.isCard ? '3' : '0.5'}
 								class:glowing={state[t.id]?.isCard}
 								on:click|stopPropagation={() => handleCountryClick(t.id)}
+								on:keydown|stopPropagation={(e) =>
+									(e.key === 'Enter' || e.key === ' ') && handleCountryClick(t.id)}
 								on:contextmenu={(e) => handleRightClick(e, t.id)}
+								role="button"
+								aria-label={t.name}
+								tabindex="0"
 							/>
 						{/if}
 					{/each}
