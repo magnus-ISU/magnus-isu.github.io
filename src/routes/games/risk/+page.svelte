@@ -53,7 +53,7 @@
 	let state = {};
 	let selectedId = null;
 	let activeColor = null;
-	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#000000', '#008000', '#C0C0C0'];
+	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#FFFFFF', '#008000', '#800080'];
 
 	let svgElement;
 
@@ -61,6 +61,16 @@
 		const saved = localStorage.getItem('risk-state');
 		if (saved) {
 			state = JSON.parse(saved);
+			// Migrate old Black team (#000000) to White (#FFFFFF)
+			// and old Silver team (#C0C0C0) to Purple (#800080)
+			Object.keys(state).forEach((id) => {
+				if (state[id].owner === '#000000') {
+					state[id].owner = '#FFFFFF';
+				}
+				if (state[id].owner === '#C0C0C0') {
+					state[id].owner = '#800080';
+				}
+			});
 		} else {
 			territories.forEach((t) => {
 				state[t.id] = {
@@ -196,9 +206,11 @@
 				style="background-color: {color}; color: {getContrastColor(color)};"
 				on:click={() => changeColor(color)}
 			>
-				<span class="stat-t">{stats[color].territories}</span>
-				<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;"></span>
-				<span class="stat-a">{stats[color].armies}</span>
+				{#if stats[color].territories > 0}
+					<span class="stat-t">{stats[color].territories}</span>
+					<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;"></span>
+					<span class="stat-a">{stats[color].armies}</span>
+				{/if}
 			</button>
 		{/each}
 	</div>
@@ -236,7 +248,7 @@
 					role="presentation"
 				>
 					{#each connections as conn}
-						<path d={conn.d} style={conn.style} stroke="#000" fill="none" stroke-dasharray="none" />
+						<path d={conn.d} style={conn.style} stroke="#444" fill="none" stroke-dasharray="none" />
 					{/each}
 				</g>
 
@@ -249,9 +261,7 @@
 								fill={state[t.id]?.owner || '#ccc'}
 								fill-opacity="1.0"
 								stroke={selectedId === t.id
-									? state[t.id]?.owner === '#000000'
-										? '#FF0000'
-										: '#000000'
+									? '#000000'
 									: state[t.id]?.isCard
 										? 'gold'
 										: '#000'}
@@ -417,11 +427,8 @@
 	.svg-container {
 		width: 100%;
 		max-width: 900px;
-		background-color: white;
-		border: 1px solid #333;
-		border-radius: 12px;
+		background-color: #121212;
 		overflow: hidden;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 	}
 
 	svg {
@@ -433,6 +440,7 @@
 	path {
 		cursor: pointer;
 		transition: fill-opacity 0.2s, fill 0.3s;
+		outline: none;
 	}
 
 	path:hover {
@@ -440,7 +448,7 @@
 	}
 
 	.glowing {
-		filter: drop-shadow(0 0 12px gold);
+		filter: drop-shadow(0 0 5px gold);
 	}
 
 	.cards-container {
