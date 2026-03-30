@@ -2,14 +2,10 @@
 <script>
 	import PostsList from '$lib/components/PostsList.svelte'
 	import Pagination from '$lib/components/Pagination.svelte'
-  import { postsPerPage } from '$lib/config'
 
 	let { data } = $props();
 
   const { page, posts, category, total } = data
-
-	let lowerBound = $derived((page * postsPerPage) - (postsPerPage - 1) || 1)
-	let upperBound = $derived(Math.min(page * postsPerPage, total))
 </script>
 
 

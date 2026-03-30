@@ -75,8 +75,7 @@
 			feedback = 'Congratulations! You guessed within 5% of the price!';
 			gameOver = true;
 		} else if (difference >= 25) {
-			feedback =
-				'<div style="background-color: red; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"></div> Your guess is 25% or more off.';
+			feedback = 'Your guess is 25% or more off.';
 		} else {
 			feedback = 'Incorrect guess. Try again!';
 		}
@@ -128,7 +127,14 @@
 		</button>
 	</div>
 
-	<div style="margin-top: 10px;">{@html feedback}</div>
+	<div style="margin-top: 10px;">
+		{#if feedback.includes('25% or more off')}
+			<div
+				style="background-color: red; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"
+			></div>
+		{/if}
+		{feedback}
+	</div>
 {:else}
 	<p>Loading product data...</p>
 {/if}

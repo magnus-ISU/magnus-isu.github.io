@@ -134,7 +134,7 @@
 				case 4:
 					cities[cityName].soldiers += cities[cityName].barracks;
 					break;
-				case 7:
+				case 7: {
 					// Cheat after we get attacked to always set to the right values
 					let cheatStrings = cities[cityName].target.split(' ');
 					if (cheatStrings.length != 4) {
@@ -146,7 +146,7 @@
 					let cheatValues = [];
 					for (let j = 0; j < 4; j++) {
 						cheatValues[j] = parseInt(cheatStrings[j]);
-						if (cheatValues[j] === NaN) {
+						if (Number.isNaN(cheatValues[j])) {
 							alert(
 								"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'"
 							);
@@ -158,6 +158,7 @@
 					cities[cityName].barracks = cheatValues[2];
 					cities[cityName].soldiers = cheatValues[3];
 					break;
+				}
 			}
 		}
 	}

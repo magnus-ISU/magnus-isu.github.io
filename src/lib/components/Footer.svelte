@@ -3,8 +3,8 @@
 
 	import { currentPage, isMenuOpen } from '../assets/js/store';
 
-	const maybeCloseMenu = () => {
-		if (href != $currentPage) {
+	const maybeCloseMenu = (route) => {
+		if (route != $currentPage) {
 			isMenuOpen.set(false);
 		}
 	};
@@ -20,7 +20,7 @@
 				<li>
 					<a
 						href={page.route}
-						onclick={maybeCloseMenu}
+						onclick={() => maybeCloseMenu(page.route)}
 						class:active={$currentPage.startsWith(page.route)}
 					>
 						{page.title}
