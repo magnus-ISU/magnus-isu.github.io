@@ -55,6 +55,226 @@
 	let activeColor = null;
 	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#FFFFFF', '#008000', '#800080'];
 
+	let campaign = [];
+	let campaignStats = [];
+
+	const adjacencies = {
+		eastern_australia: ['new_guinea', 'western_australia'],
+		indonesia: ['siam', 'new_guinea', 'western_australia'],
+		new_guinea: ['indonesia', 'western_australia', 'eastern_australia'],
+		alaska: ['northwest_territory', 'alberta', 'kamchatka'],
+		ontario: [
+			'northwest_territory',
+			'alberta',
+			'western_united_states',
+			'eastern_united_states',
+			'quebec',
+			'greenland'
+		],
+		northwest_territory: ['alaska', 'alberta', 'ontario', 'greenland'],
+		venezuela: ['central_america', 'peru', 'brazil'],
+		madagascar: ['east_africa', 'south_africa'],
+		north_africa: ['brazil', 'western_europe', 'southern_europe', 'egypt', 'east_africa', 'congo'],
+		greenland: ['northwest_territory', 'ontario', 'quebec', 'iceland'],
+		iceland: ['greenland', 'great_britain', 'scandinavia'],
+		great_britain: ['iceland', 'scandinavia', 'northern_europe', 'western_europe'],
+		scandinavia: ['iceland', 'great_britain', 'northern_europe', 'ukraine'],
+		japan: ['kamchatka', 'mongolia'],
+		yakursk: ['siberia', 'irkutsk', 'kamchatka'],
+		kamchatka: ['alaska', 'yakursk', 'irkutsk', 'mongolia', 'japan'],
+		siberia: ['ural', 'yakursk', 'irkutsk', 'mongolia', 'china'],
+		ural: ['ukraine', 'siberia', 'afghanistan', 'china'],
+		afghanistan: ['ukraine', 'ural', 'china', 'india', 'middle_east'],
+		middle_east: [
+			'ukraine',
+			'southern_europe',
+			'egypt',
+			'east_africa',
+			'india',
+			'afghanistan'
+		],
+		india: ['middle_east', 'afghanistan', 'china', 'siam'],
+		siam: ['india', 'china', 'indonesia'],
+		china: ['afghanistan', 'ural', 'siberia', 'mongolia', 'siam', 'india'],
+		mongolia: ['siberia', 'irkutsk', 'kamchatka', 'japan', 'china'],
+		irkutsk: ['siberia', 'yakursk', 'kamchatka', 'mongolia'],
+		ukraine: [
+			'scandinavia',
+			'northern_europe',
+			'southern_europe',
+			'ural',
+			'afghanistan',
+			'middle_east'
+		],
+		southern_europe: [
+			'western_europe',
+			'northern_europe',
+			'ukraine',
+			'middle_east',
+			'egypt',
+			'north_africa'
+		],
+		western_europe: ['great_britain', 'northern_europe', 'southern_europe', 'north_africa'],
+		northern_europe: [
+			'great_britain',
+			'scandinavia',
+			'ukraine',
+			'southern_europe',
+			'western_europe'
+		],
+		egypt: ['north_africa', 'southern_europe', 'middle_east', 'east_africa'],
+		east_africa: ['egypt', 'north_africa', 'congo', 'south_africa', 'madagascar', 'middle_east'],
+		congo: ['north_africa', 'east_africa', 'south_africa'],
+		south_africa: ['congo', 'east_africa', 'madagascar'],
+		brazil: ['venezuela', 'peru', 'argentina', 'north_africa'],
+		argentina: ['peru', 'brazil'],
+		eastern_united_states: ['ontario', 'quebec', 'western_united_states', 'central_america'],
+		western_united_states: ['alberta', 'ontario', 'eastern_united_states', 'central_america'],
+		quebec: ['ontario', 'greenland', 'eastern_united_states'],
+		central_america: ['western_united_states', 'eastern_united_states', 'venezuela'],
+		peru: ['venezuela', 'brazil', 'argentina'],
+		western_australia: ['indonesia', 'new_guinea', 'eastern_australia'],
+		alberta: ['alaska', 'northwest_territory', 'ontario', 'western_united_states']
+	};
+
+	const rollProbs = {
+		'3-2': [2275 / 7776, 2611 / 7776, 2890 / 7776], // A-2, A-1/D-1, D-2
+		'3-1': [441 / 1296, 855 / 1296], // A-1, D-1
+		'2-2': [581 / 1296, 420 / 1296, 295 / 1296], // A-2, A-1/D-1, D-2
+		'2-1': [91 / 216, 125 / 216], // A-1, D-1
+		'1-2': [161 / 216, 55 / 216], // A-1, D-1
+		'1-1': [21 / 36, 15 / 36] // A-1, D-1
+	};
+
+	let battleCache = {};
+
+	function solveBattle(A, D) {
+		const key = `${A}-${D}`;
+		if (battleCache[key]) return battleCache[key];
+
+		let dp = { [`${A}-${D}`]: 1.0 };
+		let terminal = {};
+
+		for (let s = A + D; s >= 2; s--) {
+			for (let a = 1; a <= A; a++) {
+				let d = s - a;
+				if (d < 0 || d > D) continue;
+				if (a === 1 || d === 0) continue;
+
+				const p = dp[`${a}-${d}`];
+				if (!p) continue;
+
+				const nA = Math.min(a - 1, 3);
+				const nD = Math.min(d, 2);
+				const rKey = `${nA}-${nD}`;
+				const probs = rollProbs[rKey];
+
+				if (probs.length === 3) {
+					update(a - 2, d, p * probs[0]);
+					update(a - 1, d - 1, p * probs[1]);
+					update(a, d - 2, p * probs[2]);
+				} else {
+					update(a - 1, d, p * probs[0]);
+					update(a, d - 1, p * probs[1]);
+				}
+			}
+		}
+
+		function update(a, d, prob) {
+			if (a === 1 || d === 0) {
+				const outcome = d === 0 ? a - 1 : -d;
+				terminal[outcome] = (terminal[outcome] || 0) + prob;
+			} else {
+				dp[`${a}-${d}`] = (dp[`${a}-${d}`] || 0) + prob;
+			}
+		}
+
+		battleCache[key] = terminal;
+		return terminal;
+	}
+
+	function calculateCampaign() {
+		if (campaign.length < 2) {
+			campaignStats = [];
+			return;
+		}
+
+		const startId = campaign[0];
+		const startArmies = state[startId]?.armies || 0;
+		let dist = { [`reached-0-${startArmies}`]: 1.0 };
+
+		for (let i = 1; i < campaign.length; i++) {
+			const targetId = campaign[i];
+			const initialDefenders = state[targetId]?.armies || 0;
+			const nextDist = {};
+
+			for (const [key, p] of Object.entries(dist)) {
+				if (key.startsWith('fail')) {
+					nextDist[key] = (nextDist[key] || 0) + p;
+					continue;
+				}
+
+				const parts = key.split('-');
+				const attackers = parseInt(parts[2]);
+
+				if (attackers <= 1) {
+					nextDist[`fail-${i - 1}`] = (nextDist[`fail-${i - 1}`] || 0) + p;
+					continue;
+				}
+
+				const battleDist = solveBattle(attackers, initialDefenders);
+				for (const [outcome, battleP] of Object.entries(battleDist)) {
+					const combinedP = p * battleP;
+					const res = parseInt(outcome);
+					if (res > 0) {
+						nextDist[`reached-${i}-${res}`] = (nextDist[`reached-${i}-${res}`] || 0) + combinedP;
+					} else {
+						nextDist[`fail-${i}-${Math.abs(res)}`] =
+							(nextDist[`fail-${i}-${Math.abs(res)}`] || 0) + combinedP;
+					}
+				}
+			}
+			dist = nextDist;
+		}
+
+		const finalId = campaign[campaign.length - 1];
+		const finalName = territories.find((t) => t.id === finalId).name;
+		const aggregated = {};
+
+		for (const [key, p] of Object.entries(dist)) {
+			if (key.startsWith('reached')) {
+				const count = key.split('-')[2];
+				const label = `${count} ${finalName}`;
+				aggregated[label] = (aggregated[label] || 0) + p;
+			} else if (key.startsWith('fail')) {
+				const parts = key.split('-');
+				if (parts.length === 3) {
+					const count = parts[2];
+					const label = `-${count} ${finalName}`;
+					aggregated[label] = (aggregated[label] || 0) + p;
+				} else {
+					const failIdx = parseInt(parts[1]);
+					const failedAtName = territories.find((t) => t.id === campaign[failIdx]).name;
+					const label = `Failed at ${failedAtName}`;
+					aggregated[label] = (aggregated[label] || 0) + p;
+				}
+			}
+		}
+
+		campaignStats = Object.entries(aggregated)
+			.map(([label, prob]) => ({ label, prob }))
+			.sort((a, b) => {
+				const parse = (s) => {
+					const m = s.match(/^(-?\d+)/);
+					return m ? parseInt(m[1]) : -999999;
+				};
+				const vA = parse(a.label);
+				const vB = parse(b.label);
+				if (vA !== vB) return vB - vA;
+				return a.label.localeCompare(b.label);
+			});
+	}
+
 	let svgElement;
 
 	function loadState() {
@@ -86,16 +306,31 @@
 		localStorage.setItem('risk-state', JSON.stringify(state));
 	}
 
-	function handleCountryClick(id) {
-		if (activeColor) {
-			state[id].owner = activeColor;
-			state[id].armies = 1;
-			selectedId = id;
-		} else {
-			if (selectedId === id) {
-				state[id].armies += 1;
+	function handleCountryClick(id, isShift = false) {
+		if (isShift) {
+			if (campaign.length === 0) {
+				if (selectedId) campaign = [selectedId];
+				else return;
+			}
+			const last = campaign[campaign.length - 1];
+			if (adjacencies[last]?.includes(id)) {
+				campaign = [...campaign, id];
 			} else {
+				campaign = [];
+			}
+		} else {
+			if (activeColor) {
+				state[id].owner = activeColor;
+				state[id].armies = 1;
 				selectedId = id;
+				campaign = [id];
+			} else {
+				if (selectedId === id) {
+					state[id].armies += 1;
+				} else {
+					selectedId = id;
+					campaign = [id];
+				}
 			}
 		}
 		state = { ...state };
@@ -105,6 +340,7 @@
 	function handleOceanClick() {
 		selectedId = null;
 		activeColor = null;
+		campaign = [];
 	}
 
 	function handleRightClick(e, id) {
@@ -131,10 +367,11 @@
 	}
 
 	function exportState() {
-		const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+		const dataStr =
+			'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(state, null, 2));
 		const downloadAnchorNode = document.createElement('a');
-		downloadAnchorNode.setAttribute("href",     dataStr);
-		downloadAnchorNode.setAttribute("download", "risk_state.json");
+		downloadAnchorNode.setAttribute('href', dataStr);
+		downloadAnchorNode.setAttribute('download', 'risk_state.json');
 		document.body.appendChild(downloadAnchorNode);
 		downloadAnchorNode.click();
 		downloadAnchorNode.remove();
@@ -150,7 +387,7 @@
 				state = imported;
 				saveState();
 			} catch (err) {
-				alert("Failed to import: Invalid JSON");
+				alert('Failed to import: Invalid JSON');
 			}
 		};
 		reader.readAsText(file);
@@ -178,6 +415,12 @@
 	});
 
 	$: cards = territories.filter((t) => state[t.id]?.isCard);
+
+	$: if (campaign.length >= 2 && state) {
+		calculateCampaign();
+	} else {
+		campaignStats = [];
+	}
 
 	$: stats = colors.reduce((acc, color) => {
 		const teamTerritories = Object.values(state).filter((s) => s.owner === color && s.armies > 0);
@@ -208,7 +451,10 @@
 			>
 				{#if stats[color].territories > 0}
 					<span class="stat-t">{stats[color].territories}</span>
-					<span class="stat-divider" style="background-color: {getContrastColor(color)}; opacity: 0.3;"></span>
+					<span
+						class="stat-divider"
+						style="background-color: {getContrastColor(color)}; opacity: 0.3;"
+					></span>
 					<span class="stat-a">{stats[color].armies}</span>
 				{/if}
 			</button>
@@ -248,7 +494,13 @@
 					role="presentation"
 				>
 					{#each connections as conn}
-						<path d={conn.d} style={conn.style} stroke="#444" fill="none" stroke-dasharray="none" />
+						<path
+							d={conn.d}
+							style={conn.style}
+							stroke="#444"
+							fill="none"
+							stroke-dasharray="none"
+						/>
 					{/each}
 				</g>
 
@@ -261,15 +513,17 @@
 								fill={state[t.id]?.owner || '#ccc'}
 								fill-opacity="1.0"
 								stroke={selectedId === t.id
-									? '#000000'
+									? state[t.id]?.owner === '#FFFFFF'
+										? '#000000'
+										: '#FFFFFF'
 									: state[t.id]?.isCard
 										? 'gold'
 										: '#000'}
 								stroke-width={selectedId === t.id || state[t.id]?.isCard ? '3' : '0.5'}
 								class:glowing={state[t.id]?.isCard}
-								on:click|stopPropagation={() => handleCountryClick(t.id)}
+								on:click|stopPropagation={(e) => handleCountryClick(t.id, e.shiftKey)}
 								on:keydown|stopPropagation={(e) =>
-									(e.key === 'Enter' || e.key === ' ') && handleCountryClick(t.id)}
+									(e.key === 'Enter' || e.key === ' ') && handleCountryClick(t.id, e.shiftKey)}
 								on:contextmenu={(e) => handleRightClick(e, t.id)}
 								role="button"
 								aria-label={t.name}
@@ -303,6 +557,23 @@
 		</svg>
 	</div>
 
+	{#if campaignStats.length > 0}
+		<div class="campaign-container">
+			<h3>Attack Probabilities</h3>
+			<p class="campaign-path">
+				{campaign.map((id) => territories.find((t) => t.id === id).name).join(' → ')}
+			</p>
+			<div class="stats-grid">
+				{#each campaignStats as stat}
+					<div class="stat-row">
+						<span class="stat-label">{stat.label}</span>
+						<span class="stat-value">{(stat.prob * 100).toFixed(2)}%</span>
+					</div>
+				{/each}
+			</div>
+		</div>
+	{/if}
+
 	<div class="cards-container">
 		<h3>Held Cards</h3>
 		<div class="cards-list">
@@ -318,15 +589,29 @@
 
 		<div class="game-actions">
 			<button class="action-btn" on:click={exportState}>
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
 				</svg>
 				Export Game
 			</button>
 			<label class="action-btn">
 				<input type="file" accept=".json" on:change={importState} style="display: none;" />
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
 				</svg>
 				Import Game
 			</label>
@@ -353,7 +638,7 @@
 		padding: 10px;
 		background: #1e1e1e;
 		border-radius: 30px;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 	}
 
 	.color-btn {
@@ -362,7 +647,9 @@
 		border-radius: 50%;
 		border: 3px solid transparent;
 		cursor: pointer;
-		transition: transform 0.2s, border-color 0.2s;
+		transition:
+			transform 0.2s,
+			border-color 0.2s;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -439,7 +726,9 @@
 
 	path {
 		cursor: pointer;
-		transition: fill-opacity 0.2s, fill 0.3s;
+		transition:
+			fill-opacity 0.2s,
+			fill 0.3s;
 		outline: none;
 	}
 
@@ -449,6 +738,47 @@
 
 	.glowing {
 		filter: drop-shadow(0 0 5px gold);
+	}
+
+	.campaign-container {
+		margin-top: 20px;
+		width: 100%;
+		max-width: 900px;
+		background: #1e1e1e;
+		padding: 20px;
+		border-radius: 8px;
+		text-align: center;
+	}
+
+	.campaign-path {
+		color: #4fc3f7;
+		font-weight: bold;
+		margin: 10px 0;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: 10px;
+		margin-top: 15px;
+	}
+
+	.stat-row {
+		background: #2a2a2a;
+		padding: 8px 12px;
+		border-radius: 4px;
+		display: flex;
+		justify-content: space-between;
+		font-family: monospace;
+	}
+
+	.stat-label {
+		color: #aaa;
+	}
+
+	.stat-value {
+		color: #fff;
+		font-weight: bold;
 	}
 
 	.cards-container {
@@ -472,13 +802,19 @@
 		border: 2px solid;
 		border-radius: 8px;
 		font-weight: bold;
-		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		animation: slideUp 0.3s ease-out;
 	}
 
 	@keyframes slideUp {
-		from { transform: translateY(10px); opacity: 0; }
-		to { transform: translateY(0); opacity: 1; }
+		from {
+			transform: translateY(10px);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
 	}
 
 	h3 {
