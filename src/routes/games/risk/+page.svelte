@@ -239,39 +239,53 @@
 
 		const finalId = campaign[campaign.length - 1];
 		const finalName = territories.find((t) => t.id === finalId).name;
-		const aggregated = {};
+		const aggregated = [];
 
+		const buckets = {};
 		for (const [key, p] of Object.entries(dist)) {
 			if (key.startsWith('reached')) {
 				const count = key.split('-')[2];
 				const label = `${count} ${finalName}`;
-				aggregated[label] = (aggregated[label] || 0) + p;
+				buckets[label] = (buckets[label] || 0) + p;
 			} else if (key.startsWith('fail')) {
 				const parts = key.split('-');
+				const failIdx = parseInt(parts[1]);
+				const failedName = territories.find((t) => t.id === campaign[failIdx]).name;
 				if (parts.length === 3) {
 					const count = parts[2];
-					const label = `-${count} ${finalName}`;
-					aggregated[label] = (aggregated[label] || 0) + p;
+					const label = `-${count} ${failedName}`;
+					buckets[label] = (buckets[label] || 0) + p;
 				} else {
-					const failIdx = parseInt(parts[1]);
-					const failedAtName = territories.find((t) => t.id === campaign[failIdx]).name;
-					const label = `Failed at ${failedAtName}`;
-					aggregated[label] = (aggregated[label] || 0) + p;
+					const nextName = territories.find((t) => t.id === campaign[failIdx + 1])?.name || failedName;
+					const label = `Stopped before ${nextName}`;
+					buckets[label] = (buckets[label] || 0) + p;
 				}
 			}
 		}
 
-		// Sort by outcome value descending (best outcomes first, losses last)
-		const sorted = Object.entries(aggregated)
-			.map(([label, prob]) => ({ label, prob }))
+		// Sort: wins descending, then losses by territory (closest failure first), then by count
+		const sorted = Object.entries(buckets)
+			.map(([label, prob]) => {
+				const numMatch = label.match(/^(-?\d+)/);
+				const num = numMatch ? parseInt(numMatch[1]) : -999999;
+				// Extract territory name for grouping losses
+				const nameMatch = label.match(/^-?\d+\s+(.+)/) || label.match(/^Stopped before\s+(.+)/);
+				const territory = nameMatch ? nameMatch[1] : '';
+				// Find campaign index of territory for ordering loss groups
+				const tIdx = campaign.findIndex(
+					(id) => territories.find((t) => t.id === id)?.name === territory
+				);
+				return { label, prob, num, tIdx: tIdx >= 0 ? tIdx : 999 };
+			})
 			.sort((a, b) => {
-				const parse = (s) => {
-					const m = s.match(/^(-?\d+)/);
-					return m ? parseInt(m[1]) : -999999;
-				};
-				const vA = parse(a.label);
-				const vB = parse(b.label);
-				if (vA !== vB) return vB - vA;
+				const aIsWin = a.num > 0;
+				const bIsWin = b.num > 0;
+				if (aIsWin && !bIsWin) return -1;
+				if (!aIsWin && bIsWin) return 1;
+				if (aIsWin && bIsWin) return b.num - a.num;
+				// Both losses: sort by campaign step (further first), then by fewer remaining defenders
+				if (a.tIdx !== b.tIdx) return b.tIdx - a.tIdx;
+				if (a.num !== b.num) return b.num - a.num;
 				return a.label.localeCompare(b.label);
 			});
 
