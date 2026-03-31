@@ -53,10 +53,10 @@
 	let state = {};
 	let selectedId = null;
 	let activeColor = null;
-	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#FFFFFF', '#008000', '#800080'];
+	const colors = ['#FF0000', '#4488FF', '#FFFF00', '#FFFFFF', '#008000', '#800080'];
 	const selectedColors = {
 		'#FF0000': '#FF6666',
-		'#0000FF': '#6666FF',
+		'#4488FF': '#88AAFF',
 		'#FFFF00': '#FFFF88',
 		'#FFFFFF': '#CCCCCC',
 		'#008000': '#44BB44',
@@ -336,8 +336,10 @@
 		localStorage.setItem('risk-state', JSON.stringify(state));
 	}
 
+	let campaignMode = false;
+
 	function handleCountryClick(id, isShift = false) {
-		if (isShift) {
+		if (isShift || campaignMode) {
 			if (campaign.length === 0) {
 				if (selectedId) campaign = [selectedId];
 				else return;
@@ -350,8 +352,12 @@
 			}
 		} else {
 			if (activeColor) {
-				state[id].owner = activeColor;
-				state[id].armies = 1;
+				if (state[id].owner === activeColor) {
+					state[id].armies += 1;
+				} else {
+					state[id].owner = activeColor;
+					state[id].armies = 1;
+				}
 				selectedId = id;
 				campaign = [id];
 			} else {
@@ -371,6 +377,7 @@
 		selectedId = null;
 		activeColor = null;
 		campaign = [];
+		campaignMode = false;
 	}
 
 	function handleRightClick(e, id) {
@@ -568,11 +575,21 @@
 				<g id="labels" pointer-events="none">
 					{#each territories as t (t.id)}
 						{#if centers[t.id]}
-							<circle cx={centers[t.id].x} cy={centers[t.id].y} r="8" fill="white" opacity="0.9" />
+							<text
+								x={centers[t.id].x}
+								y={centers[t.id].y - 6}
+								text-anchor="middle"
+								dominant-baseline="central"
+								font-size="5"
+								fill="black"
+								opacity="0.9"
+							>
+								{t.name}
+							</text>
 							{#if state[t.id]?.armies > 0}
 								<text
 									x={centers[t.id].x}
-									y={centers[t.id].y}
+									y={centers[t.id].y + 5}
 									text-anchor="middle"
 									dominant-baseline="central"
 									font-size="10"
@@ -619,7 +636,37 @@
 			{/if}
 		</div>
 
+		<div class="how-to-use">
+			<h3>How to Use</h3>
+			<ul>
+				<li>Click a color to select a team, then click territories to assign them.</li>
+				<li>Click an owned territory of the same team color to add troops.</li>
+				<li>Click a territory without a team color selected to select it and click again to add troops.</li>
+				<li>Right-click a selected territory to toggle its card.</li>
+				<li>Hold Shift and click adjacent territories to plan a campaign, or use the Campaign button below.</li>
+				<li>Click the ocean to deselect everything.</li>
+			</ul>
+		</div>
+
 		<div class="game-actions">
+			<button
+				class="action-btn campaign-btn"
+				class:campaign-active={campaignMode}
+				disabled={!selectedId}
+				on:click={() => (campaignMode = !campaignMode)}
+			>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path d="M5 12h14M12 5l7 7-7 7" />
+				</svg>
+				{campaignMode ? 'Stop Campaign' : 'Start Campaign'}
+			</button>
 			<button class="action-btn" on:click={exportState}>
 				<svg
 					width="16"
@@ -712,6 +759,41 @@
 	.color-btn.selected {
 		border-color: white;
 		transform: scale(1.2);
+	}
+
+	.how-to-use {
+		margin-top: 30px;
+		padding: 16px 20px;
+		background: #1e1e1e;
+		border-radius: 8px;
+		text-align: left;
+	}
+
+	.how-to-use h3 {
+		margin-bottom: 10px;
+	}
+
+	.how-to-use ul {
+		margin: 0;
+		padding-left: 20px;
+		list-style: disc;
+	}
+
+	.how-to-use li {
+		color: #999;
+		font-size: 0.85rem;
+		margin-bottom: 4px;
+	}
+
+	.campaign-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	.campaign-btn.campaign-active {
+		border-color: #4fc3f7;
+		color: #4fc3f7;
+		box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
 	}
 
 	.game-actions {
