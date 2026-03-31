@@ -436,13 +436,18 @@
 		// Calculate centers
 		setTimeout(() => {
 			if (svgElement) {
+				const centerAdjust = {
+					alaska: { dx: 0, dy: -9 },
+					northwest_territory: { dx: 0, dy: 9 }
+				};
 				territories.forEach((t) => {
 					const el = svgElement.getElementById(t.id);
 					if (el) {
 						const bbox = el.getBBox();
+						const adj = centerAdjust[t.id] || { dx: 0, dy: 0 };
 						centers[t.id] = {
-							x: bbox.x + bbox.width / 2,
-							y: bbox.y + bbox.height / 2
+							x: bbox.x + bbox.width / 2 + adj.dx,
+							y: bbox.y + bbox.height / 2 + adj.dy
 						};
 					}
 				});
