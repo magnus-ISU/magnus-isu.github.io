@@ -1,0 +1,212 @@
+{
+  "eastern_australia": {
+    "armies": 3,
+    "owner": "#008000",
+    "isCard": false
+  },
+  "indonesia": {
+    "armies": 1,
+    "owner": "#008000",
+    "isCard": true
+  },
+  "new_guinea": {
+    "armies": 1,
+    "owner": "#008000",
+    "isCard": false
+  },
+  "alaska": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": true
+  },
+  "ontario": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "northwest_territory": {
+    "armies": 3,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "venezuela": {
+    "armies": 20,
+    "owner": "#FFFFFF",
+    "isCard": true
+  },
+  "madagascar": {
+    "armies": 1,
+    "owner": "#FFFFFF",
+    "isCard": false
+  },
+  "north_africa": {
+    "armies": 3,
+    "owner": "#4488FF",
+    "isCard": true
+  },
+  "greenland": {
+    "armies": 7,
+    "owner": "#FF0000",
+    "isCard": true
+  },
+  "iceland": {
+    "armies": 6,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "great_britain": {
+    "armies": 1,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "scandinavia": {
+    "armies": 1,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "japan": {
+    "armies": 5,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "yakursk": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "kamchatka": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": true
+  },
+  "siberia": {
+    "armies": 2,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "ural": {
+    "armies": 5,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "afghanistan": {
+    "armies": 3,
+    "owner": "#008000",
+    "isCard": false
+  },
+  "middle_east": {
+    "armies": 3,
+    "owner": "#FFFFFF",
+    "isCard": true
+  },
+  "india": {
+    "armies": 3,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "siam": {
+    "armies": 10,
+    "owner": "#008000",
+    "isCard": false
+  },
+  "china": {
+    "armies": 10,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "mongolia": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "irkutsk": {
+    "armies": 9,
+    "owner": "#FF0000",
+    "isCard": true
+  },
+  "ukraine": {
+    "armies": 1,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "southern_europe": {
+    "armies": 6,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "western_europe": {
+    "armies": 6,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "northern_europe": {
+    "armies": 1,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "egypt": {
+    "armies": 10,
+    "owner": "#FFFFFF",
+    "isCard": true
+  },
+  "east_africa": {
+    "armies": 2,
+    "owner": "#FFFFFF",
+    "isCard": false
+  },
+  "congo": {
+    "armies": 1,
+    "owner": "#FFFFFF",
+    "isCard": true
+  },
+  "south_africa": {
+    "armies": 1,
+    "owner": "#FFFFFF",
+    "isCard": false
+  },
+  "brazil": {
+    "armies": 3,
+    "owner": "#4488FF",
+    "isCard": false
+  },
+  "argentina": {
+    "armies": 1,
+    "owner": "#FFFFFF",
+    "isCard": false
+  },
+  "eastern_united_states": {
+    "armies": 4,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "western_united_states": {
+    "armies": 5,
+    "owner": "#FF0000",
+    "isCard": false
+  },
+  "quebec": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": true
+  },
+  "central_america": {
+    "armies": 6,
+    "owner": "#008000",
+    "isCard": false
+  },
+  "peru": {
+    "armies": 1,
+    "owner": "#FFFFFF",
+    "isCard": false
+  },
+  "western_australia": {
+    "armies": 1,
+    "owner": "#008000",
+    "isCard": true
+  },
+  "alberta": {
+    "armies": 1,
+    "owner": "#FF0000",
+    "isCard": true
+  }
+}
