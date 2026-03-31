@@ -261,7 +261,8 @@
 			}
 		}
 
-		campaignStats = Object.entries(aggregated)
+		// Sort by outcome value descending (best outcomes first, losses last)
+		const sorted = Object.entries(aggregated)
 			.map(([label, prob]) => ({ label, prob }))
 			.sort((a, b) => {
 				const parse = (s) => {
@@ -273,6 +274,13 @@
 				if (vA !== vB) return vB - vA;
 				return a.label.localeCompare(b.label);
 			});
+
+		// Convert to cumulative probabilities (running sum from best to worst, ending at 100%)
+		let cumulative = 0;
+		campaignStats = sorted.map((s) => {
+			cumulative += s.prob;
+			return { label: s.label, prob: cumulative };
+		});
 	}
 
 	let svgElement;
@@ -558,7 +566,7 @@
 	</div>
 
 	{#if campaignStats.length > 0}
-		<div class="campaign-container">
+		<div class="campaign-sidebar">
 			<h3>Attack Probabilities</h3>
 			<p class="campaign-path">
 				{campaign.map((id) => territories.find((t) => t.id === id).name).join(' → ')}
@@ -740,36 +748,54 @@
 		filter: drop-shadow(0 0 5px gold);
 	}
 
-	.campaign-container {
-		margin-top: 20px;
+	.campaign-sidebar {
 		width: 100%;
 		max-width: 900px;
-		background: #1e1e1e;
-		padding: 20px;
+		background: #1a1a1a;
+		padding: 16px;
 		border-radius: 8px;
-		text-align: center;
+		box-sizing: border-box;
+		margin-top: 20px;
+	}
+
+	@media (min-width: 1280px) {
+		.campaign-sidebar {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 260px;
+			max-width: 260px;
+			height: 100vh;
+			overflow-y: auto;
+			z-index: 100;
+			border-right: 1px solid #333;
+			border-radius: 0;
+			margin-top: 0;
+		}
 	}
 
 	.campaign-path {
 		color: #4fc3f7;
 		font-weight: bold;
 		margin: 10px 0;
+		font-size: 0.85rem;
 	}
 
 	.stats-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: 10px;
-		margin-top: 15px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		margin-top: 12px;
 	}
 
 	.stat-row {
 		background: #2a2a2a;
-		padding: 8px 12px;
+		padding: 6px 10px;
 		border-radius: 4px;
 		display: flex;
 		justify-content: space-between;
 		font-family: monospace;
+		font-size: 0.8rem;
 	}
 
 	.stat-label {
