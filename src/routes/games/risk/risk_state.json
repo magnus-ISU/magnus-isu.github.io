@@ -20,7 +20,7 @@
     "isCard": true
   },
   "ontario": {
-    "armies": 1,
+    "armies": 2,
     "owner": "#FF0000",
     "isCard": false
   },
@@ -85,13 +85,13 @@
     "isCard": false
   },
   "ural": {
-    "armies": 5,
+    "armies": 4,
     "owner": "#FF0000",
     "isCard": false
   },
   "afghanistan": {
-    "armies": 3,
-    "owner": "#008000",
+    "armies": 1,
+    "owner": "#FF0000",
     "isCard": false
   },
   "middle_east": {
