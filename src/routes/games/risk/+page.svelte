@@ -329,6 +329,7 @@
 
 	function saveState() {
 		if (JSON.stringify(state) === JSON.stringify(defaultState)) return;
+		if (localStorage.getItem('risk-state') === JSON.stringify(state)) return;
 		localStorage.setItem('risk-state', JSON.stringify(state));
 	}
 
