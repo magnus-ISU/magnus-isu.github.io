@@ -439,7 +439,7 @@
 				const centerAdjust = {
 					alaska: { dx: 0, dy: -9 },
 					northwest_territory: { dx: 0, dy: 13 },
-					eastern_united_states: { dx: 0, dy: 6, rotate: -30 },
+					eastern_united_states: { dx: -3, dy: 6, rotate: -10 },
 					scandinavia: { dx: -4, dy: 0, rotate: -20 },
 					brazil: { dx: 20, dy: -6 },
 					venezuela: { dx: -10, dy: -3 },
@@ -449,15 +449,21 @@
 					east_africa: { dx: -8, dy: -20 },
 					great_britain: { dx: 8, dy: 15 },
 					southern_europe: { dx: 7, dy: 0 },
-					western_europe: { dx: -7, dy: 10, lines: ['Western', 'Europe'] },
+					western_europe: { dx: -7, dy: 16, lines: ['Western', 'Europe'] },
 					northern_europe: { dx: 5, dy: 4 },
 					ural: { dx: -5, dy: 5 },
 					siberia: { dx: 8, dy: -3 },
 					china: { dx: 0, dy: 4 },
 					siam: { dx: 0, dy: -6 },
-					eastern_australia: {dx: 3, dy: -6 },
-					western_australia: { dx: -5, dy: 7 },
-					central_america: { dx: -5, dy: -15, lines: ['Central  ', 'America    ']}
+					eastern_australia: {dx: 8, dy: -6, lines: ['Eastern', 'Australia']},
+					western_australia: { dx: -7, dy: 9 },
+					central_america: { dx: -4, dy: -15, lines: [{ text: 'Central', dx: -3 }, { text: 'America', dx: -4 }] },
+					madagascar: { dx: -3, dy: 13, rotate: -40},
+					great_britain: { dx: 8, dy: 16, lines: [{text: 'Great', dx: 2 }, { text: 'Britain', dx: 1 }]},
+					iceland: { dx: 0, dy: 2, rotate: -20 },
+					kamchatka: { dx: 0, dy: -37 },
+					japan: { dx: 6, dy: 8, rotate: -60},
+					indonesia: { dx: 7, dy: -2, rotate: -40}
 				};
 				territories.forEach((t) => {
 					const el = svgElement.getElementById(t.id);
@@ -613,7 +619,7 @@
 									transform={centers[t.id].rotate ? `rotate(${centers[t.id].rotate}, ${centers[t.id].x}, ${centers[t.id].y - 6})` : undefined}
 								>
 									{#each centers[t.id].lines as line, i}
-										<tspan x={centers[t.id].x} dy={i === 0 ? 0 : 6}>{line}</tspan>
+										<tspan x={centers[t.id].x + (typeof line === 'object' ? line.dx : 0)} dy={i === 0 ? 0 : 6}>{typeof line === 'object' ? line.text : line}</tspan>
 									{/each}
 								</text>
 							{:else}
