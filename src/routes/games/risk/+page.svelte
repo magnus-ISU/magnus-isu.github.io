@@ -54,6 +54,14 @@
 	let selectedId = null;
 	let activeColor = null;
 	const colors = ['#FF0000', '#0000FF', '#FFFF00', '#FFFFFF', '#008000', '#800080'];
+	const selectedColors = {
+		'#FF0000': '#FF6666',
+		'#0000FF': '#6666FF',
+		'#FFFF00': '#FFFF88',
+		'#FFFFFF': '#CCCCCC',
+		'#008000': '#44BB44',
+		'#800080': '#BB44BB'
+	};
 
 	let campaign = [];
 	let campaignStats = [];
@@ -532,7 +540,9 @@
 							<path
 								id={t.id}
 								d={paths[t.id]}
-								fill={state[t.id]?.owner || '#ccc'}
+								fill={selectedId === t.id || campaign.includes(t.id)
+									? selectedColors[state[t.id]?.owner] || '#ddd'
+									: state[t.id]?.owner || '#ccc'}
 								fill-opacity="1.0"
 								stroke={selectedId === t.id
 									? state[t.id]?.owner === '#FFFFFF'
