@@ -438,7 +438,8 @@
 			if (svgElement) {
 				const centerAdjust = {
 					alaska: { dx: 0, dy: -9 },
-					northwest_territory: { dx: 0, dy: 9 }
+					northwest_territory: { dx: 0, dy: 9 },
+					eastern_united_states: { dx: 0, dy: 6, rotate: -30 }
 				};
 				territories.forEach((t) => {
 					const el = svgElement.getElementById(t.id);
@@ -447,7 +448,8 @@
 						const adj = centerAdjust[t.id] || { dx: 0, dy: 0 };
 						centers[t.id] = {
 							x: bbox.x + bbox.width / 2 + adj.dx,
-							y: bbox.y + bbox.height / 2 + adj.dy
+							y: bbox.y + bbox.height / 2 + adj.dy,
+							rotate: adj.rotate || 0
 						};
 					}
 				});
@@ -588,6 +590,7 @@
 								font-size="5"
 								fill="black"
 								opacity="0.9"
+								transform={centers[t.id].rotate ? `rotate(${centers[t.id].rotate}, ${centers[t.id].x}, ${centers[t.id].y - 6})` : undefined}
 							>
 								{t.name}
 							</text>
