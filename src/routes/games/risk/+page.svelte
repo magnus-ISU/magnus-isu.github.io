@@ -438,8 +438,26 @@
 			if (svgElement) {
 				const centerAdjust = {
 					alaska: { dx: 0, dy: -9 },
-					northwest_territory: { dx: 0, dy: 9 },
-					eastern_united_states: { dx: 0, dy: 6, rotate: -30 }
+					northwest_territory: { dx: 0, dy: 13 },
+					eastern_united_states: { dx: 0, dy: 6, rotate: -30 },
+					scandinavia: { dx: -4, dy: 0, rotate: -20 },
+					brazil: { dx: 20, dy: -6 },
+					venezuela: { dx: -10, dy: -3 },
+					peru: { dx: 0, dy: 4 },
+					argentina: { dx: -5, dy: -10 },
+					north_africa: { dx: -5, dy: 5 },
+					east_africa: { dx: -8, dy: -20 },
+					great_britain: { dx: 8, dy: 15 },
+					southern_europe: { dx: 7, dy: 0 },
+					western_europe: { dx: -7, dy: 10, lines: ['Western', 'Europe'] },
+					northern_europe: { dx: 5, dy: 4 },
+					ural: { dx: -5, dy: 5 },
+					siberia: { dx: 8, dy: -3 },
+					china: { dx: 0, dy: 4 },
+					siam: { dx: 0, dy: -6 },
+					eastern_australia: {dx: 3, dy: -6 },
+					western_australia: { dx: -5, dy: 7 },
+					central_america: { dx: -5, dy: -15, lines: ['Central  ', 'America    ']}
 				};
 				territories.forEach((t) => {
 					const el = svgElement.getElementById(t.id);
@@ -449,7 +467,8 @@
 						centers[t.id] = {
 							x: bbox.x + bbox.width / 2 + adj.dx,
 							y: bbox.y + bbox.height / 2 + adj.dy,
-							rotate: adj.rotate || 0
+							rotate: adj.rotate || 0,
+							lines: adj.lines || null
 						};
 					}
 				});
@@ -582,18 +601,35 @@
 				<g id="labels" pointer-events="none">
 					{#each territories as t (t.id)}
 						{#if centers[t.id]}
-							<text
-								x={centers[t.id].x}
-								y={centers[t.id].y - 6}
-								text-anchor="middle"
-								dominant-baseline="central"
-								font-size="5"
-								fill="black"
-								opacity="0.9"
-								transform={centers[t.id].rotate ? `rotate(${centers[t.id].rotate}, ${centers[t.id].x}, ${centers[t.id].y - 6})` : undefined}
-							>
-								{t.name}
-							</text>
+							{#if centers[t.id].lines}
+								<text
+									x={centers[t.id].x}
+									y={centers[t.id].y - 6 - (centers[t.id].lines.length - 1) * 2.5}
+									text-anchor="middle"
+									dominant-baseline="central"
+									font-size="5"
+									fill="black"
+									opacity="0.9"
+									transform={centers[t.id].rotate ? `rotate(${centers[t.id].rotate}, ${centers[t.id].x}, ${centers[t.id].y - 6})` : undefined}
+								>
+									{#each centers[t.id].lines as line, i}
+										<tspan x={centers[t.id].x} dy={i === 0 ? 0 : 6}>{line}</tspan>
+									{/each}
+								</text>
+							{:else}
+								<text
+									x={centers[t.id].x}
+									y={centers[t.id].y - 6}
+									text-anchor="middle"
+									dominant-baseline="central"
+									font-size="5"
+									fill="black"
+									opacity="0.9"
+									transform={centers[t.id].rotate ? `rotate(${centers[t.id].rotate}, ${centers[t.id].x}, ${centers[t.id].y - 6})` : undefined}
+								>
+									{t.name}
+								</text>
+							{/if}
 							{#if state[t.id]?.armies > 0}
 								<text
 									x={centers[t.id].x}
