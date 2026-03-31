@@ -357,7 +357,11 @@
 		} else {
 			if (activeColor) {
 				if (state[id].owner === activeColor) {
-					state[id].armies += 1;
+					if (isShift) {
+						if (state[id].armies > 1) state[id].armies -= 1;
+					} else {
+						state[id].armies += 1;
+					}
 				} else {
 					state[id].owner = activeColor;
 					state[id].armies = 1;
@@ -366,7 +370,11 @@
 				campaign = [id];
 			} else {
 				if (selectedId === id) {
-					state[id].armies += 1;
+					if (isShift) {
+						if (state[id].armies > 1) state[id].armies -= 1;
+					} else {
+						state[id].armies += 1;
+					}
 				} else {
 					selectedId = id;
 					campaign = [id];
