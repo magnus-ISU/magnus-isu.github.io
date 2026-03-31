@@ -3,6 +3,7 @@
 	import paths from './paths.json';
 	import background from './background.json';
 	import connections from './connections.json';
+	import defaultState from './risk_state.json';
 
 	let territories = [
 		{ id: 'eastern_australia', name: 'Eastern Australia' },
@@ -322,18 +323,21 @@
 				}
 			});
 		} else {
-			territories.forEach((t) => {
-				state[t.id] = {
-					armies: 0,
-					owner: colors[0],
-					isCard: false
-				};
-			});
+			state = JSON.parse(JSON.stringify(defaultState));
 		}
 	}
 
 	function saveState() {
 		localStorage.setItem('risk-state', JSON.stringify(state));
+	}
+
+	function clearSave() {
+		localStorage.removeItem('risk-state');
+		state = JSON.parse(JSON.stringify(defaultState));
+		selectedId = null;
+		activeColor = null;
+		campaign = [];
+		campaignMode = false;
 	}
 
 	let campaignMode = false;
@@ -744,6 +748,19 @@
 				</svg>
 				Import Game
 			</label>
+			<button class="action-btn" on:click={clearSave}>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path d="M3 6h18M8 6V4h8v2M5 6v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6M10 11v6M14 11v6" />
+				</svg>
+				Clear Save
+			</button>
 		</div>
 	</div>
 </div>
