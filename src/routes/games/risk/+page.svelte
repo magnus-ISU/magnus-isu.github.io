@@ -3,7 +3,8 @@
 	import paths from './paths.json';
 	import background from './background.json';
 	import connections from './connections.json';
-	import defaultState from './risk_state.json';
+	import defaultStateJson from './risk_state.json';
+	const { colorOrder: defaultColorOrder, ...defaultState } = defaultStateJson;
 
 	let territories = [
 		{ id: 'eastern_australia', name: 'Eastern Australia' },
@@ -63,6 +64,9 @@
 		'#008000': '#44BB44',
 		'#800080': '#BB44BB'
 	};
+
+	let colorOrder = defaultColorOrder ? [...defaultColorOrder] : [...colors];
+	let dragIdx = null;
 
 	let campaign = [];
 	let campaignStats = [];
@@ -325,6 +329,13 @@
 		} else {
 			state = JSON.parse(JSON.stringify(defaultState));
 		}
+		const savedOrder = localStorage.getItem('risk-color-order');
+		if (savedOrder) {
+			const parsed = JSON.parse(savedOrder);
+			if (parsed.length === colors.length && colors.every((c) => parsed.includes(c))) {
+				colorOrder = parsed;
+			}
+		}
 	}
 
 	function saveState() {
@@ -333,9 +344,15 @@
 		localStorage.setItem('risk-state', JSON.stringify(state));
 	}
 
+	function saveColorOrder() {
+		localStorage.setItem('risk-color-order', JSON.stringify(colorOrder));
+	}
+
 	function clearSave() {
 		localStorage.removeItem('risk-state');
+		localStorage.removeItem('risk-color-order');
 		state = JSON.parse(JSON.stringify(defaultState));
+		colorOrder = defaultColorOrder ? [...defaultColorOrder] : [...colors];
 		selectedId = null;
 		activeColor = null;
 		campaign = [];
@@ -418,8 +435,9 @@
 	}
 
 	function exportState() {
+		const exportData = { ...state, colorOrder };
 		const dataStr =
-			'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(state, null, 2));
+			'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportData, null, 2));
 		const downloadAnchorNode = document.createElement('a');
 		downloadAnchorNode.setAttribute('href', dataStr);
 		downloadAnchorNode.setAttribute('download', 'risk_state.json');
@@ -435,7 +453,12 @@
 		reader.onload = (e) => {
 			try {
 				const imported = JSON.parse(e.target.result);
-				state = imported;
+				if (imported.colorOrder) {
+					colorOrder = imported.colorOrder;
+					saveColorOrder();
+				}
+				const { colorOrder: _, ...territories } = imported;
+				state = territories;
 				saveState();
 			} catch (err) {
 				alert('Failed to import: Invalid JSON');
@@ -525,12 +548,31 @@
 
 <div class="game-container">
 	<div class="color-picker">
-		{#each colors as color}
+		{#each colorOrder as color, i (color)}
 			<button
 				class="color-btn"
 				class:selected={activeColor === color}
+				draggable="true"
 				style="background-color: {color}; color: {getContrastColor(color)};"
 				on:click={() => changeColor(color)}
+				on:dragstart={(e) => {
+					dragIdx = i;
+					e.dataTransfer.effectAllowed = 'move';
+				}}
+				on:dragover|preventDefault={(e) => {
+					e.dataTransfer.dropEffect = 'move';
+					if (dragIdx !== null && dragIdx !== i) {
+						const newOrder = [...colorOrder];
+						const [moved] = newOrder.splice(dragIdx, 1);
+						newOrder.splice(i, 0, moved);
+						colorOrder = newOrder;
+						dragIdx = i;
+					}
+				}}
+				on:dragend={() => {
+					dragIdx = null;
+					saveColorOrder();
+				}}
 			>
 				{#if stats[color].territories > 0}
 					<span class="stat-t">{stats[color].territories}</span>
@@ -836,6 +878,10 @@
 	.color-btn.selected {
 		border-color: white;
 		transform: scale(1.2);
+	}
+
+	.color-btn:active:not(.selected) {
+		cursor: grabbing;
 	}
 
 	.how-to-use {

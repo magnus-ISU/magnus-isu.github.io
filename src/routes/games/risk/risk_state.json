@@ -208,5 +208,6 @@
     "armies": 1,
     "owner": "#FF0000",
     "isCard": true
-  }
+  },
+  "colorOrder": ["#FFFFFF", "#4488FF", "#FF0000", "#008000", "#FFFF00", "#800080"]
 }
