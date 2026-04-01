@@ -15,8 +15,8 @@
     "isCard": false
   },
   "alaska": {
-    "armies": 1,
-    "owner": "#FF0000",
+    "armies": 10,
+    "owner": "#008000",
     "isCard": true
   },
   "ontario": {
@@ -30,7 +30,7 @@
     "isCard": false
   },
   "venezuela": {
-    "armies": 20,
+    "armies": 3,
     "owner": "#FFFFFF",
     "isCard": true
   },
@@ -180,8 +180,8 @@
     "isCard": false
   },
   "western_united_states": {
-    "armies": 5,
-    "owner": "#FF0000",
+    "armies": 1,
+    "owner": "#008000",
     "isCard": true
   },
   "quebec": {
@@ -206,7 +206,7 @@
   },
   "alberta": {
     "armies": 1,
-    "owner": "#FF0000",
+    "owner": "#008000",
     "isCard": true
   },
   "colorOrder": [
