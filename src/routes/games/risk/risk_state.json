@@ -40,7 +40,7 @@
     "isCard": false
   },
   "north_africa": {
-    "armies": 3,
+    "armies": 1,
     "owner": "#4488FF",
     "isCard": true
   },
@@ -87,7 +87,7 @@
   "ural": {
     "armies": 4,
     "owner": "#FF0000",
-    "isCard": false
+    "isCard": true
   },
   "afghanistan": {
     "armies": 1,
@@ -117,7 +117,7 @@
   "mongolia": {
     "armies": 1,
     "owner": "#FF0000",
-    "isCard": false
+    "isCard": true
   },
   "irkutsk": {
     "armies": 9,
@@ -127,15 +127,15 @@
   "ukraine": {
     "armies": 1,
     "owner": "#4488FF",
-    "isCard": false
+    "isCard": true
   },
   "southern_europe": {
-    "armies": 6,
+    "armies": 2,
     "owner": "#4488FF",
     "isCard": false
   },
   "western_europe": {
-    "armies": 6,
+    "armies": 1,
     "owner": "#4488FF",
     "isCard": false
   },
@@ -152,7 +152,7 @@
   "east_africa": {
     "armies": 2,
     "owner": "#FFFFFF",
-    "isCard": false
+    "isCard": true
   },
   "congo": {
     "armies": 1,
@@ -165,8 +165,8 @@
     "isCard": false
   },
   "brazil": {
-    "armies": 3,
-    "owner": "#4488FF",
+    "armies": 1,
+    "owner": "#FFFFFF",
     "isCard": false
   },
   "argentina": {
@@ -182,7 +182,7 @@
   "western_united_states": {
     "armies": 5,
     "owner": "#FF0000",
-    "isCard": false
+    "isCard": true
   },
   "quebec": {
     "armies": 1,
@@ -190,9 +190,9 @@
     "isCard": true
   },
   "central_america": {
-    "armies": 6,
-    "owner": "#008000",
-    "isCard": false
+    "armies": 8,
+    "owner": "#FFFFFF",
+    "isCard": true
   },
   "peru": {
     "armies": 1,
@@ -209,5 +209,12 @@
     "owner": "#FF0000",
     "isCard": true
   },
-  "colorOrder": ["#FFFFFF", "#4488FF", "#FF0000", "#008000", "#FFFF00", "#800080"]
+  "colorOrder": [
+    "#FFFFFF",
+    "#4488FF",
+    "#FF0000",
+    "#008000",
+    "#FFFF00",
+    "#800080"
+  ]
 }
