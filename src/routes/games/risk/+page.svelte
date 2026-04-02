@@ -622,7 +622,7 @@
 						<path
 							d={conn.d}
 							style={conn.style}
-							stroke="#444"
+							stroke="white"
 							fill="none"
 							stroke-dasharray="none"
 						/>

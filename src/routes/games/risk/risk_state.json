@@ -5,8 +5,8 @@
     "isCard": false
   },
   "indonesia": {
-    "armies": 1,
-    "owner": "#008000",
+    "armies": 2,
+    "owner": "#FF0000",
     "isCard": true
   },
   "new_guinea": {
@@ -65,7 +65,7 @@
     "isCard": false
   },
   "japan": {
-    "armies": 5,
+    "armies": 1,
     "owner": "#FF0000",
     "isCard": false
   },
@@ -75,7 +75,7 @@
     "isCard": false
   },
   "kamchatka": {
-    "armies": 1,
+    "armies": 5,
     "owner": "#FF0000",
     "isCard": true
   },
@@ -105,12 +105,12 @@
     "isCard": false
   },
   "siam": {
-    "armies": 10,
-    "owner": "#008000",
+    "armies": 1,
+    "owner": "#FF0000",
     "isCard": false
   },
   "china": {
-    "armies": 10,
+    "armies": 1,
     "owner": "#FF0000",
     "isCard": false
   },
@@ -175,7 +175,7 @@
     "isCard": false
   },
   "eastern_united_states": {
-    "armies": 4,
+    "armies": 6,
     "owner": "#FF0000",
     "isCard": false
   },
