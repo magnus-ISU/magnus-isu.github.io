@@ -10,12 +10,12 @@
     "isCard": true
   },
   "new_guinea": {
-    "armies": 1,
+    "armies": 2,
     "owner": "#008000",
     "isCard": false
   },
   "alaska": {
-    "armies": 10,
+    "armies": 5,
     "owner": "#008000",
     "isCard": true
   },
@@ -25,8 +25,8 @@
     "isCard": false
   },
   "northwest_territory": {
-    "armies": 3,
-    "owner": "#FF0000",
+    "armies": 5,
+    "owner": "#008000",
     "isCard": false
   },
   "venezuela": {
