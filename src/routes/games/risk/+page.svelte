@@ -314,6 +314,7 @@
 
 	function loadState() {
 		const saved = localStorage.getItem('risk-state');
+		checkHasSave();
 		if (saved) {
 			state = JSON.parse(saved);
 			// Migrate old Black team (#000000) to White (#FFFFFF)
@@ -342,10 +343,17 @@
 		if (JSON.stringify(state) === JSON.stringify(defaultState)) return;
 		if (localStorage.getItem('risk-state') === JSON.stringify(state)) return;
 		localStorage.setItem('risk-state', JSON.stringify(state));
+		hasSave = true;
 	}
 
 	function saveColorOrder() {
 		localStorage.setItem('risk-color-order', JSON.stringify(colorOrder));
+	}
+
+	let hasSave = false;
+
+	function checkHasSave() {
+		hasSave = localStorage.getItem('risk-state') !== null;
 	}
 
 	function clearSave() {
@@ -357,6 +365,7 @@
 		activeColor = null;
 		campaign = [];
 		campaignMode = false;
+		hasSave = false;
 	}
 
 	let campaignMode = false;
@@ -800,7 +809,7 @@
 				</svg>
 				Import Game
 			</label>
-			<button class="action-btn" on:click={clearSave}>
+			<button class="action-btn" on:click={clearSave} disabled={!hasSave}>
 				<svg
 					width="16"
 					height="16"
@@ -942,7 +951,12 @@
 		transition: all 0.2s;
 	}
 
-	.action-btn:hover {
+	.action-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	.action-btn:hover:not(:disabled) {
 		background: #2a2a2a;
 		border-color: #444;
 		color: white;
