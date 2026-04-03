@@ -20,7 +20,7 @@
     "isCard": true
   },
   "ontario": {
-    "armies": 2,
+    "armies": 1,
     "owner": "#FF0000",
     "isCard": false
   },
@@ -40,8 +40,8 @@
     "isCard": false
   },
   "north_africa": {
-    "armies": 1,
-    "owner": "#4488FF",
+    "armies": 5,
+    "owner": "#FFFFFF",
     "isCard": true
   },
   "greenland": {
@@ -136,7 +136,7 @@
   },
   "western_europe": {
     "armies": 1,
-    "owner": "#4488FF",
+    "owner": "#FFFFFF",
     "isCard": false
   },
   "northern_europe": {
@@ -145,7 +145,7 @@
     "isCard": false
   },
   "egypt": {
-    "armies": 10,
+    "armies": 6,
     "owner": "#FFFFFF",
     "isCard": true
   },
@@ -175,7 +175,7 @@
     "isCard": false
   },
   "eastern_united_states": {
-    "armies": 6,
+    "armies": 3,
     "owner": "#FF0000",
     "isCard": false
   },
