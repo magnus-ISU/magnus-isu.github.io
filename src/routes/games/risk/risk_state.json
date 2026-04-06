@@ -1,17 +1,17 @@
 {
   "eastern_australia": {
-    "armies": 3,
+    "armies": 5,
     "owner": "#008000",
     "isCard": false
   },
   "indonesia": {
-    "armies": 2,
+    "armies": 1,
     "owner": "#FF0000",
     "isCard": true
   },
   "new_guinea": {
-    "armies": 2,
-    "owner": "#008000",
+    "armies": 4,
+    "owner": "#FF0000",
     "isCard": false
   },
   "alaska": {
@@ -20,12 +20,12 @@
     "isCard": true
   },
   "ontario": {
-    "armies": 1,
-    "owner": "#FF0000",
+    "armies": 2,
+    "owner": "#008000",
     "isCard": false
   },
   "northwest_territory": {
-    "armies": 5,
+    "armies": 1,
     "owner": "#008000",
     "isCard": false
   },
@@ -91,7 +91,7 @@
   },
   "afghanistan": {
     "armies": 1,
-    "owner": "#FF0000",
+    "owner": "#4488FF",
     "isCard": false
   },
   "middle_east": {
@@ -100,7 +100,7 @@
     "isCard": true
   },
   "india": {
-    "armies": 3,
+    "armies": 1,
     "owner": "#4488FF",
     "isCard": false
   },
@@ -125,12 +125,12 @@
     "isCard": true
   },
   "ukraine": {
-    "armies": 1,
+    "armies": 3,
     "owner": "#4488FF",
     "isCard": true
   },
   "southern_europe": {
-    "armies": 2,
+    "armies": 3,
     "owner": "#4488FF",
     "isCard": false
   },
@@ -200,8 +200,8 @@
     "isCard": false
   },
   "western_australia": {
-    "armies": 1,
-    "owner": "#008000",
+    "armies": 3,
+    "owner": "#FF0000",
     "isCard": true
   },
   "alberta": {
