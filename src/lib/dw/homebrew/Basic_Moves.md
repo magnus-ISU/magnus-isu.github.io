@@ -113,7 +113,7 @@ When you **have downtime and Level+7 XP**:
 - Spend Level+7 XP.
 - Increase your Level by 1.
 - Choose a new advanced move from your class.
-- Increase a stat by 1, if it is Constitution then increase your current and maximum HP.
+- At even levels, increase a stat modifier by 1 (if it is CON then increase your current and maximum HP by 3).
 
 ### End of Session
 When you **reach the end of a session**, describe how your opinion of or relationship with another character (PC or NPC) has changed. If no one objects, mark XP. Then everyone marks XP for each of the following questions:

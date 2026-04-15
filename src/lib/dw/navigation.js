@@ -6,8 +6,18 @@ export const navigation = [
 			{
 				title: 'Character Creation',
 				slug: 'character-creation',
+				source: 'homebrew',
+				file: 'Character_Creation',
+				homebrew: true,
+				srdSlug: 'character-creation-srd'
+			},
+			{
+				title: 'Character Creation',
+				slug: 'character-creation-srd',
 				source: 'srd',
-				file: 'Character_Creation'
+				file: 'Character_Creation',
+				homebrewSlug: 'character-creation',
+				hidden: true
 			},
 			{
 				title: 'Basic Moves',
