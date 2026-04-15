@@ -66,7 +66,7 @@
 		border-radius: 4px;
 		overflow: hidden;
 		border: 1px solid #444;
-		margin-top: 0.25rem;
+		margin-top: calc(0.25rem + 8px);
 		position: relative;
 		z-index: 11;
 	}
