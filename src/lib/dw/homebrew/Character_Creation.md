@@ -22,7 +22,7 @@ chooses a different class; there probably aren’t two of The Wizard.
 > cool ideas for a wizard, so I mention that would be my first choice. No one
 > else was thinking of playing one, so I take the wizard character sheet.
 
-## 6\. Choose Starting Moves
+## 2\. Choose Starting Moves
 
 The front side of each character sheet lists the starting moves. Some classes,
 like the fighter, have choices to make as part of one of their moves. Make
@@ -35,7 +35,7 @@ prepared to start with.
 > class, so that’s in too. I choose Alarm for my last spell, since I can think
 > of some interesting uses for it.
 
-## 2\. Choose a Race or Background
+## 3\. Choose a Race or Background
 
 Most classes have race or background options. Choose one. It gives you a special
 move.
@@ -75,7 +75,7 @@ HP is still computed from your full Constitution. That is 9 plus 3 times your CO
 
 > A Wizard's base 4 health, plus 9 equals 13. If I had assigned a +1 for CON, I could have had 16...
 
-## 7\. Choose Alignment
+## 6\. Choose Alignment
 
 Your alignment is a few words that describe your character’s moral outlook.
 Each class may only start with certain alignments. Choose your alignment—in
@@ -85,7 +85,7 @@ XP.
 > The Neutral option for wizards says I earn extra XP when I discover a magical
 > mystery. Avon is all about discovering mystery—I’ll go with Neutral.
 
-## 8\. Choose Gear
+## 7\. Choose Gear
 
 Each class has choices to make for starting gear. Keep your load in mind—it
 limits how much you can easily carry. Make sure to total up your armor and
@@ -96,7 +96,7 @@ note it on your character sheet.
 > healing potion and the antitoxin, but healing wins out. I also end up with
 > some rations.
 
-## 3\. Choose a Name
+## 8\. Choose a Name
 
 A suggested list appears on each class.
 
@@ -128,7 +128,7 @@ and ask about anything that stands out. Establish where they’re from, who they
 are, how they came together, or anything else that seems relevant or
 interesting.
 
-> “This is Avon, mighty wizard\! He’s a human with haunted eyes, wild hair,
+> “This is Avon, the mighty wizard\! He’s a human with haunted eyes, wild hair,
 > strange robes, and a thin body. Like I mentioned before his robes are strange
 > because they’re literally not of this world: they came to him as part of a
 > summoning ritual.”

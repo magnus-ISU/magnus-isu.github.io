@@ -71,6 +71,13 @@
 		z-index: 11;
 	}
 
+	@media (max-width: 768px) {
+		.source-bar {
+			margin-top: calc(0.65rem + 8px);
+			margin-right: 0;
+		}
+	}
+
 	.source-opt {
 		padding: 0.2rem 0.6rem;
 		font-size: 0.7rem;

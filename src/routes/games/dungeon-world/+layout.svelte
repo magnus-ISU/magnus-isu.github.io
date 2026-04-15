@@ -300,7 +300,6 @@
 		top: 0;
 		background: #1e1e1e;
 		z-index: 10;
-		text-indent: 3rem;
 	}
 
 	:global(.dw-article h2) {
@@ -539,7 +538,18 @@
 		}
 
 		.dw-content {
-			padding: 3.5rem 1rem 2rem;
+			padding: 0 1rem 2rem;
+		}
+
+		:global(.dw-article h1) {
+			padding-left: 4.5rem;
+			padding-top: 0.65rem;
+			padding-bottom: 0.65rem;
+			margin-left: -1rem;
+			margin-right: -1rem;
+			padding-right: 1rem;
+			font-size: 1.5rem;
+			line-height: 2.5rem;
 		}
 	}
 </style>
