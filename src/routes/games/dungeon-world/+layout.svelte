@@ -335,7 +335,8 @@
 	}
 
 	:global(.dw-article li) {
-		margin-bottom: -0.45rem;
+		margin-bottom: 0;
+		line-height: 1.5;
 	}
 
 	:global(.dw-article strong) {

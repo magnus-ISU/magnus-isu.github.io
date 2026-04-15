@@ -65,18 +65,13 @@ Load: 12+STR
 
 ## Alignment
 
-### Good
-Defend those weaker than you.
-
-### Neutral
-Defeat a worthy opponent.
-
-### Evil
-Kill a defenseless or surrendered enemy.
+Good: Defend those weaker than you.  
+Neutral: Defeat a worthy opponent.  
+Evil: Kill a defenseless or surrendered enemy.
 
 ## Gear
 You carry your signature weapon and dungeon rations (5 uses, 1 weight). Choose your defenses:
-- Chainmail (1 armor, 1 weight) and adventuring gear (1 weight)
+- Chainmail (1 armor, 1 weight) and adventuring gear (5 uses, 1 weight)
 - Scale armor (2 armor, 3 weight)
 
 Choose two:
@@ -86,23 +81,23 @@ Choose two:
 - 22 coins
 
 ## Names
-*Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq
-*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian
-*Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca
+*Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq  
+*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
+*Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca  
 *Human*: Hawke, Rudiger, Gregor, Brianne, Walton, Castor, Shanna, Ajax, Hob
 
 ## Look
 Choose one for each:
 
-Hard Eyes, Dead Eyes, or Eager Eyes
-Wild Hair, Shorn Hair, or Battered Helm
-Calloused Skin, Tanned Skin, or Scarred Skin
+Hard Eyes, Dead Eyes, or Eager Eyes  
+Wild Hair, Shorn Hair, or Battered Helm  
+Calloused Skin, Tanned Skin, or Scarred Skin  
 Built Body, Lithe Body, or Ravaged Body
 
 ## Bonds
-\_\_\_\_\_ owes me their life, whether they admit it or not.
-I have sworn to protect \_\_\_\_\_.
-I worry about the ability of \_\_\_\_\_ to survive in the dungeon.
+\_\_\_\_\_ owes me their life, whether they admit it or not.  
+I have sworn to protect \_\_\_\_\_.  
+I worry about the ability of \_\_\_\_\_ to survive in the dungeon.  
 \_\_\_\_\_ is soft, but I will make them hard like me.
 
 ## Advanced Moves
@@ -123,13 +118,13 @@ Choose one extra enhancement for your signature weapon.
 When you discern realities during combat, you take +1.
 
 ### Interrogate
-When you use threats of violence to get someone you've cornered to do or tell you something, roll+CHA. On a hit, they'll comply; choose 2/1:
-- Even if given the slightest chance, they won't immediately make a break for it
-- You don't need to begin to follow through on your threats before they start
-- You get the message across really fast
+When you use threats of violence to get someone you've cornered to do or tell you something, roll+CHA. On a hit, they'll comply; on a 10+, choose 2. On a 7-9, choose 1.
+- They won't immediately make a break for it, even if given a chance.
+- You don't need to begin to follow through on your threats before they start.
+- You get the message across really fast.
 
 ### Scent of Blood
-When you hack and slash an enemy, your next attack against that same foe deals +1d4 damage.
+When you hack and slash an enemy, the next attack against that same foe deals +1d4 damage.
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
@@ -148,16 +143,16 @@ When it's your word against someone else's, roll+CHA. On a 10+, you're believed 
 You know whether another person has killed or not, after interacting with them even briefly.
 
 ### Strategist
-You know the war-lore of the ancients. When you examine how armies move, you can always tell where the enemy will next strike and what they're preparing for. If you don't have enough information, you'll know what to look for in order to find out.
+You know the lore of the ancients. When you examine how armies move, you can always tell where the enemy will next strike and what they're preparing for. If you don't have enough information, you'll know what to look for in order to find out.
 
 ## Mastery Moves
 
 ### Bloodthirsty
-*Replaces Merciless*
+*Replaces Merciless*  
 When you deal damage, deal +1d8 damage.
 
 ### Armored Perfection
-*Replaces Armor Mastery*
+*Replaces Armor Mastery*  
 When you **choose to let your armor take the brunt of damage dealt to you**, the damage is negated and you take +1 forward against the attacker, but you must reduce the armor value of your armor or shield (your choice) by 1. The value is reduced each time you make this choice. If the reduction leaves the item with 0 armor it is destroyed.
 
 ### Evil Eye
@@ -165,15 +160,15 @@ When you **choose to let your armor take the brunt of damage dealt to you**, the
 When you **enter combat**, roll+CHA. On a 10+, hold 2. On a 7-9, hold 1. Spend your hold to make eye contact with an NPC present, who freezes or flinches and can't act until you break it off. On a 6-, your enemies immediately identify you as their biggest threat.
 
 ### Taste of Blood
-*Replaces Scent of Blood*
-When you hack and slash an enemy, your next attack against that same foe deals +1d8 damage.
+*Replaces Scent of Blood*  
+When you hack and slash an enemy, all subsequent attacks against that same foe deal +1d4 damage.
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*
 Get one move from another class. Treat your level as one lower for choosing the move.
 
 ### Steel Hide
-*Replaces Iron Hide*
+*Replaces Iron Hide*  
 You gain +2 armor.
 
 ### Through Death's Eyes
