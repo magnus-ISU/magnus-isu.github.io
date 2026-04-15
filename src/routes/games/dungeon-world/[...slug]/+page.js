@@ -31,7 +31,9 @@ export const load = async ({ params }) => {
 		Content: mod.default,
 		title: entry.title,
 		isHomebrew: !!entry.homebrew,
-		slug
+		slug,
+		srdSlug: entry.srdSlug || null,
+		homebrewSlug: entry.homebrewSlug || null
 	};
 };
 

@@ -10,6 +10,10 @@
 			.replace('/games/dungeon-world/', '')
 			.replace(/\/$/, '') || 'introduction'
 	);
+
+	function isActive(item, slug) {
+		return slug === item.slug || slug === item.srdSlug || slug === item.homebrewSlug;
+	}
 </script>
 
 <div class="dw-layout">
@@ -31,15 +35,31 @@
 			<details open>
 				<summary>{category.category}</summary>
 				<ul>
-					{#each category.items as item}
-						<li class:active={currentSlug === item.slug}>
+					{#each category.items.filter(i => !i.hidden) as item}
+						<li class:active={isActive(item, currentSlug)} class:has-toggle={item.srdSlug}>
 							<a
 								href="/games/dungeon-world/{item.slug}"
 								onclick={() => (sidebarOpen = false)}
 							>
 								{item.title}
-								{#if item.homebrew}<span class="hb">HB</span>{/if}
+								{#if item.homebrew && !item.srdSlug}<span class="hb">HB</span>{/if}
 							</a>
+							{#if item.srdSlug}
+								<span class="source-toggle">
+									<a
+										class="toggle-opt"
+										class:active={currentSlug !== item.srdSlug}
+										href="/games/dungeon-world/{item.slug}"
+										onclick={() => (sidebarOpen = false)}
+									>HB</a>
+									<a
+										class="toggle-opt"
+										class:active={currentSlug === item.srdSlug}
+										href="/games/dungeon-world/{item.srdSlug}"
+										onclick={() => (sidebarOpen = false)}
+									>SRD</a>
+								</span>
+							{/if}
 						</li>
 					{/each}
 				</ul>
@@ -123,6 +143,13 @@
 		margin: 0 0 0.5rem;
 	}
 
+	li {
+		display: flex;
+		align-items: center;
+		border-left: 3px solid transparent;
+		transition: background 0.15s;
+	}
+
 	li a {
 		display: flex;
 		justify-content: space-between;
@@ -132,18 +159,30 @@
 		text-decoration: none;
 		font-size: 0.85rem;
 		transition: color 0.15s, background 0.15s;
-		border-left: 3px solid transparent;
+		border-left: none;
+		flex: 1;
+		min-width: 0;
+	}
+
+	li.has-toggle > a {
+		padding-right: 0.3rem;
+	}
+
+	li:hover {
+		background: #1e1e1e;
 	}
 
 	li a:hover {
 		color: #aabbff;
+	}
+
+	li.active {
+		border-left-color: #ffaaaa;
 		background: #1e1e1e;
 	}
 
-	li.active a {
+	li.active > a {
 		color: #ffaaaa;
-		border-left-color: #ffaaaa;
-		background: #1e1e1e;
 	}
 
 	.hb {
@@ -156,6 +195,49 @@
 		font-weight: bold;
 		letter-spacing: 0.03em;
 		flex-shrink: 0;
+	}
+
+	/* Source toggle (HB/SRD switcher) */
+	.source-toggle {
+		display: inline-flex;
+		background: #2a2a2a;
+		border-radius: 3px;
+		overflow: hidden;
+		flex-shrink: 0;
+		border: 1px solid #444;
+		margin-right: 0.5rem;
+	}
+
+	.source-toggle .toggle-opt {
+		padding: 0.05rem 0.3rem;
+		font-size: 0.6rem;
+		font-weight: bold;
+		letter-spacing: 0.03em;
+		text-decoration: none;
+		color: #888;
+		transition: background 0.15s, color 0.15s;
+		border: none;
+		border-left: none;
+	}
+
+	.source-toggle .toggle-opt:first-child {
+		border-right: 1px solid #444;
+	}
+
+	.source-toggle .toggle-opt:hover {
+		color: #ccc;
+		background: #333;
+		text-decoration: none;
+	}
+
+	.source-toggle .toggle-opt.active {
+		background: #d4a847;
+		color: #1e1e1e;
+	}
+
+	li.active .source-toggle .toggle-opt.active {
+		background: #d4a847;
+		color: #1e1e1e;
 	}
 
 	/* Content */

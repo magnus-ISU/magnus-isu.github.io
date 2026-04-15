@@ -14,9 +14,10 @@ export const navigation = [
 				slug: 'basic-moves',
 				source: 'homebrew',
 				file: 'Basic_Moves',
-				homebrew: true
+				homebrew: true,
+				srdSlug: 'basic-moves-srd'
 			},
-			{ title: 'Basic Moves', slug: 'basic-moves-srd', source: 'srd', file: 'Moves' },
+			{ title: 'Basic Moves', slug: 'basic-moves-srd', source: 'srd', file: 'Moves', hidden: true, homebrewSlug: 'basic-moves' },
 			{
 				title: 'Playing the Game',
 				slug: 'playing-the-game',
@@ -48,18 +49,20 @@ export const navigation = [
 				slug: 'cleric',
 				source: 'homebrew',
 				file: 'classes/Cleric',
-				homebrew: true
+				homebrew: true,
+				srdSlug: 'cleric-srd'
 			},
-			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric' },
+			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric', hidden: true, homebrewSlug: 'cleric' },
 			{ title: 'Druid', slug: 'druid', source: 'srd', file: 'Druid' },
 			{
 				title: 'Fighter',
 				slug: 'fighter',
 				source: 'homebrew',
 				file: 'classes/Fighter',
-				homebrew: true
+				homebrew: true,
+				srdSlug: 'fighter-srd'
 			},
-			{ title: 'Fighter', slug: 'fighter-srd', source: 'srd', file: 'Fighter' },
+			{ title: 'Fighter', slug: 'fighter-srd', source: 'srd', file: 'Fighter', hidden: true, homebrewSlug: 'fighter' },
 			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
 			{ title: 'Ranger', slug: 'ranger', source: 'srd', file: 'Ranger' },
 			{ title: 'Thief', slug: 'thief', source: 'srd', file: 'Thief' },
@@ -105,13 +108,14 @@ export const navigation = [
 		category: 'Spells',
 		items: [
 			{
-				title: 'Cleric Miracles',
+				title: 'Cleric Spells',
 				slug: 'cleric-miracles',
 				source: 'homebrew',
 				file: 'spells/Cleric_Miracles',
-				homebrew: true
+				homebrew: true,
+				srdSlug: 'cleric-spells-srd'
 			},
-			{ title: 'Cleric Spells', slug: 'cleric-spells-srd', source: 'srd', file: 'Cleric_Spells' },
+			{ title: 'Cleric Spells', slug: 'cleric-spells-srd', source: 'srd', file: 'Cleric_Spells', hidden: true, homebrewSlug: 'cleric-miracles' },
 			{
 				title: 'Druid Bindings',
 				slug: 'druid-bindings',
@@ -124,9 +128,10 @@ export const navigation = [
 				slug: 'wizard-spells',
 				source: 'homebrew',
 				file: 'spells/Wizard_Spells',
-				homebrew: true
+				homebrew: true,
+				srdSlug: 'wizard-spells-srd'
 			},
-			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells' }
+			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells', hidden: true, homebrewSlug: 'wizard-spells' }
 		]
 	},
 	{
