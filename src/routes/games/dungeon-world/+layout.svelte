@@ -104,10 +104,12 @@
 				</ul>
 			</details>
 		{/each}
+		<div class="sidebar-spacer"></div>
 	</nav>
 
 	<main class="dw-content">
 		{@render children?.()}
+		<div class="content-spacer"></div>
 	</main>
 </div>
 
@@ -267,11 +269,19 @@
 		color: #1e1e1e;
 	}
 
+	.sidebar-spacer {
+		height: 50px;
+	}
+
 	/* Content */
 	.dw-content {
 		padding: 2rem 2.5rem;
 		max-width: 56rem;
 		min-width: 0;
+	}
+
+	.content-spacer {
+		height: 100vh;
 	}
 
 	/* Content typography */

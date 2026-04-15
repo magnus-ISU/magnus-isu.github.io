@@ -64,8 +64,7 @@ Repeat this process for your remaining scores: 1, 0, 0, -1
 
 Your maximum HP is equal to your class’s base HP+Constitution score.
 
-Dungeon World only needs stat modifiers, but HP is still computed from your full
-Constitution. That is 9 plus 3 times your CON score.
+HP is still computed from your full Constitution. That is 9 plus 3 times your CON score.
 
 > A Wizard's base 4 health, plus 9 equals 13. If I had assigned a +1 for CON, I could have had 16...
 
