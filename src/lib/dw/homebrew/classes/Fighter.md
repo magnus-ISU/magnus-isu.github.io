@@ -124,7 +124,7 @@ When you use threats of violence to get someone you've cornered to do or tell yo
 - You get the message across really fast.
 
 ### Scent of Blood
-When you hack and slash an enemy, the next attack against that same foe deals +1d4 damage.
+When you hack and slash an enemy, the next attack someone else makes against that same foe deals +1d8 damage.
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
@@ -140,7 +140,7 @@ Those who see you know you mean business. When you say something with honesty, c
 When it's your word against someone else's, roll+CHA. On a 10+, you're believed if there was any plausibility at all. On a 7-9, you're believed, but your grim demeanor makes the situation interpreted as unfavorably as possible for you within that context.
 
 ### It Takes One To Know One
-You know whether another person has killed or not, after interacting with them even briefly.
+You know whether another person has killed or not, after speaking with them even briefly.
 
 ### Strategist
 You know the lore of the ancients. When you examine how armies move, you can always tell where the enemy will next strike and what they're preparing for. If you don't have enough information, you'll know what to look for in order to find out.
@@ -153,7 +153,7 @@ When you deal damage, deal +1d8 damage.
 
 ### Armored Perfection
 *Replaces Armor Mastery*  
-When you **choose to let your armor take the brunt of damage dealt to you**, the damage is negated and you take +1 forward against the attacker, but you must reduce the armor value of your armor or shield (your choice) by 1. The value is reduced each time you make this choice. If the reduction leaves the item with 0 armor it is destroyed.
+When you **choose to let your armor take the brunt of damage dealt to you**, the damage is negated and you take +1 forward against the attacker, but you must reduce the armor value of your armor or shield (your choice) by 1. The value is reduced each time you make this choice. If the reduction leaves the item with 0 armor it is destroyed; otherwise, it may be repaired.
 
 ### Evil Eye
 *Requires Seeing Red*
@@ -161,7 +161,7 @@ When you **enter combat**, roll+CHA. On a 10+, hold 2. On a 7-9, hold 1. Spend y
 
 ### Taste of Blood
 *Replaces Scent of Blood*  
-When you hack and slash an enemy, all subsequent attacks against that same foe deal +1d4 damage.
+When you hack and slash an enemy, all subsequent attacks made by anyone against that same foe deal +1d8 damage.
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*
