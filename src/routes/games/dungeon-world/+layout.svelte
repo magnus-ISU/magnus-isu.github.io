@@ -124,7 +124,9 @@
 	}
 
 	li a {
-		display: block;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		padding: 0.3rem 1rem 0.3rem 1.5rem;
 		color: #ccc;
 		text-decoration: none;
@@ -152,9 +154,8 @@
 		border-radius: 2px;
 		font-size: 0.6rem;
 		font-weight: bold;
-		margin-left: 0.4rem;
-		vertical-align: middle;
 		letter-spacing: 0.03em;
+		flex-shrink: 0;
 	}
 
 	/* Content */
@@ -182,12 +183,16 @@
 		font-size: 1.5rem;
 		margin: 2.5rem 0 1rem;
 		color: #fff;
+		text-align: center;
 	}
 
 	:global(.dw-article h3) {
 		font-size: 1.2rem;
 		margin: 2rem 0 0.75rem;
 		color: #eee;
+		background: #252525;
+		padding: 0.4rem 0.75rem;
+		border-radius: 6px;
 	}
 
 	:global(.dw-article h4) {

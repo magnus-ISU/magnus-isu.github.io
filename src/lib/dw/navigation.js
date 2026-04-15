@@ -16,13 +16,13 @@ export const navigation = [
 				file: 'Basic_Moves',
 				homebrew: true
 			},
+			{ title: 'Basic Moves', slug: 'basic-moves-srd', source: 'srd', file: 'Moves' },
 			{
 				title: 'Playing the Game',
 				slug: 'playing-the-game',
 				source: 'srd',
 				file: 'Playing_the_Game'
 			},
-			{ title: 'Moves', slug: 'moves', source: 'srd', file: 'Moves' },
 			{
 				title: 'Moves Discussion',
 				slug: 'moves-discussion',
@@ -50,6 +50,7 @@ export const navigation = [
 				file: 'classes/Cleric',
 				homebrew: true
 			},
+			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric' },
 			{ title: 'Druid', slug: 'druid', source: 'srd', file: 'Druid' },
 			{
 				title: 'Fighter',
@@ -58,6 +59,7 @@ export const navigation = [
 				file: 'classes/Fighter',
 				homebrew: true
 			},
+			{ title: 'Fighter', slug: 'fighter-srd', source: 'srd', file: 'Fighter' },
 			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
 			{ title: 'Ranger', slug: 'ranger', source: 'srd', file: 'Ranger' },
 			{ title: 'Thief', slug: 'thief', source: 'srd', file: 'Thief' },
@@ -109,6 +111,7 @@ export const navigation = [
 				file: 'spells/Cleric_Miracles',
 				homebrew: true
 			},
+			{ title: 'Cleric Spells', slug: 'cleric-spells-srd', source: 'srd', file: 'Cleric_Spells' },
 			{
 				title: 'Druid Bindings',
 				slug: 'druid-bindings',
@@ -122,7 +125,8 @@ export const navigation = [
 				source: 'homebrew',
 				file: 'spells/Wizard_Spells',
 				homebrew: true
-			}
+			},
+			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells' }
 		]
 	},
 	{
@@ -142,14 +146,7 @@ export const navigation = [
 	{
 		category: 'Monsters',
 		items: [
-			{ title: 'SRD Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
-			{
-				title: 'Homebrew Monsters',
-				slug: 'monsters-homebrew',
-				source: 'homebrew',
-				file: 'Monsters',
-				homebrew: true
-			},
+			{ title: 'Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
 			{ title: 'Making Monsters', slug: 'making-monsters', source: 'srd', file: 'Example' },
 			{
 				title: 'Cavern Dwellers',
@@ -174,7 +171,14 @@ export const navigation = [
 			{ title: 'Ravenous Hordes', slug: 'hordes', source: 'srd', file: 'Hordes' },
 			{ title: 'Planar Powers', slug: 'planes', source: 'srd', file: 'Planes' },
 			{ title: 'Swamp Denizens', slug: 'swamp', source: 'srd', file: 'Swamp' },
-			{ title: 'Undead Legions', slug: 'undead', source: 'srd', file: 'Undead' }
+			{ title: 'Undead Legions', slug: 'undead', source: 'srd', file: 'Undead' },
+			{
+				title: 'Homebrew Monsters',
+				slug: 'monsters-homebrew',
+				source: 'homebrew',
+				file: 'Monsters',
+				homebrew: true
+			}
 		]
 	},
 	{

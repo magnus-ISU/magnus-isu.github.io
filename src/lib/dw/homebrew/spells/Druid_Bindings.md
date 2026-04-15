@@ -1,12 +1,12 @@
 # Druid Bindings
-# 0
+## Level 0
 ### Calming Aura
 The air immediately around you is purified, driving away smoke or miasma, cooling a desert or calming a blizzard. Muddy water clears, blinding light dims, and unbearable noises quiet. The spell lasts until it would have no effect, because the area around you is clear.
 ### Magnetize
 The pebbles, sand, dirt, or other small objects or powder you choose within arms reach magnetize. You can also create minor magnetic fields which can move small objects, hold them in unlikely shapes and places, or arrange into geometric patterns. The spell lasts as long as you are nearby, or the magnetic bond is not tested too hard.
 ### Wildwords
 When you cast this spell name your recipient, and a small animal, such as a squirrel, songbird, rat, or lizard will approach, if any nearby could deliver your message. Tell them your message, and they will find and deliver the words.
-# 1
+## Level 1
 ### Cure Light Wounds
 At your touch wounds scab and bones cease to ache. Heal someone you touch of 1d8 damage.
 ### Magic Weapon
@@ -21,7 +21,7 @@ Raise out your hand and call upon a spirit of molten fire. All the metal in a sm
 You and the person you touch while casting this spell will be treated as friends and stewards by the natural wilds, those whose ancestors grew and hunted and grazed on the earth. Concentration 1
 ### Bendbark
 For a moment, you control a living tree, bending it temporarily or permanently into a shape you desire like a stair or hollow, or wielding it as a weapon with fast-swinging branches. The closer you are to the tree, the more precise control you have. If this spell deals damage, it deals 2d4.
-# 3
+## Level 3
 ### Cure Moderate Wounds
 You staunch bleeding and set bones through magic. Heal an ally you touch of 2d8 damage.
 ### Darkness
@@ -54,7 +54,7 @@ Summon a rainbow, from which two glowing spirits of wolves emerge. They have a +
 - They manifest for more than a few minutes
 ### Wind Ward
 A powerful force emanates from you, creating a blasting wind which prevents most projectiles from passing through, and makes it difficult for others to approach. You cannot breathe until you end the spell; nor can others who reach the innermost vacuum with you.
-# 5
+## Level 5
 ### Contagion
 Choose a creature you can see. Until you end this spell, the target suffers from a disease of your choice. Concentration 1
 ### Words of the Unspeaking
@@ -75,7 +75,7 @@ All who stand amidst the flowers can do nothing but listen to you, so long as yo
 You create or destroy water, under the right conditions. If you destroy it, a whirlpool forms which pushes the water into the fountains of the deep. If you create it, a geyser erupts, spilling over everywhere.
 ### Tar Pit
 An explosion erupts from the earth, dealing d8 damage and revealing a burning pit of tar. The pit is sticky, hard to escape, and those who sink into its depths die an agonizing, burning death.
-# 7
+## Level 7
 ### Harm
 Touch an enemy and strike them with divine wrath — deal 2d8 damage to them and 1d6 damage to yourself, ignoring armor.
 
@@ -92,7 +92,7 @@ You give a piercing shout, and your cry is heard. Every animal within earshot lo
 Touch an artifact. You learn its full nature, and begin to disperse its magic into the earth. Unless interrupted, you will slowly drain away its power. Take -1 ongoing to everything while you channel this energy (ending only if you stop it or fall unconscious), and -1 forward when you end the spell, regardless of whether you succeeded or not.
 ### Just Like Old Times
 You look back through the ages, and see the history of this place. You can describe what you want to see, but it is up to the land itself what it considers most important to reveal to you.
-# 9
+## Level 9
 ### True Seeing
 You see all things as they truly are, including the effects of magic. This effect persists until you tell a lie or dismiss the spell. Concentration 1
 
@@ -104,7 +104,7 @@ Alternatively, reverse this and turn Stone to Flesh.
 You bring the Moon Spirit to your cause. It sails across the sky to where you want, and glows full or vanishes. You can cause an eclipse or make its pale glow replace it, bring the tides in or out, use her power to illuminate your foes and force them back to their true forms. Concentration 1
 ### Mould Earth
 You reshape the earth itself as you work this magic over several hours, your will extending far beyond what your eye can see. Widen entire rivers or dry them up; move mountains, dig valleys; open great rifts in the land.
-# Comparison to Cleric
+## Comparison to Cleric
 ### Stolen spells
 level 1: Cure Light Wounds, Magic Weapon
 level 3: Animate Dead, Darkness, Hold Person
