@@ -4,14 +4,14 @@ HP: 6+Constitution
 Load: 6+STR
 
 ## Alignments
-Good: Help someone or something grow
-Neutral: Eliminate an unnatural menace
-Chaotic: Destroy a symbol of civilization
+Good: Help someone or something grow  
+Neutral: Eliminate an unnatural menace  
+Chaotic: Destroy a symbol of civilization  
 
 ## Bonds
-\_ smells more like prey than a hunter.
-The spirits told me of a great danger following \_
-I have shown \_ a secret rite of the Land
+- \_ smells more like prey than a hunter.
+- The spirits told me of a great danger following \_
+- I have shown \_ a secret rite of the Land
 - Which of you also reveres the old gods?
 - Which of you dismisses me as a primitive?
 - Which of you disregards the natural order?
@@ -123,18 +123,18 @@ When you **borrow a form**, you may spend a minute to grant the form to your com
 When you **Shapechange**, you can take -1 to the roll in order to take on the form of a specific individual or creature you have seen. Even if you succeed, take -1 ongoing until you release the form.
 
 ### Formshaper
-*Requires Formcrafter*
+*Requires Formcrafter*  
 When you **Shapechange**, choose to increase your armor by 1 or deal an additional d4 damage.
 
 ### Grove of the Gods
 You know and walk the secret paths to the eldest glens. Even in the busiest city or the harshest dungeons, when you **seek the Grove**, you and those you directly lead will find it. You can always return the way you came; but the spirits may show you other ways out, for a price.
 
 ### Forms of the Divine
-*Requires God Amidst the Wastes*
+*Requires God Amidst the Wastes*  
 You can Channel a Spell from any form, not just your natural one.
 
 ### In Nature Reborn
-*Requires By Nature Sustained*
+*Requires By Nature Sustained*  
 You no longer age or sleep. When you **fall to 0 hit points**, do not roll your Last Breath. A seed (like an acorn?) somewhere on your corpse will grow in a few days back into yourself, so long as it is not destroyed.
 
 ### Chimera

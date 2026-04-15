@@ -68,7 +68,7 @@ You do not need your spellbook to prepare spells. They come to you in your dream
 When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them for just a moment.
 
 ### Spellblade
-*Requires Warrior of the Mind*
+*Requires Warrior of the Mind*  
 When you **Cast a Spell**, you get +d4 forward to damage from **Hack and Slash**. When you **Hack and Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
 
 ### Natural
@@ -99,7 +99,7 @@ When you use strict deduction to analyze your surroundings, you can discern real
 When you **shunt the energy from a spell to protect you**, end an ongoing non-cantrip spell or forget any spell (including cantrips) and reduce the damage you take from an effect by 2. You cannot do this with multiple spells at once.
 
 ### Greater Warding
-*Replaces Weak Warding*
+*Replaces Weak Warding*  
 When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (including cantrips) and hold twice that much Warding.
 When you **take damage**, reduce the damage you take from an effect by your Warding, then lose half your Warding.
 
@@ -112,7 +112,7 @@ When you attempt to counter an arcane spell which you see being cast, stake up t
 When you **Prepare Spells**, prepare one additional spell (3+½ Level)
 
 ### Memory Palace
-*Requires Memorius*
+*Requires Memorius*  
 You study every trick in the memorization book. And then memorize the book. You no longer forget things at all.
 When you **open your spellbook to memorize a single spell, fast**, roll+INT, subtracting the number of spells you have memorized. On a 10+, choose 1. On a 7-9, choose 1 and the GM chooses 1.
 - Take -1 ongoing to Prepare Spells and to Cast a Spell until you have no spells.
@@ -126,7 +126,7 @@ When you **open your spellbook to memorize a single spell, fast**, roll+INT, sub
 Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar.
 
 ### Familiar's Protection
-*Requires Familiar*
+*Requires Familiar*  
 When you **are in danger and your foes loom over you**, your familiar gains strength to protect you; roll+CHA. On a 10+, it is the size of a grizzly bear and not going anywhere until you're safe. On a 7-9, choose one:
 - It doesn't grow from it's small size
 - It cannot remain in this form for long
@@ -141,18 +141,18 @@ When **another player's character comes to you for advice and you tell them what
 When you have time, expensive arcane materials, and a safe space, you can create your own place of power. Describe to the GM what kind of power it is and how you're binding it to this place, the GM will tell you one kind of creature that will have an interest in your workings.
 
 ### Spell Stealer
-*Requires Counterspell*
+*Requires Counterspell*  
 When you roll 12+ to **Counterspell**, you instead capture the living spell instead of cancelling it. You memorize their spell, and they lose it.
 
 ### Highly Logical
-*Requires Logical*
+*Requires Logical*  
 When you **Discern Realities**, on a 12+, you can ask any questions you like.
 
 ### He shall know your ways as if born to them
-*Requires Natural*
+*Requires Natural*  
 Choose 3 spells which can hardly be forgotten; you need but a few seconds to re-create the Living Spells, if you forget them, even without your spellbook.
 If they are the spells from Natural, choose new spells for Natural.
 
 ### Enchanter's Soul
-*Requires Enchanter*
+*Requires Enchanter*  
 When you have time and safety with a magic item in a place of power you can empower that item so that the next time you use it its effects are amplified, the GM will tell you exactly how.
