@@ -41,7 +41,7 @@ Choose its unique power:
 - It drips an acidic ooze, melting and warping
 - It hums with sonic power, booming when it strikes metal
 - It is simply an instrument of death, choose two more enhancements or ranges (including range *far*)
-- Your choice, ask your DM...
+- Your choice, ask your GM...
 
 ## Backgrounds
 

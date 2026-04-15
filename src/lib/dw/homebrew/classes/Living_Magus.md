@@ -18,13 +18,12 @@ Evil: Use magic to cause fear and terror
 
 ## Starting Moves
 
-### Spellbook
-You carry a book of power. You start out with 3 level 1 spells, as well as the cantrips.
-
 ### Prepare Spells
-When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and up to 2 + ½ Level (round down) spells from your spellbook, forgetting any others.
-When you **sit down with your spellbook to memorize a single spell**, spend d20 minutes if you have half your level spells memorized or fewer.
-When you **sleep with spells still memorized**, your rest is subpar.
+You carry a book of power. You start out with 2 level 1 spells, as well as the cantrips. You can add new spells to it in a manner the GM will describe.
+
+When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level, forgetting any others.
+
+When you **sleep with spells still memorized**, your rest is subpar (not cantrips). You may forget your spells as part of your bedtime routine.
 
 ### Cast A Spell
 When you **cast a memorized spell**, roll+INT. On a 7-9, choose one:
@@ -34,7 +33,7 @@ When you **cast a memorized spell**, roll+INT. On a 7-9, choose one:
 
 ### Ritual
 When you **draw on a place of power to create a magical effect**, tell the GM what you're trying to achieve. Ritual effects are always possible, but the GM will give you one to four of the following conditions:
-- It's going to take days/weeks/months
+- It's going to take minutes/hours/days/weeks/months
 - First you must \_
 - You'll need help from \_
 - It will require a lot of money
@@ -57,25 +56,22 @@ When you roll a 6- to **Cast a Spell**, it always succeeds to cast as expected, 
 Take the advanced move **Familiar**.
 
 ### Swordmage
-Take the advanced move **Warrior of the Mind**.
+Take the mastery move **Warrior of the Mind**.
 
 ### Sorcerer
 You do not use a spellbook to prepare spells. They are a part of your blood.
 
 ## Advanced Moves
 
-### Warrior of the Mind
-When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them fight in melee for a few moments.
-
 ### Spellblade
-*Requires Warrior of the Mind*  
 When you **Cast a Spell**, you get +d4 forward to damage from **Hack and Slash**. When you **Hack and Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
 
-### Natural
-Choose three spells or cantrips. You can prepare them without your spellbook.
+### Quick Thinking
+When you **spend one minute in contemplation of your spellbook**, you memorize one spell or cantrip from your spellbook, forgetting any others.
 
 ### Quick Study
 When you **see a spell being cast**, you can ask the GM what it's name is and its effects. Take +1 forward acting on the answers.
+
 Even knowing a spell's name is enough for you to begin researching how to learn it. You can always ask the GM, "what is the next step I must take to learn \_?"
 
 ### Spell Augmentation
@@ -100,34 +96,25 @@ When you **shunt the energy from a spell to protect you**, end an ongoing non-ca
 
 ### Greater Warding
 *Replaces Weak Warding*  
-When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (including cantrips) and hold twice that much Warding.
-When you **take damage**, reduce the damage you take from an effect by your Warding, then lose half your Warding.
+When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (including cantrips) and reduce the damage you take from an effect by 3 times the number of effects and spells ended.
 
 ### Counterspell
-When you attempt to counter an arcane spell which you see being cast, stake up to your INT prepared spells and roll+Staked. Choose 1/2:
-- The spell is only weakened, and others aren't protected much
-- You forget the staked spells
+When you attempt to **counter an arcane spell** which you see being cast, stake up to your INT prepared spells and roll+Staked. On a 10+, choose 2. On a 7-9, choose 1:
+- The spell is completely negated where your protection extends.
+- You can protect others, not just yourself.
+- You forget the staked spells.
 
 ### Memorius
-When you **Prepare Spells**, prepare one additional spell (3+½ Level)
+When you **Prepare Spells**, prepare two additional spells (3+½ Level).
 
-### Memory Palace
-*Requires Memorius*  
-You study every trick in the memorization book. And then memorize the book. You no longer forget things at all.
-When you **open your spellbook to memorize a single spell, fast**, roll+INT, subtracting the number of spells you have memorized. On a 10+, choose 1. On a 7-9, choose 1 and the GM chooses 1.
-- Take -1 ongoing to Prepare Spells and to Cast a Spell until you have no spells.
-- The spell immediately goes off.
-- The spell you memorize has some issues, which won't be corrected until you cast it the first time.
-- You forget some or all other spells you had prepared.
-- Your mind shudders under the strain; mark Stunned or take 2d4-1 damage, your choice.
-- The living spell escapes your mind; you are still unable to cast it, and it is loose!
+If you have **Quick Thinking**, you may prepare two additional spells or cantrips when using it.
 
 ### Familiar
-Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar.
+Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar. If your familiar dies, you can perform a **Ritual** to bring it back.
 
 ### Familiar's Protection
 *Requires Familiar*  
-When you **are in danger and your foes loom over you**, your familiar gains strength to protect you; roll+CHA. On a 10+, it is the size of a grizzly bear and not going anywhere until you're safe. On a 7-9, choose one:
+When you **are in danger and your foes loom over you**, your familiar gains strength to protect you; roll+CHA. On a 10+, it grows to the size of a grizzly bear and is not going anywhere until you're safe. On a 7-9, choose one:
 - It doesn't grow from it's small size
 - It cannot remain in this form for long
 - Until it shifts back, your familiar is draining magical energy from you at an alarming rate
@@ -138,21 +125,26 @@ When **another player's character comes to you for advice and you tell them what
 ## Mastery Moves
 
 ### Self-Powered
-When you have time, expensive arcane materials, and a safe space, you can create your own place of power. Describe to the GM what kind of power it is and how you're binding it to this place, the GM will tell you one kind of creature that will have an interest in your workings.
+When you have time, expensive arcane materials, and a safe space, you can create your own place of power. Describe to the GM what kind of power it is and how you're binding it to this place, the GM will tell you someone or something that will have an interest in your workings.
 
 ### Spell Stealer
 *Requires Counterspell*  
-When you roll 12+ to **Counterspell**, you instead capture the living spell instead of cancelling it. You memorize their spell, and they lose it.
+Add the following option to **Counterspell**:
+- You capture their living spell instead of cancelling it. You memorize their spell, and they lose it.
+
+When you roll 12+ to **Counterspell**, choose 4.
 
 ### Highly Logical
 *Requires Logical*  
 When you **Discern Realities**, on a 12+, you can ask any questions you like.
 
-### He shall know your ways as if born to them
-*Requires Natural*  
-Choose 3 spells which can hardly be forgotten; you need but a few seconds to re-create the Living Spells, if you forget them, even without your spellbook.
-If they are the spells from Natural, choose new spells for Natural.
+### As if born to them
+*Requires Quick Thinking*  
+Choose 3 spells which can hardly be forgotten; it takes but a few seconds of thought to re-memorize them, even without your spellbook.
 
 ### Enchanter's Soul
 *Requires Enchanter*  
 When you have time and safety with a magic item in a place of power you can empower that item so that the next time you use it its effects are amplified, the GM will tell you exactly how.
+
+### Warrior of the Mind
+When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them fight in melee for a few moments.
