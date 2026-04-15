@@ -9,17 +9,17 @@ Neutral: Discover something about a magical mystery
 Evil: Use magic to cause fear and terror
 
 ## Bonds
-_ will play an important role in the events to come. I have foreseen it!
-_ is keeping an important secret from me.
-_ is woefully misinformed about the world; I will teach them all that I can.
-_ must help me unlock my full magical power.
-_ has seen the terrible power of magic, but I want to show them a better way.
-_ wants me to use magic I'm not willing to.
+\_ will play an important role in the events to come. I have foreseen it!  
+\_ is keeping an important secret from me.  
+\_ is woefully misinformed about the world; I will teach them all that I can.  
+\_ must help me unlock my full magical power.  
+\_ has seen the terrible power of magic, but I want to show them a better way.  
+\_ wants me to use magic I'm not willing to.
 
 ## Starting Moves
 
-### Archmage's Spellbook
-You carry the spellbook of an old, powerful magus, but you cannot make sense of most of it. You start out with 4 level 1 spells written on the first page, as well as the cantrips in the margins of the first few.
+### Spellbook
+You carry a book of power. You start out with 3 level 1 spells, as well as the cantrips.
 
 ### Prepare Spells
 When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and up to 2 + ½ Level (round down) spells from your spellbook, forgetting any others.
@@ -45,22 +45,22 @@ When you **draw on a place of power to create a magical effect**, tell the GM wh
 ## Backgrounds
 
 ### Studious Acolyte
-Add a Miracle to your spellbook
+Add a Miracle to your spellbook.
 
 ### Elf
-Detect Magic is a cantrip for you
+Detect Magic is a cantrip for you.
 
 ### Wild Mage
 When you roll a 6- to **Cast a Spell**, it always succeeds to cast as expected, in addition to whatever the GM says.
 
 ### Bonded
-Take the advanced move **Familiar**
+Take the advanced move **Familiar**.
 
 ### Swordmage
-Take the advanced move **Warrior of the Mind**
+Take the advanced move **Warrior of the Mind**.
 
 ### Sorcerer
-You do not need your spellbook to prepare spells. They come to you in your dreams.
+You do not use a spellbook to prepare spells. They are a part of your blood.
 
 ## Advanced Moves
 

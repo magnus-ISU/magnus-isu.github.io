@@ -321,7 +321,7 @@
 	}
 
 	:global(.dw-article p) {
-		margin: 0 0 1rem;
+		margin: 0 0 8px;
 	}
 
 	:global(.dw-article ul),

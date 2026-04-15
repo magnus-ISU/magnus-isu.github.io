@@ -95,9 +95,9 @@ Nothing you could normally hear makes any noise at all.
 One object or creature no larger than a wagon you can see becomes weightless, experiencing no gravity as long as you watch. Concentration 1
 ## Level 4
 ### Embrace of the Lost Star <span style="float:right" >Conjuration 4</span>
-You raise your hand and pull a creature a foot off the ground, as they are held aloft and burned continually for d4 damage by the lost star's light which shines in your hand also. At any moment, you may throw your hand out to end the spell and teleport the victim to another location within eyesight, at your hand's level. The higher your hand moves, the higher your victim is dragged. If your hand moves down, the spell ends.
+You raise your hand and with a brilliant flash of light, you teleport a creature or object you touch to another location on the ground which you can see. It teleports instantly upon contact, leaving you unharmed in melee.
 ### Withering Aura  <span style="float:right" >Necromancy 4</span>
-All life around you is drained; plants wither to dust, creatures take 1d6 damage when they come nearby and again if they stay too long. Concentration 1
+All life around you is drained; plants wither to dust, living creatures take 1d6 damage when they come nearby and again while they linger. Concentration 1
 ## Level 5 <span style="float:right">1A 2C 1D 1En 1Ev 1I 1N 2T</span>
 ### Cage  <span style="float:right" >Abjuration 5</span>
 The target is held in a cage of magical force. Nothing can get in or out of the cage. The cage remains until you cast another spell or dismiss it. While the spell is ongoing, the caged creature can hear your thoughts and you cannot leave sight of the cage.
@@ -129,9 +129,9 @@ Transform for an instant into lightning, being able to travel in a straight line
 While you concentrate on nothing else, you and someone you can see experience the world exactly as you want them to, not as it really is. The effect is suggestive even if it makes no sense, except to the very intelligent or strong-willed.
 If they were already asleep, you gain even more control. You can enter the dreams of many; bring their dreams to other planes where their actions are very real; and trap them there, extending their sleep indefinitely unless their mind or body breaks free.
 ### Larloch's Draining  <span style="float:right" >Necromancy 5</span>
-Lay your hands on a creature who cannot interrupt your channelling. It takes 2d8 damage over the course of a minute and you or another you also touch heals the same.
+Lay your hands on a creature, which may be difficult in combat. It takes 2d8 damage and you or another you also touch heals the same.
 ### Deepcrush <span style="float:right" >Transmutation 5</span>
-A sphere of water is pulled into place from existing sources, keeping water away from where you don't want it and enveloping no more than a horse and subjecting all within to crushing, suffocating pressure. Only the strongest or fastest can swim free of the sphere, and those that can’t are subjected to 2d8 damage after a short time, and will likely drown shortly after that. The sphere lasts until you do (or are forced to do) anything more complex than walking around.
+A sphere of water is pulled into place from existing sources, keeping water away from where you don't want it and enveloping no more than a horse and subjecting all within to crushing, suffocating pressure. Only the strongest or fastest can swim free of the sphere, and those that can’t will soon drown. The sphere lasts until you do (or are forced to do) anything more complex than walking around.
 ## Level 7 <span style="float:right">0A 1C 1D 1En 2Ev 1I 1N 1T</span>
 ---
 ### Shadow Walk <span style="float:right" >Conjuration 7</span>

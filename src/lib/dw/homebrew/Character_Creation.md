@@ -22,9 +22,22 @@ chooses a different class; there probably aren’t two of The Wizard.
 > cool ideas for a wizard, so I mention that would be my first choice. No one
 > else was thinking of playing one, so I take the wizard character sheet.
 
-## 2\. Choose a Race
+## 6\. Choose Starting Moves
 
-Some classes have race options. Choose one. Your race gives you a special
+The front side of each character sheet lists the starting moves. Some classes,
+like the fighter, have choices to make as part of one of their moves. Make
+these choices now. The wizard will need to choose spells for their spellbook.
+Both the cleric and the wizard will need to choose which spells they have
+prepared to start with.
+
+> A _Summoning_ spell is an easy choice, so I take Contact Spirits. Magic
+> Missile will allow me to deal more damage than the pitiful d4 for the wizard
+> class, so that’s in too. I choose Alarm for my last spell, since I can think
+> of some interesting uses for it.
+
+## 2\. Choose a Race or Background
+
+Most classes have race or background options. Choose one. It gives you a special
 move.
 
 > I like the idea of being flexible—having more spells available is always good,
@@ -34,12 +47,6 @@ move.
 
 If you wish, your GM will probably work with you to make a new move if you
 want a race that isn't listed.
-
-## 3\. Choose a Name
-
-A suggested list appears on each class.
-
-> Avon sounds good.
 
 ## 4\. Choose Stats
 
@@ -68,19 +75,6 @@ HP is still computed from your full Constitution. That is 9 plus 3 times your CO
 
 > A Wizard's base 4 health, plus 9 equals 13. If I had assigned a +1 for CON, I could have had 16...
 
-## 6\. Choose Starting Moves
-
-The front side of each character sheet lists the starting moves. Some classes,
-like the fighter, have choices to make as part of one of their moves. Make
-these choices now. The wizard will need to choose spells for their spellbook.
-Both the cleric and the wizard will need to choose which spells they have
-prepared to start with.
-
-> A _Summoning_ spell is an easy choice, so I take Contact Spirits. Magic
-> Missile will allow me to deal more damage than the pitiful d4 for the wizard
-> class, so that’s in too. I choose Alarm for my last spell, since I can think
-> of some interesting uses for it.
-
 ## 7\. Choose Alignment
 
 Your alignment is a few words that describe your character’s moral outlook.
@@ -101,6 +95,12 @@ note it on your character sheet.
 > right for rituals; I choose that over a staff. It’s a toss-up between the
 > healing potion and the antitoxin, but healing wins out. I also end up with
 > some rations.
+
+## 3\. Choose a Name
+
+A suggested list appears on each class.
+
+> Avon sounds good.
 
 ## 9\. Choose a Look
 

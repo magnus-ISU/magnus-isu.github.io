@@ -129,7 +129,7 @@ export const navigation = [
 			},
 			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells', hidden: true, homebrewSlug: 'wizard-spells' },
 			{
-				title: 'Cleric Spells',
+				title: 'Cleric Miracles',
 				slug: 'cleric-miracles',
 				source: 'homebrew',
 				file: 'spells/Cleric_Miracles',
