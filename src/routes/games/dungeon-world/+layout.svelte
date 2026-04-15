@@ -300,6 +300,7 @@
 		top: 0;
 		background: #1e1e1e;
 		z-index: 10;
+		text-indent: 3rem;
 	}
 
 	:global(.dw-article h2) {

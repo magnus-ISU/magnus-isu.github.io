@@ -10,7 +10,7 @@ You perform minor tricks of true magic. If you touch an item as part of the cast
 An item you touch glows with arcane light, about as bright as a torch. It gives off no heat or sound and requires no fuel, but it is otherwise like a mundane torch. You have complete control of the color of the flame. The spell lasts as long as it is in your presence, or forever cast in a gemstone.
 ### Magic Missiles <span style="float:right"> Evocation 0 </span> 
 Projectiles of pure magic spring from your fingers. Deal 2d4 damage to one target, or 1d4 to 2 targets.
-## Level 1 <span style="float:right">2A 2C 4D 2En 2Ev 2I 2N 2T</span>
+## Level 1
 ### Alarm <span style="float:right">Abjuration 1</span>
 Walk a wide circle as you cast this spell. Until you prepare spells again your magic will alert you if a creature crosses that circle. Even if you are asleep, the spell will shake you from your slumber.
 ### Detect Magic <span style="float:right" >Divination 1</span>
@@ -54,7 +54,7 @@ Rest your hand on a wooden, glass, or stone object for about 20 seconds, as you 
 Summon rich, expensive clothes tailored just for you to wear, onto your body. Fashionable, by the standards of 150 years ago.
 ### Inksplit <span style="float:right" >Necromancy 2</span>
 Point your hand. A thin wall of liquid darkness leaves your hand and divides your Left and Right. It can be passed, but the tar-like, viscous substance makes it difficult.
-## Level 3 <span style="float:right">2A 2C 2D 2En 2Ev 2I 2N 4T</span>
+## Level 3
 ### Dispel Magic <span style="float:right">Abjuration 3</span>
 Choose a spell or magic effect in your presence: this spell rips it apart. Lesser spells are ended, powerful magic is just reduced or dampened so long as you are nearby.
 ### Visions Through Time <span style="float:right" >Divination 3</span>
@@ -98,7 +98,7 @@ One object or creature no larger than a wagon you can see becomes weightless, ex
 You raise your hand and with a brilliant flash of light, you teleport a creature or object you touch to another location on the ground which you can see. It teleports instantly upon contact, leaving you unharmed in melee.
 ### Withering Aura  <span style="float:right" >Necromancy 4</span>
 All life around you is drained; plants wither to dust, living creatures take 1d6 damage when they come nearby and again while they linger. Concentration 1
-## Level 5 <span style="float:right">1A 2C 1D 1En 1Ev 1I 1N 2T</span>
+## Level 5
 ### Cage  <span style="float:right" >Abjuration 5</span>
 The target is held in a cage of magical force. Nothing can get in or out of the cage. The cage remains until you cast another spell or dismiss it. While the spell is ongoing, the caged creature can hear your thoughts and you cannot leave sight of the cage.
 ### Sending  <span style="float:right" >Divination 5</span>
@@ -132,7 +132,7 @@ If they were already asleep, you gain even more control. You can enter the dream
 Lay your hands on a creature, which may be difficult in combat. It takes 2d8 damage and you or another you also touch heals the same.
 ### Deepcrush <span style="float:right" >Transmutation 5</span>
 A sphere of water is pulled into place from existing sources, keeping water away from where you don't want it and enveloping no more than a horse and subjecting all within to crushing, suffocating pressure. Only the strongest or fastest can swim free of the sphere, and those that can’t will soon drown. The sphere lasts until you do (or are forced to do) anything more complex than walking around.
-## Level 7 <span style="float:right">0A 1C 1D 1En 2Ev 1I 1N 1T</span>
+## Level 7
 ---
 ### Shadow Walk <span style="float:right" >Conjuration 7</span>
 The shadows you target with this spell become a portal for you and your allies. Name a location, describing it with no more words than your level. Stepping through the portal deposits you and any allies present when you cast the spell at the location you described so long as the area is not lit up and you do not cast this spell again.
@@ -160,7 +160,7 @@ Lightning strikes out at your foes. Roll 2d10, then pick one die to be the numbe
 Reach out and touch an ally or an object smaller than yourself. Poof! They are invisible. The spell persists until you dismiss it. Concentration 1, and you cannot cast any other invisibility spells while the spell is ongoing.
 ### Bubble <span style="float:right" >Transmutation 7</span>
 You create a fixed bubble of time around you. Within, time passes extremely quickly or slowly, and the world outside is frozen or very fast. The spell lasts until something leaves or enters the bubble.
-## Level 9 <span style="float:right">0A 2C 1D 2En 1Ev 0I 1N 0T</span>
+## Level 9
 ### Perfect Summons <span style="float:right" >Conjuration 9</span>
 You teleport a creature to your presence. Name a creature or give a short description of a type of creature. If you named a creature, that creature appears before you. If you described a type of creature, a creature of that type appears before you.
 ### Shelter <span style="float:right" >Conjuration 9</span>
