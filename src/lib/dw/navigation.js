@@ -43,17 +43,6 @@ export const navigation = [
 	{
 		category: 'Classes',
 		items: [
-			{ title: 'Bard', slug: 'bard', source: 'srd', file: 'Bard' },
-			{
-				title: 'Cleric',
-				slug: 'cleric',
-				source: 'homebrew',
-				file: 'classes/Cleric',
-				homebrew: true,
-				srdSlug: 'cleric-srd'
-			},
-			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric', hidden: true, homebrewSlug: 'cleric' },
-			{ title: 'Druid', slug: 'druid', source: 'srd', file: 'Druid' },
 			{
 				title: 'Fighter',
 				slug: 'fighter',
@@ -63,10 +52,37 @@ export const navigation = [
 				srdSlug: 'fighter-srd'
 			},
 			{ title: 'Fighter', slug: 'fighter-srd', source: 'srd', file: 'Fighter', hidden: true, homebrewSlug: 'fighter' },
+			{
+				title: 'Wizard',
+				slug: 'wizard',
+				source: 'homebrew',
+				file: 'classes/Living_Magus',
+				homebrew: true,
+				srdSlug: 'wizard-srd'
+			},
+			{ title: 'Wizard', slug: 'wizard-srd', source: 'srd', file: 'Wizard', hidden: true, homebrewSlug: 'wizard' },
+			{
+				title: 'Cleric',
+				slug: 'cleric',
+				source: 'homebrew',
+				file: 'classes/Cleric',
+				homebrew: true,
+				srdSlug: 'cleric-srd'
+			},
+			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric', hidden: true, homebrewSlug: 'cleric' },
+			{ title: 'Thief', slug: 'thief', source: 'srd', file: 'Thief' },
 			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
 			{ title: 'Ranger', slug: 'ranger', source: 'srd', file: 'Ranger' },
-			{ title: 'Thief', slug: 'thief', source: 'srd', file: 'Thief' },
-			{ title: 'Wizard', slug: 'wizard', source: 'srd', file: 'Wizard' },
+			{
+				title: 'Druid',
+				slug: 'druid',
+				source: 'homebrew',
+				file: 'classes/Druidess',
+				homebrew: true,
+				srdSlug: 'druid-srd'
+			},
+			{ title: 'Druid', slug: 'druid-srd', source: 'srd', file: 'Druid', hidden: true, homebrewSlug: 'druid' },
+			{ title: 'Bard', slug: 'bard', source: 'srd', file: 'Bard' },
 			{
 				title: 'Alchemist',
 				slug: 'alchemist',
@@ -75,24 +91,10 @@ export const navigation = [
 				homebrew: true
 			},
 			{
-				title: 'Druidess',
-				slug: 'druidess',
-				source: 'homebrew',
-				file: 'classes/Druidess',
-				homebrew: true
-			},
-			{
 				title: 'Illithid Parasite',
 				slug: 'illithid-parasite',
 				source: 'homebrew',
 				file: 'classes/Illithid_Parasite',
-				homebrew: true
-			},
-			{
-				title: 'Living Magus',
-				slug: 'living-magus',
-				source: 'homebrew',
-				file: 'classes/Living_Magus',
 				homebrew: true
 			},
 			{
