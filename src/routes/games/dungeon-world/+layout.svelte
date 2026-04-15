@@ -1,9 +1,13 @@
 <script>
 	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
 	import { navigation } from '$lib/dw/navigation.js';
+	import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 	let { children } = $props();
 	let sidebarOpen = $state(false);
+	let longPressTimer;
+	let isLongPress = false;
 
 	const currentSlug = $derived(
 		page.url.pathname
@@ -12,7 +16,36 @@
 	);
 
 	function isActive(item, slug) {
-		return slug === item.slug || slug === item.srdSlug || slug === item.homebrewSlug;
+		if (slug === item.slug) return true;
+		if (item.srdSlug && slug === item.srdSlug) return true;
+		if (item.homebrewSlug && slug === item.homebrewSlug) return true;
+		return false;
+	}
+
+	function getHref(item) {
+		if (!item.srdSlug) return `/games/dungeon-world/${item.slug}`;
+		return getSource(item.slug) === 'srd'
+			? `/games/dungeon-world/${item.srdSlug}`
+			: `/games/dungeon-world/${item.slug}`;
+	}
+
+	function handleToggle(item, target, e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const singleOnly = e.shiftKey || isLongPress;
+		toggleSource(item.slug, target, singleOnly);
+		const slug = target === 'srd' ? item.srdSlug : item.slug;
+		sidebarOpen = false;
+		goto(`/games/dungeon-world/${slug}`);
+	}
+
+	function onPointerDown() {
+		isLongPress = false;
+		longPressTimer = setTimeout(() => { isLongPress = true; }, 500);
+	}
+
+	function onPointerUp() {
+		clearTimeout(longPressTimer);
 	}
 </script>
 
@@ -36,28 +69,34 @@
 				<summary>{category.category}</summary>
 				<ul>
 					{#each category.items.filter(i => !i.hidden) as item}
-						<li class:active={isActive(item, currentSlug)} class:has-toggle={item.srdSlug}>
+						<li class:active={isActive(item, currentSlug)}>
 							<a
-								href="/games/dungeon-world/{item.slug}"
+								href={getHref(item)}
 								onclick={() => (sidebarOpen = false)}
 							>
 								{item.title}
-								{#if item.homebrew && !item.srdSlug}<span class="hb">HB</span>{/if}
 							</a>
+							{#if item.homebrew && !item.srdSlug}
+								<span class="hb">HB</span>
+							{/if}
 							{#if item.srdSlug}
 								<span class="source-toggle">
-									<a
+									<button
 										class="toggle-opt"
-										class:active={currentSlug !== item.srdSlug}
-										href="/games/dungeon-world/{item.slug}"
-										onclick={() => (sidebarOpen = false)}
-									>HB</a>
-									<a
+										class:active={getSource(item.slug) === 'srd'}
+										onpointerdown={onPointerDown}
+										onpointerup={onPointerUp}
+										onpointercancel={onPointerUp}
+										onclick={(e) => handleToggle(item, 'srd', e)}
+									>SRD</button>
+									<button
 										class="toggle-opt"
-										class:active={currentSlug === item.srdSlug}
-										href="/games/dungeon-world/{item.srdSlug}"
-										onclick={() => (sidebarOpen = false)}
-									>SRD</a>
+										class:active={getSource(item.slug) === 'hb'}
+										onpointerdown={onPointerDown}
+										onpointerup={onPointerUp}
+										onpointercancel={onPointerUp}
+										onclick={(e) => handleToggle(item, 'hb', e)}
+									>HB</button>
 								</span>
 							{/if}
 						</li>
@@ -151,21 +190,13 @@
 	}
 
 	li a {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex: 1;
+		min-width: 0;
 		padding: 0.3rem 1rem 0.3rem 1.5rem;
 		color: #ccc;
 		text-decoration: none;
 		font-size: 0.85rem;
-		transition: color 0.15s, background 0.15s;
-		border-left: none;
-		flex: 1;
-		min-width: 0;
-	}
-
-	li.has-toggle > a {
-		padding-right: 0.3rem;
+		transition: color 0.15s;
 	}
 
 	li:hover {
@@ -195,17 +226,18 @@
 		font-weight: bold;
 		letter-spacing: 0.03em;
 		flex-shrink: 0;
+		margin-right: 0.75rem;
 	}
 
 	/* Source toggle (HB/SRD switcher) */
 	.source-toggle {
 		display: inline-flex;
 		background: #2a2a2a;
-		border-radius: 3px;
+		border-radius: 2px;
 		overflow: hidden;
 		flex-shrink: 0;
 		border: 1px solid #444;
-		margin-right: 0.5rem;
+		margin-right: 0.75rem;
 	}
 
 	.source-toggle .toggle-opt {
@@ -213,11 +245,12 @@
 		font-size: 0.6rem;
 		font-weight: bold;
 		letter-spacing: 0.03em;
-		text-decoration: none;
 		color: #888;
-		transition: background 0.15s, color 0.15s;
+		background: transparent;
 		border: none;
-		border-left: none;
+		cursor: pointer;
+		transition: background 0.15s, color 0.15s;
+		font-family: inherit;
 	}
 
 	.source-toggle .toggle-opt:first-child {
@@ -227,15 +260,9 @@
 	.source-toggle .toggle-opt:hover {
 		color: #ccc;
 		background: #333;
-		text-decoration: none;
 	}
 
 	.source-toggle .toggle-opt.active {
-		background: #d4a847;
-		color: #1e1e1e;
-	}
-
-	li.active .source-toggle .toggle-opt.active {
 		background: #d4a847;
 		color: #1e1e1e;
 	}

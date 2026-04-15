@@ -108,6 +108,15 @@ export const navigation = [
 		category: 'Spells',
 		items: [
 			{
+				title: 'Wizard Spells',
+				slug: 'wizard-spells',
+				source: 'homebrew',
+				file: 'spells/Wizard_Spells',
+				homebrew: true,
+				srdSlug: 'wizard-spells-srd'
+			},
+			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells', hidden: true, homebrewSlug: 'wizard-spells' },
+			{
 				title: 'Cleric Spells',
 				slug: 'cleric-miracles',
 				source: 'homebrew',
@@ -122,16 +131,7 @@ export const navigation = [
 				source: 'homebrew',
 				file: 'spells/Druid_Bindings',
 				homebrew: true
-			},
-			{
-				title: 'Wizard Spells',
-				slug: 'wizard-spells',
-				source: 'homebrew',
-				file: 'spells/Wizard_Spells',
-				homebrew: true,
-				srdSlug: 'wizard-spells-srd'
-			},
-			{ title: 'Wizard Spells', slug: 'wizard-spells-srd', source: 'srd', file: 'Wizard_Spells', hidden: true, homebrewSlug: 'wizard-spells' }
+			}
 		]
 	},
 	{

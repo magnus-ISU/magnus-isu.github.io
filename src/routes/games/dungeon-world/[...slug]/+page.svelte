@@ -1,27 +1,60 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
+
 	let { data } = $props();
+	let longPressTimer;
+	let isLongPress = false;
+
+	const homebrewSlug = $derived(data.homebrewSlug || data.slug);
+	const srdSlug = $derived(data.srdSlug || data.slug);
+	const hasPair = $derived(!!data.srdSlug || !!data.homebrewSlug);
+
+	function handleToggle(target, e) {
+		e.preventDefault();
+		const singleOnly = e.shiftKey || isLongPress;
+		const itemSlug = data.homebrewSlug || data.slug;
+		toggleSource(itemSlug, target, singleOnly);
+		const slug = target === 'srd' ? srdSlug : homebrewSlug;
+		goto(`/games/dungeon-world/${slug}`);
+	}
+
+	function onPointerDown() {
+		isLongPress = false;
+		longPressTimer = setTimeout(() => { isLongPress = true; }, 500);
+	}
+
+	function onPointerUp() {
+		clearTimeout(longPressTimer);
+	}
 </script>
 
 <svelte:head>
 	<title>{data.title} - Dungeon World</title>
 </svelte:head>
 
-{#if data.srdSlug || data.homebrewSlug}
+{#if hasPair}
 	<div class="source-bar">
-		<a
-			class="source-opt"
-			class:active={data.isHomebrew}
-			href="/games/dungeon-world/{data.homebrewSlug || data.slug}"
-		>HB</a>
-		<a
+		<button
 			class="source-opt"
 			class:active={!data.isHomebrew}
-			href="/games/dungeon-world/{data.srdSlug || data.slug}"
-		>SRD</a>
+			onpointerdown={onPointerDown}
+			onpointerup={onPointerUp}
+			onpointercancel={onPointerUp}
+			onclick={(e) => handleToggle('srd', e)}
+		>SRD</button>
+		<button
+			class="source-opt"
+			class:active={data.isHomebrew}
+			onpointerdown={onPointerDown}
+			onpointerup={onPointerUp}
+			onpointercancel={onPointerUp}
+			onclick={(e) => handleToggle('hb', e)}
+		>HB</button>
 	</div>
 {/if}
 
-<article class="dw-article" class:is-homebrew={data.isHomebrew && !data.srdSlug}>
+<article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	<data.Content />
 </article>
 
@@ -41,10 +74,12 @@
 		font-size: 0.7rem;
 		font-weight: bold;
 		letter-spacing: 0.05em;
-		text-decoration: none;
 		color: #888;
-		transition: background 0.15s, color 0.15s;
+		background: transparent;
+		border: none;
 		cursor: pointer;
+		transition: background 0.15s, color 0.15s;
+		font-family: inherit;
 	}
 
 	.source-opt:first-child {
