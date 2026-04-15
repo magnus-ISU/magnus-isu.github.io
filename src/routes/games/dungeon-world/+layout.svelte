@@ -335,7 +335,7 @@
 	}
 
 	:global(.dw-article li) {
-		margin-bottom: 0.3rem;
+		margin-bottom: -0.45rem;
 	}
 
 	:global(.dw-article strong) {

@@ -98,21 +98,24 @@ export const navigation = [
 				slug: 'alchemist',
 				source: 'homebrew',
 				file: 'classes/Alchemist',
-				homebrew: true
+				homebrew: true,
+				hidden: true
 			},
 			{
 				title: 'Illithid Parasite',
 				slug: 'illithid-parasite',
 				source: 'homebrew',
 				file: 'classes/Illithid_Parasite',
-				homebrew: true
+				homebrew: true,
+				hidden: true
 			},
 			{
 				title: 'Trenchcoat',
 				slug: 'trenchcoat',
 				source: 'homebrew',
 				file: 'classes/Trenchcoat',
-				homebrew: true
+				homebrew: true,
+				hidden: true
 			}
 		]
 	},
