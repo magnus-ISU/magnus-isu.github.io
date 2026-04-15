@@ -296,6 +296,10 @@
 		color: #fff;
 		border-bottom: 1px solid #333;
 		padding-bottom: 0.5rem;
+		position: sticky;
+		top: 0;
+		background: #1e1e1e;
+		z-index: 10;
 	}
 
 	:global(.dw-article h2) {

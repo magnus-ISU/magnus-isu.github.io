@@ -26,7 +26,7 @@ quick-fingered and strong-armed adventurers to discover them. That unexplored
 world has plans of its own. Play to see what they are and how they’ll change
 the lives of our characters.
 
-# How to Use This Book
+## How to Use This Book
 
 This book is going to teach you how to play Dungeon World. If you’re going to
 be the GM, you’re going to need to read the whole thing, though you can skim
@@ -38,7 +38,7 @@ character sheets you use during the game itself. You’ll come back to the text
 a few times throughout your game to refer to certain rules, but it should be a
 rare occasion.
 
-# Setting Up
+## Setting Up
 
 To play Dungeon World, you’ll need to gather yourself and 2–5 friends. A group
 of 4 to 6, including you, is best. Choose one person to be the Game Master
@@ -68,7 +68,7 @@ You’ll also need some specialized dice: four-sided, eight-sided, ten-sided and
 twelve-sided. One of each is enough but more is better: you won’t have to pass
 them around so much.
 
-# What’s Dungeon World Like to Play?
+## What’s Dungeon World Like to Play?
 
 Playing Dungeon World is all about finding out what happens when your
 characters encounter dangerous and exciting monsters, strange ruins, and

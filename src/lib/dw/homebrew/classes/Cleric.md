@@ -1,4 +1,4 @@
-# Cleric
+# The Cleric
 
 ## Starting Moves
 

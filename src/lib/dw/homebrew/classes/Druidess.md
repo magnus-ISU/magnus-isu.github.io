@@ -1,4 +1,4 @@
-# Druidess
+# The Druid
 Damage: d6
 HP: 6+Constitution
 Load: 6+STR

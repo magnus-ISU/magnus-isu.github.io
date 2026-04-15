@@ -1,4 +1,4 @@
-# Fighter
+# The Fighter
 
 ## Starting Moves
 

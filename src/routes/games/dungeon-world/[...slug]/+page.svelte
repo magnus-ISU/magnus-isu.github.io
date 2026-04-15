@@ -67,6 +67,8 @@
 		overflow: hidden;
 		border: 1px solid #444;
 		margin-top: 0.25rem;
+		position: relative;
+		z-index: 11;
 	}
 
 	.source-opt {

@@ -1,4 +1,4 @@
-# Living Magus
+# The Wizard
 Damage: d4
 HP: 4+Constitution
 Load: 6+STR
@@ -65,7 +65,7 @@ You do not use a spellbook to prepare spells. They are a part of your blood.
 ## Advanced Moves
 
 ### Warrior of the Mind
-When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them for just a moment.
+When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them fight in melee for a few moments.
 
 ### Spellblade
 *Requires Warrior of the Mind*  
