@@ -14,17 +14,15 @@
 	$effect(() => { encounterText.value = text; });
 
 	// Sync store → local (shift+click from other components)
-	let searchSectionEl;
+	let encounterInputEl;
+	let textBox;
 	$effect(() => {
 		const storeVal = encounterText.value;
 		if (storeVal !== text) {
-			// Anchor the search section so the clicked monster doesn't jump
-			const anchorTop = searchSectionEl?.getBoundingClientRect().top;
 			text = storeVal;
 			tick().then(() => {
-				if (anchorTop == null || !searchSectionEl) return;
-				const drift = searchSectionEl.getBoundingClientRect().top - anchorTop;
-				if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+				encounterInputEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				textBox?.focus();
 			});
 		}
 	});
@@ -83,12 +81,12 @@
 <article class="dw-article">
 	<h1>Encounters</h1>
 
-	<section class="encounter-input">
+	<section class="encounter-input" bind:this={encounterInputEl}>
 		<label for="encounter-text">
 			Type monster names to build an encounter. Shift Click or Long Press monster names to add them.
 			Click on HP to track it, attacks to roll them, moves to note usage.
 		</label>
-		<TextBox bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} />
+		<TextBox bind:this={textBox} bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} />
 	</section>
 
 	{#if matched.length > 0}
@@ -99,7 +97,7 @@
 		</section>
 	{/if}
 
-	<section class="monster-search-section" bind:this={searchSectionEl}>
+	<section class="monster-search-section">
 		<MonsterSearch hint={unmatched} />
 	</section>
 </article>

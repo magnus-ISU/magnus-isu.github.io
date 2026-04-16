@@ -16,7 +16,7 @@ export default [
 		hp: 26,
 		armor: 5,
 		attacks: [
-			{ name: 'Bite', damage: 'b[2d12]+9', tags: 'Reach, Forceful, Messy, 4 piercing' },
+			{ name: 'Bite', damage: '2d12 keep highest 1 +9', tags: 'Reach, Forceful, Messy, 4 piercing' },
 		],
 		special: 'Inch-thick metal hide, Supernatural knowledge, Wings',
 		description: 'The end of all things shall be a burning—of tree and earth and of the air itself. It shall come upon the plains and mountains not from beyond this world but from within it. Birthed from the womb of deepest earth shall come the Dragon that Will End the World. In its passing all will become ash and bile and the Dungeon World a dying thing will drift through planar space devoid of life. They say to worship the Apocalypse Dragon is to invite madness. They say to love it is to know oblivion. The awakening is coming.',

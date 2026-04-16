@@ -13,6 +13,8 @@
 	let textarea;
 	let lineHeights = $state([]);
 
+	export function focus() { textarea?.focus(); }
+
 	const lines = $derived(value.split('\n'));
 	const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
 
