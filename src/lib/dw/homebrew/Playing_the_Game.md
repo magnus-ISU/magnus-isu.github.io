@@ -10,11 +10,7 @@ When a move says **roll+STAT**, roll 2d6 and add the stat modifier.
 
 - **10+:** Full success.
 - **7-9:** Success with a cost, complication, or hard choice.
-- **6-:** Mark XP. The GM makes a move.
-
-### Advantage and Disadvantage
-
-When you have **Advantage**, roll an additonal die and discard the lowest. When you have **Disadvantage**, roll an additional die and discard the highest. They cancel each other out.
+- **6-:** Mark XP. The GM makes a move against you.
 
 ### Hold
 
@@ -36,9 +32,9 @@ Armor reduces incoming damage by its value. Damage can be reduced to 0 this way.
 
 ### Damage
 
-Player characters deal damage by rolling their class damage die (plus any bonuses from moves or weapons). When a move says **Deal Damage**, roll your damage die.
+Player characters deal damage by rolling their class damage die (plus any bonuses from moves or weapons). When a move says **Deal Damage**, roll your damage die, and apply that damage to each target.
 
-If multiple creatures attack at once, roll the highest damage among them and add +1 for each additional attacker.
+Typically, you will deal damage or suffer attacks based on a single one of your own dice rolls. If multiple creatures attack you at once, roll the highest damage among them and add +1 for each additional attacker.
 
 Environmental damage uses the GM's judgment:
 - Scrapes and bruises: d4
@@ -74,7 +70,7 @@ You can only have each debility once. Debilities require rest in safety, medical
 
 ## Equipment and Tags
 
-Equipment helps describe what moves you can trigger. You can't Hack & Slash a dragon bare-handed. A good set of climbing gear might let you avoid Defying Danger on a cliff.
+Equipment helps describe what moves you can trigger. You can't Hack & Slash a dragon bare-handed. A good set of climbing gear might let you avoid Defying Danger on a cliff. If your target is sleeping, you're not going to have to roll; you may deal damage or just outright kill them, depending on your weapon and finesse.
 
 In Dungeon World, you're a competent adventurer; you know what you'll be getting into without needing to enumerate every kind of item you'll be taking along. **Adventurer's Gear** contains limited uses of all the mundane tools you might need, but if you need it in a split second, there might not be time to rummage around your backpack.
 
@@ -134,3 +130,7 @@ Followers are NPCs in your employ, defined by **Quality**, **Loyalty**, and **Co
 Magic encompasses anything beyond the physically possible — wizard spells, cleric miracles, druid shapeshifting, and more. Each class interacts with magic in different ways, discoverable by reading the classes. In general, you may not run out of magical resources to use before you end up causing yourself more trouble than you expected.
 
 **Concentration:** While maintaining an ongoing spell, take -1 ongoing to cast further spells.
+
+## Advantage and Disadvantage
+
+When you have **Advantage**, roll an additonal die and discard the lowest. When you have **Disadvantage**, roll an additional die and discard the highest. They cancel each other out.
