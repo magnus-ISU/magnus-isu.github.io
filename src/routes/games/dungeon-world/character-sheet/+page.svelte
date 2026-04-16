@@ -144,17 +144,12 @@
 	function clickHp() {
 		if (editingHp) return;
 		if (maxHp === null || parsed.hp === null) return;
-		updateHpInText(parsed.hp <= 0 ? maxHp : parsed.hp - 1);
+		editingHp = true;
+		tick().then(() => hpInputEl?.select());
 	}
 
 	let editingHp = $state(false);
 	let hpInputEl;
-
-	function startEditHp(e) {
-		e.stopPropagation();
-		editingHp = true;
-		tick().then(() => hpInputEl?.select());
-	}
 
 	function commitHp(e) {
 		const raw = e.target.value.trim();
@@ -503,7 +498,7 @@
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingHp = false; } }}
 									/>
 								{:else}
-									<span class="circle-text" style="color: {hpC}" onclick={startEditHp}>{parsed.hp}/{maxHp}</span>
+									<span class="circle-text" style="color: {hpC}">{parsed.hp}/{maxHp}</span>
 								{/if}
 								<span class="circle-label" style="color: {hpC}">Health</span>
 							</button>
