@@ -51,8 +51,8 @@ Your kingdom's strongholds are spread throughout the country. Whenever you come 
 
 ## Stats
 
-Damage: d4
-HP: 6+Constitution
+Damage: d4  
+HP: 6+Constitution  
 Load: 5+STR
 
 ## Drive
