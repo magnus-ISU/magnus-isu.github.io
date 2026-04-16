@@ -54,6 +54,12 @@ export const navigation = [
 		]
 	},
 	{
+		category: 'Characters',
+		items: [
+			{ title: 'Character Sheet', slug: 'character-sheet', skipSlug: true },
+		]
+	},
+	{
 		category: 'Classes',
 		items: [
 			{
