@@ -36,12 +36,6 @@ Damage: d8
 HP: 8+Constitution  
 Load: 8+STR
 
-## Alignment
-
-Good: Defend someone weaker than you in a fight.  
-Neutral: Defeat a worthy opponent in a fair duel.  
-Evil: Kill a defenseless or surrendered enemy to prove your superiority.
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -59,10 +53,6 @@ Choose one:
 - Adventuring gear (1 weight) and dungeon rations (5 uses, 1 weight)
 - Healing potion (0 weight)
 
-## Names
-*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
-*Human*: Yang, Garm, Caleb, Maximillian, Alexander, La Croix, Rodriguez, Scyld
-
 ## Look
 Choose one for each:
 
@@ -70,6 +60,16 @@ Fiery Eyes, Cold Eyes, or Weary Eyes
 Cropped Hair, Flowing Hair, or Hooded Head  
 Aristocratic Clothes, Threadbare Clothes, or Training Clothes  
 Muscular Body, Lithe Body, or Scarred Body
+
+## Names
+*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
+*Human*: Yang, Garm, Caleb, Maximillian, Alexander, La Croix, Rodriguez, Scyld
+
+## Alignment
+
+Good: Defend someone weaker than you in a fight.  
+Neutral: Defeat a worthy opponent in a fair duel.  
+Evil: Kill a defenseless or surrendered enemy to prove your superiority.
 
 ## Bonds
 \_\_\_\_\_ broke up a fight I was involved in. I was probably going to lose, but they don't need to know that part.  

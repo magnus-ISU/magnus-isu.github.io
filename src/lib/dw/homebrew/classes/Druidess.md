@@ -52,12 +52,6 @@ Damage: d6
 HP: 6+Constitution
 Load: 6+STR
 
-## Alignment
-
-Good: Help someone or something grow.
-Neutral: Eliminate an unnatural menace.
-Chaotic: Destroy a symbol of civilization.
-
 ## Gear
 You start with:
 - Some token of your land, describe it (0 weight)
@@ -77,17 +71,23 @@ Choose one:
 - Halfling pipeleaf (0 weight)
 - 3 antitoxin (0 weight)
 
-## Names
-*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor
-*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah
-*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei
-
 ## Look
 Choose one for each:
 
 Wise Eyes, Wild Eyes, or Haunting Eyes
 Furry Hood, Messy Hair, or Braided Hair
 Ceremonial Garb, Practical Leathers, or Weathered Hides
+
+## Names
+*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor
+*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah
+*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei
+
+## Alignment
+
+Good: Help someone or something grow.
+Neutral: Eliminate an unnatural menace.
+Chaotic: Destroy a symbol of civilization.
 
 ## Bonds
 \_ smells more like prey than a hunter.

@@ -61,12 +61,6 @@ Damage: d4
 HP: 4+Constitution  
 Load: 6+STR
 
-## Alignment
-
-Good: Use magic to permanently improve someone's life.  
-Neutral: Discover something about a magical mystery.  
-Evil: Use magic to cause fear and terror.
-
 ## Gear
 You start with:
 - Your spellbook (1 weight)
@@ -84,10 +78,6 @@ Choose one:
 - Healing potion (0 weight)
 - 3 antitoxins (0 weight)
 
-## Names
-*Elf*: Galadiir, Fenfaril, Lilliastre, Phirosalle, Enkirash, Halwyr  
-*Human*: Avon, Morgan, Rath, Ysolde, Ovid, Vitus, Aldara, Xeno, Uri
-
 ## Look
 Choose one for each:
 
@@ -95,6 +85,16 @@ Haunted Eyes, Sharp Eyes, or Crazy Eyes
 Styled Hair, Wild Hair, or Pointed Hat  
 Worn Robes, Stylish Robes, or Strange Robes  
 Pudgy Body, Creepy Body, or Thin Body
+
+## Names
+*Elf*: Galadiir, Fenfaril, Lilliastre, Phirosalle, Enkirash, Halwyr  
+*Human*: Avon, Morgan, Rath, Ysolde, Ovid, Vitus, Aldara, Xeno, Uri
+
+## Alignment
+
+Good: Use magic to permanently improve someone's life.  
+Neutral: Discover something about a magical mystery.  
+Evil: Use magic to cause fear and terror.
 
 ## Bonds
 \_ will play an important role in the events to come. I have foreseen it!  

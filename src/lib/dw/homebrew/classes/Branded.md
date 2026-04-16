@@ -48,14 +48,6 @@ Damage: d8
 HP: 4+Constitution  
 Load: 9+STR
 
-## Alignment
-
-Evil: Sacrifice an innocent victim to the flames.  
-Chaotic: Spread a dangerous new idea.  
-Neutral: Throw caution to the wind for your own personal gain.  
-Lawful: Exchange a sacrifice, freely given, for a service rendered.  
-Good: Make a sacrifice or take a risk to help someone in need.
-
 ## Gear
 You carry no weapons and need no armour but the flames that burn within you. You start with:
 - A Keepsake of your sacrifices past, describe it (0 weight)
@@ -67,12 +59,6 @@ Choose two:
 - Healing potion (0 weight)
 - 10 coins
 
-## Names
-*Human*: Solomon, Fatia, Kalil, Omen, Hiko, Agasha, Elizabeth, Adur, Ignis, Yajna, Umilio  
-*Dwarf*: Higar, Egdorn, Faldin, Breski, Niona, Odenil, Agar, Kilkarn, Gremma  
-*Halfling*: Leoric, Barlow, Finley, Hart, Weasley, Mallory, Kellen, Clement, Prynne  
-*Elf*: Beldarii, Elsenwyn, Kithduin, Isilmwe, Haeralos, Ostranor, Gemenalle, Sorosthrine, Pelenash
-
 ## Look
 Choose one for each:
 
@@ -80,6 +66,20 @@ Strange Brands, Ritual Scars, or Perfect Skin
 Smouldering Eyes, Warm Eyes, or Searing Eyes  
 Crackling Voice, Whispering Voice, or Roaring Voice  
 Imperious Demeanor, Manic Demeanor, or Barely-Hidden Rage
+
+## Names
+*Human*: Solomon, Fatia, Kalil, Omen, Hiko, Agasha, Elizabeth, Adur, Ignis, Yajna, Umilio  
+*Dwarf*: Higar, Egdorn, Faldin, Breski, Niona, Odenil, Agar, Kilkarn, Gremma  
+*Halfling*: Leoric, Barlow, Finley, Hart, Weasley, Mallory, Kellen, Clement, Prynne  
+*Elf*: Beldarii, Elsenwyn, Kithduin, Isilmwe, Haeralos, Ostranor, Gemenalle, Sorosthrine, Pelenash
+
+## Alignment
+
+Evil: Sacrifice an innocent victim to the flames.  
+Chaotic: Spread a dangerous new idea.  
+Neutral: Throw caution to the wind for your own personal gain.  
+Lawful: Exchange a sacrifice, freely given, for a service rendered.  
+Good: Make a sacrifice or take a risk to help someone in need.
 
 ## Bonds
 \_\_\_\_\_ has felt the hellish touch of my fire; now they know my strength.  

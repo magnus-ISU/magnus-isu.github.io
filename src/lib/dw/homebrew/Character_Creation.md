@@ -74,17 +74,7 @@ HP is still computed from your full Constitution. That is 9 plus 3 times your CO
 
 > A Wizard's base 4 health, plus 9 equals 13. If I had assigned a +1 for CON, I could have had 16...
 
-## 6\. Choose Alignment
-
-Your alignment is a few words that describe your character’s moral outlook.
-Each class may only start with certain alignments. Choose your alignment—in
-play, it’ll give your character certain actions that can earn you additional
-XP.
-
-> The Neutral option for wizards says I earn extra XP when I discover a magical
-> mystery. Avon is all about discovering mystery—I’ll go with Neutral.
-
-## 7\. Choose Gear
+## 6\. Choose Gear
 
 Each class has choices to make for starting gear. Keep your load in mind—it
 limits how much you can easily carry. Make sure to total up your armor and
@@ -95,13 +85,7 @@ note it on your character sheet.
 > healing potion and the antitoxin, but healing wins out. I also end up with
 > some rations.
 
-## 8\. Choose a Name
-
-A suggested list appears on each class.
-
-> Avon sounds good.
-
-## 9\. Choose a Look
+## 7\. Choose a Look
 
 Your look is your physical appearance. Choose one item from each list.
 
@@ -110,6 +94,22 @@ Your look is your physical appearance. Choose one item from each list.
 > robes are strange, and I mention to everyone that I think maybe they came from
 > Beyond as part of a summoning ritual. No time to eat with all that studying
 > and research: thin body.
+
+## 8\. Choose a Name
+
+A suggested list appears on each class.
+
+> Avon sounds good.
+
+## 9\. Choose Alignment
+
+Your alignment is a few words that describe your character’s moral outlook.
+Each class may only start with certain alignments. Choose your alignment—in
+play, it’ll give your character certain actions that can earn you additional
+XP.
+
+> The Neutral option for wizards says I earn extra XP when I discover a magical
+> mystery. Avon is all about discovering mystery—I’ll go with Neutral.
 
 ## 10\. Introduce Your Character
 

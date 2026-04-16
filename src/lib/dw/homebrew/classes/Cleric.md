@@ -77,12 +77,6 @@ Damage: d6
 HP: 8+Constitution  
 Load: 10+STR
 
-## Alignment
-
-Good: Endanger yourself to heal another.  
-Lawful: Endanger yourself following the precepts of your church or god.  
-Evil: Harm another to prove the superiority of your church or god.
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -101,10 +95,6 @@ Choose one:
 - Adventuring gear (1 weight) and dungeon rations (5 uses, 1 weight)
 - Healing potion (0 weight)
 
-## Names
-*Dwarf*: Durga, Aelfar, Gerda, Rurgosh, Bjorn, Drummond, Helga, Siggrun, Freya  
-*Human*: Wesley, Brinton, Jon, Sara, Hawthorn, Elise, Clarke, Lenore, Piotr, Dahlia, Carmine
-
 ## Look
 Choose one for each:
 
@@ -112,6 +102,16 @@ Kind Eyes, Sharp Eyes, or Sad Eyes
 Tonsure, Strange Hair, or Bald  
 Flowing Robes, Habit, or Common Garb  
 Thin Body, Knobby Body, or Flabby Body
+
+## Names
+*Dwarf*: Durga, Aelfar, Gerda, Rurgosh, Bjorn, Drummond, Helga, Siggrun, Freya  
+*Human*: Wesley, Brinton, Jon, Sara, Hawthorn, Elise, Clarke, Lenore, Piotr, Dahlia, Carmine
+
+## Alignment
+
+Good: Endanger yourself to heal another.  
+Lawful: Endanger yourself following the precepts of your church or god.  
+Evil: Harm another to prove the superiority of your church or god.
 
 ## Bonds
 \_\_\_\_\_ has insulted my deity; I do not trust them.  

@@ -64,12 +64,6 @@ Damage: d10
 HP: 10+Constitution  
 Load: 12+STR
 
-## Alignment
-
-Good: Defend those weaker than you.  
-Neutral: Defeat a worthy opponent.  
-Evil: Kill a defenseless or surrendered enemy.
-
 ## Gear
 You start with:
 - Your signature weapon
@@ -85,12 +79,6 @@ Choose two:
 - Antitoxin (0 weight), dungeon rations (1 weight), and poultices and herbs (1 weight)
 - 22 coins
 
-## Names
-*Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq  
-*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
-*Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca  
-*Human*: Hawke, Rudiger, Gregor, Brianne, Walton, Castor, Shanna, Ajax, Hob
-
 ## Look
 Choose one for each:
 
@@ -98,6 +86,18 @@ Hard Eyes, Dead Eyes, or Eager Eyes
 Wild Hair, Shorn Hair, or Battered Helm  
 Calloused Skin, Tanned Skin, or Scarred Skin  
 Built Body, Lithe Body, or Ravaged Body
+
+## Names
+*Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq  
+*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
+*Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca  
+*Human*: Hawke, Rudiger, Gregor, Brianne, Walton, Castor, Shanna, Ajax, Hob
+
+## Alignment
+
+Good: Defend those weaker than you.  
+Neutral: Defeat a worthy opponent.  
+Evil: Kill a defenseless or surrendered enemy.
 
 ## Bonds
 \_\_\_\_\_ owes me their life, whether they admit it or not.  

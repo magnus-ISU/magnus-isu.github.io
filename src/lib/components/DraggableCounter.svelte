@@ -26,7 +26,7 @@
 		if (!wrapEl) return;
 		const r = wrapEl.getBoundingClientRect();
 		previewX = r.left + r.width / 2;
-		previewY = r.top - 4;
+		previewY = r.top - 32;
 	}
 
 	function beginTracking(e) {
@@ -38,7 +38,7 @@
 
 		function onMove(ev) {
 			const dx = ev.clientX - startX;
-			const newDelta = Math.round(dx / 16);
+			const newDelta = Math.round(dx / 24);
 			if (!didDrag && Math.abs(dx) > 4) didDrag = true;
 			if (didDrag) {
 				dragging = true;
@@ -131,10 +131,11 @@
 		transform: translateX(-50%);
 		color: #9b59b6;
 		font-weight: bold;
-		font-size: 0.82rem;
+		font-size: 1.5rem;
 		white-space: nowrap;
 		pointer-events: none;
-		text-shadow: 0 1px 4px #000a;
+		-webkit-text-stroke: 1px #000;
+		text-shadow: 0 0 6px #000, 0 0 12px #000, 0 2px 4px #000;
 		z-index: 200;
 	}
 

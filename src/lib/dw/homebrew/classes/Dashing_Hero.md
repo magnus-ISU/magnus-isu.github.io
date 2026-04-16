@@ -45,12 +45,6 @@ Damage: d8
 HP: 8+Constitution  
 Load: 7+STR
 
-## Alignment
-
-Good: Put yourself at risk for the sake of a friend or lover.  
-Neutral: Go out of your way to show off your skills.  
-Chaotic: Dethrone or destabilize a person in power.
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -67,10 +61,6 @@ Choose two:
 - Bandages (3 uses, 0 weight) and 9 coin
 - A noble steed, describe it
 
-## Names
-*Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z  
-*Elf*: Celeste, Garinith, Gilderoy, Nyhopyri, Tahnea, Tetra, Tome, Valens
-
 ## Look
 Choose one for each:
 
@@ -78,6 +68,16 @@ Confident Eyes, Bright Eyes, or Always Closed Eyes
 Fashionable Hat, Flowing Hair, or Magnificent Beard  
 Ornate Clothes, Functional Clothes, or Flowing Clothes  
 Muscled Body, Stoic Body, or Toned Body
+
+## Names
+*Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z  
+*Elf*: Celeste, Garinith, Gilderoy, Nyhopyri, Tahnea, Tetra, Tome, Valens
+
+## Alignment
+
+Good: Put yourself at risk for the sake of a friend or lover.  
+Neutral: Go out of your way to show off your skills.  
+Chaotic: Dethrone or destabilize a person in power.
 
 ## Bonds
 \_\_\_\_\_ realizes just how great I am.  
