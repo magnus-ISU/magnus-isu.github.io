@@ -18,31 +18,42 @@ function save(val) {
 }
 
 let text = $state(load());
+let knownNames = new Set();
+
+function lineMonsterName(line) {
+	const t = line.trim();
+	if (!t) return '';
+	const m = t.match(/^(\d+)\s+(.+)/);
+	return (m ? m[2] : t).toLowerCase();
+}
 
 export const encounterText = {
 	get value() { return text; },
 	set value(v) { text = v; save(v); },
+	setKnownNames(names) {
+		knownNames = new Set(names.map(n => n.toLowerCase()));
+	},
 	appendName(name) {
-		const trimmed = text.trimEnd();
-		const lines = trimmed.split('\n');
+		const lines = text.trimEnd().split('\n');
 		const lowerName = name.toLowerCase();
 
+		// Strip lines that don't match any known monster
+		const clean = knownNames.size > 0
+			? lines.filter(l => { const n = lineMonsterName(l); return !n || knownNames.has(n); })
+			: lines;
+
 		// Find existing line with this monster name
-		const idx = lines.findIndex(l => {
-			const t = l.trim();
-			const m = t.match(/^(\d+)\s+(.+)/);
-			const lineName = m ? m[2] : t;
-			return lineName.toLowerCase() === lowerName;
-		});
+		const idx = clean.findIndex(l => lineMonsterName(l) === lowerName);
 
 		if (idx !== -1) {
-			const m = lines[idx].trim().match(/^(\d+)\s+(.+)/);
+			const m = clean[idx].trim().match(/^(\d+)\s+(.+)/);
 			const count = m ? +m[1] : 1;
-			lines[idx] = `${count + 1} ${name}`;
-			text = lines.join('\n');
+			clean[idx] = `${count + 1} ${name}`;
 		} else {
-			text = trimmed ? trimmed + '\n' + name : name;
+			clean.push(name);
 		}
+
+		text = clean.filter(l => l.trim()).join('\n');
 		save(text);
 	},
 };

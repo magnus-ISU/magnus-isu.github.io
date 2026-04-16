@@ -32,6 +32,9 @@
 	const knownMonsters = $derived([...userMonsters.list, ...allMonsters]);
 	const maxWords = $derived(Math.max(...knownMonsters.map((m) => m.name.split(/\s+/).length), 1));
 
+	// Keep the store aware of valid monster names for cleanup on shift+click
+	$effect(() => { encounterText.setKnownNames(knownMonsters.map(m => m.name)); });
+
 	// Greedy name matching — tries longest prefix first
 	const parsed = $derived.by(() => {
 		if (!text.trim()) return { matched: [], unmatched: '' };
@@ -39,7 +42,7 @@
 		const results = [];
 		const missed = [];
 		for (const line of text.split('\n')) {
-			let words = line.trim().split(/\s+/).filter(Boolean);
+			let words = line.trim().replace(/,/g, '').split(/\s+/).filter(Boolean);
 			const lineUnmatched = [];
 			while (words.length > 0) {
 				let count = 1;
@@ -97,7 +100,7 @@
 	{/if}
 
 	<section class="monster-search-section" bind:this={searchSectionEl}>
-		<MonsterSearch />
+		<MonsterSearch hint={unmatched} />
 	</section>
 </article>
 

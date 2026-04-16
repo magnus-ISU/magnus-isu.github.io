@@ -6,9 +6,22 @@
 	let {
 		/** Show all sections when search is empty */
 		showAll = false,
+		/** External search hint (used when the user hasn't typed anything) */
+		hint = '',
 	} = $props();
 
+	let userTyped = $state(false);
 	let search = $state('');
+	const isHint = $derived(!userTyped && !!hint);
+
+	$effect(() => {
+		if (!userTyped) search = hint;
+	});
+
+	function onSearchInput(e) {
+		search = e.target.value;
+		userTyped = !!e.target.value;
+	}
 
 	const filteredSections = $derived.by(() => {
 		if (!search.trim()) {
@@ -43,7 +56,7 @@
 </script>
 
 <div class="monster-search-wrap">
-	<input class="monster-search" type="text" placeholder="Search monsters…" bind:value={search} />
+	<input class="monster-search" class:hint={isHint} type="text" placeholder="Search monsters…" value={search} oninput={onSearchInput} />
 	{#each filteredSections as section}
 		<h2>{section.name}</h2>
 		{#each section.monsters as m}
@@ -69,5 +82,10 @@
 
 	.monster-search:focus {
 		border-color: #d4a847;
+	}
+
+	.monster-search.hint {
+		color: #e05555;
+		border-color: #e05555;
 	}
 </style>
