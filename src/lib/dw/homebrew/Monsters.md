@@ -191,8 +191,8 @@
 <MonsterStatblock
   name="Avatar of Darkness"
   tags="Solitary, Huge, Magical, Divine"
-  hp="??"
-  armor="??"
+  hp={20}
+  armor={4}
   attack="Look Upon The Void"
   damage="d6+2"
   attack2="Touch of Darkness"

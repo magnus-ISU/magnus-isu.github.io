@@ -34,6 +34,20 @@
 		usedMoves = next;
 	}
 
+	// HP tracking
+	const hpNum = $derived(typeof hp === 'number' ? hp : null);
+	let currentHp = $state(typeof hp === 'number' ? hp : null);
+	const hpColor = $derived(
+		currentHp === null   ? null :
+		currentHp <= 0       ? '#e05555' :
+		currentHp < hpNum    ? '#d4a847' :
+		                       '#5aaa6a'
+	);
+	function clickHp() {
+		if (currentHp === null) return;
+		currentHp = currentHp <= 0 ? hpNum : currentHp - 1;
+	}
+
 	// Dice rolling — rollKey increments on each roll to restart the CSS animation
 	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
 	let rollKey = $state(0);
@@ -114,7 +128,14 @@
 			</div>
 			<div class="monster-vitals">
 				{#if hp !== null}
-					<span class="vital"><span class="vital-label">HP</span> {hp}</span>
+					<span class="vital">
+						<button class="vital-label hp-btn" onclick={clickHp} title={currentHp <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
+						{#if hpNum !== null}
+							<input class="hp-input" type="number" style="color: {hpColor}" bind:value={currentHp} />
+						{:else}
+							<span>{hp}</span>
+						{/if}
+					</span>
 				{/if}
 				{#if armor !== null}
 					<span class="vital"><span class="vital-label">Armor</span> {armor}</span>
@@ -279,6 +300,38 @@
 		letter-spacing: 0.06em;
 		color: #888;
 		margin-right: 0.2rem;
+	}
+
+	.hp-btn {
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		transition: color 0.15s;
+	}
+
+	.hp-btn:hover {
+		color: #bbb;
+	}
+
+	.hp-input {
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font: inherit;
+		font-size: 0.88rem;
+		width: 3.5ch;
+		outline: none;
+		-moz-appearance: textfield;
+		appearance: textfield;
+		transition: color 0.2s;
+	}
+
+	.hp-input::-webkit-inner-spin-button,
+	.hp-input::-webkit-outer-spin-button {
+		-webkit-appearance: none;
 	}
 
 	.monster-special {
