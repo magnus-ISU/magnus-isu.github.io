@@ -1,7 +1,8 @@
 <script>
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
+	import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 	import TextBox from '$lib/components/TextBox.svelte';
-	import { monsterSections, allMonsters } from '$lib/dw/monsters.js';
+	import { allMonsters } from '$lib/dw/monsters.js';
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 	import { tick } from 'svelte';
@@ -32,12 +33,14 @@
 	const maxWords = $derived(Math.max(...knownMonsters.map((m) => m.name.split(/\s+/).length), 1));
 
 	// Greedy name matching — tries longest prefix first
-	const matched = $derived.by(() => {
-		if (!text.trim()) return [];
+	const parsed = $derived.by(() => {
+		if (!text.trim()) return { matched: [], unmatched: '' };
 		const nameMap = new Map(knownMonsters.map((m) => [m.name.toLowerCase(), m]));
 		const results = [];
+		const missed = [];
 		for (const line of text.split('\n')) {
 			let words = line.trim().split(/\s+/).filter(Boolean);
+			const lineUnmatched = [];
 			while (words.length > 0) {
 				let count = 1;
 				let offset = 0;
@@ -55,34 +58,19 @@
 						break;
 					}
 				}
-				if (!found) words = words.slice(1);
+				if (!found) {
+					lineUnmatched.push(words[0]);
+					words = words.slice(1);
+				}
 			}
+			if (lineUnmatched.length) missed.push(lineUnmatched.join(' '));
 		}
-		return results;
+		return { matched: results, unmatched: missed.join(' ') };
 	});
+	const matched = $derived(parsed.matched);
+	const unmatched = $derived(parsed.unmatched);
 
-	// Search bar — regex-enabled, same as All Monsters
-	let search = $state('');
-	const filteredSections = $derived.by(() => {
-		if (!search.trim()) return [];
-		const q = search.trim();
-		let test;
-		try {
-			const re = new RegExp(q, 'i');
-			test = (name) => re.test(name);
-		} catch {
-			const lower = q.toLowerCase();
-			test = (name) => name.toLowerCase().includes(lower);
-		}
-		return monsterSections
-			.map(s => ({
-				...s,
-				monsters: s.monsters.filter(m => test(m.name))
-			}))
-			.filter(s => s.monsters.length > 0);
-	});
-	const filteredCount = $derived(filteredSections.reduce((n, s) => n + s.monsters.length, 0));
-	const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
+
 </script>
 
 <svelte:head>
@@ -109,13 +97,7 @@
 	{/if}
 
 	<section class="monster-search-section" bind:this={searchSectionEl}>
-		<input class="monster-search" type="text" placeholder="Search monsters…" bind:value={search} />
-		{#each filteredSections as section}
-			<h2>{section.name}</h2>
-			{#each section.monsters as m}
-				<MonsterStatblock {...m} open={autoExpand} />
-			{/each}
-		{/each}
+		<MonsterSearch />
 	</section>
 </article>
 
@@ -143,23 +125,5 @@
 
 	.monster-search-section {
 		margin-top: 2rem;
-	}
-
-	.monster-search {
-		width: 100%;
-		box-sizing: border-box;
-		background: #161616;
-		border: 1px solid #333;
-		border-radius: 6px;
-		color: #ddd;
-		font-family: inherit;
-		font-size: 0.9rem;
-		padding: 0.5rem 0.75rem;
-		margin-bottom: 1rem;
-		outline: none;
-	}
-
-	.monster-search:focus {
-		border-color: #d4a847;
 	}
 </style>

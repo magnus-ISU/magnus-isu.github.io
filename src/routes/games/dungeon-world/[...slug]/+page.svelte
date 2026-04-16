@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
-	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+	import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 
 	let { data } = $props();
 	let longPressTimer;
@@ -11,30 +11,7 @@
 	const homebrewSlug = $derived(data.homebrewSlug || data.slug);
 	const srdSlug = $derived(data.srdSlug || data.slug);
 	const hasPair = $derived(!!data.srdSlug || !!data.homebrewSlug);
-
-	// Search for all-monsters page
-	let search = $state('');
 	const isAllMonsters = $derived(data.slug === 'all-monsters');
-	const filteredSections = $derived.by(() => {
-		if (!isAllMonsters || !search.trim()) return data.monsterSections;
-		const q = search.trim();
-		let test;
-		try {
-			const re = new RegExp(q, 'i');
-			test = (name) => re.test(name);
-		} catch {
-			const lower = q.toLowerCase();
-			test = (name) => name.toLowerCase().includes(lower);
-		}
-		return data.monsterSections
-			?.map(s => ({
-				...s,
-				monsters: s.monsters.filter(m => test(m.name))
-			}))
-			.filter(s => s.monsters.length > 0);
-	});
-	const filteredCount = $derived(filteredSections?.reduce((n, s) => n + s.monsters.length, 0) ?? 0);
-	const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
 
 	function handleToggle(target, e) {
 		e.preventDefault();
@@ -84,20 +61,15 @@
 	{#if data.render === 'monsters'}
 		<h1>{data.title}</h1>
 		{#if isAllMonsters}
-			<input class="monster-search" type="text" placeholder="Search monsters…" bind:value={search} />
-		{/if}
-		{#if data.slug === 'all-monsters' && userMonsters.list.length > 0 && !search.trim()}
-			<h2>User Monsters</h2>
-			{#each userMonsters.list as m (m.name)}
-				<MonsterStatblock {...m} />
+			<MonsterSearch showAll />
+		{:else}
+			{#each data.monsterSections as section}
+				{#if data.monsterSections.length > 1}<h2>{section.name}</h2>{/if}
+				{#each section.monsters as m}
+					<MonsterStatblock {...m} />
+				{/each}
 			{/each}
 		{/if}
-		{#each filteredSections as section}
-			{#if isAllMonsters || filteredSections.length > 1}<h2>{section.name}</h2>{/if}
-			{#each section.monsters as m}
-				<MonsterStatblock {...m} open={autoExpand} />
-			{/each}
-		{/each}
 	{:else}
 		<data.Content />
 	{/if}
@@ -148,23 +120,6 @@
 	.source-opt.active {
 		background: #d4a847;
 		color: #1e1e1e;
-	}
-
-	.monster-search {
-		width: 100%;
-		background: #161616;
-		border: 1px solid #333;
-		border-radius: 6px;
-		color: #ddd;
-		font-family: inherit;
-		font-size: 0.9rem;
-		padding: 0.5rem 0.75rem;
-		margin-bottom: 1rem;
-		outline: none;
-	}
-
-	.monster-search:focus {
-		border-color: #d4a847;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
