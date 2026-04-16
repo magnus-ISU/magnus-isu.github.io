@@ -19,9 +19,9 @@ particular formians are the bottom caste. They work the hills and honeycombs
 with single-minded joy that can be known only by such an alien mind.
 _Instinct_: To follow orders
 
-  * Raise the alarm
-  * Create value for the hive
-  * Assimilate
+- Raise the alarm
+- Create value for the hive
+- Assimilate
 
 Formian Taskmaster Group, Organized, Intelligent
 
@@ -42,8 +42,8 @@ interfere in a project, but get in the way of The Great Work and expect
 nothing less than their full attention. You don’t want their full attention.
 _Instinct_: To command
 
-  * Order drones into battle
-  * Set great numbers in motion
+- Order drones into battle
+- Set great numbers in motion
 
 Formian Centurion Horde, Intelligent, Organized
 
@@ -66,9 +66,9 @@ flickering in the heat or spilling up from a sandy mound to wipe clean a
 newly-dug mine. Theirs is an orderly bloodshed, committed with no pleasure but
 the completion of a goal. _Instinct_: To fight as ordered
 
-  * Advance as one
-  * Summon reinforcements
-  * Give a life for the hive
+- Advance as one
+- Summon reinforcements
+- Give a life for the hive
 
 Formian Queen Solitary, Huge, Organized, Intelligent, Hoarder
 
@@ -88,9 +88,9 @@ stone and war while still pale and wriggling larvae, without a word. To kill
 one is to set chaos on the hive; without their queen, the rest turn on one
 another in a mad, blind rage. _Instinct_: To spread formians
 
-  * Call every formian it spawned
-  * Release a half-formed larval mutation
-  * Organize and issue orders
+- Call every formian it spawned
+- Release a half-formed larval mutation
+- Organize and issue orders
 
 Gnoll Tracker Group, Organized, Intelligent
 
@@ -110,8 +110,8 @@ They’ll hunt you, slow and steady, as you die. If you hear laughter in the
 desert wind, well, best pray Death comes to take you before they do.
 _Instinct_: To prey on weakness
 
-  * Doggedly track prey
-  * Strike at a moment of weakness
+- Doggedly track prey
+- Strike at a moment of weakness
 
 Gnoll Emissary Solitary, Divine, Intelligent, Organized
 
@@ -129,8 +129,8 @@ lord. Frightening? Too right. Every hound has a master with his hand on the
 chain. This gnoll hears his master’s voice. Hears it and obeys. _Instinct_: To
 share divine insight
 
-  * Pass on demonic influence
-  * Drive the pack into a fervor
+- Pass on demonic influence
+- Drive the pack into a fervor
 
 Gnoll Alpha Solitary, Intelligent, Organized
 
@@ -148,8 +148,8 @@ them to you. If they’re that awful to each other—to their living kin—think
 about how they must view us. It’s hard to be mere meat in a land of
 carnivores. _Instinct_: To drive the pack
 
-  * Demand obedience
-  * Send the pack to hunt
+- Demand obedience
+- Send the pack to hunt
 
 Orc Bloodwarrior Horde, Intelligent, Organized
 
@@ -165,8 +165,8 @@ fealty to the warchief and their tribe and bears the jagged blade of a
 bloodwarrior. Men are trained to fight and kill—orcs are born to it.
 _Instinct_: To fight
 
-  * Fight with abandon
-  * Revel in destruction
+- Fight with abandon
+- Revel in destruction
 
 Orc Berserker Solitary, Large, Divine, Intelligent, Organized
 
@@ -184,8 +184,8 @@ spreads. The rare berserker that lives more than a few years becomes horrible
 and twisted, growing horns or an extra arm with which to grasp the iron
 cleavers they favor in battle. _Instinct_: To rage
 
-  * Fly into a frenzy
-  * Unleash chaos
+- Fly into a frenzy
+- Unleash chaos
 
 Orc Breaker Solitary, Large
 
@@ -208,8 +208,8 @@ see, so maybe it’s jealousy drives these burly things to crush and shatter the
 way they do. Effective tactic, though. Careful out there.” _Instinct_: To
 smash
 
-  * Destroy armor or protection
-  * Lay low the mighty
+- Destroy armor or protection
+- Lay low the mighty
 
 Orc One-Eye Group, Divine, Magical, Intelligent, Organized
 
@@ -226,9 +226,9 @@ the Iron Gallows\! I call to the runes\! I call to the clouded sky\! Take this
 mortal organ, eat of the flesh of our enemy and give me what is mine\!
 _Instinct_: To hate
 
-  * Rend flesh with divine magic
-  * Take an eye
-  * Make a sacrifice and grow in power
+- Rend flesh with divine magic
+- Take an eye
+- Make a sacrifice and grow in power
 
 Orc Shaman Solitary, Intelligent, Organized
 
@@ -246,10 +246,10 @@ of the sun. Fitting, then, that the old ways still hold. They summon the
 powers of the world to work, to fight and to protect their people, as they
 have since the first nights. _Instinct_: To strengthen orc-kind
 
-  * Give protection of earth
-  * Give power of fire
-  * Give swiftness of water
-  * Give clarity of air
+- Give protection of earth
+- Give power of fire
+- Give swiftness of water
+- Give clarity of air
 
 Orc Slaver Horde, Stealthy, Intelligent, Organized
 
@@ -265,9 +265,9 @@ Taken to it like a sacred duty—especially if they can get their hands on
 elves. Hard to think of a grimmer fate than to live out your life on an orcish
 galley, back bent under the lash. _Instinct_: To take
 
-  * Take a captive
-  * Pin someone under a net
-  * Drug them
+- Take a captive
+- Pin someone under a net
+- Drug them
 
 Orc Shadowhunter Solitary, Stealthy, Magical, Intelligent
 
@@ -284,9 +284,9 @@ into camps, towns and temples and end the lives of those within. Do not be so
 distracted by the howling of the berserkers that you don’t notice the knife at
 your back. _Instinct_: To kill in darkness
 
-  * Poison them
-  * Melt into the shadows
-  * Cloak them in darkness
+- Poison them
+- Melt into the shadows
+- Cloak them in darkness
 
 Orc Warchief Solitary, Intelligent, Organized
 
@@ -305,9 +305,9 @@ carries the ancient grudge against the civil races on his shoulders. The
 Warchief is to be respected, to be obeyed and above all else, to be feared.
 All glory to the Warchief. _Instinct_: To lead
 
-  * Start a war
-  * Make a show of power
-  * Enrage the tribes
+- Start a war
+- Make a show of power
+- Enrage the tribes
 
 Triton Spy Solitary, Stealthy, Intelligent, Organized
 
@@ -327,8 +327,8 @@ the dying triton’s tales were true. That there are powers deep below that
 watch and wait. They fear the tide is coming in. _Instinct_: To spy on the
 surface world
 
-  * Reveal their secrets
-  * Strike at weakness
+- Reveal their secrets
+- Strike at weakness
 
 Triton Tidecaller Group, Divine, Magical, Intelligent
 
@@ -349,9 +349,9 @@ come, now, back to the cities of the triton, bearing word that the prophecy is
 coming to pass. The world of men will drown in icy brine. The tidecallers
 speak and the lords begin to listen. _Instinct_: To bring on The Flood
 
-  * Cast a spell of water and destruction
-  * Command beasts of the sea
-  * Reveal divine proclamation
+- Cast a spell of water and destruction
+- Command beasts of the sea
+- Reveal divine proclamation
 
 Triton Sub-Mariner Group, Organized, Intelligent
 
@@ -371,8 +371,8 @@ and attack the crews of ships that wander too far from port. Watch for their
 pennants of kelp on the horizon and the conch-cry of a call to battle and
 keep, if you can, your boats near shore. _Instinct_: To wage war
 
-  * Lead tritons to battle
-  * Pull them beneath the waves
+- Lead tritons to battle
+- Pull them beneath the waves
 
 Triton Noble Group, Organized, Intelligent
 
@@ -394,6 +394,6 @@ begun to respond, and it is feared by some that the ancient blood is changing
 forever. It may be too late to turn back. Time and tide wait for none.
 _Instinct_: To lead
 
-  * Stir tritons to war
-  * Call reinforcements
+- Stir tritons to war
+- Call reinforcements
 

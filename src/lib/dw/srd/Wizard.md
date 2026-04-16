@@ -68,9 +68,9 @@ lower to your spellbook. You spellbook is 1 weight.
 When you **spend uninterrupted time \(an hour or so\) in quiet contemplation
 of your spellbook**, you:
 
-  * Lose any spells you already have prepared
-  * Prepare new spells of your choice from your spellbook whose total levels don’t exceed your own level+1.
-  * Prepare your cantrips which never count against your limit.
+- Lose any spells you already have prepared
+- Prepare new spells of your choice from your spellbook whose total levels don’t exceed your own level+1.
+- Prepare your cantrips which never count against your limit.
 
 ### Cast a Spell \(Int\)
 
@@ -78,9 +78,9 @@ When you **release a spell you’ve prepared**, roll+Int. ✴On a 10+, the spell
 is successfully cast and you do not forget the spell—you may cast it again
 later. ✴On a 7-9, the spell is cast, but choose one:
 
-  * You draw unwelcome attention or put yourself in a spot. The GM will tell you how.
-  * The spell disturbs the fabric of reality as it is cast—take -1 ongoing to cast a spell until the next time you Prepare Spells.
-  * After it is cast, the spell is forgotten. You cannot cast the spell again until you prepare spells.
+- You draw unwelcome attention or put yourself in a spot. The GM will tell you how.
+- The spell disturbs the fabric of reality as it is cast—take -1 ongoing to cast a spell until the next time you Prepare Spells.
+- After it is cast, the spell is forgotten. You cannot cast the spell again until you prepare spells.
 
 Note that maintaining spells with ongoing effects will sometimes cause a
 penalty to your roll to cast a spell.
@@ -97,13 +97,13 @@ When you **draw on a place of power to create a magical effect**, tell the GM
 what you’re trying to achieve. Ritual effects are always possible, but the GM
 will give you one to four of the following conditions:
 
-  * It’s going to take days/weeks/months
-  * First you must \_\_\_\_
-  * You’ll need help from \_\_\_\_
-  * It will require a lot of money
-  * The best you can do is a lesser version, unreliable and limited
-  * You and your allies will risk danger from \_\_\_\_
-  * You’ll have to disenchant \_\_\_\_ to do it
+- It’s going to take days/weeks/months
+- First you must \_\_\_\_
+- You’ll need help from \_\_\_\_
+- It will require a lot of money
+- The best you can do is a lesser version, unreliable and limited
+- You and your allies will risk danger from \_\_\_\_
+- You’ll have to disenchant \_\_\_\_ to do it
 
 ## Alignment
 
@@ -126,18 +126,18 @@ Use magic to cause terror and fear.
 Your load is 7+Str. You start with your spellbook \(1 weight\) and dungeon
 rations \(5 uses, 1 weight\). Choose your defenses:
 
-  * Leather armor \(1 armor, 1 weight\)
-  * Bag of books \(5 uses, 2 weight\) and 3 healing potions
+- Leather armor \(1 armor, 1 weight\)
+- Bag of books \(5 uses, 2 weight\) and 3 healing potions
 
 Choose your weapon:
 
-  * Dagger \(hand, 1 weight\)
-  * Staff \(close, two-handed, 1 weight\)
+- Dagger \(hand, 1 weight\)
+- Staff \(close, two-handed, 1 weight\)
 
 Choose one:
 
-  * Healing potion \(0 weight\)
-  * 3 antitoxins \(0 weight\)
+- Healing potion \(0 weight\)
+- 3 antitoxins \(0 weight\)
 
 ## Bonds
 
@@ -165,8 +165,8 @@ Choose a spell. You prepare that spell as if it were one level lower.
 When you cast a spell, on a 10+ you have the option of choosing from the 7-9
 list. If you do, you may choose one of these as well:
 
-  * The spell’s effects are maximized
-  * The spell’s targets are doubled
+- The spell’s effects are maximized
+- The spell’s targets are doubled
 
 ### Fount of Knowledge
 
@@ -229,8 +229,8 @@ When you cast a spell, on a 10-11 you have the option of choosing from the 7-9
 list. If you do, you may choose one of these effects as well. On a 12+ you get
 to choose one of these effects for free:
 
-  * The spell’s effects are doubled
-  * The spell’s targets are doubled
+- The spell’s effects are doubled
+- The spell’s targets are doubled
 
 ### Enchanter’s Soul
 

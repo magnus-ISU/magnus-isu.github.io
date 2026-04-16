@@ -49,6 +49,8 @@ When you **closely study a situation or person**, roll+WIS. On a 10+ hold 3 Insi
 ### Parley
 When you **want something from someone that they don't want to give up**, make your case and roll+CHA: on a 10+, they name their absolute minimum price; on a 7-9, they name a price they could live with; on a 6-, mark XP, and prepare to be milked for all you're worth.
 
+## Pushing Moves
+
 ### Aid or Interfere
 When you **act alongside one of your companions**, they roll with Advantage but you are both exposed to any costs or consequences associated with their move.
 When you **hinder one of your companions**, they roll with Disadvantage but you also expose yourself to danger, retribution, or cost.

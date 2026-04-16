@@ -81,10 +81,10 @@ abilities. Treat the zombie as a character, but with access to only the basic
 moves. It has a +1 modifier for all stats and 1 HP. The zombie also gets your
 choice of 1d4 of these traits:
 
-  * It’s talented. Give one stat a +2 modifier.
-  * It’s durable. It has +2 HP for each level you have.
-  * It has a functioning brain and can complete complex tasks.
-  * It does not appear obviously dead, at least for a day or two.
+- It’s talented. Give one stat a +2 modifier.
+- It’s durable. It has +2 HP for each level you have.
+- It has a functioning brain and can complete complex tasks.
+- It does not appear obviously dead, at least for a day or two.
 
 The zombie lasts until it is destroyed by taking damage in excess of its HP,
 or until you end the spell. While this spell is ongoing you take -1 to cast a
@@ -106,10 +106,10 @@ Tell the GM you would like to resurrect a corpse whose soul has not yet fully
 departed this world. Resurrection is always possible, but the GM will give you
 one or more \(possibly all\) of these conditions to fulfill:
 
-  * It’s going to take days/weeks/months
-  * You must get help from \_\_\_\_
-  * It will require a lot of money
-  * You must sacrifice \_\_\_\_ to do it
+- It’s going to take days/weeks/months
+- You must get help from \_\_\_\_
+- It will require a lot of money
+- You must sacrifice \_\_\_\_ to do it
 
 The GM may, depending on the circumstances, allow you to resurrect the corpse
 now, with the understanding that the conditions must be met before it’s

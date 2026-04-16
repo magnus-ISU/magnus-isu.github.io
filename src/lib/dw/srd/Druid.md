@@ -73,17 +73,17 @@ within you and allow you to take their shape. Choose one of the following. It
 is the land to which you are attuned—when shapeshifting you may take the shape
 of any animal who might live in your Land.
 
-  * The Great Forests
-  * The Whispering Plains
-  * The Vast Desert
-  * The Stinking Mire
-  * The River Delta
-  * The Depths of the Earth
-  * The Sapphire Islands
-  * The Open Sea
-  * The Towering Mountains
-  * The Frozen North
-  * The Blasted Wasteland
+- The Great Forests
+- The Whispering Plains
+- The Vast Desert
+- The Stinking Mire
+- The River Delta
+- The Depths of the Earth
+- The Sapphire Islands
+- The Open Sea
+- The Towering Mountains
+- The Frozen North
+- The Blasted Wasteland
 
 Chose a tell—a physical attribute that marks you as born of the soil—that
 reflects the spirit of your land. It may be an animal feature like antlers or
@@ -142,19 +142,19 @@ Eliminate an unnatural menace.
 Your load is 6+Str. You carry some token of your land, describe it. Choose
 your defenses:
 
-  * Hide armor \(1 armor, 1 weight\)
-  * Wooden shield \(+1 armor, 1 weight\)
+- Hide armor \(1 armor, 1 weight\)
+- Wooden shield \(+1 armor, 1 weight\)
 Choose your armament:
 
-  * Shillelagh \(close, 2 weight\)
-  * Staff \(close, two-handed, 1 weight\)
-  * Spear \(close, thrown, near, 1 weight\)
+- Shillelagh \(close, 2 weight\)
+- Staff \(close, two-handed, 1 weight\)
+- Spear \(close, thrown, near, 1 weight\)
 Choose one:
 
-  * Adventuring gear \(1 weight\)
-  * Poultices and herbs \(2 uses, 1 weight\)
-  * Halfling pipeleaf \(0 weight\)
-  * 3 antitoxin \(0 weight\)
+- Adventuring gear \(1 weight\)
+- Poultices and herbs \(2 uses, 1 weight\)
+- Halfling pipeleaf \(0 weight\)
+- 3 antitoxin \(0 weight\)
 
 ## Bonds
 
@@ -226,9 +226,9 @@ When you **call on the primal spirits of fire, water, earth or air to perform
 a task for you** roll+Wis. ✴On a 10+ choose two. ✴On a 7–9 choose one. ✴On a
 miss, some catastrophe occurs as a result of your calling.
 
-  * The effect you desire comes to pass
-  * You avoid paying nature’s price 
-  * You retain control
+- The effect you desire comes to pass
+- You avoid paying nature’s price 
+- You retain control
 
 ### Balance
 

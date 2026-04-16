@@ -57,9 +57,9 @@ When you **spend a moment to survey a dangerous area**, roll+DEX. ✴On a 10+,
 hold 3. ✴On a 7–9, hold 1. Spend your hold as you walk through the area to ask
 these questions:
 
-  * Is there a trap here and if so, what activates it?
-  * What does the trap do when activated?
-  * What else is hidden here?
+- Is there a trap here and if so, what activates it?
+- What does the trap do when activated?
+- What else is hidden here?
 
 ### Tricks of the Trade
 
@@ -73,10 +73,10 @@ When you **attack a surprised or defenseless enemy with a melee weapon**, you
 can choose to deal your damage or roll+DEX. ✴On a 10+ choose two. ✴On a 7–9
 choose one.
 
-  * You don’t get into melee with them
-  * You deal your damage+1d6
-  * You create an advantage, +1 forward to you or an ally acting on it
-  * Reduce their armor by 1 until they repair it
+- You don’t get into melee with them
+- You deal your damage+1d6
+- You take the initiative, +1 forward to you or an ally acting on it
+- Reduce their armor by 1 until they repair it
 
 ### Flexible Morals
 
@@ -93,10 +93,10 @@ choose for free. Note that some poisons are applied, meaning you have to
 carefully apply it to the target or something they eat or drink. Touch poisons
 just need to touch the target, they can even be used on the blade of a weapon.
 
-  * Oil of Tagit \(applied\): The target falls into a light sleep
-  * Bloodweed \(touch\): The target deals -1d4 damage ongoing until cured
-  * Goldenroot \(applied\): The target treats the next creature they see as a trusted ally, until proved otherwise
-  * Serpent’s Tears \(touch\): Anyone dealing damage to the target rolls twice and takes the better result.
+- Oil of Tagit \(applied\): The target falls into a light sleep
+- Bloodweed \(touch\): The target deals -1d4 damage ongoing until cured
+- Goldenroot \(applied\): The target treats the next creature they see as a trusted ally, until proved otherwise
+- Serpent’s Tears \(touch\): Anyone dealing damage to the target rolls twice and takes the better result.
 
 ## Alignment
 
@@ -120,18 +120,18 @@ Your load is 9+Str. You start with dungeon rations \(5 uses, 1 weight\),
 leather armor \(1 armor, 1 weight\), 3 uses of your chosen poison, and 10
 coins. Choose your arms:
 
-  * Dagger \(hand, 1 weight\) and short sword \(close, 1 weight\)
-  * Rapier \(close, precise, 1 weight\)
+- Dagger \(hand, 1 weight\) and short sword \(close, 1 weight\)
+- Rapier \(close, precise, 1 weight\)
 
 Choose a ranged weapon:
 
-  * 3 throwing daggers \(thrown, near, 0 weight\)
-  * Ragged Bow \(near, 2 weight\) and bundle of arrows \(3 ammo, 1 weight\)
+- 3 throwing daggers \(thrown, near, 0 weight\)
+- Ragged Bow \(near, 2 weight\) and bundle of arrows \(3 ammo, 1 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\)
-  * Healing potion \(0 weight\)
+- Adventuring gear \(1 weight\)
+- Healing potion \(0 weight\)
 
 ## Bonds
 
@@ -222,10 +222,10 @@ can create three doses of any poison you’ve used before. Alternately you can
 describe the effects of a poison you’d like to create. The GM will tell you
 that you can create it, but with one or more caveats:
 
-  * It will only work under specific circumstances
-  * The best you can manage is a weaker version
-  * It’ll take a while to take effect
-  * It’ll have obvious side effects
+- It will only work under specific circumstances
+- The best you can manage is a weaker version
+- It’ll take a while to take effect
+- It’ll have obvious side effects
 
 ### Serious Underdog
 
@@ -263,8 +263,8 @@ When you take time to make a plan to steal something, name the thing you want
 to steal and ask the GM these questions. When acting on the answers you and
 your allies take +1 forward.
 
-  * Who will notice it’s missing?
-  * What’s its most powerful defense?
-  * Who will come after it?
-  * Who else wants it?
+- Who will notice it’s missing?
+- What’s its most powerful defense?
+- Who will come after it?
+- Who else wants it?
 

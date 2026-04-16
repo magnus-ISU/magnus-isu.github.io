@@ -65,9 +65,9 @@ You ignore the clumsy tag on armor you wear.
 When you **give an NPC an order based on your divine authority**, roll+Cha.
 ✴On a 7+, they choose one:
 
-  * Do what you say
-  * Back away cautiously, then flee
-  * Attack you
+- Do what you say
+- Back away cautiously, then flee
+- Attack you
 
 ✴On a 10+, you also take +1 forward against them. ✴On a miss, they do as they
 please and you take -1 forward against them.
@@ -77,28 +77,28 @@ please and you take -1 forward against them.
 When you **dedicate yourself to a mission through prayer and ritual
 cleansing**, state what you set out to do:
 
-  * Slay \_\_\_\_\_\_\_, a great blight on the land
-  * Defend \_\_\_\_\_\_\_ from the iniquities that beset them
-  * Discover the truth of \_\_\_\_\_\_\_
+- Slay \_\_\_\_\_\_\_, a great blight on the land
+- Defend \_\_\_\_\_\_\_ from the iniquities that beset them
+- Discover the truth of \_\_\_\_\_\_\_
 
 Then choose up to two boons:
 
-  * An unwavering sense of direction to \_\_\_\_\_\_\_.
-  * Invulnerability to \_\_\_\_\_\_\_ \(e.g., edged weapons, fire, enchantment, etc.\)
-  * A mark of divine authority
-  * Senses that pierce lies
-  * A voice that transcends language
-  * A freedom from hunger, thirst, and sleep
+- An unwavering sense of direction to \_\_\_\_\_\_\_.
+- Invulnerability to \_\_\_\_\_\_\_ \(e.g., edged weapons, fire, enchantment, etc.\)
+- A mark of divine authority
+- Senses that pierce lies
+- A voice that transcends language
+- A freedom from hunger, thirst, and sleep
 
 The GM will then tell you what vow or vows is required of you to maintain your
 blessing:
 
-  * Honor \(forbidden: cowardly tactics and tricks\)
-  * Temperance \(forbidden: gluttony in food, drink, and pleasure of the flesh\)
-  * Piety \(required: observance of daily holy services\)
-  * Valor \(forbidden: suffering an evil creature to live\)
-  * Truth \(forbidden: lies\)
-  * Hospitality \(required: comfort to those in need, no matter who they are\)
+- Honor \(forbidden: cowardly tactics and tricks\)
+- Temperance \(forbidden: gluttony in food, drink, and pleasure of the flesh\)
+- Piety \(required: observance of daily holy services\)
+- Valor \(forbidden: suffering an evil creature to live\)
+- Truth \(forbidden: lies\)
+- Hospitality \(required: comfort to those in need, no matter who they are\)
 
 ## Alignment
 
@@ -118,13 +118,13 @@ Your load is 12+Str. You start with dungeon rations \(5 uses, 1 weight\),
 scale armor \(2 armor, 3 weight\), and some mark of faith, describe it \(0
 weight\). Choose your weapon:
 
-  * Halberd \(reach, +1 damage, two-handed, 2 weight\)
-  * Long sword \(close, +1 damage, 1 weight\) and shield \(+1 armor, 2 weight\)
+- Halberd \(reach, +1 damage, two-handed, 2 weight\)
+- Long sword \(close, +1 damage, 1 weight\) and shield \(+1 armor, 2 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\)
-  * Dungeon rations \(1 weight\) and healing potion \(0 weight\)
+- Adventuring gear \(1 weight\)
+- Dungeon rations \(1 weight\) and healing potion \(0 weight\)
 
 ## Bonds
 

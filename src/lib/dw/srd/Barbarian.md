@@ -53,12 +53,12 @@ your appetites if you would roll for a move, instead of rolling 2d6 you roll
 1d6+1d8. If the d6 is the higher die of the pair, the GM will also introduce a
 complication or danger that comes about due to your heedless pursuits.
 
-  * Pure destruction
-  * Power over others
-  * Mortal pleasures
-  * Conquest
-  * Riches and property
-  * Fame and glory
+- Pure destruction
+- Power over others
+- Mortal pleasures
+- Conquest
+- Riches and property
+- Fame and glory
 
 ### The Upper Hand
 
@@ -106,13 +106,13 @@ Your Load is 8+Str. You carry dungeon rations \(5 uses, 1 weight\), a dagger
 \(hand, 1 weight\) some token of where you've traveled or where you're from,
 and your choice of weapon:
 
-  * Axe \(close, 1 weight\)
-  * Two handed sword \(close, +1 damage, 2 weight\)
+- Axe \(close, 1 weight\)
+- Two handed sword \(close, +1 damage, 2 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\) and dungeon rations \(5 uses, 1 weight\)
-  * Chainmail \(1 armor, 1 weight\)
+- Adventuring gear \(1 weight\) and dungeon rations \(5 uses, 1 weight\)
+- Chainmail \(1 armor, 1 weight\)
 
 ## Bonds
 
@@ -214,8 +214,8 @@ multiclass moves from those classes.
 When you **enter battle with a show of force** \(a shout, a rallying cry, a
 battle dance\) roll+Cha. On a 10+ both, on a 7–9 one or the other.
 
-  * Your allies are rallied and take +1 forward
-  * Your enemies feel fear and act accordingly \(avoiding you, hiding, attacking with fear driven abandon\)
+- Your allies are rallied and take +1 forward
+- Your enemies feel fear and act accordingly \(avoiding you, hiding, attacking with fear driven abandon\)
 
 ### Mark of Might
 

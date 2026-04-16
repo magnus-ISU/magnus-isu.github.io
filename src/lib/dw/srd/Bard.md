@@ -61,10 +61,10 @@ You start with these moves:
 When you** weave a performance into a basic spell**, choose an ally and an
 effect:
 
-  * Heal 1d8 damage
-  * +1d4 forward to damage
-  * Their mind is shaken clear of one enchantment
-  * The next time someone successfully assists the target with aid, they get +2 instead of +1
+- Heal 1d8 damage
+- +1d4 forward to damage
+- Their mind is shaken clear of one enchantment
+- The next time someone successfully assists the target with aid, they get +2 instead of +1
 
 Then roll+Cha. ✴On a 10+, the ally gets the selected effect. ✴On a 7-9, your
 spell still works, but you draw unwanted attention or your magic reverberates
@@ -74,13 +74,13 @@ to other targets affecting them as well, GM’s choice.
 
 Choose an area of expertise:
 
-  * Spells and Magicks
-  * The Dead and Undead
-  * Grand Histories of the Known World
-  * A Bestiary of Creatures Unusual
-  * The Planar Spheres
-  * Legends of Heroes Past
-  * Gods and Their Servants
+- Spells and Magicks
+- The Dead and Undead
+- Grand Histories of the Known World
+- A Bestiary of Creatures Unusual
+- The Planar Spheres
+- Legends of Heroes Past
+- Gods and Their Servants
 
 When you **first encounter an important creature, location, or item \(your
 call\) covered by your bardic lore** you can ask the GM any one question about
@@ -93,11 +93,11 @@ When you **speak frankly with someone**, you can ask their player a question
 from the list below. They must answer it truthfully, then they may ask you a
 question from the list \(which you must answer truthfully\).
 
-  * Whom do you serve?
-  * What do you wish I would do?
-  * How can I get you to \_\_\_\_\_\_?
-  * What are you really feeling right now?
-  * What do you most desire?
+- Whom do you serve?
+- What do you wish I would do?
+- How can I get you to \_\_\_\_\_\_?
+- What are you really feeling right now?
+- What do you most desire?
 
 ### A Port in the Storm
 
@@ -125,29 +125,29 @@ Spur others to significant and unplanned decisive action.
 Your load is 9+Str. You have dungeon rations \(5 uses, 1 weight\). Choose one
 instrument, all are 0 weight for you:
 
-  * Your father’s mandolin, repaired
-  * A fine lute, a gift from a noble
-  * The pipes with which you courted your first love
-  * A stolen horn
-  * A fiddle, never before played
-  * A songbook in a forgotten tongue
+- Your father’s mandolin, repaired
+- A fine lute, a gift from a noble
+- The pipes with which you courted your first love
+- A stolen horn
+- A fiddle, never before played
+- A songbook in a forgotten tongue
 
 Choose your clothing:
 
-  * Leather armor \(1 armor, 1 weight\)
-  * Ostentatious clothes \(0 weight\)
+- Leather armor \(1 armor, 1 weight\)
+- Ostentatious clothes \(0 weight\)
 
 Choose your armament:
 
-  * Dueling rapier \(close, precise, 2 weight\)
-  * Worn bow \(near, 2 weight\), bundle of arrows \(3 ammo, 1 weight\), and short sword \(close, 1 weight\)
+- Dueling rapier \(close, precise, 2 weight\)
+- Worn bow \(near, 2 weight\), bundle of arrows \(3 ammo, 1 weight\), and short sword \(close, 1 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\)
-  * Bandages \(0 weight\)
-  * Halfling pipeleaf \(0 weight\)
-  * 3 coins
+- Adventuring gear \(1 weight\)
+- Bandages \(0 weight\)
+- Halfling pipeleaf \(0 weight\)
+- 3 coins
 
 ## Bonds
 

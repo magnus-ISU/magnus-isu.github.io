@@ -18,9 +18,9 @@ sword and tome and did into the villages go, a great thirst for blood on her
 lips for the word the angel wrote upon the soul of Avra’hal was ‘kill’.”
 _Instinct_: To share divine will
 
-  * Deliver visions and prophecy
-  * Stir mortals to action
-  * Expose sin and injustice
+- Deliver visions and prophecy
+- Stir mortals to action
+- Expose sin and injustice
 
 Barbed Devil Solitary, Large, Planar, Terrifying
 
@@ -42,8 +42,8 @@ and letting them die there. Cruel but not particularly effective beyond
 slaughter. A low inquisitorial priority. _Instinct_: To rend flesh and spill
 blood
 
-  * Impale someone
-  * Kill indiscriminately
+- Impale someone
+- Kill indiscriminately
 
 Chain Devil Solitary, Planar
 
@@ -59,9 +59,9 @@ as a man-shaped mass of rusting iron, hooks and coils of mismatched links.
 Other times, a roiling tangle of rope or kelp or twisted bloody bedsheets. The
 results are always the same. _Instinct_: To capture
 
-  * Take a captive
-  * Return to whence it came
-  * Torture with glee
+- Take a captive
+- Return to whence it came
+- Torture with glee
 
 Concept Elemental Solitary, Devious, Planar, Amorphous
 
@@ -76,7 +76,7 @@ fire or earth might be. Easier to make mistakes, too—one might try calling up
 a wealth elemental and be surprised to find a murder elemental instead.
 _Instinct_: To perfect its concept
 
-  * Demonstrate its concept in its purest form
+- Demonstrate its concept in its purest form
 
 Corrupter Solitary, Devious, Planar, Hoarder
 
@@ -92,9 +92,9 @@ things when you’ve the vaults of hell to plumb. Don’t look so shocked, you
 knew what this was. You have but one thing we desire. Promise it to us, and
 the world shall be yours for the taking. Trust me.” _Instinct_: To bargain
 
-  * Offer a deal with horrible consequences
-  * Plumb the vaults of hell for a bargaining chip
-  * Make a show of power
+- Offer a deal with horrible consequences
+- Plumb the vaults of hell for a bargaining chip
+- Make a show of power
 
 Djinn Group, Large, Magical
 
@@ -117,8 +117,8 @@ hope to survive a summoning. Now, bring the lamp here and we will light it, it
 grows dark and these ruins are dangerous at night.” _Instinct_: To burn
 eternally
 
-  * Grant power for a price
-  * Summon the forces of the City of Brass
+- Grant power for a price
+- Summon the forces of the City of Brass
 
 Hell Hound Group, Planar, Organized
 
@@ -134,9 +134,9 @@ Below. They only want what is theirs. A howling pack of shadows, flame and
 jagged bone, driven by the hunting horn. They will not cease, they cannot be
 evaded. _Instinct_: To pursue
 
-  * Follow despite all obstacles
-  * Spew fire
-  * Summon the forces of hell on their target
+- Follow despite all obstacles
+- Spew fire
+- Summon the forces of hell on their target
 
 Imp Horde, Planar, Intelligent, Organized
 
@@ -150,8 +150,8 @@ when no one watches, and chasing pets and servants with tiny pitchforks. A
 caricature of true demonhood, these little creatures are, thankfully, not too
 difficult to bind or extinguish. _Instinct_: To harass
 
-  * Send information back to hell
-  * Cause mischief
+- Send information back to hell
+- Cause mischief
 
 Inevitable Group, Large, Magical, Cautious, Amorphous, Planar
 
@@ -171,9 +171,9 @@ Unshakable, seemingly immune to mortal harm and utterly enigmatic, it is said
 that the Inevitable are all that will remain when time’s long thread has run
 out. _Instinct_: To preserve order
 
-  * End a spell or effect
-  * Enforce a law of nature or man
-  * Give a glimpse of destiny
+- End a spell or effect
+- Enforce a law of nature or man
+- Give a glimpse of destiny
 
 Larvae Horde, Devious, Planar, Intelligent
 
@@ -189,9 +189,9 @@ wriggling and in torment, into our world. Once here, they spread misery and
 sickness during their mayfly lives before expiring into a slurry of gore. All
 in all, an enticement to do good deeds in life. _Instinct_: To suffer
 
-  * Fill them with despair
-  * Beg for mercy
-  * Draw evil attention
+- Fill them with despair
+- Beg for mercy
+- Draw evil attention
 
 Nightmare Horde, Large, Magical, Terrifying, Planar
 
@@ -210,8 +210,8 @@ the fiends of the pit ride on the finest horses ever seen. Coats of shining
 oil and manes of tormented flame: these are steeds of hell’s cavalry.
 _Instinct_: To ride rampant
 
-  * Sheath a rider in hellish flame
-  * Drive them away
+- Sheath a rider in hellish flame
+- Drive them away
 
 Quasit Horde, Planar
 
@@ -227,8 +227,8 @@ give it just a little edge over its hellish peers. Commonly bound by warlocks
 to carry heavy loads or build bridges or guard their twisted towers, a quasit
 can take on many forms, none of them pleasant. _Instinct_: To serve
 
-  * Attack with abandon
-  * Inflict pain
+- Attack with abandon
+- Inflict pain
 
 The Tarrasque Solitary, Huge, Planar
 
@@ -244,8 +244,8 @@ such a thing might be found, pray we do not ever need to learn. It slumbers.
 Somewhere in the periphery of the planar edge, it sleeps for now. _Instinct_:
 To consume
 
-  * Swallow a person, group, or place whole
-  * Release a remnant of a long-eaten place from its gullet
+- Swallow a person, group, or place whole
+- Release a remnant of a long-eaten place from its gullet
 
 Word Demon Solitary, Planar, Magical
 
@@ -260,6 +260,6 @@ at random and are often short-lived, but come to attend a particular word.
 Capricious, unpredictable and dangerous, yes—but possibly useful, depending on
 the word. _Instinct_: To further their word
 
-  * Cast a spell related to their word
-  * Bring their word into abundance
+- Cast a spell related to their word
+- Bring their word into abundance
 

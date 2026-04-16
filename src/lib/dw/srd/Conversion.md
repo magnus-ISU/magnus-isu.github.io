@@ -21,10 +21,10 @@ mind going in the right direction—so that gameplay stays true to the style and
 rules set out in this book. You’ll want to read through the module next,
 paying close attention to the four following topics as you go.
 
-  * Maps
-  * Monsters
-  * Magic Items
-  * NPCs and Organizations
+- Maps
+- Monsters
+- Magic Items
+- NPCs and Organizations
 
 Flip through the adventure, make some notes as you go, but don’t feel you need
 to memorize the whole thing. Areas that focus particularly on statistics are
@@ -229,9 +229,9 @@ adventure. Roll+CHA and tell us how much they love you. On a 10+ pick two
 heirlooms, on a 7-9 pick one. On a miss, well, good intentions count for
 something, right?
 
-  * A vial of antivenom
-  * A shield that glows with silver light
-  * A rusted old key in the shape of a lizard
+- A vial of antivenom
+- A shield that glows with silver light
+- A rusted old key in the shape of a lizard
 
 These sorts of moves can give the players the sense that their characters are
 tied to the situation at hand, and open the door for more lines of question-

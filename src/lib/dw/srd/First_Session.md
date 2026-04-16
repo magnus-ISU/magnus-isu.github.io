@@ -15,10 +15,10 @@ will face.
 
 Before the first session, you’ll need to print some stuff. Print off:
 
-  * A few copies of the basic moves
-  * One copy of each class sheet, double-sided
-  * One copy each of the cleric and wizard spell sheets, double-sided
-  * The GM sheet
+- A few copies of the basic moves
+- One copy of each class sheet, double-sided
+- One copy each of the cleric and wizard spell sheets, double-sided
+- The GM sheet
 
 You’ll also need to read this whole book, especially the sections on GMing
 \(GM moves\) and the basic moves. It’s a good idea to be acquainted with the
@@ -137,14 +137,14 @@ actually doing?” Ask “How?” or “With what?”
 
 For the first session, you have a few specific goals:
 
-  * Establish details, describe
-  * Use what they give you
-  * Ask questions
-  * Leave blanks
-  * Look for interesting facts
-  * Help the players understand the moves
-  * Give each character a chance to shine
-  * Introduce NPCs
+- Establish details, describe
+- Use what they give you
+- Ask questions
+- Leave blanks
+- Look for interesting facts
+- Help the players understand the moves
+- Give each character a chance to shine
+- Introduce NPCs
 
 #### Establish details, describe
 

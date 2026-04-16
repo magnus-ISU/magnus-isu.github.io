@@ -77,10 +77,10 @@ You start with these moves:
 When you **use pure strength to destroy an inanimate obstacle**, roll+Str. ✴On
 a 10+, choose 3. ✴On a 7-9 choose 2.
 
-  * It doesn’t take a very long time
-  * Nothing of value is damaged
-  * It doesn’t make an inordinate amount of noise
-  * You can fix the thing again without a lot of effort
+- It doesn’t take a very long time
+- Nothing of value is damaged
+- It doesn’t make an inordinate amount of noise
+- You can fix the thing again without a lot of effort
 
 ### Armored
 
@@ -95,37 +95,37 @@ useless. You must wield your weapon true.
 
 Choose a base description, all are 2 weight:
 
-  * Sword
-  * Axe
-  * Hammer
-  * Spear
-  * Flail
-  * Fists
+- Sword
+- Axe
+- Hammer
+- Spear
+- Flail
+- Fists
 
 Choose the range that best fits your weapon:
 
-  * Hand
-  * Close
-  * Reach
+- Hand
+- Close
+- Reach
 
 Choose two enhancements:
 
-  * Hooks and spikes. +1 damage, but +1 weight.
-  * Sharp. +2 piercing.
-  * Perfectly weighted. Add precise.
-  * Serrated edges. +1 damage.
-  * Glows in the presence of one type of creature, your choice.
-  * Huge. Add messy and forceful.
-  * Versatile. Choose an additional range.
-  * Well-crafted. -1 weight.
+- Hooks and spikes. +1 damage, but +1 weight.
+- Sharp. +2 piercing.
+- Perfectly weighted. Add precise.
+- Serrated edges. +1 damage.
+- Glows in the presence of one type of creature, your choice.
+- Huge. Add messy and forceful.
+- Versatile. Choose an additional range.
+- Well-crafted. -1 weight.
 
 Choose a look:
 
-  * Ancient
-  * Unblemished
-  * Ornate
-  * Blood-stained
-  * Sinister
+- Ancient
+- Unblemished
+- Ornate
+- Blood-stained
+- Sinister
 
 ## Alignment
 
@@ -148,15 +148,15 @@ Kill a defenseless or surrendered enemy.
 Your load is 12+Str. You carry your signature weapon and dungeon rations \(5
 uses, 1 weight\). Choose your defenses:
 
-  * Chainmail \(1 armor, 1 weight\) and adventuring gear \(1 weight\)
-  * Scale armor \(2 armor, 3 weight\)
+- Chainmail \(1 armor, 1 weight\) and adventuring gear \(1 weight\)
+- Scale armor \(2 armor, 3 weight\)
 
 Choose two:
 
-  * 2 Healing potions \(0 weight\)
-  * Shield \(+1 armor, 2 weight\)
-  * Antitoxin \(0 weight\), dungeon rations \(1 weight\), and poultices and herbs \(1 weight\)
-  * 22 coins
+- 2 Healing potions \(0 weight\)
+- Shield \(+1 armor, 2 weight\)
+- Antitoxin \(0 weight\), dungeon rations \(1 weight\), and poultices and herbs \(1 weight\)
+- 22 coins
 
 ## Bonds
 

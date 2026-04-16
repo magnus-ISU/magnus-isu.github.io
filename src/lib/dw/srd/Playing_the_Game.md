@@ -224,10 +224,10 @@ other than their normal attack.
 Other sources of damage—like being struck by a chunk of a collapsing tower, or
 falling into a pit—are left to the GM based on these options:
 
-  * It threatens bruises and scrapes at worst: d4 damage
-  * It’s likely to spill some blood, but nothing horrendous: d6 damage
-  * It might break some bones: d8 damage
-  * It could kill a common person: d10 damage
+- It threatens bruises and scrapes at worst: d4 damage
+- It’s likely to spill some blood, but nothing horrendous: d6 damage
+- It might break some bones: d8 damage
+- It could kill a common person: d10 damage
 
 Add the _ignores armor_ tag if the source of the damage is particularly large
 or if the damage comes from magic or poison.
@@ -523,9 +523,9 @@ armor instead.
 Once you’ve reached 10th level things change a little. When you have enough XP
 to go to 11th level instead you choose one of these:
 
-  * Retire to safety
-  * Take on an apprentice
-  * Change entirely to a new class
+- Retire to safety
+- Take on an apprentice
+- Change entirely to a new class
 
 If you retire you create a new character to play instead and work with the GM
 to establish your place in the world. If you take on an apprentice you play a
@@ -641,41 +641,41 @@ important.
 
 #### Lawful
 
-  * Uphold the letter of the law over the spirit
-  * Fulfill a promise of import
-  * Bring someone to justice
-  * Choose honor over personal gain
-  * Return treasure to its rightful owner
+- Uphold the letter of the law over the spirit
+- Fulfill a promise of import
+- Bring someone to justice
+- Choose honor over personal gain
+- Return treasure to its rightful owner
 
 #### Good
 
-  * Ignore danger to aid another
-  * Lead others into righteous battle
-  * Give up powers or riches for the greater good
-  * Reveal a dangerous lie
-  * Show mercy
+- Ignore danger to aid another
+- Lead others into righteous battle
+- Give up powers or riches for the greater good
+- Reveal a dangerous lie
+- Show mercy
 
 #### Neutral
 
-  * Make an ally of someone powerful
-  * Defeat a personally important foe
-  * Learn a secret about an enemy
-  * Uncover a hidden truth
+- Make an ally of someone powerful
+- Defeat a personally important foe
+- Learn a secret about an enemy
+- Uncover a hidden truth
 
 #### Chaotic
 
-  * Reveal corruption
-  * Break an unjust law to benefit another
-  * Defeat a tyrant
-  * Reveal hypocrisy
+- Reveal corruption
+- Break an unjust law to benefit another
+- Defeat a tyrant
+- Reveal hypocrisy
 
 #### Evil
 
-  * Take advantage of someone’s trust
-  * Cause suffering for its own sake
-  * Destroy something beautiful
-  * Upset the rightful order
-  * Harm an innocent
+- Take advantage of someone’s trust
+- Cause suffering for its own sake
+- Destroy something beautiful
+- Upset the rightful order
+- Harm an innocent
 
 ## Hirelings
 
@@ -747,12 +747,12 @@ lower the hireling’s loyalty.
 
 ### Costs
 
-  * The Thrill of Victory
-  * Money
-  * Uncovered Knowledge
-  * Fame and Glory
-  * Debauchery
-  * Good Accomplished
+- The Thrill of Victory
+- Money
+- Uncovered Knowledge
+- Fame and Glory
+- Debauchery
+- Good Accomplished
 
 ### Skills
 

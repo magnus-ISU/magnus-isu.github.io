@@ -86,9 +86,9 @@ exactly what they do. Consider this one from Chris Bennet:
 When you **open a sewer hatch**, roll+STR: ✴On a 10+, choose 2. ✴On a 7–9
 choose 1.
 
-  * You avoid being covered in feces and rotting animal entrails from the sewers above.
-  * You avoid having a gelatinous cube land on you.
-  * You find a secret back entrance to where the merchant’s daughter is being held.
+- You avoid being covered in feces and rotting animal entrails from the sewers above.
+- You avoid having a gelatinous cube land on you.
+- You find a secret back entrance to where the merchant’s daughter is being held.
 
 This move is strong because it is tied strongly to a particular place at a
 particular time. This move was written by request for Jason Morningstar’s
@@ -300,9 +300,9 @@ to make the XP awards tie directly to this adventure.
 When you end the session, instead of using the normal end of session
 questions, use these:
 
-  * Did we learn something about the Cult of the Scaled God?
-  * Did we rescue a captured villager or help defend the village of Secor?
-  * Did we defeat a major agent of the Cult of the Scaled God?
+- Did we learn something about the Cult of the Scaled God?
+- Did we rescue a captured villager or help defend the village of Secor?
+- Did we defeat a major agent of the Cult of the Scaled God?
 
 ### Move Structure
 
@@ -326,11 +326,11 @@ days\).
 
 Here are some broad types of triggers:
 
-  * **When a character takes action**. Examples: Discern Realities, Arcane Art \(Bard\), Command \(Ranger\).
-  * **When a character takes action under specific circumstances**. Examples: Hack and Slash, Seeing Red \(Fighter\), Backstab \(Thief\).
-  * **When circumstances dictate, no character action**. Examples: Order Hirelings, End of Session.
-  * **When a character uses a thing**. Examples: Magic items, Heirloom \(Fighter\).
-  * **From now on**. Examples: Serenity \(Cleric\), Poisoner \(Thief\).
+- **When a character takes action**. Examples: Discern Realities, Arcane Art \(Bard\), Command \(Ranger\).
+- **When a character takes action under specific circumstances**. Examples: Hack and Slash, Seeing Red \(Fighter\), Backstab \(Thief\).
+- **When circumstances dictate, no character action**. Examples: Order Hirelings, End of Session.
+- **When a character uses a thing**. Examples: Magic items, Heirloom \(Fighter\).
+- **From now on**. Examples: Serenity \(Cleric\), Poisoner \(Thief\).
 
 ### Effect
 
@@ -342,18 +342,18 @@ as a friend” is just as powerful and useful as +1 forward—maybe more so.
 Here are some broad types of effects, any given move may use more than one of
 them:
 
-  * **Roll**. Examples: Defy Danger, Cast a Spell \(Wizard\), Called Shot \(Ranger\).
-  * **Substitute stats**. Examples: Dwarf \(Fighter\).
-  * **Negate damage**. Examples: Man's Best Friend \(Ranger\).
-  * **Give a bonus or penalty, forward or ongoing.** Examples: Underdog \(Thief\), Smite \(Paladin\).
-  * **Deal or heal damage**. Examples: Volley, Backstab \(Thief\), Arcane Art \(Bard\).
-  * **Choose options**. Examples: Spout Lore, Discern Realities, Ritual \(Wizard\).
-  * **Hold & Spend**. Examples: Dominate \(Wizard spell\), Trap Expert \(Thief\).
-  * **Ask & Answer**. Examples: Charming and Open \(Bard\), Spout Lore.
-  * **Change circumstances**. Examples: Reputation \(Bard\).
-  * **Mark experience**. Examples: End of Session.
-  * **Call for more information**. Examples: Parley, Ritual \(Wizard\).
-  * **Add options**. Examples: Called Shot \(Ranger\).
+- **Roll**. Examples: Defy Danger, Cast a Spell \(Wizard\), Called Shot \(Ranger\).
+- **Substitute stats**. Examples: Dwarf \(Fighter\).
+- **Negate damage**. Examples: Man's Best Friend \(Ranger\).
+- **Give a bonus or penalty, forward or ongoing.** Examples: Underdog \(Thief\), Smite \(Paladin\).
+- **Deal or heal damage**. Examples: Volley, Backstab \(Thief\), Arcane Art \(Bard\).
+- **Choose options**. Examples: Spout Lore, Discern Realities, Ritual \(Wizard\).
+- **Hold & Spend**. Examples: Dominate \(Wizard spell\), Trap Expert \(Thief\).
+- **Ask & Answer**. Examples: Charming and Open \(Bard\), Spout Lore.
+- **Change circumstances**. Examples: Reputation \(Bard\).
+- **Mark experience**. Examples: End of Session.
+- **Call for more information**. Examples: Parley, Ritual \(Wizard\).
+- **Add options**. Examples: Called Shot \(Ranger\).
 
 ## Changing the Basics
 
@@ -404,10 +404,10 @@ When you wade into combat, attacking your enemies, deal damage to the enemy
 you’re attacking, take that enemy’s damage, and roll+Str. ✴On a 10+, choose 2.
 ✴On a 7–9 choose 1.
 
-  * Prevent one ally from taking damage this round
-  * Kill one enemy of lower level than you or deal max damage to otherwise
-  * Put an enemy right where you want them \(drive them off, prevent them from fleeing, etc.\)
-  * Divide your damage amongst any number of targets you can reach with your weapon
+- Prevent one ally from taking damage this round
+- Kill one enemy of lower level than you or deal max damage to otherwise
+- Put an enemy right where you want them \(drive them off, prevent them from fleeing, etc.\)
+- Divide your damage amongst any number of targets you can reach with your weapon
 
 The first problem with this move is that one of the options, preventing
 damage, is far less useful than the others. Being able to outright kill an
@@ -418,9 +418,9 @@ When you wade into combat, attacking your enemies, deal damage to the enemy
 you’re attacking, take that enemy’s damage, and roll+Str. ✴On a 10+ choose 2.
 ✴On a 7–9 choose 1.
 
-  * Kill one enemy of lower level than you or deal max damage to otherwise
-  * Put an enemy right where you want them \(drive them off, prevent them from fleeing, etc.\)
-  * Divide your damage amongst any number of targets you can reach with your weapon
+- Kill one enemy of lower level than you or deal max damage to otherwise
+- Put an enemy right where you want them \(drive them off, prevent them from fleeing, etc.\)
+- Divide your damage amongst any number of targets you can reach with your weapon
 
 This left only three options which is a great number of options to have when a
 10+ lets you pick two. The player making the move always had to not choose one
@@ -520,9 +520,9 @@ rewrite some of the questions, maybe adding this:
 #### The monster is Evil through and through. Choose one to reflect why it’s
 evil:
 
-  * It’s an intrusion of the Old Ones Beyond the Walls: Planar, +5 damage
-  * It’s a product of the Old Wizards of the Red Tower: Construct, +5 HP
-  * It’s from The Time Before Man: Primordial, +5 damage, +5 HP
+- It’s an intrusion of the Old Ones Beyond the Walls: Planar, +5 damage
+- It’s a product of the Old Wizards of the Red Tower: Construct, +5 HP
+- It’s from The Time Before Man: Primordial, +5 damage, +5 HP
 
 When creating new monster questions you can either reinterpret existing
 monsters by answering the questions for them again or only use the new

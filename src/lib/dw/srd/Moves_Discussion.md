@@ -97,9 +97,9 @@ When you **take aim and shoot at an enemy at range**, roll+Dex. ✴On a 10+, you
 have a clear shot—deal your damage. ✴On a 7–9, choose one \(whichever you
 choose you deal your damage\):
 
-  * You have to move to get the shot placing you in danger as described by the GM
-  * You have to take what you can get: -1d6 damage
-  * You have to take several shots, reducing your ammo by one
+- You have to move to get the shot placing you in danger as described by the GM
+- You have to take what you can get: -1d6 damage
+- You have to take several shots, reducing your ammo by one
 
 Volley covers the entire act of drawing, aiming, and firing a ranged weapon or
 throwing a thrown weapon. The advantage to using a ranged weapon over melee is
@@ -154,12 +154,12 @@ you do?
 When you **act despite an imminent threat** or **suffer a calamity**, say how
 you deal with it and roll. If you do it…
 
-  * …by powering through, +Str
-  * …by getting out of the way or acting fast, +Dex
-  * …by enduring, +Con
-  * …with quick thinking, +Int
-  * …through mental fortitude, +Wis
-  * …using charm and social grace, +Cha
+- …by powering through, +Str
+- …by getting out of the way or acting fast, +Dex
+- …by enduring, +Con
+- …with quick thinking, +Int
+- …through mental fortitude, +Wis
+- …using charm and social grace, +Cha
 
 ✴On a 10+, you do what you set out to, the threat doesn’t come to bear. ✴On a
 7–9, you stumble, hesitate, or flinch: the GM will offer you a worse outcome,
@@ -240,10 +240,10 @@ roll+Con. ✴On a 10+, hold 3. ✴On a 7–9, hold 1. As long as you stand in
 defense, when you or the thing you defend is attacked you may spend hold, 1
 for 1, to choose an option:
 
-  * Redirect an attack from the thing you defend to yourself
-  * Halve the attack’s effect or damage
-  * Open up the attacker to an ally giving that ally +1 forward against the attacker
-  * Deal damage to the attacker equal to your level
+- Redirect an attack from the thing you defend to yourself
+- Halve the attack’s effect or damage
+- Open up the attacker to an ally giving that ally +1 forward against the attacker
+- Deal damage to the attacker equal to your level
 
 Defending something means standing nearby and focusing on preventing attacks
 against that thing or stopping anyone from getting near it. When you’re no
@@ -379,12 +379,12 @@ GM 3 questions from the list below. ✴On a 7–9, ask 1.
 
 Either way, take +1 forward when acting on the answers.
 
-  * What happened here recently?
-  * What is about to happen?
-  * What should I be on the lookout for?
-  * What here is useful or valuable to me?
-  * Who’s really in control here?
-  * What here is not what it appears to be?
+- What happened here recently?
+- What is about to happen?
+- What should I be on the lookout for?
+- What here is useful or valuable to me?
+- Who’s really in control here?
+- What here is not what it appears to be?
 
 To discern realities you must closely observe your target. That usually means
 interacting with it or watching someone else do the same. You can’t just stick
@@ -616,9 +616,9 @@ little thief?”
 When you **make a move while carrying weight** you may be encumbered. If your
 weight carried is:
 
-  * Equal to or less than your load, you suffer no penalty
-  * Less than or equal to your load+2, you take -1 ongoing until you lighten your burden
-  * Greater than your load+2, you have a choice: drop at least 1 weight and roll at -1, or automatically fail
+- Equal to or less than your load, you suffer no penalty
+- Less than or equal to your load+2, you take -1 ongoing until you lighten your burden
+- Greater than your load+2, you have a choice: drop at least 1 weight and roll at -1, or automatically fail
 
 A PC’s load stat is determined by their class and Str. Being able to haul more
 is a clear benefit when trying to carry treasure out of a dungeon or just
@@ -659,9 +659,9 @@ When you **travel through hostile territory**, choose one member of the party
 to act as _trailblazer_, one to _scout_ ahead, and one to be _quartermaster_.
 Each character with a job to do rolls+Wis. ✴On a 10+:
 
-  * the quartermaster reduces the number of rations required by one
-  * the trailblazer reduces the amount of time it takes to reach your destination \(the GM will say by how much\)
-  * the scout will spot any trouble quick enough to let you get the drop on it
+- the quartermaster reduces the number of rations required by one
+- the trailblazer reduces the amount of time it takes to reach your destination \(the GM will say by how much\)
+- the scout will spot any trouble quick enough to let you get the drop on it
 
 ✴On a 7–9, each role performs their job as expected: the normal number of
 rations are consumed, the journey takes about as long as expected, no one gets
@@ -695,9 +695,9 @@ Once bonds have been updated look at your alignment. If you fulfilled that
 alignment at least once this session, mark XP. Then answer these three
 questions as a group:
 
-  * Did we learn something new and important about the world?
-  * Did we overcome a notable monster or enemy?
-  * Did we loot a memorable treasure?
+- Did we learn something new and important about the world?
+- Did we overcome a notable monster or enemy?
+- Did we loot a memorable treasure?
 
 For each “yes” answer everyone marks XP.
 
@@ -707,11 +707,11 @@ When you **have downtime \(hours or days\) and XP equal to \(or greater than\)
 your current level+7**, you can reflect on your experiences and hone your
 skills.
 
-  * Subtract your current level+7 from your XP.
-  * Increase your level by 1.
-  * Choose a new advanced move from your class.
-  * If you are the wizard, you also get to add a new spell to your spellbook.
-  * Choose one of your stats and increase it by 1 \(this may change your modifier\). Changing your Constitution increases your maximum and current HP. Ability scores can’t go higher than 18.
+- Subtract your current level+7 from your XP.
+- Increase your level by 1.
+- Choose a new advanced move from your class.
+- If you are the wizard, you also get to add a new spell to your spellbook.
+- Choose one of your stats and increase it by 1 \(this may change your modifier\). Changing your Constitution increases your maximum and current HP. Ability scores can’t go higher than 18.
 
 ### Carouse
 
@@ -720,10 +720,10 @@ When you **return triumphant and throw a big party**, spend 100 coins and roll
 ✴On a miss, you still choose one, but things get really out of hand \(the GM
 will say how\).
 
-  * You befriend a useful NPC.
-  * You hear rumors of an opportunity.
-  * You gain useful information.
-  * You are not entangled, ensorcelled, or tricked.
+- You befriend a useful NPC.
+- You hear rumors of an opportunity.
+- You gain useful information.
+- You are not entangled, ensorcelled, or tricked.
 
 You can only carouse when you return triumphant. That’s what draws the crowd
 of revelers to surround adventurers as they celebrate their latest haul. If
@@ -750,10 +750,10 @@ a debility for every two days of rest instead.
 
 When you **put out word that you’re looking to hire help**, roll:
 
-  * +1 if you make it known that your pay is generous
-  * +1 if you make it known what you’re setting out to do
-  * +1 if you make it known that they’ll get a share of whatever you find
-  * +1 if you have a useful reputation around these parts
+- +1 if you make it known that your pay is generous
+- +1 if you make it known what you’re setting out to do
+- +1 if you make it known that they’ll get a share of whatever you find
+- +1 if you have a useful reputation around these parts
 
 ✴On a 10+, you’ve got your pick of a number of skilled applicants, your choice
 who you hire, no penalty for not taking them along. ✴On a 7–9, you’ll have to
@@ -769,9 +769,9 @@ When you **return to a civilized place in which you’ve caused trouble
 before**, roll+Cha. ✴On a 10+, word has spread of your deeds and everyone
 recognizes you. ✴On a 7–9, as above, and the GM chooses a complication:
 
-  * The local constabulary has a warrant out for your arrest.
-  * Someone has put a price on your head.
-  * Someone important to you has been put in a bad spot as a result of your actions.
+- The local constabulary has a warrant out for your arrest.
+- Someone has put a price on your head.
+- Someone important to you has been put in a bad spot as a result of your actions.
 
 This move is only for places where you’ve caused trouble, not every patch of
 civilization you enter. Being publicly caught up in someone else’s trouble

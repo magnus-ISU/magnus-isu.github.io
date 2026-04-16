@@ -136,7 +136,7 @@ When you **howl long and loud for help from your canine kin**, roll+CHA. On a 10
 When you **sniff out supernatural creatures**, choose 1:
 - They reveal themselves, unable to hide or remain invisible.
 - They fear you and will not attack you right away.
-- You gain advantage when you try to escape from them.
+- You take +1 forward when you try to escape from them.
 
 ### Forensic Nose
 When you **thoroughly investigate a location by sniffing every surface**, roll+WIS. On a 10+, ask 3. On a 7-9, ask 1:
@@ -155,7 +155,7 @@ Once you **know a creature's scent**, you can track them anywhere. No matter whe
 ### To the Rescue!
 When you **suddenly arrive on the scene to help**, choose 1:
 - You catch the enemy off guard, giving you a chance to act freely.
-- Your presence gives your allies advantage on their next roll.
+- Your presence gives each of your allies +1 forward on their next roll.
 
 ### Newer Tricks
 Choose a non-multiclass move from the Druid, Fighter, Ranger, or Thief playbooks.

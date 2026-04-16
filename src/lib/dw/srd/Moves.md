@@ -13,21 +13,21 @@ When you **take aim and shoot at an enemy at range**, roll+Dex. On a 10+ you
 have a clear shot—deal your damage. On a 7–9, choose one \(whichever you
 choose you deal your damage\):
 
-  * You have to move to get the shot placing you in danger of the GM’s choice
-  * You have to take what you can get: -1d6 damage
-  * You have to take several shots, reducing your ammo by one.
+- You have to move to get the shot placing you in danger of the GM’s choice
+- You have to take what you can get: -1d6 damage
+- You have to take several shots, reducing your ammo by one.
 
 ## Defy Danger
 
 When you **act despite an imminent threat** or **suffer a calamity**, say how
 you deal with it and roll. If you do it…
 
-  * …by powering through, +Str
-  * …by getting out of the way or acting fast, +Dex
-  * …by enduring, +Con
-  * …with quick thinking, +Int
-  * …through mental fortitude, +Wis
-  * …using charm and social grace, +Cha
+- …by powering through, +Str
+- …by getting out of the way or acting fast, +Dex
+- …by enduring, +Con
+- …with quick thinking, +Int
+- …through mental fortitude, +Wis
+- …using charm and social grace, +Cha
 
 On a 10+, you do what you set out to, the threat doesn’t come to bear. On a
 7–9, you stumble, hesitate, or flinch: the GM will offer you a worse outcome,
@@ -40,10 +40,10 @@ roll+Con. On a 10+, hold 3. On a 7–9, hold 1. So long as you stand in defense,
 when you or the thing you defend is attacked you may spend hold, 1 for 1, to
 choose an option:
 
-  * Redirect an attack from the thing you defend to yourself
-  * Halve the attack’s effect or damage
-  * Open up the attacker to an ally giving that ally +1 forward against the attacker
-  * Deal damage to the attacker equal to your level
+- Redirect an attack from the thing you defend to yourself
+- Halve the attack’s effect or damage
+- Open up the attacker to an ally giving that ally +1 forward against the attacker
+- Deal damage to the attacker equal to your level
 
 ## Spout Lore
 
@@ -59,12 +59,12 @@ When you **closely study a situation or person**, roll+Wis. On a 10+ ask the
 GM 3 questions from the list below. On a 7–9 ask 1. Take +1 forward when
 acting on the answers.
 
-  * What happened here recently?
-  * What is about to happen?
-  * What should I be on the lookout for?
-  * What here is useful or valuable to me?
-  * Who’s really in control here?
-  * What here is not what it appears to be?
+- What happened here recently?
+- What is about to happen?
+- What should I be on the lookout for?
+- What here is useful or valuable to me?
+- Who’s really in control here?
+- What here is not what it appears to be?
 
 ## Parley
 
@@ -151,9 +151,9 @@ Once bonds have been updated look at your alignment. If you fulfilled that
 alignment at least once this session, mark XP. Then answer these three
 questions as a group:
 
-  * Did we learn something new and important about the world?
-  * Did we overcome a notable monster or enemy?
-  * Did we loot a memorable treasure?
+- Did we learn something new and important about the world?
+- Did we overcome a notable monster or enemy?
+- Did we loot a memorable treasure?
 
 For each “yes” answer everyone marks XP.
 
@@ -163,10 +163,10 @@ When you **return triumphant and throw a big party**, spend 100 coin and roll
 + extra 100s of coin spent. On a 10+ choose 3. On a 7–9 choose 1. On a miss,
 you still choose one, but things get really out of hand.
 
-  * You befriend a useful NPC
-  * You hear rumors of an opportunity
-  * You gain useful information
-  * You are not entangled, ensorcelled, or tricked
+- You befriend a useful NPC
+- You hear rumors of an opportunity
+- You gain useful information
+- You are not entangled, ensorcelled, or tricked
 
 ## Supply
 
@@ -188,9 +188,9 @@ a debility for every two days of rest instead.
 When you **put out word that you’re looking to hire help**, roll. If you make
 it known…
 
-  * …that your pay is generous, take +1
-  * …what you’re setting out to do, take +1
-  * …that they’ll get a share of whatever you find, take +1
+- …that your pay is generous, take +1
+- …what you’re setting out to do, take +1
+- …that they’ll get a share of whatever you find, take +1
 
 If you have a useful reputation around these parts take an additional +1. On a
 10+ you’ve got your pick of a number of skilled applicants, your choice who
@@ -206,9 +206,9 @@ When you **return to a civilized place in which you’ve caused trouble
 before**, roll+Cha. On a hit, word has spread of your deeds and everyone
 recognizes you. On a 7–9, that, and, the GM chooses a complication:
 
-  * The local constabulary has a warrant out for your arrest
-  * Someone has put a price on your head
-  * Someone important to you has been put in a bad spot as a result of your actions
+- The local constabulary has a warrant out for your arrest
+- Someone has put a price on your head
+- Someone important to you has been put in a bad spot as a result of your actions
 
 ## Bolster
 

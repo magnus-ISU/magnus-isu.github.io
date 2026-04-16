@@ -39,11 +39,11 @@ When you **use adventurer's gear and mark an area with sacred symbols**, the are
 - Natural beasts and spirits of the wild
 
 ### Totem Spirit
-Choose a natural beast native to your homeland. When you **borrow the form of your totem**, don't roll to Shapechange; you automatically get a 10+. However, when **you act against to your totem's instincts during Shapechange**, you Defy Danger with disadvantage.
+Choose a natural beast native to your homeland. When you **borrow the form of your totem**, don't roll to Shapechange; you automatically get a 10+. However, when **you act against to your totem's instincts during Shapechange**, you Defy Danger with a -1 penalty.
 When you **use adventurer's gear to craft an effigy of your totem**, set it to watch over a place or a person. It will alert you the next time danger approaches.
 
 ### Trickster/Culture Hero
-When you **Defy Danger or Parley using flattery or deceit**, you have advantage.
+When you **Defy Danger or Parley using flattery or deceit**, you take +1 forward.
 When you **use adventurer's gear**, you can produce something strange & magical. Say how you stole/ won it and how it's useful right now, but ask the GM how it's limited and problematic.
 
 ## Stats

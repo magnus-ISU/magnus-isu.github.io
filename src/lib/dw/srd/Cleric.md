@@ -60,19 +60,19 @@ You serve and worship some deity or power which grants you spells. Give your
 god a name \(maybe Helferth, Sucellus, Zorica or Krugon the Bleak\) and choose
 your deity’s domain:
 
-  * Healing and Restoration
-  * Bloody Conquest
-  * Civilization
-  * Knowledge and Hidden Things
-  * The Downtrodden and Forgotten
-  * What Lies Beneath
+- Healing and Restoration
+- Bloody Conquest
+- Civilization
+- Knowledge and Hidden Things
+- The Downtrodden and Forgotten
+- What Lies Beneath
 
 Choose one precept of your religion:
 
-  * Your religion preaches the sanctity of suffering, add Petition: Suffering
-  * Your religion is cultish and insular, add Petition: Gaining Secrets
-  * Your religion has important sacrificial rites, add Petition: Offering
-  * Your religion believes in trial by combat, add Petition: Personal Victory
+- Your religion preaches the sanctity of suffering, add Petition: Suffering
+- Your religion is cultish and insular, add Petition: Gaining Secrets
+- Your religion has important sacrificial rites, add Petition: Offering
+- Your religion believes in trial by combat, add Petition: Personal Victory
 
 ### Divine Guidance
 
@@ -94,9 +94,9 @@ undead may still find ways to harry you from afar. They’re clever like that.
 When you **spend uninterrupted time \(an hour or so\) in quiet communion with
 your deity**, you:
 
-  * Lose any spells already granted to you.
-  * Are granted new spells of your choice whose total levels don’t exceed your own level+1, and none of which is a higher level than your own level.
-  * Prepare all of your rotes, which never count against your limit.
+- Lose any spells already granted to you.
+- Are granted new spells of your choice whose total levels don’t exceed your own level+1, and none of which is a higher level than your own level.
+- Prepare all of your rotes, which never count against your limit.
 
 ### Cast a Spell
 
@@ -104,9 +104,9 @@ When you **unleash a spell granted to you by your deity**, roll+Wis. ✴On a
 10+, the spell is successfully cast and your deity does not revoke the spell,
 so you may cast it again. ✴On a 7–9, the spell is cast, but choose one:
 
-  * You draw unwelcome attention or put yourself in a spot. The GM will tell you how.
-  * Your casting distances you from your deity—take -1 ongoing to cast a spell until the next time you commune.
-  * After you cast it, the spell is revoked by your deity. You cannot cast the spell again until you commune and have it granted to you.
+- You draw unwelcome attention or put yourself in a spot. The GM will tell you how.
+- Your casting distances you from your deity—take -1 ongoing to cast a spell until the next time you commune.
+- After you cast it, the spell is revoked by your deity. You cannot cast the spell again until you commune and have it granted to you.
 
 Note that maintaining spells with ongoing effects will sometimes cause a
 penalty to your roll to cast a spell.
@@ -132,19 +132,19 @@ Harm another to prove the superiority of your church or god.
 Your load is 10+Str. You carry dungeon rations \(5 uses, 1 weight\) and some
 symbol of the divine, describe it \(0 weight\). Choose your defenses:
 
-  * Chainmail \(1 armor, 1 weight\)
-  * Shield \(+1 armor, 2 weight\)
+- Chainmail \(1 armor, 1 weight\)
+- Shield \(+1 armor, 2 weight\)
 
 Choose your armament:
 
-  * Warhammer \(close, 1 weight\)
-  * Mace \(close, 1 weight\)
-  * Staff \(close, two-handed, 1 weight\) and bandages \(0 weight\)
+- Warhammer \(close, 1 weight\)
+- Mace \(close, 1 weight\)
+- Staff \(close, two-handed, 1 weight\) and bandages \(0 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\) and dungeon rations \(5 uses, 1 weight\)
-  * Healing potion \(0 weight\)
+- Adventuring gear \(1 weight\) and dungeon rations \(5 uses, 1 weight\)
+- Healing potion \(0 weight\)
 
 ## Bonds
 
@@ -202,8 +202,8 @@ When you **take damage and embrace the pain**, you may take +1d4 damage
 When you cast a spell, on a 10+ you have the option of choosing from the 7–9
 list. If you do, you may choose one of these effects as well:
 
-  * The spell’s effects are doubled
-  * The spell’s targets are doubled
+- The spell’s effects are doubled
+- The spell’s targets are doubled
 
 ### Orison for Guidance
 
@@ -285,8 +285,8 @@ When you cast a spell, on a 10–11 you have the option of choosing from the 7�
 list. If you do, you may choose one of these effects as well. On a 12+ you get
 to choose one of these effects for free.
 
-  * The spell’s effects are doubled
-  * The spell’s targets are doubled
+- The spell’s effects are doubled
+- The spell’s targets are doubled
 
 ### Multiclass Dabbler
 

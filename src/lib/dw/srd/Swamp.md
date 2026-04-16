@@ -17,9 +17,9 @@ though, her jaws are strong enough to crack the hull of any swamp-boat and
 certainly enough to slice through a steel breastplate or two. Give the greedy
 snake your treasures and she might just leave you alone. _Instinct_: To devour
 
-  * Lure prey with lies and illusions
-  * Lash out at light
-  * Devour
+- Lure prey with lies and illusions
+- Lash out at light
+- Devour
 
 Basilisk Solitary, Hoarder
 
@@ -36,8 +36,8 @@ like an alligator, with snapping jaws and sawing teeth. Covered in stony
 scales and very hard to kill. Best avoided, if possible.” _Instinct_: To
 create new statuary
 
-  * Turn flesh to stone with a gaze
-  * Retreat into a maze of stone
+- Turn flesh to stone with a gaze
+- Retreat into a maze of stone
 
 Black Pudding Solitary, Amorphous
 
@@ -51,8 +51,8 @@ How do you kill a pile of goo? A great, squishy pile of goo that also happens
 to want to dissolve you and slurp you up? That is a good question to which I
 have no answer. Do let us know when you find out. _Instinct_: To dissolve
 
-  * Eat away metal, flesh, or wood
-  * Ooze into a troubling place: food, armor, stomach
+- Eat away metal, flesh, or wood
+- Ooze into a troubling place: food, armor, stomach
 
 Coutal Solitary, Intelligent Devious
 
@@ -71,9 +71,9 @@ with it in exchange for some favor. They seek to cleanse and to purge and to
 make of this dark world a better one. Shame we have so few. The gods are
 cruel. _Instinct_: To cleanse
 
-  * Pass judgment on a person or place
-  * Summon divine forces to cleanse
-  * Offer information in exchange for service
+- Pass judgment on a person or place
+- Summon divine forces to cleanse
+- Offer information in exchange for service
 
 Crocodilian Group, Large
 
@@ -85,9 +85,9 @@ Close, Reach
 
 It’s a really, really big crocodile. Seriously. So big. _Instinct_: To eat
 
-  * Attack an unsuspecting victim
-  * Escape into the water
-  * Hold something tight in its jaws
+- Attack an unsuspecting victim
+- Escape into the water
+- Hold something tight in its jaws
 
 Doppelgänger Solitary, Devious, Intelligent
 
@@ -107,9 +107,9 @@ your friend might be dead at the bottom of a well somewhere. Then again,
 depending on your friends, that might be an improvement. _Instinct_: To
 infiltrate
 
-  * Assume the shape of a person whose flesh it’s tasted
-  * Use another’s identity to advantage
-  * Leave someone’s reputation shattered
+- Assume the shape of a person whose flesh it’s tasted
+- Use another’s identity to advantage
+- Leave someone’s reputation shattered
 
 Dragon Turtle Solitary, Huge, Cautious
 
@@ -127,9 +127,9 @@ huts and cook their ratty meals on the shell of the dragon turtle. His
 snapping jaws may be glacier-slow, but they can rend a castle wall. Careful
 where you tread. _Instinct_: To resist change
 
-  * Move forward implacably
-  * Bring its full bulk to bear
-  * Destroy structures and buildings
+- Move forward implacably
+- Bring its full bulk to bear
+- Destroy structures and buildings
 
 Dragon Whelp Solitary, Small, Intelligent, Cautious, Hoarder
 
@@ -147,9 +147,9 @@ are softer than those of their bigger kin, but can still turn aside an arrow
 or sword not perfectly aimed. Size is not the only measure of might.
 _Instinct_: To grow in power
 
-  * Start a lair, form a base of power
-  * Call on family ties
-  * Demand oaths of servitude
+- Start a lair, form a base of power
+- Call on family ties
+- Demand oaths of servitude
 
 Ekek Horde
 
@@ -167,8 +167,8 @@ mimicking the words they hear with mocking laughter. It’s a chilling thing to
 see a beast so close to man or bird but not quite either one. _Instinct_: To
 lash out
 
-  * Attack from the air
-  * Carry out the bidding of a more powerful creature
+- Attack from the air
+- Carry out the bidding of a more powerful creature
 
 Fire Eels Horde, Tiny
 
@@ -186,8 +186,8 @@ of burning oil atop the surface of the water and roasting prey and predator
 alike. I hear the slimy things make good ingredients for fire-resistant gear,
 but you have to get your hands on one, first. _Instinct_: To ignite
 
-  * Catch someone or something on fire \(even underwater\)
-  * Consume burning prey
+- Catch someone or something on fire \(even underwater\)
+- Consume burning prey
 
 Frogman Horde, Small, Intelligent
 
@@ -205,8 +205,8 @@ and stupid but clever enough when they need to defend themselves. Some say,
 too, their priests have a remarkable skill at healing. Or maybe they’re just
 really, really hard to kill. _Instinct_: To wage war
 
-  * Launch an amphibious assault
-  * Heal at a prodigious rate
+- Launch an amphibious assault
+- Heal at a prodigious rate
 
 Hydra Solitary, Large
 
@@ -224,8 +224,8 @@ stronger. Cut off a head and two more grow in its place. Only a strike, true
 and strong, to the heart can end a hydra’s life. Not time or tide or any other
 thing but this. _Instinct_: To grow
 
-  * Attack many enemies at once
-  * Regenerate a body part \(especially a head\)
+- Attack many enemies at once
+- Regenerate a body part \(especially a head\)
 
 Kobold Horde, Small, Stealthy, Intelligent, Organized
 
@@ -243,9 +243,9 @@ Ironscale and Whitewing, form around a dragon master and live to serve and do
 its bidding. Spotting a kobold means more are near—and if more are near then a
 mighty dragon cannot be far, either. _Instinct_: To serve dragons
 
-  * Lay a trap
-  * Call on dragons or draconic allies
-  * Retreat and regroup
+- Lay a trap
+- Call on dragons or draconic allies
+- Retreat and regroup
 
 Lizardman Group, Stealthy, Intelligent, Organized
 
@@ -263,8 +263,8 @@ ain’t—now they dwell in places men long forgot or abandoned, crafting tools
 from volcano-glass and lashing against the works of the civilized world. Maybe
 they just want back what they lost. _Instinct_: To destroy civilization
 
-  * Ambush the unsuspecting
-  * Launch an amphibious assault
+- Ambush the unsuspecting
+- Launch an amphibious assault
 
 Medusa Solitary, Devious, Intelligent, Hoarder
 
@@ -283,9 +283,9 @@ vanity to know they were the last thing seen in so many lives. Arrogant,
 proud, and spiteful, in their way, they seek what so many do—endless company.
 _Instinct_: To collect
 
-  * Turn a body part to stone with a look
-  * Draw someone’s gaze
-  * Show hidden terrible beauty
+- Turn a body part to stone with a look
+- Draw someone’s gaze
+- Show hidden terrible beauty
 
 Sahuagin Horde, Intelligent
 
@@ -302,9 +302,9 @@ controlled or sated. They are hunger and bloodlust, driven up from the depths
 of the sea to ravage coastal towns and swallow island villages. _Instinct_: To
 spill blood
 
-  * Bite off a limb
-  * Hurl a poisoned spear
-  * Frenzy at the sight of blood
+- Bite off a limb
+- Hurl a poisoned spear
+- Frenzy at the sight of blood
 
 Sauropod Group, Huge, Cautious
 
@@ -320,9 +320,9 @@ raised, they trample smaller creatures with the care we might give to crushing
 an ant beneath our boots. If you see one, drift by and gaze in awe, but do not
 wake the giant. _Instinct_: To endure
 
-  * Stampede
-  * Knock something down
-  * Unleash a deafening bellow
+- Stampede
+- Knock something down
+- Unleash a deafening bellow
 
 Swamp Shambler Solitary, Large, Magical
 
@@ -340,9 +340,9 @@ think the way a man might think. They cannot be understood as one might
 understand an elf. They simply are. Spirits of the swamp. Shamblers in the
 mud. _Instinct_: To preserve and create swamps
 
-  * Call on the swamp itself for aid
-  * Meld into the swamp
-  * Reassemble into a new form
+- Call on the swamp itself for aid
+- Meld into the swamp
+- Reassemble into a new form
 
 Troll Solitary, Large
 
@@ -360,8 +360,8 @@ kill, too, unless you’ve fire or acid to spare—cut a limb off and watch. In 
 few days, you’ve got two trolls where you once had one. A real serious
 problem, as you can imagine. _Instinct_: To smash
 
-  * Undo the effects of an attack \(unless caused by a weakness, your call\)
-  * Hurl something or someone
+- Undo the effects of an attack \(unless caused by a weakness, your call\)
+- Hurl something or someone
 
 Will-o-wisp Solitary, Tiny, Magical
 
@@ -379,6 +379,6 @@ doom. These creatures are a mystery—some say they’re ghosts, others beacons 
 faerie light. Nobody knows the truth. They are cruel, however. All can agree
 on that. _Instinct_: To misguide
 
-  * Lead someone astray
-  * Clear a path to the worst place possible
+- Lead someone astray
+- Clear a path to the worst place possible
 

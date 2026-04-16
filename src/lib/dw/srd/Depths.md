@@ -17,9 +17,9 @@ plot against each other, fishy cultists building and digging upward towards
 the surface until someday, they’ll breach it. For now, they sleep and dream
 and guide their pallid minions to do their bidding. _Instinct_: To command
 
-  * Invade a mind
-  * Turn minions on them
-  * Put a plan in motion
+- Invade a mind
+- Turn minions on them
+- Put a plan in motion
 
 Apocalypse Dragon Solitary, Huge, Magical, Divine
 
@@ -38,9 +38,9 @@ life. They say to worship the Apocalypse Dragon is to invite madness. They say
 to love it is to know oblivion. The awakening is coming. _Instinct_: To end
 the world
 
-  * Set a disaster in motion
-  * Breathe forth the elements
-  * Act with perfect foresight
+- Set a disaster in motion
+- Breathe forth the elements
+- Act with perfect foresight
 
 Chaos Spawn Solitary, Amorphous
 
@@ -58,8 +58,8 @@ First, he forgets his name. Then he forgets his shape. His chaos gods, most
 beloved, bless him with a new one. _Instinct_: To undermine the established
 order
 
-  * Rewrite reality
-  * Unleash chaos from containment
+- Rewrite reality
+- Unleash chaos from containment
 
 Chuul Group, Large, Cautious
 
@@ -76,8 +76,8 @@ forgotten and the chuul is one of them. If you spot one, your best hope is a
 heavy mace to crack its shell and maybe a little garlic butter. Mmmm.
 _Instinct_: To split
 
-  * Split something in two with mighty claws
-  * Retreat into water
+- Split something in two with mighty claws
+- Retreat into water
 
 Deep Elf Assassin Group, Intelligent, Organized
 
@@ -97,9 +97,9 @@ Some still remain after the great exodus below. Some hide amongst us with
 spider-poisoned blades, meting out that strangest of punishments: elven
 vengeance. _Instinct_: To spite the surface races
 
-  * Poison them
-  * Unleash an ancient spell
-  * Call reinforcements
+- Poison them
+- Unleash an ancient spell
+- Call reinforcements
 
 Deep Elf Swordmaster Group, Intelligent, Organized
 
@@ -116,8 +116,8 @@ battles on the surface. The swordmasters of the deep elf clans do not merely
 seek to kill, but to punish with every stroke of their blades. Wickedness and
 pain are their currency. _Instinct_: To punish unbelievers
 
-  * Inflict pain beyond measure
-  * Use the dark to advantage
+- Inflict pain beyond measure
+- Use the dark to advantage
 
 Deep Elf Priest Solitary, Divine, Intelligent, Organized
 
@@ -136,9 +136,9 @@ found a new source of power. Hate calls to hate and grim alliances were made.
 Even among these spiteful ranks, piety finds a way to express itself.
 _Instinct_: To pass on divine vengeance
 
-  * Weave spells of hatred and malice
-  * Rally the deep elves
-  * Pass on divine knowledge
+- Weave spells of hatred and malice
+- Rally the deep elves
+- Pass on divine knowledge
 
 Dragon Solitary, Huge, Terrifying, Cautious, Hoarder
 
@@ -151,9 +151,9 @@ Reach, Messy
 They are the greatest and most terrible things this world will ever have to
 offer. _Instinct_: To rule
 
-  * Bend an element to its will
-  * Demand tribute
-  * Act with disdain
+- Bend an element to its will
+- Demand tribute
+- Act with disdain
 
 Gray Render Solitary, Large
 
@@ -170,7 +170,7 @@ render will follow their bonded master wherever they go, bringing them
 offerings of meat and protecting them while they sleep. Finding an un-bonded
 render means certain riches, if you survive to sell it. _Instinct_: To serve
 
-  * Tear something apart
+- Tear something apart
 
 Magmin Horde, Intelligent, Organized, Hoarder
 
@@ -190,9 +190,9 @@ more than a finely made item and to learn to forge from a magmin craftsman
 means unlocking secrets unknown to surface blacksmiths. Like so much else,
 visiting the magmin is a game of risk and reward. _Instinct_: To craft
 
-  * Offer a trade or deal
-  * Strike with fire or magic
-  * Provide just the right item, at a price
+- Offer a trade or deal
+- Strike with fire or magic
+- Provide just the right item, at a price
 
 Minotaur Solitary, Large
 
@@ -208,8 +208,8 @@ the old king said something about a maze? Blast\! You know I can’t think under
 this kind of pressure. What was that? Oh gods, I think it’s coming…”
 _Instinct_: To contain
 
-  * Confuse them
-  * Make them lost
+- Confuse them
+- Make them lost
 
 Naga Solitary, Intelligent, Organized, Hoarder, Magical
 
@@ -227,9 +227,9 @@ serpent body. Variations of these creatures exist depending on their bloodline
 and original purpose, but they are all master manipulators and magical forces
 to be reckoned with. _Instinct_: To lead
 
-  * Send a follower to their death
-  * Use old magic
-  * Offer a deal or bargain
+- Send a follower to their death
+- Use old magic
+- Offer a deal or bargain
 
 Salamander Horde, Large, Intelligent, Organized, Planar
 
@@ -252,6 +252,6 @@ already read what happened next, sir. I know I’m the only one that got back,
 but what I said is true. The gate is open, now. This is just the beginning\!”
 _Instinct_: To consume in flame
 
-  * Summon elemental fire
-  * Melt away deception
+- Summon elemental fire
+- Melt away deception
 

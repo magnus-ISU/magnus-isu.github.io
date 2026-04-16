@@ -95,24 +95,20 @@ export const navigation = [
 			{
 				title: 'Playing the Game',
 				slug: 'playing-the-game',
-				source: 'srd',
-				file: 'Playing_the_Game'
+				source: 'homebrew',
+				file: 'Playing_the_Game',
+				homebrew: true,
+				srdSlug: 'playing-the-game-srd'
 			},
 			{
-				title: 'Moves Discussion',
-				slug: 'moves-discussion',
+				title: 'Playing the Game',
+				slug: 'playing-the-game-srd',
 				source: 'srd',
-				file: 'Moves_Discussion'
+				file: 'Playing_the_Game',
+				hidden: true,
+				homebrewSlug: 'playing-the-game'
 			},
-			{ title: 'Example of Play', slug: 'example-of-play', source: 'srd', file: 'Example' },
-			{ title: 'Equipment', slug: 'equipment', source: 'srd', file: 'Equipment' },
-			{ title: 'First Session', slug: 'first-session', source: 'srd', file: 'First_Session' },
-			{
-				title: 'Class Moves Discussion',
-				slug: 'class-moves-discussion',
-				source: 'srd',
-				file: 'Class_Moves_Discussion'
-			}
+			{ title: 'Equipment', slug: 'equipment', source: 'srd', file: 'Equipment' }
 		]
 	},
 	{
@@ -256,6 +252,25 @@ export const navigation = [
 				source: 'homebrew',
 				file: 'spells/Druid_Bindings',
 				homebrew: true
+			}
+		]
+	},
+	{
+		category: 'Detailed Introduction',
+		items: [
+			{
+				title: 'Moves Discussion',
+				slug: 'moves-discussion',
+				source: 'srd',
+				file: 'Moves_Discussion'
+			},
+			{ title: 'Example of Play', slug: 'example-of-play', source: 'srd', file: 'Example' },
+			{ title: 'First Session', slug: 'first-session', source: 'srd', file: 'First_Session' },
+			{
+				title: 'Class Moves Discussion',
+				slug: 'class-moves-discussion',
+				source: 'srd',
+				file: 'Class_Moves_Discussion'
 			}
 		]
 	},

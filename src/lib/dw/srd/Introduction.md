@@ -55,11 +55,11 @@ and you’ll be able to start playing right away within the first session.
 You’ll need to print some materials. Before you start a new game, find or
 print off at least:
 
-  * A few copies of the basic and special moves
-  * One copy of each class sheet
-  * One copy each of the cleric and wizard spell sheets
-  * One copy of the adventure sheet and GM moves
-  * Miscellanea such as: pens and pencils, scrap paper for maps and notes, maybe some index cards
+- A few copies of the basic and special moves
+- One copy of each class sheet
+- One copy each of the cleric and wizard spell sheets
+- One copy of the adventure sheet and GM moves
+- Miscellanea such as: pens and pencils, scrap paper for maps and notes, maybe some index cards
 
 Everyone at the table will need something to write with and some six-sided
 dice. Two dice is the minimum but two dice per player is a good idea.

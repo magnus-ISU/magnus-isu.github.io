@@ -450,8 +450,8 @@ infinite number of items, and its weight never increases. When you try to
 retrieve an item from a bag of holding, roll+WIS. ✴On a 10+, it’s right there.
 ✴On a 7-9, choose one:
 
-  * You get the exact item, but it takes a while
-  * You get a similar item of the GM’s choice, but it only takes a moment
+- You get the exact item, but it takes a while
+- You get a similar item of the GM’s choice, but it only takes a moment
 
 No matter how many items it contains, a bag of holding is always 0 weight.
 
@@ -575,9 +575,9 @@ tome teaches one the value of clear-headedness but leaves a sense of dread
 behind. When you read from the Fiasco Codex, Roll+WIS. ✴On a 10+, ask two of
 the questions below. ✴On a 7–9, ask one.
 
-  * What is my greatest opportunity, right now?
-  * Who can I betray to gain an advantage?
-  * Who is an ally I should not trust?
+- What is my greatest opportunity, right now?
+- Who can I betray to gain an advantage?
+- Who is an ally I should not trust?
 
 The codex gives up its answers only once to each reader and takes 2 to 3 hours
 to read.

@@ -17,8 +17,8 @@ the very thing it cannot have—life. Many students of the black arts learn to
 their mortal dismay the most important fact about these hulks; an abomination
 knows no master. _Instinct_: To end life
 
-  * Tear flesh apart
-  * Spill forth putrid guts
+- Tear flesh apart
+- Spill forth putrid guts
 
 Banshee Solitary, Magical, Intelligent
 
@@ -38,9 +38,9 @@ senses. If you can help her get her vengeance, they say she might grant
 rewards. Whether the affection of a spurned spirit is a thing you’d want,
 well, that’s another question. _Instinct_: To get revenge
 
-  * Drown out all other sound with a ceaseless scream
-  * Unleash a skull-splitting noise
-  * Disappear into the mists
+- Drown out all other sound with a ceaseless scream
+- Unleash a skull-splitting noise
+- Disappear into the mists
 
 Devourer Solitary, Large, Intelligent, Hoarder
 
@@ -59,8 +59,8 @@ enjoy and in the moments of its victims’ expiry, draws breath like a drowning
 man and swallows a soul. What does it mean to have your soul eaten by such a
 creature? None dare ask for fear of finding out. _Instinct_: To feast on souls
 
-  * Devour or trap dying soul
-  * Bargain for a soul’s return
+- Devour or trap dying soul
+- Bargain for a soul’s return
 
 Dragonbone Solitary, Huge
 
@@ -76,7 +76,7 @@ serves its master with a twisted devotion and is often set to assault the
 keeps and towers of rival necromancers. It would take a being of some
 considerable evil to twist the remains of a dragon thus. _Instinct_: To serve
 
-  * Attack unrelentingly
+- Attack unrelentingly
 
 Draugr Horde, Organized
 
@@ -96,8 +96,8 @@ frozen and twisted and empowered by jealous rage and wage their eternal war
 not on the forces of giants or trolls but on the towns of the men they once
 knew. _Instinct_: To take from the living
 
-  * Freeze flesh
-  * Call on the unworthy dead
+- Freeze flesh
+- Call on the unworthy dead
 
 Ghost Solitary, Devious, Terrifying
 
@@ -116,9 +116,9 @@ drinking away the terrors they’ve seen or babbling to themselves in the
 madhouse. Death takes a toll on the living, no matter how you come by it.
 _Instinct_: To haunt
 
-  * Reveal the terrifying nature of death
-  * Haunt a place of importance 
-  * Offer information from the other side, at a price
+- Reveal the terrifying nature of death
+- Haunt a place of importance 
+- Offer information from the other side, at a price
 
 Ghoul Group
 
@@ -133,8 +133,8 @@ charge on twisted legs—scare the living flesh and sweeten it ever more with
 the stink of fear. Feast. Peasant or knight, wizard, sage, prince, or priest
 all make for such delicious meat. _Instinct_: To eat
 
-  * Gnaw off a body part
-  * Gain the memories of their meal
+- Gnaw off a body part
+- Gain the memories of their meal
 
 Lich Solitary, Magical, Intelligent, Cautious, Hoarder, Construct
 
@@ -155,9 +155,9 @@ next. It pains me to have to do this, but, you see, you cannot be permitted to
 endanger my research. When you meet Death, say hello for me, would you?”
 _Instinct_: To un-live
 
-  * Cast a perfected spell of death or destruction
-  * Set a ritual or great working into motion
-  * Reveal a preparation or plan already completed
+- Cast a perfected spell of death or destruction
+- Set a ritual or great working into motion
+- Reveal a preparation or plan already completed
 
 Mohrg Group
 
@@ -176,8 +176,8 @@ wreak havoc and their souls do not rest. Such is the punishment, both on them
 for the crime and on all mankind for daring to murder one another. The gods
 are just and they are harsh. _Instinct_: To wreak havoc
 
-  * Rage
-  * Add to their collection of guts
+- Rage
+- Add to their collection of guts
 
 Mummy Solitary, Divine, Hoarder
 
@@ -194,9 +194,9 @@ vaults—oh, I know that greedy look\! Heed my warnings or risk a terrible fate,
 for the honored dead do not wish to be disturbed. Thievery will only raise
 their ire—don’t say I did not warn you\! _Instinct_: To enjoy eternal rest
 
-  * Curse them
-  * Wrap them up
-  * Rise again
+- Curse them
+- Wrap them up
+- Rise again
 
 Nightwing Horde, Stealthy
 
@@ -218,8 +218,8 @@ peasants out past curfew. Watch the night sky for their red eyes. Listen for
 their screeching call. And hope to the gods you have something to hide under
 until they pass. _Instinct_: To hunt
 
-  * Attack from the night sky
-  * Fly away with prey
+- Attack from the night sky
+- Fly away with prey
 
 Shadow Horde, Large, Magical, Construct
 
@@ -237,8 +237,8 @@ of Night. Shadow, we name you. Death’s messenger and black assassin, we claim
 for our own. Accept our sacrifice and do our bidding ’til the morning come.
 _Instinct_: To darken
 
-  * Snuff out light
-  * Spawn another shadow from the dead
+- Snuff out light
+- Spawn another shadow from the dead
 
 Sigben Horde, Large, Construct
 
@@ -256,8 +256,8 @@ mischievous they cause all kinds of chaos when let out of the strange clay
 jars in which they’re born. Only a vampire could love such a wretched thing.”
 _Instinct_: To disturb
 
-  * Poison them
-  * Do a vampire’s bidding
+- Poison them
+- Do a vampire’s bidding
 
 Skeleton Horde
 
@@ -267,9 +267,9 @@ Close
 
 Dem bones, dem bones, dem dry bones. _Instinct_: To take the semblance of life
 
-  * Act out what it did in life
-  * Snuff out the warmth of life
-  * Reconstruct from miscellaneous bones
+- Act out what it did in life
+- Snuff out the warmth of life
+- Reconstruct from miscellaneous bones
 
 Spectre Solitary, Hoarder
 
@@ -289,8 +289,8 @@ them out. These places belong to them and these invisible spirits will kill
 before they’ll let anyone send them to their rest. _Instinct_: To drive life
 from a place
 
-  * Turn their haunt against a creature
-  * Bring the environment to life
+- Turn their haunt against a creature
+- Bring the environment to life
 
 Vampire Group, Stealthy, Organized, Intelligent
 
@@ -309,9 +309,9 @@ of its creator. Vampires beget vampires. Suffering begets suffering. Do not be
 drawn in by their seduction or you may be given their gift—a crown of shadows
 and the chains of eternal undying grief. _Instinct_: To manipulate
 
-  * Charm someone
-  * Feed on their blood
-  * Retreat to plan again
+- Charm someone
+- Feed on their blood
+- Retreat to plan again
 
 Wight-Wolf Horde, Organized, Intelligent
 
@@ -330,8 +330,8 @@ undead—liches, vampires and the like—who will sometimes make pacts with the
 alpha and serve a grim purpose together. Listen for the baying of the hounds
 of Death and pray that they do not howl for you. _Instinct_: To hunt
 
-  * Encircle prey
-  * Summon the pack
+- Encircle prey
+- Summon the pack
 
 Zombie Horde
 
@@ -341,7 +341,7 @@ Close
 
 When there’s no more room in Hell… _Instinct_: Braaaaaains
 
-  * Attack with overwhelming numbers
-  * Corner them
-  * Gain strength from the dead, spawn more zombies
+- Attack with overwhelming numbers
+- Corner them
+- Gain strength from the dead, spawn more zombies
 

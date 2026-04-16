@@ -8,8 +8,8 @@ messy floor, do he? They said it’d be enlightenment and magic. Feh. It’s
 bruised knees and dishpan hands. If only I’d been a cleric, instead.”
 _Instinct_: To serve dutifully
 
-  * Follow dogma
-  * Offer eternal reward for mortal deeds
+- Follow dogma
+- Offer eternal reward for mortal deeds
 
 Adventurer Horde, Intelligent
 
@@ -28,9 +28,9 @@ whole system becomes completely uprooted. Dangerous, unpredictable murder-
 hobos. Oh, wait, you’re an adventurer? I take it all back.” _Instinct_: To
 adventure or die trying
 
-  * Go on a fool’s errand
-  * Act impulsively
-  * Share tales of past exploits
+- Go on a fool’s errand
+- Act impulsively
+- Share tales of past exploits
 
 Bandit Horde, Intelligent, Organized
 
@@ -45,8 +45,8 @@ we’ve all got to eat so who can blame them? Then again, there’s evil in the
 hearts of some and who’s to say that desperation isn’t a need to sate one’s
 baser lusts? Anyway—it’s this or starve, sometimes. _Instinct_: To rob
 
-  * Steal something
-  * Demand tribute
+- Steal something
+- Demand tribute
 
 Bandit King Solitary, Intelligent, Organized
 
@@ -56,9 +56,9 @@ Close
 
 Better to rule in hell than serve in heaven. _Instinct_: To lead
 
-  * Make a demand
-  * Extort
-  * Topple power
+- Make a demand
+- Extort
+- Topple power
 
 Fool
 
@@ -68,8 +68,8 @@ bells and prancing and chalky face-paint, but who else gets to tell the King
 what’s what? You can trust a fool, they say, especially when he’s made you
 red-faced and you’d just as soon drown him in a cesspit. _Instinct_: To mock
 
-  * Expose injustice
-  * Play a trick
+- Expose injustice
+- Play a trick
 
 Guardsman Group, Intelligent, Organized
 
@@ -87,8 +87,8 @@ eye on the gate when the Black Riders have been spotted in the woods. Too many
 of us owe our lives to these souls—remember that the next time one is
 drunkenly insulting your mother, hmm? _Instinct_: To do as ordered
 
-  * Uphold the law
-  * Make a profit
+- Uphold the law
+- Make a profit
 
 Halfling Thief Solitary, Small, Intelligent, Stealthy, Devious
 
@@ -107,8 +107,8 @@ alms—and your arrogant eyes can’t even see the difference until too late.
 Well, it matters little. They’re gone with your coin before you even realize
 you deserved it. _Instinct_: To live a life of stolen luxury
 
-  * Steal
-  * Put on the appearance of friendship
+- Steal
+- Put on the appearance of friendship
 
 Hedge Wizard Magical
 
@@ -120,8 +120,8 @@ break or a love to prove, might be that a hedge wizard will help you, if you
 can find his rotten hut in the swamp and pay the price he asks. _Instinct_: To
 learn
 
-  * Cast almost the right spell \(for a price\)
-  * Make deals beyond their ken
+- Cast almost the right spell \(for a price\)
+- Make deals beyond their ken
 
 High Priest
 
@@ -133,9 +133,9 @@ speak to them as a hawker-of-wares might speak to us in the marketplace. For
 this, for the bearing-of-secrets and the knowing-of-things, we give them a
 wide berth as they pass in their shining robes. _Instinct_: To lead
 
-  * Set down divine law
-  * Reveal divine secrets
-  * Commission divine undertakings
+- Set down divine law
+- Reveal divine secrets
+- Commission divine undertakings
 
 Hunter Group, Intelligent
 
@@ -151,8 +151,8 @@ more in common with the things they track and eat than with their own kind.
 Solemn, somber and quiet, they find a sort of peace in the wild. _Instinct_:
 To survive
 
-  * Bring back news from the wilds
-  * Slay a beast
+- Bring back news from the wilds
+- Slay a beast
 
 Knight Solitary, Intelligent, Organized, Cautious
 
@@ -168,8 +168,8 @@ the bright pennant? A knight is many things—a holy warrior, a sworn sword, a
 villain sometimes, too, but a knight cannot help but be a symbol to all who
 see her. A knight means something. _Instinct_: To live by a code
 
-  * Make a moral stand
-  * Lead soldiers into battle
+- Make a moral stand
+- Lead soldiers into battle
 
 Merchant
 
@@ -177,8 +177,8 @@ Merchant
 Mules, too—stubborn but immaculately bred. Need a linen sack, do you? Right
 over here\! Come and get your ten foot poles\!” _Instinct_: To profit
 
-  * Propose a business venture
-  * Offer a “deal”
+- Propose a business venture
+- Offer a “deal”
 
 Noble
 
@@ -189,8 +189,8 @@ wears the finery of his place and, they say, we all have our burdens to bear.
 Seems to me that some of us have burdens of stone and some carry their weight
 in gold. It’s a tough life. _Instinct_: To rule
 
-  * Issue an order
-  * Offer a reward
+- Issue an order
+- Offer a reward
 
 Peasant
 
@@ -201,8 +201,8 @@ They’ll dream at night of how someday, somehow, they’ll fight a dragon and
 save a princess. Don’t act like you weren’t one before you lost what little
 sense you had, adventurer. _Instinct_: To get by
 
-  * Plead for help
-  * Offer a simple reward and gratitude
+- Plead for help
+- Offer a simple reward and gratitude
 
 Rebel Horde, Intelligent, Organized
 
@@ -220,8 +220,8 @@ the right moment are all tools of the rebel. The burning brand of anarchy is a
 common fear amongst the nobles of Dungeon World. These men and women are why.
 _Instinct_: To upset order
 
-  * Die for a cause
-  * Inspire others
+- Die for a cause
+- Inspire others
 
 Soldier Horde, Intelligent, Organized
 
@@ -239,8 +239,8 @@ side still in one piece. Besides, the nobles need strong men and women. What
 is it they say? A handful of soldiers beats a mouthful of arguments.
 _Instinct_: To fight
 
-  * March into battle
-  * Fight as one
+- March into battle
+- Fight as one
 
 Spy
 
@@ -252,8 +252,8 @@ never knows. Hells, maybe you’re a spy—they say there’s magic that can tur
 folks’ minds without them ever knowing it. How can we trust you? _Instinct_:
 To infiltrate
 
-  * Report the truth
-  * Double cross
+- Report the truth
+- Double cross
 
 Tinkerer
 
@@ -267,6 +267,6 @@ that never wilts or a clock that chimes with the sound of faerie laughter. Or
 maybe they’re just antisocial peddlers. You never know, right? _Instinct_: To
 create
 
-  * Offer an oddity at a price
-  * Spin tales of great danger and reward in far-off lands
+- Offer an oddity at a price
+- Spin tales of great danger and reward in far-off lands
 

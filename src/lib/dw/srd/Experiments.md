@@ -16,9 +16,9 @@ might be able to bargain. One alarm from the scouts that always, always means
 it’s time to pack up, whip your horse and run for the hills? “LAND SHARK\!”
 _Instinct_: To devour
 
-  * Drag prey into rough tunnels
-  * Burst from the earth
-  * Swallow whole
+- Drag prey into rough tunnels
+- Burst from the earth
+- Swallow whole
 
 Chimera Solitary, Large, Construct
 
@@ -36,9 +36,9 @@ assassin or merely an instrument of chaos unchained, it matters little. The
 chimera is the worst sort of abomination: an intentional affront to all
 natural life. _Instinct_: To do as commanded
 
-  * Belch forth flame
-  * Run them over
-  * Poison them
+- Belch forth flame
+- Run them over
+- Poison them
 
 Derro Horde, Devious, Intelligent, Organized
 
@@ -58,8 +58,8 @@ grown too large. They do not speak except in thoughts to one another and plot
 in the silent dark to extract sweetest revenge—that of the created on the
 creator. _Instinct_: To replace dwarves
 
-  * Fill a mind with foreign thoughts
-  * Take control of a beast’s mind
+- Fill a mind with foreign thoughts
+- Take control of a beast’s mind
 
 Digester Solitary, Large, Construct
 
@@ -79,8 +79,8 @@ Stout drinks ale. Next time one of these unfortunate accidents occurs, just
 point the Digester at it and all your troubles drain away. Just keep an eye on
 it. Damn thing ate my wand last week. _Instinct_: To digest
 
-  * Eat away at something
-  * Draw sustenance
+- Eat away at something
+- Draw sustenance
 
 Ethereal Filcher Solitary, Devious, Planar
 
@@ -99,9 +99,9 @@ stolen objects arranged in some mad pattern. We never watch it assemble its
 collection of halfling finger-bones, stolen from the hands of the sleeping.
 We’re lucky, that way. _Instinct_: To steal
 
-  * Take something important to its planar lair
-  * Retreat to the Ethereal plane
-  * Use an item from its lair
+- Take something important to its planar lair
+- Retreat to the Ethereal plane
+- Use an item from its lair
 
 Ettin Solitary, Large, Construct
 
@@ -114,8 +114,8 @@ Close, Reach, Forceful
 What could possibly be better than an idiotic angry hill giant? One with two
 heads. Fantastic idea, really. Grade A stuff. _Instinct_: To smash
 
-  * Attack two enemies at once
-  * Defend its creator
+- Attack two enemies at once
+- Defend its creator
 
 Girallon Solitary, Huge
 
@@ -134,9 +134,9 @@ explorer visits the jungle villages seeking the ape and returns, never quite
 the same, never with a trophy. The pounding of the drums goes on. _Instinct_:
 To rule
 
-  * Answer the call of sacrifice
-  * Drive them from the jungle
-  * Throw someone
+- Answer the call of sacrifice
+- Drive them from the jungle
+- Throw someone
 
 Iron Golem Group, Large, Construct
 
@@ -155,8 +155,8 @@ Unceasing watchdog, stalwart defender, the iron golem lives to serve,
 following its orders eternally. Any enchanter worth his salt can craft one, if
 he can afford the materials. If not… _Instinct_: To serve
 
-  * Follow orders implacably
-  * Use a special tool or adaptation, built-in
+- Follow orders implacably
+- Use a special tool or adaptation, built-in
 
 Flesh Golem Horde
 
@@ -172,8 +172,8 @@ the humblest hedge-enchanter can make do with what he can and, with a little
 creativity, well—it’s not only the college that can make life, hmm? We’ll show
 them. _Instinct_: To live
 
-  * Follow orders
-  * Detach a body part
+- Follow orders
+- Detach a body part
 
 Kraken Solitary, Huge
 
@@ -193,8 +193,8 @@ strike—when you’re all too drunk or too tired or run out of clean water,
 that’s when he gets you. No, I ain’t ever seen him. I’m alive, aren’t I?”
 _Instinct_: To rule the ocean
 
-  * Drag a person or ship to a watery grave
-  * Wrap them in tentacles
+- Drag a person or ship to a watery grave
+- Wrap them in tentacles
 
 Manticore Solitary, Large, Construct
 
@@ -214,8 +214,8 @@ twisted magic. All sense of who they are is lost, and maybe that’s a blessing,
 but the beast is born from human suffering. No wonder, then, that they’re all
 so eager to kill. _Instinct_: To kill
 
-  * Poison them
-  * Rip something apart
+- Poison them
+- Rip something apart
 
 Owlbear Solitary, Construct
 
@@ -226,7 +226,7 @@ Close
 Body of a bear. Feathers of an owl. Beak, claws, and excellent night vision.
 What’s not to love? _Instinct_: To hunt
 
-  * Strike from darkness
+- Strike from darkness
 
 Pegasus Group, Construct
 
@@ -245,8 +245,8 @@ way. They breed true—that’s the purity of elf-magic at work. Hatching from
 little crystal eggs and bonded with their riders for life. There’s still some
 beauty in the world, mark my words. _Instinct_: To carry aloft
 
-  * Carry a rider into the air
-  * Give their rider an advantage
+- Carry a rider into the air
+- Give their rider an advantage
 
 Rust Monster Group, Construct
 
@@ -265,8 +265,8 @@ Magic lasts longer but under the scrutiny of a rust monster, it’s a foregone
 conclusion. Only the gods know where they came from, but they’re a curse if
 you value your belongings. _Instinct_: To decay
 
-  * Turn metal to rust
-  * Gain strength from consuming metal
+- Turn metal to rust
+- Gain strength from consuming metal
 
 Xorn Solitary, Large, Construct
 
@@ -285,6 +285,6 @@ left but to collapse the place down on it and move somewhere else. Ask Burrin,
 Son of Fjornnvald, exile from his clan. I bet he could tell you a story about
 a xorn. _Instinct_: To eat
 
-  * Consume stone
-  * Give off a burst of light and heat
+- Consume stone
+- Give off a burst of light and heat
 

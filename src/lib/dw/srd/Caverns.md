@@ -15,9 +15,9 @@ things have the gall to be as long as any given horse. It’s just not natural\!
 Good thing they tend to stick to one place? Easy for you to say—you don’t have
 an ankheg living under your corn field. _Instinct_: To undermine
 
-  * Undermine the ground
-  * Burst from the earth
-  * Spray forth acid, eating away at metal and flesh
+- Undermine the ground
+- Burst from the earth
+- Spray forth acid, eating away at metal and flesh
 
 Cave Rat Horde, Small
 
@@ -30,8 +30,8 @@ of you anymore. Maybe this one was a cousin to that one you caught in a trap
 or the one you killed with a knife in that filthy tavern in Darrow. Maybe he’s
 looking for a little ratty revenge. _Instinct_: To devour
 
-  * Swarm
-  * Rip something \(or someone\) apart
+- Swarm
+- Rip something \(or someone\) apart
 
 Choker Solitary, Stealthy, Intelligent
 
@@ -50,8 +50,8 @@ grasping. They hate all life that bears the stink of the sun’s touch, as one
 might expect. Jealousy, long-instilled, is hard to shake. _Instinct_: To deny
 light
 
-  * Hold someone, wringing the breath from them
-  * Fling a held creature
+- Hold someone, wringing the breath from them
+- Fling a held creature
 
 Cloaker Solitary, Stealthy
 
@@ -65,7 +65,7 @@ Don’t put on that cloak, Gareth. Don’t. You don’t know where it’s been. 
 you, it’s no good. See\! It moved\! I’m not mad, Gareth, it moved\! Don’t do
 it\! No\! GARETH\! _Instinct_: To engulf
 
-  * Engulf the unsuspecting
+- Engulf the unsuspecting
 
 Dwarven Warrior Horde, Organized
 
@@ -82,8 +82,8 @@ their duty to protect the riches of the Dwarven realm. Earn their trust and
 you’ve an ally for life. Earn their ire and you’re not likely to regret it
 very long. _Instinct_: To defend
 
-  * Drive them back
-  * Call up reinforcements
+- Drive them back
+- Call up reinforcements
 
 Earth Elemental Solitary, Huge
 
@@ -100,8 +100,8 @@ I saw was huge—big as a house\! It came boiling up from a rockslide out of
 nowhere and had a voice like an avalanche. I pay my respects, now. Rightly so.
 _Instinct_: To show the strength of earth
 
-  * Turn the ground into a weapon
-  * Meld into stone
+- Turn the ground into a weapon
+- Meld into stone
 
 Fire Beetle Horde, Small
 
@@ -119,9 +119,9 @@ of these creatures alone, if it comes up from below, can be a hellish nuisance
 to a farmstead or village. A whole swarm? There’s a reason they call it a
 conflagration of fire beetles. _Instinct_: To enflame
 
-  * Undermine the ground
-  * Burst from the earth
-  * Spray forth flames
+- Undermine the ground
+- Burst from the earth
+- Spray forth flames
 
 Gargoyle Horde, Stealthy, Hoarder
 
@@ -139,9 +139,9 @@ notoriously good at finding valuables buried below the earth, though. Find one
 of these winged reptiles and you’ll find yourself a treasure nearby. Just be
 careful, they’re hard to spot and tend to move in packs. _Instinct_: To guard
 
-  * Attack with the element of surprise
-  * Take to the air
-  * Blend into stonework
+- Attack with the element of surprise
+- Take to the air
+- Blend into stonework
 
 Gelatinous Cube Solitary, Large, Stealthy, Amorphous
 
@@ -158,8 +158,8 @@ ever so slowly along, eating everything in its path. It cannot eat stone or
 metal and will often have them floating in its jelly mass. Blech. _Instinct_:
 To clean
 
-  * Fill an apparently empty space
-  * Dissolve
+- Fill an apparently empty space
+- Dissolve
 
 Goblin Horde, Small, Intelligent, Organized
 
@@ -174,9 +174,9 @@ truth of the matter is that goblins have always been here and they’ll be here
 once all the civilized races have fallen and gone away. Goblins never die out.
 There’s just too damn many of them. _Instinct_: To multiply
 
-  * Charge\!
-  * Call more goblins
-  * Retreat and return with \(many\) more
+- Charge\!
+- Call more goblins
+- Retreat and return with \(many\) more
 
 Goblin Orkaster Solitary, Small, Magical, Intelligent, Organized
 
@@ -186,9 +186,9 @@ Near, Far
 
 Oh lord, who taught them magic? _Instinct_: To tap power beyond their stature
 
-  * Unleash a poorly understood spell
-  * Pour forth magical chaos
-  * Use other goblins for shields
+- Unleash a poorly understood spell
+- Pour forth magical chaos
+- Use other goblins for shields
 
 Goliath Group, Huge, Organized, Intelligent
 
@@ -203,8 +203,8 @@ hate and anger warmed by the pools of lava deep below. It’s said that an
 earthquake is a goliath’s birthing cry. Someday they’ll take back what’s
 theirs. _Instinct_: To retake
 
-  * Shake the earth
-  * Retreat, only to come back stronger
+- Shake the earth
+- Retreat, only to come back stronger
 
 Otyugh Solitary, Large
 
@@ -223,8 +223,8 @@ and you’ll have one of its barbed tentacles dragging you into that soggy,
 razor-toothed maw. If you get away with your life, best get to a doctor, or
 your victory may be short lived. _Instinct_: To befoul
 
-  * Infect someone with filth fever
-  * Fling someone or something
+- Infect someone with filth fever
+- Fling someone or something
 
 Maggot-Squid Horde, Small
 
@@ -240,7 +240,7 @@ tentacles that, if they touch you, feel like being struck by lightning.
 They’ll paralyze you and chew you up slowly while you’re helpless. Best to not
 let it get to that. _Instinct_: To eat
 
-  * Paralyze with a touch
+- Paralyze with a touch
 
 Purple Worm Solitary, Huge
 
@@ -257,8 +257,8 @@ embrace of its tooth-ringed maw. Let it consume us\! Let it eat our homes and
 villages so that we might be taken\! Iä\! Iä\! The Purple Worm\! _Instinct_:
 To consume
 
-  * Swallow whole
-  * Tunnel through stone and earth
+- Swallow whole
+- Tunnel through stone and earth
 
 Roper Solitary, Large, Stealthy, Intelligent
 
@@ -276,9 +276,9 @@ thing’s hide. A hundred lashes in the blink of an eye and the stunned prey is
 being dragged into the roper’s mouth. Surprisingly effective for a thing that
 looks like a rock. _Instinct_: To ambush
 
-  * Ensnare the unsuspecting
-  * Disarm a foe
-  * Chew on someone
+- Ensnare the unsuspecting
+- Disarm a foe
+- Chew on someone
 
 Rot Grub Horde, Tiny
 
@@ -292,9 +292,9 @@ They live in your skin. Or your organ meat. Or your eyeballs. They grow there
 and then, in a bloody and horrific display, burrow their way out. Disgusting.
 _Instinct_: To infect
 
-  * Burrow under flesh
-  * Lay eggs
-  * Burst forth from an infected creature
+- Burrow under flesh
+- Lay eggs
+- Burst forth from an infected creature
 
 Spiderlord Solitary, Large, Devious, Intelligent
 
@@ -307,8 +307,8 @@ Close, Reach
 Even spiders have their gods, whispered to in webs with little praying arms.
 _Instinct_: To weave webs \(literal and metaphorical\)
 
-  * Enmesh in webbing
-  * Put a plot into motion
+- Enmesh in webbing
+- Put a plot into motion
 
 Troglodyte Group, Organized
 
@@ -324,6 +324,6 @@ numbers to seize cattle, tools, and poor prisoners to drag into the hills.
 Known for their viciousness and their stink, they’re an old and dying race
 we’d all sooner forget existed. _Instinct_: To prey on civilization
 
-  * Raid and retreat
-  * Use scavenged weapons or magic
+- Raid and retreat
+- Use scavenged weapons or magic
 

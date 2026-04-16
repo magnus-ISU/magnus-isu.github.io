@@ -134,9 +134,9 @@ you cast a spell. Describe the new shape you craft, including any stat
 changes, significant adaptations, or major weaknesses. The GM will then tell
 you one or more of these:
 
-  * The form will be unstable and temporary
-  * The creature’s mind will be altered as well
-  * The form has an unintended benefit or weakness
+- The form will be unstable and temporary
+- The creature’s mind will be altered as well
+- The form has an unintended benefit or weakness
 
 ### Summon Monster Level 5 _Summoning Ongoing_
 
@@ -145,11 +145,11 @@ with access to only the basic moves. It has +1 modifier for all stats, 1 HP,
 and uses your damage dice. The monster also gets your choice of 1d6 of these
 traits:
 
-  * It has +2 instead of +1 to one stat
-  * It’s not reckless
-  * It does 1d8 damage
-  * Its bond to your plane is strong: +2 HP for each level you have
-  * It has some useful adaptation
+- It has +2 instead of +1 to one stat
+- It’s not reckless
+- It does 1d8 damage
+- Its bond to your plane is strong: +2 HP for each level you have
+- It has some useful adaptation
 
 The GM will tell you the type of monster you get based on the traits you
 select. The creature remains on this plane until it dies or you dismiss it.
@@ -162,10 +162,10 @@ While the spell is ongoing you take -1 to cast a spell.
 Your touch pushes your mind into someone else’s. You gain 1d4 hold. Spend one
 hold to make the target take one of these actions:
 
-  * Speak a few words of your choice
-  * Give you something they hold
-  * Make a concerted attack on a target of your choice
-  * Truthfully answer one question
+- Speak a few words of your choice
+- Give you something they hold
+- Make a concerted attack on a target of your choice
+- Truthfully answer one question
 
 If you run out of hold the spell ends. If the target takes damage you lose 1
 hold. While the spell is ongoing you cannot cast a spell.

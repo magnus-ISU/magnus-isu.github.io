@@ -34,10 +34,10 @@ would with any other rule.
 
 When you sit down at the table as a GM you do these things:
 
-  * Describe the situation
-  * Follow the rules
-  * Make moves
-  * Exploit your prep
+- Describe the situation
+- Follow the rules
+- Make moves
+- Exploit your prep
 
 The players have it easy—they just say what their characters say, think, and
 do. You have it a bit harder. You have to say everything else. What does that
@@ -82,9 +82,9 @@ demon waiting two levels below, but you do.
 Your agenda makes up the things you aim to do at all times while GMing a game
 of Dungeon World:
 
-  * Portray a fantastic world
-  * Fill the characters’ lives with adventure
-  * Play to find out what happens
+- Portray a fantastic world
+- Fill the characters’ lives with adventure
+- Play to find out what happens
 
 Everything you say and do at the table \(and away from the table, too\) exists
 to accomplish these three goals and no others. Things that aren’t on this list
@@ -120,18 +120,18 @@ see how things unfold, trust us.
 
 ## Principles
 
-  * Draw maps, leave blanks
-  * Address the characters, not the players
-  * Embrace the fantastic
-  * Make a move that follows
-  * Never speak the name of your move
-  * Give every monster life
-  * Name every person
-  * Ask questions and use the answers
-  * Be a fan of the characters
-  * Think dangerous
-  * Begin and end with the fiction
-  * Think offscreen, too
+- Draw maps, leave blanks
+- Address the characters, not the players
+- Embrace the fantastic
+- Make a move that follows
+- Never speak the name of your move
+- Give every monster life
+- Name every person
+- Ask questions and use the answers
+- Be a fan of the characters
+- Think dangerous
+- Begin and end with the fiction
+- Think offscreen, too
 
 Your principles are your guides. Often, when it’s time to make a move, you’ll
 already have an idea of what makes sense. Consider it in light of your
@@ -250,18 +250,18 @@ move is something that occurs in the fiction of the game—they aren’t code
 words or special terms. “Use up their resources” literally means to expend the
 resources of the characters, for example.
 
-  * Use a monster, danger, or location move
-  * Reveal an unwelcome truth
-  * Show signs of an approaching threat
-  * Deal damage
-  * Use up their resources
-  * Turn their move back on them
-  * Separate them
-  * Give an opportunity that fits a class’ abilities
-  * Show a downside to their class, race, or equipment
-  * Offer an opportunity, with or without cost
-  * Put someone in a spot
-  * Tell them the requirements or consequences and ask
+- Use a monster, danger, or location move
+- Reveal an unwelcome truth
+- Show signs of an approaching threat
+- Deal damage
+- Use up their resources
+- Turn their move back on them
+- Separate them
+- Give an opportunity that fits a class’ abilities
+- Show a downside to their class, race, or equipment
+- Offer an opportunity, with or without cost
+- Put someone in a spot
+- Tell them the requirements or consequences and ask
 
 Never speak the name of your move \(that’s one of your principles\). Make it a
 real thing that happens to them: “As you dodge the hulking ogre’s club, you
@@ -277,9 +277,9 @@ out from under them adventurers react or suffer the consequences of inaction.
 
 You make a move:
 
-  * When everyone looks to you to find out what happens
-  * When the players give you a golden opportunity
-  * When they roll a 6-
+- When everyone looks to you to find out what happens
+- When the players give you a golden opportunity
+- When they roll a 6-
 
 Generally when the players are just looking at you to find out what happens
 you make a soft move, otherwise you make a hard move.
@@ -440,13 +440,13 @@ already have planned completely.
 Map out the area being explored as you make these moves. Most of them will
 require you to add a new room or element to your map.
 
-  * Change the environment
-  * Point to a looming threat
-  * Introduce a new faction or type of creature
-  * Use a threat from an existing faction or type of creature
-  * Make them backtrack
-  * Present riches at a price
-  * Present a challenge to one of the characters
+- Change the environment
+- Point to a looming threat
+- Introduce a new faction or type of creature
+- Use a threat from an existing faction or type of creature
+- Make them backtrack
+- Present riches at a price
+- Present a challenge to one of the characters
 
 You can make these moves whenever everyone looks to you to say something, when
 the players present you an opportunity, or when the players miss on a roll.

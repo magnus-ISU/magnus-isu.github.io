@@ -18,8 +18,8 @@ they wander where they oughtn’t—paths into the deep woods covered in creepin
 vines and with a snap, these hungry ropes snap tight, dragging their meaty
 prey into the underbrush. Mind your feet, traveller. _Instinct_: To grow
 
-  * Shoot forth new growth
-  * Attack the unwary
+- Shoot forth new growth
+- Attack the unwary
 
 Blink Dog Group, Small, Magical, Organized
 
@@ -40,9 +40,9 @@ eyes and fight. You’ll have an easier time when not betrayed by your natural
 sight. By such sorceries are the natural places of the world polluted with
 unnatural things. _Instinct_: To hunt
 
-  * Give the appearance of being somewhere they’re not
-  * Summon the pack
-  * Move with amazing speed
+- Give the appearance of being somewhere they’re not
+- Summon the pack
+- Move with amazing speed
 
 Centaur Horde, Large, Organized, Intelligent
 
@@ -60,9 +60,9 @@ and cowardly, friend to these mannish slime. It will be a cleansing fire from
 the darkest woods. Raise the red banner of war\! Today we strike back against
 these apes and retake what is ours\!” _Instinct_: To rage
 
-  * Overrun them
-  * Fire a perfect bullseye
-  * Move with unrelenting speed
+- Overrun them
+- Fire a perfect bullseye
+- Move with unrelenting speed
 
 Chaos Ooze Solitary, Planar, Terrifying, Amorphous
 
@@ -82,8 +82,8 @@ though, it squirms and squishes around a bit and stays that way, warping all
 it touches into some other, strange form. Chaos begets chaos, and it grows.
 _Instinct_: To change
 
-  * Cause a change in appearance or substance
-  * Briefly bridge the planes
+- Cause a change in appearance or substance
+- Briefly bridge the planes
 
 Cockatrice Group, Small, Hoarder
 
@@ -105,7 +105,7 @@ sir. All frozen up like when we left the dog out overnight in winter two years
 back. Poor, stupid Rodrick. Weren’t no bird nor lizard, were it,
 sir?”_Instinct_: To defend the nest
 
-  * Start a slow transformation to stone
+- Start a slow transformation to stone
 
 Dryad Solitary, Magical, Intelligent, Devious,
 
@@ -126,9 +126,9 @@ dryad’s wrath to contend with, but in every nearby village there’s a score o
 men with a secret longing in their heart, ready to murder you where you sleep
 for just a smile from such a creature. _Instinct_: To love nature passionately
 
-  * Entice a mortal
-  * Merge into a tree
-  * Turn nature against them
+- Entice a mortal
+- Merge into a tree
+- Turn nature against them
 
 Eagle Lord Group, Large, Organized, Intelligent
 
@@ -149,9 +149,9 @@ serve as spies and mounts for them. Long-lived and proud, some might be
 willing to trade their ancient secrets for the right price, too. _Instinct_:
 To rule the heights
 
-  * Attack from the sky
-  * Pull someone into the air
-  * Call on ancient oaths
+- Attack from the sky
+- Pull someone into the air
+- Call on ancient oaths
 
 Elvish Warrior Horde, Intelligent, Organized
 
@@ -173,9 +173,9 @@ skill meant nothing. Thank the gods the elves were with us then. A more
 beautiful and terrible thing I have never seen.” _Instinct_: To seek
 perfection
 
-  * Strike at a weak point
-  * Set ancient plans in motion
-  * Use the woods to advantage
+- Strike at a weak point
+- Set ancient plans in motion
+- Use the woods to advantage
 
 Elvish High Arcanist Solitary, Magical, Intelligent, Organized
 
@@ -195,8 +195,8 @@ Arcanists, in a way, have become more and less than any elf. The beat of their
 blood is the throbbing of all magic in this world. _Instinct_: To unleash
 power
 
-  * Work the magic that nature demands
-  * Cast forth the elements
+- Work the magic that nature demands
+- Cast forth the elements
 
 Griffin Group, Large, Organized
 
@@ -215,9 +215,9 @@ that. If you’re ever lucky enough to meet one be respectful and deferential
 above all else. It may not seem it but they can perceive the subtlest slights
 and will answer them with a sharp beak and talons. _Instinct_: To serve allies
 
-  * Judge someone’s worthiness
-  * Carry an ally aloft
-  * Strike from above
+- Judge someone’s worthiness
+- Carry an ally aloft
+- Strike from above
 
 Hill Giant Group, Huge, Intelligent, Organized
 
@@ -228,9 +228,9 @@ Reach, Near, Far, Forceful
 Ever seen an ogre before? Bigger than that. Dumber and meaner, too. Hope you
 like having cows thrown at you. _Instinct_: Ruin everything.
 
-  * Throw something
-  * Do something stupid
-  * Shake the earth
+- Throw something
+- Do something stupid
+- Shake the earth
 
 Ogre Group, Large, Intelligent
 
@@ -249,9 +249,9 @@ strong and full of hate. We have forged steel and they match it with their
 savagery. We may have forgotten our common roots, but somewhere, deep down,
 the ogres remember. _Instinct_: To return the world to darker days
 
-  * Destroy something
-  * Fly into a rage
-  * Take something by force
+- Destroy something
+- Fly into a rage
+- Take something by force
 
 Razor Boar Solitary
 
@@ -265,8 +265,8 @@ greater trophy of bravery and skill is hard to name, though I hear a razor
 boar killed the Drunkard King in a single thrust. You think you’re a better
 hunter than he? _Instinct_: To shred
 
-  * Rip them apart
-  * Rend armor and weapons
+- Rip them apart
+- Rend armor and weapons
 
 Satyr Group, Devious, Magical, Hoarder
 
@@ -284,9 +284,9 @@ with jokes and sport, will treat our kind with friendliness. They’ve a mean
 streak, though, so if you cross them, make haste elsewhere; very few things
 hold a grudge like the stubborn satyr. _Instinct_: To enjoy
 
-  * Pull others into revelry through magic
-  * Force gifts upon them
-  * Play jokes with illusions and tricks
+- Pull others into revelry through magic
+- Force gifts upon them
+- Play jokes with illusions and tricks
 
 Sprite Horde, Tiny, Stealthy, Magical, Devious, Intelligent
 
@@ -299,9 +299,9 @@ Hand
 I’d classify them elementals, except that “being annoying” isn’t an element.
 _Instinct_: To play tricks
 
-  * Play a trick to expose someone’s true nature
-  * Confuse their senses
-  * Craft an illusion
+- Play a trick to expose someone’s true nature
+- Confuse their senses
+- Craft an illusion
 
 Treant Group, Huge, Intelligent, Amorphous
 
@@ -325,9 +325,9 @@ know the treants be thy foe
 
 _Instinct_: To protect nature
 
-  * Move with implacable strength
-  * Set down roots
-  * Spread old magic
+- Move with implacable strength
+- Set down roots
+- Spread old magic
 
 Werewolf Solitary, Intelligent
 
@@ -348,9 +348,9 @@ have the arrows I gave you? Silver, yes. Ah, you begin to understand. Don’t
 cry, sister. You must do this for me. I cannot bear more blood on my hands.
 You must end this. For me.” _Instinct_: To shed the appearance of civilization
 
-  * Transform to pass unnoticed as beast or man
-  * Strike from within
-  * Hunt like man and beast
+- Transform to pass unnoticed as beast or man
+- Strike from within
+- Hunt like man and beast
 
 Worg Horde, Organized
 
@@ -367,6 +367,6 @@ become a loyal protector or hunting hound in time. Train it well, mind you,
 for the worg are smart and never quite free of their primal urges. _Instinct_:
 To serve
 
-  * Carry a rider into battle
-  * Give its rider an advantage
+- Carry a rider into battle
+- Give its rider an advantage
 

@@ -59,17 +59,17 @@ roll+WIS. ✴On a 7+, you follow the creature’s trail until there’s a
 significant change in its direction or mode of travel. ✴On a 10+, you also
 choose 1:
 
-  * Gain a useful bit of information about your quarry, the GM will tell you what
-  * Determine what caused the trail to end
+- Gain a useful bit of information about your quarry, the GM will tell you what
+- Determine what caused the trail to end
 
 ### Called Shot
 
 When you **attack a defenseless or surprised enemy at range**, you can choose
 to deal your damage or name your target and roll+DEX.
 
-  * Head ✴10+: As 7–9, plus your damage ✴7-9: They do nothing but stand and drool for a few moments.
-  * Arms ✴10+: As 7-9, plus your damage ✴7-9: They drop anything they’re holding.
-  * Legs ✴10+: As 7-9, plus your damage ✴7-9: They’re hobbled and slow moving.
+- Head ✴10+: As 7–9, plus your damage ✴7-9: They do nothing but stand and drool for a few moments.
+- Arms ✴10+: As 7-9, plus your damage ✴7-9: They drop anything they’re holding.
+- Legs ✴10+: As 7-9, plus your damage ✴7-9: They’re hobbled and slow moving.
 
 ### Animal Companion
 
@@ -81,10 +81,10 @@ Wolf, cougar, bear, eagle, dog, hawk, cat, owl, pigeon, rat, mule
 
 Choose a base:
 
-  * Ferocity +2, Cunning +1, 1 Armor, Instinct +1
-  * Ferocity +2, Cunning +2, 0 Armor, Instinct +1
-  * Ferocity +1, Cunning +2, 1 Armor, Instinct +1
-  * Ferocity +3, Cunning +1, 1 Armor, Instinct +2
+- Ferocity +2, Cunning +1, 1 Armor, Instinct +1
+- Ferocity +2, Cunning +2, 0 Armor, Instinct +1
+- Ferocity +1, Cunning +2, 1 Armor, Instinct +1
+- Ferocity +3, Cunning +1, 1 Armor, Instinct +2
 
 Choose as many strengths as its ferocity:
 
@@ -104,12 +104,12 @@ Flighty, savage, slow, broken, frightening, forgetful, stubborn, lame
 
 When you work with your animal companion on something it’s trained in…
 
-  * …and you attack the same target, add its ferocity to your damage
-  * …and you track, add its cunning to your roll
-  * …and you take damage, add its armor to your armor
-  * …and you discern realities, add its cunning to your roll
-  * …and you parley, add its cunning to your roll
-  * …and someone interferes with you, add its instinct to their roll
+- …and you attack the same target, add its ferocity to your damage
+- …and you track, add its cunning to your roll
+- …and you take damage, add its armor to your armor
+- …and you discern realities, add its cunning to your roll
+- …and you parley, add its cunning to your roll
+- …and someone interferes with you, add its instinct to their roll
 
 ## Alignment
 
@@ -133,13 +133,13 @@ Your load is 11+Str. You start with dungeon rations \(5 uses, 1 weight\),
 leather armor \(1 armor, 1 weight\), and a bundle of arrows \(3 ammo, 1
 weight\). Choose your armament:
 
-  * Hunter’s bow \(near, far, 1 weight\) and short sword \(close, 1 weight\)
-  * Hunter’s bow \(near, far, 1 weight\) and spear \(reach, 1 weight\)
+- Hunter’s bow \(near, far, 1 weight\) and short sword \(close, 1 weight\)
+- Hunter’s bow \(near, far, 1 weight\) and spear \(reach, 1 weight\)
 
 Choose one:
 
-  * Adventuring gear \(1 weight\) and dungeon rations \(1 weight\)
-  * Adventuring gear \(1 weight\) and bundle of arrows \(3 ammo, 1 weight\)
+- Adventuring gear \(1 weight\) and dungeon rations \(1 weight\)
+- Adventuring gear \(1 weight\) and bundle of arrows \(3 ammo, 1 weight\)
 
 ## Bonds
 
