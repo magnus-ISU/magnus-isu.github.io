@@ -1,6 +1,7 @@
 <script>
 	import TextBox from '$lib/components/TextBox.svelte';
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 	import { tick } from 'svelte';
 
 	const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -95,12 +96,23 @@
 		return n > 0 ? `+${n}` : `${n}`;
 	}
 
+	// --- Undo stack for programmatic edits (HP/EXP) ---
+	let undoStack = [];
+
+	function pushUndo() { undoStack.push(text); }
+
+	function undo() {
+		if (!undoStack.length) return;
+		text = undoStack.pop();
+	}
+
 	// --- HP editing ---
 	function updateHpInText(newHp) {
 		const lines = text.split('\n');
 		const parts = lines[1].split(',').map(s => s.trim());
 		const idx = parts.findIndex(p => /^HP\s/i.test(p) && !/^Base/i.test(p));
 		if (idx !== -1) {
+			pushUndo();
 			parts[idx] = `HP ${newHp}`;
 			lines[1] = parts.join(', ');
 			text = lines.join('\n');
@@ -108,6 +120,7 @@
 	}
 
 	function updateExpInText(newExp) {
+		pushUndo();
 		const lines = text.split('\n');
 		const parts = lines[1].split(',').map(s => s.trim());
 		const idx = parts.findIndex(p => /^EXP\s/i.test(p));
@@ -151,26 +164,9 @@
 	let editingHp = $state(false);
 	let hpInputEl = $state();
 
-	function commitHp(e) {
-		const raw = e.target.value.trim();
-		if (!raw) { editingHp = false; return; }
-		const currentHp = parsed.hp ?? 0;
-		if (raw.startsWith('+')) {
-			// Heal: +N, capped at maxHp
-			const heal = parseInt(raw.slice(1));
-			if (!isNaN(heal)) updateHpInText(Math.min(currentHp + heal, maxHp ?? Infinity));
-		} else if (raw.startsWith('-')) {
-			// Damage: -N, reduced by armor
-			const dmg = parseInt(raw.slice(1));
-			if (!isNaN(dmg)) {
-				const effective = Math.max(0, dmg - (parsed.armor ?? 0));
-				updateHpInText(currentHp - effective);
-			}
-		} else {
-			// Absolute value
-			const val = parseInt(raw);
-			if (!isNaN(val)) updateHpInText(val);
-		}
+	function handleCommitHp(e) {
+		const result = commitHpFn(e.target.value, parsed.hp ?? 0, maxHp, parsed.armor ?? 0);
+		if (result !== null) updateHpInText(result);
 		editingHp = false;
 	}
 
@@ -425,6 +421,13 @@
 	const bodyHtml = $derived(renderMarkdown(parsed.body));
 </script>
 
+<svelte:window onkeydown={(e) => {
+	if ((e.metaKey || e.ctrlKey) && e.key === 'z' && !e.shiftKey && undoStack.length) {
+		e.preventDefault();
+		undo();
+	}
+}} />
+
 <svelte:head>
 	<title>Character Sheet - Dungeon World</title>
 </svelte:head>
@@ -495,7 +498,7 @@
 										value={parsed.hp}
 										bind:this={hpInputEl}
 										onclick={(e) => e.stopPropagation()}
-										onblur={commitHp}
+										onblur={handleCommitHp}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingHp = false; } }}
 									/>
 								{:else}

@@ -130,9 +130,22 @@
 		if (val == null) return null;
 		return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
 	}
+	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+	let editingHpIdx = $state(-1);
+
 	function clickHp(idx) {
 		if (currentHps[idx] == null) return;
-		currentHps[idx] = currentHps[idx] <= 0 ? hpNum : currentHps[idx] - 1;
+		editingHpIdx = idx;
+	}
+
+	function autofocus(node) {
+		node.focus();
+	}
+
+	function handleMonsterHpCommit(e, idx) {
+		const result = commitHpFn(e.target.value, currentHps[idx], hpNum, armor ?? 0);
+		if (result !== null) currentHps[idx] = result;
+		editingHpIdx = -1;
 	}
 
 	// Chunk HP entries into rows of 6
@@ -272,10 +285,12 @@
 					</div>
 					<div class="monster-vitals">
 						{#if hp !== null && count <= 1}
-							<button class="hp-pill" onclick={() => clickHp(0)} onmousedown={(e) => { if (!e.target.closest('.hp-input')) e.preventDefault(); }} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+							<button class="hp-pill" onclick={() => clickHp(0)} onmousedown={(e) => { if (!e.target.closest('.hp-input')) e.preventDefault(); }} title="Click to edit HP">
 								<span class="vital-label">HP</span>
-								{#if hpNum !== null}
-									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}; width: {String(currentHps[0] ?? 0).length + 1}ch" bind:value={currentHps[0]} onclick={(e) => e.stopPropagation()} />
+								{#if hpNum !== null && editingHpIdx === 0}
+									<input use:autofocus class="hp-input" type="text" style="color: {getHpColor(currentHps[0])}; width: {String(currentHps[0] ?? 0).length + 2}ch" value={currentHps[0]} onclick={(e) => e.stopPropagation()} onblur={(e) => handleMonsterHpCommit(e, 0)} onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingHpIdx = -1; } }} onfocus={(e) => e.target.select()} />
+								{:else if hpNum !== null}
+									<span class="hp-display" style="color: {getHpColor(currentHps[0])}">{currentHps[0]}</span>
 								{:else}
 									<span>{hp}</span>
 								{/if}
@@ -293,7 +308,7 @@
 					{#each hpRows as row}
 						<div class="hp-row">
 							{#each row as idx}
-								<button class="hp-pill" onclick={() => clickHp(idx)} onmousedown={(e) => { if (!e.target.closest('input')) e.preventDefault(); }} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+								<button class="hp-pill" onclick={() => clickHp(idx)} onmousedown={(e) => { if (!e.target.closest('input')) e.preventDefault(); }} title="Click to edit HP">
 									<input
 										class="label-input"
 										style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
@@ -301,8 +316,10 @@
 										onclick={(e) => e.stopPropagation()}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
 									/>
-									{#if hpNum !== null}
-										<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}; width: {String(currentHps[idx] ?? 0).length + 0.5}ch" bind:value={currentHps[idx]} onclick={(e) => e.stopPropagation()} />
+									{#if hpNum !== null && editingHpIdx === idx}
+										<input use:autofocus class="hp-input" type="text" style="color: {getHpColor(currentHps[idx])}; width: {String(currentHps[idx] ?? 0).length + 0.5}ch" value={currentHps[idx]} onclick={(e) => e.stopPropagation()} onblur={(e) => handleMonsterHpCommit(e, idx)} onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingHpIdx = -1; } }} onfocus={(e) => e.target.select()} />
+									{:else if hpNum !== null}
+										<span class="hp-display" style="color: {getHpColor(currentHps[idx])}">{currentHps[idx]}</span>
 									{:else}
 										<span>{hp}</span>
 									{/if}
@@ -637,9 +654,11 @@
 		transition: color 0.2s;
 	}
 
-	.hp-input::-webkit-inner-spin-button,
-	.hp-input::-webkit-outer-spin-button {
-		-webkit-appearance: none;
+	.hp-display {
+		font-size: 0.88rem;
+		text-align: right;
+		transition: color 0.2s;
+		cursor: pointer;
 	}
 
 	.monster-description {
