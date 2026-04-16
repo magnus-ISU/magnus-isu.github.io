@@ -8,6 +8,13 @@
 	let { data } = $props();
 	let longPressTimer;
 	let isLongPress = false;
+	let imgLoaded = $state(false);
+
+	$effect(() => {
+		// Reset loaded state when art URL changes
+		void data.art;
+		imgLoaded = false;
+	});
 
 	const homebrewSlug = $derived(data.homebrewSlug || data.slug);
 	const srdSlug = $derived(data.srdSlug || data.slug);
@@ -81,7 +88,7 @@
 
 {#if data.art}
 	<div class="bg-art">
-		<img src={data.art} alt="" class:mirror={data.artMirror} />
+		<img src={data.art} alt="" class:mirror={data.artMirror && imgLoaded} onload={() => { imgLoaded = true; }} />
 	</div>
 {/if}
 
