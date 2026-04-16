@@ -3,6 +3,8 @@ import { contentIndex, pageArt } from '$lib/dw/navigation.js';
 
 const srdModules = import.meta.glob('/src/lib/dw/srd/*.md');
 const homebrewModules = import.meta.glob('/src/lib/dw/homebrew/**/*.md');
+const srdRaw = import.meta.glob('/src/lib/dw/srd/*.md', { query: '?raw', import: 'default' });
+const homebrewRaw = import.meta.glob('/src/lib/dw/homebrew/**/*.md', { query: '?raw', import: 'default' });
 
 function resolveArt(...keys) {
 	for (const k of keys) {
@@ -61,6 +63,7 @@ export const load = async ({ params }) => {
 	}
 
 	const modules = entry.source === 'srd' ? srdModules : homebrewModules;
+	const rawModules = entry.source === 'srd' ? srdRaw : homebrewRaw;
 	const resolver = modules[modulePath];
 
 	if (!resolver) {
@@ -68,8 +71,10 @@ export const load = async ({ params }) => {
 	}
 
 	const mod = await resolver();
+	const rawSource = rawModules[modulePath] ? await rawModules[modulePath]() : null;
 	return {
 		Content: mod.default,
+		rawSource,
 		title: entry.title,
 		isHomebrew: !!entry.homebrew,
 		slug,

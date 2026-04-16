@@ -30,6 +30,41 @@
 	function onPointerUp() {
 		clearTimeout(longPressTimer);
 	}
+
+	function extractSection(headingText) {
+		const raw = data.rawSource;
+		if (!raw) return null;
+		const lines = raw.split('\n');
+		let startIdx = -1;
+		let level = 0;
+		for (let i = 0; i < lines.length; i++) {
+			const m = lines[i].match(/^(#{1,6})\s+(.+)/);
+			if (m && m[2].trim() === headingText) {
+				startIdx = i;
+				level = m[1].length;
+				break;
+			}
+		}
+		if (startIdx === -1) return null;
+		let endIdx = lines.length;
+		for (let i = startIdx + 1; i < lines.length; i++) {
+			const m = lines[i].match(/^(#{1,6})\s/);
+			if (m && m[1].length <= level) { endIdx = i; break; }
+		}
+		return lines.slice(startIdx, endIdx).join('\n').trimEnd();
+	}
+
+	function handleArticleClick(e) {
+		if (!data.rawSource) return;
+		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+		if (!heading) return;
+		const text = heading.textContent.trim();
+		const section = extractSection(text);
+		if (!section) return;
+		navigator.clipboard.writeText(section);
+		heading.classList.add('copied');
+		setTimeout(() => heading.classList.remove('copied'), 1000);
+	}
 </script>
 
 <svelte:head>
@@ -63,7 +98,7 @@
 	</div>
 {/if}
 
-<article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
+<article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair} onclick={handleArticleClick}>
 	{#if data.render === 'monsters'}
 		<h1>{data.title}</h1>
 		{#if isAllMonsters}
@@ -144,6 +179,24 @@
 
 	.bg-art img.mirror {
 		transform: scaleX(-1);
+	}
+
+	:global(.dw-article h1, .dw-article h2, .dw-article h3, .dw-article h4, .dw-article h5, .dw-article h6) {
+		cursor: pointer;
+		position: relative;
+	}
+
+	:global(.dw-article h1.copied, .dw-article h2.copied, .dw-article h3.copied, .dw-article h4.copied) {
+		color: #8f8;
+		transition: color 0.15s;
+	}
+
+	:global(.dw-article h1.copied::after, .dw-article h2.copied::after, .dw-article h3.copied::after, .dw-article h4.copied::after) {
+		content: 'Copied!';
+		font-size: 0.6em;
+		color: #8f8;
+		margin-left: 0.75rem;
+		font-weight: normal;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
