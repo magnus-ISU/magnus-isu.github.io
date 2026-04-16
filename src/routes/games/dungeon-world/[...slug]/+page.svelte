@@ -239,9 +239,13 @@
 		transform: scaleX(-1);
 	}
 
-	:global(.dw-article h1, .dw-article h2, .dw-article h3, .dw-article h4, .dw-article h5, .dw-article h6) {
+	:global(.dw-article h2, .dw-article h3, .dw-article h4, .dw-article h5, .dw-article h6) {
 		cursor: pointer;
 		position: relative;
+	}
+
+	:global(.dw-article h1) {
+		cursor: pointer;
 	}
 
 	:global(.dw-article h1.copied, .dw-article h2.copied, .dw-article h3.copied, .dw-article h4.copied) {
