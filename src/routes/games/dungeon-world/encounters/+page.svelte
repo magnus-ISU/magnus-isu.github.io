@@ -3,6 +3,7 @@
 	import { allMonsters } from '$lib/dw/monsters.js';
 
 	let text = $state('');
+	const encounterPlaceholder = `Bandit King\n3 bandit\nowlbear`;
 	let customMonsters = $state([]);
 
 	const knownMonsters = $derived([...allMonsters, ...customMonsters]);
@@ -124,7 +125,7 @@
 		<textarea
 			id="encounter-text"
 			bind:value={text}
-			placeholder="Bandit King&#10;Bandit&#10;Bandit&#10;Soldier"
+			placeholder={encounterPlaceholder}
 			rows="5"
 		></textarea>
 		{#if matched.length > 0}

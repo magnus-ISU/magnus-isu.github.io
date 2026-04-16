@@ -122,8 +122,8 @@
 				{#if attacks.length > 0}
 					<span class="summary-damage">{attacks.map(a => a.damage).filter(Boolean).map(d => d.replace(/\s*keep\s+lowest\s*/i, 'kl')).join(', ')}</span>
 				{/if}
-				{#if hp !== null}<span class="summary-stat">HP {hp}</span>{/if}
-				{#if armor !== null}<span class="summary-stat">Armor {armor}</span>{/if}
+				{#if hp !== null}<span class="summary-hp">{hp}</span>{/if}
+				{#if armor !== null}<span class="summary-armor">{armor}</span>{/if}
 				{#if instinct}<span class="summary-instinct">{instinct}</span>{/if}
 			</div>
 		{/if}
@@ -153,17 +153,17 @@
 					</div>
 					<div class="monster-vitals">
 						{#if hp !== null && count <= 1}
-							<span class="vital">
-								<button class="vital-label hp-btn" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
+							<button class="hp-pill" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+								<span class="vital-label">HP</span>
 								{#if hpNum !== null}
-									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} />
+									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} onclick={(e) => e.stopPropagation()} />
 								{:else}
 									<span>{hp}</span>
 								{/if}
-							</span>
+							</button>
 						{/if}
 						{#if armor !== null}
-							<span class="vital"><span class="vital-label">Armor</span> {armor}</span>
+							<span class="vital"><span class="vital-label">Armor</span> <span class="armor-value">{armor}</span></span>
 						{/if}
 					</div>
 				</div>
@@ -174,16 +174,14 @@
 					{#each hpRows as row}
 						<div class="hp-row">
 							{#each row as idx}
-								<span class="vital">
-									<button class="vital-label hp-btn" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
-										HP{idx + 1}
-									</button>
+								<button class="hp-pill" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+									<span class="vital-label">#{idx + 1}</span>
 									{#if hpNum !== null}
-										<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} />
+										<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} onclick={(e) => e.stopPropagation()} />
 									{:else}
 										<span>{hp}</span>
 									{/if}
-								</span>
+								</button>
 							{/each}
 						</div>
 					{/each}
@@ -298,8 +296,18 @@
 		font-family: monospace;
 	}
 
-	.summary-stat {
-		color: #999;
+	.summary-hp {
+		color: #5aaa6a;
+		font-family: monospace;
+	}
+
+	.summary-armor {
+		color: #5a8fd4;
+		font-family: monospace;
+	}
+
+	.armor-value {
+		color: #5a8fd4;
 	}
 
 	.summary-instinct {
@@ -408,6 +416,29 @@
 	.hp-row {
 		display: flex;
 		gap: 0.75rem;
+		justify-content: flex-end;
+	}
+
+	.hp-pill {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		min-width: 5rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 999px;
+		padding: 0.2rem 0.6rem;
+		cursor: pointer;
+		font: inherit;
+		font-size: 0.88rem;
+		color: #ddd;
+		transition: background 0.15s, border-color 0.15s;
+		white-space: nowrap;
+	}
+
+	.hp-pill:hover {
+		background: #333;
+		border-color: #555;
 	}
 
 	.vital {
@@ -443,6 +474,7 @@
 		border: none;
 		padding: 0;
 		margin: 0;
+		text-align: right;
 		font: inherit;
 		font-size: 0.88rem;
 		width: 3.5ch;
