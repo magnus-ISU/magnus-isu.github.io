@@ -117,6 +117,34 @@ export const navigation = [
 				file: 'classes/Trenchcoat',
 				homebrew: true,
 				hidden: true
+			},
+			{
+				title: 'The Branded',
+				slug: 'branded',
+				source: 'homebrew',
+				file: 'classes/Branded',
+				homebrew: true
+			},
+			{
+				title: 'The Dashing Hero',
+				slug: 'dashing-hero',
+				source: 'homebrew',
+				file: 'classes/Dashing_Hero',
+				homebrew: true
+			},
+			{
+				title: 'The Princess',
+				slug: 'princess',
+				source: 'homebrew',
+				file: 'classes/Princess',
+				homebrew: true
+			},
+			{
+				title: 'The Dog',
+				slug: 'dog',
+				source: 'homebrew',
+				file: 'classes/Dog',
+				homebrew: true
 			}
 		]
 	},
