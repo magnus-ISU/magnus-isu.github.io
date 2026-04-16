@@ -1,0 +1,1 @@
+import{b as g,g as s,e as r}from"./lTSu4Se7.js";import{p as e}from"./CyNClcM8.js";let i=g("hb"),o=g(e({}));function p(t){return s(o)[t]??s(i)}function u(t,a,l){l?r(o,e({...s(o),[t]:a})):(r(i,e(a)),r(o,e({})))}export{p as g,u as t};
