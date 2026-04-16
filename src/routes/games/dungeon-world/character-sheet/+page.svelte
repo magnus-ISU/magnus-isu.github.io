@@ -149,8 +149,9 @@
 	function commitExp(e) {
 		const raw = e.target.value.trim();
 		if (!raw) { editingExp = false; return; }
-		const val = parseInt(raw);
-		if (!isNaN(val)) updateExpInText(val);
+		const current = parsed.exp ?? 0;
+		const result = commitHpFn(raw, current, null, 0);
+		if (result !== null) updateExpInText(Math.max(0, result));
 		editingExp = false;
 	}
 
