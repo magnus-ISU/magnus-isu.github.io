@@ -556,10 +556,6 @@
 		cursor: pointer;
 	}
 
-	.circle-xs .circle-text {
-		font-size: 0.7rem;
-	}
-
 	.circle-sm .circle-text {
 		font-size: 0.75rem;
 		cursor: default;
