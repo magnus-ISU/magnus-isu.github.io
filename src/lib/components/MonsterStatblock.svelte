@@ -155,20 +155,20 @@
 	function parseAndRoll(dmg) {
 		if (!dmg || dmg === '??') return null;
 
-		// "3d12 keep lowest 2"
-		const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)/i);
+		// "3d12 keep lowest 2 +3"
+		const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)\s*([+-]\d+)?/i);
 		if (keepLowest) {
-			const count = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3];
+			const count = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3], mod = +(keepLowest[4] || 0);
 			const rolls = Array.from({ length: count }, () => rollDie(sides));
-			return [...rolls].sort((a, b) => a - b).slice(0, keep).reduce((a, b) => a + b, 0);
+			return [...rolls].sort((a, b) => a - b).slice(0, keep).reduce((a, b) => a + b, 0) + mod;
 		}
 
-		// "3d12 keep highest 2"
-		const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)/i);
+		// "3d12 keep highest 2 +9"
+		const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)\s*([+-]\d+)?/i);
 		if (keepHighest) {
-			const count = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3];
+			const count = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3], mod = +(keepHighest[4] || 0);
 			const rolls = Array.from({ length: count }, () => rollDie(sides));
-			return [...rolls].sort((a, b) => b - a).slice(0, keep).reduce((a, b) => a + b, 0);
+			return [...rolls].sort((a, b) => b - a).slice(0, keep).reduce((a, b) => a + b, 0) + mod;
 		}
 
 		// "NdX+M" / "dX+M" / "dX"
@@ -235,7 +235,7 @@
 		{#if !expanded}
 			<div class="monster-summary">
 				{#if attacks.length > 0}
-					<span class="summary-damage">{attacks.map(a => a.damage).filter(Boolean).map(d => d.replace(/\s*keep\s+lowest\s*/i, 'kl')).join(', ')}</span>
+					<span class="summary-damage">{attacks.map(a => a.damage).filter(Boolean).map(d => d.replace(/\s*keep\s+highest\s*/i, 'kh').replace(/\s*keep\s+lowest\s*/i, 'kl')).join(', ')}</span>
 				{/if}
 				{#if hp !== null}<span class="summary-hp">{hp}</span>{/if}
 				{#if armor !== null}<span class="summary-armor">{armor}</span>{/if}

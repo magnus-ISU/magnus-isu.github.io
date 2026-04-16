@@ -47,7 +47,7 @@ export default [
 		tags: 'Solitary, Devious, Planar',
 		hp: 12,
 		armor: 1,
-		attacks: [{ name: 'Stolen dagger', damage: 'w[2d8]', tags: 'Close, Reach' }],
+		attacks: [{ name: 'Stolen dagger', damage: '2d8 keep lowest 1', tags: 'Close, Reach' }],
 		special: 'Burrowing',
 		description: 'Things go missing. A sock, a silver spoon, your dead mother’s bones. We blame the maid, or bad luck, or just a moment of stupid forgetfulness and we move on. We never get to see the real cause of these problems. The spidery thing with human hands and eyes as blue as the deep Ethereal plane from whence the creature comes. We never see the nest it makes of astral silver webbing and stolen objects arranged in some mad pattern. We never watch it assemble its collection of halfling finger-bones, stolen from the hands of the sleeping. We’re lucky, that way.',
 		instinct: 'To steal',

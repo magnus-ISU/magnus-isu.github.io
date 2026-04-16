@@ -248,7 +248,7 @@ export default [
 		tags: 'Solitary, Tiny, Magical',
 		hp: 12,
 		armor: 0,
-		attacks: [{ name: 'Ray', damage: 'w[2d8-2]', tags: 'Near' }],
+		attacks: [{ name: 'Ray', damage: '2d8 keep lowest 1 -2', tags: 'Near' }],
 		special: 'Body of light',
 		description: 'Spot a lantern floating in the darkness, lost traveler in the swamp. Hope—a beacon of shimmering light. You call out to it, but there’s no answer. It begins to fade and so you follow, sloshing through the muck, tiring at the chase, hoping you’re being led to safety. Such a sad tale that always ends in doom. These creatures are a mystery—some say they’re ghosts, others beacons of faerie light. Nobody knows the truth. They are cruel, however. All can agree on that.',
 		instinct: 'To misguide',

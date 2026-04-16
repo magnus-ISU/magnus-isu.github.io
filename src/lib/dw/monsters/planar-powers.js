@@ -5,7 +5,7 @@ export default [
 		hp: 18,
 		armor: 4,
 		attacks: [
-			{ name: 'Sword of Flames', damage: 'b[2d10]+4', tags: 'Close, Forceful, ignores armor' },
+			{ name: 'Sword of Flames', damage: '2d10 keep highest 1 +4', tags: 'Close, Forceful, ignores armor' },
 		],
 		special: 'Wings',
 		description: '“So was it written that the heavens opened up to Avra’hal and did an angel from the clouds emerge to speak unto her and so did it appear to her as her firstborn daughter—beautiful, of ebon skin and golden eyes—and did Avra’hal weep to see it. ‘Be not afraid,’ it commanded her. ‘Go to the villages I have shown you in your dreams and unto them show the word I have written on your soul.’ Avra’hal wept and wept and did agree to do this and did take up her sword and tome and did into the villages go, a great thirst for blood on her lips for the word the angel wrote upon the soul of Avra’hal was ‘kill’.”',
@@ -50,7 +50,7 @@ export default [
 		tags: 'Solitary, Devious, Planar, Hoarder',
 		hp: 12,
 		armor: 0,
-		attacks: [{ name: 'Secret dagger', damage: 'w[2d8]', tags: 'Close' }],
+		attacks: [{ name: 'Secret dagger', damage: '2d8 keep lowest 1', tags: 'Close' }],
 		description: '“Surely, my good man, you must know why I am here. Must know who I am. You said the words. You spilled the blood and followed the instructions almost to the letter. Your pronunciation was a bit off but that’s to be expected. I’ve come to give you what you’ve always wanted, friend. Glory, love, money? Paltry things when you’ve the vaults of hell to plumb. Don’t look so shocked, you knew what this was. You have but one thing we desire. Promise it to us, and the world shall be yours for the taking. Trust me.”',
 		instinct: 'To bargain',
 		moves: [
@@ -115,7 +115,7 @@ export default [
 		tags: 'Horde, Devious, Planar, Intelligent',
 		hp: 10,
 		armor: 0,
-		attacks: [{ name: 'Slime', damage: 'w[2d4]', tags: 'Close' }],
+		attacks: [{ name: 'Slime', damage: '2d4 keep lowest 1', tags: 'Close' }],
 		description: 'Those who have seen visions of the Planes Below, and survived with their sanity intact, speak of masses of these writhing wretches. Maggots with the faces of men and women, crying out for salvation in a nest of flames. Sometimes, they can be goaded out through a rip in the planar caul and emerge, wriggling and in torment, into our world. Once here, they spread misery and sickness during their mayfly lives before expiring into a slurry of gore. All in all, an enticement to do good deeds in life.',
 		instinct: 'To suffer',
 		moves: ['Fill them with despair', 'Beg for mercy', 'Draw evil attention'],
