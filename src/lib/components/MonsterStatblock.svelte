@@ -17,6 +17,18 @@
 	import { tick } from 'svelte';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 
+	function inlineMd(text) {
+		return text
+			.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+			.replace(/__(.+?)__/g, '<strong>$1</strong>')
+			.replace(/\*(.+?)\*/g, '<em>$1</em>')
+			.replace(/_(.+?)_/g, '<em>$1</em>')
+			.replace(/`(.+?)`/g, '<code>$1</code>');
+	}
+
+	const descriptionHtml = $derived(description ? inlineMd(description) : '');
+
 	let expanded = $state(open);
 	$effect(() => { expanded = open; });
 	let el;
@@ -302,7 +314,7 @@
 			{/if}
 
 			{#if description}
-				<div class="monster-description">{description}</div>
+				<div class="monster-description">{@html descriptionHtml}</div>
 			{/if}
 
 			{#if special}
@@ -646,7 +658,6 @@
 	.monster-description {
 		padding: 0.5rem 0.75rem;
 		color: #bbb;
-		font-style: italic;
 		font-size: 0.92rem;
 		line-height: 1.6;
 		background: #1a1a1a;
