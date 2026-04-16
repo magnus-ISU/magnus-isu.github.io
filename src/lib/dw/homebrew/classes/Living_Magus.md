@@ -1,20 +1,14 @@
 # The Wizard
-Damage: d4
-HP: 4+Constitution
-Load: 6+STR
 
-## Alignments
-Good: Use magic to permanently improve someone's life
-Neutral: Discover something about a magical mystery
-Evil: Use magic to cause fear and terror
+Dungeon World has rules. Not the laws of men or the rule of some petty tyrant. Bigger, better rules. You drop something—it falls. You can't make something out of nothing. The dead stay dead, right?
 
-## Bonds
-\_ will play an important role in the events to come. I have foreseen it!  
-\_ is keeping an important secret from me.  
-\_ is woefully misinformed about the world; I will teach them all that I can.  
-\_ must help me unlock my full magical power.  
-\_ has seen the terrible power of magic, but I want to show them a better way.  
-\_ wants me to use magic I'm not willing to.
+Oh, the things we tell ourselves to feel better about the long, dark nights.
+
+You've spent so very long poring over those tomes of yours. The experiments that nearly drove you mad and all the botched summonings that endangered your very soul. For what? For power. What else is there? Not just the power of King or Country but the power to boil a man's blood in his veins. To call on the thunder of the sky and the churn of the roiling earth. To shrug off the rules the world holds so dear.
+
+Let them cast their sidelong glances. Let them call you "warlock" or "diabolist." Who among them can hurl fireballs from their eyes?
+
+Yeah. We didn't think so.
 
 ## Starting Moves
 
@@ -53,13 +47,58 @@ Detect Magic is a cantrip for you.
 When you roll a 6- to **Cast a Spell**, it always succeeds to cast as expected, in addition to whatever the GM says.
 
 ### Bonded
-Take the advanced move **Familiar**.
+Take the advanced move **Familiar**. The ritual to revive them will never be very taxing.
 
 ### Swordmage
 Take the mastery move **Warrior of the Mind**.
 
 ### Sorcerer
 You do not use a spellbook to prepare spells. They are a part of your blood.
+
+## Stats
+
+Damage: d4  
+HP: 4+Constitution  
+Load: 6+STR
+
+## Alignment
+
+Good: Use magic to permanently improve someone's life.  
+Neutral: Discover something about a magical mystery.  
+Evil: Use magic to cause fear and terror.
+
+## Gear
+You start with your spellbook (1 weight) and dungeon rations (5 uses, 1 weight). Choose your defenses:
+- Leather armor (1 armor, 1 weight)
+- Bag of books (5 uses, 2 weight) and 3 healing potions
+
+Choose your weapon:
+- Dagger (hand, 1 weight)
+- Staff (close, two-handed, 1 weight)
+
+Choose one:
+- Healing potion (0 weight)
+- 3 antitoxins (0 weight)
+
+## Names
+*Elf*: Galadiir, Fenfaril, Lilliastre, Phirosalle, Enkirash, Halwyr  
+*Human*: Avon, Morgan, Rath, Ysolde, Ovid, Vitus, Aldara, Xeno, Uri
+
+## Look
+Choose one for each:
+
+Haunted Eyes, Sharp Eyes, or Crazy Eyes  
+Styled Hair, Wild Hair, or Pointed Hat  
+Worn Robes, Stylish Robes, or Strange Robes  
+Pudgy Body, Creepy Body, or Thin Body
+
+## Bonds
+\_ will play an important role in the events to come. I have foreseen it!  
+\_ is keeping an important secret from me.  
+\_ is woefully misinformed about the world; I will teach them all that I can.  
+\_ must help me unlock my full magical power.  
+\_ has seen the terrible power of magic, but I want to show them a better way.  
+\_ wants me to use magic I'm not willing to.
 
 ## Advanced Moves
 
@@ -112,12 +151,13 @@ If you have **Quick Thinking**, you may prepare two additional spells or cantrip
 ### Familiar
 Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar. If your familiar dies, you can perform a **Ritual** to bring it back.
 
-### Familiar's Protection
+### Gigantic Familiar
 *Requires Familiar*  
 When you **are in danger and your foes loom over you**, your familiar gains strength to protect you; roll+CHA. On a 10+, it grows to the size of a grizzly bear and is not going anywhere until you're safe. On a 7-9, choose one:
-- It doesn't grow from it's small size
 - It cannot remain in this form for long
 - Until it shifts back, your familiar is draining magical energy from you at an alarming rate
+
+Your familiar has +2 Strength and 1d10 damage in this form.
 
 ### Know-It-All
 When **another player's character comes to you for advice and you tell them what you think is best**, they get +1 forward when following your advice and you mark experience if they do.
@@ -147,4 +187,4 @@ Choose 3 spells which can hardly be forgotten; it takes but a few seconds of tho
 When you have time and safety with a magic item in a place of power you can empower that item so that the next time you use it its effects are amplified, the GM will tell you exactly how.
 
 ### Warrior of the Mind
-When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. You can tell someone's style from watching them fight in melee for a few moments.
+When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
