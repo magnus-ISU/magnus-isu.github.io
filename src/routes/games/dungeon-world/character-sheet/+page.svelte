@@ -298,10 +298,33 @@
 	function renderMarkdown(src) {
 		if (!src.trim()) return '';
 		const lines = src.split('\n');
+
+		// Pre-scan: count h3s under each h2 (by line index)
+		const h2H3Counts = new Map();
+		let scanH2 = -1;
+		for (let i = 0; i < lines.length; i++) {
+			const hm = lines[i].match(/^(#{1,4})\s/);
+			if (hm) {
+				if (hm[1].length === 2) { scanH2 = i; h2H3Counts.set(i, 0); }
+				else if (hm[1].length === 3 && scanH2 >= 0) h2H3Counts.set(scanH2, h2H3Counts.get(scanH2) + 1);
+			}
+		}
+
 		let html = '';
 		let inList = false;
 		let listTag = '';
 		let paraLines = [];
+		let inMoveBlock = false;
+		let inH2Section = false;
+
+		function closeMoveBlock() {
+			if (inMoveBlock) { html += '</div>'; inMoveBlock = false; }
+		}
+
+		function closeH2Section() {
+			closeMoveBlock();
+			if (inH2Section) { html += '</div>'; inH2Section = false; }
+		}
 
 		function closePendingList() {
 			if (inList) { html += `</${listTag}>`; inList = false; }
@@ -344,13 +367,29 @@
 			return t;
 		}
 
-		for (const line of lines) {
+		for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
+			const line = lines[lineIdx];
 			const hm = line.match(/^(#{1,4})\s+(.*)/);
 			if (hm) {
 				flushPara();
 				closePendingList();
 				const level = hm[1].length;
-				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				if (level <= 2) {
+					closeH2Section();
+					html += `<h${level}>${inline(hm[2])}</h${level}>`;
+					if (level === 2) {
+						const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
+						html += `<div class="h2-section${cols ? ' h2-columns' : ''}">`;
+						inH2Section = true;
+					}
+				} else if (level === 3) {
+					closeMoveBlock();
+					html += '<div class="move-block">';
+					inMoveBlock = true;
+					html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				} else {
+					html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				}
 				continue;
 			}
 
@@ -396,6 +435,7 @@
 		}
 		flushPara();
 		closePendingList();
+		closeH2Section();
 		return html;
 	}
 
@@ -768,8 +808,25 @@
 	}
 
 	.char-body :global(h3) {
+		margin-top: 0;
+	}
+
+	.char-body :global(.move-block + .move-block) {
 		margin-top: 1rem;
 	}
+
+	.char-body :global(.h2-columns) {
+		columns: 2;
+		column-gap: 2rem;
+	}
+
+	@media (max-width: 1028px) {
+		.char-body :global(.h2-columns) {
+			columns: 1;
+		}
+	}
+
+	.char-body :global(.move-block) { break-inside: avoid; }
 
 	/* --- Roll bubble (launches from mouse) --- */
 	@keyframes roll-launch {
