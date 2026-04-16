@@ -1,5 +1,11 @@
 # The Barbarian
 
+You are not from here. Wherever "here" is — this city, this kingdom, this so-called civilization — it is not yours, and you are not fooled by its pretensions. You have seen what people are when the walls come down and the laws stop working: hungry, afraid, desperate. You skipped that lesson. You were born into it.
+
+Where others have ambitions, you have appetites. Where others exercise restraint, you exercise your axe. They call you barbarian like it's an insult. Let them. Their disapproval has never once stopped you, and it never will.
+
+You are a force of nature with opinions about treasure. Gods help whoever gets between you and what you want.
+
 ## Names
 
 Gorm, Si-Yi, Priscilla, Sen, Xia, Anneira, Haepha, Lur, Shar, Korrin, Nkosi,
