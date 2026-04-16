@@ -13,20 +13,31 @@
 
 		const name = get(0);
 		const tags = get(1);
-		const hpRaw = get(2);
-		const armorRaw = get(3);
-		const special = get(4);
-		const description = get(5).replaceAll('\\n', '\n');
-		const instinct = get(6);
+		const line2 = get(2);
 
-		const hpMatch = hpRaw.match(/^(\d+)/);
-		const hp = hpMatch ? +hpMatch[1] : null;
-		const armorMatch = armorRaw.match(/^(\d+)/);
-		const armor = armorMatch ? +armorMatch[1] : null;
+		// Detect combined format: "16 HP, 4 Armor" or "16 HP"
+		const combined = line2.match(/(\d+)\s*HP\s*,\s*(\d+)\s*Armor/i);
+
+		let hp, armor, ofs;
+		if (combined) {
+			hp = +combined[1];
+			armor = +combined[2];
+			ofs = 3;
+		} else {
+			const hpMatch = line2.match(/^(\d+)/);
+			hp = hpMatch ? +hpMatch[1] : null;
+			const armorMatch = get(3).match(/^(\d+)/);
+			armor = armorMatch ? +armorMatch[1] : null;
+			ofs = 4;
+		}
+
+		const special = get(ofs);
+		const description = get(ofs + 1).replaceAll('\\n', '\n');
+		const instinct = get(ofs + 2);
 
 		const attacks = [];
 		const moves = [];
-		for (let i = 7; i < lines.length; i++) {
+		for (let i = ofs + 3; i < lines.length; i++) {
 			const line = lines[i].trim();
 			if (!line) continue;
 			if (line.toLowerCase().startsWith('attack:')) {

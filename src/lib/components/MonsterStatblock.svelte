@@ -15,6 +15,7 @@
 	} = $props();
 
 	import { tick } from 'svelte';
+	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 
 	let expanded = $state(open);
 	$effect(() => { expanded = open; });
@@ -34,14 +35,26 @@
 		clearTimeout(longPressTimer);
 	}
 
-	async function appendNameToClipboard() {
-		let existing = '';
-		try { existing = await navigator.clipboard.readText(); } catch {}
-		const trimmed = existing.trimEnd();
-		const lines = trimmed.split('\n');
-		// If this monster is already the last line, reset to just it
-		const newText = lines[lines.length - 1]?.trim() === name ? name : (trimmed ? trimmed + '\n' + name : name);
-		await navigator.clipboard.writeText(newText);
+	async function handleShiftClick() {
+		// Copy full statblock to clipboard in user-monsters-pasteable format
+		const lines = [name, tags || ''];
+		const vitals = [];
+		if (hp !== null) vitals.push(`${hp} HP`);
+		if (armor !== null) vitals.push(`${armor} Armor`);
+		lines.push(vitals.join(', ') || '0 HP, 0 Armor');
+		lines.push(special || '');
+		lines.push(description || '');
+		lines.push(instinct || '');
+		for (const atk of attacks) {
+			const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
+			lines.push(`attack: ${parts.join(' ; ')}`);
+		}
+		for (const m of moves) lines.push(m);
+		while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
+		await navigator.clipboard.writeText(lines.join('\n'));
+
+		// Also update encounter text
+		encounterText.appendName(name);
 		copied = true;
 		setTimeout(() => { copied = false; }, 1200);
 	}
@@ -49,7 +62,7 @@
 	function handleHeaderClick(e) {
 		if (e.shiftKey || isLongPress) {
 			isLongPress = false;
-			appendNameToClipboard();
+			handleShiftClick();
 			return;
 		}
 		toggleExpanded();

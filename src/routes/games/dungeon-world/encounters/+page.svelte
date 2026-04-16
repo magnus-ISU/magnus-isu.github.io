@@ -1,10 +1,32 @@
 <script>
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
-	import { allMonsters } from '$lib/dw/monsters.js';
+	import TextBox from '$lib/components/TextBox.svelte';
+	import { monsterSections, allMonsters } from '$lib/dw/monsters.js';
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+	import { encounterText } from '$lib/dw/encounterText.svelte.js';
+	import { tick } from 'svelte';
 
-	let text = $state('');
+	let text = $state(encounterText.value);
 	const encounterPlaceholder = `Bandit King\n3 bandit\nowlbear`;
+
+	// Sync local → store
+	$effect(() => { encounterText.value = text; });
+
+	// Sync store → local (shift+click from other components)
+	let searchSectionEl;
+	$effect(() => {
+		const storeVal = encounterText.value;
+		if (storeVal !== text) {
+			// Anchor the search section so the clicked monster doesn't jump
+			const anchorTop = searchSectionEl?.getBoundingClientRect().top;
+			text = storeVal;
+			tick().then(() => {
+				if (anchorTop == null || !searchSectionEl) return;
+				const drift = searchSectionEl.getBoundingClientRect().top - anchorTop;
+				if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			});
+		}
+	});
 
 	const knownMonsters = $derived([...userMonsters.list, ...allMonsters]);
 	const maxWords = $derived(Math.max(...knownMonsters.map((m) => m.name.split(/\s+/).length), 1));
@@ -38,6 +60,29 @@
 		}
 		return results;
 	});
+
+	// Search bar — regex-enabled, same as All Monsters
+	let search = $state('');
+	const filteredSections = $derived.by(() => {
+		if (!search.trim()) return [];
+		const q = search.trim();
+		let test;
+		try {
+			const re = new RegExp(q, 'i');
+			test = (name) => re.test(name);
+		} catch {
+			const lower = q.toLowerCase();
+			test = (name) => name.toLowerCase().includes(lower);
+		}
+		return monsterSections
+			.map(s => ({
+				...s,
+				monsters: s.monsters.filter(m => test(m.name))
+			}))
+			.filter(s => s.monsters.length > 0);
+	});
+	const filteredCount = $derived(filteredSections.reduce((n, s) => n + s.monsters.length, 0));
+	const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
 </script>
 
 <svelte:head>
@@ -48,16 +93,11 @@
 	<h1>Encounters</h1>
 
 	<section class="encounter-input">
-		<label for="encounter-text">Type monster names to build an encounter. Shift+Click or long press monster names in other pages to copy them. Select twice to clear clipboard. Click on HP to track it, attacks to roll them.</label>
-		<textarea
-			id="encounter-text"
-			bind:value={text}
-			placeholder={encounterPlaceholder}
-			rows="5"
-		></textarea>
-		{#if matched.length > 0}
-			<p class="match-count">{matched.length} creature{matched.length === 1 ? '' : 's'}</p>
-		{/if}
+		<label for="encounter-text">
+			Type monster names to build an encounter. Shift Click or Long Press monster names to add them.
+			Click on HP to track it, attacks to roll them, moves to note usage.
+		</label>
+		<TextBox bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} />
 	</section>
 
 	{#if matched.length > 0}
@@ -67,6 +107,16 @@
 			{/each}
 		</section>
 	{/if}
+
+	<section class="monster-search-section" bind:this={searchSectionEl}>
+		<input class="monster-search" type="text" placeholder="Search monsters…" bind:value={search} />
+		{#each filteredSections as section}
+			<h2>{section.name}</h2>
+			{#each section.monsters as m}
+				<MonsterStatblock {...m} open={autoExpand} />
+			{/each}
+		{/each}
+	</section>
 </article>
 
 <style>
@@ -76,26 +126,9 @@
 
 	.encounter-input label {
 		display: block;
-		font-size: 0.85rem;
+		font-size: 0.65rem;
 		color: #999;
 		margin-bottom: 0.4rem;
-	}
-
-	.encounter-input textarea {
-		width: 100%;
-		background: #161616;
-		border: 1px solid #333;
-		border-radius: 6px;
-		color: #ddd;
-		font-family: inherit;
-		font-size: 0.9rem;
-		padding: 0.6rem 0.75rem;
-		resize: vertical;
-		outline: none;
-	}
-
-	.encounter-input textarea:focus {
-		border-color: #d4a847;
 	}
 
 	.match-count {
@@ -106,5 +139,27 @@
 
 	.encounter-results {
 		margin-bottom: 1rem;
+	}
+
+	.monster-search-section {
+		margin-top: 2rem;
+	}
+
+	.monster-search {
+		width: 100%;
+		box-sizing: border-box;
+		background: #161616;
+		border: 1px solid #333;
+		border-radius: 6px;
+		color: #ddd;
+		font-family: inherit;
+		font-size: 0.9rem;
+		padding: 0.5rem 0.75rem;
+		margin-bottom: 1rem;
+		outline: none;
+	}
+
+	.monster-search:focus {
+		border-color: #d4a847;
 	}
 </style>

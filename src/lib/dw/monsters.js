@@ -16,7 +16,7 @@ const order = [
 	...srdSections,
 	'wild-beasts',
 	'denizens-of-the-feywild',
-	'god-killers',
+	'godlike-beings',
 ];
 
 function slugToName(slug) {

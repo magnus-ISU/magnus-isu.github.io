@@ -1,13 +1,35 @@
 <script>
+	import { onMount } from 'svelte';
+
 	let {
 		value = $bindable(''),
 		placeholders = [],
-		rows = 10,
+		rows = 12,
+		storageKey = '',
 	} = $props();
 
 	let scrollTop = $state(0);
 	const lines = $derived(value.split('\n'));
 	const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
+
+	onMount(() => {
+		if (!storageKey) return;
+		try {
+			const saved = localStorage.getItem(storageKey);
+			if (saved != null) value = saved;
+		} catch {}
+	});
+
+	$effect(() => {
+		if (!storageKey) return;
+		try {
+			if (value.length <= 1024) {
+				localStorage.setItem(storageKey, value);
+			} else {
+				localStorage.removeItem(storageKey);
+			}
+		} catch {}
+	});
 </script>
 
 <div class="textbox-wrap">
@@ -27,20 +49,19 @@
 
 <style>
 	.textbox-wrap {
-		display: grid;
+		position: relative;
 		overflow: hidden;
 		border-radius: 6px;
 	}
 
-	.textbox-wrap > :global(*) {
-		grid-area: 1 / 1;
-	}
-
 	.textbox-ph {
+		position: absolute;
+		inset: 0 0 7px 0;
 		padding: 0.6rem 0.75rem;
 		border: 1px solid transparent;
 		pointer-events: none;
 		user-select: none;
+		overflow: hidden;
 	}
 
 	.ph-line {
