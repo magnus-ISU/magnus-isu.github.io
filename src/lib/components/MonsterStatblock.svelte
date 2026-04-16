@@ -4,12 +4,7 @@
 		tags = '',
 		hp = null,
 		armor = null,
-		attack = '',
-		damage = '',
-		attackTags = '',
-		attack2 = '',
-		damage2 = '',
-		attackTags2 = '',
+		attacks = [],
 		special = '',
 		description = '',
 		instinct = '',
@@ -17,7 +12,7 @@
 		notes = ''
 	} = $props();
 
-	const hasStats = $derived(hp !== null || armor !== null || !!attack);
+	const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
 
 	// Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
 	const moveColumns = $derived(
@@ -74,11 +69,11 @@
 		return Array.from({ length: count }, () => rollDie(sides)).reduce((a, b) => a + b, 0) + modifier;
 	}
 
-	function doRoll(dmg, attackKey) {
+	function doRoll(dmg, atkIdx) {
 		const total = parseAndRoll(dmg);
 		if (total === null) return;
 		rollKey++;
-		rollResult = { attackKey, total };
+		rollResult = { atkIdx, total };
 	}
 </script>
 
@@ -93,38 +88,22 @@
 	{#if hasStats}
 		<div class="monster-stats">
 			<div class="monster-attacks">
-				{#if attack}
+				{#each attacks as atk, i}
 					<div class="attack-row">
-						<button class="attack-btn" onclick={() => doRoll(damage, 'atk1')}>{attack}</button>
+						<button class="attack-btn" onclick={() => doRoll(atk.damage, i)}>{atk.name}</button>
 						<span class="roll-slot">
 							{#key rollKey}
-								{#if rollResult?.attackKey === 'atk1'}
+								{#if rollResult?.atkIdx === i}
 									<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
 										{rollResult.total}
 									</span>
 								{/if}
 							{/key}
 						</span>
-						{#if damage}<span class="attack-damage">{damage} damage</span>{/if}
-						{#if attackTags}<span class="attack-tags">{attackTags}</span>{/if}
+						{#if atk.damage}<span class="attack-damage">{atk.damage} damage</span>{/if}
+						{#if atk.tags}<span class="attack-tags">{atk.tags}</span>{/if}
 					</div>
-				{/if}
-				{#if attack2}
-					<div class="attack-row">
-						<button class="attack-btn" onclick={() => doRoll(damage2, 'atk2')}>{attack2}</button>
-						<span class="roll-slot">
-							{#key rollKey}
-								{#if rollResult?.attackKey === 'atk2'}
-									<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
-										{rollResult.total}
-									</span>
-								{/if}
-							{/key}
-						</span>
-						{#if damage2}<span class="attack-damage">{damage2} damage</span>{/if}
-						{#if attackTags2}<span class="attack-tags">{attackTags2}</span>{/if}
-					</div>
-				{/if}
+				{/each}
 			</div>
 			<div class="monster-vitals">
 				{#if hp !== null}
