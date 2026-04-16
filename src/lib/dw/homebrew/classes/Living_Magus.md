@@ -38,7 +38,7 @@ When you **draw on a place of power to create a magical effect**, tell the GM wh
 ## Backgrounds
 
 ### Acolyte
-Add a Cleric Miracle to your spellbook.
+Add a Cleric Miracle to your spellbook. When you reach level 6, add another.
 
 ### Elf
 Detect Magic is a cantrip for you.

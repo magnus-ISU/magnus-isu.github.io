@@ -16,7 +16,7 @@ When you cast this spell choose an alignment: Good, Evil, Lawful, or Chaotic. On
 ### Cause Fear
 Choose a target you can see and a nearby object. The target is afraid of the object so long as you maintain the spell. Their reaction is up to them: flee, panic, beg, fight. You cannot target entities with less than animal intelligence (magical constructs, undead, automatons, and the like). Concentration 1
 ### Magic Weapon
-The weapon you hold while casting does +1d4 damage until you dismiss this spell. Concentration 1
+The weapon you hold while casting does +1d4 damage until you let go or dismiss this spell. When you Miss while attacking with it, you can instead treat your roll as a 10. The spell then ends. Concentration 1
 ### Sanctuary
 As you cast this spell, you walk the perimeter of an area, consecrating it to your deity. As long as you stay within that area you are alerted whenever someone acts with malice within the sanctuary (including entering with harmful intent). Anyone who receives healing within a sanctuary heals +1d4 HP.
 ### Speak With Dead

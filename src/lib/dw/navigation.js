@@ -72,7 +72,15 @@ export const navigation = [
 				srdSlug: 'wizard-srd'
 			},
 			{ title: 'Wizard', slug: 'wizard-srd', source: 'srd', file: 'Wizard', hidden: true, homebrewSlug: 'wizard' },
-			{ title: 'Cleric', slug: 'cleric', source: 'srd', file: 'Cleric' },
+			{
+				title: 'Cleric',
+				slug: 'cleric',
+				source: 'homebrew',
+				file: 'classes/Cleric',
+				homebrew: true,
+				srdSlug: 'cleric-srd'
+			},
+			{ title: 'Cleric', slug: 'cleric-srd', source: 'srd', file: 'Cleric', hidden: true, homebrewSlug: 'cleric' },
 			{ title: 'Thief', slug: 'thief', source: 'srd', file: 'Thief' },
 			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
 			{ title: 'Ranger', slug: 'ranger', source: 'srd', file: 'Ranger' },
