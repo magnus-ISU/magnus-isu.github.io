@@ -1,0 +1,1 @@
+import{l,j as s,m as r}from"./BABQSOUd.js";import{p as e}from"./M5-qKIDb.js";let i=l("hb"),o=l(e({}));function n(t){return s(o)[t]??s(i)}function p(t,a,f){f?r(o,e({...s(o),[t]:a})):(r(i,e(a)),r(o,e({})))}export{n as g,p as t};
