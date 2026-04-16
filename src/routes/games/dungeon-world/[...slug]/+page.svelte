@@ -59,7 +59,7 @@
 	{#if data.render === 'monsters'}
 		<h1>{data.title}</h1>
 		{#each data.monsterSections as section}
-			<h2>{section.name}</h2>
+			{#if data.monsterSections.length > 1}<h2>{section.name}</h2>{/if}
 			{#each section.monsters as m}
 				<MonsterStatblock {...m} />
 			{/each}

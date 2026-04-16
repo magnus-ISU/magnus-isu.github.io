@@ -205,7 +205,8 @@ export const navigation = [
 		category: 'Monsters',
 		items: [
 			{ title: 'Encounters', slug: 'encounters' },
-			{ title: 'Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
+			{ title: 'About Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
+			{ title: 'All Monsters', slug: 'all-monsters', render: 'monsters' },
 			{ title: 'Cavern Dwellers', slug: 'cavern-dwellers', render: 'monsters', monsterSection: 'cavern-dwellers' },
 			{ title: 'Dark Woods', slug: 'dark-woods', render: 'monsters', monsterSection: 'dark-woods' },
 			{ title: 'Lower Depths', slug: 'lower-depths', render: 'monsters', monsterSection: 'lower-depths' },
