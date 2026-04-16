@@ -25,7 +25,7 @@ export const pageArt = {
 	'dashing-hero': 'https://litrpgreads.com/wp-content/uploads/2023/11/dnd-swashbuckler.jpg',
 	'princess': 'https://64.media.tumblr.com/dc8cbb1a46f5ba6512d37eabeb32fe53/49400ecba3e78054-21/s500x750/14cec37c800919fd73ef5f88e9cf63c51224e1cc.pnj',
 	'arcane-duelist': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/611557270_10236484864114506_2387826330232835738_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=0MZfQZq5iY4Q7kNvwGxT3IO&_nc_oc=Adq9-p6znBXybnAeGuisRQMgBFymd5CsR2hnBdD1Nep_1Jxv-nUzMx5AtNQLNwQ_rCo&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=eUgTOVN2DYJ2KYlUeSIkMw&_nc_ss=7a3a8&oh=00_Af2SDf4PQmTmZay1Q177jqpsh6Ov7Pl2n6N9Lr5FTCu7qA&oe=69E6B74A',
-	'dog': 'https://images.unsplash.com/photo-1686592344891-ad645877db25?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+	'dog': { url: 'https://www.oilpaintings.com/images/eugene-verboeckhoven-paintings-sheep-dog-guarding-his-flock/44885/600x600/49804.webp', mirror: true },
 	// Monster Zones
 	'cavern-dwellers': 'https://cros.land/wp-content/uploads/2021/07/crystal_caves_by_josheiten_d5z8fes-pre.jpeg',
 	'dark-woods': 'https://static.wixstatic.com/media/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg',

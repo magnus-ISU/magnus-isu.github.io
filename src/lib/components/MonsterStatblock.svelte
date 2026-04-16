@@ -131,6 +131,7 @@
 		return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
 	}
 	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+	import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
 	let editingHpIdx = $state(-1);
 
 	function clickHp(idx) {
@@ -144,7 +145,11 @@
 
 	function handleMonsterHpCommit(e, idx) {
 		const result = commitHpFn(e.target.value, currentHps[idx], hpNum, armor ?? 0);
-		if (result !== null) currentHps[idx] = result;
+		if (result !== null) {
+			const prev = currentHps[idx];
+			monsterUndo.push(() => { currentHps[idx] = prev; });
+			currentHps[idx] = result;
+		}
 		editingHpIdx = -1;
 	}
 

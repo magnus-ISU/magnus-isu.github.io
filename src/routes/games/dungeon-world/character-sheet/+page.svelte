@@ -489,7 +489,7 @@
 						{/if}
 						{#if parsed.hp !== null && maxHp !== null}
 							{@const hpC = hpColor(parsed.hp, maxHp)}
-							<button class="circle circle-lg" style="border-color: {hpC}" onclick={clickHp} title={parsed.hp <= 0 ? 'Reset HP' : 'Click to reduce HP'}>
+							<button class="circle circle-lg" style="border-color: {hpC}" onclick={clickHp} title="Click to edit HP">
 								<div class="circle-fill" style="height: {hpFillPct}%; background: {hpC}"></div>
 								{#if editingHp}
 									<input

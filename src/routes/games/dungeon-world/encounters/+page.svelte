@@ -6,6 +6,7 @@
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 	import { pageArt } from '$lib/dw/navigation.js';
+	import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
 	import { tick, onMount } from 'svelte';
 
 	const artUrl = typeof pageArt['encounters'] === 'string' ? pageArt['encounters'] : pageArt['encounters']?.url;
@@ -83,6 +84,13 @@
 
 
 </script>
+
+<svelte:window onkeydown={(e) => {
+	if ((e.metaKey || e.ctrlKey) && e.key === 'z' && !e.shiftKey && monsterUndo.length) {
+		e.preventDefault();
+		monsterUndo.pop();
+	}
+}} />
 
 <svelte:head>
 	<title>Encounters - Dungeon World</title>
