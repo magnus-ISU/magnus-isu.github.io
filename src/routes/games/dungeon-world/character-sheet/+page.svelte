@@ -826,6 +826,8 @@
 
 	.char-body :global(h1) {
 		position: static;
+		background: transparent;
+		border-bottom: none;
 	}
 
 	.char-body :global(h2) {

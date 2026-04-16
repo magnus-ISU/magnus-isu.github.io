@@ -48,12 +48,14 @@ Briefly inhabit a corpse you can see as if it was your body, having it perform a
 ### Stick <span style="float:right" >Transmutation 1</span>
 Imagine a specific object you can see. It becomes stuck to whatever it is currently touching, and cannot be separated without damaging it or the thing(s) it is stuck to. The spell lasts until you dismiss it or cast another spell.
 ### Splinter <span style="float:right" >Transmutation 1</span>
-Rest your hand on a wooden, glass, or stone object for about 20 seconds, as you channel power into it. It then explodes violently, leaving behind the splintered ruins.
+Rest your hand on a wooden, glass, or stone object for a long moment, as you focus power into it. It then explodes violently, leaving behind the splintered ruins.
+### Feather fall
+You all those you can see acquire a terminal velocity that is merely painful, not deadly, for a few seconds.
 ## Level 2
 ### Vanastalem <span style="float:right" >Conjuration 2</span>
 Summon rich, expensive clothes tailored just for you to wear, onto your body. Fashionable, by the standards of 150 years ago.
 ### Inksplit <span style="float:right" >Necromancy 2</span>
-Point your hand. A thin wall of liquid darkness leaves your hand and divides your Left and Right. It can be passed, but the tar-like, viscous substance makes it difficult.
+Point your hand. A thin wall of liquid darkness leaves your hand and divides your Left and Right. It can be passed, but the viscous shadow makes it difficult.
 ## Level 3
 ### Dispel Magic <span style="float:right">Abjuration 3</span>
 Choose a spell or magic effect in your presence: this spell rips it apart. Lesser spells are ended, powerful magic is just reduced or dampened so long as you are nearby.
@@ -132,6 +134,8 @@ If they were already asleep, you gain even more control. You can enter the dream
 Lay your hands on a creature, which may be difficult in combat. It takes 2d8 damage and you or another you also touch heals the same.
 ### Deepcrush <span style="float:right" >Transmutation 5</span>
 A sphere of water is pulled into place from existing sources, keeping water away from where you don't want it and enveloping no more than a horse and subjecting all within to crushing, suffocating pressure. Only the strongest or fastest can swim free of the sphere, and those that can’t will soon drown. The sphere lasts until you do (or are forced to do) anything more complex than walking around.
+### Fly <span style="float:right" >Transmutation 5</span>
+You touch another person, who sprouts wings. They can fly faster than a horse, until you end the spell. Ongoing 1
 ## Level 7
 ---
 ### Shadow Walk <span style="float:right" >Conjuration 7</span>
