@@ -205,6 +205,7 @@ export const navigation = [
 		category: 'Monsters',
 		items: [
 			{ title: 'Encounters', slug: 'encounters' },
+			{ title: 'User Monsters', slug: 'user-monsters', skipSlug: true },
 			{ title: 'About Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
 			{ title: 'All Monsters', slug: 'all-monsters', render: 'monsters' },
 			{ title: 'Cavern Dwellers', slug: 'cavern-dwellers', render: 'monsters', monsterSection: 'cavern-dwellers' },

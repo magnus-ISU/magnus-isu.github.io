@@ -20,6 +20,50 @@
 	$effect(() => { expanded = open; });
 	let el;
 
+	// Long-press / shift-click to copy name
+	let longPressTimer;
+	let isLongPress = false;
+	let copied = $state(false);
+
+	function onPointerDown() {
+		isLongPress = false;
+		longPressTimer = setTimeout(() => { isLongPress = true; }, 400);
+	}
+
+	function onPointerUp() {
+		clearTimeout(longPressTimer);
+	}
+
+	async function appendNameToClipboard() {
+		let existing = '';
+		try { existing = await navigator.clipboard.readText(); } catch {}
+		const newText = existing ? existing.trimEnd() + '\n' + name : name;
+		await navigator.clipboard.writeText(newText);
+		copied = true;
+		setTimeout(() => { copied = false; }, 1200);
+	}
+
+	async function handleHeaderClick(e) {
+		if (e.shiftKey || isLongPress) {
+			isLongPress = false;
+			appendNameToClipboard();
+			return;
+		}
+		if (e.detail === 2) {
+			// Double-click: if this monster is the last line, reset clipboard to just it
+			let existing = '';
+			try { existing = await navigator.clipboard.readText(); } catch {}
+			const lines = existing.trimEnd().split('\n');
+			if (lines[lines.length - 1]?.trim() === name) {
+				await navigator.clipboard.writeText(name);
+				copied = true;
+				setTimeout(() => { copied = false; }, 1200);
+			}
+			return;
+		}
+		toggleExpanded();
+	}
+
 	function toggleExpanded() {
 		const oldTop = el.getBoundingClientRect().top;
 		expanded = !expanded;
@@ -107,10 +151,48 @@
 		rollKey++;
 		rollResult = { atkIdx, total };
 	}
+
+	function handleCopy(e) {
+		const sel = window.getSelection();
+		if (!sel.rangeCount) return;
+		const range = sel.getRangeAt(0);
+		if (!el.contains(range.commonAncestorContainer)) return;
+		// Only intercept if the selection includes the monster name
+		const nameEl = el.querySelector('.monster-name');
+		if (!nameEl || !sel.containsNode(nameEl, true)) return;
+
+		let md = `**${name}**`;
+		if (tags) md += ` _${tags}_`;
+		md += '\n';
+		for (const atk of attacks) {
+			md += `${atk.name} (${atk.damage ? atk.damage + ' damage' : '??'})`;
+			if (atk.tags) md += ` ${atk.tags}`;
+			md += '\n';
+		}
+		const vitals = [];
+		if (hp !== null) vitals.push(`${hp} HP`);
+		if (armor !== null) vitals.push(`${armor} Armor`);
+		if (vitals.length) md += vitals.join(', ') + '\n';
+		if (special) md += `**Special Qualities:** ${special}\n`;
+		if (description) md += `\n${description}\n`;
+		if (instinct) md += `\n_Instinct:_ ${instinct}\n`;
+		if (moves.length) md += '\n' + moves.map(m => `- ${m}`).join('\n') + '\n';
+		if (notes) md += `\n> ${notes}\n`;
+
+		e.clipboardData.setData('text/plain', md.trim());
+		e.preventDefault();
+	}
 </script>
 
-<div class="monster" class:is-expanded={expanded} bind:this={el}>
-	<button class="monster-header" onclick={toggleExpanded}>
+<div class="monster" class:is-expanded={expanded} bind:this={el} oncopy={handleCopy}>
+	<button
+		class="monster-header"
+		class:copied
+		onclick={handleHeaderClick}
+		onpointerdown={onPointerDown}
+		onpointerup={onPointerUp}
+		onpointercancel={onPointerUp}
+	>
 		<div class="monster-header-left">
 			<span class="monster-name">{count > 1 ? `${name} ×${count}` : name}</span>
 			{#if tags}
@@ -261,6 +343,17 @@
 
 	.monster-header:hover {
 		background: #2c2c2c;
+	}
+
+	.monster-header.copied {
+		background: #2a3a2a;
+		transition: background 0s;
+	}
+
+	.monster-header.copied .monster-name::after {
+		content: ' +';
+		color: #5aaa6a;
+		font-size: 0.8em;
 	}
 
 	.monster-header-left {

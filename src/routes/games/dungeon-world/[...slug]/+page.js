@@ -9,7 +9,19 @@ export const load = async ({ params }) => {
 	const entry = contentIndex[slug];
 
 	if (!entry) {
-		error(404, 'Page not found');
+		// Check auto-discovered monster sections not in static nav
+		const { monsterSections } = await import('$lib/dw/monsters.js');
+		const section = monsterSections.find(s => s.slug === slug);
+		if (!section) error(404, 'Page not found');
+		return {
+			title: section.name,
+			isHomebrew: true,
+			slug,
+			render: 'monsters',
+			monsterSections: [section],
+			srdSlug: null,
+			homebrewSlug: null
+		};
 	}
 
 	// Data-driven pages (no markdown file needed)
@@ -54,6 +66,16 @@ export const load = async ({ params }) => {
 	};
 };
 
-export const entries = () => {
-	return Object.keys(contentIndex).map((slug) => ({ slug }));
+export const entries = async () => {
+	const { monsterSections } = await import('$lib/dw/monsters.js');
+	const staticSlugs = Object.entries(contentIndex)
+		.filter(([, e]) => !e.skipSlug)
+		.map(([slug]) => ({ slug }));
+	const knownMonsterSections = new Set(
+		Object.values(contentIndex).filter((e) => e.monsterSection).map((e) => e.monsterSection)
+	);
+	const dynamicSlugs = monsterSections
+		.filter((s) => !contentIndex[s.slug] && !knownMonsterSections.has(s.slug))
+		.map((s) => ({ slug: s.slug }));
+	return [...staticSlugs, ...dynamicSlugs];
 };

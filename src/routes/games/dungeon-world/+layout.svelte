@@ -1,10 +1,31 @@
 <script>
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { navigation } from '$lib/dw/navigation.js';
+	import { navigation, contentIndex } from '$lib/dw/navigation.js';
+	import { monsterSections } from '$lib/dw/monsters.js';
 	import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 	let { children } = $props();
+
+	const knownMonsterSections = new Set(
+		Object.values(contentIndex).filter(e => e.monsterSection).map(e => e.monsterSection)
+	);
+
+	const dynamicMonsterItems = monsterSections
+		.filter(s => !contentIndex[s.slug] && !knownMonsterSections.has(s.slug))
+		.map(s => ({
+			title: s.name,
+			slug: s.slug,
+			render: 'monsters',
+			monsterSection: s.slug,
+			homebrew: true
+		}));
+
+	const mergedNavigation = navigation.map(cat =>
+		cat.category === 'Monsters'
+			? { ...cat, items: [...cat.items, ...dynamicMonsterItems] }
+			: cat
+	);
 	let sidebarOpen = $state(false);
 	let longPressTimer;
 	let isLongPress = false;
@@ -64,7 +85,7 @@
 
 	<nav class="dw-sidebar" class:open={sidebarOpen}>
 		<h2><a href="/games/dungeon-world/">Dungeon World</a></h2>
-		{#each navigation as category}
+		{#each mergedNavigation as category}
 			<details open>
 				<summary>{category.category}</summary>
 				<ul>

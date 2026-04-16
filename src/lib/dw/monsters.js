@@ -1,5 +1,18 @@
 const modules = import.meta.glob('./monsters/*.js', { eager: true });
 
+const order = [
+	'cavern-dwellers',
+	'dark-woods',
+	'lower-depths',
+	'twisted-experiments',
+	'the-common-folk',
+	'ravenous-hordes',
+	'planar-powers',
+	'swamp-denizens',
+	'undead-legions',
+	'homebrew-monsters',
+];
+
 function slugToName(slug) {
 	return slug
 		.split('-')
@@ -7,11 +20,22 @@ function slugToName(slug) {
 		.join(' ');
 }
 
-/** @type {{ slug: string, name: string, monsters: object[] }[]} */
-export const monsterSections = Object.entries(modules).map(([path, mod]) => {
+const sections = Object.entries(modules).map(([path, mod]) => {
 	const slug = path.replace('./monsters/', '').replace('.js', '');
-	return { slug, name: slugToName(slug), monsters: mod.default };
+	return { slug, name: slugToName(slug), monsters: mod.default, };
 });
 
+sections.sort((a, b) => {
+	const ai = order.indexOf(a.slug);
+	const bi = order.indexOf(b.slug);
+	if (ai === -1 && bi === -1) return 0;
+	if (ai === -1) return 1;
+	if (bi === -1) return -1;
+	return ai - bi;
+});
+
+/** @type {{ slug: string, name: string, monsters: object[] }[]} */
+export const monsterSections = sections;
+
 /** @type {object[]} */
-export const allMonsters = monsterSections.flatMap((s) => s.monsters);
+export const allMonsters = sections.flatMap((s) => s.monsters);
