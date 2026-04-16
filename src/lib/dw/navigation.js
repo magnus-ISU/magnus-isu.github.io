@@ -40,6 +40,7 @@ export const navigation = [
 				source: 'srd',
 				file: 'Moves_Discussion'
 			},
+			{ title: 'Example of Play', slug: 'example-of-play', source: 'srd', file: 'Example' },
 			{ title: 'Equipment', slug: 'equipment', source: 'srd', file: 'Equipment' },
 			{ title: 'First Session', slug: 'first-session', source: 'srd', file: 'First_Session' },
 			{
@@ -159,7 +160,6 @@ export const navigation = [
 		category: 'Monsters',
 		items: [
 			{ title: 'Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
-			{ title: 'Making Monsters', slug: 'making-monsters', source: 'srd', file: 'Example' },
 			{
 				title: 'Cavern Dwellers',
 				slug: 'cavern-dwellers',
