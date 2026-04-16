@@ -10,8 +10,12 @@
 		instinct = '',
 		moves = [],
 		notes = '',
-		count = 1
+		count = 1,
+		open = false
 	} = $props();
+
+	let expanded = $state(open);
+	$effect(() => { expanded = open; });
 
 	const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
 	const atkNameWidth = $derived(attacks.length > 1 ? Math.max(...attacks.map(a => a.name.length)) + 'ch' : 'auto');
@@ -89,96 +93,110 @@
 	}
 </script>
 
-<div class="monster">
-	<div class="monster-header">
-		<div class="monster-name">{count > 1 ? `${name} ×${count}` : name}</div>
-		{#if tags}
-			<div class="monster-tags">{tags}</div>
-		{/if}
-	</div>
-
-	{#if hasStats}
-		<div class="monster-stats">
-			<div class="monster-attacks">
-				{#each attacks as atk, i}
-					<div class="attack-row">
-						<button class="attack-btn" style="min-width: {atkNameWidth}" onclick={() => doRoll(atk.damage, i)}>{atk.name}</button>
-						<span class="roll-slot">
-							{#key rollKey}
-								{#if rollResult?.atkIdx === i}
-									<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
-										{rollResult.total}
-									</span>
-								{/if}
-							{/key}
-						</span>
-						{#if atk.damage}<span class="attack-damage">{atk.damage} damage</span>{/if}
-						{#if atk.tags}<span class="attack-tags">{atk.tags}</span>{/if}
-					</div>
-				{/each}
-			</div>
-			<div class="monster-vitals">
-				{#if hp !== null && count <= 1}
-					<span class="vital">
-						<button class="vital-label hp-btn" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
-						{#if hpNum !== null}
-							<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} />
-						{:else}
-							<span>{hp}</span>
-						{/if}
-					</span>
-				{/if}
-				{#if armor !== null}
-					<span class="vital"><span class="vital-label">Armor</span> {armor}</span>
-				{/if}
-			</div>
+<div class="monster" class:is-expanded={expanded}>
+	<button class="monster-header" onclick={() => { expanded = !expanded; }}>
+		<div class="monster-header-left">
+			<span class="monster-name">{count > 1 ? `${name} ×${count}` : name}</span>
+			{#if tags}
+				<span class="monster-tags">{tags}</span>
+			{/if}
 		</div>
-	{/if}
+		{#if !expanded}
+			<div class="monster-summary">
+				{#if attacks.length > 0}
+					<span class="summary-damage">{attacks.map(a => a.damage).filter(Boolean).map(d => d.replace(/\s*keep\s+lowest\s*/i, 'kl')).join(', ')}</span>
+				{/if}
+				{#if hp !== null}<span class="summary-stat">HP {hp}</span>{/if}
+				{#if armor !== null}<span class="summary-stat">Armor {armor}</span>{/if}
+				{#if instinct}<span class="summary-instinct">{instinct}</span>{/if}
+			</div>
+		{/if}
+	</button>
 
-	{#if hp !== null && count > 1}
-		<div class="monster-hp-grid">
-			{#each hpRows as row}
-				<div class="hp-row">
-					{#each row as idx}
+	{#if expanded}
+		{#if hasStats}
+			<div class="monster-stats">
+				<div class="monster-attacks">
+					{#each attacks as atk, i}
+						<div class="attack-row">
+							<button class="attack-btn" style="min-width: {atkNameWidth}" onclick={(e) => { e.stopPropagation(); doRoll(atk.damage, i); }}>{atk.name}</button>
+							<span class="roll-slot">
+								{#key rollKey}
+									{#if rollResult?.atkIdx === i}
+										<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
+											{rollResult.total}
+										</span>
+									{/if}
+								{/key}
+							</span>
+							{#if atk.damage}<span class="attack-damage">{atk.damage} damage</span>{/if}
+							{#if atk.tags}<span class="attack-tags">{atk.tags}</span>{/if}
+						</div>
+					{/each}
+				</div>
+				<div class="monster-vitals">
+					{#if hp !== null && count <= 1}
 						<span class="vital">
-							<button class="vital-label hp-btn" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
-								HP{idx + 1}
-							</button>
+							<button class="vital-label hp-btn" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
 							{#if hpNum !== null}
-								<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} />
+								<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} />
 							{:else}
 								<span>{hp}</span>
 							{/if}
 						</span>
-					{/each}
+					{/if}
+					{#if armor !== null}
+						<span class="vital"><span class="vital-label">Armor</span> {armor}</span>
+					{/if}
 				</div>
-			{/each}
-		</div>
-	{/if}
+			</div>
+		{/if}
 
-	{#if description}
-		<div class="monster-description">{description}</div>
-	{/if}
+		{#if hp !== null && count > 1}
+			<div class="monster-hp-grid">
+				{#each hpRows as row}
+					<div class="hp-row">
+						{#each row as idx}
+							<span class="vital">
+								<button class="vital-label hp-btn" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+									HP{idx + 1}
+								</button>
+								{#if hpNum !== null}
+									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} />
+								{:else}
+									<span>{hp}</span>
+								{/if}
+							</span>
+						{/each}
+					</div>
+				{/each}
+			</div>
+		{/if}
 
-	{#if instinct || special}
-		<div class="monster-instinct">
-			{#if instinct}<span><strong>Instinct:</strong> {instinct}</span>{/if}
-			{#if special}<span class="monster-special">{special}</span>{/if}
-		</div>
-	{/if}
+		{#if description}
+			<div class="monster-description">{description}</div>
+		{/if}
 
-	{#if moves.length > 0}
-		<div class="monster-moves" style="grid-template-columns: repeat({moveColumns}, 1fr)">
-			{#each moves as move, i}
-				<button class="move-pill" class:used={usedMoves.has(i)} onclick={() => toggleMove(i)}>
-					{move}
-				</button>
-			{/each}
-		</div>
-	{/if}
+		{#if instinct || special}
+			<div class="monster-instinct">
+				{#if instinct}<span><strong>Instinct:</strong> {instinct}</span>{/if}
+				{#if special}<span class="monster-special"><strong>Special:</strong> {special}</span>{/if}
+			</div>
+		{/if}
 
-	{#if notes}
-		<div class="monster-notes">{notes}</div>
+		{#if moves.length > 0}
+			<div class="monster-moves" style="grid-template-columns: repeat({moveColumns}, 1fr)">
+				{#each moves as move, i}
+					<button class="move-pill" class:used={usedMoves.has(i)} onclick={() => toggleMove(i)}>
+						{move}
+					</button>
+				{/each}
+			</div>
+		{/if}
+
+		{#if notes}
+			<div class="monster-notes">{notes}</div>
+		{/if}
 	{/if}
 </div>
 
@@ -186,14 +204,37 @@
 	.monster {
 		border: 1px solid #333;
 		border-radius: 6px;
-		margin: 1.25rem 0;
 		overflow: hidden;
 	}
 
+	.monster.is-expanded {
+		margin: 1.25rem 0;
+	}
+
 	.monster-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem 0.75rem;
+		width: 100%;
 		background: #252525;
 		padding: 0.45rem 0.75rem;
+		border: none;
 		border-bottom: 1px solid #333;
+		cursor: pointer;
+		text-align: left;
+		font: inherit;
+		transition: background 0.15s;
+	}
+
+	.monster-header:hover {
+		background: #2c2c2c;
+	}
+
+	.monster-header-left {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
 	}
 
 	.monster-name {
@@ -207,7 +248,29 @@
 		font-style: italic;
 		color: #aaa;
 		font-size: 0.85rem;
-		margin-top: 0.1rem;
+	}
+
+	.monster-summary {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin-left: auto;
+		font-size: 0.8rem;
+		color: #888;
+	}
+
+	.summary-damage {
+		color: #d4a847;
+		font-family: monospace;
+	}
+
+	.summary-stat {
+		color: #999;
+	}
+
+	.summary-instinct {
+		color: #777;
+		font-style: italic;
 	}
 
 	.monster-stats {
