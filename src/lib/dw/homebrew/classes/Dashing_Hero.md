@@ -18,17 +18,18 @@ When you **laugh confidently before performing a crazy acrobatic feat**, describ
 - You grab someone nearby and bring them along with you
 - You show off and feel fantastic about it — take +1 forward
 
-### Parry
-When you **parry an enemy's attack with your blade**, roll+DEX. On a 10+, choose 2. On a 7-9, choose 1:
-- You take no damage.
-- You deal damage equal to your level to your opponent.
-- You lock blades with them, keeping their full attention.
+### You Seem a Decent Fellow
+When you **test an opponent's defenses with blade and footwork**, roll+DEX. On a 10+, choose 2. On a 7-9, choose 1:
+- You maneuver them exactly where you want them
+- You draw their full attention away from your allies, as long as you like
+- You create an opening for a devastating strike — take +1d6 damage forward
+- You learn something about their fighting style — ask the GM one Discern Realities question about them
 
 ### Plan of Action
 There is always a chandelier, rope, window, cart, easily-spooked herd of livestock, or similar unusual environmental hazard handy in any situation in which it would be convenient for you and remotely plausible.
 
 ### True Love and High Adventure
-When you **attempt to enact a daring plan or defend the honor of a friend or lover**, gain 3 hold. You can spend 1 hold to take +1 to any Parry, Defy Danger, or Daring Devil roll made to advance your daring plan or defend their honor. You lose all of this hold after successfully defending their honor or finishing your plan.
+When you **attempt to enact a daring plan or defend the honor of a friend or lover**, hold 3 Daring. You can spend 1 Daring to take +1 to any You Seem a Decent Fellow, Defy Danger, or Daring Devil roll made to advance your daring plan or defend their honor. You lose all Daring after successfully defending their honor or finishing your plan.
 
 ## Backgrounds
 
@@ -36,7 +37,7 @@ When you **attempt to enact a daring plan or defend the honor of a friend or lov
 You are especially resourceful. When you **use Plan of Action**, take +1 to any roll made to make use of hazards created by the move.
 
 ### Elf
-Your blades dance around your enemies' defenses with ease. When you **deal damage using Parry**, ignore armor.
+Your blades dance around your enemies' defenses with ease. When you **deal +1d6 from You Seem a Decent Fellow**, you pierce through all armor.
 
 ## Stats
 
@@ -100,7 +101,7 @@ When you **need to get somewhere quickly**, roll+DEX. On a 10+, you get where yo
 When you are **looting for supplies**, you will always find 1 use of bandages, adventuring gear, weaponry, ammo, or any other basic equipment you need, if it would be remotely plausible.
 
 ### Now I Have the Upper Hand
-Add the following options to Parry:
+Add the following options to **Defend** when you spend Readiness:
 - Disarm your opponent, sending their weapon flying across the room.
 - Steal a visible item off of their person. They don't notice it's gone until you inevitably flaunt the fact you have it.
 
@@ -116,6 +117,9 @@ Gain one move from a playbook no one else is currently using.
 ### Multiclass Dabbler
 Gain one move from another class. Treat your level as one lower for choosing the move.
 
+### The Best Defense
+When you **hold your blade and see a projectile** loosed at you, you can parry it, causing it to miss you. Explosives, boulders, or magical attacks might still harm you.
+
 ## Mastery Moves
 
 ### A Knight in Shining Armor Appears
@@ -128,7 +132,7 @@ When you **dramatically appear in the middle of a tense situation**, deliver a q
 You have a personal minstrel who follows you everywhere and sings your praises. When they **sing you a song to prepare you for battle**, you and your allies take +1 forward. Should your minstrel ever die, a new one shows up at the first reasonable opportunity.
 
 ### ...I Can Do Better
-*Replaces Anything You Can Do...*
+*Replaces Anything You Can Do...*  
 Your skill is beyond compare. When you **Make Camp**, choose one move another player knows, and gain hold equal to the number of bonds you have with that player. When you **use the chosen move**, you can spend 1 hold to take +1 to your roll. When you **Make Camp**, lose any remaining hold from this move.
 
 ### Just a Flesh Wound
@@ -138,7 +142,7 @@ When you **take a truly grievous wound**, roll+CON. On a 10+, choose two. On a 7
 - Take half damage
 
 ### Loyal Fans
-*Requires Famous*
+*Requires Famous*  
 When you **speak to a group of your fans**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. On a miss, they give you the paparazzi treatment. Spend your hold 1-for-1 on the following:
 - Bring people forward and deliver them to you.
 - Bring forward all their precious things.
@@ -147,18 +151,17 @@ When you **speak to a group of your fans**, roll+CHA. On a 10+, hold 3. On a 7-9
 - Go quietly back to their lives.
 
 ### Master Swordsman
-*Requires Now I Have the Upper Hand*
-Your swordsmanship is unparalleled. When you **roll a 12+ on Parry**, choose 4 options from the list. On a 10-11, choose 3 options; on a 7-9, choose 2.
+Your swordsmanship is unparalleled. When you use **You Seem a Decent Fellow**, choose one additional option from the list.
 
 ### Thrill of Danger
 When an **enemy gets the drop on you** or you **enact an excessively reckless plan**, take +1 to Defy Danger.
 
 ### Otherworldly
-*Requires Worldly*
+*Requires Worldly*  
 Gain one move from a playbook no one else is currently using.
 
 ### Multiclass Initiate
-*Requires Multiclass Dabbler*
+*Requires Multiclass Dabbler*  
 Gain one move from another class. Treat your level as one lower for choosing the move.
 
 *A playbook by Jacob Randolph*

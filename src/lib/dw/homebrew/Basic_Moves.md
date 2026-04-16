@@ -14,14 +14,16 @@ When **danger looms, the stakes are high, and you act anyway**, if no other move
 On a 10+, you pull it off as well as one could hope; on a 7-9, you can do it, but the GM will present a lesser success, a cost, or a consequence (and maybe a choice between them, or a chance to back down).
 
 ### Hack & Slash
-When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected (Deal Damage) and pick 1:
+When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, Deal Damage to every target, and pick 1:
 - Evade, prevent, or counter the enemy's attack
 - Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
 
 On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack.
 
 ### Volley
-When you **take aim and shoot at an enemy at range**, roll+DEX. On a 10+ you have a clear shot — deal your damage. On a 7-9, you do damage, but it isn't easy and the GM will move against you.
+When you **take aim and shoot at an enemy at range**, roll+DEX. On a 10+ you have a clear shot — deal your damage. On a 7-9, you do damage, but choose one:
+- It takes a *lot* of tries; you use up your quiver, and run out of Ammo.
+- It isn't easy; you have to aim for a while, or move into position, or cannot pay attention nearby, and the GM will move against you.
 
 ### Defend
 When you **take up a defensive stance or jump in to protect others**, roll+CON: on a 10+, hold 3 Readiness; on a 7-9, hold 1 Readiness. You can spend Readiness 1-for-1 to:
@@ -110,10 +112,9 @@ When you **carry more than your Load**, you're encumbered (_noisy, slow, hot, qu
 
 ### Level Up
 When you **have downtime and Level+7 XP**:
-- Spend Level+7 XP.
-- Increase your Level by 1.
+- Spend Level+7 XP to increase your Level by 1.
 - Choose a new advanced move from your class.
-- At even levels, increase a stat modifier by 1 (if it is CON then increase your current and maximum HP by 3).
+- At even levels, increase a stat modifier by 1, capped by your Level or 3. If it is CON then increase your current and maximum HP by 3.
 
 ### End of Session
 When you **reach the end of a session**, describe how your opinion of or relationship with another character (PC or NPC) has changed. If no one objects, mark XP. Then everyone marks XP for each of the following questions:
