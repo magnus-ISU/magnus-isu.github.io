@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
@@ -54,17 +55,24 @@
 		return lines.slice(startIdx, endIdx).join('\n').trimEnd();
 	}
 
-	function handleArticleClick(e) {
-		if (!data.rawSource) return;
-		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
-		if (!heading) return;
-		const text = heading.textContent.trim();
-		const section = extractSection(text);
-		if (!section) return;
-		navigator.clipboard.writeText(section);
-		heading.classList.add('copied');
-		setTimeout(() => heading.classList.remove('copied'), 1000);
-	}
+	let articleEl;
+	onMount(() => {
+		const el = articleEl;
+		if (!el) return;
+		function handleClick(e) {
+			if (!data.rawSource) return;
+			const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+			if (!heading) return;
+			const text = heading.textContent.trim();
+			const section = extractSection(text);
+			if (!section) return;
+			navigator.clipboard.writeText(section);
+			heading.classList.add('copied');
+			setTimeout(() => heading.classList.remove('copied'), 1000);
+		}
+		el.addEventListener('click', handleClick);
+		return () => el.removeEventListener('click', handleClick);
+	});
 </script>
 
 <svelte:head>
@@ -98,7 +106,7 @@
 	</div>
 {/if}
 
-<article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair} onclick={handleArticleClick}>
+<article bind:this={articleEl} class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	{#if data.render === 'monsters'}
 		<h1>{data.title}</h1>
 		{#if isAllMonsters}

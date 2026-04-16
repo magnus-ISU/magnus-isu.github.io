@@ -622,19 +622,6 @@
 		color: #ccc;
 	}
 
-	.hp-btn {
-		background: none;
-		border: none;
-		padding: 0;
-		font: inherit;
-		cursor: pointer;
-		transition: color 0.15s;
-	}
-
-	.hp-btn:hover {
-		color: #bbb;
-	}
-
 	.hp-input {
 		background: none;
 		border: none;

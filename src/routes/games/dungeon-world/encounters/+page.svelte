@@ -114,12 +114,6 @@
 		margin-bottom: 0.4rem;
 	}
 
-	.match-count {
-		color: #888;
-		font-size: 0.8rem;
-		margin: 0.3rem 0 0;
-	}
-
 	.encounter-results {
 		margin-bottom: 1rem;
 	}

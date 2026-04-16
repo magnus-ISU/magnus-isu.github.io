@@ -125,7 +125,7 @@
 	}
 
 	let editingExp = $state(false);
-	let expInputEl;
+	let expInputEl = $state();
 
 	function startEditExp(e) {
 		e.stopPropagation();
@@ -149,7 +149,7 @@
 	}
 
 	let editingHp = $state(false);
-	let hpInputEl;
+	let hpInputEl = $state();
 
 	function commitHp(e) {
 		const raw = e.target.value.trim();
@@ -464,7 +464,8 @@
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingExp = false; } }}
 									/>
 								{:else}
-									<span class="circle-text" onclick={startEditExp}>{parsed.exp}</span>
+									<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+								<span class="circle-text" onclick={startEditExp} role="button" tabindex="0">{parsed.exp}</span>
 								{/if}
 								<span class="circle-label">EXP</span>
 							</button>

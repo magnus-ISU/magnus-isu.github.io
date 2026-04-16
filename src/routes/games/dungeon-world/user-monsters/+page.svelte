@@ -155,7 +155,7 @@
 
 {#if pendingDelete}
 	<div class="modal-backdrop" onclick={cancelDelete} role="presentation">
-		<div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+		<div class="modal" onpointerdown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
 			<p>Delete <strong>{pendingDelete}</strong>?</p>
 			<div class="modal-actions">
 				<button class="action-btn primary danger" onclick={confirmDelete}>Delete</button>
