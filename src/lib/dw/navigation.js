@@ -218,6 +218,13 @@ export const navigation = [
 			{ title: 'Swamp Denizens', slug: 'swamp-denizens', render: 'monsters', monsterSection: 'swamp-denizens' },
 			{ title: 'Undead Legions', slug: 'undead-legions', render: 'monsters', monsterSection: 'undead-legions' },
 			{
+				title: 'Denizens of the Feywild',
+				slug: 'denizens-of-the-feywild',
+				homebrew: true,
+				render: 'monsters',
+				monsterSection: 'denizens-of-the-feywild'
+			},
+			{
 				title: 'Homebrew Monsters',
 				slug: 'monsters-homebrew',
 				homebrew: true,
