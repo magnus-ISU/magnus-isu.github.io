@@ -22,7 +22,7 @@ On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack
 
 ### Volley
 When you **take aim and shoot at an enemy at range**, roll+DEX. On a 10+ you have a clear shot — deal your damage. On a 7-9, you do damage, but choose one:
-- It takes a *lot* of tries; you use up your quiver, and run out of Ammo.
+- If your weapon uses Ammo: It takes a *lot* of tries; you fire your last arrow, and you'll need to recover some Ammo or switch tactics.
 - It isn't easy; you have to aim for a while, or move into position, or cannot pay attention nearby, and the GM will move against you.
 
 ### Defend
