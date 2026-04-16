@@ -1,32 +1,10 @@
 # The Druid
-Damage: d6
-HP: 6+Constitution
-Load: 6+STR
 
-## Alignments
-Good: Help someone or something grow  
-Neutral: Eliminate an unnatural menace  
-Chaotic: Destroy a symbol of civilization  
+Cast your eyes around the fire. What has brought you to these people, stinking of the dust and sweat of the city? Perhaps it is a kindness—do you protect them as the mother bear watches over her cubs? Are they your pack, now? Strange brothers and sisters you have. Whatever your inspiration, they would certainly fail without your sharp senses and sharper claws.
 
-## Bonds
-- \_ smells more like prey than a hunter.
-- The spirits told me of a great danger following \_
-- I have shown \_ a secret rite of the Land
-- Which of you also reveres the old gods?
-- Which of you dismisses me as a primitive?
-- Which of you disregards the natural order?
-- Which of you requires my guidance?
-- Which of you is also a follower of my sect?
-- Which of you am I commanded to protect?
-- Which of you is being watched by my sect?
-- Which of you has reason to distrust my sect?
-- About which of you do the spirits whisper?
-- Which of you is followed by a dark presence?
-- Which of you thinks thinks me a mummer?
-- Which of you has also seen the spirit realm?
-- Which of you has shared in my adventures?
-- Which of you is often the butt of my jokes?
-- Which of you most enjoys my tales?
+You are of the sacred spaces; you are born of soil and wear the marks of her spirits on your skin. You may have had a life before, maybe you were a city dweller like them, but not now. You've given up that static shape. Listen to your allies pray to their carved stone gods and polish their silver shells. They speak of the glory they'll find back in that festering town you left behind.
+
+Their gods are children, their steel is false protection. You walk the old ways, you wear the pelts of the earth itself. You'll take your share of the treasure, but will you ever walk as one of them? Only time will tell.
 
 ## Starting Moves
 
@@ -67,6 +45,66 @@ When you **use adventurer's gear to craft an effigy of your totem**, set it to w
 ### Trickster/Culture Hero
 When you **Defy Danger or Parley using flattery or deceit**, you have advantage.
 When you **use adventurer's gear**, you can produce something strange & magical. Say how you stole/ won it and how it's useful right now, but ask the GM how it's limited and problematic.
+
+## Stats
+
+Damage: d6
+HP: 6+Constitution
+Load: 6+STR
+
+## Alignment
+
+Good: Help someone or something grow.
+Neutral: Eliminate an unnatural menace.
+Chaotic: Destroy a symbol of civilization.
+
+## Gear
+You carry some token of your land, describe it. Choose your defenses:
+- Hide armor (1 armor, 1 weight)
+- Wooden shield (+1 armor, 1 weight)
+
+Choose your armament:
+- Shillelagh (close, 2 weight)
+- Staff (close, two-handed, 1 weight)
+- Spear (close, thrown, near, 1 weight)
+
+Choose one:
+- Adventuring gear (1 weight)
+- Poultices and herbs (2 uses, 1 weight)
+- Halfling pipeleaf (0 weight)
+- 3 antitoxin (0 weight)
+
+## Names
+*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor
+*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah
+*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei
+
+## Look
+Choose one for each:
+
+Wise Eyes, Wild Eyes, or Haunting Eyes
+Furry Hood, Messy Hair, or Braided Hair
+Ceremonial Garb, Practical Leathers, or Weathered Hides
+
+## Bonds
+\_ smells more like prey than a hunter.
+The spirits told me of a great danger following \_
+I have shown \_ a secret rite of the Land
+Which of you also reveres the old gods?
+Which of you dismisses me as a primitive?
+Which of you disregards the natural order?
+Which of you requires my guidance?
+Which of you is also a follower of my sect?
+Which of you am I commanded to protect?
+Which of you is being watched by my sect?
+Which of you has reason to distrust my sect?
+About which of you do the spirits whisper?
+Which of you is followed by a dark presence?
+Which of you thinks thinks me a mummer?
+Which of you has also seen the spirit realm?
+Which of you has shared in my adventures?
+Which of you is often the butt of my jokes?
+Which of you most enjoys my tales?
 
 ## Advanced Moves
 
@@ -123,18 +161,18 @@ When you **borrow a form**, you may spend a minute to grant the form to your com
 When you **Shapechange**, you can take -1 to the roll in order to take on the form of a specific individual or creature you have seen. Even if you succeed, take -1 ongoing until you release the form.
 
 ### Formshaper
-*Requires Formcrafter*  
+*Requires Formcrafter*
 When you **Shapechange**, choose to increase your armor by 1 or deal an additional d4 damage.
 
 ### Grove of the Gods
 You know and walk the secret paths to the eldest glens. Even in the busiest city or the harshest dungeons, when you **seek the Grove**, you and those you directly lead will find it. You can always return the way you came; but the spirits may show you other ways out, for a price.
 
 ### Forms of the Divine
-*Requires God Amidst the Wastes*  
+*Requires God Amidst the Wastes*
 You can Channel a Spell from any form, not just your natural one.
 
 ### In Nature Reborn
-*Requires By Nature Sustained*  
+*Requires By Nature Sustained*
 You no longer age or sleep. When you **fall to 0 hit points**, do not roll your Last Breath. A seed (like an acorn?) somewhere on your corpse will grow in a few days back into yourself, so long as it is not destroyed.
 
 ### Chimera
