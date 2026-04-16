@@ -37,7 +37,7 @@ export const pageArt = {
 	'swamp-denizens': 'https://spriggans-den.com/wp-content/uploads/2019/05/the_marsh_by_johnofthenorth-d5wajrj-e1559130315634.jpg',
 	'undead-legions': 'https://www.worldanvil.com/uploads/images/b7e966bce728ddbaf67f65ddca76e6c0.jpg',
 	'wild-beasts': 'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
-	'godlike-beings': 'https://i.pinimg.com/474x/ab/eb/6f/abeb6fcd1f0850b0256e9f87f1cf8e43.jpg',
+	'godlike-beings': 'https://static.wikia.nocookie.net/pathfinderenchanter/images/c/c0/Fire_demon-wallpaper-2560x1920.jpg/revision/latest?cb=20140323200550',
 	'random-homebrew': { url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp', mirror: true },
 	// GMing
 	'gm': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/dnd-gods-2024-6.png?resize=800%2C450&ssl=1',
