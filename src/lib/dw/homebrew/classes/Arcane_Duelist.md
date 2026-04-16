@@ -5,7 +5,7 @@ Battle is not a means to an end: it is an art. Where others see nothing but chao
 ## Starting Moves
 
 ### Arcane Bladework
-When you **strike with magic and steel**, roll+STR to **Hack and Slash**. On a 10+, deal your damage and apply 1 technique.
+When you **strike with magic and steel**, roll to **Hack and Slash**. On a 10+, deal your damage and apply 1 technique.
 
 ### Throw Down the Gauntlet
 When you **challenge someone to a duel**, roll+CHA. On a 10+, they choose 2 if they do not accept. On a 7-9, they choose 1 if they do not accept.
@@ -98,7 +98,7 @@ When you **re-encounter somebody who has wronged you**, roll+INT. On a 10+, choo
 
 ### Flawless Bladework
 *Replaces Arcane Bladework*  
-When you **strike with magic and steel**, roll+STR to **Hack and Slash**. On a 10+, deal your damage and apply INT techniques.
+When you **strike with magic and steel**, roll to **Hack and Slash**. On a 10+, deal your damage and apply INT techniques.
 
 ### Blade Artist
 Learn 3 techniques.
