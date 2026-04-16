@@ -48,15 +48,18 @@
 		clearTimeout(longPressTimer);
 	}
 
+	function stripHtml(s) { return s.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim(); }
+
 	function extractSection(headingText) {
 		const raw = data.rawSource;
 		if (!raw) return null;
+		const needle = headingText.replace(/\s+/g, ' ').trim();
 		const lines = raw.split('\n');
 		let startIdx = -1;
 		let level = 0;
 		for (let i = 0; i < lines.length; i++) {
 			const m = lines[i].match(/^(#{1,6})\s+(.+)/);
-			if (m && m[2].trim() === headingText) {
+			if (m && stripHtml(m[2]) === needle) {
 				startIdx = i;
 				level = m[1].length;
 				break;
@@ -75,16 +78,47 @@
 	onMount(() => {
 		const el = articleEl;
 		if (!el) return;
+		let longPressHeading = null;
+		let longPressTimeout;
+
+		function doCopy(section, heading, append) {
+			if (append) {
+				navigator.clipboard.readText().then(existing => {
+					const sep = existing ? '\n\n' : '';
+					navigator.clipboard.writeText(existing + sep + section);
+				}).catch(() => navigator.clipboard.writeText(section));
+			} else {
+				navigator.clipboard.writeText(section);
+			}
+			heading.classList.add('copied');
+			setTimeout(() => heading.classList.remove('copied'), 1000);
+		}
+
+		el.addEventListener('pointerdown', (e) => {
+			const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+			if (!heading || !data.rawSource) return;
+			longPressHeading = null;
+			longPressTimeout = setTimeout(() => {
+				const text = heading.textContent.trim();
+				const section = extractSection(text);
+				if (!section) return;
+				longPressHeading = heading;
+				doCopy(section, heading, true);
+			}, 500);
+		});
+
+		el.addEventListener('pointerup', () => { clearTimeout(longPressTimeout); });
+		el.addEventListener('pointercancel', () => { clearTimeout(longPressTimeout); });
+
 		function handleClick(e) {
 			if (!data.rawSource) return;
+			if (longPressHeading) { longPressHeading = null; return; }
 			const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 			if (!heading) return;
 			const text = heading.textContent.trim();
 			const section = extractSection(text);
 			if (!section) return;
-			navigator.clipboard.writeText(section);
-			heading.classList.add('copied');
-			setTimeout(() => heading.classList.remove('copied'), 1000);
+			doCopy(section, heading, e.shiftKey);
 		}
 		el.addEventListener('click', handleClick);
 		return () => el.removeEventListener('click', handleClick);

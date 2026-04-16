@@ -119,6 +119,8 @@ export const navigation = [
 		category: 'Characters',
 		items: [
 			{ title: 'Character Sheet', slug: 'character-sheet', skipSlug: true },
+			{ title: 'Encounters', slug: 'encounters' },
+			{ title: 'User Monsters', slug: 'user-monsters', skipSlug: true },
 		]
 	},
 	{
@@ -275,8 +277,6 @@ export const navigation = [
 		category: 'Monsters',
 		items: [
 			{ title: 'About Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
-			{ title: 'Encounters', slug: 'encounters' },
-			{ title: 'User Monsters', slug: 'user-monsters', skipSlug: true },
 			{ title: 'All Monsters', slug: 'all-monsters', render: 'monsters' },
 			...monsterSections.map((s) => ({
 				title: s.name,

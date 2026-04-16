@@ -1,5 +1,6 @@
 <script>
 	import TextBox from '$lib/components/TextBox.svelte';
+	import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 	import { tick } from 'svelte';
@@ -137,38 +138,17 @@
 		updateExpInText((parsed.exp ?? 0) + 1);
 	}
 
-	let editingExp = $state(false);
-	let expInputEl = $state();
-
-	function startEditExp(e) {
-		e.stopPropagation();
-		editingExp = true;
-		tick().then(() => expInputEl?.select());
-	}
-
-	function commitExp(e) {
-		const raw = e.target.value.trim();
-		if (!raw) { editingExp = false; return; }
-		const current = parsed.exp ?? 0;
-		const result = commitHpFn(raw, current, null, 0);
+	function commitExpRaw(raw) {
+		const result = commitHpFn(raw, parsed.exp ?? 0, null, 0);
 		if (result !== null) updateExpInText(Math.max(0, result));
-		editingExp = false;
 	}
 
-	function clickHp() {
-		if (editingHp) return;
-		if (maxHp === null || parsed.hp === null) return;
-		editingHp = true;
-		tick().then(() => hpInputEl?.select());
-	}
+	let hpDcRef = $state();
+	let expDcRef = $state();
 
-	let editingHp = $state(false);
-	let hpInputEl = $state();
-
-	function handleCommitHp(e) {
-		const result = commitHpFn(e.target.value, parsed.hp ?? 0, maxHp, parsed.armor ?? 0);
+	function commitHpRaw(raw) {
+		const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, parsed.armor ?? 0);
 		if (result !== null) updateHpInText(result);
-		editingHp = false;
 	}
 
 	const hpFillPct = $derived(maxHp ? Math.max(0, Math.min(100, ((parsed.hp ?? 0) / maxHp) * 100)) : 0);
@@ -456,23 +436,12 @@
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
 					<div class="header-circles">
 						{#if parsed.exp !== null}
-							<button class="circle circle-xs circle-exp" onclick={clickExp} title="Add 1 EXP">
-								{#if editingExp}
-									<input
-										class="exp-edit"
-										type="text"
-										value={parsed.exp}
-										bind:this={expInputEl}
-										onclick={(e) => e.stopPropagation()}
-										onblur={commitExp}
-										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingExp = false; } }}
-									/>
-								{:else}
-									<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-								<span class="circle-text" onclick={startEditExp} role="button" tabindex="0">{parsed.exp}</span>
-								{/if}
+							<div class="circle circle-xs circle-exp">
+								<DraggableCounter value={parsed.exp} oncommit={commitExpRaw} inputWidth="1.5rem" class="circle-text" style="font-size: 0.7rem">
+									{#snippet children()}{parsed.exp}{/snippet}
+								</DraggableCounter>
 								<span class="circle-label">EXP</span>
-							</button>
+							</div>
 						{/if}
 						{#if maxLoad !== null}
 							{@const ldC = loadColor(carriedWeight, maxLoad)}
@@ -490,23 +459,14 @@
 						{/if}
 						{#if parsed.hp !== null && maxHp !== null}
 							{@const hpC = hpColor(parsed.hp, maxHp)}
-							<button class="circle circle-lg" style="border-color: {hpC}" onclick={clickHp} title="Click to edit HP">
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div class="circle circle-lg circle-draggable" style="border-color: {hpC}" onpointerdown={(e) => hpDcRef?.handlePointerDown(e)}>
 								<div class="circle-fill" style="height: {hpFillPct}%; background: {hpC}"></div>
-								{#if editingHp}
-									<input
-										class="hp-edit"
-										type="text"
-										value={parsed.hp}
-										bind:this={hpInputEl}
-										onclick={(e) => e.stopPropagation()}
-										onblur={handleCommitHp}
-										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingHp = false; } }}
-									/>
-								{:else}
-									<span class="circle-text" style="color: {hpC}">{parsed.hp}/{maxHp}</span>
-								{/if}
+								<DraggableCounter bind:this={hpDcRef} value={parsed.hp} oncommit={commitHpRaw} inputWidth="2.5rem" class="circle-text" style="color: {hpC}">
+									{#snippet children()}{parsed.hp}/{maxHp}{/snippet}
+								</DraggableCounter>
 								<span class="circle-label" style="color: {hpC}">Health</span>
-							</button>
+							</div>
 						{/if}
 						{#each damageEntries as dmgEntry, i}
 							<button class="circle circle-lg circle-damage" onclick={(e) => rollDamageFormula(dmgEntry, e)} title="Roll {dmgEntry}">
@@ -653,6 +613,10 @@
 		transition: filter 0.15s;
 	}
 
+	.circle-draggable {
+		cursor: ew-resize;
+	}
+
 	button.circle:hover {
 		filter: brightness(1.2);
 	}
@@ -729,46 +693,6 @@
 	.circle-armor {
 		border-color: #5a8fd4;
 		color: #5a8fd4;
-	}
-
-	/* HP edit input inside circle */
-	.hp-edit {
-		position: relative;
-		z-index: 1;
-		width: 2.5rem;
-		background: transparent;
-		border: none;
-		border-bottom: 1px solid currentColor;
-		color: inherit;
-		font: inherit;
-		font-size: 0.82rem;
-		font-weight: bold;
-		text-align: center;
-		outline: none;
-		padding: 0;
-		-moz-appearance: textfield;
-		appearance: textfield;
-	}
-
-	.hp-edit::-webkit-inner-spin-button,
-	.hp-edit::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-	}
-
-	.exp-edit {
-		position: relative;
-		z-index: 1;
-		width: 1.5rem;
-		background: transparent;
-		border: none;
-		border-bottom: 1px solid currentColor;
-		color: inherit;
-		font: inherit;
-		font-size: 0.7rem;
-		font-weight: bold;
-		text-align: center;
-		outline: none;
-		padding: 0;
 	}
 
 	/* --- Stat pills (centered, clickable) --- */
