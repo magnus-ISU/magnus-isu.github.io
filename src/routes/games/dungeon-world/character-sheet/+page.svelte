@@ -568,6 +568,8 @@
 <style>
 	.sheet-editor {
 		margin-bottom: 1.5rem;
+		background: rgba(26, 26, 26, 0.88);
+		border-radius: 6px;
 	}
 
 	.sheet-preview {
@@ -818,7 +820,6 @@
 	/* --- Body --- */
 	.char-body {
 		padding: 0.75rem 1rem;
-		background: #1a1a1aee;
 		white-space: normal;
 		word-wrap: break-word;
 	}

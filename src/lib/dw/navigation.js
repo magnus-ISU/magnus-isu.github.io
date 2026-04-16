@@ -42,6 +42,12 @@ export const pageArt = {
 	// Special pages
 	'all-monsters': 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
 	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
+	// Spells
+	'wizard-spells': 'https://store.noahbradley.com/cdn/shop/products/Noah-Bradley_Magic-the-Gathering_Urzas-Ruinous-Blast_1540x.jpg?v=1521681455',
+	'wizard-spells-srd': 'https://store.noahbradley.com/cdn/shop/products/Noah-Bradley_Magic-the-Gathering_Urzas-Ruinous-Blast_1540x.jpg?v=1521681455',
+	'cleric-miracles': 'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
+	'cleric-spells-srd': 'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
+	'druid-bindings': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/535019244_10234767612704294_4457784100332717442_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=gd3K4P19Y1YQ7kNvwH8UYVu&_nc_oc=AdomhH8Ulyqp8BPIr9gCQo6w0SJFQXBhg608rKUngZ0IURejqgaPqIuKbF_kWsXFAAQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=qeeML3ud3q80rzTp5vjf_A&_nc_ss=7a3a8&oh=00_Af06j5MTgve2Q9Tw8EmIIT1_L7X6k9jb1fgsqT8APzfGaA&oe=69E6C7A7',
 };
 
 export const navigation = [

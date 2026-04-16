@@ -95,7 +95,10 @@
 	}
 </script>
 
-<div class="dw-layout">
+<div
+	class="dw-layout"
+	style={isCharSheet && charImage ? `background-image: url('${charImage}'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed;` : ''}
+>
 	<button
 		class="sidebar-toggle"
 		onclick={() => (sidebarOpen = !sidebarOpen)}
@@ -156,10 +159,7 @@
 		<div class="sidebar-spacer"></div>
 	</nav>
 
-	<main
-		class="dw-content"
-		style={isCharSheet && charImage ? `background-image: url('${charImage}'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed;` : ''}
-	>
+	<main class="dw-content">
 		{@render children?.()}
 		<div class="content-spacer"></div>
 	</main>
