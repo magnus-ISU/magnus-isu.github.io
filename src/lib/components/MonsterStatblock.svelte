@@ -1,6 +1,4 @@
 <script>
-	import { fly } from 'svelte/transition';
-
 	let {
 		name,
 		tags = '',
@@ -21,6 +19,13 @@
 
 	const hasStats = $derived(hp !== null || armor !== null || !!attack);
 
+	// Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
+	const moveColumns = $derived(
+		moves.length === 1 ? 1 :
+		moves.length === 2 ? 2 :
+		moves.length === 4 ? 2 : 3
+	);
+
 	// Move toggle
 	let usedMoves = $state(new Set());
 	function toggleMove(i) {
@@ -29,10 +34,9 @@
 		usedMoves = next;
 	}
 
-	// Dice rolling
-	let rollResult = $state(null);
-	let rollVisible = $state(false);
-	let rollTimer = null;
+	// Dice rolling — rollKey increments on each roll to restart the CSS animation
+	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
+	let rollKey = $state(0);
 
 	function rollDie(sides) {
 		return Math.ceil(Math.random() * sides);
@@ -46,38 +50,21 @@
 		if (keepMatch) {
 			const count = +keepMatch[1], sides = +keepMatch[2], keep = +keepMatch[3];
 			const rolls = Array.from({ length: count }, () => rollDie(sides));
-			const sorted = [...rolls].sort((a, b) => a - b);
-			const kept = sorted.slice(0, keep);
-			return { total: kept.reduce((a, b) => a + b, 0), rolls, kept };
+			return [...rolls].sort((a, b) => a - b).slice(0, keep).reduce((a, b) => a + b, 0);
 		}
 
 		// "NdX+M" / "dX+M" / "dX"
 		const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
 		if (!m) return null;
 		const count = +(m[1] || 1), sides = +m[2], modifier = +(m[3] || 0);
-		const rolls = Array.from({ length: count }, () => rollDie(sides));
-		return { total: rolls.reduce((a, b) => a + b, 0) + modifier, rolls, modifier };
+		return Array.from({ length: count }, () => rollDie(sides)).reduce((a, b) => a + b, 0) + modifier;
 	}
 
-	function formatDetail(r) {
-		if (!r) return null;
-		if (r.kept) return `[${r.rolls.join(', ')}] keep [${r.kept.join(', ')}]`;
-		if (r.rolls.length === 1 && r.modifier === 0) return null;
-		const base = r.rolls.length === 1 ? `${r.rolls[0]}` : r.rolls.join(' + ');
-		if (r.modifier > 0) return `${base} + ${r.modifier}`;
-		if (r.modifier < 0) return `${base} − ${Math.abs(r.modifier)}`;
-		return base;
-	}
-
-	const rollDetail = $derived(rollResult ? formatDetail(rollResult) : null);
-
-	function doRoll(dmg, atk) {
-		const result = parseAndRoll(dmg);
-		if (!result) return;
-		clearTimeout(rollTimer);
-		rollResult = { attackName: atk, ...result };
-		rollVisible = true;
-		rollTimer = setTimeout(() => { rollVisible = false; }, 5000);
+	function doRoll(dmg, attackKey) {
+		const total = parseAndRoll(dmg);
+		if (total === null) return;
+		rollKey++;
+		rollResult = { attackKey, total };
 	}
 </script>
 
@@ -94,15 +81,33 @@
 			<div class="monster-attacks">
 				{#if attack}
 					<div class="attack-row">
-						<button class="attack-btn" onclick={() => doRoll(damage, attack)}>{attack}</button>
-						{#if damage}<span class="attack-damage">{damage}</span>{/if}
+						<button class="attack-btn" onclick={() => doRoll(damage, 'atk1')}>{attack}</button>
+						<span class="roll-slot">
+							{#key rollKey}
+								{#if rollResult?.attackKey === 'atk1'}
+									<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
+										{rollResult.total}
+									</span>
+								{/if}
+							{/key}
+						</span>
+						{#if damage}<span class="attack-damage">{damage} damage</span>{/if}
 						{#if attackTags}<span class="attack-tags">{attackTags}</span>{/if}
 					</div>
 				{/if}
 				{#if attack2}
 					<div class="attack-row">
-						<button class="attack-btn" onclick={() => doRoll(damage2, attack2)}>{attack2}</button>
-						{#if damage2}<span class="attack-damage">{damage2}</span>{/if}
+						<button class="attack-btn" onclick={() => doRoll(damage2, 'atk2')}>{attack2}</button>
+						<span class="roll-slot">
+							{#key rollKey}
+								{#if rollResult?.attackKey === 'atk2'}
+									<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
+										{rollResult.total}
+									</span>
+								{/if}
+							{/key}
+						</span>
+						{#if damage2}<span class="attack-damage">{damage2} damage</span>{/if}
 						{#if attackTags2}<span class="attack-tags">{attackTags2}</span>{/if}
 					</div>
 				{/if}
@@ -115,17 +120,6 @@
 					<span class="vital"><span class="vital-label">Armor</span> {armor}</span>
 				{/if}
 			</div>
-		</div>
-	{/if}
-
-	{#if rollVisible && rollResult}
-		<div class="roll-area" transition:fly={{ y: -6, duration: 180 }}>
-			<span class="roll-label">{rollResult.attackName}</span>
-			<span class="roll-arrow">→</span>
-			<span class="roll-total">{rollResult.total}</span>
-			{#if rollDetail}
-				<span class="roll-breakdown">{rollDetail}</span>
-			{/if}
 		</div>
 	{/if}
 
@@ -142,7 +136,7 @@
 	{/if}
 
 	{#if moves.length > 0}
-		<div class="monster-moves">
+		<div class="monster-moves" style="grid-template-columns: repeat({moveColumns}, 1fr)">
 			{#each moves as move, i}
 				<button class="move-pill" class:used={usedMoves.has(i)} onclick={() => toggleMove(i)}>
 					{move}
@@ -203,7 +197,7 @@
 
 	.attack-row {
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		gap: 0 0.6rem;
 		flex-wrap: wrap;
 	}
@@ -218,17 +212,47 @@
 		cursor: pointer;
 		font-size: 0.9rem;
 		transition: color 0.15s;
+		flex-shrink: 0;
 	}
 
 	.attack-btn:hover {
 		color: #d4a847;
 	}
 
+	/* Fixed-width slot — always reserves space so siblings never shift */
+	.roll-slot {
+		width: 2.5rem;
+		flex-shrink: 0;
+		position: relative;
+		height: 1.3em;
+	}
+
+	@keyframes roll-slide-fade {
+		0%   { transform: translateX(4rem); opacity: 0; }
+		17%  { transform: translateX(0);    opacity: 1; }
+		83%  { transform: translateX(0);    opacity: 1; }
+		100% { transform: translateX(0);    opacity: 0; }
+	}
+
+	.roll-inline {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		color: #e8c76a;
+		font-family: monospace;
+		font-weight: bold;
+		font-size: 1.05rem;
+		animation: roll-slide-fade 3s ease-out forwards;
+		pointer-events: none;
+		white-space: nowrap;
+	}
+
 	.attack-damage {
 		color: #d4a847;
 		font-family: monospace;
 		font-size: 0.85rem;
-		margin-left: 0.75rem;
+		margin-left: 0.25rem;
 	}
 
 	.attack-tags {
@@ -255,38 +279,6 @@
 		letter-spacing: 0.06em;
 		color: #888;
 		margin-right: 0.2rem;
-	}
-
-	.roll-area {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.35rem 0.75rem;
-		background: #131d1d;
-		border-bottom: 1px solid #1e3030;
-	}
-
-	.roll-label {
-		color: #666;
-		font-size: 0.78rem;
-	}
-
-	.roll-arrow {
-		color: #555;
-		font-size: 0.8rem;
-	}
-
-	.roll-total {
-		color: #d4a847;
-		font-size: 1.15rem;
-		font-weight: bold;
-		font-family: monospace;
-	}
-
-	.roll-breakdown {
-		color: #666;
-		font-size: 0.78rem;
-		font-family: monospace;
 	}
 
 	.monster-special {
@@ -319,7 +311,6 @@
 
 	.monster-moves {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
 		gap: 0.35rem;
 		padding: 0.5rem 0.75rem;
 		background: #1a1a1a;
