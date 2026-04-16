@@ -68,7 +68,11 @@ Neutral: Discover something about a magical mystery.
 Evil: Use magic to cause fear and terror.
 
 ## Gear
-You start with your spellbook (1 weight) and dungeon rations (5 uses, 1 weight). Choose your defenses:
+You start with:
+- Your spellbook (1 weight)
+- Dungeon rations (5 uses, 1 weight)
+
+Choose your defenses:
 - Leather armor (1 armor, 1 weight)
 - Bag of books (5 uses, 2 weight) and 3 healing potions
 

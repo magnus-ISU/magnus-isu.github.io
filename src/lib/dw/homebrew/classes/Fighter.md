@@ -71,7 +71,11 @@ Neutral: Defeat a worthy opponent.
 Evil: Kill a defenseless or surrendered enemy.
 
 ## Gear
-You carry your signature weapon and dungeon rations (5 uses, 1 weight). Choose your defenses:
+You start with:
+- Your signature weapon
+- Dungeon rations (5 uses, 1 weight)
+
+Choose your defenses:
 - Chainmail (1 armor, 1 weight) and adventuring gear (5 uses, 1 weight)
 - Scale armor (2 armor, 3 weight)
 

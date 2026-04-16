@@ -84,7 +84,11 @@ Lawful: Endanger yourself following the precepts of your church or god.
 Evil: Harm another to prove the superiority of your church or god.
 
 ## Gear
-You carry dungeon rations (5 uses, 1 weight) and some symbol of the divine, describe it (0 weight). Choose your defenses:
+You start with:
+- Dungeon rations (5 uses, 1 weight)
+- Some symbol of the divine, describe it (0 weight)
+
+Choose your defenses:
 - Chainmail (1 armor, 1 weight)
 - Shield (+1 armor, 2 weight)
 

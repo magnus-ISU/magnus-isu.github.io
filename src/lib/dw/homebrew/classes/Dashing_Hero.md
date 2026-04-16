@@ -52,7 +52,12 @@ Neutral: Go out of your way to show off your skills.
 Chaotic: Dethrone or destabilize a person in power.
 
 ## Gear
-You start with dungeon rations (5 uses, 1 weight), a dueling rapier (close, precise, 1 weight), and shining armor (1 armor, 1 weight). Choose your backup weapon:
+You start with:
+- Dungeon rations (5 uses, 1 weight)
+- Dueling rapier (close, precise, 1 weight)
+- Shining armor (1 armor, 1 weight)
+
+Choose your backup weapon:
 - Hidden stiletto (hand, 1 weight), which is never found when you are searched
 - Throwing daggers (hand, near, 1 weight), 3 ammo
 - Parrying gauntlet (hand, +1 armor, 2 weight)

@@ -43,7 +43,10 @@ Neutral: Defeat a worthy opponent in a fair duel.
 Evil: Kill a defenseless or surrendered enemy to prove your superiority.
 
 ## Gear
-You start with dungeon rations (5 uses, 1 weight). Choose one from each:
+You start with:
+- Dungeon rations (5 uses, 1 weight)
+
+Choose one from each:
 - Noble's silks (0 weight) and 10 coins
 - Duelist's leathers (1 armor, worn, 1 weight)
 

@@ -59,7 +59,10 @@ Neutral: Eliminate an unnatural menace.
 Chaotic: Destroy a symbol of civilization.
 
 ## Gear
-You carry some token of your land, describe it. Choose your defenses:
+You start with:
+- Some token of your land, describe it (0 weight)
+
+Choose your defenses:
 - Hide armor (1 armor, 1 weight)
 - Wooden shield (+1 armor, 1 weight)
 

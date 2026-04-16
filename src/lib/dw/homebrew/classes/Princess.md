@@ -62,7 +62,10 @@ Righting a Wrong: Help somebody weak to surpass their own limits.
 Banished Heir: Pass up a chance to redeem yourself or to go home.
 
 ## Gear
-You have dungeon rations (5 uses, 1 weight). Choose your arms:
+You start with:
+- Dungeon rations (5 uses, 1 weight)
+
+Choose your arms:
 - Rapier (close, precise, one-handed, 1 weight)
 - Short sword (close, +1 damage, 1 weight)
 - Ornate bow (near, 1 weight) and quiver of arrows (5 ammo, 1 weight)
