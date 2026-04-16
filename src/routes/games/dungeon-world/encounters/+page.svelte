@@ -48,7 +48,7 @@
 	<h1>Encounters</h1>
 
 	<section class="encounter-input">
-		<label for="encounter-text">Type monster names to build an encounter. Shift+Click or long press monster names in other pages to copy them. Select twice to clear clipboard.</label>
+		<label for="encounter-text">Type monster names to build an encounter. Shift+Click or long press monster names in other pages to copy them. Select twice to clear clipboard. Click on HP to track it, attacks to roll them.</label>
 		<textarea
 			id="encounter-text"
 			bind:value={text}

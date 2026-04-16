@@ -12,6 +12,20 @@
 	const srdSlug = $derived(data.srdSlug || data.slug);
 	const hasPair = $derived(!!data.srdSlug || !!data.homebrewSlug);
 
+	// Search for all-monsters page
+	let search = $state('');
+	const isAllMonsters = $derived(data.slug === 'all-monsters');
+	const filteredSections = $derived.by(() => {
+		if (!isAllMonsters || !search.trim()) return data.monsterSections;
+		const q = search.trim().toLowerCase();
+		return data.monsterSections
+			?.map(s => ({
+				...s,
+				monsters: s.monsters.filter(m => m.name.toLowerCase().includes(q))
+			}))
+			.filter(s => s.monsters.length > 0);
+	});
+
 	function handleToggle(target, e) {
 		e.preventDefault();
 		const singleOnly = e.shiftKey || isLongPress;
@@ -59,14 +73,17 @@
 <article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	{#if data.render === 'monsters'}
 		<h1>{data.title}</h1>
-		{#if data.slug === 'all-monsters' && userMonsters.list.length > 0}
+		{#if isAllMonsters}
+			<input class="monster-search" type="text" placeholder="Search monsters…" bind:value={search} />
+		{/if}
+		{#if data.slug === 'all-monsters' && userMonsters.list.length > 0 && !search.trim()}
 			<h2>User Monsters</h2>
 			{#each userMonsters.list as m (m.name)}
 				<MonsterStatblock {...m} />
 			{/each}
 		{/if}
-		{#each data.monsterSections as section}
-			{#if data.monsterSections.length > 1}<h2>{section.name}</h2>{/if}
+		{#each filteredSections as section}
+			{#if isAllMonsters || filteredSections.length > 1}<h2>{section.name}</h2>{/if}
 			{#each section.monsters as m}
 				<MonsterStatblock {...m} />
 			{/each}
@@ -121,6 +138,23 @@
 	.source-opt.active {
 		background: #d4a847;
 		color: #1e1e1e;
+	}
+
+	.monster-search {
+		width: 100%;
+		background: #161616;
+		border: 1px solid #333;
+		border-radius: 6px;
+		color: #ddd;
+		font-family: inherit;
+		font-size: 0.9rem;
+		padding: 0.5rem 0.75rem;
+		margin-bottom: 1rem;
+		outline: none;
+	}
+
+	.monster-search:focus {
+		border-color: #d4a847;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {

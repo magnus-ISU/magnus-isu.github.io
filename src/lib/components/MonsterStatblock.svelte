@@ -209,17 +209,19 @@
 					<div class="monster-attacks">
 						{#each attacks as atk, i}
 							<div class="attack-row">
-								<button class="attack-btn" style="min-width: {atkNameWidth}" onclick={(e) => { e.stopPropagation(); doRoll(atk.damage, i); }}>{atk.name}</button>
-								<span class="roll-slot">
-									{#key rollKey}
-										{#if rollResult?.atkIdx === i}
-											<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
-												{rollResult.total}
-											</span>
-										{/if}
-									{/key}
-								</span>
-								{#if atk.damage}<span class="attack-damage">{atk.damage} damage</span>{/if}
+								<button class="attack-btn" onclick={(e) => { e.stopPropagation(); doRoll(atk.damage, i); }}>
+									<span class="attack-name" style="min-width: {atkNameWidth}">{atk.name}</span>
+									<span class="roll-slot">
+										{#key rollKey}
+											{#if rollResult?.atkIdx === i}
+												<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
+													{rollResult.total}
+												</span>
+											{/if}
+										{/key}
+									</span>
+									{#if atk.damage}<span class="attack-damage">{atk.damage} damage</span>{/if}
+								</button>
 								{#if atk.tags}<span class="attack-tags">{atk.tags}</span>{/if}
 							</div>
 						{/each}
@@ -376,7 +378,7 @@
 	}
 
 	.summary-damage {
-		color: #d4a847;
+		color: #e05555;
 		font-family: monospace;
 	}
 
@@ -423,20 +425,28 @@
 	}
 
 	.attack-btn {
-		background: none;
-		border: none;
-		padding: 0;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 999px;
+		padding: 0.15rem 0.55rem;
 		font: inherit;
-		font-weight: bold;
 		color: #ddd;
 		cursor: pointer;
 		font-size: 0.9rem;
-		transition: color 0.15s;
+		transition: background 0.15s, border-color 0.15s;
 		flex-shrink: 0;
 	}
 
 	.attack-btn:hover {
-		color: #d4a847;
+		background: #333;
+		border-color: #555;
+	}
+
+	.attack-name {
+		font-weight: bold;
 	}
 
 	/* Fixed-width slot — always reserves space so siblings never shift */
@@ -459,7 +469,7 @@
 		inset: 0;
 		display: flex;
 		align-items: center;
-		color: #e8c76a;
+		color: #e05555;
 		font-family: monospace;
 		font-weight: bold;
 		font-size: 1.05rem;
@@ -469,10 +479,9 @@
 	}
 
 	.attack-damage {
-		color: #d4a847;
+		color: #e05555;
 		font-family: monospace;
 		font-size: 0.85rem;
-		margin-left: 0.25rem;
 	}
 
 	.attack-tags {
@@ -622,7 +631,7 @@
 		font-size: 0.78rem;
 		font-family: inherit;
 		cursor: pointer;
-		text-align: left;
+		text-align: center;
 		line-height: 1.3;
 		transition: background 0.15s, color 0.15s, border-color 0.15s;
 	}

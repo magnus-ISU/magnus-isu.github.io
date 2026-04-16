@@ -1,6 +1,6 @@
 const modules = import.meta.glob('./monsters/*.js', { eager: true });
 
-const order = [
+const srdSections = new Set([
 	'cavern-dwellers',
 	'dark-woods',
 	'lower-depths',
@@ -10,6 +10,10 @@ const order = [
 	'planar-powers',
 	'swamp-denizens',
 	'undead-legions',
+]);
+
+const order = [
+	...srdSections,
 	'homebrew-monsters',
 ];
 
@@ -22,7 +26,7 @@ function slugToName(slug) {
 
 const sections = Object.entries(modules).map(([path, mod]) => {
 	const slug = path.replace('./monsters/', '').replace('.js', '');
-	return { slug, name: slugToName(slug), monsters: mod.default, };
+	return { slug, name: slugToName(slug), monsters: mod.default, homebrew: !srdSections.has(slug) };
 });
 
 sections.sort((a, b) => {

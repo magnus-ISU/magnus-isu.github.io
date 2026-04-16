@@ -1,3 +1,5 @@
+import { monsterSections } from './monsters.js';
+
 export const navigation = [
 	{
 		category: 'Playing',
@@ -208,29 +210,13 @@ export const navigation = [
 			{ title: 'Encounters', slug: 'encounters' },
 			{ title: 'User Monsters', slug: 'user-monsters', skipSlug: true },
 			{ title: 'All Monsters', slug: 'all-monsters', render: 'monsters' },
-			{ title: 'Cavern Dwellers', slug: 'cavern-dwellers', render: 'monsters', monsterSection: 'cavern-dwellers' },
-			{ title: 'Dark Woods', slug: 'dark-woods', render: 'monsters', monsterSection: 'dark-woods' },
-			{ title: 'Lower Depths', slug: 'lower-depths', render: 'monsters', monsterSection: 'lower-depths' },
-			{ title: 'Twisted Experiments', slug: 'twisted-experiments', render: 'monsters', monsterSection: 'twisted-experiments' },
-			{ title: 'The Common Folk', slug: 'the-common-folk', render: 'monsters', monsterSection: 'the-common-folk' },
-			{ title: 'Ravenous Hordes', slug: 'ravenous-hordes', render: 'monsters', monsterSection: 'ravenous-hordes' },
-			{ title: 'Planar Powers', slug: 'planar-powers', render: 'monsters', monsterSection: 'planar-powers' },
-			{ title: 'Swamp Denizens', slug: 'swamp-denizens', render: 'monsters', monsterSection: 'swamp-denizens' },
-			{ title: 'Undead Legions', slug: 'undead-legions', render: 'monsters', monsterSection: 'undead-legions' },
-			{
-				title: 'Denizens of the Feywild',
-				slug: 'denizens-of-the-feywild',
-				homebrew: true,
+			...monsterSections.map((s) => ({
+				title: s.name,
+				slug: s.slug,
 				render: 'monsters',
-				monsterSection: 'denizens-of-the-feywild'
-			},
-			{
-				title: 'Homebrew Monsters',
-				slug: 'monsters-homebrew',
-				homebrew: true,
-				render: 'monsters',
-				monsterSection: 'homebrew-monsters'
-			}
+				monsterSection: s.slug,
+				...(s.homebrew && { homebrew: true }),
+			})),
 		]
 	},
 	{
