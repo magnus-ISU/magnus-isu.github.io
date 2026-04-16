@@ -53,8 +53,15 @@
 		while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
 		await navigator.clipboard.writeText(lines.join('\n'));
 
-		// Also update encounter text
+		// Also update encounter text — compensate scroll for layout shift (e.g. count 1→2)
+		const oldTop = el.getBoundingClientRect().top;
 		encounterText.appendName(name);
+		const end = performance.now() + 300;
+		requestAnimationFrame(function track() {
+			const drift = el.getBoundingClientRect().top - oldTop;
+			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			if (performance.now() < end) requestAnimationFrame(track);
+		});
 		copied = true;
 		setTimeout(() => { copied = false; }, 1200);
 	}
@@ -102,8 +109,10 @@
 	// HP tracking — supports multiple instances via count prop
 	const hpNum = $derived(typeof hp === 'number' ? hp : null);
 	let currentHps = $state([]);
+	let labels = $state([]);
 	$effect(() => {
 		currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
+		labels = Array.from({ length: count }, (_, i) => `#${i + 1}`);
 	});
 	function getHpColor(val) {
 		if (val == null) return null;
@@ -135,11 +144,19 @@
 		if (!dmg || dmg === '??') return null;
 
 		// "3d12 keep lowest 2"
-		const keepMatch = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)/i);
-		if (keepMatch) {
-			const count = +keepMatch[1], sides = +keepMatch[2], keep = +keepMatch[3];
+		const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)/i);
+		if (keepLowest) {
+			const count = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3];
 			const rolls = Array.from({ length: count }, () => rollDie(sides));
 			return [...rolls].sort((a, b) => a - b).slice(0, keep).reduce((a, b) => a + b, 0);
+		}
+
+		// "3d12 keep highest 2"
+		const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)/i);
+		if (keepHighest) {
+			const count = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3];
+			const rolls = Array.from({ length: count }, () => rollDie(sides));
+			return [...rolls].sort((a, b) => b - a).slice(0, keep).reduce((a, b) => a + b, 0);
 		}
 
 		// "NdX+M" / "dX+M" / "dX"
@@ -243,10 +260,10 @@
 					</div>
 					<div class="monster-vitals">
 						{#if hp !== null && count <= 1}
-							<button class="hp-pill" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+							<button class="hp-pill" onclick={() => clickHp(0)} onmousedown={(e) => { if (!e.target.closest('.hp-input')) e.preventDefault(); }} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>
 								<span class="vital-label">HP</span>
 								{#if hpNum !== null}
-									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} onclick={(e) => e.stopPropagation()} />
+									<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}; width: {String(currentHps[0] ?? 0).length + 1}ch" bind:value={currentHps[0]} onclick={(e) => e.stopPropagation()} />
 								{:else}
 									<span>{hp}</span>
 								{/if}
@@ -264,10 +281,16 @@
 					{#each hpRows as row}
 						<div class="hp-row">
 							{#each row as idx}
-								<button class="hp-pill" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
-									<span class="vital-label">#{idx + 1}</span>
+								<button class="hp-pill" onclick={() => clickHp(idx)} onmousedown={(e) => { if (!e.target.closest('input')) e.preventDefault(); }} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+									<input
+										class="label-input"
+										style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
+										bind:value={labels[idx]}
+										onclick={(e) => e.stopPropagation()}
+										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
+									/>
 									{#if hpNum !== null}
-										<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} onclick={(e) => e.stopPropagation()} />
+										<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}; width: {String(currentHps[idx] ?? 0).length + 0.5}ch" bind:value={currentHps[idx]} onclick={(e) => e.stopPropagation()} />
 									{:else}
 										<span>{hp}</span>
 									{/if}
@@ -568,6 +591,25 @@
 		margin-right: 0.2rem;
 	}
 
+	.label-input {
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: bold;
+		letter-spacing: 0.06em;
+		color: #888;
+		margin-right: 0.2rem;
+		outline: none;
+		cursor: text;
+		flex: none;
+	}
+
+	.label-input:focus {
+		color: #ccc;
+	}
+
 	.hp-btn {
 		background: none;
 		border: none;
@@ -589,7 +631,7 @@
 		text-align: right;
 		font: inherit;
 		font-size: 0.88rem;
-		width: 3.5ch;
+		flex: none;
 		outline: none;
 		-moz-appearance: textfield;
 		appearance: textfield;
