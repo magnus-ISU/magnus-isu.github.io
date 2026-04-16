@@ -11,9 +11,9 @@ Now who wants to go for a walk?
 ### A Dog's Life
 You're just a dog. You can't speak or do things the way people do. Communicating simple ideas to someone or performing mundane tasks may require you to Defy Danger, or simply be impossible; the GM will tell you.
 
-Choose two irrational fears you have. When either is present, you have advantage to escape from it. When you level up, you can swap one fear for another.
+Choose two irrational fears you have. When either is present, you have +1 to escape from it. When you level up, you can swap one fear for another.
 
-Irrational fears: Thunder, Fire, Cats, Water, Rodents, Heights, Hats, Mirrors, Statues, Bugs, Solitude, Crowds, Snakes, "Strangers", Fireworks, Beards
+Irrational fears: Thunder, Fire, Cats, Water, Rodents, Heights, Hats, Mirrors, Statues, Bugs, Solitude, Crowds, Snakes, Strangers, Fireworks, Beards
 
 ### Canine Senses
 When you **take time to sniff around, or perk your ears up to listen carefully**, you can ask the GM one of the following questions and get an honest answer:
@@ -21,8 +21,9 @@ When you **take time to sniff around, or perk your ears up to listen carefully**
 - What can I smell that nobody else does?
 - Are or were there other dogs nearby?
 
-Choose two. You can later choose these moves as Advanced Moves:
+## Starting Moves - Choose 2
 
+You can later choose these moves as Advanced Moves as well.
 
 ### Tough Pelt
 When you **are in the heat of battle**, your thick and loose hide provides natural armor, granting you additional protection against harm. You gain +2 armor.
@@ -153,3 +154,5 @@ When you **suddenly arrive on the scene to help**, choose 1:
 
 ### Newer Tricks
 Choose a non-multiclass move from the Druid, Fighter, Ranger, or Thief playbooks.
+
+*A playbook by CoreyKenn82*

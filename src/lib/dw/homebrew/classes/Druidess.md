@@ -177,3 +177,5 @@ You no longer age or sleep. When you **fall to 0 hit points**, do not roll your 
 
 ### Chimera
 When you **Shapechange**, you may combine elements of several different things you could normally shift into. You might be a bear with the wings of an eagle and the head of a ram, as long as you could normally shift into a bear, eagle, and ram individually.
+
+*A playbook by Magnus Anderson*

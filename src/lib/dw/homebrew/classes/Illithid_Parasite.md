@@ -41,3 +41,5 @@ Before this horror began, you were another man. It threatens to consume you; you
 Choose one starting move from another class.
 
 ## Starting Moves
+
+*A playbook by Magnus Anderson*

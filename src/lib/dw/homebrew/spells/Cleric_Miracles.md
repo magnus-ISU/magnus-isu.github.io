@@ -90,3 +90,5 @@ The mindless undead creatures you can see are destroyed and you steal their deat
 ---
 ### Prince's Invulnerability
 Up to 6 creatures you choose are immune to damage for 6 seconds. This miracle is cast in an instant, and never fails to cast.
+
+*By Magnus Anderson*

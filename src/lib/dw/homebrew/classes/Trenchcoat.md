@@ -59,3 +59,5 @@ When you **both do something conspicuous in order to avoid an attack**, take the
 
 ### Freakishly tall
 You've practiced looking menacing. When you draw yourself up to your full height, grow to about 4 feet, plus another 4 feet. Roll+CON: On a 10+, you look incredibly imposing. On a 7-9, you have to brace yourself against something, or else look foolish.
+
+*A playbook by Magnus Anderson*

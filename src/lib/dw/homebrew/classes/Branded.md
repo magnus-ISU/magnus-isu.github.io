@@ -166,3 +166,5 @@ When you **stare into a source of fire**, looking for the truth about someone yo
 - How could I get to them, physically or emotionally?
 
 On a miss, ask 1 anyway, but you won't like the answer.
+
+*A playbook by Cameron Burns*

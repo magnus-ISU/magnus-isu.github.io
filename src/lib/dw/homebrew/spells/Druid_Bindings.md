@@ -47,7 +47,7 @@ Walk a wide circle as you cast this spell. Those who walk into the circle become
 ### Weedwrap
 Nearby grasses begin to grow very rapidly, a meter or two in a few seconds. You can give them a two word command, which they will try to follow for a few minutes. Examples: Bind them, Cushion ground, Extinguish fire, Show path, Hide sword. Concentration 1
 ### Wolfcalling
-Summon a rainbow, from which two glowing spirits of wolves emerge. They have a +0 modifier, trigger basic moves, deal 1d6 damage (using monster rules for multiple attackers, including if they help you fight), and have 1 HP. Concentration 1, and choose one:
+Choose some mist, from which two glowing spirits of wolves emerge. They have a +0 modifier, trigger basic moves, deal 1d6 damage (using monster rules for multiple attackers, including if they help you fight), and have 1 HP. Concentration 1, and choose one:
 - They each have +2 forward
 - They have 3 armor
 - You call a third wolf
@@ -104,6 +104,8 @@ Alternatively, reverse this and turn Stone to Flesh.
 You bring the Moon Spirit to your cause. It sails across the sky to where you want, and glows full or vanishes. You can cause an eclipse or make its pale glow replace it, bring the tides in or out, use her power to illuminate your foes and force them back to their true forms. Concentration 1
 ### Mould Earth
 You reshape the earth itself as you work this magic over several hours, your will extending far beyond what your eye can see. Widen entire rivers or dry them up; move mountains, dig valleys; open great rifts in the land.
+
+*By Magnus Anderson*
 ## Comparison to Cleric
 ### Stolen spells
 level 1: Cure Light Wounds, Magic Weapon

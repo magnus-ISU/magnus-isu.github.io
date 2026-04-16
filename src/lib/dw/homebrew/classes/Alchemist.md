@@ -67,3 +67,5 @@ When you try to alter or inspect a magical device, roll+INT. On a 7+, you know h
 When you **break down something alchemically magical**, gain a use of Reagents.
 
 ### Technobabble
+
+*A playbook by Magnus Anderson*

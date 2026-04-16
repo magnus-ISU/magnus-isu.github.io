@@ -64,7 +64,7 @@ Cast this spell and gaze into a reflective surface to see into the depths of tim
 ### Fireball <span style="float:right" >Evocation 3</span>
 You evoke a mighty ball of flame that envelops your target and everyone nearby, inflicting 2d6 damage which ignores armor.
 ### Mirror Image <span style="float:right" >Illusion 3</span>
-You create an illusory image of yourself. When you are attacked, there's a half chance the attack hits the illusion instead. The image then dissipates and the spell ends.
+You create an illusory image of yourself. When you are attacked, you're only as likely as any of your images to be hit. The image then dissipates and the spell ends.
 ### Mimic <span style="float:right" >Transmutation 3</span>
 You take the form of someone you touch while casting this spell. Your physical characteristics match theirs exactly but your behavior may not. This change persists until you take damage or choose to return to your own form. While this spell is ongoing you lose access to all your wizard moves.
 
@@ -177,3 +177,5 @@ You trap the soul of a dying creature within a gem. The trapped creature is awar
 Speak someone's True Name and tell them a secret Word. They die.
 ### Starfall <span style="float:right" >Evocation 9</span>
 You take a star from the sky and bring it low. It roughly strikes your target and roughly obliterates anything smaller than a small castle. Hopefully you've researched what might have come with it.
+
+*By Magnus Anderson*

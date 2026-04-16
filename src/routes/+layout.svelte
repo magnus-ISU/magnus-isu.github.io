@@ -47,7 +47,7 @@
 </svelte:head>
 
 <div class="layout" class:open={$isMenuOpen}>
-	{#key data.path}
+	{#key isDW(data.path) ? 'dw' : data.path}
 		<main id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
 			{@render children?.()}
 		</main>

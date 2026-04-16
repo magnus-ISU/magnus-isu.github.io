@@ -188,3 +188,5 @@ When you have time and safety with a magic item in a place of power you can empo
 
 ### Warrior of the Mind
 When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
+
+*A playbook by Magnus Anderson*

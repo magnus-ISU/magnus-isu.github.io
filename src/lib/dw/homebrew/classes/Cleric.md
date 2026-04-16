@@ -185,3 +185,5 @@ When you Work Miracles, on a 10-11 you have the option of choosing from the 7-9 
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
+
+*A playbook by Magnus Anderson*

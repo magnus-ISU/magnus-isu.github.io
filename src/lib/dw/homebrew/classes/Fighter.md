@@ -179,3 +179,5 @@ When you look over an enemy's weaponry, ask the GM how much damage they do.
 
 ### Superior Warrior
 When you hack and slash on a 12+ you deal your damage, avoid their attack, and impress, dismay, or frighten your enemy.
+
+*A playbook by Magnus Anderson*

@@ -40,14 +40,14 @@ Your blades dance around your enemies' defenses with ease. When you **deal damag
 
 ## Stats
 
-Damage: d8
-HP: 8+Constitution
+Damage: d8  
+HP: 8+Constitution  
 Load: 7+STR
 
 ## Alignment
 
-Good: Put yourself at risk for the sake of a friend or lover.
-Neutral: Go out of your way to show off your skills.
+Good: Put yourself at risk for the sake of a friend or lover.  
+Neutral: Go out of your way to show off your skills.  
 Chaotic: Dethrone or destabilize a person in power.
 
 ## Gear
@@ -62,21 +62,21 @@ Choose two:
 - A noble steed, describe it
 
 ## Names
-*Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z
+*Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z  
 *Elf*: Celeste, Garinith, Gilderoy, Nyhopyri, Tahnea, Tetra, Tome, Valens
 
 ## Look
 Choose one for each:
 
-Confident Eyes, Bright Eyes, or Always Closed Eyes
-Fashionable Hat, Flowing Hair, or Magnificent Beard
-Ornate Clothes, Functional Clothes, or Flowing Clothes
+Confident Eyes, Bright Eyes, or Always Closed Eyes  
+Fashionable Hat, Flowing Hair, or Magnificent Beard  
+Ornate Clothes, Functional Clothes, or Flowing Clothes  
 Muscled Body, Stoic Body, or Toned Body
 
 ## Bonds
-\_\_\_\_\_ realizes just how great I am.
-\_\_\_\_\_ is someone I can rely on to make me look good.
-\_\_\_\_\_ needs to work on their appearance.
+\_\_\_\_\_ realizes just how great I am.  
+\_\_\_\_\_ is someone I can rely on to make me look good.  
+\_\_\_\_\_ needs to work on their appearance.  
 \_\_\_\_\_ needs education on this heroing business, and I will provide it whether they want it or not.
 
 ## Advanced Moves
@@ -160,3 +160,5 @@ Gain one move from a playbook no one else is currently using.
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*
 Gain one move from another class. Treat your level as one lower for choosing the move.
+
+*A playbook by Jacob Randolph*

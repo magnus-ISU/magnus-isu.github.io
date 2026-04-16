@@ -162,3 +162,5 @@ Take one more non-multiclass move from the Fighter. Your damage increases to d8.
 ### Wicked Princess
 *Requires Rebellious Princess*
 Take one more non-multiclass move from the Thief, the Bard, or the Witch.
+
+*A playbook by June Shores*

@@ -73,16 +73,16 @@ foolhardy among them\) fall prey to your taunting.
 
 In addition, choose one of these to start with:
 
+## Starting Moves - Choose one
+
 ### Full Plate and Packing Steel
 
 You ignore the clumsy tag on armor you wear.
 
-\-OR-
-
 ### Unencumbered, Unharmed
 
 So long as you are below your Load and neither wear armor nor carry a shield,
-take +1 armor.
+take +2 armor.
 
 ## Alignment
 
