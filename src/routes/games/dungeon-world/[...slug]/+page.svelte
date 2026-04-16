@@ -17,11 +17,19 @@
 	const isAllMonsters = $derived(data.slug === 'all-monsters');
 	const filteredSections = $derived.by(() => {
 		if (!isAllMonsters || !search.trim()) return data.monsterSections;
-		const q = search.trim().toLowerCase();
+		const q = search.trim();
+		let test;
+		try {
+			const re = new RegExp(q, 'i');
+			test = (name) => re.test(name);
+		} catch {
+			const lower = q.toLowerCase();
+			test = (name) => name.toLowerCase().includes(lower);
+		}
 		return data.monsterSections
 			?.map(s => ({
 				...s,
-				monsters: s.monsters.filter(m => m.name.toLowerCase().includes(q))
+				monsters: s.monsters.filter(m => test(m.name))
 			}))
 			.filter(s => s.monsters.length > 0);
 	});

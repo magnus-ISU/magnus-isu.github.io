@@ -589,6 +589,7 @@
 		font-size: 0.92rem;
 		line-height: 1.6;
 		background: #1a1a1a;
+		white-space: pre-line;
 	}
 
 	.monster-instinct {
