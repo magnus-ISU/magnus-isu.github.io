@@ -38,7 +38,7 @@ Whenever you **Discern Realities or just take time to sniff around**, you always
 You are blindingly fast on four legs. When you **run at full speed**, nothing on two legs can keep pace, and you can outrun horses in short bursts. If it comes down to who's faster, it's you.
 
 ### Scent Memory
-You never forget a scent. Once you've smelled a creature, person, or substance, you can recognize it again without fail. When you **encounter any scent**, the GM will tell you where and when you last encountered it.
+You never forget a scent. Once you've smelled a creature, person, or substance, you can recognize it again without fail. When you **encounter any scent**, the GM will tell you where and when you last encountered it, or what was most similar.
 
 ### Puppy Eyes
 When you **appear happy and cute**, people's attitudes shift positively, with friendly individuals becoming adoring, indifferent individuals becoming friendly, and hostile individuals becoming indifferent, refraining from immediate harm.
