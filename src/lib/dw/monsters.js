@@ -14,7 +14,9 @@ const srdSections = new Set([
 
 const order = [
 	...srdSections,
-	'homebrew-monsters',
+	'wild-beasts',
+	'denizens-of-the-feywild',
+	'god-killers',
 ];
 
 function slugToName(slug) {

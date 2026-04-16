@@ -199,6 +199,8 @@
 				{#if armor !== null}<span class="summary-armor">{armor}</span>{/if}
 				{#if instinct}<span class="summary-instinct">{instinct}</span>{/if}
 			</div>
+		{:else if instinct}
+			<span class="summary-instinct expanded-instinct">{instinct}</span>
 		{/if}
 	</button>
 
@@ -267,10 +269,9 @@
 				<div class="monster-description">{description}</div>
 			{/if}
 
-			{#if instinct || special}
+			{#if special}
 				<div class="monster-instinct">
-					{#if instinct}<span><strong>Instinct:</strong> {instinct}</span>{/if}
-					{#if special}<span class="monster-special"><strong>Special:</strong> {special}</span>{/if}
+					<span class="monster-special"><strong>Special:</strong> {special}</span>
 				</div>
 			{/if}
 
@@ -399,6 +400,11 @@
 	.summary-instinct {
 		color: #777;
 		font-style: italic;
+	}
+
+	.expanded-instinct {
+		margin-left: auto;
+		font-size: 0.8rem;
 	}
 
 	.monster-stats {

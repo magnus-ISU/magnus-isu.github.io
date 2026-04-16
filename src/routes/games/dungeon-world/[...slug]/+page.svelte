@@ -33,6 +33,8 @@
 			}))
 			.filter(s => s.monsters.length > 0);
 	});
+	const filteredCount = $derived(filteredSections?.reduce((n, s) => n + s.monsters.length, 0) ?? 0);
+	const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
 
 	function handleToggle(target, e) {
 		e.preventDefault();
@@ -93,7 +95,7 @@
 		{#each filteredSections as section}
 			{#if isAllMonsters || filteredSections.length > 1}<h2>{section.name}</h2>{/if}
 			{#each section.monsters as m}
-				<MonsterStatblock {...m} />
+				<MonsterStatblock {...m} open={autoExpand} />
 			{/each}
 		{/each}
 	{:else}

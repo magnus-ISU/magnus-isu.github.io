@@ -1,5 +1,26 @@
 export default [
 	{
+		name: 'Pegasi Knight',
+		tags: 'Group, Construct',
+		hp: 9,
+		armor: 3,
+		attacks: [{ name: 'Lance', damage: 'd8+1', tags: 'Forceful, Reach', }],
+		special: 'Mounted',
+		description: 'Nature is a beautiful thing, and it must be protected. Who better to protect it, than by taming its greatest majesties? Bonded from birth, the Pegasi Knight and his steed fight as one.',
+		instinct: 'To keep the natural order',
+		moves: ['Leap from the air', 'Cast a druidic spell'],
+	},
+	{
+		name: 'Psychic Jellyfish',
+		tags: 'Solitary, Magical, Devious',
+		hp: 8,
+		attacks: [{ name: 'Acidic Tendril', damage: 'd4', tags: 'Close', }],
+		special: 'Telepathy, Bioluminescence',
+		description: 'Lights in the water... so pretty... Do you hear the bells?.. do you hear the chimes of light?.. so pretty... I must defend them... I must obey them... must feed them...',
+		instinct: 'To subdue',
+		moves: ['Overwhelm their mind', 'Digest a subdued enemy, flaring brightly', 'Sacrifice a minion'],
+	},
+	{
 		name: 'Thistledown Sprite',
 		tags: 'Horde, Tiny, Stealthy, Magical',
 		hp: 3,
