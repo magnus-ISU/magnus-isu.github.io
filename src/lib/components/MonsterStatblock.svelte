@@ -14,8 +14,22 @@
 		open = false
 	} = $props();
 
+	import { tick } from 'svelte';
+
 	let expanded = $state(open);
 	$effect(() => { expanded = open; });
+	let el;
+
+	async function toggleExpanded() {
+		const oldTop = el.getBoundingClientRect().top;
+		expanded = !expanded;
+		await tick();
+		const newTop = el.getBoundingClientRect().top;
+		const diff = newTop - oldTop;
+		if (diff !== 0) {
+			window.scrollBy(0, diff);
+		}
+	}
 
 	const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
 	const atkNameWidth = $derived(attacks.length > 1 ? Math.max(...attacks.map(a => a.name.length)) + 'ch' : 'auto');
@@ -93,8 +107,8 @@
 	}
 </script>
 
-<div class="monster" class:is-expanded={expanded}>
-	<button class="monster-header" onclick={() => { expanded = !expanded; }}>
+<div class="monster" class:is-expanded={expanded} bind:this={el}>
+	<button class="monster-header" onclick={toggleExpanded}>
 		<div class="monster-header-left">
 			<span class="monster-name">{count > 1 ? `${name} ×${count}` : name}</span>
 			{#if tags}
