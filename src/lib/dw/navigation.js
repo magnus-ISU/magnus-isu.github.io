@@ -93,6 +93,7 @@ export const navigation = [
 				srdSlug: 'druid-srd'
 			},
 			{ title: 'Druid', slug: 'druid-srd', source: 'srd', file: 'Druid', hidden: true, homebrewSlug: 'druid' },
+			{ title: 'Barbarian', slug: 'barbarian', source: 'srd', file: 'Barbarian' },
 			{ title: 'Bard', slug: 'bard', source: 'srd', file: 'Bard' },
 			{
 				title: 'Alchemist',
@@ -144,6 +145,14 @@ export const navigation = [
 				slug: 'dog',
 				source: 'homebrew',
 				file: 'classes/Dog',
+				homebrew: true
+			},
+
+			{
+				title: 'Arcane Duelist',
+				slug: 'arcane-duelist',
+				source: 'homebrew',
+				file: 'classes/Arcane_Duelist',
 				homebrew: true
 			}
 		]
