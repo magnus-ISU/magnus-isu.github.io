@@ -191,7 +191,7 @@ While the spell is ongoing, take -1 ongoing to cast a spell.
 - Use a monster, danger, or location move
 - Reveal an unwelcome truth
 - Show signs of an approaching threat
-- Deal damage
+- Hurt them
 - Use up their resources
 - Turn their move back on them
 - Separate them

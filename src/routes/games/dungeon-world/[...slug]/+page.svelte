@@ -4,6 +4,9 @@
 	import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 	import MonsterSearch from '$lib/components/MonsterSearch.svelte';
+	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+
+	const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
 
 	let { data } = $props();
 	let longPressTimer;
@@ -169,6 +172,8 @@
 				{/each}
 			{/each}
 		{/if}
+	{:else if contentHtml}
+		{@html contentHtml}
 	{:else}
 		<data.Content />
 	{/if}
@@ -259,6 +264,29 @@
 		color: #8f8;
 		margin-left: 0.75rem;
 		font-weight: normal;
+	}
+
+	:global(.dw-article .h2-columns) {
+		columns: 2;
+		column-gap: 2rem;
+	}
+
+	@media (max-width: 1028px) {
+		:global(.dw-article .h2-columns) {
+			columns: 1;
+		}
+	}
+
+	:global(.dw-article .h2-columns h3) {
+		margin-top: 0;
+	}
+
+	:global(.dw-article .move-block) {
+		break-inside: avoid;
+	}
+
+	:global(.dw-article .move-block + .move-block) {
+		margin-top: 1rem;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
