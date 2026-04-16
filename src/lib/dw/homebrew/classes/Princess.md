@@ -55,11 +55,11 @@ Damage: d4
 HP: 6+Constitution  
 Load: 5+STR
 
-## Drive
+## Alignment
 
-Finding Your Way Home: Help somebody to find their place.
-Righting a Wrong: Help somebody weak to surpass their own limits.
-Banished Heir: Pass up a chance to redeem yourself or to go home.
+Good, Righting a Wrong: Help somebody weak to surpass their own limits.  
+Lawful, Finding Your Way Home: Help somebody to find their place.  
+Chaotic, Banished Heir: Pass up a chance to redeem yourself or to go home.
 
 ## Gear
 You start with:
@@ -89,7 +89,7 @@ Choose one for each:
 Soft Eyes, Sparkling Eyes, or Sharp Eyes  
 Hooded Head, Long Hair, or Bobbed Hair  
 Ornate Clothes, Regal Clothes, or Common Clothes  
-Chubby Body, Willowy Body, or Angular Body  
+Chubby Body, Willowy Body, or Angular Body
 
 ## Bonds
 \_\_\_\_\_ is a former subject of my kingdom.  

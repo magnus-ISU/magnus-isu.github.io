@@ -61,15 +61,15 @@ When you **enter a steading or settlement**, you can always find a kind citizen 
 
 Damage: d6  
 HP: 8+Constitution  
-Load: You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
+Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
 
-## Drive
+## Alignment
 
-Companionship: Offer comfort to a friend or stranger in need.  
-Loyalty: Help someone when the odds are against you.  
-Playfulness: Cause trouble by being excitable or mischievous.  
-Instability: Act frightened or vicious without any warning.  
-Appetite: Seek out food at any cost.
+Good, Companionship: Offer comfort to a friend or stranger in need.  
+Lawful, Loyalty: Help someone when the odds are against you.  
+Neutral, Playfulness: Cause trouble by being excitable or mischievous.  
+Chaotic, Instability: Act frightened or vicious without any warning.  
+Evil, Appetite: Seek out food at any cost.
 
 ## Gear
 Choose one:
