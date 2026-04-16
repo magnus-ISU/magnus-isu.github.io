@@ -9,8 +9,13 @@
 	import { siteTitle, siteURL } from '$lib/config.js';
 	let { data, children } = $props();
 
-	const transitionIn = { delay: 150, duration: 150 };
-	const transitionOut = { duration: 100 };
+	const isDW = (p) => p?.startsWith('/games/dungeon-world');
+	let prevPath = $state(data.path);
+	$effect(() => { prevPath = data.path; });
+	const skipTransition = $derived(isDW(data.path) && isDW(prevPath));
+
+	const transitionIn = $derived(skipTransition ? { duration: 0 } : { delay: 150, duration: 150 });
+	const transitionOut = $derived(skipTransition ? { duration: 0 } : { duration: 100 });
 
 	/**
 	 * Updates the global store with the current path. (Used for highlighting

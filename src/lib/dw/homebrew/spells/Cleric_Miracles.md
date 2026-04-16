@@ -44,6 +44,7 @@ You invoke a hungry spirit to possess a recently-dead body and serve you. This c
 - It’s durable. It has +2 HP for each level you have.
 - It has a functioning brain and can complete complex tasks.
 - It does not appear obviously dead, at least for a day or two.
+- You can instead animate 1d6 zombies with 1 HP each (cannot be increased).
 ## Level 5
 ### Revelation
 Your deity answers your prayers with a moment of perfect understanding. The GM will shed light on the current situation. When acting on the information, you take +1 forward.
@@ -77,14 +78,15 @@ Choose an appendage on a nearby living target, such as an arm, tentacle, or wing
 ## Level 9
 ### Storm of Vengeance
 Your deity brings the unnatural weather of your choice to pass. Rain of blood or acid, clouds of souls, wind that can carry away buildings, or any other weather you can imagine: ask and it shall come.
-### Repair
-Choose one event in the target’s past. All effects of that event, including damage, poison, disease, and magical effects, are ended and repaired. HP and diseases are healed, poisons are neutralized, magical effects are ended.
 ### Divine Presence
 Every creature must ask your leave to enter your presence, and you must give permission aloud for them to enter. Any creature without your leave takes an extra 1d10 damage whenever they take damage in your presence. Concentration 1
-### Consume Unlife
-The mindless undead creature you touch is destroyed and you steal its death energy to heal yourself or the next ally you touch. The amount of damage healed is equal to the HP that the creature had remaining before you destroyed it.
 ### Plague
 Name a city, town, encampment, or other place where people live. As long as this spell is active that place is beset by a plague appropriate to your deity’s domains (locusts, death of the first born, etc). Concentration 1
 
 ---
-### Resurrection
+### Consume Unlife
+The mindless undead creatures you can see are destroyed and you steal their death energy to heal yourself or your nearby allies. The amount of damage healed is equal to the HP that the creatures had remaining before you destroyed them.
+
+---
+### Prince's Invulnerability
+Up to 6 creatures you choose are immune to damage for 6 seconds. This miracle is cast in an instant, and never fails to cast.

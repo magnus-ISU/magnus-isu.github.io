@@ -3,7 +3,7 @@
 ## Starting Moves
 
 ### Hallowed Hold
-When you *stand on sanctified, holy ground*, hold 1 Miracle. (Stolen from pontificating on the universe, and maybe that Bloodborne and Dark Souls and Elden Ring has churches all around)
+When you *stand on sanctified, holy ground*, hold 1 Miracle.
 
 ### Unleash Miracles
 When you *hold Miracle and pray for a saint's miracle*, roll+WIS. On a 10+, it goes off. On a 7-9,

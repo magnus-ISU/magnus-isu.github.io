@@ -13,9 +13,9 @@ Yeah. We didn't think so.
 ## Starting Moves
 
 ### Prepare Spells
-You carry a book of power. You start out with 2 level 1 spells, as well as the cantrips. You can add new spells to it in a manner the GM will describe.
+You carry a book of power. You start out with 2 level 1 spells, as well as the cantrips. You can add new spells to it in a manner the GM will describe, typically by finding spell scrolls or studying other mages' spellbooks.
 
-When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level, forgetting any others.
+When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others.
 
 When you **sleep with spells still memorized**, your rest is subpar (not cantrips). You may forget your spells as part of your bedtime routine.
 
@@ -37,8 +37,8 @@ When you **draw on a place of power to create a magical effect**, tell the GM wh
 
 ## Backgrounds
 
-### Studious Acolyte
-Add a Miracle to your spellbook.
+### Acolyte
+Add a Cleric Miracle to your spellbook.
 
 ### Elf
 Detect Magic is a cantrip for you.

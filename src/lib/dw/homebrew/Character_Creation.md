@@ -30,9 +30,8 @@ these choices now. The wizard will need to choose spells for their spellbook.
 Both the cleric and the wizard will need to choose which spells they have
 prepared to start with.
 
-> A _Summoning_ spell is an easy choice, so I take Contact Spirits. Magic
-> Missile will allow me to deal more damage than the pitiful d4 for the wizard
-> class, so that’s in too. I choose Alarm for my last spell, since I can think
+> A _Summoning_ spell is an easy choice, so I take Contact Spirits.
+> I choose Alarm for my other spell, since I can think
 > of some interesting uses for it.
 
 ## 3\. Choose a Race or Background
@@ -41,9 +40,9 @@ Most classes have race or background options. Choose one. It gives you a special
 move.
 
 > I like the idea of being flexible—having more spells available is always good,
-> right? I choose Human, since it’ll allow me to pick a cleric spell and cast it
+> right? I choose Acolyte, since it’ll allow me to pick a cleric spell and cast it
 > like it was a wizard one. That’ll leave Shannon’s cleric free to keep the
-> healing magic flowing.
+> healing magic flowing. I'll choose Speak With Dead, so I can learn about ancient secrets.
 
 If you wish, your GM will probably work with you to make a new move if you
 want a race that isn't listed.
