@@ -119,7 +119,7 @@
 	.ph-line {
 		font-size: 0.88rem;
 		line-height: 1.5;
-		color: #555;
+		color: #5b9bd5;
 		white-space: nowrap;
 		overflow: hidden;
 		margin-bottom: 0.5px;

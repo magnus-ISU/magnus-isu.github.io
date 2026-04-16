@@ -1,0 +1,139 @@
+// Simple markdown → HTML (CommonMark-ish) with two-column layout for h2 sections with 2+ h3s
+export function renderMarkdown(src) {
+	if (!src.trim()) return '';
+	const lines = src.split('\n');
+
+	// Pre-scan: count h3s under each h2 (by line index)
+	const h2H3Counts = new Map();
+	let scanH2 = -1;
+	for (let i = 0; i < lines.length; i++) {
+		const hm = lines[i].match(/^(#{1,4})\s/);
+		if (hm) {
+			if (hm[1].length === 2) { scanH2 = i; h2H3Counts.set(i, 0); }
+			else if (hm[1].length === 3 && scanH2 >= 0) h2H3Counts.set(scanH2, h2H3Counts.get(scanH2) + 1);
+		}
+	}
+
+	let html = '';
+	let inList = false;
+	let listTag = '';
+	let paraLines = [];
+	let inMoveBlock = false;
+	let inH2Section = false;
+
+	function closeMoveBlock() {
+		if (inMoveBlock) { html += '</div>'; inMoveBlock = false; }
+	}
+
+	function closeH2Section() {
+		closeMoveBlock();
+		if (inH2Section) { html += '</div>'; inH2Section = false; }
+	}
+
+	function closePendingList() {
+		if (inList) { html += `</${listTag}>`; inList = false; }
+	}
+
+	function flushPara() {
+		if (paraLines.length === 0) return;
+		const content = paraLines.map((l, i) => {
+			const isLast = i === paraLines.length - 1;
+			if (!isLast && / {2,}$/.test(l)) return inline(l.replace(/ {2,}$/, '')) + '<br>';
+			if (!isLast && /\\$/.test(l)) return inline(l.slice(0, -1)) + '<br>';
+			return inline(l);
+		}).join('\n');
+		html += `<p>${content}</p>`;
+		paraLines = [];
+	}
+
+	function inline(t) {
+		const escapes = [];
+		t = t.replace(/\\([\\`*_\[\]{}()#+\-.!|~])/g, (_, ch) => {
+			escapes.push(ch);
+			return `\x00ESC${escapes.length - 1}\x00`;
+		});
+
+		t = t
+			.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+			.replace(/__(.+?)__/g, '<strong>$1</strong>')
+			.replace(/\*(.+?)\*/g, '<em>$1</em>')
+			.replace(/_(.+?)_/g, '<em>$1</em>')
+			.replace(/`(.+?)`/g, '<code>$1</code>')
+			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+		t = t.replace(/\x00ESC(\d+)\x00/g, (_, i) => escapes[+i].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+
+		return t;
+	}
+
+	for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
+		const line = lines[lineIdx];
+		const hm = line.match(/^(#{1,6})\s+(.*)/);
+		if (hm) {
+			flushPara();
+			closePendingList();
+			const level = hm[1].length;
+			if (level <= 2) {
+				closeH2Section();
+				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				if (level === 2) {
+					const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
+					html += `<div class="h2-section${cols ? ' h2-columns' : ''}">`;
+					inH2Section = true;
+				}
+			} else if (level === 3) {
+				closeMoveBlock();
+				html += '<div class="move-block">';
+				inMoveBlock = true;
+				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+			} else {
+				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+			}
+			continue;
+		}
+
+		if (/^---+$/.test(line.trim())) {
+			flushPara();
+			closePendingList();
+			html += '<hr>';
+			continue;
+		}
+
+		if (line.startsWith('> ')) {
+			flushPara();
+			closePendingList();
+			html += `<blockquote><p>${inline(line.slice(2))}</p></blockquote>`;
+			continue;
+		}
+
+		const ul = line.match(/^[-*]\s+(.*)/);
+		if (ul) {
+			flushPara();
+			if (!inList || listTag !== 'ul') { closePendingList(); html += '<ul>'; inList = true; listTag = 'ul'; }
+			html += `<li>${inline(ul[1])}</li>`;
+			continue;
+		}
+
+		const ol = line.match(/^\d+\.\s+(.*)/);
+		if (ol) {
+			flushPara();
+			if (!inList || listTag !== 'ol') { closePendingList(); html += '<ol>'; inList = true; listTag = 'ol'; }
+			html += `<li>${inline(ol[1])}</li>`;
+			continue;
+		}
+
+		if (!line.trim()) {
+			flushPara();
+			closePendingList();
+			continue;
+		}
+
+		closePendingList();
+		paraLines.push(line);
+	}
+	flushPara();
+	closePendingList();
+	closeH2Section();
+	return html;
+}
