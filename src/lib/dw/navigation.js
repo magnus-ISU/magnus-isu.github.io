@@ -23,7 +23,7 @@ export const pageArt = {
 	'bard': 'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-dance-bard-nerf.jpg',
 	'branded': 'https://simple-carry.com/cdn/shop/articles/firemage_1445x.jpg?v=1687386175',
 	'dashing-hero': 'https://litrpgreads.com/wp-content/uploads/2023/11/dnd-swashbuckler.jpg',
-	'princess': { url: 'https://64.media.tumblr.com/716021ac81e62a83d4ae5cd9859a434f/49400ecba3e78054-1f/s500x750/82bbe28164f6ce78a3490b7b71ae7a25704dd9b2.pnj', mirror: true },
+	'princess': 'https://64.media.tumblr.com/dc8cbb1a46f5ba6512d37eabeb32fe53/49400ecba3e78054-21/s500x750/14cec37c800919fd73ef5f88e9cf63c51224e1cc.pnj',
 	'arcane-duelist': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/611557270_10236484864114506_2387826330232835738_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=0MZfQZq5iY4Q7kNvwGxT3IO&_nc_oc=Adq9-p6znBXybnAeGuisRQMgBFymd5CsR2hnBdD1Nep_1Jxv-nUzMx5AtNQLNwQ_rCo&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=eUgTOVN2DYJ2KYlUeSIkMw&_nc_ss=7a3a8&oh=00_Af2SDf4PQmTmZay1Q177jqpsh6Ov7Pl2n6N9Lr5FTCu7qA&oe=69E6B74A',
 	'dog': 'https://images.unsplash.com/photo-1686592344891-ad645877db25?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 	// Monster Zones
@@ -37,13 +37,13 @@ export const pageArt = {
 	'swamp-denizens': 'https://spriggans-den.com/wp-content/uploads/2019/05/the_marsh_by_johnofthenorth-d5wajrj-e1559130315634.jpg',
 	'undead-legions': 'https://www.worldanvil.com/uploads/images/b7e966bce728ddbaf67f65ddca76e6c0.jpg',
 	'wild-beasts': 'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
-	'godlike-beings': 'https://static.wikia.nocookie.net/pathfinderenchanter/images/c/c0/Fire_demon-wallpaper-2560x1920.jpg/revision/latest?cb=20140323200550',
+	'godlike-beings': 'https://static.wikia.nocookie.net/pathfinderenchanter/images/c/c0/Fire_demon-wallpaper-2560x1920.jpg',
 	'random-homebrew': { url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp', mirror: true },
 	// GMing
 	'gm': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/dnd-gods-2024-6.png?resize=800%2C450&ssl=1',
 	'the-world': 'https://images.squarespace-cdn.com/content/v1/5dadaf88e03a4e6bb69307dd/904f0cc0-7846-4576-ac91-176528727e4b/Vhaledhon+No+Text+Map+Blog.jpg',
 	'fronts': 'https://www.slashfilm.com/img/gallery/dark-tower-tv-series-cast/intro-import.jpg',
-	'advanced-delving': 'https://static.wikia.nocookie.net/medievalhogwartsroleplay/images/0/06/Dungeon_Hall.png/revision/latest?cb=20150626145122',
+	'advanced-delving': 'https://static.wikia.nocookie.net/medievalhogwartsroleplay/images/0/06/Dungeon_Hall.png',
 	// Appendices
 	'conversion': 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/02/tasha-with-spellbooks.jpg',
 	'npcs': 'https://i.redd.it/zekid8146y3g1.jpeg',
@@ -51,7 +51,7 @@ export const pageArt = {
 	'thanks': 'https://www.dndspeak.com/wp-content/uploads/2021/04/RoyalFamily-1.jpg',
 	// Special pages
 	'monsters-srd': 'https://cdn.shopify.com/s/files/1/0828/6568/4757/files/chinese-god-dragon_480x480.jpg?v=1718627014',
-	'encounters': 'https://static.wikia.nocookie.net/forgottenrealms/images/f/f3/Black_Pits_art.png/revision/latest',
+	'encounters': 'https://static.wikia.nocookie.net/forgottenrealms/images/f/f3/Black_Pits_art.png',
 	'all-monsters': 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
 	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
 	// Spells

@@ -5,7 +5,10 @@
 	import { allMonsters } from '$lib/dw/monsters.js';
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
+	import { pageArt } from '$lib/dw/navigation.js';
 	import { tick } from 'svelte';
+
+	const art = typeof pageArt['encounters'] === 'string' ? pageArt['encounters'] : pageArt['encounters']?.url;
 
 	let text = $state(encounterText.value);
 	const encounterPlaceholder = `Bandit King\n3 bandit\nowlbear`;
@@ -102,7 +105,27 @@
 	</section>
 </article>
 
+{#if art}
+	<div class="bg-art">
+		<img src={art} alt="" />
+	</div>
+{/if}
+
 <style>
+	.bg-art {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.bg-art img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.12;
+	}
+
 	.encounter-input {
 		margin-bottom: 1.5rem;
 	}
