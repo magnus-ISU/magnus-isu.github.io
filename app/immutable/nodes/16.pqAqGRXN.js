@@ -1,0 +1,1 @@
+import{r as e}from"../chunks/PD1Wq3xD.js";import{d as o}from"../chunks/DbKA4knt.js";const r=()=>{e(307,`/games/dungeon-world/${o}`)},l=Object.freeze(Object.defineProperty({__proto__:null,load:r},Symbol.toStringTag,{value:"Module"}));export{l as universal};
