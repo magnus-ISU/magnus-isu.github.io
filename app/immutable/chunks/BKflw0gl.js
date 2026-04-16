@@ -13,9 +13,9 @@ Yeah. We didn't think so.
 ## Starting Moves
 
 ### Prepare Spells
-You carry a spellbook of power. You start out with 2 level 1 spells, the cantrips, and one higher level spell. You can add new spells to it in a manner the GM will describe, typically by finding spell scrolls or studying other mages' spellbooks.
+You carry a spellbook of power. You start out with the cantrips, 2 level 1 spells, and one higher level spell. Ask the GM how you can learn new spells, typically by finding spell scrolls or studying other mages' spellbooks.
 
-When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others.
+When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others. These spells must be of your level or lower.
 
 When you **sleep with spells still memorized**, your rest is subpar (not cantrips). You may forget your spells as part of your bedtime routine.
 
@@ -131,14 +131,14 @@ When you have time and safety with a magic item you may ask the GM what it does,
 When you use strict deduction to analyze your surroundings, you can discern realities with INT instead of WIS.
 
 ### Weak Warding
-When you **shunt the energy from a spell to protect you**, end an ongoing non-cantrip spell or forget any spell (including cantrips) and reduce the damage you take from an effect by 2. You cannot do this with multiple spells at once.
+When you **shunt the energy from a single spell to protect you**, end an ongoing non-cantrip spell or forget any spell (including cantrips) and reduce the damage you take from an effect by 2.
 
 ### Greater Warding
 *Replaces Weak Warding*  
-When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (including cantrips) and reduce the damage you take from an effect by 3 times the number of effects and spells ended.
+When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (and cantrips) and reduce the damage you take from an effect by 3 times the number of effects and spells ended.
 
 ### Counterspell
-When you attempt to **counter an arcane spell** which you see being cast, stake up to your INT prepared spells and roll+Staked. On a 10+, choose 2. On a 7-9, choose 1:
+When you attempt to **counter an arcane spell** which you see being cast, stake up to your INT prepared spells (including cantrips) and roll+Staked. On a 10+, choose 2. On a 7-9, choose 1:
 - The spell is completely negated where your protection extends.
 - You can protect others, not just yourself.
 - You forget the staked spells.
@@ -161,6 +161,9 @@ Your familiar has +2 Strength and 1d10 damage in this form.
 
 ### Know-It-All
 When **another player's character comes to you for advice and you tell them what you think is best**, they get +1 forward when following your advice and you mark experience if they do.
+
+### Missile Barrage
+When you **cast Magic Missiles**, on a hit, you may immediately recast it with improved Alacrity. Each time you do so, take -1 ongoing to cast it again until you stop.
 
 ## Mastery Moves
 

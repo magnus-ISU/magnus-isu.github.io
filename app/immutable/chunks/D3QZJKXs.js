@@ -9,18 +9,16 @@ You perform minor tricks of true magic. If you touch an item as part of the cast
 ### Light <span style="float:right"> Transmutation 0 </span> 
 An item you touch glows with arcane light, about as bright as a torch. It gives off no heat or sound and requires no fuel, but it is otherwise like a mundane torch. You have complete control of the color of the flame. The spell lasts as long as it is in your presence, or forever cast in a gemstone.
 ### Magic Missiles <span style="float:right"> Evocation 0 </span> 
-Projectiles of pure magic spring from your fingers. Deal 2d4 damage to one target, or 1d4 to 2 targets.
+Projectiles of pure magic spring from your fingers. Deal 2d4 damage to one target.
 ## Level 1
 ### Alarm <span style="float:right">Abjuration 1</span>
 Walk a wide circle as you cast this spell. Until you prepare spells again your magic will alert you if a creature crosses that circle. Even if you are asleep, the spell will shake you from your slumber.
 ### Detect Magic <span style="float:right" >Divination 1</span>
-One of your senses is briefly attuned to magic. The GM will tell you what here is magical.
+One of your senses is briefly attuned to magic. The GM will tell you what here is magical, and what it appears to do.
 ### Telepathy <span style="float:right" >Divination 1</span>
 You form a telepathic bond with a single person you touch, enabling you to converse with that person through your thoughts. You can only have one telepathic bond at a time.
 ### Charm Person <span style="float:right" >Enchantment 1</span>
 The person (not beast or monster) you touch while casting counts you as a friend until you end the spell, they take damage, or you prove otherwise.
-### Magic Missile <span style="float:right" >Evocation 1</span>
-Projectiles of pure magic spring from your fingers. Deal 2d4 damage to one target.
 ### Invisibility <span style="float:right" >Illusion 1</span>
 Touch an ally: nobody can see them. They’re invisible! The spell persists until the target attacks or you dismiss the effect. While the spell is ongoing you can’t cast a spell.
 ### Contact Spirit <span style="float:right" >Necromancy 1</span>
