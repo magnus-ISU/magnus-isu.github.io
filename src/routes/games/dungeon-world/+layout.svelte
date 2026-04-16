@@ -95,10 +95,7 @@
 	}
 </script>
 
-<div
-	class="dw-layout"
-	style={isCharSheet && charImage ? `background-image: url('${charImage}'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed;` : ''}
->
+<div class="dw-layout">
 	<button
 		class="sidebar-toggle"
 		onclick={() => (sidebarOpen = !sidebarOpen)}
@@ -164,6 +161,12 @@
 		<div class="content-spacer"></div>
 	</main>
 </div>
+
+{#if isCharSheet && charImage}
+	<div class="cs-bg-art">
+		<img src={charImage} alt="" />
+	</div>
+{/if}
 
 <style>
 	.dw-layout {
@@ -607,5 +610,19 @@
 			font-size: 1.5rem;
 			line-height: 2.5rem;
 		}
+	}
+
+	.cs-bg-art {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.cs-bg-art img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.12;
 	}
 </style>
