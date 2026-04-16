@@ -1,1 +1,0 @@
-import{v as i,j as s,w as r}from"./CUSK-jMp.js";import{p as e}from"./ZilAcF8f.js";let l=i("hb"),o=i(e({}));function p(t){return s(o)[t]??s(l)}function u(t,a,f){f?r(o,e({...s(o),[t]:a})):(r(l,e(a)),r(o,e({})))}export{p as g,u as t};
