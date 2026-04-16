@@ -204,6 +204,7 @@ export const navigation = [
 	{
 		category: 'Monsters',
 		items: [
+			{ title: 'Encounters', slug: 'encounters' },
 			{ title: 'Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
 			{
 				title: 'Cavern Dwellers',
@@ -232,9 +233,8 @@ export const navigation = [
 			{
 				title: 'Homebrew Monsters',
 				slug: 'monsters-homebrew',
-				source: 'homebrew',
-				file: 'Monsters',
-				homebrew: true
+				homebrew: true,
+				render: 'monsters'
 			}
 		]
 	},

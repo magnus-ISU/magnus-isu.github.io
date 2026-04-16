@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
+	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 
 	let { data } = $props();
 	let longPressTimer;
@@ -55,7 +56,17 @@
 {/if}
 
 <article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
-	<data.Content />
+	{#if data.render === 'monsters'}
+		<h1>{data.title}</h1>
+		{#each data.monsterSections as section}
+			<h2>{section.name}</h2>
+			{#each section.monsters as m}
+				<MonsterStatblock {...m} />
+			{/each}
+		{/each}
+	{:else}
+		<data.Content />
+	{/if}
 </article>
 
 <style>

@@ -9,10 +9,12 @@
 		description = '',
 		instinct = '',
 		moves = [],
-		notes = ''
+		notes = '',
+		count = 1
 	} = $props();
 
 	const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
+	const atkNameWidth = $derived(attacks.length > 1 ? Math.max(...attacks.map(a => a.name.length)) + 'ch' : 'auto');
 
 	// Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
 	const moveColumns = $derived(
@@ -29,19 +31,29 @@
 		usedMoves = next;
 	}
 
-	// HP tracking
+	// HP tracking — supports multiple instances via count prop
 	const hpNum = $derived(typeof hp === 'number' ? hp : null);
-	let currentHp = $state(typeof hp === 'number' ? hp : null);
-	const hpColor = $derived(
-		currentHp === null   ? null :
-		currentHp <= 0       ? '#e05555' :
-		currentHp < hpNum    ? '#d4a847' :
-		                       '#5aaa6a'
-	);
-	function clickHp() {
-		if (currentHp === null) return;
-		currentHp = currentHp <= 0 ? hpNum : currentHp - 1;
+	let currentHps = $state([]);
+	$effect(() => {
+		currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
+	});
+	function getHpColor(val) {
+		if (val == null) return null;
+		return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
 	}
+	function clickHp(idx) {
+		if (currentHps[idx] == null) return;
+		currentHps[idx] = currentHps[idx] <= 0 ? hpNum : currentHps[idx] - 1;
+	}
+
+	// Chunk HP entries into rows of 6
+	const hpRows = $derived.by(() => {
+		const rows = [];
+		for (let i = 0; i < currentHps.length; i += 6) {
+			rows.push(currentHps.slice(i, i + 6).map((_, j) => i + j));
+		}
+		return rows;
+	});
 
 	// Dice rolling — rollKey increments on each roll to restart the CSS animation
 	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
@@ -79,7 +91,7 @@
 
 <div class="monster">
 	<div class="monster-header">
-		<div class="monster-name">{name}</div>
+		<div class="monster-name">{count > 1 ? `${name} ×${count}` : name}</div>
 		{#if tags}
 			<div class="monster-tags">{tags}</div>
 		{/if}
@@ -90,7 +102,7 @@
 			<div class="monster-attacks">
 				{#each attacks as atk, i}
 					<div class="attack-row">
-						<button class="attack-btn" onclick={() => doRoll(atk.damage, i)}>{atk.name}</button>
+						<button class="attack-btn" style="min-width: {atkNameWidth}" onclick={() => doRoll(atk.damage, i)}>{atk.name}</button>
 						<span class="roll-slot">
 							{#key rollKey}
 								{#if rollResult?.atkIdx === i}
@@ -106,11 +118,11 @@
 				{/each}
 			</div>
 			<div class="monster-vitals">
-				{#if hp !== null}
+				{#if hp !== null && count <= 1}
 					<span class="vital">
-						<button class="vital-label hp-btn" onclick={clickHp} title={currentHp <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
+						<button class="vital-label hp-btn" onclick={() => clickHp(0)} title={currentHps[0] <= 0 ? 'Reset HP' : 'Reduce HP'}>HP</button>
 						{#if hpNum !== null}
-							<input class="hp-input" type="number" style="color: {hpColor}" bind:value={currentHp} />
+							<input class="hp-input" type="number" style="color: {getHpColor(currentHps[0])}" bind:value={currentHps[0]} />
 						{:else}
 							<span>{hp}</span>
 						{/if}
@@ -123,16 +135,36 @@
 		</div>
 	{/if}
 
-	{#if special}
-		<div class="monster-special"><em>Special: {special}</em></div>
+	{#if hp !== null && count > 1}
+		<div class="monster-hp-grid">
+			{#each hpRows as row}
+				<div class="hp-row">
+					{#each row as idx}
+						<span class="vital">
+							<button class="vital-label hp-btn" onclick={() => clickHp(idx)} title={currentHps[idx] <= 0 ? 'Reset HP' : 'Reduce HP'}>
+								HP{idx + 1}
+							</button>
+							{#if hpNum !== null}
+								<input class="hp-input" type="number" style="color: {getHpColor(currentHps[idx])}" bind:value={currentHps[idx]} />
+							{:else}
+								<span>{hp}</span>
+							{/if}
+						</span>
+					{/each}
+				</div>
+			{/each}
+		</div>
 	{/if}
 
 	{#if description}
 		<div class="monster-description">{description}</div>
 	{/if}
 
-	{#if instinct}
-		<div class="monster-instinct"><strong>Instinct:</strong> {instinct}</div>
+	{#if instinct || special}
+		<div class="monster-instinct">
+			{#if instinct}<span><strong>Instinct:</strong> {instinct}</span>{/if}
+			{#if special}<span class="monster-special">{special}</span>{/if}
+		</div>
 	{/if}
 
 	{#if moves.length > 0}
@@ -199,7 +231,6 @@
 		display: flex;
 		align-items: center;
 		gap: 0 0.6rem;
-		flex-wrap: wrap;
 	}
 
 	.attack-btn {
@@ -262,8 +293,24 @@
 
 	.monster-vitals {
 		display: flex;
-		gap: 0.75rem;
+		align-items: baseline;
+		gap: 0.4rem 0.75rem;
 		flex-shrink: 0;
+		flex-wrap: wrap;
+	}
+
+	.monster-hp-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		padding: 0.4rem 0.75rem;
+		background: #1e1e1e;
+		border-bottom: 1px solid #2c2c2c;
+	}
+
+	.hp-row {
+		display: flex;
+		gap: 0.75rem;
 	}
 
 	.vital {
@@ -313,13 +360,6 @@
 		-webkit-appearance: none;
 	}
 
-	.monster-special {
-		padding: 0.35rem 0.75rem 0;
-		color: #aaa;
-		font-size: 0.88rem;
-		background: #1a1a1a;
-	}
-
 	.monster-description {
 		padding: 0.5rem 0.75rem;
 		color: #bbb;
@@ -330,6 +370,10 @@
 	}
 
 	.monster-instinct {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 0.75rem;
 		padding: 0.35rem 0.75rem 0.4rem;
 		font-size: 0.88rem;
 		color: #ccc;
@@ -339,6 +383,13 @@
 
 	.monster-instinct strong {
 		color: #fff;
+	}
+
+	.monster-special {
+		color: #aaa;
+		font-style: italic;
+		font-size: 0.82rem;
+		flex-shrink: 0;
 	}
 
 	.monster-moves {

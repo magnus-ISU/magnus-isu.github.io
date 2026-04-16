@@ -12,6 +12,20 @@ export const load = async ({ params }) => {
 		error(404, 'Page not found');
 	}
 
+	// Data-driven pages (no markdown file needed)
+	if (entry.render === 'monsters') {
+		const { monsterSections } = await import('$lib/dw/monsters.js');
+		return {
+			title: entry.title,
+			isHomebrew: !!entry.homebrew,
+			slug,
+			render: 'monsters',
+			monsterSections,
+			srdSlug: entry.srdSlug || null,
+			homebrewSlug: entry.homebrewSlug || null
+		};
+	}
+
 	let modulePath;
 	if (entry.source === 'srd') {
 		modulePath = `/src/lib/dw/srd/${entry.file}.md`;
