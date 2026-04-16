@@ -57,6 +57,7 @@
 
 	textarea {
 		width: 100%;
+		box-sizing: border-box;
 		background: transparent;
 		border: 1px solid #333;
 		border-radius: 6px;
