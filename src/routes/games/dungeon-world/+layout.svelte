@@ -9,6 +9,15 @@
 
 	let { children } = $props();
 
+	const charImage = $derived.by(() => {
+		const lines = characterSheet.value.split('\n');
+		return lines[3]?.trim() || '';
+	});
+
+	const isCharSheet = $derived(
+		page.url.pathname.replace(/\/$/, '').endsWith('/character-sheet')
+	);
+
 	const knownMonsterSections = new Set(
 		Object.values(contentIndex).filter(e => e.monsterSection).map(e => e.monsterSection)
 	);
@@ -147,7 +156,10 @@
 		<div class="sidebar-spacer"></div>
 	</nav>
 
-	<main class="dw-content">
+	<main
+		class="dw-content"
+		style={isCharSheet && charImage ? `background-image: url('${charImage}'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed;` : ''}
+	>
 		{@render children?.()}
 		<div class="content-spacer"></div>
 	</main>

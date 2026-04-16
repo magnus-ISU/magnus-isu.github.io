@@ -437,7 +437,7 @@
 	</div>
 
 	{#if parsed.name}
-		<div class="sheet-preview" style={parsed.image ? `background-image: url('${parsed.image}')` : ''}>
+		<div class="sheet-preview">
 			<div class="sheet-top">
 			<div class="sheet-header">
 				<div class="header-info">
@@ -573,9 +573,6 @@
 	.sheet-preview {
 		border: 1px solid #333;
 		border-radius: 6px;
-		background-size: cover;
-		background-position: center top;
-		background-repeat: no-repeat;
 	}
 
 	.sheet-top {
@@ -821,7 +818,7 @@
 	/* --- Body --- */
 	.char-body {
 		padding: 0.75rem 1rem;
-		background: #1a1a1a;
+		background: #1a1a1aee;
 		white-space: normal;
 		word-wrap: break-word;
 	}

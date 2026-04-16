@@ -5,6 +5,12 @@ export const pageArt = {
 	'introduction': { url: 'https://www.enworld.org/attachments/flying_castle_by_asganafer-d6ufj92-png.73830/', mirror: true },
 	'character-creation': 'https://assetsio.gnwcdn.com/D%26D-carfeul-planning-artwork.jpg?width=690&quality=85&format=jpg&dpr=3&auto=webp',
 	'basic-moves': 'https://travisdanielbow.weebly.com/uploads/3/8/3/9/38395353/dragon-s-fury-by-benwootten-d574oag_orig.jpg',
+	'playing-the-game': 'https://images.stockcake.com/public/7/e/e/7ee410d1-36aa-4cfc-b20c-a4db0d45314c_large/wizard-reading-spellbook-stockcake.jpg',
+	'moves-discussion': 'https://assetsio.gnwcdn.com/0_TheKingsDilemma.png?width=1200&height=600&fit=crop&enable=upscale&auto=webp',
+	'example-of-play': 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/08/DD-Fighter-dead-giant.jpg',
+	'equipment': { url: 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/11/Metallic-Dragon-with-Hoard.jpg', mirror: true },
+	'first-session': 'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-crystal-caves-adventure-lesbian-couple.jpg',
+	'class-moves-discussion': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2025/07/dungeon-master-university-hero.png?fit=800%2C450&ssl=1',
 	// Classes
 	'fighter': 'https://everhearthinn.com/wp-content/uploads/2022/08/Fighter-5E-Class-Guide-Featured-Image.webp',
 	'wizard': 'https://imgcdn.stablediffusionweb.com/2025/1/28/efdf78a6-f201-4b00-bd0d-3f7cf0eb87f8.jpg',
