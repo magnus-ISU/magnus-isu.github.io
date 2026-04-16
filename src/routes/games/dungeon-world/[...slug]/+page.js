@@ -15,12 +15,15 @@ export const load = async ({ params }) => {
 	// Data-driven pages (no markdown file needed)
 	if (entry.render === 'monsters') {
 		const { monsterSections } = await import('$lib/dw/monsters.js');
+		const sections = entry.monsterSection
+			? monsterSections.filter((s) => s.slug === entry.monsterSection)
+			: monsterSections;
 		return {
 			title: entry.title,
 			isHomebrew: !!entry.homebrew,
 			slug,
 			render: 'monsters',
-			monsterSections,
+			monsterSections: sections,
 			srdSlug: entry.srdSlug || null,
 			homebrewSlug: entry.homebrewSlug || null
 		};

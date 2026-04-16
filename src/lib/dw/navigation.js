@@ -206,35 +206,21 @@ export const navigation = [
 		items: [
 			{ title: 'Encounters', slug: 'encounters' },
 			{ title: 'Monsters', slug: 'monsters-srd', source: 'srd', file: 'Monsters' },
-			{
-				title: 'Cavern Dwellers',
-				slug: 'cavern-dwellers',
-				source: 'srd',
-				file: 'Caverns'
-			},
-			{ title: 'Dark Woods', slug: 'dark-woods', source: 'srd', file: 'Woods' },
-			{
-				title: 'Denizens of the Depths',
-				slug: 'depths',
-				source: 'srd',
-				file: 'Depths'
-			},
-			{
-				title: 'Twisted Experiments',
-				slug: 'experiments',
-				source: 'srd',
-				file: 'Experiments'
-			},
-			{ title: 'The Common Folk', slug: 'folk', source: 'srd', file: 'Folk' },
-			{ title: 'Ravenous Hordes', slug: 'hordes', source: 'srd', file: 'Hordes' },
-			{ title: 'Planar Powers', slug: 'planes', source: 'srd', file: 'Planes' },
-			{ title: 'Swamp Denizens', slug: 'swamp', source: 'srd', file: 'Swamp' },
-			{ title: 'Undead Legions', slug: 'undead', source: 'srd', file: 'Undead' },
+			{ title: 'Cavern Dwellers', slug: 'cavern-dwellers', render: 'monsters', monsterSection: 'cavern-dwellers' },
+			{ title: 'Dark Woods', slug: 'dark-woods', render: 'monsters', monsterSection: 'dark-woods' },
+			{ title: 'Lower Depths', slug: 'lower-depths', render: 'monsters', monsterSection: 'lower-depths' },
+			{ title: 'Twisted Experiments', slug: 'twisted-experiments', render: 'monsters', monsterSection: 'twisted-experiments' },
+			{ title: 'The Common Folk', slug: 'the-common-folk', render: 'monsters', monsterSection: 'the-common-folk' },
+			{ title: 'Ravenous Hordes', slug: 'ravenous-hordes', render: 'monsters', monsterSection: 'ravenous-hordes' },
+			{ title: 'Planar Powers', slug: 'planar-powers', render: 'monsters', monsterSection: 'planar-powers' },
+			{ title: 'Swamp Denizens', slug: 'swamp-denizens', render: 'monsters', monsterSection: 'swamp-denizens' },
+			{ title: 'Undead Legions', slug: 'undead-legions', render: 'monsters', monsterSection: 'undead-legions' },
 			{
 				title: 'Homebrew Monsters',
 				slug: 'monsters-homebrew',
 				homebrew: true,
-				render: 'monsters'
+				render: 'monsters',
+				monsterSection: 'homebrew-monsters'
 			}
 		]
 	},

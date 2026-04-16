@@ -7,10 +7,10 @@ function slugToName(slug) {
 		.join(' ');
 }
 
-/** @type {{ name: string, monsters: object[] }[]} */
+/** @type {{ slug: string, name: string, monsters: object[] }[]} */
 export const monsterSections = Object.entries(modules).map(([path, mod]) => {
 	const slug = path.replace('./monsters/', '').replace('.js', '');
-	return { name: slugToName(slug), monsters: mod.default, };
+	return { slug, name: slugToName(slug), monsters: mod.default };
 });
 
 /** @type {object[]} */
