@@ -14,7 +14,6 @@
 	let bMoves = $state(['']);
 	let bNotes = $state('');
 	let nameError = $state(false);
-	let importInput = $state(null);
 
 	function addAttack() { bAttacks = [...bAttacks, { name: '', damage: '', tags: '' }]; }
 	function rmAttack(i) { bAttacks = bAttacks.filter((_, idx) => idx !== i); }
@@ -80,139 +79,177 @@
 		reader.readAsText(file);
 		e.target.value = '';
 	}
+
+	// Delete confirmation — prompt once, then allow for 1 minute
+	let pendingDelete = $state(null); // monster name awaiting confirm
+	let lastConfirmed = 0;
+
+	function requestDelete(name) {
+		if (Date.now() - lastConfirmed < 60_000) {
+			userMonsters.remove(name);
+		} else {
+			pendingDelete = name;
+		}
+	}
+
+	function confirmDelete() {
+		lastConfirmed = Date.now();
+		userMonsters.remove(pendingDelete);
+		pendingDelete = null;
+	}
+
+	function cancelDelete() {
+		pendingDelete = null;
+	}
 </script>
 
 <svelte:head>
 	<title>User Monsters - Dungeon World</title>
 </svelte:head>
 
+{#if pendingDelete}
+	<div class="modal-backdrop" onclick={cancelDelete} role="presentation">
+		<div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+			<p>Delete <strong>{pendingDelete}</strong>?</p>
+			<div class="modal-actions">
+				<button class="action-btn primary danger" onclick={confirmDelete}>Delete</button>
+				<button class="action-btn" onclick={cancelDelete}>Cancel</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
 <article class="dw-article">
 	<h1>User Monsters</h1>
 
-	<div class="toolbar">
-		{#if userMonsters.list.length > 0}
-			<button class="action-btn" onclick={exportMonsters}>Export</button>
-		{/if}
-		<label class="action-btn import-label">
-			Import
-			<input type="file" accept=".json" onchange={handleImport} />
+	<div class="builder">
+		<div class="builder-row">
+			<label class:error={nameError}>
+				Name{#if nameError} <span class="error-msg">— already exists</span>{/if}
+				<input
+					type="text"
+					bind:value={bName}
+					placeholder="Owlbear"
+					class:input-error={nameError}
+				/>
+			</label>
+			<label>
+				Tags
+				<input type="text" bind:value={bTags} placeholder="Solitary, Large" />
+			</label>
+		</div>
+
+		<div class="builder-row">
+			<label>
+				HP
+				<input type="number" bind:value={bHp} placeholder="12" />
+			</label>
+			<label>
+				Armor
+				<input type="number" bind:value={bArmor} placeholder="1" />
+			</label>
+			<label>
+				Special Qualities
+				<input type="text" bind:value={bSpecial} placeholder="Wings, Keen senses" />
+			</label>
+		</div>
+
+		<fieldset>
+			<legend>Attacks</legend>
+			{#each bAttacks as atk, i}
+				<div class="builder-attack-row">
+					<input type="text" bind:value={bAttacks[i].name} placeholder="Attack name" />
+					<input type="text" bind:value={bAttacks[i].damage} placeholder="d10+2" />
+					<input type="text" bind:value={bAttacks[i].tags} placeholder="Close, Messy" />
+					{#if bAttacks.length > 1}
+						<button class="rm-btn" onclick={() => rmAttack(i)}>x</button>
+					{/if}
+				</div>
+			{/each}
+			<button class="add-btn" onclick={addAttack}>+ Attack</button>
+		</fieldset>
+
+		<label class="full-width">
+			Description
+			<textarea bind:value={bDescription} placeholder="Flavor text..." rows="3"></textarea>
 		</label>
+
+		<div class="builder-row">
+			<label>
+				Instinct
+				<input type="text" bind:value={bInstinct} placeholder="To hunt" />
+			</label>
+		</div>
+
+		<fieldset>
+			<legend>Moves</legend>
+			{#each bMoves as _, i}
+				<div class="builder-move-row">
+					<input type="text" bind:value={bMoves[i]} placeholder="Monster move" />
+					{#if bMoves.length > 1}
+						<button class="rm-btn" onclick={() => rmMove(i)}>x</button>
+					{/if}
+				</div>
+			{/each}
+			<button class="add-btn" onclick={addMove}>+ Move</button>
+		</fieldset>
+
+		<label class="full-width">
+			Design Notes
+			<textarea bind:value={bNotes} placeholder="Optional GM notes..." rows="2"></textarea>
+		</label>
+
+		{#if bName.trim()}
+			<div class="builder-preview">
+				<h3>Preview</h3>
+				<MonsterStatblock {...built} open={true} />
+			</div>
+		{/if}
+
+		<div class="builder-actions">
+			<button class="action-btn primary" onclick={saveMonster}>Save Monster</button>
+			{#if bName.trim() || bDescription.trim() || bTags.trim()}
+				<button class="action-btn" onclick={resetBuilder}>Clear</button>
+			{/if}
+		</div>
 	</div>
 
 	{#if userMonsters.list.length > 0}
+		<hr />
+
+		<div class="toolbar">
+			<button class="action-btn" onclick={exportMonsters}>Export</button>
+			<label class="action-btn import-label">
+				Import
+				<input type="file" accept=".json" onchange={handleImport} />
+			</label>
+		</div>
+
 		<section class="monster-list">
 			{#each userMonsters.list as m (m.name)}
 				<div class="monster-row">
-					<MonsterStatblock {...m} />
-					<button class="remove-btn" onclick={() => userMonsters.remove(m.name)} title="Remove">✕</button>
+					<div class="monster-wrap">
+						<MonsterStatblock {...m} />
+					</div>
+					<button class="remove-btn" onclick={() => requestDelete(m.name)} title="Delete">✕</button>
 				</div>
 			{/each}
 		</section>
-		<hr />
-	{/if}
-
-	<details open={userMonsters.list.length === 0}>
-		<summary class="builder-toggle">Create Monster</summary>
-
-		<div class="builder">
-			<div class="builder-row">
-				<label class:error={nameError}>
-					Name{#if nameError} <span class="error-msg">— already exists</span>{/if}
-					<input
-						type="text"
-						bind:value={bName}
-						placeholder="Owlbear"
-						class:input-error={nameError}
-					/>
-				</label>
-				<label>
-					Tags
-					<input type="text" bind:value={bTags} placeholder="Solitary, Large" />
-				</label>
-			</div>
-
-			<div class="builder-row">
-				<label>
-					HP
-					<input type="number" bind:value={bHp} placeholder="12" />
-				</label>
-				<label>
-					Armor
-					<input type="number" bind:value={bArmor} placeholder="1" />
-				</label>
-				<label>
-					Special Qualities
-					<input type="text" bind:value={bSpecial} placeholder="Wings, Keen senses" />
-				</label>
-			</div>
-
-			<fieldset>
-				<legend>Attacks</legend>
-				{#each bAttacks as atk, i}
-					<div class="builder-attack-row">
-						<input type="text" bind:value={bAttacks[i].name} placeholder="Attack name" />
-						<input type="text" bind:value={bAttacks[i].damage} placeholder="d10+2" />
-						<input type="text" bind:value={bAttacks[i].tags} placeholder="Close, Messy" />
-						{#if bAttacks.length > 1}
-							<button class="rm-btn" onclick={() => rmAttack(i)}>x</button>
-						{/if}
-					</div>
-				{/each}
-				<button class="add-btn" onclick={addAttack}>+ Attack</button>
-			</fieldset>
-
-			<label class="full-width">
-				Description
-				<textarea bind:value={bDescription} placeholder="Flavor text..." rows="3"></textarea>
+	{:else}
+		<div class="toolbar">
+			<label class="action-btn import-label">
+				Import
+				<input type="file" accept=".json" onchange={handleImport} />
 			</label>
-
-			<div class="builder-row">
-				<label>
-					Instinct
-					<input type="text" bind:value={bInstinct} placeholder="To hunt" />
-				</label>
-			</div>
-
-			<fieldset>
-				<legend>Moves</legend>
-				{#each bMoves as _, i}
-					<div class="builder-move-row">
-						<input type="text" bind:value={bMoves[i]} placeholder="Monster move" />
-						{#if bMoves.length > 1}
-							<button class="rm-btn" onclick={() => rmMove(i)}>x</button>
-						{/if}
-					</div>
-				{/each}
-				<button class="add-btn" onclick={addMove}>+ Move</button>
-			</fieldset>
-
-			<label class="full-width">
-				Design Notes
-				<textarea bind:value={bNotes} placeholder="Optional GM notes..." rows="2"></textarea>
-			</label>
-
-			{#if bName.trim()}
-				<div class="builder-preview">
-					<h3>Preview</h3>
-					<MonsterStatblock {...built} open={true} />
-				</div>
-			{/if}
-
-			<div class="builder-actions">
-				<button class="action-btn primary" onclick={saveMonster}>Save Monster</button>
-				{#if bName.trim() || bDescription.trim() || bTags.trim()}
-					<button class="action-btn" onclick={resetBuilder}>Clear</button>
-				{/if}
-			</div>
 		</div>
-	</details>
+	{/if}
 </article>
 
 <style>
 	hr {
 		border: none;
 		border-top: 1px solid #333;
-		margin: 2rem 0;
+		margin: 2rem 0 1.5rem;
 	}
 
 	.toolbar {
@@ -225,52 +262,78 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
-		margin-bottom: 1.5rem;
 	}
 
 	.monster-row {
-		position: relative;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+
+	.monster-wrap {
+		flex: 1;
+		min-width: 0;
 	}
 
 	.remove-btn {
-		position: absolute;
-		top: 0.5rem;
-		right: 0.5rem;
+		flex-shrink: 0;
+		margin-top: 0.45rem;
 		background: none;
-		border: none;
+		border: 1px solid #3a3a3a;
+		border-radius: 4px;
 		color: #555;
 		cursor: pointer;
-		font-size: 0.75rem;
-		padding: 0.2rem 0.4rem;
-		border-radius: 3px;
+		font-size: 0.7rem;
+		padding: 0.3rem 0.45rem;
 		line-height: 1;
-		transition: color 0.15s, background 0.15s;
-		z-index: 2;
+		transition: color 0.15s, border-color 0.15s, background 0.15s;
 	}
 
 	.remove-btn:hover {
 		color: #e05555;
+		border-color: #e05555;
 		background: #2a1a1a;
 	}
 
-	/* Builder toggle */
-	.builder-toggle {
-		cursor: pointer;
-		font-size: 1.1rem;
-		font-weight: bold;
-		color: #d4a847;
-		padding: 0.5rem 0;
-		user-select: none;
-		list-style: none;
+	/* Modal */
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 2000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.builder-toggle::-webkit-details-marker { display: none; }
-	.builder-toggle::before { content: '+ '; font-family: monospace; }
-	details[open] > .builder-toggle::before { content: '- '; }
+	.modal {
+		background: #1e1e1e;
+		border: 1px solid #444;
+		border-radius: 8px;
+		padding: 1.5rem 2rem;
+		min-width: 260px;
+		text-align: center;
+	}
+
+	.modal p {
+		color: #ddd;
+		margin: 0 0 1.25rem;
+		font-size: 1rem;
+	}
+
+	.modal strong {
+		color: #fff;
+	}
+
+	.modal-actions {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+	}
 
 	/* Builder form */
 	.builder {
-		margin-top: 1rem;
+		margin-bottom: 0;
 	}
 
 	.builder label {
@@ -431,6 +494,13 @@
 	}
 
 	.action-btn.primary:hover { background: #e0b850; }
+
+	.action-btn.primary.danger {
+		background: #c0392b;
+		border-color: #c0392b;
+	}
+
+	.action-btn.primary.danger:hover { background: #d44438; }
 
 	.import-label {
 		display: inline-flex;
