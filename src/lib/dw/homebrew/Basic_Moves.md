@@ -189,14 +189,14 @@ While the spell is ongoing, take -1 ongoing to cast a spell.
 ## GM Moves
 
 - Use a monster, danger, or location move
-- Reveal an unwelcome truth
-- Show signs of an approaching threat
 - Hurt them
+- Put someone in a spot
 - Use up their resources
 - Turn their move back on them
 - Separate them
-- Give an opportunity that fits a class' abilities
-- Show a downside to their class, race, or equipment
-- Offer an opportunity, with or without cost
-- Put someone in a spot
+- Reveal an unwelcome truth
+- Show signs of an approaching threat
 - Tell them the requirements or consequences and ask
+- Show a downside to their class, race, or equipment
+- Give an opportunity that fits a class' abilities
+- Offer an opportunity, with or without cost

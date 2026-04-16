@@ -6,9 +6,8 @@
 	import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
 
-	const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
-
 	let { data } = $props();
+	const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
 	let longPressTimer;
 	let isLongPress = false;
 	let imgLoaded = $state(false);
