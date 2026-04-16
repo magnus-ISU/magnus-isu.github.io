@@ -13,31 +13,26 @@
 
 		const name = get(0);
 		const tags = get(1);
-		const line2 = get(2);
+		const vitalsRaw = get(2);
 
-		// Detect combined format: "16 HP, 4 Armor" or "16 HP"
-		const combined = line2.match(/(\d+)\s*HP\s*,\s*(\d+)\s*Armor/i);
-
-		let hp, armor, ofs;
-		if (combined) {
-			hp = +combined[1];
-			armor = +combined[2];
-			ofs = 3;
+		// Parse "3 HP, 3 Armor" or "3,3" or "3 HP" or "3"
+		let hp = null, armor = null;
+		const full = vitalsRaw.match(/(\d+)\s*(?:HP)?\s*,\s*(\d+)\s*(?:Armor)?/i);
+		if (full) {
+			hp = +full[1];
+			armor = +full[2];
 		} else {
-			const hpMatch = line2.match(/^(\d+)/);
-			hp = hpMatch ? +hpMatch[1] : null;
-			const armorMatch = get(3).match(/^(\d+)/);
-			armor = armorMatch ? +armorMatch[1] : null;
-			ofs = 4;
+			const hpOnly = vitalsRaw.match(/^(\d+)/);
+			if (hpOnly) hp = +hpOnly[1];
 		}
 
-		const special = get(ofs);
-		const description = get(ofs + 1).replaceAll('\\n', '\n');
-		const instinct = get(ofs + 2);
+		const special = get(3);
+		const description = get(4).replaceAll('\\n', '\n');
+		const instinct = get(5);
 
 		const attacks = [];
 		const moves = [];
-		for (let i = ofs + 3; i < lines.length; i++) {
+		for (let i = 6; i < lines.length; i++) {
 			const line = lines[i].trim();
 			if (!line) continue;
 			if (line.toLowerCase().startsWith('attack:')) {
@@ -66,17 +61,16 @@
 		const phs = [
 			'Monster name',
 			'Solitary, Large',
-			'12 hp',
-			'1 armor',
+			'hp, armor',
 			'Special qualities',
 			'Description',
 			'Instinct',
 		];
 
-		const hasAttack = lines.slice(7).some(l => l.trim().toLowerCase().startsWith('attack:'));
+		const hasAttack = lines.slice(6).some(l => l.trim().toLowerCase().startsWith('attack:'));
 		phs.push(hasAttack ? 'Move or attack: Name ; damage ; tags' : 'attack: Attack name ; Attack damage ; Attack tags');
 
-		const total = Math.max(lines.length + 1, 11);
+		const total = Math.max(lines.length, 10);
 		while (phs.length < total) {
 			phs.push('Move or attack');
 		}
