@@ -153,7 +153,6 @@ Get one move from another class. Treat your level as one lower for choosing the 
 
 ## Techniques
 
-- **Flowing**  If your attack kills a target, you may immediately **Deal Damage** to another target in range as well.
 - **Freezing**  Your attack freezes and shatters a portion of your opponent's armor. After you deal your damage, reduce their armor by 1 until they repair it.
 - **Galvanic**  Electricity courses through your blade, numbing one of your target's limbs.
 - **Void-Edged**  The edge of your weapon hums with an unearthly light. You may slice through inanimate objects with ease and add the *messy* tag to your attack.
@@ -166,5 +165,8 @@ Get one move from another class. Treat your level as one lower for choosing the 
 - **Quicksilver**  Your blade cuts faster than the eye can see, preventing your opponent from mounting a proper defense. Gain 2 piercing on your attack.
 - **Warding**  Your attack creates a ring of light around you and your target that other creatures (and their projectiles) cannot cross.
 - **Dust Devil**  Your attack kicks up a small tornado of dust and grit at your target's feet, obscuring visibility.
+- **Repelling**  A concussive wave follows your blade, forcing you and your opponent apart. You choose which direction you leap.
+- **Grounding**  Energy channels from your blade into the earth beneath you. Until you choose to move from this spot, you cannot be knocked down, pushed, or thrown off balance.
+- **Redirecting**  Your blade traces a sigil in the air that lingers after your strike. Hold 1 Ward; spend it to deflected a nearby ranged attack toward a target of your choosing within near range. Lose your Ward when you stop fighting.
 
 *A playbook by Timothy Schroeder*

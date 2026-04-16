@@ -36,6 +36,12 @@
 	<title>{data.title} - Dungeon World</title>
 </svelte:head>
 
+{#if data.art}
+	<div class="bg-art">
+		<img src={data.art} alt="" class:mirror={data.artMirror} />
+	</div>
+{/if}
+
 {#if hasPair}
 	<div class="source-bar">
 		<button
@@ -120,6 +126,24 @@
 	.source-opt.active {
 		background: #d4a847;
 		color: #1e1e1e;
+	}
+
+	.bg-art {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.bg-art img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.12;
+	}
+
+	.bg-art img.mirror {
+		transform: scaleX(-1);
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {

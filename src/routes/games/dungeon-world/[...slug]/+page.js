@@ -1,8 +1,18 @@
 import { error } from '@sveltejs/kit';
-import { contentIndex } from '$lib/dw/navigation.js';
+import { contentIndex, pageArt } from '$lib/dw/navigation.js';
 
 const srdModules = import.meta.glob('/src/lib/dw/srd/*.md');
 const homebrewModules = import.meta.glob('/src/lib/dw/homebrew/**/*.md');
+
+function resolveArt(...keys) {
+	for (const k of keys) {
+		const v = k && pageArt[k];
+		if (!v) continue;
+		if (typeof v === 'string') return { art: v, artMirror: false };
+		return { art: v.url, artMirror: !!v.mirror };
+	}
+	return { art: null, artMirror: false };
+}
 
 export const load = async ({ params }) => {
 	const slug = params.slug;
@@ -19,6 +29,7 @@ export const load = async ({ params }) => {
 			slug,
 			render: 'monsters',
 			monsterSections: [section],
+			...resolveArt(slug),
 			srdSlug: null,
 			homebrewSlug: null
 		};
@@ -36,6 +47,7 @@ export const load = async ({ params }) => {
 			slug,
 			render: 'monsters',
 			monsterSections: sections,
+			...resolveArt(slug, entry.monsterSection),
 			srdSlug: entry.srdSlug || null,
 			homebrewSlug: entry.homebrewSlug || null
 		};
@@ -61,6 +73,7 @@ export const load = async ({ params }) => {
 		title: entry.title,
 		isHomebrew: !!entry.homebrew,
 		slug,
+		...resolveArt(slug, slug.replace('-srd', '')),
 		srdSlug: entry.srdSlug || null,
 		homebrewSlug: entry.homebrewSlug || null
 	};

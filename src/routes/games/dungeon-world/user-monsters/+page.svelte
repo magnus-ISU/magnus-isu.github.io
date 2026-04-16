@@ -1,6 +1,7 @@
 <script>
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 	import { allMonsters } from '$lib/dw/monsters.js';
+	import { pageArt } from '$lib/dw/navigation.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 	import TextBox from '$lib/components/TextBox.svelte';
 
@@ -146,6 +147,12 @@
 	<title>User Monsters - Dungeon World</title>
 </svelte:head>
 
+{#if pageArt['user-monsters']}
+	<div class="bg-art">
+		<img src={pageArt['user-monsters']} alt="" />
+	</div>
+{/if}
+
 {#if pendingDelete}
 	<div class="modal-backdrop" onclick={cancelDelete} role="presentation">
 		<div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
@@ -211,6 +218,20 @@
 </article>
 
 <style>
+	.bg-art {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.bg-art img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.12;
+	}
+
 	hr {
 		border: none;
 		border-top: 1px solid #333;

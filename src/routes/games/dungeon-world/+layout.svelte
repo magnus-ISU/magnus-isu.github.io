@@ -4,6 +4,8 @@
 	import { navigation, contentIndex } from '$lib/dw/navigation.js';
 	import { monsterSections } from '$lib/dw/monsters.js';
 	import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
+	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+	import { loadClassRaw, buildCharacterSheet } from '$lib/dw/classLoader.js';
 
 	let { children } = $props();
 
@@ -68,6 +70,20 @@
 	function onPointerUp() {
 		clearTimeout(longPressTimer);
 	}
+
+	async function handleNavClick(e, item, category) {
+		if (category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+			if (e.shiftKey || isLongPress) {
+				e.preventDefault();
+				e.stopPropagation();
+				const raw = await loadClassRaw(item);
+				if (raw) characterSheet.value = buildCharacterSheet(raw);
+				sidebarOpen = false;
+				return;
+			}
+		}
+		sidebarOpen = false;
+	}
 </script>
 
 <div class="dw-layout">
@@ -93,7 +109,10 @@
 						<li class:active={isActive(item, currentSlug)}>
 							<a
 								href={getHref(item)}
-								onclick={() => (sidebarOpen = false)}
+								onclick={(e) => handleNavClick(e, item, category.category)}
+								onpointerdown={onPointerDown}
+								onpointerup={onPointerUp}
+								onpointercancel={onPointerUp}
 							>
 								{item.title}
 							</a>
@@ -302,7 +321,7 @@
 	}
 
 	.content-spacer {
-		height: 100vh;
+		height: 200vh;
 	}
 
 	/* Content typography */
@@ -314,9 +333,11 @@
 	:global(.dw-article h1) {
 		font-size: 2rem;
 		margin: 0 0 1.5rem;
+		margin-left: -2.5rem;
+		margin-right: -2.5rem;
+		padding: 0.5rem 2.5rem;
 		color: #fff;
 		border-bottom: 1px solid #333;
-		padding-bottom: 0.5rem;
 		position: sticky;
 		top: 0;
 		background: #1e1e1e;
@@ -334,7 +355,8 @@
 		font-size: 1.2rem;
 		margin: 2rem 0 0.75rem;
 		color: #eee;
-		background: #252525;
+		background: transparent;
+		border: 1px solid #444;
 		padding: 0.4rem 0.75rem;
 		border-radius: 6px;
 	}

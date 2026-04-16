@@ -1,5 +1,43 @@
 import { monsterSections } from './monsters.js';
 
+export const pageArt = {
+	// Playing
+	'introduction': { url: 'https://www.enworld.org/attachments/flying_castle_by_asganafer-d6ufj92-png.73830/', mirror: true },
+	'character-creation': 'https://assetsio.gnwcdn.com/D%26D-carfeul-planning-artwork.jpg?width=690&quality=85&format=jpg&dpr=3&auto=webp',
+	'basic-moves': 'https://travisdanielbow.weebly.com/uploads/3/8/3/9/38395353/dragon-s-fury-by-benwootten-d574oag_orig.jpg',
+	// Classes
+	'fighter': 'https://everhearthinn.com/wp-content/uploads/2022/08/Fighter-5E-Class-Guide-Featured-Image.webp',
+	'wizard': 'https://imgcdn.stablediffusionweb.com/2025/1/28/efdf78a6-f201-4b00-bd0d-3f7cf0eb87f8.jpg',
+	'cleric': 'https://i.pinimg.com/736x/35/40/48/354048c51b3a8d929d93bd5dd5b85a8b.jpg',
+	'thief': 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/02/DD-Assassin-Rogue.jpg?w=1600&h=900&fit=crop',
+	'paladin': 'https://nat1gaming.com/wp-content/uploads/2024/10/Silverblade-Paladin-MtG-Art.webp',
+	'ranger': 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/03/DD-Ranger.jpg?w=1600&h=1200&fit=crop',
+	'druid': 'https://cosmicdraft.com/wp-content/uploads/2023/05/Druidcraft-Flowers.png',
+	'barbarian': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/path-of-the-wild-heart-barbarian-subclass-dnd-6.png?resize=800%2C450&ssl=1',
+	'bard': 'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-dance-bard-nerf.jpg',
+	'branded': 'https://simple-carry.com/cdn/shop/articles/firemage_1445x.jpg?v=1687386175',
+	'dashing-hero': 'https://litrpgreads.com/wp-content/uploads/2023/11/dnd-swashbuckler.jpg',
+	'princess': { url: 'https://64.media.tumblr.com/716021ac81e62a83d4ae5cd9859a434f/49400ecba3e78054-1f/s500x750/82bbe28164f6ce78a3490b7b71ae7a25704dd9b2.pnj', mirror: true },
+	'arcane-duelist': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/611557270_10236484864114506_2387826330232835738_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=0MZfQZq5iY4Q7kNvwGxT3IO&_nc_oc=Adq9-p6znBXybnAeGuisRQMgBFymd5CsR2hnBdD1Nep_1Jxv-nUzMx5AtNQLNwQ_rCo&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=eUgTOVN2DYJ2KYlUeSIkMw&_nc_ss=7a3a8&oh=00_Af2SDf4PQmTmZay1Q177jqpsh6Ov7Pl2n6N9Lr5FTCu7qA&oe=69E6B74A',
+	'dog': 'https://images.unsplash.com/photo-1686592344891-ad645877db25?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+	// Monster Zones
+	'cavern-dwellers': 'https://cros.land/wp-content/uploads/2021/07/crystal_caves_by_josheiten_d5z8fes-pre.jpeg',
+	'dark-woods': 'https://static.wixstatic.com/media/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg',
+	'lower-depths': 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/07/forgotten-realms-swamp-cave-swamp-by-piotr-dura.jpg',
+	'twisted-experiments': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2025/05/dnd-reanimator-artificer-subclass-hero.png?fit=800%2C450&ssl=1',
+	'the-common-folk': 'https://www.aidedd.org/monster/img/bandit.jpg',
+	'ravenous-hordes': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/484151884_2299055003814839_3187383080746407242_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=Ujz8IbJ5InUQ7kNvwF_rJzQ&_nc_oc=Adqeuqy3pEbZIdyPQeZ2SbyCipRzzwX_FyNj0m_839Izq2AXgNLG2XaX46tnwYZd4lQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=uqJZn0S7DQkLjqcJKiI1Ig&_nc_ss=7a3a8&oh=00_Af0f6FTkol7hged-AwqrGammRvQSnPS79Tvp_DtRWV6knA&oe=69E6C7C2',
+	'planar-powers': 'https://i.redd.it/r8wvm0ou93k91.jpg',
+	'swamp-denizens': 'https://spriggans-den.com/wp-content/uploads/2019/05/the_marsh_by_johnofthenorth-d5wajrj-e1559130315634.jpg',
+	'undead-legions': 'https://www.worldanvil.com/uploads/images/b7e966bce728ddbaf67f65ddca76e6c0.jpg',
+	'wild-beasts': 'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
+	'godlike-beings': 'https://i.pinimg.com/474x/ab/eb/6f/abeb6fcd1f0850b0256e9f87f1cf8e43.jpg',
+	'random-homebrew': { url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp', mirror: true },
+	// Special pages
+	'all-monsters': 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
+	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
+};
+
 export const navigation = [
 	{
 		category: 'Playing',
