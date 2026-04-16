@@ -71,9 +71,8 @@ not nearly so dangerous as one in the hands of a skilled fighter.
 Weapons may have tags that are primarily there to help you describe them
 \(like Rusty or Glowing\) but these tags have a specific, mechanical effect.
 
-_n Ammo_: It counts as ammunition for appropriate ranged weapons. The number
-indicated does not represent individual arrows or sling stones, but represents
-what you have left on hand.
+_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all
+your ammo, you can hang back in a combat and pick off some of the combatants.
 
 _Forceful_: It can knock someone back a pace, maybe even off their feet.
 
@@ -132,9 +131,9 @@ Hunter’s Bow near, far, 100 coins, 1 weight
 
 Crossbow near, +1 damage, reload, 35 coins, 3 weight
 
-Bundle of Arrows 3 ammo, 1 coin, 1 weight
+Bundle of Arrows Ammo, 1 coin, 1 weight
 
-Elven Arrows 4 ammo, 20 coins, 1 weight
+Elven Arrows Ammo, 20 coins, 0 weight
 
 Club, Shillelagh close, 1 coin, 2 weight
 
