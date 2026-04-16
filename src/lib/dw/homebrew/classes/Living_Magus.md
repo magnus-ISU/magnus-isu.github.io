@@ -13,9 +13,9 @@ Yeah. We didn't think so.
 ## Starting Moves
 
 ### Prepare Spells
-You carry a spellbook of power. You start out with 2 level 1 spells, the cantrips, and one higher level spell. You can add new spells to it in a manner the GM will describe, typically by finding spell scrolls or studying other mages' spellbooks.
+You carry a spellbook of power. You start out with the cantrips, 2 level 1 spells, and one higher level spell. Ask the GM how you can learn new spells, typically by finding spell scrolls or studying other mages' spellbooks.
 
-When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others.
+When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others. These spells must be of your level or lower.
 
 When you **sleep with spells still memorized**, your rest is subpar (not cantrips). You may forget your spells as part of your bedtime routine.
 
@@ -161,6 +161,9 @@ Your familiar has +2 Strength and 1d10 damage in this form.
 
 ### Know-It-All
 When **another player's character comes to you for advice and you tell them what you think is best**, they get +1 forward when following your advice and you mark experience if they do.
+
+### Missile Barrage
+When you **cast Magic Missiles**, on a hit, you may immediately recast it with improved Alacrity. Each time you do so, take -1 ongoing to cast it again until you stop.
 
 ## Mastery Moves
 
