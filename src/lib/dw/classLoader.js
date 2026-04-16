@@ -38,8 +38,9 @@ export function buildCharacterSheet(raw) {
 
 	const header = [
 		`Name, ${className} 1`,
-		`Base HP ${baseHp}, Armor 0, Damage ${damage}, Base Load ${baseLoad}, HP ${initialMaxHp}`,
+		`EXP 0, Base HP ${baseHp}, Armor 0, Damage ${damage}, Base Load ${baseLoad}, HP ${initialMaxHp}`,
 		`STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1`,
+		``,
 	].join('\n');
 
 	return header + '\n' + raw;

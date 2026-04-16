@@ -30,9 +30,10 @@
 		// Line 1: "Base HP 15, Armor 0, Damage d6, Base Load 6, HP 6"
 		const vitalsLine = get(1);
 		const vParts = vitalsLine.split(',').map(s => s.trim());
-		let baseHp = null, armor = null, damage = null, baseLoad = null, hp = null;
+		let exp = null, baseHp = null, armor = null, damage = null, baseLoad = null, hp = null;
 		for (const p of vParts) {
 			let m;
+			if ((m = p.match(/^EXP\s+(\d+)$/i))) { exp = +m[1]; continue; }
 			if ((m = p.match(/^Base\s*HP\s+(\d+)$/i))) { baseHp = +m[1]; continue; }
 			if ((m = p.match(/^Armor\s+(\d+)$/i))) { armor = +m[1]; continue; }
 			if ((m = p.match(/^Damage\s+(.+)$/i))) { damage = m[1]; continue; }
@@ -55,9 +56,12 @@
 			}
 		}
 
-		const body = lines.slice(3).join('\n');
+		// Line 3: character art image URL
+		const image = get(3);
 
-		return { name, clazz, level, baseHp, armor, damage, baseLoad, hp, stats, body };
+		const body = lines.slice(4).join('\n');
+
+		return { name, clazz, level, exp, baseHp, armor, damage, baseLoad, hp, stats, image, body };
 	});
 
 	// Computed max values from base + stat modifiers
@@ -77,8 +81,9 @@
 		const lines = text.split('\n');
 		const hints = [
 			'Name, Class Level',
-			'Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
+			'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
 			'STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1',
+			'Character art image URL',
 		];
 		const phs = hints.map((h, i) => (lines[i]?.trim() ? '' : h));
 		const total = Math.max(lines.length + 1, phs.length);
@@ -100,6 +105,40 @@
 			lines[1] = parts.join(', ');
 			text = lines.join('\n');
 		}
+	}
+
+	function updateExpInText(newExp) {
+		const lines = text.split('\n');
+		const parts = lines[1].split(',').map(s => s.trim());
+		const idx = parts.findIndex(p => /^EXP\s/i.test(p));
+		if (idx !== -1) {
+			parts[idx] = `EXP ${newExp}`;
+		} else {
+			parts.unshift(`EXP ${newExp}`);
+		}
+		lines[1] = parts.join(', ');
+		text = lines.join('\n');
+	}
+
+	function clickExp() {
+		updateExpInText((parsed.exp ?? 0) + 1);
+	}
+
+	let editingExp = $state(false);
+	let expInputEl;
+
+	function startEditExp(e) {
+		e.stopPropagation();
+		editingExp = true;
+		tick().then(() => expInputEl?.select());
+	}
+
+	function commitExp(e) {
+		const raw = e.target.value.trim();
+		if (!raw) { editingExp = false; return; }
+		const val = parseInt(raw);
+		if (!isNaN(val)) updateExpInText(val);
+		editingExp = false;
 	}
 
 	function clickHp() {
@@ -168,7 +207,7 @@
 	}
 
 	function launchDir() {
-		const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
+		const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
 		const dist = 120 + Math.random() * 60;
 		return { lx: Math.cos(angle) * dist, ly: Math.sin(angle) * dist };
 	}
@@ -220,39 +259,123 @@
 		return 'miss';
 	}
 
+	// --- Stat drag-to-swap ---
+	let dragStat = $state(null);
+	let dropTarget = $state(null);
+
+	function onStatDragStart(e, ab) {
+		dragStat = ab;
+		e.dataTransfer.effectAllowed = 'move';
+		e.dataTransfer.setData('text/plain', ab);
+	}
+
+	function onStatDragOver(e, ab) {
+		if (dragStat && dragStat !== ab) {
+			e.preventDefault();
+			dropTarget = ab;
+		}
+	}
+
+	function onStatDragLeave(ab) {
+		if (dropTarget === ab) dropTarget = null;
+	}
+
+	function onStatDrop(e, ab) {
+		e.preventDefault();
+		if (!dragStat || dragStat === ab) return;
+		swapStats(dragStat, ab);
+		dragStat = null;
+		dropTarget = null;
+	}
+
+	function onStatDragEnd() {
+		dragStat = null;
+		dropTarget = null;
+	}
+
+	function swapStats(a, b) {
+		const lines = text.split('\n');
+		const statsLine = lines[2];
+		// Parse labeled values
+		const parts = statsLine.split(',').map(s => s.trim());
+		const vals = {};
+		for (const p of parts) {
+			const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
+			if (m) vals[m[1].toUpperCase()] = m[2];
+		}
+		// Swap
+		const tmp = vals[a];
+		vals[a] = vals[b];
+		vals[b] = tmp;
+		// Rebuild line preserving order
+		lines[2] = parts.map(p => {
+			const m = p.match(/^([A-Za-z]+)\s*/);
+			if (m) return `${m[1]} ${vals[m[1].toUpperCase()] ?? 0}`;
+			return p;
+		}).join(', ');
+		text = lines.join('\n');
+	}
+
 	// Parse damage field into rollable entries (split on semicolons)
 	const damageEntries = $derived.by(() => {
 		if (!parsed.damage) return [];
 		return parsed.damage.split(';').map(s => s.trim()).filter(Boolean);
 	});
 
-	// Simple markdown → HTML
+	// Simple markdown → HTML (CommonMark-ish)
 	function renderMarkdown(src) {
 		if (!src.trim()) return '';
 		const lines = src.split('\n');
 		let html = '';
 		let inList = false;
 		let listTag = '';
+		let paraLines = [];
 
 		function closePendingList() {
 			if (inList) { html += `</${listTag}>`; inList = false; }
 		}
 
+		function flushPara() {
+			if (paraLines.length === 0) return;
+			const content = paraLines.map((l, i) => {
+				const isLast = i === paraLines.length - 1;
+				// Hard break: trailing two spaces or trailing backslash
+				if (!isLast && / {2,}$/.test(l)) return inline(l.replace(/ {2,}$/, '')) + '<br>';
+				if (!isLast && /\\$/.test(l)) return inline(l.slice(0, -1)) + '<br>';
+				return inline(l);
+			}).join('\n');
+			html += `<p>${content}</p>`;
+			paraLines = [];
+		}
+
 		function inline(t) {
-			return t
+			// Backslash escapes: \* \_ \\ \` \[ etc.
+			// Replace escaped chars with placeholders, process, then restore
+			const escapes = [];
+			t = t.replace(/\\([\\`*_\[\]{}()#+\-.!|~])/g, (_, ch) => {
+				escapes.push(ch);
+				return `\x00ESC${escapes.length - 1}\x00`;
+			});
+
+			t = t
 				.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 				.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
 				.replace(/__(.+?)__/g, '<strong>$1</strong>')
 				.replace(/\*(.+?)\*/g, '<em>$1</em>')
 				.replace(/_(.+?)_/g, '<em>$1</em>')
 				.replace(/`(.+?)`/g, '<code>$1</code>')
-				.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-				.replace(/ {2,}$/, '<br>');
+				.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+			// Restore escaped characters
+			t = t.replace(/\x00ESC(\d+)\x00/g, (_, i) => escapes[+i].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+
+			return t;
 		}
 
 		for (const line of lines) {
 			const hm = line.match(/^(#{1,4})\s+(.*)/);
 			if (hm) {
+				flushPara();
 				closePendingList();
 				const level = hm[1].length;
 				html += `<h${level}>${inline(hm[2])}</h${level}>`;
@@ -260,12 +383,14 @@
 			}
 
 			if (/^---+$/.test(line.trim())) {
+				flushPara();
 				closePendingList();
 				html += '<hr>';
 				continue;
 			}
 
 			if (line.startsWith('> ')) {
+				flushPara();
 				closePendingList();
 				html += `<blockquote><p>${inline(line.slice(2))}</p></blockquote>`;
 				continue;
@@ -273,6 +398,7 @@
 
 			const ul = line.match(/^[-*]\s+(.*)/);
 			if (ul) {
+				flushPara();
 				if (!inList || listTag !== 'ul') { closePendingList(); html += '<ul>'; inList = true; listTag = 'ul'; }
 				html += `<li>${inline(ul[1])}</li>`;
 				continue;
@@ -280,19 +406,23 @@
 
 			const ol = line.match(/^\d+\.\s+(.*)/);
 			if (ol) {
+				flushPara();
 				if (!inList || listTag !== 'ol') { closePendingList(); html += '<ol>'; inList = true; listTag = 'ol'; }
 				html += `<li>${inline(ol[1])}</li>`;
 				continue;
 			}
 
 			if (!line.trim()) {
+				flushPara();
 				closePendingList();
 				continue;
 			}
 
+			// Continuation of paragraph
 			closePendingList();
-			html += `<p>${inline(line)}</p>`;
+			paraLines.push(line);
 		}
+		flushPara();
 		closePendingList();
 		return html;
 	}
@@ -312,7 +442,7 @@
 	</div>
 
 	{#if parsed.name}
-		<div class="sheet-preview">
+		<div class="sheet-preview" style={parsed.image ? `background-image: url('${parsed.image}')` : ''}>
 			<div class="sheet-top">
 			<div class="sheet-header">
 				<div class="header-info">
@@ -326,6 +456,24 @@
 				</div>
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
 					<div class="header-circles">
+						{#if parsed.exp !== null}
+							<button class="circle circle-xs circle-exp" onclick={clickExp} title="Add 1 EXP">
+								{#if editingExp}
+									<input
+										class="exp-edit"
+										type="text"
+										value={parsed.exp}
+										bind:this={expInputEl}
+										onclick={(e) => e.stopPropagation()}
+										onblur={commitExp}
+										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingExp = false; } }}
+									/>
+								{:else}
+									<span class="circle-text" onclick={startEditExp}>{parsed.exp}</span>
+								{/if}
+								<span class="circle-label">EXP</span>
+							</button>
+						{/if}
 						{#if maxLoad !== null}
 							{@const ldC = loadColor(carriedWeight, maxLoad)}
 							<div class="circle circle-sm" style="border-color: {ldC}; color: {ldC}">
@@ -347,7 +495,7 @@
 								{#if editingHp}
 									<input
 										class="hp-edit"
-										type="number"
+										type="text"
 										value={parsed.hp}
 										bind:this={hpInputEl}
 										onclick={(e) => e.stopPropagation()}
@@ -373,7 +521,17 @@
 			{#if Object.keys(parsed.stats).length > 0}
 				<div class="char-stats">
 					{#each Object.entries(parsed.stats) as [ab, mod]}
-						<button class="stat-pill" onclick={(e) => rollStat(ab, mod, e)}>
+						<button
+							class="stat-pill"
+							class:drag-over={dropTarget === ab}
+							draggable="true"
+							onclick={(e) => rollStat(ab, mod, e)}
+							ondragstart={(e) => onStatDragStart(e, ab)}
+							ondragover={(e) => onStatDragOver(e, ab)}
+							ondragleave={() => onStatDragLeave(ab)}
+							ondrop={(e) => onStatDrop(e, ab)}
+							ondragend={onStatDragEnd}
+						>
 							<span class="stat-label">{ab}</span>
 							<span class="stat-value">{fmtMod(mod)}</span>
 						</button>
@@ -420,7 +578,16 @@
 	.sheet-preview {
 		border: 1px solid #333;
 		border-radius: 6px;
-		overflow: hidden;
+		background-size: cover;
+		background-position: center top;
+		background-repeat: no-repeat;
+	}
+
+	.sheet-top {
+		position: sticky;
+		top: calc(2rem * 1.7 + 1rem + 1px);
+		z-index: 9;
+		border-radius: 6px 6px 0 0;
 	}
 
 	/* --- Header with circles --- */
@@ -501,6 +668,11 @@
 		height: 51px;
 	}
 
+	.circle-xs {
+		width: 34px;
+		height: 34px;
+	}
+
 	.circle-sm {
 		width: 42px;
 		height: 42px;
@@ -524,6 +696,10 @@
 		cursor: pointer;
 	}
 
+	.circle-xs .circle-text {
+		font-size: 0.7rem;
+	}
+
 	.circle-sm .circle-text {
 		font-size: 0.75rem;
 		cursor: default;
@@ -544,6 +720,11 @@
 	.circle-damage {
 		border-color: #e05555;
 		color: #e05555;
+	}
+
+	.circle-exp {
+		border-color: #9b59b6;
+		color: #9b59b6;
 	}
 
 	.circle-armor {
@@ -573,6 +754,22 @@
 	.hp-edit::-webkit-inner-spin-button,
 	.hp-edit::-webkit-outer-spin-button {
 		-webkit-appearance: none;
+	}
+
+	.exp-edit {
+		position: relative;
+		z-index: 1;
+		width: 1.5rem;
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid currentColor;
+		color: inherit;
+		font: inherit;
+		font-size: 0.7rem;
+		font-weight: bold;
+		text-align: center;
+		outline: none;
+		padding: 0;
 	}
 
 	/* --- Stat pills (centered, clickable) --- */
@@ -607,6 +804,12 @@
 		border-color: #555;
 	}
 
+	.stat-pill.drag-over {
+		background: #3a3a5a;
+		border-color: #aabbff;
+		box-shadow: 0 0 8px #aabbff44;
+	}
+
 	.stat-label {
 		font-size: 0.72rem;
 		font-weight: bold;
@@ -624,6 +827,12 @@
 	.char-body {
 		padding: 0.75rem 1rem;
 		background: #1a1a1a;
+		white-space: normal;
+		word-wrap: break-word;
+	}
+
+	.char-body :global(h1) {
+		position: static;
 	}
 
 	.char-body :global(h2) {
