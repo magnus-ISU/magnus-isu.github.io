@@ -58,7 +58,7 @@ Choose your backup weapon:
 
 Choose two:
 - Adventuring gear (5 uses, 1 weight) and a map
-- Bandages (3 uses, 0 weight) and 9 coin
+- Bandages (3 uses, 1 weight) and 9 coin
 - A noble steed, describe it
 
 ## Look

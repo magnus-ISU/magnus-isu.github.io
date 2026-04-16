@@ -32,7 +32,7 @@ When you **are in the heat of battle**, your thick and loose hide provides natur
 When you **fight with your unarmed attacks** (teeth, claws, etc) they have the *messy* tag.
 
 ### Chowhound
-Whenever you **Discern Realities or just take time to sniff around**, you always find a use of Provisions for you to eat, no matter the outcome. It may or may not be acceptable for human consumption; the GM will tell you.
+Whenever you **Discern Realities or just take time to sniff around**, you always find a ration for you to eat, no matter the outcome. It may or may not be acceptable for human consumption; the GM will tell you.
 
 ### Fleet of Foot
 You are blindingly fast on four legs. When you **run at full speed**, nothing on two legs can keep pace, and you can outrun horses in short bursts. If it comes down to who's faster, it's you.

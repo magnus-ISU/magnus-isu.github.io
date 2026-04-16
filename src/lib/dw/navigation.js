@@ -108,7 +108,24 @@ export const navigation = [
 				hidden: true,
 				homebrewSlug: 'playing-the-game'
 			},
-			{ title: 'Equipment', slug: 'equipment', source: 'srd', file: 'Equipment' }
+			{
+				title: 'Equipment',
+				slug: 'equipment',
+				source: 'homebrew',
+				file: 'Equipment',
+				homebrew: true,
+				srdSlug: 'equipment-srd'
+			},
+			{ title: 'Equipment', slug: 'equipment-srd', source: 'srd', file: 'Equipment', hidden: true, homebrewSlug: 'equipment' },
+			{
+				title: 'Magic Items',
+				slug: 'magic-items',
+				source: 'homebrew',
+				file: 'Magic_Items',
+				homebrew: true,
+				srdSlug: 'magic-items-srd'
+			},
+			{ title: 'Magic Items', slug: 'magic-items-srd', source: 'srd', file: 'Magic_Items', hidden: true, homebrewSlug: 'magic-items' }
 		]
 	},
 	{

@@ -145,7 +145,7 @@ Choose your armament:
 Choose one:
 
 - Adventuring gear \(1 weight\)
-- Bandages \(0 weight\)
+- Bandages \(3 uses, 0 weight\)
 - Halfling pipeleaf \(0 weight\)
 - 3 coins
 

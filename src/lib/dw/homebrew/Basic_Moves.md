@@ -75,11 +75,14 @@ When you **interact carefully and watchfully with someone**, roll+INT. On a 10+,
 ## Rest and Recovery Moves
 
 ### Recover
-When you **take time to catch your breath and tend to what ails you**, expend 1 use of Supplies and regain 5 HP. You can't benefit from this move again until you take more damage.
-When you **tend to a debility or a problematic wound**, say how. The GM will either say that it's taken care of or tell you what's required to do so (Defying Danger, expending Supplies, finding \_\_, Making Camp, etc.)
+When you **do nothing but rest in comfort and safety** after a day of rest you recover all your HP. After two days of rest you remove one debility of your choice.
 
 ### Make Camp
-When you **settle in to rest in a dangerous area**, someone in the party must expend a use of Supplies. When you **wake from a few hours' sleep**, you regain HP equal to half your maximum.
+When you **settle in to rest and consume a ration**, when you wake up from at least a few hours of sleep heal half your max HP.
+If you’re somewhere dangerous decide the watch order as well. If you have enough XP you may Level Up.
+
+### Bandage
+When you **spend a few minutes bandaging someone else's wounds and storing energy**, consume a ration and a bandage. They heal 4 hit points, and cannot benefit from this move again until they take damage again. If you also apply poultices, that's the first step to recovering from a debility in the field and will temporarily ensure serious wounds do not get worse.
 
 ### Last Breath
 When **you're dying** you catch a glimpse of what lies beyond the Black Gates of Death's Kingdom (the GM will describe it). Then roll. On a 10+ you've cheated death — you're in a bad spot but still alive. On a 7-9 Death will offer you a bargain. Take it and return or refuse and pass beyond the Black Gates into whatever fate awaits you. On a miss, your fate is sealed. You're marked as Death's own and you'll cross the threshold soon or be permanently marked and changed according to Death's whim.
@@ -176,6 +179,9 @@ When a follower is compensated for their efforts by having their Cost met, incre
 
 ### Do Their Thing
 When you **have a follower do something chancy within the scope of their tags**, roll +Quality: on a 10+, they do it, as well as one could reasonably hope; on a 7-9, they do it, but there's an unforeseen cost, consequence, or limitation.
+
+### Order, Hireling
+When a **follower ends up in a dangerous, degrading, or crazy situation because of your orders**, roll +Loyalty. On a 10+, they hold firm. On a 7-9, they'll do it, but start entertaining serious thoughts about stabbing you in the back.
 
 ### Call For Assistance
 When **a follower helps you make a move and you roll**, take +1, but that follower is exposed to any risks or consequences. If you deal damage, roll your damage die twice and use the higher die.

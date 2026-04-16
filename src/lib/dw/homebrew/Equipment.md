@@ -189,21 +189,19 @@ Shield +1 armor, 15 coins, 2 weight
 
 ## Dungeon Gear
 
-Adventuring Gear 5 uses, 20 coins, 1 weight
+Adventuring Gear 3 uses, 20 coins, 1 weight
 
 Adventuring gear is a collection of useful mundane items such as chalk, poles,
 spikes, ropes, etc. When you rummage through your adventuring gear for some
 useful mundane item, you find what you need and mark off a use.
 
-Bandages 3 uses, slow, 5 coins, 0 weight
+Bandages 3 uses, slow, 5 coins, 1 weight
 
-When you have a few minutes to bandage someone else’s wounds, heal them of 4
-damage and expend a use.
+See the **Bandage** recovery move.
 
 Poultices and Herbs 2 uses, slow, 10 coins, 1 weight
 
-When you carefully treat someone’s wounds with poultices and herbs, heal them
-of 7 damage and expend a use.
+See the **Bandage** recovery move.
 
 Healing Potion 50 coins, 0 weight
 
