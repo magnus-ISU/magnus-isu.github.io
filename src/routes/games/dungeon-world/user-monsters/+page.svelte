@@ -162,11 +162,8 @@
 	<h1>User Monsters</h1>
 
 	<div class="builder">
-		{#if nameError}
-			<p class="error-msg">Name already exists</p>
-		{/if}
-
 		<TextBox bind:value={text} {placeholders} rows={12} />
+		<p class="error-msg" class:visible={nameError}>Name already exists</p>
 
 		{#if text.split('\n')[0]?.trim()}
 			<div class="builder-preview">
@@ -312,7 +309,12 @@
 	.error-msg {
 		color: #e05555;
 		font-size: 0.85rem;
-		margin: 0 0 0.5rem;
+		margin: 0.4rem 0 0;
+		visibility: hidden;
+	}
+
+	.error-msg.visible {
+		visibility: visible;
 	}
 
 	.builder-preview {
