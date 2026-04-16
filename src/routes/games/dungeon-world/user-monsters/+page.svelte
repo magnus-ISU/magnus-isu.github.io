@@ -4,6 +4,16 @@
 	import { pageArt } from '$lib/dw/navigation.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 	import TextBox from '$lib/components/TextBox.svelte';
+	import { onMount } from 'svelte';
+
+	const artUrl = typeof pageArt['user-monsters'] === 'string' ? pageArt['user-monsters'] : pageArt['user-monsters']?.url;
+	let art = $state(null);
+	onMount(() => {
+		function loadArt() { art = artUrl; }
+		if (document.readyState === 'complete') loadArt();
+		else window.addEventListener('load', loadArt, { once: true });
+		return () => window.removeEventListener('load', loadArt);
+	});
 
 	let text = $state('');
 	let nameError = $state(false);
@@ -147,9 +157,9 @@
 	<title>User Monsters - Dungeon World</title>
 </svelte:head>
 
-{#if pageArt['user-monsters']}
+{#if art}
 	<div class="bg-art">
-		<img src={pageArt['user-monsters']} alt="" />
+		<img src={art} alt="" />
 	</div>
 {/if}
 

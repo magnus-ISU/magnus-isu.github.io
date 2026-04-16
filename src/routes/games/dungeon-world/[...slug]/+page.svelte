@@ -9,11 +9,20 @@
 	let longPressTimer;
 	let isLongPress = false;
 	let imgLoaded = $state(false);
+	let artSrc = $state(null);
 
 	$effect(() => {
-		// Reset loaded state when art URL changes
-		void data.art;
+		const url = data.art;
 		imgLoaded = false;
+		artSrc = null;
+		if (!url) return;
+		if (document.readyState === 'complete') {
+			artSrc = url;
+		} else {
+			const handler = () => { artSrc = url; };
+			window.addEventListener('load', handler, { once: true });
+			return () => window.removeEventListener('load', handler);
+		}
 	});
 
 	const homebrewSlug = $derived(data.homebrewSlug || data.slug);
@@ -86,9 +95,9 @@
 	<title>{data.title} - Dungeon World</title>
 </svelte:head>
 
-{#if data.art}
+{#if artSrc}
 	<div class="bg-art">
-		<img src={data.art} alt="" class:mirror={data.artMirror && imgLoaded} onload={() => { imgLoaded = true; }} />
+		<img src={artSrc} alt="" class:mirror={data.artMirror && imgLoaded} onload={() => { imgLoaded = true; }} />
 	</div>
 {/if}
 

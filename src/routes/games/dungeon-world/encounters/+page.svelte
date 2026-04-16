@@ -6,9 +6,16 @@
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 	import { pageArt } from '$lib/dw/navigation.js';
-	import { tick } from 'svelte';
+	import { tick, onMount } from 'svelte';
 
-	const art = typeof pageArt['encounters'] === 'string' ? pageArt['encounters'] : pageArt['encounters']?.url;
+	const artUrl = typeof pageArt['encounters'] === 'string' ? pageArt['encounters'] : pageArt['encounters']?.url;
+	let art = $state(null);
+	onMount(() => {
+		function loadArt() { art = artUrl; }
+		if (document.readyState === 'complete') loadArt();
+		else window.addEventListener('load', loadArt, { once: true });
+		return () => window.removeEventListener('load', loadArt);
+	});
 
 	let text = $state(encounterText.value);
 	const encounterPlaceholder = `Bandit King\n3 bandit\nowlbear`;
