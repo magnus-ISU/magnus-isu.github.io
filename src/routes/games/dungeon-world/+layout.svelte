@@ -331,7 +331,7 @@
 	/* Content */
 	.dw-content {
 		padding: 2rem 2.5rem;
-		max-width: 56rem;
+		max-width: 2000px;
 		min-width: 0;
 	}
 
