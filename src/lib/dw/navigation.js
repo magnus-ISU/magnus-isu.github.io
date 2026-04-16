@@ -39,12 +39,24 @@ export const pageArt = {
 	'wild-beasts': 'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
 	'godlike-beings': 'https://i.pinimg.com/474x/ab/eb/6f/abeb6fcd1f0850b0256e9f87f1cf8e43.jpg',
 	'random-homebrew': { url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp', mirror: true },
+	// GMing
+	'gm': 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/dnd-gods-2024-6.png?resize=800%2C450&ssl=1',
+	'the-world': 'https://images.squarespace-cdn.com/content/v1/5dadaf88e03a4e6bb69307dd/904f0cc0-7846-4576-ac91-176528727e4b/Vhaledhon+No+Text+Map+Blog.jpg',
+	'fronts': 'https://www.slashfilm.com/img/gallery/dark-tower-tv-series-cast/intro-import.jpg',
+	'advanced-delving': 'https://static.wikia.nocookie.net/medievalhogwartsroleplay/images/0/06/Dungeon_Hall.png/revision/latest?cb=20150626145122',
+	// Appendices
+	'conversion': 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/02/tasha-with-spellbooks.jpg',
+	'npcs': 'https://i.redd.it/zekid8146y3g1.jpeg',
+	'teaching': 'https://static0.srcdn.com/wordpress/wp-content/uploads/2022/11/dnd-school-of-adventure-campaign.jpg',
+	'thanks': 'https://www.dndspeak.com/wp-content/uploads/2021/04/RoyalFamily-1.jpg',
 	// Special pages
+	'monsters-srd': 'https://cdn.shopify.com/s/files/1/0828/6568/4757/files/chinese-god-dragon_480x480.jpg?v=1718627014',
+	'encounters': 'https://static.wikia.nocookie.net/forgottenrealms/images/f/f3/Black_Pits_art.png/revision/latest',
 	'all-monsters': 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
 	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
 	// Spells
-	'wizard-spells': 'https://store.noahbradley.com/cdn/shop/products/Noah-Bradley_Magic-the-Gathering_Urzas-Ruinous-Blast_1540x.jpg?v=1521681455',
-	'wizard-spells-srd': 'https://store.noahbradley.com/cdn/shop/products/Noah-Bradley_Magic-the-Gathering_Urzas-Ruinous-Blast_1540x.jpg?v=1521681455',
+	'wizard-spells': 'https://mysterydicegoblin.com/cdn/shop/articles/a93025da-294f-4951-bb6d-ff3735e83838.webp?v=1724242177',
+	'wizard-spells-srd': 'https://mysterydicegoblin.com/cdn/shop/articles/a93025da-294f-4951-bb6d-ff3735e83838.webp?v=1724242177',
 	'cleric-miracles': 'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
 	'cleric-spells-srd': 'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
 	'druid-bindings': 'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/535019244_10234767612704294_4457784100332717442_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=gd3K4P19Y1YQ7kNvwH8UYVu&_nc_oc=AdomhH8Ulyqp8BPIr9gCQo6w0SJFQXBhg608rKUngZ0IURejqgaPqIuKbF_kWsXFAAQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=qeeML3ud3q80rzTp5vjf_A&_nc_ss=7a3a8&oh=00_Af06j5MTgve2Q9Tw8EmIIT1_L7X6k9jb1fgsqT8APzfGaA&oe=69E6C7A7',
