@@ -552,14 +552,14 @@ brothers\!” I don’t have any bonds with him but I want to try anyway.
 > GM: Touching, really. Okay, roll+0 and if you succeed, Ozruk, take +1 to your
 defend attempt. Here we go\!
 
-# Special Moves
+## Special Moves
 
 Special moves are moves that come up less often or in more specific
 situations. They’re still the basis of what characters do in Dungeon
 World—particularly what they do between dungeon crawls and high-flying
 adventures.
 
-## Last Breath
+### Last Breath
 
 When **you’re dying** you catch a glimpse of what lies beyond the Black Gates
 of Death’s Kingdom \(the GM will describe it\). Then roll \(just roll,
@@ -611,7 +611,7 @@ little thief?”
 >
 > Sparrow: \(gulp\)
 
-## Encumbrance
+### Encumbrance
 
 When you **make a move while carrying weight** you may be encumbered. If your
 weight carried is:
@@ -629,7 +629,7 @@ act. Carrying a boulder on your back is not encumbrance—you can’t really act
 or move much with it. It affects what moves you can make appropriately in the
 fiction.
 
-## Make Camp
+### Make Camp
 
 When you **settle in to rest** consume a ration. If you’re somewhere dangerous
 decide the watch order as well. If you have enough XP you may level up. When
@@ -644,7 +644,7 @@ Staying a night in an inn or house is making camp, too. Regain your hit points
 as usual, but only mark off a ration if you’re eating from the food you carry,
 not paying for a meal or receiving hospitality.
 
-## Take Watch
+### Take Watch
 
 When **you’re on watch and something approaches the camp** roll+Wis. ✴On a
 10+, you’re able to wake the camp and prepare a response, everyone in the camp
@@ -653,7 +653,7 @@ in camp are awake but haven’t had time to prepare. They have weapons and armor
 but little else. ✴On a miss, whatever lurks outside the campfire’s light has
 the drop on you.
 
-## Undertake a Perilous Journey
+### Undertake a Perilous Journey
 
 When you **travel through hostile territory**, choose one member of the party
 to act as _trailblazer_, one to _scout_ ahead, and one to be _quartermaster_.
@@ -684,7 +684,7 @@ explore is not a perilous journey. It’s wandering around looking for cool
 things to discover. Use up rations as you camp and the GM will give you
 details about the world as you discover them.
 
-## End of Session
+### End of Session
 
 When you **reach the end of a session**, choose one of your bonds that you
 feel is resolved \(completely explored, no longer relevant, or otherwise\).
@@ -701,7 +701,7 @@ questions as a group:
 
 For each “yes” answer everyone marks XP.
 
-## Level Up
+### Level Up
 
 When you **have downtime \(hours or days\) and XP equal to \(or greater than\)
 your current level+7**, you can reflect on your experiences and hone your
@@ -713,7 +713,7 @@ skills.
   * If you are the wizard, you also get to add a new spell to your spellbook.
   * Choose one of your stats and increase it by 1 \(this may change your modifier\). Changing your Constitution increases your maximum and current HP. Ability scores can’t go higher than 18.
 
-## Carouse
+### Carouse
 
 When you **return triumphant and throw a big party**, spend 100 coins and roll
 +1 for every extra 100 coins spent. ✴On a 10+, choose 3. ✴On a 7–9, choose 1.
@@ -730,7 +730,7 @@ of revelers to surround adventurers as they celebrate their latest haul. If
 you don’t proclaim your success or your failure, then who would want to party
 with you anyway?
 
-## Supply
+### Supply
 
 When you **go to buy something with gold on hand**, if it’s something readily
 available in the settlement you’re in, you can buy it at market price. If it’s
@@ -739,14 +739,14 @@ roll+Cha. ✴On a 10+, you find what you’re looking for at a fair price. ✴On
 7–9, you’ll have to pay more or settle for something that’s not exactly what
 you wanted, but close. The GM will tell you what your options are.
 
-## Recover
+### Recover
 
 When you **do nothing but rest in comfort and safety** after a day of rest you
 recover all your HP. After three days of rest you remove one debility of your
 choice. If you’re under the care of a healer \(magical or otherwise\) you heal
 a debility for every two days of rest instead.
 
-## Recruit
+### Recruit
 
 When you **put out word that you’re looking to hire help**, roll:
 
@@ -763,7 +763,7 @@ foolhardy youth, a loose-cannon, or a veiled enemy, for example\), bring them
 and take the consequences or turn them away. If you turn away applicants you
 take -1 forward to recruit.
 
-## Outstanding Warrants
+### Outstanding Warrants
 
 When you **return to a civilized place in which you’ve caused trouble
 before**, roll+Cha. ✴On a 10+, word has spread of your deeds and everyone
@@ -782,7 +782,7 @@ dwarves, and halflings but it can also apply to any relatively lawful
 establishment of monstrous species, such as orcs or goblins. If the PCs have
 stayed in a place as part of the community, it counts as civilization.
 
-## Bolster
+### Bolster
 
 When you **spend your leisure time in study, meditation, or hard practice,**
 you gain preparation. If you prepare for a week or more, take 1 preparation.
