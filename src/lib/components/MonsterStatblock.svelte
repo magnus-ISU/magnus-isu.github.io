@@ -37,28 +37,19 @@
 	async function appendNameToClipboard() {
 		let existing = '';
 		try { existing = await navigator.clipboard.readText(); } catch {}
-		const newText = existing ? existing.trimEnd() + '\n' + name : name;
+		const trimmed = existing.trimEnd();
+		const lines = trimmed.split('\n');
+		// If this monster is already the last line, reset to just it
+		const newText = lines[lines.length - 1]?.trim() === name ? name : (trimmed ? trimmed + '\n' + name : name);
 		await navigator.clipboard.writeText(newText);
 		copied = true;
 		setTimeout(() => { copied = false; }, 1200);
 	}
 
-	async function handleHeaderClick(e) {
+	function handleHeaderClick(e) {
 		if (e.shiftKey || isLongPress) {
 			isLongPress = false;
 			appendNameToClipboard();
-			return;
-		}
-		if (e.detail === 2) {
-			// Double-click: if this monster is the last line, reset clipboard to just it
-			let existing = '';
-			try { existing = await navigator.clipboard.readText(); } catch {}
-			const lines = existing.trimEnd().split('\n');
-			if (lines[lines.length - 1]?.trim() === name) {
-				await navigator.clipboard.writeText(name);
-				copied = true;
-				setTimeout(() => { copied = false; }, 1200);
-			}
 			return;
 		}
 		toggleExpanded();
