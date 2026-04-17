@@ -17,6 +17,33 @@
 		if (storeVal !== text) text = storeVal;
 	});
 
+	// --- Multi-character tabs ---
+	let activeTab = $state(characterSheet.activeIndex);
+
+	function switchTab(i) {
+		if (i === activeTab) return;
+		characterSheet.switchTo(i);
+		activeTab = i;
+		text = characterSheet.value;
+		undoStack = [];
+	}
+
+	function addCharacter() {
+		characterSheet.addSlot();
+		activeTab = characterSheet.activeIndex;
+		text = '';
+		undoStack = [];
+	}
+
+	function tabName(i) {
+		return characterSheet.slotName(i) || 'Untitled';
+	}
+
+	const showNewButton = $derived(
+		// Show "New Character" when there's no empty trailing slot
+		characterSheet.slotCount === 0 || !characterSheet.isEmpty || activeTab !== characterSheet.slotCount - 1
+	);
+
 	const parsed = $derived.by(() => {
 		const lines = text.split('\n');
 		const get = (i) => lines[i]?.trim() || '';
@@ -328,6 +355,19 @@
 <article class="dw-article">
 	<h1>Character Sheet</h1>
 
+	<div class="char-tabs">
+		{#each { length: characterSheet.slotCount } as _, i}
+			<button
+				class="char-tab"
+				class:active={i === activeTab}
+				onclick={() => switchTab(i)}
+			>{tabName(i)}</button>
+		{/each}
+		{#if showNewButton}
+			<button class="char-tab char-tab-new" onclick={addCharacter}>+ New Character</button>
+		{/if}
+	</div>
+
 	<div class="sheet-editor">
 		<TextBox bind:value={text} {placeholders} rows={12} />
 	</div>
@@ -441,6 +481,58 @@
 {/key}
 
 <style>
+	.char-tabs {
+		display: flex;
+		gap: 0.25rem;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		padding-bottom: 0.25rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.char-tabs::-webkit-scrollbar {
+		display: none;
+	}
+
+	.char-tab {
+		flex-shrink: 0;
+		padding: 0.3rem 0.75rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 4px 4px 0 0;
+		color: #999;
+		font: inherit;
+		font-size: 0.8rem;
+		cursor: pointer;
+		white-space: nowrap;
+		transition: background 0.15s, color 0.15s, border-color 0.15s;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	.char-tab:hover {
+		background: #333;
+		color: #ccc;
+	}
+
+	.char-tab.active {
+		background: #1a1a1a;
+		border-color: #555;
+		border-bottom-color: #1a1a1a;
+		color: #fff;
+	}
+
+	.char-tab-new {
+		color: #666;
+		border-style: dashed;
+	}
+
+	.char-tab-new:hover {
+		color: #aabbff;
+		border-color: #aabbff;
+	}
+
 	.sheet-editor {
 		margin-bottom: 1.5rem;
 		background: rgba(26, 26, 26, 0.88);

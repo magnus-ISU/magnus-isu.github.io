@@ -21,7 +21,7 @@ By no means is this an exhaustive list—feel free to create your own tags.
 These are general tags that can apply to just about any piece of gear. You’ll
 see them on armor, weapons or general adventuring tools.
 
-_n weight_: Count the listed amount against your load. Something with no listed weight isn’t designed to be carried. 100 coins in standard denominations is 1 weight. The same value in gems or fine art may be lighter or heavier.
+_n weight_: Count the listed amount against your load. 100 coins is 1 weight. Most items have weight, and if you're not careful about it you might have to leave certain things behind.
 
 _n Uses_: It can only be used _n_ times.
 
