@@ -50,24 +50,6 @@ retrieve an item from a bag of holding, roll+WIS. ✴On a 10+, it’s right ther
 
 No matter how many items it contains, a bag of holding is always 0 weight.
 
-### [[Weight:2]] The Burning Wheel
-
-An ancient wooden wheel, as might appear on a war-wagon, banded with steel. On
-a glance, it appears to be nothing special—many spokes are shattered and the
-thing seems mundane. Under the scrutiny of magic or the eyes of an expert, its
-true nature is revealed: the Burning Wheel is a gift from the God of Fire and
-burns with his authority.
-
-When you hold The Burning Wheel and speak a god’s name, roll+CON. ✴On a 7+,
-the god you name takes notice and grants you an audience. An audience with a
-god is not without a price: on a 10+, you choose one of your stats and reduce
-it to the next lowest modifier \(for example, a 14 is +1, so it would be
-reduced to 12, a +0\). ✴On a 7–9, the GM chooses which stat to reduce.
-
-Once used, the Burning Wheel ignites and burns with brilliant light. It does
-not confer any protection from those flames, nor does it provide any bonus to
-swimming.
-
 ### [[Weight:1]] Captain Bligh’s Cornucopia
 
 A brass naval horn, curled and ornate, carved with symbols of the gods of
@@ -84,64 +66,6 @@ mere mortal spear. Its true purpose is to do harm to those things whose
 strange natures protect them against mundane weapons. Used thus, the Spire can
 wound foes otherwise invulnerable to harm. The wielder will recognize these
 twisted foes on sight—the Spire knows its own.
-
-### [[Weight:1]] Cloak of Silent Stars
-
-A cape of rich black velvet outside and sparkling with tiny points of light
-within, this cloak bends fate, time and reality around it to protect the
-wearer, who may defy danger with whatever stat they like. To do this, the
-wearer invokes the cloak’s magic and their player describes how the cloak
-helps “break the rules.” They can deflect a fireball with CHA by convincing it
-they deserve to live or elude a fall by applying the mighty logic of their INT
-to prove the fall won’t hurt. The cloak makes it so. It can be used once for
-each stat before losing its magic.
-
-### [[Weight:0]] Coin of Remembering
-
-What appears, at a glance, to be a simple copper coin is, in truth, an
-enchanted coin. Its bearer can, at any time, redeem it to know immediately one
-fact that has been forgotten. The coin vanishes thereafter. It does not have
-to be a thing forgotten by the bearer, but it cannot be “known.”
-Interpretation of this stipulation is left to the gods. If the coin is
-unsuccessful, it will still paint an image in the mind’s eye of someone or
-something that does remember what was sought.
-
-### [[Weight:0]] Common Scroll _1 use_
-
-A common scroll has a spell inscribed on it. The spell must be castable by you
-or on your class’s spell list for you to be able to cast it. When you cast a
-spell from a scroll, the spell takes effect, simple as that.
-
-### [[Weight:0]] Devilsbane Oil _1 use_
-
-A holy oil, created in limited supply by a mute sect of mountain monks whose
-order protected humanity from the powers of the Demon Pits in ancient epochs.
-Only a few jars remain. When applied to any weapon and used to strike a
-denizen of any outer plane, the oil undoes the magic that binds that creature.
-In some cases, this will return it to its home. In others, it merely undoes
-any magic controlling it. The oil stays on the weapon for a few hours before
-it dries and flakes away.
-
-If applied to the edges of a doorway or drawn in a circle, the oil will repel
-creatures whose home is any of the outer planes. They cannot pass across it.
-The oil lasts for one full day before it soaks in or evaporates.
-
-### [[Weight:0]] Earworm Wax _1 use_
-
-A yellowish candle. Seems never to burn out and the light it casts is strange
-and weak. Its wax is always cool, too. Drip the wax into the ear of a target
-and gain 3 hold. Spend that hold and ask your target a question. They find
-themselves telling you the whole truth, despite themselves. The consequences,
-after the fact? Those are up to you to deal with.
-
-### [[Weight:0]] The Echo
-
-A seemingly empty bottle. Once unstoppered, the whispers of another plane
-resound once and fall silent. In the silence, the bearer learns in his soul
-the coming of one great danger and how he can avoid it. At any point after you
-use the Echo, you can ignore the results of any single die roll—yours or
-another player’s—and roll again. Once opened, the Echo is released and gone
-forever.
 
 ### [[Weight:1]] The Epoch Lens
 
@@ -238,16 +162,6 @@ regardless of distance, roll to aid them on any one roll. On a miss, the GM
 can hold 1 and spend it to apply -2 to any roll of yours or the poor sap who
 listened to your advice.
 
-### [[Weight:0]] Lamented Memento
-
-Taking the form of a single lock of bright red hair, bound in a black ribbon
-and immune to the ravages of time, the Lamented Memento bears a grim
-enchantment. In it are the memories and emotions of a girl who dealt with
-Death at the Black Gates so many times that, in the end, they fell in love and
-she left the world to be with him for a time. Her memory protects the wielder.
-If he finds himself at the Gates, the Memento can be traded for an automatic
-result of 10+ on the Last Breath move.
-
 ### [[Weight:1]] Lodestone Shield _+1 armor_
 
 What mixed-up dummy made this? Shields are meant to repel metal, not draw it
@@ -281,33 +195,12 @@ to go. So long as you do nothing that would alert another to your presence
 memories out with you, the key’s magic will prevent your intrusion from ever
 being discovered. It’s like you were never there at all.
 
-### [[Weight:0]] Sacred Herbs
-
-The sacred herbs, collected and prepared by an order of lost wizard-monks, can
-be found in bundles with two or three uses to them. Kept dry, they last
-indefinitely. When smoked in a pipe or consumed in an incense burner and the
-thick, blue smoke inhaled, these herbs will grant you strange visions of
-faraway places and distant times. If you focus your will on a particular
-person, place or thing, the herbs will respond: roll+WIS. ✴On a 10+, the
-vision is clear and useful—yielding some valid information. ✴On a 7–9, the
-vision is about the thing desired, but is unclear, fraught with metaphor or
-somehow difficult to understand. ✴On a miss, the GM will ask you, “What is it
-you fear most?” You must answer honestly, of course.
-
 ### [[Weight:0]] The Sartar Duck
 
 An odd, hand-carved wooden duck. Who would make such a funny thing? While you
 bear it, you find yourself an exceptionally gifted storyteller—no matter the
 language, you can make yourself and your story clear to any audience. They
 will understand your meaning, if not your words.
-
-### [[Weight:0]] Tears of Annalise
-
-Cloudy red gemstones the size of a thumbnail, the Tears of Annalise are always
-found in pairs. When swallowed by two different people, they bind the
-swallowers together—when either feels strong emotions \(particularly sadness,
-loss, fear or desire\) the other feels it, as well. The effects last until one
-spills the blood of the other.
 
 ### Teleportation Room _Slow_
 
@@ -324,13 +217,6 @@ those who bend time and space with these devices.
 A stealthy suit of armor, it appears as many things to many people and blends
 in with appropriate apparel. The wearer always seems the height of fashion to
 any who gaze upon him.
-
-### [[Weight:0]] Titus’ Truthful Tallow
-
-A candle of ivory- and copper-colored tallow with a wick of spun silver. When
-lit, none upon whom its light falls is able to tell a lie. They may keep
-silent or dissemble but when asked a question directly, they can speak naught
-but truth.
 
 ### [[Weight:1]] Tricksy Rope
 
@@ -370,3 +256,117 @@ lives. When you deal damage with the Vorpal Sword, your enemy must choose
 something \(an item, an advantage, a limb\) and lose it, permanently.
 
 ## Consumables
+
+### [[Weight:0]] Common Scroll _1 use_
+
+A common scroll has a spell inscribed on it. The spell must be castable by you
+or on your class’s spell list for you to be able to cast it. When you cast a
+spell from a scroll, the spell takes effect, simple as that.
+
+### [[Weight:0]] Titus’ Truthful Tallow
+
+A candle of ivory- and copper-colored tallow with a wick of spun silver. When
+lit, none upon whom its light falls is able to tell a lie. They may keep
+silent or dissemble but when asked a question directly, they can speak naught
+but truth.
+
+### [[Weight:1]] Cloak of Silent Stars
+
+A cape of rich black velvet outside and sparkling with tiny points of light
+within, this cloak bends fate, time and reality around it to protect the
+wearer, who may defy danger with whatever stat they like. To do this, the
+wearer invokes the cloak’s magic and their player describes how the cloak
+helps “break the rules.” They can deflect a fireball with CHA by convincing it
+they deserve to live or elude a fall by applying the mighty logic of their INT
+to prove the fall won’t hurt. The cloak makes it so. It can be used once for
+each stat before losing its magic.
+
+### [[Weight:0]] Coin of Remembering
+
+What appears, at a glance, to be a simple copper coin is, in truth, an
+enchanted coin. Its bearer can, at any time, redeem it to know immediately one
+fact that has been forgotten. The coin vanishes thereafter. It does not have
+to be a thing forgotten by the bearer, but it cannot be “known.”
+Interpretation of this stipulation is left to the gods. If the coin is
+unsuccessful, it will still paint an image in the mind’s eye of someone or
+something that does remember what was sought.
+
+### [[Weight:0]] Devilsbane Oil _1 use_
+
+A holy oil, created in limited supply by a mute sect of mountain monks whose
+order protected humanity from the powers of the Demon Pits in ancient epochs.
+Only a few jars remain. When applied to any weapon and used to strike a
+denizen of any outer plane, the oil undoes the magic that binds that creature.
+In some cases, this will return it to its home. In others, it merely undoes
+any magic controlling it. The oil stays on the weapon for a few hours before
+it dries and flakes away.
+
+If applied to the edges of a doorway or drawn in a circle, the oil will repel
+creatures whose home is any of the outer planes. They cannot pass across it.
+The oil lasts for one full day before it soaks in or evaporates.
+
+### [[Weight:0]] Earworm Wax _1 use_
+
+A yellowish candle. Seems never to burn out and the light it casts is strange
+and weak. Its wax is always cool, too. Drip the wax into the ear of a target
+and gain 3 hold. Spend that hold and ask your target a question. They find
+themselves telling you the whole truth, despite themselves. The consequences,
+after the fact? Those are up to you to deal with.
+
+### [[Weight:0]] The Echo
+
+A seemingly empty bottle. Once unstoppered, the whispers of another plane
+resound once and fall silent. In the silence, the bearer learns in his soul
+the coming of one great danger and how he can avoid it. At any point after you
+use the Echo, you can ignore the results of any single die roll—yours or
+another player’s—and roll again. Once opened, the Echo is released and gone
+forever.
+
+### [[Weight:0]] Sacred Herbs
+
+The sacred herbs, collected and prepared by an order of lost wizard-monks, can
+be found in bundles with two or three uses to them. Kept dry, they last
+indefinitely. When smoked in a pipe or consumed in an incense burner and the
+thick, blue smoke inhaled, these herbs will grant you strange visions of
+faraway places and distant times. If you focus your will on a particular
+person, place or thing, the herbs will respond: roll+WIS. ✴On a 10+, the
+vision is clear and useful—yielding some valid information. ✴On a 7–9, the
+vision is about the thing desired, but is unclear, fraught with metaphor or
+somehow difficult to understand. ✴On a miss, the GM will ask you, “What is it
+you fear most?” You must answer honestly, of course.
+
+### [[Weight:0]] Tears of Annalise
+
+Cloudy red gemstones the size of a thumbnail, the Tears of Annalise are always
+found in pairs. When swallowed by two different people, they bind the
+swallowers together—when either feels strong emotions \(particularly sadness,
+loss, fear or desire\) the other feels it, as well. The effects last until one
+spills the blood of the other.
+
+### [[Weight:0]] Lamented Memento
+
+Taking the form of a single lock of bright red hair, bound in a black ribbon
+and immune to the ravages of time, the Lamented Memento bears a grim
+enchantment. In it are the memories and emotions of a girl who dealt with
+Death at the Black Gates so many times that, in the end, they fell in love and
+she left the world to be with him for a time. Her memory protects the wielder.
+If he finds himself at the Gates, the Memento can be traded for an automatic
+result of 10+ on the Last Breath move.
+
+### [[Weight:2]] The Burning Wheel
+
+An ancient wooden wheel, as might appear on a war-wagon, banded with steel. On
+a glance, it appears to be nothing special—many spokes are shattered and the
+thing seems mundane. Under the scrutiny of magic or the eyes of an expert, its
+true nature is revealed: the Burning Wheel is a gift from the God of Fire and
+burns with his authority.
+
+When you hold The Burning Wheel and speak a god’s name, roll+CON. ✴On a 7+,
+the god you name takes notice and grants you an audience. An audience with a
+god is not without a price: on a 10+, you choose one of your stats and reduce
+it to the next lowest modifier \(for example, a 14 is +1, so it would be
+reduced to 12, a +0\). ✴On a 7–9, the GM chooses which stat to reduce.
+
+Once used, the Burning Wheel ignites and burns with brilliant light. It does
+not confer any protection from those flames, nor does it provide any bonus to
+swimming.

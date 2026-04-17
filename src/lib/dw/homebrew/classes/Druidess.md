@@ -48,22 +48,22 @@ When you **use adventurer's gear**, you can produce something strange & magical.
 
 ## Gear
 You start with:
-- Some token of your land, describe it (0 weight)
+- Some token of your land, describe it ([[Weight:0]])
 
 Choose your defenses:
-- Hide armor (1 armor, 1 weight)
-- Wooden shield (+1 armor, 1 weight)
+- Hide armor (1 armor, [[Weight:1]])
+- Wooden shield (+1 armor, [[Weight:1]])
 
 Choose your armament:
-- Shillelagh (close, 2 weight)
-- Staff (close, two-handed, 1 weight)
-- Spear (close, thrown, near, 1 weight)
+- Shillelagh (close, [[Weight:2]])
+- Staff (close, two-handed, [[Weight:1]])
+- Spear (close, thrown, near, [[Weight:1]])
 
 Choose one:
-- Adventuring gear (1 weight)
-- Poultices and herbs (2 uses, 1 weight)
-- Halfling pipeleaf (6 uses, 0 weight)
-- Antitoxin (3 uses, 1 weight)
+- Adventuring gear ([[Weight:1]])
+- Poultices and herbs (2 uses, [[Weight:1]])
+- Halfling pipeleaf (6 uses, [[Weight:0]])
+- Antitoxin (3 uses, [[Weight:1]])
 
 ## Look
 Choose one for each:

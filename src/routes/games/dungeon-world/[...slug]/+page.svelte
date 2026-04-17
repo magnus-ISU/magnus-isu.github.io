@@ -320,9 +320,6 @@
 		height: 1.8em;
 		width: 1.8em;
 		vertical-align: middle;
-		margin-right: 0.3em;
-		transform: scale(1.2);
-		transform-origin: center;
 	}
 
 	:global(.dw-article .weight-icon) {
@@ -331,10 +328,7 @@
 		width: 1.25em;
 		min-width: 1.25em;
 		vertical-align: middle;
-		margin-right: 0.8em;
 		color: #444;
-		transform: scale(1.75) translateY(-2px);
-		transform-origin: center;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {

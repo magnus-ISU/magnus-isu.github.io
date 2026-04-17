@@ -143,10 +143,11 @@
 	const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
 	const maxLoad = $derived(parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null);
 
-	// Carried weight from "(N weight)" in body
+	// Carried weight from "[[Weight:N]]" or "(N weight)" in body
 	const carriedWeight = $derived.by(() => {
-		const matches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
-		return matches.reduce((sum, m) => sum + (+m[1]), 0);
+		const bracketMatches = [...parsed.body.matchAll(/\[\[Weight:(\d+)\]\]/g)];
+		const legacyMatches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
+		return [...bracketMatches, ...legacyMatches].reduce((sum, m) => sum + (+m[1]), 0);
 	});
 
 	const placeholders = $derived.by(() => {
@@ -1035,4 +1036,20 @@
 	}
 
 	.action-btn.primary.danger:hover { background: #d44438; }
+
+	:global(.char-body .coin-icon) {
+		display: inline-block;
+		height: 1.8em;
+		width: 1.8em;
+		vertical-align: middle;
+	}
+
+	:global(.char-body .weight-icon) {
+		display: inline-block;
+		height: 1.25em;
+		width: 1.25em;
+		min-width: 1.25em;
+		vertical-align: middle;
+		color: #444;
+	}
 </style>

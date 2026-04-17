@@ -73,21 +73,21 @@ You once followed another path, so you know better than most how outsiders feel 
 
 ## Gear
 You start with:
-- Dungeon rations (5 uses, 1 weight)
-- Some symbol of the divine, describe it (0 weight)
+- Dungeon rations (5 uses, [[Weight:1]])
+- Some symbol of the divine, describe it ([[Weight:0]])
 
 Choose your defenses:
-- Chainmail (1 armor, 1 weight)
-- Shield (+1 armor, 2 weight)
+- Chainmail (1 armor, [[Weight:1]])
+- Shield (+1 armor, [[Weight:2]])
 
 Choose your armament:
-- Warhammer (close, 1 weight)
-- Mace (close, 1 weight)
-- Staff (close, two-handed, 1 weight) and bandages (3 uses, 1 weight)
+- Warhammer (close, [[Weight:1]])
+- Mace (close, [[Weight:1]])
+- Staff (close, two-handed, [[Weight:1]]) and bandages (3 uses, [[Weight:1]])
 
 Choose one:
-- Adventuring gear (3 uses, 1 weight) and dungeon rations (5 uses, 1 weight)
-- Healing potion (1 weight)
+- Adventuring gear (3 uses, [[Weight:1]]) and dungeon rations (5 uses, [[Weight:1]])
+- Healing potion ([[Weight:1]])
 
 ## Look
 Choose one for each:
