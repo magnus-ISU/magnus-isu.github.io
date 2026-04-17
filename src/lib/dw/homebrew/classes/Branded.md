@@ -44,13 +44,13 @@ You walked into a fire and walked out the other side, into a place you shouldn't
 
 ## Gear
 You carry no weapons and need no armour but the flames that burn within you. You start with:  
-[[Weight:0]] A Keepsake of Your Sacrifices Past, describe it  
-[[Weight:1]] Adventuring Gear (3 uses)  
-[[Weight:1]] Healing Potion  
+[0 Weight] A Keepsake of Your Sacrifices Past, describe it  
+[1 Weight] Adventuring Gear (3 uses)  
+[1 Weight] Healing Potion  
 Choose two:  
-[[Weight:1]] Dungeon Rations (5 uses)  
-[[Weight:1]] Healing Potion  
-[[Coin:10]]
+[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Healing Potion  
+[10 Coin]
 
 ## Look
 Choose one for each:

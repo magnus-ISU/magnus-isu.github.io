@@ -61,16 +61,16 @@ Once per battle you may reroll a single damage roll (yours or someone else's) an
 
 ## Gear
 You start with:  
-[[Weight:0]] Your Signature Weapon  
-[[Weight:1]] Dungeon Rations (5 uses)  
+[0 Weight] Your Signature Weapon  
+[1 Weight] Dungeon Rations (5 uses)  
 Choose your defenses:  
-[[Weight:1]] Chainmail (1 armor) and [[Weight:1]] Adventuring Gear (3 uses)  
-[[Weight:3]] Scale Armor (2 armor)  
+[1 Weight] [1 Armor] Chainmail and [1 Weight] Adventuring Gear (3 uses)  
+[3 Weight] [2 Armor] Scale Armor  
 Choose two:  
-[[Coin:22]]  
-[[Weight:2]] 2 Healing Potions  
-[[Weight:2]] Shield (+1 armor)  
-[[Weight:1]] Antitoxin (1 use), [[Weight:1]] Dungeon Rations, and [[Weight:1]] Poultices and Herbs (2 uses)
+[22 Coin]  
+[2 Weight] 2 Healing Potions  
+[2 Weight] [+1 Armor] Shield  
+[1 Weight] Antitoxin (1 use), [1 Weight] Dungeon Rations, and [1 Weight] Poultices and Herbs (2 uses)
 
 ## Look
 Choose one for each:

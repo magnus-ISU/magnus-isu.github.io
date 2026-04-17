@@ -32,17 +32,17 @@ Your fighting style is showy and impressive. Gain +1 forward to Parley with anyo
 
 ## Gear
 You start with:  
-[[Weight:1]] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 uses)  
 Choose one from each:  
-[[Weight:0]] Noble's Silks and [[Coin:10]]  
-[[Weight:1]] Duelist's Leathers (1 armor, worn)  
+[0 Weight] Noble's Silks and [10 Coin]  
+[1 Weight] [1 Armor] Duelist's Leathers (worn)  
 Choose your weapon:  
-[[Weight:2]] Bastard Sword (+1 damage, two-handed, close)  
-[[Weight:2]] Rapier (precise, close)  
-[[Weight:1]] Dagger (hand) and [[Weight:1]] Parrying Dagger (hand, +1 armor)  
+[2 Weight] Bastard Sword (+1 damage, two-handed, close)  
+[2 Weight] Rapier (precise, close)  
+[1 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
 Choose one:  
-[[Weight:1]] Adventuring Gear (3 uses) and [[Weight:1]] Dungeon Rations (5 uses)  
-[[Weight:1]] Healing Potion
+[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Healing Potion
 
 ## Look
 Choose one for each:

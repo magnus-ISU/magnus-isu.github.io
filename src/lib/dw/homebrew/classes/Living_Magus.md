@@ -57,17 +57,17 @@ You do not use a spellbook to prepare spells. They are a part of your blood.
 
 ## Gear
 You start with:  
-[[Weight:1]] Your Spellbook  
-[[Weight:1]] Dungeon Rations (5 uses)  
+[1 Weight] Your Spellbook  
+[1 Weight] Dungeon Rations (5 uses)  
 Choose your defenses:  
-[[Weight:1]] Leather Armor (1 armor)  
-[[Weight:2]] Bag of Books (5 uses) and [[Weight:0]] 3 Weightless Healing Potions  
+[1 Weight] [1 Armor] Leather Armor  
+[2 Weight] Bag of Books (5 uses) and [0 Weight] 3 Weightless Healing Potions  
 Choose your weapon:  
-[[Weight:1]] Dagger (hand)  
-[[Weight:1]] Staff (close, two-handed)  
+[1 Weight] Dagger (hand)  
+[1 Weight] Staff (close, two-handed)  
 Choose one:  
-[[Weight:1]] Healing Potion  
-[[Weight:1]] Antitoxin (3 uses)
+[1 Weight] Healing Potion  
+[1 Weight] Antitoxin (3 uses)
 
 ## Look
 Choose one for each:

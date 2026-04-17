@@ -15,43 +15,50 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 ### Ranged Weapons
 
-[[Coin:10]] [[Weight:1]] **Throwing Daggers** thrown, near, Ammo
+[10 Coin] [1 Weight] **Throwing Daggers** thrown, near, Ammo
 
-[[Coin:15]] [[Weight:2]] **Ragged Bow** near
+[15 Coin] [2 Weight] **Ragged Bow** near
 
-[[Coin:60]] [[Weight:2]] **Fine Bow** near, far
+[60 Coin] [2 Weight] **Fine Bow** near, far
 
-[[Coin:100]] [[Weight:1]] **Hunter's Bow** near, far
+[100 Coin] [1 Weight] **Hunter's Bow** near, far
 
-[[Coin:35]] [[Weight:3]] **Crossbow** near, +1 damage, reload
+[35 Coin] [3 Weight] **Crossbow** near, +1 damage, reload
 
-[[Coin:1]] [[Weight:1]] **Bundle of Arrows** Ammo
+[1 Coin] [1 Weight] **Bundle of Arrows** Ammo
 
-[[Coin:20]] [[Weight:0]] **Elven Arrows** Ammo
+[20 Coin] [0 Weight] **Elven Arrows** Ammo
 
 ### Melee Weapons
 
-[[Coin:2]] [[Weight:1]] **Dagger, Shiv, Knife** hand
+[2 Coin] [1 Weight] **Dagger, Shiv, Knife** hand
 
-[[Coin:1]] [[Weight:2]] **Club, Shillelagh** close
+[1 Coin] [2 Weight] **Club, Shillelagh** close
 
-[[Coin:1]] [[Weight:1]] **Staff** close, two-handed
+[1 Coin] [1 Weight] **Staff** close, two-handed
 
-[[Coin:8]] [[Weight:1]] **Short Sword, Axe, Warhammer, Mace** close
+[8 Coin] [1 Weight] **Short Sword, Axe, Warhammer, Mace** close
 
-[[Coin:15]] [[Weight:2]] **Long Sword, Battle Axe, Flail** close, +1 damage
+[15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** close, +1 damage
 
-[[Coin:25]] [[Weight:1]] **Rapier** close, precise
+[25 Coin] [1 Weight] **Rapier** close, precise
 
-[[Coin:50]] [[Weight:2]] **Dueling Rapier** close, 1 piercing, precise
+[50 Coin] [2 Weight] **Dueling Rapier** close, 1 piercing, precise
 
 ### Reach Weapons
 
-[[Coin:5]] [[Weight:1]] **Spear** reach, thrown, near
+[5 Coin] [1 Weight] **Spear** reach, thrown, near
 
-[[Coin:9]] [[Weight:2]] **Halberd** reach, +1 damage, two-handed
+[9 Coin] [2 Weight] **Halberd** reach, +1 damage, two-handed
 
 ## Armor
+
+### Armor List
+
+[10 Coin] [1 Weight] [1 Armor] **Leather, Chainmail** *worn*  
+[50 Coin] [3 Weight] [2 Armor] **Scale Mail** *worn, clumsy*  
+[350 Coin] [4 Weight] [3 Armor] **Plate** *worn, clumsy*  
+[15 Coin] [2 Weight] [+1 Armor] **Shield**  
 
 Armor is heavy, difficult to wear and is damned uncomfortable. Some classes
 are better trained to ignore these drawbacks, but anyone can strap on a suit
@@ -68,212 +75,204 @@ _+n Armor_: It protects you and stacks with other armor. Add its value to your t
 
 _Clumsy_: It's tough to move around with. -1 ongoing while using it. This penalty is cumulative.
 
-### Armor List
-
-[[Coin:10]] [[Weight:1]] **Leather, Chainmail** 1 armor, worn
-
-[[Coin:50]] [[Weight:3]] **Scale Mail** 2 armor, worn, clumsy
-
-[[Coin:350]] [[Weight:4]] **Plate** 3 armor, worn, clumsy
-
-[[Coin:15]] [[Weight:2]] **Shield** +1 armor
+_Worn_: To use it, you have to be wearing it.
 
 ## Dungeon Gear
 
 ### Staples
 
-[[Coin:20]] [[Weight:1]] **Adventuring Gear** 3 uses
+[12 Coin] [1 Weight] **Adventuring Gear** 3 uses
 
 A collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you **rummage through your adventuring gear for some useful mundane item**, you find what you need and mark off a use.
 
-[[Coin:5]] [[Weight:1]] **Bandages** 3 uses, slow
+[5 Coin] [1 Weight] **Bandages** 3 uses, slow
 
 See the Bandage recovery move.
 
-[[Coin:10]] [[Weight:1]] **Poultices and Herbs** 2 uses, slow
+[10 Coin] [1 Weight] **Poultices and Herbs** 2 uses, slow
 
 See the Bandage recovery move.
 
-[[Coin:3]] [[Weight:1]] **Dungeon Rations** Ration, 5 uses
+[3 Coin] [1 Weight] **Dungeon Rations** Ration, 5 uses
 
 Not tasty, but not bad either.
 
-[[Coin:10]] [[Weight:1]] **Personal Feast** Ration, 1 use
+[10 Coin] [1 Weight] **Personal Feast** Ration, 1 use
 
 Ostentatious to say the least.
 
-[[Coin:3]] [[Weight:1]] **Dwarven Hardtack** Requires Dwarf, ration, 7 uses
+[3 Coin] [1 Weight] **Dwarven Hardtack** Requires Dwarf, ration, 7 uses
 
 Dwarves say it tastes like home. Everyone else says it tastes like home, if
 home is a hog farm, and on fire.
 
-[[Coin:100]] [[Weight:1]] **Elven Bread** Ration, 15 uses
+[100 Coin] [1 Weight] **Elven Bread** Ration, 15 uses
 
 Only the greatest of elf-friends are treated to this rare delicacy.
 
 ### Potions & Remedies
 
-[[Coin:50]] [[Weight:1]] **Healing Potion**
+[50 Coin] [1 Weight] **Healing Potion**
 
 When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
 
-[[Coin:10]] [[Weight:1]] **Antitoxin** 3 uses
+[10 Coin] [1 Weight] **Antitoxin** 3 uses
 
 When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
 ### Bonus-Granting Items
 
-[[Coin:10]] [[Weight:2]] **Bag of Books** 5 uses
+[10 Coin] [2 Weight] **Bag of Books** 5 uses
 
 When your bag of books **contains just the right book** for the subject you're spouting lore on, consult the book, mark off a use, and take +1 to your roll.
 
-[[Coin:10]] [[Weight:4]] **Keg of Dwarven Stout**
+[10 Coin] [4 Weight] **Keg of Dwarven Stout**
 
 When you open a keg of dwarven stout and **let everyone drink freely**, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.
 
-[[Coin:25]] [[Weight:0]] **Halfling Pipeleaf** 3 uses
+[25 Coin] [0 Weight] **Halfling Pipeleaf** 3 uses
 
 When you **share halfling pipeleaf with someone**, expend a use and take +1 forward to parley with them.
 
 ### Poisons
 
-[[Coin:12]] [[Weight:0]] **Bloodweed** Dangerous, touch
+[12 Coin] [0 Weight] **Bloodweed** Dangerous, touch
 
 Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
 
-[[Coin:10]] [[Weight:0]] **Serpent's Tears** Dangerous, touch
+[10 Coin] [0 Weight] **Serpent's Tears** Dangerous, touch
 
 Anyone dealing damage against the target has advantage.
 
-[[Coin:15]] [[Weight:0]] **Oil of Tagit** Dangerous, applied
+[15 Coin] [0 Weight] **Oil of Tagit** Dangerous, applied
 
 The target falls into a light sleep.
 
-[[Coin:20]] [[Weight:0]] **Goldenroot** Dangerous, applied
+[20 Coin] [0 Weight] **Goldenroot** Dangerous, applied
 
 The target treats the next creature they see as a trusted ally, until proved otherwise.
 
 ### Services
 
-[[Coin:3-C]] **A week's stay at a peasant inn**
+[3-C Coin] **A week's stay at a peasant inn**
 
-[[Coin:15]] **A week's stay at a civilized inn**
+[15 Coin] **A week's stay at a civilized inn**
 
-[[Coin:30]] **A week's stay at the fanciest inn in town**
+[30 Coin] **A week's stay at the fanciest inn in town**
 
-[[Coin:10]] **A week's unskilled mundane labor**
+[10 Coin] **A week's unskilled mundane labor**
 
-[[Coin:30]] **A month's pay for enlistment in an army**
+[30 Coin] **A month's pay for enlistment in an army**
 
-[[Coin:50+]] **A custom item from a blacksmith** base item cost + 50
+[50+ Coin] **A custom item from a blacksmith** base item cost + 50
 
-[[Coin:8-C]] **A night's "companionship"**
+[8-C Coin] **A night's "companionship"**
 
-[[Coin:5-C]] **An evening of song and dance**
+[5-C Coin] **An evening of song and dance**
 
-[[Coin:20]] **Escort for a day along a bandit-infested road**
+[20 Coin] **Escort for a day along a bandit-infested road**
 
-[[Coin:54]] **Escort for a day along a monster-infested road**
+[54 Coin] **Escort for a day along a monster-infested road**
 
-[[Coin:5]] **A run-of-the-mill killing**
+[120 Coin] **An assassination**
 
-[[Coin:120]] **An assassination**
+[5 Coin] **Healing from a chirurgeon**
 
-[[Coin:5]] **Healing from a chirurgeon**
-
-[[Coin:1]] **A month's prayers for the departed**
+[1 Coin] **A month's prayers for the departed**
 
 **Repairs to a mundane item** 25% of the item's cost
 
 ### Meals
 
-[[Coin:1]] **A hearty meal for one**
+[1 Coin] **A hearty meal for one**
 
-[[Coin:1]] **A poor meal for a family**
+[1 Coin] **A poor meal for a family**
 
-[[Coin:15]] **A feast** per person
+[15 Coin] **A feast** per person
 
 ### Transport
 
-[[Coin:50]] **Cart and Donkey, sworn to carry your burdens** load 20
+[50 Coin] **Cart and Donkey, sworn to carry your burdens** load 20
 
-[[Coin:75]] **Horse** load 10
+[75 Coin] **Horse** load 10
 
-[[Coin:400]] **Warhorse** load 12
+[400 Coin] **Warhorse** load 12
 
-[[Coin:150]] **Wagon** load 40
+[150 Coin] **Wagon** load 40
 
-[[Coin:50]] **Barge** load 15
+[50 Coin] **Barge** load 15
 
-[[Coin:150]] **River boat** load 20
+[150 Coin] **River boat** load 20
 
-[[Coin:5,000]] **Merchant ship** load 200
+[5k Coin] **Merchant ship** load 200
 
-[[Coin:20,000]] **War ship** load 100
+[20k Coin] **War ship** load 100
 
-[[Coin:1]] **Passage on a safe route**
+[1 Coin] **Passage on a safe route**
 
-[[Coin:10]] **Passage on a tough route**
+[10 Coin] **Passage on a tough route**
 
-[[Coin:100]] **Passage on a dangerous route**
+[100 Coin] **Passage on a dangerous route**
 
 ### Land and Buildings
 
-[[Coin:20]] **A hovel**
+[20 Coin] **A hovel**
 
-[[Coin:500]] **A cottage**
+[500 Coin] **A cottage**
 
-[[Coin:2,500]] **A house**
+[2500 Coin] **A house**
 
-[[Coin:50,000]] **A mansion**
+[50k Coin] **A mansion**
 
-[[Coin:75,000]] **A keep**
+[75k Coin] **A keep**
 
-[[Coin:250,000]] **A castle**
+[250k Coin] **A castle**
 
-[[Coin:1,000,000]] **A grand castle**
+[1M Coin] **A grand castle**
 
 **A month's upkeep** 1% of the cost
 
 ### Bribes
 
-[[Coin:15-C]] **A peasant dowry**
+[5 Coin] **A spilled secret**
 
-[[Coin:100]] **"Protection" for a small business**
+[15-C Coin] **A peasant dowry**
 
-[[Coin:40]] **A government bribe**
+[100 Coin] **"Protection" for a small business**
 
-[[Coin:80]] **A compelling bribe**
+[40 Coin] **A government bribe**
 
-[[Coin:500]] **An offer you can't refuse**
+[80 Coin] **A compelling bribe**
+
+[500 Coin] **An offer you can't refuse**
 
 ### Gifts and Finery
 
-[[Coin:1]] **A peasant gift**
+[1 Coin] **A peasant gift**
 
-[[Coin:55]] **A fine gift**
+[55 Coin] **A fine gift**
 
-[[Coin:200]] **A noble gift**
+[200 Coin] **A noble gift**
 
-[[Coin:75]] **A ring or cameo**
+[75 Coin] **A ring or cameo**
 
-[[Coin:105]] **Finery**
+[105 Coin] **Finery**
 
-[[Coin:350+]] **A fine tapestry**
+[350 Coin] **A fine tapestry**
 
-[[Coin:5,000]] **A crown fit for a king**
+[5k Coin] **A crown fit for a king**
 
 ### Hoards
 
-[[Coin:2]] **A goblin's stash**
+[2 Coin] **A goblin's stash**
 
-[[Coin:5]] **A lizardman's trinkets**
+[5 Coin] **A lizardman's trinkets**
 
-[[Coin:80]] **A "priceless" sword**
+[80 Coin] **A "priceless" sword**
 
-[[Coin:250]] **An orc warchief's tribute**
+[250 Coin] **An orc warchief's tribute**
 
-[[Coin:130,000]] **A dragon's mound of coins and gems**
+[130k Coin] **A dragon's mound of coins and gems**
 
 ## Tags
 
@@ -281,7 +280,7 @@ The target treats the next creature they see as a trusted ally, until proved oth
 
 These are general tags that can apply to just about any piece of gear. You'll see them on armor, weapons or general adventuring tools.
 
-[[Weight:n]] _n weight_: Count the listed amount against your load. 100 coins is 1 weight. Most items have weight, and if you're not careful about it you might have to leave certain things behind.
+[n Weight] _n weight_: Count the listed amount against your load. 100 coins is 1 weight. Most items have weight, and if you're not careful about it you might have to leave certain things behind.
 
 _n Uses_: It can only be used _n_ times.
 
@@ -292,7 +291,7 @@ they eat or drink.
 
 _Awkward_: It's unwieldy and tough to use.
 
-[[Coin:n]] _n coins_: How much it costs to buy, normally. If the cost includes "-C" a little negotiation subtracts the haggler's CHA from the price.
+[n Coin] _n coins_: How much it costs to buy, normally. If the cost includes "-C" a little negotiation subtracts the haggler's CHA from the price.
 
 _Dangerous_: It's easy to get in trouble with it. If you interact with it without proper precautions the GM may freely invoke the consequences of your foolish actions.
 
@@ -303,8 +302,6 @@ _Slow_: It takes minutes or more to use.
 _Touch_: It's used by touching it to the target's skin.
 
 _Two-handed_: It takes two hands to use it effectively.
-
-_Worn_: To use it, you have to be wearing it.
 
 ### Weapon Tags
 

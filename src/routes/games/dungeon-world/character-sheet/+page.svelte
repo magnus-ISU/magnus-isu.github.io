@@ -143,14 +143,23 @@
 	const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
 	const maxLoad = $derived(parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null);
 
-	// Carried weight from "[[Weight:N]]" or "(N weight)" in body, plus coins/100
+	// TODO compute carried weight and worn armor together in an optimized manner to avoid iterating over the full character sheet many times. First, trim down to the things that we care about.
+	// Carried weight from "N Weight" in body, plus coins/100
 	const carriedWeight = $derived.by(() => {
-		const bracketMatches = [...parsed.body.matchAll(/\[\[Weight:(\d+)\]\]/g)];
-		const legacyMatches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
-		const weight = [...bracketMatches, ...legacyMatches].reduce((sum, m) => sum + (+m[1]), 0);
-		const coinMatches = [...parsed.body.matchAll(/\[\[Coin:(\d+)\]\]/g)];
+		const weightMatches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
+		const weight = [...weightMatches].reduce((sum, m) => sum + (+m[1]), 0);
+		const coinMatches = [...parsed.body.matchAll(/\[(\d+) Coin\]/g)];
 		const coins = coinMatches.reduce((sum, m) => sum + (+m[1]), 0);
 		return weight + Math.floor(coins / 100);
+	});
+	
+	const wornArmor = $derived.by(() => {
+		return 0 // TODO remove
+		const baseArmorMatches = [...parsed.body.matchAll(/\[(\d+)\s+Armor\]/gi)]; // TODO should not match [+1 Armor], only [1 Armor]
+		const baseArmor = 0 // TODO 0 or max of [...baseArmorMatches];
+		const bonusArmorMatches = [] // TODO [...parsed.body.matchAll(/\[\+(\d+)\s+weight\]/gi)]; // TODO should match [+1 Armor] but not [1 Armor]
+		const totalArmor = bonusArmorMatches.reduce((sum, armor) => sum + (+m[1]), baseArmor)
+		return totalArmor;
 	});
 
 	const placeholders = $derived.by(() => {
@@ -475,7 +484,7 @@
 						{/if}
 						{#if parsed.armor !== null}
 							<div class="circle circle-md circle-armor">
-								<span class="circle-text">{parsed.armor}</span>
+								<span class="circle-text">{parsed.armor + wornArmor}</span>
 								<span class="circle-label">Armor</span>
 							</div>
 						{/if}

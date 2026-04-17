@@ -73,18 +73,18 @@ You once followed another path, so you know better than most how outsiders feel 
 
 ## Gear
 You start with:  
-[[Weight:1]] Dungeon Rations (5 uses)  
-[[Weight:0]] Some Symbol of the Divine, describe it  
+[1 Weight] Dungeon Rations (5 uses)  
+[0 Weight] Some Symbol of the Divine, describe it  
 Choose your defenses:  
-[[Weight:1]] Chainmail [[1 armor]]  
-[[Weight:2]] Shield (+1 armor)  
-Choose your armament:  
-[[Weight:1]] Warhammer (close)  
-[[Weight:1]] Mace (close)  
-[[Weight:1]] Staff (close, two-handed) and [[Weight:1]] Bandages (3 uses)  
+[1 Weight] [1 Armor] Chainmail  
+[2 Weight] [+1 Armor] Shield  
+Choose one armament:  
+[1 Weight] Warhammer (close)  
+[1 Weight] Mace (close)  
+[1 Weight] Staff (close, two-handed) and [1 Weight] Bandages (3 uses)  
 Choose one:  
-[[Weight:1]] Adventuring Gear (3 uses) and [[Weight:1]] Dungeon Rations (5 uses)  
-[[Weight:1]] Healing Potion
+[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Healing Potion
 
 ## Look
 Choose one for each:

@@ -41,16 +41,16 @@ Your blades dance around your enemies' defenses with ease. When you **deal +1d6 
 
 ## Gear
 You start with:  
-[[Weight:1]] Dungeon Rations (5 uses)  
-[[Weight:1]] Dueling Rapier (close, precise)  
-[[Weight:1]] Shining Armor (1 armor)  
+[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dueling Rapier (close, precise)  
+[1 Weight] [1 Armor] Shining Armor  
 Choose your backup weapon:  
-[[Weight:1]] Hidden Stiletto (hand), which is never found when you are searched  
-[[Weight:1]] Throwing Daggers (hand, near, ammo)
-[[Weight:2]] Parrying Gauntlet (hand, +1 armor)  
+[1 Weight] Hidden Stiletto (hand), which is never found when you are searched  
+[1 Weight] Throwing Daggers (hand, near, ammo)
+[2 Weight] [+1 Armor] Parrying Gauntlet (hand)  
 Choose two:  
-[[Weight:1]] Adventuring Gear (3 uses) and a map, describe it  
-[[Weight:1]] Bandages (3 uses) and [[Coin:9]]  
+[1 Weight] Adventuring Gear (3 uses) and a map, describe it  
+[1 Weight] Bandages (3 uses) and [9 Coin]  
 A noble steed, describe it
 
 ## Look
