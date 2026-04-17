@@ -1,1 +1,0 @@
-import{l as o,g as r,m as s}from"./C-zC7P9M.js";import{p as a}from"./CkN5vTkk.js";const c="dw-character-sheet";function n(){try{return localStorage.getItem(c)??""}catch{return""}}function l(t){try{localStorage.setItem(c,t)}catch{}}let e=o(a(n()));const g={get value(){return r(e)},set value(t){s(e,a(t)),l(t)},get isEmpty(){return!r(e).trim()}};export{g as c};
