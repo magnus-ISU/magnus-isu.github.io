@@ -121,6 +121,7 @@
 		position: relative;
 		cursor: ew-resize;
 		user-select: none;
+		touch-action: none;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;

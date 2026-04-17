@@ -114,6 +114,10 @@
 		el.addEventListener('pointerup', () => { clearTimeout(longPressTimeout); });
 		el.addEventListener('pointercancel', () => { clearTimeout(longPressTimeout); });
 
+		el.addEventListener('contextmenu', (e) => {
+			if (e.target.closest('h1, h2, h3, h4, h5, h6')) e.preventDefault();
+		});
+
 		function handleClick(e) {
 			if (!data.rawSource) return;
 			if (longPressHeading) { longPressHeading = null; return; }

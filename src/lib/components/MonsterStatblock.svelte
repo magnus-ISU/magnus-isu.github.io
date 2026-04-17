@@ -78,16 +78,25 @@
 		setTimeout(() => { copied = false; }, 1200);
 	}
 
+	let lastClickTime = 0;
+
 	function handleHeaderClick(e) {
 		if (e.shiftKey || isLongPress) {
 			isLongPress = false;
 			handleShiftClick();
 			return;
 		}
+		const now = Date.now();
+		if (now - lastClickTime < 400) {
+			lastClickTime = 0;
+			handleDoubleTap();
+			return;
+		}
+		lastClickTime = now;
 		toggleExpanded();
 	}
 
-	function handleHeaderDblClick() {
+	function handleDoubleTap() {
 		const oldTop = el.getBoundingClientRect().top;
 		encounterText.appendName(name);
 		const end = performance.now() + 300;
@@ -245,7 +254,6 @@
 		class="monster-header"
 		class:copied
 		onclick={handleHeaderClick}
-		ondblclick={handleHeaderDblClick}
 		onpointerdown={onPointerDown}
 		onpointerup={onPointerUp}
 		onpointercancel={onPointerUp}
@@ -416,6 +424,7 @@
 		transition: background 0.15s;
 		-webkit-user-select: none;
 		user-select: none;
+		touch-action: manipulation;
 	}
 
 	.monster-header:hover {
@@ -527,6 +536,7 @@
 		font-size: 0.9rem;
 		transition: background 0.15s, border-color 0.15s;
 		flex-shrink: 0;
+		touch-action: manipulation;
 	}
 
 	.attack-btn:hover {
@@ -626,6 +636,7 @@
 	.hp-pill.hp-draggable {
 		cursor: ew-resize;
 		overflow: visible;
+		touch-action: none;
 	}
 
 	.vital {
@@ -721,6 +732,7 @@
 		text-align: center;
 		line-height: 1.3;
 		transition: background 0.15s, color 0.15s, border-color 0.15s;
+		touch-action: manipulation;
 	}
 
 	.move-pill:hover {

@@ -512,6 +512,7 @@
 
 	.circle-draggable {
 		cursor: ew-resize;
+		touch-action: none;
 	}
 
 	button.circle:hover {
