@@ -60,7 +60,7 @@ dead, looking to drag a meaty corpse back to their lair? Scary, sure, but
 there’s treasure, too. More gold and jewels and magic lost to man have fallen
 between the cracks in the world than you can imagine. Who better to retrieve
 it than a band of stalwart heroes?</p> <p>You and your friends <em>are</em> those heroes. You go where others can’t or won’t.
-There are monstrous things lurking in the world. Are you ready to face them?</p> <h2 id="the-bard"><a aria-hidden="true" tabindex="-1" href="#the-bard"><span class="icon icon-link"></span></a>The Bard</h2> <p>The poems say an adventurer’s life is all open roads and the glory of coin and
+There are monstrous things lurking in the world. Are you ready to face them?</p> <h2 id="the-classes"><a aria-hidden="true" tabindex="-1" href="#the-classes"><span class="icon icon-link"></span></a>The Classes</h2> <h3 id="the-bard"><a aria-hidden="true" tabindex="-1" href="#the-bard"><span class="icon icon-link"></span></a>The Bard</h3> <p>The poems say an adventurer’s life is all open roads and the glory of coin and
 combat. The tales told in every farmhand-filled inn have to have some ring of
 truth to them, don’t they? The songs to inspire peasantry and royals alike—to
 soothe the savage beast or drive men to a frenzy—have to come from somewhere.</p> <p>Enter the bard. You, with your smooth tongue and quick wit. You teller-of-
@@ -68,14 +68,14 @@ tales and singer-of-songs. A mere minstrel can retell a thing, but it takes a
 true bard to live it. Strap on your boots, noble orator. Sharpen that hidden
 dagger and take up the call. Someone’s got to be there, fighting shoulder-to-
 shoulder with the goons and the thugs and the soon-to-be-heroes. Who better
-than you to write the tale of your own heroism?</p> <p>Nobody. Get going.</p> <h2 id="the-cleric"><a aria-hidden="true" tabindex="-1" href="#the-cleric"><span class="icon icon-link"></span></a>The Cleric</h2> <p>The lands of Dungeon World are a gods-forsaken mess. They’re lousy with the
+than you to write the tale of your own heroism?</p> <p>Nobody. Get going.</p> <h3 id="the-cleric"><a aria-hidden="true" tabindex="-1" href="#the-cleric"><span class="icon icon-link"></span></a>The Cleric</h3> <p>The lands of Dungeon World are a gods-forsaken mess. They’re lousy with the
 walking dead, beasts of all sorts, and the vast unnatural spaces between safe
 and temple-blessed civilizations. It is a godless world out there. That’s why
 it needs you.</p> <p>Bringing the glory of your god to the heathens isn’t just in your nature—it’s
 your calling. It falls to you to proselytize with sword and mace and spell, to
 cleave deep into the witless heart of the wilds and plant the seed of divinity
 there. Some say that it’s best to keep the gods close to your heart. You know
-that’s rubbish. God lives at the edge of a blade.</p> <p>Show the world who is lord.</p> <h2 id="the-druid"><a aria-hidden="true" tabindex="-1" href="#the-druid"><span class="icon icon-link"></span></a>The Druid</h2> <p>Cast your eyes around the fire. What has brought you to these people, stinking
+that’s rubbish. God lives at the edge of a blade.</p> <p>Show the world who is lord.</p> <h3 id="the-druid"><a aria-hidden="true" tabindex="-1" href="#the-druid"><span class="icon icon-link"></span></a>The Druid</h3> <p>Cast your eyes around the fire. What has brought you to these people, stinking
 of the dust and sweat of the city? Perhaps it is a kindness—do you protect
 them as the mother bear watches over her cubs? Are they your pack, now?
 Strange brothers and sisters you have. Whatever your inspiration, they would
@@ -86,7 +86,7 @@ your allies pray to their carved stone gods and polish their silver shells.
 They speak of the glory they’ll find back in that festering town you left
 behind.</p> <p>Their gods are children, their steel is false protection. You walk the old
 ways, you wear the pelts of the earth itself. You’ll take your share of the
-treasure, but will you ever walk as one of them? Only time will tell.</p> <h2 id="the-fighter"><a aria-hidden="true" tabindex="-1" href="#the-fighter"><span class="icon icon-link"></span></a>The Fighter</h2> <p>It’s a thankless job—living day to day by your armor and the skill of your
+treasure, but will you ever walk as one of them? Only time will tell.</p> <h3 id="the-fighter"><a aria-hidden="true" tabindex="-1" href="#the-fighter"><span class="icon icon-link"></span></a>The Fighter</h3> <p>It’s a thankless job—living day to day by your armor and the skill of your
 arm, diving heedlessly into danger. They won’t be playing golden horns for the
 time you took that knife to the ribs for them in the bar in Bucksberg. No
 flock of angels will sing of the time you dragged them, still screaming, from
@@ -95,7 +95,7 @@ hot blood of it. You are a beast of iron. Your friends may carry blades of
 forged steel but, fighter, you are steel. While your traveling companions
 might moan about their wounds around a campfire in the wilderness, you bear
 your scars with pride.</p> <p>You are the wall—let every danger smash itself to dust on you. In the end,
-you’ll be the last one standing.</p> <h2 id="the-paladin"><a aria-hidden="true" tabindex="-1" href="#the-paladin"><span class="icon icon-link"></span></a>The Paladin</h2> <p>Hell awaits. An eternity of torment in fire or ice or whatever best suits the
+you’ll be the last one standing.</p> <h3 id="the-paladin"><a aria-hidden="true" tabindex="-1" href="#the-paladin"><span class="icon icon-link"></span></a>The Paladin</h3> <p>Hell awaits. An eternity of torment in fire or ice or whatever best suits the
 sins of the damned throngs of Dungeon World. All that stands between the pits
 of that grim torture and salvation is you. Holy man, armored war machine,
 templar of the Good and the Light, right? The cleric may say his prayers at
@@ -103,20 +103,20 @@ night to the gods, dwelling in their heavens. The fighter may wield his sharp
 sword in the name of “good” but you know. Only you.</p> <p>Eyes, hands, and sweet killing blow of the gods, you are. Yours is the gift of
 righteousness and virtue—of justice, of Vision, too. A purity of intent that
 your companions do not have.</p> <p>So guide these fools, paladin. Take up your holy cause and bring salvation to
-the wastrel world.</p> <p>Vae victis, right?</p> <h2 id="the-ranger"><a aria-hidden="true" tabindex="-1" href="#the-ranger"><span class="icon icon-link"></span></a>The Ranger</h2> <p>These city-born folk you travel with. Have they heard the call of the wolf?
+the wastrel world.</p> <p>Vae victis, right?</p> <h3 id="the-ranger"><a aria-hidden="true" tabindex="-1" href="#the-ranger"><span class="icon icon-link"></span></a>The Ranger</h3> <p>These city-born folk you travel with. Have they heard the call of the wolf?
 Felt the winds howl in the bleak deserts of the East? Have they hunted their
 prey with the bow and the knife like you? Hell no. That’s why they need you.</p> <p>Guide. Hunter. Creature of the wilds. You are these things and more. Your time
 in the wilderness may have been solitary until now, but the call of some
 greater thing—call it fate if you like—has cast your lot with these folk.
 Brave, they may be. Powerful and strong, too. But only you know the secrets of
 the spaces between.</p> <p>Without you, they’d be lost. Blaze a trail through the blood and dark,
-strider.</p> <h2 id="the-thief"><a aria-hidden="true" tabindex="-1" href="#the-thief"><span class="icon icon-link"></span></a>The Thief</h2> <p>You’ve heard them, sitting around the campfire. Bragging about this battle or
+strider.</p> <h3 id="the-thief"><a aria-hidden="true" tabindex="-1" href="#the-thief"><span class="icon icon-link"></span></a>The Thief</h3> <p>You’ve heard them, sitting around the campfire. Bragging about this battle or
 that, or about how their gods are smiling on your merry band. You count your
 coins and smile to yourself—this is the thrill above all. You alone know the
 secret of Dungeon World: filthy, filthy lucre.</p> <p>Sure, they give you lip for all the times you’ve snuck off alone, but without
 you, every one of them would have been dissected by a flying guillotine or
 poisoned straight to death by some ancient needle trap. So let them complain.
-When you’re done with all this delving you’ll toast their heroes’ graves.</p> <p>From your castle. Full of gold. You rogue.</p> <h2 id="the-wizard"><a aria-hidden="true" tabindex="-1" href="#the-wizard"><span class="icon icon-link"></span></a>The Wizard</h2> <p>Dungeon World has rules. Not the laws of men or the rule of some petty tyrant.
+When you’re done with all this delving you’ll toast their heroes’ graves.</p> <p>From your castle. Full of gold. You rogue.</p> <h3 id="the-wizard"><a aria-hidden="true" tabindex="-1" href="#the-wizard"><span class="icon icon-link"></span></a>The Wizard</h3> <p>Dungeon World has rules. Not the laws of men or the rule of some petty tyrant.
 Bigger, better rules. You drop something—it falls. You can’t make something
 out of nothing. The dead stay dead, right?</p> <p>Oh, the things we tell ourselves to feel better about the long, dark nights.</p> <p>You’ve spent so very long poring over those tomes of yours. Conducting
 experiments that nearly drove you mad and casting summonings that endangered
@@ -124,4 +124,4 @@ your very soul. For what? For power. What else is there? Not just the power of
 King or Country but the power to boil a man’s blood in his veins. To call on
 the thunder of the sky and the churn of the roiling earth. To shrug off the
 rules the world holds so dear.</p> <p>Let them cast their sidelong glances. Let them call you “warlock” or
-“diabolist.” Who among them can hurl fireballs from their eyes?</p> <p>Yeah. Didn’t think so.</p>`,1);function d(e){var t=r();o(120),a(e,t)}export{d as default};
+“diabolist.” Who among them can hurl fireballs from their eyes?</p> <p>Yeah. Didn’t think so.</p>`,1);function d(e){var t=r();o(122),a(e,t)}export{d as default};

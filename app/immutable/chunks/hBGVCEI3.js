@@ -18,18 +18,18 @@ When you **conjure a weapon of pure flame**, roll+CON. You may treat your DEX as
 - Remove the *Dangerous* tag
 
 ### Fuel for the Pyre
-When you **take damage while unarmoured**, the flames within you come to your aid. Take 1 fuel. At any time, you may spend 1 fuel to:
+When you **take damage while unarmoured**, the flames within you come to your aid. Hold 1 fuel. At any time, you may spend 1 fuel to:
 - Heal 1d4 HP
 - Take +1 forward to conjure your Firebrand
 - Take +1d4 forward to your next damage roll
 
-Your fuel is reset if you receive healing from any other source.
+You must spend all your fuel when you receive healing from any other source.
 
 ### Give Me Fuel, Give Me Fire
 When you **gaze intensely into someone's eyes**, you may ask their player: "What fuels the flames of your desire?" They'll answer with the truth, even if the character does not know or would otherwise keep this hidden.
 
 ### Zuko Style
-When you **bend a flame to your will**, roll+WIS. On a 10+ it does as you command, taking the shape and movement that you desire for as long as it has fuel on which to burn. On a 7-9, the effect is short-lived, lasting only for a moment. On a miss, it rages out of control with a mind of its own.
+When you **bend an existing flame to your will**, roll+WIS. On a 10+ it does as you command, taking the shape and movement that you desire for as long as it has fuel on which to burn. On a 7-9, the effect is short-lived, lasting only for a moment. On a miss, it rages out of control with a mind of its own.
 
 ## Backgrounds
 
