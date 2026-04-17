@@ -348,8 +348,9 @@
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
 					<div class="header-circles">
 						{#if parsed.exp !== null}
-							<div class="circle circle-xs circle-exp">
-								<DraggableCounter value={parsed.exp} oncommit={commitExpRaw} inputWidth="1.5rem" class="circle-text" style="font-size: 0.7rem">
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div class="circle circle-xs circle-exp circle-draggable" onpointerdown={(e) => expDcRef?.handlePointerDown(e)}>
+								<DraggableCounter bind:this={expDcRef} value={parsed.exp} oncommit={commitExpRaw} inputWidth="1.5rem" class="circle-text" style="font-size: 0.7rem">
 									{#snippet children()}{parsed.exp}{/snippet}
 								</DraggableCounter>
 								<span class="circle-label">EXP</span>
@@ -779,6 +780,11 @@
 
 		.header-circles {
 			justify-content: center;
+		}
+
+		.circle-xs {
+			width: 44px;
+			height: 44px;
 		}
 	}
 </style>
