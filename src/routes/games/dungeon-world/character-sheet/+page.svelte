@@ -768,7 +768,7 @@
 
 		.sheet-top {
 			border-radius: 0;
-			top: calc(1.5rem * 1.7 + 1.3rem + 1px);
+			top: calc(0.65rem + 2.5rem + 0.65rem + 1px);
 		}
 
 		.sheet-header {
