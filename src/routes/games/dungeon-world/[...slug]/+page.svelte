@@ -317,18 +317,18 @@
 
 	:global(.dw-article .coin-icon) {
 		display: inline-block;
-		height: 1.8em;
-		width: 1.8em;
+		width: 24px;
+		height: 24px;
 		vertical-align: middle;
 	}
 
 	:global(.dw-article .weight-icon) {
 		display: inline-block;
-		height: 1.25em;
-		width: 1.25em;
-		min-width: 1.25em;
+		width: 22px;
+		height: 22px;
 		vertical-align: middle;
 		color: #444;
+		transform: translateY(-2px);
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
