@@ -75,7 +75,18 @@
 		goto(`/games/dungeon-world/${slug}`);
 	}
 
-	function onPointerDown(item, category, toggleTarget) {
+	function onPointerDown(e, item, category, toggleTarget) {
+		if (e.shiftKey && !toggleTarget) {
+			e.preventDefault();
+			if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+				loadClassRaw(item).then(raw => {
+					if (raw) characterSheet.value = buildCharacterSheet(raw);
+				});
+			}
+			sidebarOpen = false;
+			return;
+		}
+
 		isLongPress = false;
 		longPressItem = item;
 		longPressTarget = toggleTarget || null;
@@ -105,11 +116,13 @@
 			isLongPress = false;
 			return;
 		}
-		if (e.shiftKey && category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+		if (e.shiftKey) {
 			e.preventDefault();
 			e.stopPropagation();
-			const raw = await loadClassRaw(item);
-			if (raw) characterSheet.value = buildCharacterSheet(raw);
+			if (category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+				const raw = await loadClassRaw(item);
+				if (raw) characterSheet.value = buildCharacterSheet(raw);
+			}
 			sidebarOpen = false;
 			return;
 		}
@@ -141,7 +154,7 @@
 							<a
 								href={getHref(item)}
 								onclick={(e) => handleNavClick(e, item, category.category)}
-								onpointerdown={() => onPointerDown(item, category.category)}
+								onpointerdown={(e) => onPointerDown(e, item, category.category)}
 								onpointerup={onPointerUp}
 								onpointercancel={onPointerUp}
 								oncontextmenu={(e) => e.preventDefault()}
@@ -156,7 +169,7 @@
 									<button
 										class="toggle-opt"
 										class:active={getSource(item.slug) === 'srd'}
-										onpointerdown={() => onPointerDown(item, null, 'srd')}
+										onpointerdown={(e) => onPointerDown(e, item, null, 'srd')}
 										onpointerup={onPointerUp}
 										onpointercancel={onPointerUp}
 										onclick={(e) => handleToggle(item, 'srd', e)}
@@ -164,7 +177,7 @@
 									<button
 										class="toggle-opt"
 										class:active={getSource(item.slug) === 'hb'}
-										onpointerdown={() => onPointerDown(item, null, 'hb')}
+										onpointerdown={(e) => onPointerDown(e, item, null, 'hb')}
 										onpointerup={onPointerUp}
 										onpointercancel={onPointerUp}
 										onclick={(e) => handleToggle(item, 'hb', e)}

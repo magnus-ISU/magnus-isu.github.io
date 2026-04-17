@@ -4,13 +4,16 @@
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
-	import { tick } from 'svelte';
+	import { tick, untrack } from 'svelte';
 
 	const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
 	let text = $state(characterSheet.value);
 
-	$effect(() => { characterSheet.value = text; });
+	$effect(() => {
+		const t = text;
+		untrack(() => { characterSheet.value = t; });
+	});
 
 	$effect(() => {
 		const storeVal = characterSheet.value;
@@ -37,6 +40,48 @@
 
 	function tabName(i) {
 		return characterSheet.slotName(i) || 'Untitled';
+	}
+
+	// --- Delete character confirmation ---
+	let pendingDeleteIdx = $state(null);
+	let lastDeleteConfirmed = 0;
+	let longPressTimer = null;
+
+	function requestDelete(i) {
+		if (characterSheet.slotCount <= 1) return;
+		if (Date.now() - lastDeleteConfirmed < 60_000) {
+			doDelete(i);
+		} else {
+			pendingDeleteIdx = i;
+		}
+	}
+
+	function confirmDelete() {
+		lastDeleteConfirmed = Date.now();
+		doDelete(pendingDeleteIdx);
+		pendingDeleteIdx = null;
+	}
+
+	function cancelDelete() {
+		pendingDeleteIdx = null;
+	}
+
+	function doDelete(i) {
+		characterSheet.deleteSlot(i);
+		activeTab = characterSheet.activeIndex;
+		text = characterSheet.value;
+		undoStack = [];
+	}
+
+	function onTabPointerDown(e, i) {
+		clearTimeout(longPressTimer);
+		longPressTimer = setTimeout(() => {
+			requestDelete(i);
+		}, 500);
+	}
+
+	function onTabPointerUp() {
+		clearTimeout(longPressTimer);
 	}
 
 	const showNewButton = $derived(
@@ -356,6 +401,18 @@
 	<title>Character Sheet - Dungeon World</title>
 </svelte:head>
 
+{#if pendingDeleteIdx !== null}
+	<div class="modal-backdrop" onclick={cancelDelete} role="presentation">
+		<div class="modal" onpointerdown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+			<p>Delete <strong>{tabName(pendingDeleteIdx)}</strong>?</p>
+			<div class="modal-actions">
+				<button class="action-btn primary danger" onclick={confirmDelete}>Delete</button>
+				<button class="action-btn" onclick={cancelDelete}>Cancel</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
 <article class="dw-article">
 	<h1>Character Sheet</h1>
 
@@ -364,7 +421,11 @@
 			<button
 				class="char-tab"
 				class:active={i === activeTab}
-				onclick={() => switchTab(i)}
+				onclick={(e) => { if (e.shiftKey) { requestDelete(i); } else { switchTab(i); } }}
+				ondblclick={() => requestDelete(i)}
+				onpointerdown={(e) => onTabPointerDown(e, i)}
+				onpointerup={onTabPointerUp}
+				onpointercancel={onTabPointerUp}
 			>{tabName(i)}</button>
 		{/each}
 		{#if showNewButton}
@@ -908,4 +969,70 @@
 			height: 44px;
 		}
 	}
+
+	/* Delete modal */
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 2000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.modal {
+		background: #1e1e1e;
+		border: 1px solid #444;
+		border-radius: 8px;
+		padding: 1.5rem 2rem;
+		min-width: 260px;
+		text-align: center;
+	}
+
+	.modal p {
+		color: #ddd;
+		margin: 0 0 1.25rem;
+		font-size: 1rem;
+	}
+
+	.modal strong {
+		color: #fff;
+	}
+
+	.modal-actions {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	.action-btn {
+		background: #252525;
+		border: 1px solid #444;
+		border-radius: 4px;
+		color: #ccc;
+		cursor: pointer;
+		font-size: 0.85rem;
+		padding: 0.45rem 1rem;
+		font-family: inherit;
+		transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+
+	.action-btn:hover { background: #333; color: #fff; }
+
+	.action-btn.primary {
+		background: #d4a847;
+		color: #1e1e1e;
+		border-color: #d4a847;
+		font-weight: bold;
+	}
+
+	.action-btn.primary:hover { background: #e0b850; }
+
+	.action-btn.primary.danger {
+		background: #c0392b;
+		border-color: #c0392b;
+	}
+
+	.action-btn.primary.danger:hover { background: #d44438; }
 </style>

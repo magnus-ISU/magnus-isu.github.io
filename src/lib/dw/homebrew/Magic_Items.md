@@ -16,19 +16,19 @@ should provide more interesting bonuses.
 
 ### Argo-Thaan, Holy Avenger Close, 2 weight
 
-There are many swords in this world, but there is only one Argo-thaan. It is a
+There are many swords in this world, but there is only one Argo-Thaan. It is a
 blade of gold, silver and light, revered as a holy relic by all orders and
 religions for whom Good rings true. Its touch is a blessing and to many, the
 sight of it brings tears of joy.
 
 In the hands of a paladin, it strikes true and strong. A paladin wielding it
 increases their damage die to d12 and has access to every paladin move. As
-well, Argo-thaan can harm any creature of Evil, regardless of any defenses it
+well, Argo-Thaan can harm any creature of Evil, regardless of any defenses it
 may have. No Evil creature may touch it without suffering agony. In the hands
 of any non-paladin, it is merely a sword, heavier and more cumbersome than
 most—it gains the awkward tag.
 
-Argo-thaan, while not intelligent, will forever be drawn to a cause of true
+Argo-Thaan, while not intelligent, will forever be drawn to a cause of true
 Good, like iron to a magnet.
 
 ### Axe of the Conqueror-King Close, 1 weight

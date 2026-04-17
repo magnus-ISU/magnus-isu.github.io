@@ -1,141 +1,55 @@
 # Equipment
 
-The musty tombs and forgotten treasure troves of the world are filled with
-useful items. The fighter can find a sharp new sword or the thief might
-stumble across a deadly poison. Most items are mundane—not magical or
-intrinsically unique in any way. Any item that is magical or one-of-a-kind is
-not mundane for the purposes of moves. The fighter’s signature weapon is never
-mundane.
+The musty tombs and forgotten treasure troves of the world are filled with useful items. The fighter can find a sharp new sword or the thief might stumble across a deadly poison. Most items are mundane—not magical or intrinsically unique in any way. Any item that is magical or one-of-a-kind is not mundane for the purposes of moves. The fighter's signature weapon is never mundane.
 
-Each piece of equipment will have a number of tags. These will tell you
-something about how the equipment affects the character using it \(like
-+Armor\) or suggest something about the way it is used \(like the Range
-tags\). Like everything else in Dungeon World, these guide the fiction you’re
-creating in play. If a weapon is awkward, it might mean that you’re more
-likely to drop it when you fail that hack and slash roll.
-
-By no means is this an exhaustive list—feel free to create your own tags.
-
-### General Equipment Tags
-
-These are general tags that can apply to just about any piece of gear. You’ll
-see them on armor, weapons or general adventuring tools.
-
-_n weight_: Count the listed amount against your load. 100 coins is 1 weight. Most items have weight, and if you're not careful about it you might have to leave certain things behind.
-
-_n Uses_: It can only be used _n_ times.
-
-_+Bonus_: It modifies your effectiveness in a specified situation. It might be “+1 forward to spout lore” or “-1 ongoing to hack and slash.”
-
-_Applied_: It’s only useful when carefully applied to a person or to something
-they eat or drink.
-
-_Awkward_: It’s unwieldy and tough to use.
-
-_n coins_: How much it costs to buy, normally. If the cost includes “-Charisma” a little negotiation subtracts the haggler’s Charisma score \(not modifier\) from the price.
-
-_Dangerous_: It’s easy to get in trouble with it. If you interact with it without proper precautions the GM may freely invoke the consequences of your foolish actions.
-
-_Requires_: It’s only useful to certain people. If you don’t meet the requirements it works poorly, if at all.
-
-_Slow_: It takes minutes or more to use.
-
-_Touch_: It’s used by touching it to the target’s skin.
-
-_Two-handed_: It takes two hands to use it effectively.
-
-_Worn_: To use it, you have to be wearing it.
+Each piece of equipment will have a number of tags. These will tell you something about how the equipment affects the character using it \(like +Armor\) or suggest something about the way it is used \(like the Range tags\). Like everything else in Dungeon World, these guide the fiction you're creating in play. If a weapon is awkward, it might mean that you're more likely to drop it when you fail that hack and slash roll.
 
 ## Weapons
 
-Weapons don’t kill monsters, people do. That’s why weapons in Dungeon World
-don’t have a listed damage. A weapon is useful primarily for its tags which
-describe what the weapon is useful for. A dagger is not useful because it does
-more or less damage than some other blade. It’s useful because it’s small and
-easy to strike with at close distance. A dagger in the hands of the wizard is
-not nearly so dangerous as one in the hands of a skilled fighter.
-
-### Weapon Tags
-
-Weapons may have tags that are primarily there to help you describe them
-\(like Rusty or Glowing\) but these tags have a specific, mechanical effect.
-
-_Forceful_: It can knock someone back a pace, maybe even off their feet.
-
-_Messy_: It does damage in a particularly destructive way, ripping people and things apart.
-
-_Thrown_: Throw it at someone to hurt them. If you volley with this weapon, you can’t choose to mark off ammo on a 7–9; once you throw it, it’s gone until you can recover it.
-
-_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all your ammo, you can hang back in a combat and pick off some of the combatants.
-
-_+n Damage_: It is particularly harmful to your enemies. When you deal damage, you add _n_ to it.
-
-_Ignores Armor_: Don’t subtract armor from the damage taken.
-
-_n Piercing_: It goes right through armor. When you deal damage with _n_
-piercing, you subtract _n_ from the enemy’s armor for that attack.
-
-_Reload_: After you attack with it, it takes more than a moment to reset for another attack.
-
-_Precise_: It rewards careful strikes. You use DEX to hack and slash with this weapon, not STR.
-
-_Stun_: When you attack with it, it does nonlethal damage instead of normal damage.
-
-Weapons have tags to indicate the range at which they are useful. Dungeon
-World doesn’t inflict penalties or grant bonuses for “optimal range” or the
-like, but if your weapon says Hand and an enemy is ten yards away, a player
-would have a hard time justifying using that weapon against him.
-
-_Hand_: It’s useful for attacking something within your reach, no further.
-
-_Close_: It’s useful for attacking something at arm’s reach plus a foot or
-two.
-
-_Reach_: It’s useful for attacking something that’s several feet away—maybe as
-far as ten.
-
-_Near_: It’s useful for attacking if you can see the whites of their eyes.
-
-_Far_: It’s useful for attacking something in shouting distance.
+Weapons don't kill monsters, people do. That's why weapons in Dungeon World don't have a listed damage. A weapon is useful primarily for its tags which describe what the weapon is useful for. A dagger is not useful because it does more or less damage than some other blade. It's useful because it's small and easy to strike with at close distance. A dagger in the hands of the wizard is not nearly so dangerous as one in the hands of a skilled fighter.
 
 ## Weapon List
 
-The stats below are for typical items. There are, of course, variations. A
-dull long sword might be -1 damage instead while a masterwork dagger could be
-+1 damage. Consider the following to be stats for typical weapons of their
-type—a specific weapon could have different tags to represent its features.
+### Reasonable Quality
+The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
 
-Ragged Bow near, 15 coins, 2 weight
+### Ranged Weapons
 
-Fine Bow near, far, 60 coins, 2 weight
+[[Coin:10]] [[Weight:1]] **Throwing Daggers** thrown, near, Ammo
 
-Hunter’s Bow near, far, 100 coins, 1 weight
+[[Coin:15]] [[Weight:2]] **Ragged Bow** near
 
-Crossbow near, +1 damage, reload, 35 coins, 3 weight
+[[Coin:60]] [[Weight:2]] **Fine Bow** near, far
 
-Bundle of Arrows Ammo, 1 coin, 1 weight
+[[Coin:100]] [[Weight:1]] **Hunter's Bow** near, far
 
-Elven Arrows Ammo, 20 coins, 0 weight
+[[Coin:35]] [[Weight:3]] **Crossbow** near, +1 damage, reload
 
-Club, Shillelagh close, 1 coin, 2 weight
+[[Coin:1]] [[Weight:1]] **Bundle of Arrows** Ammo
 
-Staff close, two-handed, 1 coin, 1 weight
+[[Coin:20]] [[Weight:0]] **Elven Arrows** Ammo
 
-Dagger, Shiv, Knife hand, 2 coins, 1 weight
+### Melee Weapons
 
-Throwing Dagger thrown, near, 1 coin, 0 weight
+[[Coin:2]] [[Weight:1]] **Dagger, Shiv, Knife** hand
 
-Short Sword, Axe, Warhammer, Mace close, 8 coins, 1 weight
+[[Coin:1]] [[Weight:2]] **Club, Shillelagh** close
 
-Spear reach, thrown, near, 5 coins, 1 weight
+[[Coin:1]] [[Weight:1]] **Staff** close, two-handed
 
-Long Sword, Battle Axe, Flail close, +1 damage, 15 coins, 2 weight
+[[Coin:8]] [[Weight:1]] **Short Sword, Axe, Warhammer, Mace** close
 
-Halberd reach, +1 damage, two-handed, 9 coins, 2 weight
+[[Coin:15]] [[Weight:2]] **Long Sword, Battle Axe, Flail** close, +1 damage
 
-Rapier close, precise, 25 coins, 1 weight
+[[Coin:25]] [[Weight:1]] **Rapier** close, precise
 
-Dueling Rapier close, 1 piercing, precise, 50 coins, 2 weight
+[[Coin:50]] [[Weight:2]] **Dueling Rapier** close, 1 piercing, precise
+
+### Reach Weapons
+
+[[Coin:5]] [[Weight:1]] **Spear** reach, thrown, near
+
+[[Coin:9]] [[Weight:2]] **Halberd** reach, +1 damage, two-handed
 
 ## Armor
 
@@ -148,223 +62,283 @@ of armor and enjoy the benefits it grants.
 Armor, like weapons, has tags. Some are purely descriptive but the ones below
 have some mechanical effect on the player wearing them
 
-_n Armor_: It protects you from harm and absorbs damage. When you take damage,
-subtract your armor from the total. If you have more than one item with _n
-Armor_, only the highest value counts.
+_n Armor_: It protects you from harm and absorbs damage. When you take damage, subtract your armor from the total. If you have more than one item with _n Armor_, only the highest value counts.
 
-_+n Armor_: It protects you and stacks with other armor. Add its value to your
-total armor.
+_+n Armor_: It protects you and stacks with other armor. Add its value to your total armor.
 
-_Clumsy_: It’s tough to move around with. -1 ongoing while using it. This
-penalty is cumulative.
+_Clumsy_: It's tough to move around with. -1 ongoing while using it. This penalty is cumulative.
 
 ### Armor List
 
-Leather, Chainmail 1 armor, worn, 10 coins, 1 weight
+[[Coin:10]] [[Weight:1]] **Leather, Chainmail** 1 armor, worn
 
-Scale Mail 2 armor, worn, clumsy, 50 coins, 3 weight
+[[Coin:50]] [[Weight:3]] **Scale Mail** 2 armor, worn, clumsy
 
-Plate 3 armor, worn, clumsy, 350 coins, 4 weight
+[[Coin:350]] [[Weight:4]] **Plate** 3 armor, worn, clumsy
 
-Shield +1 armor, 15 coins, 2 weight
+[[Coin:15]] [[Weight:2]] **Shield** +1 armor
 
 ## Dungeon Gear
 
-Adventuring Gear 3 uses, 20 coins, 1 weight
+### Staples
 
-Adventuring gear is a collection of useful mundane items such as chalk, poles,
-spikes, ropes, etc. When you rummage through your adventuring gear for some
-useful mundane item, you find what you need and mark off a use.
+[[Coin:20]] [[Weight:1]] **Adventuring Gear** 3 uses
 
-Bandages 3 uses, slow, 5 coins, 1 weight
+A collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you **rummage through your adventuring gear for some useful mundane item**, you find what you need and mark off a use.
 
-See the **Bandage** recovery move.
+[[Coin:5]] [[Weight:1]] **Bandages** 3 uses, slow
 
-Poultices and Herbs 2 uses, slow, 10 coins, 1 weight
+See the Bandage recovery move.
 
-See the **Bandage** recovery move.
+[[Coin:10]] [[Weight:1]] **Poultices and Herbs** 2 uses, slow
 
-Healing Potion 50 coins, 1 weight
+See the Bandage recovery move.
 
-When you drink an entire healing potion, heal yourself of 10 damage or remove
-one debility, your choice.
-
-Keg of Dwarven Stout 10 coins, 4 weight
-
-When you open a keg of dwarven stout and let everyone drink freely, take +1 to
-your Carouse roll. If you drink a whole keg yourself, you are very, very
-drunk.
-
-Bag of Books 5 uses, 10 coins, 2 weight
-
-When your bag of books contains just the right book for the subject you’re
-spouting lore on, consult the book, mark off a use, and take +1 to your roll.
-
-Antitoxin 10 coins, 3 uses, 1 weight
-
-When you sip an antitoxin, you’re cured of one poison affecting you.
-
-Dungeon Rations Ration, 5 uses, 3 coins, 1 weight
+[[Coin:3]] [[Weight:1]] **Dungeon Rations** Ration, 5 uses
 
 Not tasty, but not bad either.
 
-Personal Feast Ration, 1 use, 10 coins, 1 weight
+[[Coin:10]] [[Weight:1]] **Personal Feast** Ration, 1 use
 
 Ostentatious to say the least.
 
-Dwarven Hardtack Requires Dwarf, ration, 7 uses, 3 coins, 1 weight
+[[Coin:3]] [[Weight:1]] **Dwarven Hardtack** Requires Dwarf, ration, 7 uses
 
 Dwarves say it tastes like home. Everyone else says it tastes like home, if
 home is a hog farm, and on fire.
 
-Elven Bread Ration, 7 uses, 10 coins, 1 weight
+[[Coin:100]] [[Weight:1]] **Elven Bread** Ration, 15 uses
 
 Only the greatest of elf-friends are treated to this rare delicacy.
 
-Halfling Pipeleaf 6 uses, 5 coins, 0 weight
+### Potions & Remedies
 
-When you share halfling pipeleaf with someone, expend two uses and take +1
-forward to parley with them.
+[[Coin:50]] [[Weight:1]] **Healing Potion**
 
-## Poisons
+When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
 
-Oil of Tagit Dangerous, applied, 15 coins, 0 weight
+[[Coin:10]] [[Weight:1]] **Antitoxin** 3 uses
+
+When you **sip a use of antitoxin**, you're cured of one poison affecting you.
+
+### Bonus-Granting Items
+
+[[Coin:10]] [[Weight:2]] **Bag of Books** 5 uses
+
+When your bag of books **contains just the right book** for the subject you're spouting lore on, consult the book, mark off a use, and take +1 to your roll.
+
+[[Coin:10]] [[Weight:4]] **Keg of Dwarven Stout**
+
+When you open a keg of dwarven stout and **let everyone drink freely**, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.
+
+[[Coin:25]] [[Weight:0]] **Halfling Pipeleaf** 3 uses
+
+When you **share halfling pipeleaf with someone**, expend a use and take +1 forward to parley with them.
+
+### Poisons
+
+[[Coin:12]] [[Weight:0]] **Bloodweed** Dangerous, touch
+
+Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
+
+[[Coin:10]] [[Weight:0]] **Serpent's Tears** Dangerous, touch
+
+Anyone dealing damage against the target has advantage.
+
+[[Coin:15]] [[Weight:0]] **Oil of Tagit** Dangerous, applied
 
 The target falls into a light sleep.
 
-Bloodweed Dangerous, touch, 12 coins, 0 weight
+[[Coin:20]] [[Weight:0]] **Goldenroot** Dangerous, applied
 
-Until cured, whenever the afflicted rolls damage, they roll an additional d4
-and subtract that result from their normal damage.
+The target treats the next creature they see as a trusted ally, until proved otherwise.
 
-Goldenroot Dangerous, applied, 20 coins, 0 weight
+### Services
 
-The target treats the next creature they see as a trusted ally, until proved
-otherwise.
+[[Coin:3-C]] **A week's stay at a peasant inn**
 
-Serpent’s Tears Dangerous, touch, 10 coins, 0 weight
+[[Coin:15]] **A week's stay at a civilized inn**
 
-Anyone dealing damage against the target rolls twice and takes the better
-result.
+[[Coin:30]] **A week's stay at the fanciest inn in town**
 
-## Services
+[[Coin:10]] **A week's unskilled mundane labor**
 
-A week’s stay at a peasant inn 14-Charisma coins
+[[Coin:30]] **A month's pay for enlistment in an army**
 
-A week’s stay at a civilized inn 30-Charisma coins
+[[Coin:50+]] **A custom item from a blacksmith** base item cost + 50
 
-A week’s stay at the fanciest inn in town 43-Charisma coins
+[[Coin:8-C]] **A night's "companionship"**
 
-A week’s unskilled mundane labor 10 coins
+[[Coin:5-C]] **An evening of song and dance**
 
-A month’s pay for enlistment in an army 30 coins
+[[Coin:20]] **Escort for a day along a bandit-infested road**
 
-A custom item from a blacksmith Base Item + 50 coins
+[[Coin:54]] **Escort for a day along a monster-infested road**
 
-A night’s “companionship” 20-Charisma coins
+[[Coin:5]] **A run-of-the-mill killing**
 
-An evening of song and dance 18-Charisma coins
+[[Coin:120]] **An assassination**
 
-Escort for a day along a bandit-infested road 20 coins
+[[Coin:5]] **Healing from a chirurgeon**
 
-Escort for a day along a monster-infested road 54 coins
+[[Coin:1]] **A month's prayers for the departed**
 
-A run-of-the-mill killing 5 coins
+**Repairs to a mundane item** 25% of the item's cost
 
-An assassination 120 coins
+### Meals
 
-Healing from a chirurgeon 5 coins
+[[Coin:1]] **A hearty meal for one**
 
-A month’s prayers for the departed 1 coin
+[[Coin:1]] **A poor meal for a family**
 
-Repairs to a mundane item 25% of the item’s cost
+[[Coin:15]] **A feast** per person
 
-## Meals
+### Transport
 
-A hearty meal for one 1 coin
+[[Coin:50]] **Cart and Donkey, sworn to carry your burdens** load 20
 
-A poor meal for a family 1 coin
+[[Coin:75]] **Horse** load 10
 
-A feast 15 coins per person
+[[Coin:400]] **Warhorse** load 12
 
-## Transport
+[[Coin:150]] **Wagon** load 40
 
-Cart and Donkey, sworn to carry your burdens 50 coins, load 20
+[[Coin:50]] **Barge** load 15
 
-Horse 75 coins, load 10
+[[Coin:150]] **River boat** load 20
 
-Warhorse 400 coins, load 12
+[[Coin:5,000]] **Merchant ship** load 200
 
-Wagon 150 coins, load 40
+[[Coin:20,000]] **War ship** load 100
 
-Barge 50 coins, load 15
+[[Coin:1]] **Passage on a safe route**
 
-River boat 150 coins, load 20
+[[Coin:10]] **Passage on a tough route**
 
-Merchant ship 5,000 coins, load 200
+[[Coin:100]] **Passage on a dangerous route**
 
-War ship 20,000 coins, load 100
+### Land and Buildings
 
-Passage on a safe route 1 coin
+[[Coin:20]] **A hovel**
 
-Passage on a tough route 10 coins
+[[Coin:500]] **A cottage**
 
-Passage on a dangerous route 100 coins
+[[Coin:2,500]] **A house**
 
-## Land and Buildings
+[[Coin:50,000]] **A mansion**
 
-A hovel 20 coins
+[[Coin:75,000]] **A keep**
 
-A cottage 500 coins
+[[Coin:250,000]] **A castle**
 
-A house 2,500 coins
+[[Coin:1,000,000]] **A grand castle**
 
-A mansion 50,000 coins
+**A month's upkeep** 1% of the cost
 
-A keep 75,000 coins
+### Bribes
 
-A castle 250,000 coins
+[[Coin:15-C]] **A peasant dowry**
 
-A grand castle 1,000,000 coins
+[[Coin:100]] **"Protection" for a small business**
 
-A month’s upkeep 1% of the cost
+[[Coin:40]] **A government bribe**
 
-## Bribes
+[[Coin:80]] **A compelling bribe**
 
-A peasant dowry 20-Charisma coins
+[[Coin:500]] **An offer you can't refuse**
 
-“Protection” for a small business 100-Charisma coins
+### Gifts and Finery
 
-A government bribe 50-Charisma coins
+[[Coin:1]] **A peasant gift**
 
-A compelling bribe 80-Charisma coins
+[[Coin:55]] **A fine gift**
 
-An offer you can’t refuse 500-Charisma coins
+[[Coin:200]] **A noble gift**
 
-## Gifts and Finery
+[[Coin:75]] **A ring or cameo**
 
-A peasant gift 1 coin
+[[Coin:105]] **Finery**
 
-A fine gift 55 coins
+[[Coin:350+]] **A fine tapestry**
 
-A noble gift 200 coins
+[[Coin:5,000]] **A crown fit for a king**
 
-A ring or cameo 75 coins
+### Hoards
 
-Finery 105 coins
+[[Coin:2]] **A goblin's stash**
 
-A fine tapestry 350+ coins
+[[Coin:5]] **A lizardman's trinkets**
 
-A crown fit for a king 5,000 coins
+[[Coin:80]] **A "priceless" sword**
 
-## Hoards
+[[Coin:250]] **An orc warchief's tribute**
 
-A goblin’s stash 2 coins
+[[Coin:130,000]] **A dragon's mound of coins and gems**
 
-A lizardman’s trinkets 5 coins
+## Tags
 
-A “priceless” sword 80 coins
+### General Equipment Tags
 
-An orc warchief’s tribute 250 coins
+These are general tags that can apply to just about any piece of gear. You'll see them on armor, weapons or general adventuring tools.
 
-A dragon’s mound of coins and gems 130,000 coins
+[[Weight:n]] _n weight_: Count the listed amount against your load. 100 coins is 1 weight. Most items have weight, and if you're not careful about it you might have to leave certain things behind.
+
+_n Uses_: It can only be used _n_ times.
+
+_+Bonus_: It modifies your effectiveness in a specified situation. It might be "+1 forward to spout lore" or "-1 ongoing to hack and slash."
+
+_Applied_: It's only useful when carefully applied to a person or to something
+they eat or drink.
+
+_Awkward_: It's unwieldy and tough to use.
+
+[[Coin:n]] _n coins_: How much it costs to buy, normally. If the cost includes "-C" a little negotiation subtracts the haggler's CHA from the price.
+
+_Dangerous_: It's easy to get in trouble with it. If you interact with it without proper precautions the GM may freely invoke the consequences of your foolish actions.
+
+_Requires_: It's only useful to certain people. If you don't meet the requirements it works poorly, if at all.
+
+_Slow_: It takes minutes or more to use.
+
+_Touch_: It's used by touching it to the target's skin.
+
+_Two-handed_: It takes two hands to use it effectively.
+
+_Worn_: To use it, you have to be wearing it.
+
+### Weapon Tags
+
+Weapons may have tags that are primarily there to help you describe them \(like Rusty or Glowing\) but these tags have a specific, mechanical effect.
+
+_Forceful_: It can knock someone back a pace, maybe even off their feet.
+
+_Messy_: It does damage in a particularly destructive way, ripping people and things apart.
+
+_Thrown_: Throw it at someone to hurt them. If you volley with this weapon, you can't choose to mark off ammo on a 7–9; once you throw it, it's gone until you can recover it.
+
+_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all your ammo, you can hang back in a combat and pick off some of the combatants.
+
+_+n Damage_: It is particularly harmful to your enemies. When you deal damage, you add _n_ to it.
+
+_Ignores Armor_: Don't subtract armor from the damage taken.
+
+_n Piercing_: It goes right through armor. When you deal damage with _n_
+piercing, you subtract _n_ from the enemy's armor for that attack.
+
+_Reload_: After you attack with it, it takes more than a moment to reset for another attack.
+
+_Precise_: It rewards careful strikes. You use DEX to hack and slash with this weapon, not STR.
+
+_Stun_: When you attack with it, it does nonlethal damage instead of normal damage.
+
+Weapons have tags to indicate the range at which they are useful. Dungeon World doesn't inflict penalties or grant bonuses for "optimal range" or the like, but if your weapon says Hand and an enemy is ten yards away, a player would have a hard time justifying using that weapon against him.
+
+_Hand_: It's useful for attacking something within your reach, no further.
+
+_Close_: It's useful for attacking something at arm's reach plus a foot or two.
+
+_Reach_: It's useful for attacking something that's several feet away—maybe as far as ten.
+
+_Near_: It's useful for attacking if you can see the whites of their eyes.
+
+_Far_: It's useful for attacking something in shouting distance.
