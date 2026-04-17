@@ -101,7 +101,7 @@
 
 	<section class="encounter-input" bind:this={encounterInputEl}>
 		<label for="encounter-text">
-			Type monster names to build an encounter. Shift Click or Long Press monster names to add them.
+			Type monster names to build an encounter. Shift click, long-press, or double-click monster names to add them.
 			Click on HP to track it, attacks to roll them, moves to note usage.
 		</label>
 		<TextBox bind:this={textBox} bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} />
