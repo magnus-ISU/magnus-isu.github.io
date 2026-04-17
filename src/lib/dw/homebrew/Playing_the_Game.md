@@ -199,7 +199,7 @@ When you have **Level + 7 XP** and some downtime, you can **Level Up**:
 - Choose a new advanced move from your class.
 - At even levels, increase a stat modifier by 1, capped by your Level or +3. If it's CON, also increase your current and max HP by 3.
 
-#### Beyond 10th Level
+### Beyond 10th Level
 
 Once you've reached 10th level, when you have enough XP to go to 11th, instead choose one:
 
