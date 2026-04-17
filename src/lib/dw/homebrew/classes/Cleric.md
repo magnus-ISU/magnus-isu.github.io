@@ -27,9 +27,9 @@ Choose one precept of your religion:
 When you **petition your deity according to the precept of your religion**, you are granted some useful knowledge or boon related to your deity's domain. The GM will tell you what.
 
 ### Hallowed Hold
-When you *stand on sanctified, holy ground*, hold 1 Miracle. You may spend one hour and inexpensive materials to sanctify a site until it is disturbed by evil.
+When you *stand on sanctified, holy ground* for some time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adevnturer's Gear) to temporarily sanctify a site until it is disturbed by evil, and it usually won't take much longer after that to reconnect with your God.
 
-When you *stand in a place of worship*, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
+When you *stand in a place of holy worship and significance*, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
 - You must redeem someone before the holy site
 - You must dedicate something to your God here
 - You must repair something which infidels have defaced
@@ -39,9 +39,9 @@ When you do, hold 3 Miracles.
 
 ### Work Miracles
 When you *hold Miracle and pray for a saint's Miracle*, roll+WIS. On a 10+, it goes off. On a 7-9, choose 1:
-- Spend 1 Miracle
-- -1 ongoing to Work Miracles until you prove yourself
-- Your God demands something of you; or you call attention to yourself; or are put in a spot; or your connection is cut off and the Miracle has unexpected/lesser effects.
+- Spend 1 Miracle as you lose some access to the divine.
+- -1 ongoing to Work Miracles until you prove yourself; listen to your God to learn how.
+- The casting takes longer than expected; or you call attention to yourself; or are put in a spot; or your connection is off and the Miracle has unexpected/lesser effects.
 
 You can always work your rotes, and automatically succeed at them.
 
