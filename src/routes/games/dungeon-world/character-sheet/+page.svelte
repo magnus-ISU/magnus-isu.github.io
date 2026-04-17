@@ -237,6 +237,52 @@
 
 	const hpFillPct = $derived(maxHp ? Math.max(0, Math.min(100, ((parsed.hp ?? 0) / maxHp) * 100)) : 0);
 
+	// --- Editable Armor ---
+	let editingArmor = $state(false);
+	let armorInputEl = $state();
+
+	function startEditArmor() {
+		editingArmor = true;
+		tick().then(() => { armorInputEl?.select(); });
+	}
+
+	function commitArmor(el) {
+		editingArmor = false;
+		const val = parseInt(el.value);
+		if (isNaN(val)) return;
+		const newBaseArmor = val - wornArmor;
+		pushUndo();
+		const lines = text.split('\n');
+		const parts = lines[1].split(',').map(s => s.trim());
+		const idx = parts.findIndex(p => /^Armor\s/i.test(p));
+		if (idx !== -1) parts[idx] = `Armor ${newBaseArmor}`;
+		lines[1] = parts.join(', ');
+		text = lines.join('\n');
+	}
+
+	// --- Editable Load ---
+	let editingLoad = $state(false);
+	let loadInputEl = $state();
+
+	function startEditLoad() {
+		editingLoad = true;
+		tick().then(() => { loadInputEl?.select(); });
+	}
+
+	function commitLoad(el) {
+		editingLoad = false;
+		const val = parseInt(el.value);
+		if (isNaN(val)) return;
+		const newBaseLoad = val - (parsed.stats.STR ?? 0);
+		pushUndo();
+		const lines = text.split('\n');
+		const parts = lines[1].split(',').map(s => s.trim());
+		const idx = parts.findIndex(p => /^Base\s*Load\s/i.test(p));
+		if (idx !== -1) parts[idx] = `Base Load ${newBaseLoad}`;
+		lines[1] = parts.join(', ');
+		text = lines.join('\n');
+	}
+
 	function hpColor(current, max) {
 		if (current == null || max == null) return '#5aaa6a';
 		if (current <= 0) return '#e05555';
@@ -474,19 +520,44 @@
 						{/if}
 						{#if maxLoad !== null}
 							{@const ldC = loadColor(carriedWeight, maxLoad)}
-							<div class="circle circle-sm" style="border-color: {ldC}; color: {ldC}">
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div class="circle circle-sm" style="border-color: {ldC}; color: {ldC}" onclick={startEditLoad}>
 								<div class="circle-fill" style="height: {loadFillPct}%; background: {ldC}"></div>
-								<span class="circle-text">{carriedWeight}/{maxLoad}</span>
+								{#if editingLoad}
+									<input
+										bind:this={loadInputEl}
+										class="circle-input"
+										type="number"
+										value={maxLoad}
+										onblur={(e) => commitLoad(e.target)}
+										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingLoad = false; } }}
+									/>
+								{:else}
+									<span class="circle-text">{carriedWeight}/{maxLoad}</span>
+								{/if}
 								<span class="circle-label">Load</span>
 							</div>
 						{/if}
 						{#if parsed.armor !== null}
-							<div class="armor-display">
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div class="armor-display" onclick={startEditArmor}>
 								<svg class="armor-shield" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 									<path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/>
 									<path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/>
-									<text x="256" y="280" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
+									{#if !editingArmor}
+										<text x="256" y="280" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
+									{/if}
 								</svg>
+								{#if editingArmor}
+									<input
+										bind:this={armorInputEl}
+										class="armor-input"
+										type="number"
+										value={parsed.armor + wornArmor}
+										onblur={(e) => commitArmor(e.target)}
+										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingArmor = false; } }}
+									/>
+								{/if}
 								<span class="armor-label">Armor</span>
 							</div>
 						{/if}
@@ -1074,6 +1145,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		cursor: pointer;
+		position: relative;
 	}
 
 	.armor-shield {
@@ -1089,5 +1162,47 @@
 		opacity: 0.7;
 		color: #5a8fd4;
 		margin-top: 2px;
+	}
+
+	.armor-input {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -60%);
+		width: 2rem;
+		text-align: center;
+		background: transparent;
+		border: none;
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: bold;
+		font-family: inherit;
+		outline: none;
+	}
+
+	.circle-input {
+		width: 2.5rem;
+		text-align: center;
+		background: transparent;
+		border: none;
+		color: inherit;
+		font-size: 0.75rem;
+		font-weight: bold;
+		font-family: inherit;
+		outline: none;
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Hide number input spinners */
+	.armor-input::-webkit-inner-spin-button,
+	.armor-input::-webkit-outer-spin-button,
+	.circle-input::-webkit-inner-spin-button,
+	.circle-input::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	.armor-input, .circle-input {
+		-moz-appearance: textfield;
 	}
 </style>
