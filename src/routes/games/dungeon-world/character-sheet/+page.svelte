@@ -774,7 +774,7 @@
 	}
 
 	.circle-draggable {
-		cursor: ew-resize;
+		cursor: ns-resize;
 		touch-action: none;
 	}
 

@@ -19,7 +19,7 @@
 	let dragDelta = $state(0);
 	let previewX = $state(0);
 	let previewY = $state(0);
-	let startX = 0;
+	let startY = 0;
 	let didDrag = false;
 
 	function updatePreviewPos() {
@@ -32,14 +32,14 @@
 	function beginTracking(e) {
 		if (editing) return;
 		e.preventDefault();
-		startX = e.clientX;
+		startY = e.clientY;
 		didDrag = false;
 		dragDelta = 0;
 
 		function onMove(ev) {
-			const dx = ev.clientX - startX;
-			const newDelta = Math.round(dx / 24);
-			if (!didDrag && Math.abs(dx) > 4) didDrag = true;
+			const dy = startY - ev.clientY;
+			const newDelta = Math.round(dy / 24);
+			if (!didDrag && Math.abs(dy) > 4) didDrag = true;
 			if (didDrag) {
 				dragging = true;
 				dragDelta = newDelta;
@@ -119,7 +119,7 @@
 <style>
 	.dc-wrap {
 		position: relative;
-		cursor: ew-resize;
+		cursor: ns-resize;
 		user-select: none;
 		touch-action: none;
 		display: inline-flex;

@@ -629,7 +629,7 @@
 	}
 
 	.hp-pill.hp-draggable {
-		cursor: ew-resize;
+		cursor: ns-resize;
 		overflow: visible;
 		touch-action: none;
 	}
