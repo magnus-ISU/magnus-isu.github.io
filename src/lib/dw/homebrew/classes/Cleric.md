@@ -71,12 +71,6 @@ You served alongside soldiers. You can wear heavy armor without penalty and your
 ### Convert
 You once followed another path, so you know better than most how outsiders feel about your God and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
 
-## Stats
-
-Damage: d6  
-HP: 8+Constitution  
-Load: 10+STR
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -89,11 +83,11 @@ Choose your defenses:
 Choose your armament:
 - Warhammer (close, 1 weight)
 - Mace (close, 1 weight)
-- Staff (close, two-handed, 1 weight) and bandages (0 weight)
+- Staff (close, two-handed, 1 weight) and bandages (3 uses, 1 weight)
 
 Choose one:
-- Adventuring gear (1 weight) and dungeon rations (5 uses, 1 weight)
-- Healing potion (0 weight)
+- Adventuring gear (3 uses, 1 weight) and dungeon rations (5 uses, 1 weight)
+- Healing potion (1 weight)
 
 ## Look
 Choose one for each:
@@ -118,6 +112,11 @@ Evil: Harm another to prove the superiority of your church or god.
 \_\_\_\_\_ is a good and faithful person; I trust them implicitly.  
 \_\_\_\_\_ is in constant danger, I will keep them safe.  
 I am working on converting \_\_\_\_\_ to my faith.
+
+## Stats
+Damage: d6  
+HP: 8+Constitution  
+Load: 10+STR
 
 ## Advanced Moves
 

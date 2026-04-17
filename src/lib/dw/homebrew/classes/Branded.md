@@ -42,21 +42,15 @@ Name what branded you — a demon, an elemental lord, a dying star. When you **c
 ### Ash Walker
 You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should.
 
-## Stats
-
-Damage: d8  
-HP: 4+Constitution  
-Load: 9+STR
-
 ## Gear
 You carry no weapons and need no armour but the flames that burn within you. You start with:
 - A Keepsake of your sacrifices past, describe it (0 weight)
-- Adventuring gear (5 uses, 1 weight)
-- Healing potion (0 weight)
+- Adventuring gear (3 uses, 1 weight)
+- Healing potion (1 weight)
 
 Choose two:
 - Dungeon rations (5 uses, 1 weight)
-- Healing potion (0 weight)
+- Healing potion (1 weight)
 - 10 coins
 
 ## Look
@@ -86,6 +80,11 @@ Good: Make a sacrifice or take a risk to help someone in need.
 I will teach \_\_\_\_\_ the true meaning of sacrifice. They don't understand.  
 I once cast something into the fire for \_\_\_\_\_, and I will collect my due.  
 \_\_\_\_\_ is such a stick in the mud; it's up to me to show them how to have fun.
+
+## Stats
+Damage: d8  
+HP: 4+Constitution  
+Load: 9+STR
 
 ## Advanced Moves
 

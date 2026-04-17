@@ -57,12 +57,6 @@ When you **fight like a wild animal**, increase your damage to d10 instead of d6
 ### Stray
 When you **enter a steading or settlement**, you can always find a kind citizen to take you in, providing you with food and shelter. While you **act harmless and meek**, nobody will notice you are present until you make yourself known.
 
-## Stats
-
-Damage: d6  
-HP: 8+Constitution  
-Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
-
 ## Gear
 Choose one:
 - A tattered scarf with a familiar scent
@@ -99,6 +93,11 @@ Which of you gives the best head scratches? \_\_\_\_\_
 Which of you knew my previous owner? \_\_\_\_\_  
 Which of you had a dog like me when you were young? \_\_\_\_\_  
 Which of you truly understands me? \_\_\_\_\_
+
+## Stats
+Damage: d6  
+HP: 8+Constitution  
+Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
 
 ## Advanced Moves
 

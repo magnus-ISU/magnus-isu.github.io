@@ -55,12 +55,6 @@ Take the mastery move **Warrior of the Mind**.
 ### Sorcerer
 You do not use a spellbook to prepare spells. They are a part of your blood.
 
-## Stats
-
-Damage: d4  
-HP: 4+Constitution  
-Load: 6+STR
-
 ## Gear
 You start with:
 - Your spellbook (1 weight)
@@ -68,15 +62,15 @@ You start with:
 
 Choose your defenses:
 - Leather armor (1 armor, 1 weight)
-- Bag of books (5 uses, 2 weight) and 3 healing potions
+- Bag of books (5 uses, 2 weight) and 3 Concentrated Healing Potions (0 weight)
 
 Choose your weapon:
 - Dagger (hand, 1 weight)
 - Staff (close, two-handed, 1 weight)
 
 Choose one:
-- Healing potion (0 weight)
-- 3 antitoxins (0 weight)
+- Healing potion (1 weight)
+- Antitoxin (3 uses, 1 weight)
 
 ## Look
 Choose one for each:
@@ -103,6 +97,11 @@ Evil: Use magic to cause fear and terror.
 \_ must help me unlock my full magical power.  
 \_ has seen the terrible power of magic, but I want to show them a better way.  
 \_ wants me to use magic I'm not willing to.
+
+## Stats
+Damage: d4  
+HP: 4+Constitution  
+Load: 6+STR
 
 ## Advanced Moves
 

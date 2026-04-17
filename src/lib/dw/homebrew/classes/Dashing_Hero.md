@@ -39,12 +39,6 @@ You are especially resourceful. When you **use Plan of Action**, take +1 to any 
 ### Elf
 Your blades dance around your enemies' defenses with ease. When you **deal +1d6 from You Seem a Decent Fellow**, you pierce through all armor.
 
-## Stats
-
-Damage: d8  
-HP: 8+Constitution  
-Load: 7+STR
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -84,6 +78,11 @@ Chaotic: Dethrone or destabilize a person in power.
 \_\_\_\_\_ is someone I can rely on to make me look good.  
 \_\_\_\_\_ needs to work on their appearance.  
 \_\_\_\_\_ needs education on this heroing business, and I will provide it whether they want it or not.
+
+## Stats
+Damage: d8  
+HP: 8+Constitution  
+Load: 7+STR
 
 ## Advanced Moves
 

@@ -58,12 +58,6 @@ When you defy danger and **use your small size to your advantage**, take +1.
 ### Human
 Once per battle you may reroll a single damage roll (yours or someone else's).
 
-## Stats
-
-Damage: d10  
-HP: 10+Constitution  
-Load: 12+STR
-
 ## Gear
 You start with:
 - Your signature weapon
@@ -74,9 +68,9 @@ Choose your defenses:
 - Scale armor (2 armor, 3 weight)
 
 Choose two:
-- 2 Healing potions (0 weight)
+- 2 Healing potions (2 weight)
 - Shield (+1 armor, 2 weight)
-- Antitoxin (0 weight), dungeon rations (1 weight), and poultices and herbs (1 weight)
+- Antitoxin (1 use, 1 weight), dungeon rations (1 weight), and poultices and herbs (2 uses, 1 weight)
 - 22 coins
 
 ## Look
@@ -104,6 +98,11 @@ Evil: Kill a defenseless or surrendered enemy.
 I have sworn to protect \_\_\_\_\_.  
 I worry about the ability of \_\_\_\_\_ to survive in the dungeon.  
 \_\_\_\_\_ is soft, but I will make them hard like me.
+
+## Stats
+Damage: d10  
+HP: 10+Constitution  
+Load: 12+STR
 
 ## Advanced Moves
 
