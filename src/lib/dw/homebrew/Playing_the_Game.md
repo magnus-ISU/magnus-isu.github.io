@@ -30,21 +30,31 @@ Most moves include the phrase "roll+STAT" where STAT is one of your character's 
 
 The results always fall into three basic categories. A total of **10 or higher (10+)** is the best outcome. A total of **7-9** is still a success but it comes with a cost, compromise, or hard choice. A **6 or lower (6-)** is trouble, but you also get to mark XP. Each move will tell you what happens on a 10+ and a 7-9. Most moves won't say what happens on a 6-; that's up to the GM.
 
+Notably, once a move is triggered, the fiction doesn't affect the difficulty of a roll; there are no circumstantial bonuses or penalties. But if the stakes are high, then the fictional outcome of your roll is important. If you're running straight into dragonfire, then a successful **Defy Danger** might mean you get halfway to the wyrm and find some shelter, realizing it is futile without a different strategy. A failure might mean you suffer horrible burns, and the rest of your party gets their hands full just trying to get you out of there alive. On the other hand, most things that should be easy are, and you'll succeed without any roll. If you're not triggering **Defy Danger** or any other move, then the dice won't interrupt the conversation.
+
 ### Moves and Equipment
 
 The most important role of equipment is to help describe the moves you make. A character without a weapon of some sort isn't going to trigger Hack & Slash when fighting a dragon since a bare-knuckle punch really doesn't do much to inch-thick scales. Likewise, sometimes equipment will avoid triggering a move—climbing a sheer icy cliff is usually Defying Danger, but with a good set of climbing gear you might avoid the danger entirely.
 
 Weapons are particularly likely to modify what moves you can trigger. A character with a dagger can easily stab the goblin gnawing on his leg, triggering Hack & Slash, but the character with a halberd is going to have a much harder time bringing it to bear on such a close foe. If your target is sleeping, you're not going to have to roll; you may deal damage or just outright kill them, depending on your weapon and finesse.
 
+### Tags
+
 Items have **tags**—short descriptors like *close*, *messy*, *two-handed*, *clumsy*, or *slow*. Some tags have specific mechanical effects (like damage reduction on armor, or a magical bonus). Others are purely fictional (like the *close* tag, which describes how near your enemies need to be for you to attack them). A *messy* weapon might lop off a hand, *slow* healing might not cut it in a chase, and a *hand* weapon might let you claim the advantage if you can get within a halberd's reach. Tags help you describe your character's actions and give the GM information about how things might go wrong when you fail a roll.
 
-In Dungeon World, you're a competent adventurer; you know what you'll be getting into without needing to enumerate every kind of item you'll be taking along. **Adventurer's Gear** contains limited uses of all the mundane tools you might need, but if you need it in a split second, there might not be time to rummage around your backpack.
+### Equipment
 
-When you carry more than your **Load**, you're encumbered—*noisy, slow, hot, and quick to tire*.
+In Dungeon World, you're a competent adventurer; you know what you'll be getting into without needing to enumerate every kind of item you'll be taking along. **Adventurer's Gear** contains limited uses of all the mundane tools you might need. Usually this won't trigger any moves at all, but follow the fiction; if you need something in a split second, there might not be time to rummage around your backpack.
+
+Having many items will help you trigger the moves you want and avoid the ones you don't, but when you carry more than your **Load**, you're encumbered—*noisy, slow, hot, and quick to tire* and have -1 Ongoing.
 
 ### The Effects of Moves
 
-The effects of moves are always about the fictional world the characters inhabit. A 10+ on Hack & Slash doesn't just mean the mechanical effects—it means you successfully attacked something and did some type of harm to it. Once you've figured out the effects, apply them to the fiction and go back to the conversation. Always return to what's going on in the game.
+The effects of moves are always about the fictional world the characters inhabit. A 10+ on Hack & Slash doesn't just mean the mechanical effects—it means you successfully attacked something and did some type of harm to it. The specifics of how you attacked and what you're fighting will matter to the rest of the fight. Once you've figured out the effects, apply them to the fiction.
+
+The most important part of a move might not even be crunching the numbers and reducing hit points. When you Hack & Slash, if you describe yourself trying to fight the undead horde back into a corridor so they stop swarming in, on a 10+ you will succeed in your maneuver. That could set your party up better to respond, or buy them some time if they're in a spot.
+
+However, there are some mechanical effects that many moves share, described below:
 
 #### Some Moves...
 
@@ -54,7 +64,7 @@ The effects of moves are always about the fictional world the characters inhabit
 
 ...Say **"take +1 ongoing."** That means +1 to all move rolls (not damage) until a stated condition ends it, like "until you dismiss the spell" or "until you atone to your deity."
 
-...Give you **"hold."** Hold is a currency that allows you to make choices later by spending it as the move describes. Some moves give hold specific names—**Readiness** from Defend, **Insight** from Discern Realities, **Empathy** from Draw Them Out—but the principle is the same: hold is always tied to the move that generated it. You can't spend Readiness on Discern Realities or vice versa.
+...Give you **"hold."** Hold is a currency that allows you to make choices later by spending it as the move describes. Moves give hold specific names—**Readiness** from Defend, **Insight** from Discern Realities, **Empathy** from Draw Them Out—but the principle is the same: hold is always tied to the move that generated it and spent in the way that it describes.
 
 ...Present a **choice**. The choice you make dictates things that happen in the fiction in addition to any mechanical effects. The choice on a 10+ Hack & Slash to deal extra damage at the cost of suffering the enemy's attack is exactly what's happening to your character: they have enough advantage that they can stay safe or push their luck.
 
@@ -64,9 +74,7 @@ The effects of moves are always about the fictional world the characters inhabit
 
 ### Advantage and Disadvantage
 
-When you have **Advantage**, roll an additional die and discard the lowest. When you have **Disadvantage**, roll an additional die and discard the highest. They cancel each other out.
-
-Advantage and Disadvantage come from specific moves. When an ally aids you, you roll with Advantage—but they share your risk. When you Push Yourself by taking a debility, you gain Advantage on that roll. When someone interferes with you, you roll with Disadvantage.
+When you have **Advantage**, roll an additional die and discard the lowest. With **Disadvantage**, roll an additional die and discard the highest. They cancel each other out, and come from specific moves, not circumstance.
 
 ## Harm and Healing
 
