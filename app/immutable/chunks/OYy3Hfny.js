@@ -23,7 +23,7 @@ On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack
 ### Volley
 When you **take aim and shoot at an enemy at range**, roll+DEX. On a 10+ you have a clear shot — deal your damage. On a 7-9, you do damage, but choose one:
 - If your weapon uses Ammo: It takes a *lot* of tries; you fire your last arrow, and you'll need to recover some Ammo or switch tactics.
-- It isn't easy; you have to aim for a while, or move into position, or cannot pay attention nearby, and the GM will move against you.
+- It isn't easy. You have to aim for a while, or move into position, or cannot pay attention nearby; and the GM will move against you.
 
 ### Defend
 When you **take up a defensive stance or jump in to protect others**, roll+CON: on a 10+, hold 3 Readiness; on a 7-9, hold 1 Readiness. You can spend Readiness 1-for-1 to:
@@ -111,7 +111,7 @@ When you **venture out into perilous or unfamiliar territory**, indicate the rou
 - You aren't followed or seen, and you get the drop on whatever lies ahead.
 
 ### Encumbrance
-When you **carry more than your Load**, you're encumbered (_noisy, slow, hot, quick to tire_).
+When you **carry more than your Load**, you're encumbered (_noisy, slow, hot, quick to tire_) and have -1 ongoing.
 
 ## Progression Moves
 
