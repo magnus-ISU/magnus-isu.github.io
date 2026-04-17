@@ -25,6 +25,7 @@ You carry a unique weapon, describe it and give it a name/title. It might be wei
 Choose it's range: Hand, Close, Reach  
 Choose one enhancement or another range:
 - messy
+- forceful
 - precise
 - thrown
 - +2 piercing
@@ -56,7 +57,7 @@ Choose one weapon—you can always treat weapons of that type as if they had the
 When you defy danger and **use your small size to your advantage**, take +1.
 
 ### Human
-Once per battle you may reroll a single damage roll (yours or someone else's).
+Once per battle you may reroll a single damage roll (yours or someone else's) and choose either result.
 
 ## Gear
 You start with:  

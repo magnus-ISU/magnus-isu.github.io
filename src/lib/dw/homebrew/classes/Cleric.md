@@ -76,7 +76,7 @@ You start with:
 [[Weight:1]] Dungeon Rations (5 uses)  
 [[Weight:0]] Some Symbol of the Divine, describe it  
 Choose your defenses:  
-[[Weight:1]] Chainmail (1 armor)  
+[[Weight:1]] Chainmail [[1 armor]]  
 [[Weight:2]] Shield (+1 armor)  
 Choose your armament:  
 [[Weight:1]] Warhammer (close)  

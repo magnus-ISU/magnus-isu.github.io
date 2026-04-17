@@ -49,7 +49,7 @@ Choose your backup weapon:
 [[Weight:1]] Throwing Daggers (hand, near, ammo)
 [[Weight:2]] Parrying Gauntlet (hand, +1 armor)  
 Choose two:  
-[[Weight:1]] Adventuring Gear (5 uses) and a map, describe it  
+[[Weight:1]] Adventuring Gear (3 uses) and a map, describe it  
 [[Weight:1]] Bandages (3 uses) and [[Coin:9]]  
 A noble steed, describe it
 
