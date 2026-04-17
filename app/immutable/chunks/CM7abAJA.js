@@ -176,7 +176,7 @@ You can Channel a Spell from any form, not just your natural one.
 
 ### In Nature Reborn
 *Requires By Nature Sustained*
-You no longer age or sleep. When you **fall to 0 hit points**, do not roll your Last Breath. A seed (like an acorn?) somewhere on your corpse will grow in a few days back into yourself, so long as it is not destroyed.
+You no longer age or sleep except to restore bindings. When you **fall to 0 hit points**, do not roll your Last Breath. A seed (like an acorn?) somewhere on your corpse will grow in a few days back into yourself, so long as it is not destroyed.
 
 ### Chimera
 When you **Shapechange**, you may combine elements of several different things you could normally shift into. You might be a bear with the wings of an eagle and the head of a ram, as long as you could normally shift into a bear, eagle, and ram individually.
