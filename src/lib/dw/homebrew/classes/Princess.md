@@ -50,23 +50,20 @@ You have been sent to many cities on diplomatic missions from your country. When
 Your kingdom's strongholds are spread throughout the country. Whenever you come to them they will provide shelter.
 
 ## Gear
-You start with:
-- Dungeon rations (5 uses, [[Weight:1]])
-
-Choose your arms:
-- Rapier (close, precise, one-handed, [[Weight:1]])
-- Short sword (close, +1 damage, [[Weight:1]])
-- Ornate bow (near, [[Weight:1]]) and quiver of arrows (5 ammo, [[Weight:1]])
-
-Choose your defense:
-- Cloth armor (1 armor, [[Weight:1]])
-- A loaf of bread from your kingdom (3 uses, [[Weight:1]]) and healing potion
-
-Choose one:
-- Ornate jewelry ([[Weight:1]], valuable)
-- Adventuring gear
-- Silk robes and bandages (3 uses)
-- Looking glass ([[Weight:1]])
+You start with:  
+[[Weight:1]] Dungeon Rations (5 uses)  
+Choose your arms:  
+[[Weight:1]] Rapier (close, precise, one-handed)  
+[[Weight:1]] Short Sword (close, +1 damage)  
+[[Weight:1]] Ornate Bow (near) and [[Weight:1]] Quiver of Arrows (5 ammo)  
+Choose your defense:  
+[[Weight:1]] Cloth Armor (1 armor)  
+[[Weight:1]] A Loaf of Bread from Your Kingdom (3 uses) and Healing Potion  
+Choose one:  
+[[Weight:1]] Ornate Jewelry (valuable)  
+Adventuring Gear  
+Silk Robes and Bandages (3 uses)  
+[[Weight:1]] Looking Glass
 
 ## Look
 Choose one for each:

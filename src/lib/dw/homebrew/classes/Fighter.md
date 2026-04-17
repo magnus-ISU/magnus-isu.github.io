@@ -59,19 +59,17 @@ When you defy danger and **use your small size to your advantage**, take +1.
 Once per battle you may reroll a single damage roll (yours or someone else's).
 
 ## Gear
-You start with:
-- Your signature weapon
-- Dungeon rations (5 uses, [[Weight:1]])
-
-Choose your defenses:
-- Chainmail (1 armor, [[Weight:1]]) and adventuring gear (5 uses, [[Weight:1]])
-- Scale armor (2 armor, [[Weight:3]])
-
-Choose two:
-- 2 Healing potions ([[Weight:2]])
-- Shield (+1 armor, [[Weight:2]])
-- Antitoxin (1 use, [[Weight:1]]), dungeon rations ([[Weight:1]]), and poultices and herbs (2 uses, [[Weight:1]])
-- 22 coins
+You start with:  
+[[Weight:0]] Your Signature Weapon  
+[[Weight:1]] Dungeon Rations (5 uses)  
+Choose your defenses:  
+[[Weight:1]] Chainmail (1 armor) and [[Weight:1]] Adventuring Gear (5 uses)  
+[[Weight:3]] Scale Armor (2 armor)  
+Choose two:  
+[[Weight:2]] 2 Healing Potions  
+[[Weight:2]] Shield (+1 armor)  
+[[Weight:1]] Antitoxin (1 use), [[Weight:1]] Dungeon Rations, and [[Weight:1]] Poultices and Herbs (2 uses)  
+[[Coin:22]]
 
 ## Look
 Choose one for each:

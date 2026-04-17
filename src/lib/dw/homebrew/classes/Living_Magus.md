@@ -56,21 +56,18 @@ Take the mastery move **Warrior of the Mind**.
 You do not use a spellbook to prepare spells. They are a part of your blood.
 
 ## Gear
-You start with:
-- Your spellbook ([[Weight:1]])
-- Dungeon rations (5 uses, [[Weight:1]])
-
-Choose your defenses:
-- Leather armor (1 armor, [[Weight:1]])
-- Bag of books (5 uses, [[Weight:2]]) and 3 Concentrated Healing Potions ([[Weight:0]])
-
-Choose your weapon:
-- Dagger (hand, [[Weight:1]])
-- Staff (close, two-handed, [[Weight:1]])
-
-Choose one:
-- Healing potion ([[Weight:1]])
-- Antitoxin (3 uses, [[Weight:1]])
+You start with:  
+[[Weight:1]] Your Spellbook  
+[[Weight:1]] Dungeon Rations (5 uses)  
+Choose your defenses:  
+[[Weight:1]] Leather Armor (1 armor)  
+[[Weight:2]] Bag of Books (5 uses) and [[Weight:0]] 3 Concentrated Healing Potions  
+Choose your weapon:  
+[[Weight:1]] Dagger (hand)  
+[[Weight:1]] Staff (close, two-handed)  
+Choose one:  
+[[Weight:1]] Healing Potion  
+[[Weight:1]] Antitoxin (3 uses)
 
 ## Look
 Choose one for each:

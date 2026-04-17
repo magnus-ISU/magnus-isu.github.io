@@ -72,22 +72,19 @@ You served alongside soldiers. You can wear heavy armor without penalty and your
 You once followed another path, so you know better than most how outsiders feel about your God and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
 
 ## Gear
-You start with:
-- Dungeon rations (5 uses, [[Weight:1]])
-- Some symbol of the divine, describe it ([[Weight:0]])
-
-Choose your defenses:
-- Chainmail (1 armor, [[Weight:1]])
-- Shield (+1 armor, [[Weight:2]])
-
-Choose your armament:
-- Warhammer (close, [[Weight:1]])
-- Mace (close, [[Weight:1]])
-- Staff (close, two-handed, [[Weight:1]]) and bandages (3 uses, [[Weight:1]])
-
-Choose one:
-- Adventuring gear (3 uses, [[Weight:1]]) and dungeon rations (5 uses, [[Weight:1]])
-- Healing potion ([[Weight:1]])
+You start with:  
+[[Weight:1]] Dungeon Rations (5 uses)  
+[[Weight:0]] Some Symbol of the Divine, describe it  
+Choose your defenses:  
+[[Weight:1]] Chainmail (1 armor)  
+[[Weight:2]] Shield (+1 armor)  
+Choose your armament:  
+[[Weight:1]] Warhammer (close)  
+[[Weight:1]] Mace (close)  
+[[Weight:1]] Staff (close, two-handed) and [[Weight:1]] Bandages (3 uses)  
+Choose one:  
+[[Weight:1]] Adventuring Gear (3 uses) and [[Weight:1]] Dungeon Rations (5 uses)  
+[[Weight:1]] Healing Potion
 
 ## Look
 Choose one for each:
