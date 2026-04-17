@@ -122,6 +122,7 @@
 								onpointerdown={onPointerDown}
 								onpointerup={onPointerUp}
 								onpointercancel={onPointerUp}
+								oncontextmenu={(e) => e.preventDefault()}
 							>
 								{item.title}
 							</a>

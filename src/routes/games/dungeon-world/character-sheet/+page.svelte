@@ -79,7 +79,7 @@
 
 	const placeholders = $derived.by(() => {
 		if (!text.trim()) {
-			return ['Shift+click or long-press a class in the sidebar to get started'];
+			return ['Shift+click or long-press a class in the sidebar to get started, or open a class and click its name'];
 		}
 		const lines = text.split('\n');
 		const hints = [

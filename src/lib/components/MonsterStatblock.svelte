@@ -87,6 +87,19 @@
 		toggleExpanded();
 	}
 
+	function handleHeaderDblClick() {
+		const oldTop = el.getBoundingClientRect().top;
+		encounterText.appendName(name);
+		const end = performance.now() + 300;
+		requestAnimationFrame(function track() {
+			const drift = el.getBoundingClientRect().top - oldTop;
+			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			if (performance.now() < end) requestAnimationFrame(track);
+		});
+		copied = true;
+		setTimeout(() => { copied = false; }, 1200);
+	}
+
 	function toggleExpanded() {
 		const oldTop = el.getBoundingClientRect().top;
 		expanded = !expanded;
@@ -232,6 +245,7 @@
 		class="monster-header"
 		class:copied
 		onclick={handleHeaderClick}
+		ondblclick={handleHeaderDblClick}
 		onpointerdown={onPointerDown}
 		onpointerup={onPointerUp}
 		onpointercancel={onPointerUp}
@@ -400,6 +414,8 @@
 		text-align: left;
 		font: inherit;
 		transition: background 0.15s;
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	.monster-header:hover {

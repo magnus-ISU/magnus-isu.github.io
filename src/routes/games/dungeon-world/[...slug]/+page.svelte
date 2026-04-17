@@ -5,6 +5,8 @@
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 	import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+	import { buildCharacterSheet } from '$lib/dw/classLoader.js';
 
 	let { data } = $props();
 	const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
@@ -117,6 +119,12 @@
 			if (longPressHeading) { longPressHeading = null; return; }
 			const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 			if (!heading) return;
+			if (heading.tagName === 'H1' && characterSheet.isEmpty) {
+				characterSheet.value = buildCharacterSheet(data.rawSource);
+				heading.classList.add('copied');
+				setTimeout(() => heading.classList.remove('copied'), 1000);
+				return;
+			}
 			const text = heading.textContent.trim();
 			const section = extractSection(text);
 			if (!section) return;
