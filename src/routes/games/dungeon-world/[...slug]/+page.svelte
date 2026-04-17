@@ -331,6 +331,14 @@
 		transform: translateY(-2px);
 	}
 
+	:global(.dw-article .armor-icon) {
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
+		transform: translateY(-2px);
+	}
+
 	:global(.dw-article.is-homebrew h1:first-child::after) {
 		content: 'HB';
 		display: inline-block;

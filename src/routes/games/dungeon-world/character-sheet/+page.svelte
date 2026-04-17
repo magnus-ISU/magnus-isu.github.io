@@ -110,7 +110,7 @@
 			let m;
 			if ((m = p.match(/^EXP\s+(\d+)$/i))) { exp = +m[1]; continue; }
 			if ((m = p.match(/^Base\s*HP\s+(\d+)$/i))) { baseHp = +m[1]; continue; }
-			if ((m = p.match(/^Armor\s+(\d+)$/i))) { armor = +m[1]; continue; }
+			if ((m = p.match(/^Armor\s+(-?\d+)$/i))) { armor = +m[1]; continue; }
 			if ((m = p.match(/^Damage\s+(.+)$/i))) { damage = m[1]; continue; }
 			if ((m = p.match(/^Base\s*Load\s+(\d+)$/i))) { baseLoad = +m[1]; continue; }
 			if ((m = p.match(/^HP\s+(-?\d+)$/i))) { hp = +m[1]; continue; }
@@ -143,24 +143,22 @@
 	const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
 	const maxLoad = $derived(parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null);
 
-	// TODO compute carried weight and worn armor together in an optimized manner to avoid iterating over the full character sheet many times. First, trim down to the things that we care about.
-	// Carried weight from "N Weight" in body, plus coins/100
-	const carriedWeight = $derived.by(() => {
-		const weightMatches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
-		const weight = [...weightMatches].reduce((sum, m) => sum + (+m[1]), 0);
-		const coinMatches = [...parsed.body.matchAll(/\[(\d+) Coin\]/g)];
-		const coins = coinMatches.reduce((sum, m) => sum + (+m[1]), 0);
-		return weight + Math.floor(coins / 100);
+	// Carried weight and worn armor parsed from body in a single pass
+	const bodyStats = $derived.by(() => {
+		const body = parsed.body;
+		let weight = 0, coins = 0, baseArmor = 0, bonusArmor = 0;
+		for (const m of body.matchAll(/\[([+-]?)(\d+)\s+(Weight|Armor|Coin)\]/gi)) {
+			const val = (m[1] === '-' ? -1 : 1) * +m[2];
+			const type = m[3].toLowerCase();
+			if (type === 'weight') weight += val;
+			else if (type === 'coin') coins += val;
+			else if (type === 'armor' && m[1]) bonusArmor += val;
+			else if (type === 'armor') baseArmor = Math.max(baseArmor, val);
+		}
+		return { weight: weight + Math.floor(coins / 100), armor: baseArmor + bonusArmor };
 	});
-	
-	const wornArmor = $derived.by(() => {
-		return 0 // TODO remove
-		const baseArmorMatches = [...parsed.body.matchAll(/\[(\d+)\s+Armor\]/gi)]; // TODO should not match [+1 Armor], only [1 Armor]
-		const baseArmor = 0 // TODO 0 or max of [...baseArmorMatches];
-		const bonusArmorMatches = [] // TODO [...parsed.body.matchAll(/\[\+(\d+)\s+weight\]/gi)]; // TODO should match [+1 Armor] but not [1 Armor]
-		const totalArmor = bonusArmorMatches.reduce((sum, armor) => sum + (+m[1]), baseArmor)
-		return totalArmor;
-	});
+	const carriedWeight = $derived(bodyStats.weight);
+	const wornArmor = $derived(bodyStats.armor);
 
 	const placeholders = $derived.by(() => {
 		if (!text.trim()) {
@@ -483,9 +481,13 @@
 							</div>
 						{/if}
 						{#if parsed.armor !== null}
-							<div class="circle circle-md circle-armor">
-								<span class="circle-text">{parsed.armor + wornArmor}</span>
-								<span class="circle-label">Armor</span>
+							<div class="armor-display">
+								<svg class="armor-shield" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+									<path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/>
+									<path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/>
+									<text x="256" y="280" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
+								</svg>
+								<span class="armor-label">Armor</span>
 							</div>
 						{/if}
 						{#if parsed.hp !== null && maxHp !== null}
@@ -774,11 +776,6 @@
 		color: #9b59b6;
 	}
 
-	.circle-armor {
-		border-color: #5a8fd4;
-		color: #5a8fd4;
-	}
-
 	/* --- Stat pills (centered, clickable) --- */
 	.char-stats {
 		display: flex;
@@ -1063,5 +1060,34 @@
 		vertical-align: middle;
 		color: #444;
 		transform: translateY(-2px);
+	}
+
+	:global(.char-body .armor-icon) {
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		vertical-align: middle;
+		transform: translateY(2px);
+	}
+
+	.armor-display {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.armor-shield {
+		width: 55px;
+		height: 55px;
+	}
+
+	.armor-label {
+		font-size: 0.5rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		opacity: 0.7;
+		color: #5a8fd4;
+		margin-top: 2px;
 	}
 </style>
