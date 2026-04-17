@@ -63,13 +63,13 @@ You start with:
 [[Weight:0]] Your Signature Weapon  
 [[Weight:1]] Dungeon Rations (5 uses)  
 Choose your defenses:  
-[[Weight:1]] Chainmail (1 armor) and [[Weight:1]] Adventuring Gear (5 uses)  
+[[Weight:1]] Chainmail (1 armor) and [[Weight:1]] Adventuring Gear (3 uses)  
 [[Weight:3]] Scale Armor (2 armor)  
 Choose two:  
+[[Coin:22]]  
 [[Weight:2]] 2 Healing Potions  
 [[Weight:2]] Shield (+1 armor)  
-[[Weight:1]] Antitoxin (1 use), [[Weight:1]] Dungeon Rations, and [[Weight:1]] Poultices and Herbs (2 uses)  
-[[Coin:22]]
+[[Weight:1]] Antitoxin (1 use), [[Weight:1]] Dungeon Rations, and [[Weight:1]] Poultices and Herbs (2 uses)
 
 ## Look
 Choose one for each:
@@ -138,14 +138,14 @@ You gain +1 armor.
 When you have access to a forge you can graft the magical powers of a weapon onto your signature weapon. This process destroys the magical weapon. Your signature weapon gains the magical powers of the destroyed weapon.
 
 ### Respectful Aura
-Those who see you know you mean business. When you say something with honesty, conviction, and finality, no one can doubt you.
+Those who see you know you mean business. When you **say something with honesty, conviction, and finality**, no one can doubt you.
 When it's your word against someone else's, roll+CHA. On a 10+, you're believed if there was any plausibility at all. On a 7-9, you're believed, but your grim demeanor makes the situation interpreted as unfavorably as possible for you within that context.
 
 ### It Takes One To Know One
 You know whether another person has killed or not, after speaking with them even briefly.
 
 ### Strategist
-You know the lore of the ancients. When you examine how armies move, you can always tell where the enemy will next strike and what they're preparing for. If you don't have enough information, you'll know what to look for in order to find out.
+You know the lore of the ancients. When you **examine how armies move**, you can always tell where the enemy will next strike and what they're preparing for. If you really don't have enough information, you'll know what to look for in order to find out.
 
 ## Mastery Moves
 

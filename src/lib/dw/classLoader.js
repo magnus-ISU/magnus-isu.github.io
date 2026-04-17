@@ -37,7 +37,7 @@ export function buildCharacterSheet(raw) {
 	const initialMaxHp = baseHp + 3 * defaultCon;
 
 	const header = [
-		`Name, ${className} 1`,
+		`The ${className}, ${className} 1`,
 		`EXP 0, Base HP ${baseHp}, Armor 0, Damage ${damage}, Base Load ${baseLoad}, HP ${initialMaxHp}`,
 		`STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1`,
 		``,

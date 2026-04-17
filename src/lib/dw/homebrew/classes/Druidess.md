@@ -57,9 +57,9 @@ Choose your armament:
 [[Weight:1]] Staff (close, two-handed)  
 [[Weight:1]] Spear (close, thrown, near)  
 Choose one:  
-[[Weight:1]] Adventuring Gear  
+[[Weight:1]] Adventuring Gear (3 uses)  
 [[Weight:1]] Poultices and Herbs (2 uses)  
-[[Weight:0]] Halfling Pipeleaf (6 uses)  
+[[Weight:0]] Halfling Pipeleaf (3 uses)  
 [[Weight:1]] Antitoxin (3 uses)
 
 ## Look

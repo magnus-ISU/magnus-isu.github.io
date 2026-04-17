@@ -143,11 +143,14 @@
 	const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
 	const maxLoad = $derived(parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null);
 
-	// Carried weight from "[[Weight:N]]" or "(N weight)" in body
+	// Carried weight from "[[Weight:N]]" or "(N weight)" in body, plus coins/100
 	const carriedWeight = $derived.by(() => {
 		const bracketMatches = [...parsed.body.matchAll(/\[\[Weight:(\d+)\]\]/g)];
 		const legacyMatches = [...parsed.body.matchAll(/(\d+)\s+weight/gi)];
-		return [...bracketMatches, ...legacyMatches].reduce((sum, m) => sum + (+m[1]), 0);
+		const weight = [...bracketMatches, ...legacyMatches].reduce((sum, m) => sum + (+m[1]), 0);
+		const coinMatches = [...parsed.body.matchAll(/\[\[Coin:(\d+)\]\]/g)];
+		const coins = coinMatches.reduce((sum, m) => sum + (+m[1]), 0);
+		return weight + Math.floor(coins / 100);
 	});
 
 	const placeholders = $derived.by(() => {

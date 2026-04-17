@@ -41,7 +41,7 @@ Choose your weapon:
 [[Weight:2]] Rapier (precise, close)  
 [[Weight:1]] Dagger (hand) and [[Weight:1]] Parrying Dagger (hand, +1 armor)  
 Choose one:  
-[[Weight:1]] Adventuring Gear and [[Weight:1]] Dungeon Rations (5 uses)  
+[[Weight:1]] Adventuring Gear (3 uses) and [[Weight:1]] Dungeon Rations (5 uses)  
 [[Weight:1]] Healing Potion
 
 ## Look

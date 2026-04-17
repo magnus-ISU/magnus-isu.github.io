@@ -61,7 +61,7 @@ You start with:
 [[Weight:1]] Dungeon Rations (5 uses)  
 Choose your defenses:  
 [[Weight:1]] Leather Armor (1 armor)  
-[[Weight:2]] Bag of Books (5 uses) and [[Weight:0]] 3 Concentrated Healing Potions  
+[[Weight:2]] Bag of Books (5 uses) and [[Weight:0]] 3 Weightless Healing Potions  
 Choose your weapon:  
 [[Weight:1]] Dagger (hand)  
 [[Weight:1]] Staff (close, two-handed)  
