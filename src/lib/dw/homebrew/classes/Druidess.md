@@ -111,13 +111,12 @@ Load: 6+STR
 ## Advanced Moves
 
 ### God Amidst The Wastes
-You can cast Miracles, like a Cleric; but it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
+You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
 When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your cantrips and a number of leveled spells equal to your level. The spells must be your level or lower.
 
-When you are in your natural form and channel a spell you have attuned, roll+WIS. On a 10+, cast the spell; on a 7-9, do so, but choose 1:
+When you are in your natural form and channel a spell you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
 - The spell comes out dangerously or unpredictably; or you anger one or more spirits; or draw attention to yourself; or put yourself in a spot.
-- The primal become distant; take -1 ongoing to cast a spell until you Attune
-- The attunement is lost; you cannot cast the spell again until you Attune
+- The primal become distant; take -1 ongoing to cast a spell until you sleep
 
 ### Keeper of the Old Faith
 Take +1 to Spout Lore about the natural world or things civilization has forgot.
