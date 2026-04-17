@@ -264,6 +264,8 @@
 	let dropTarget = $state(null);
 	let dragStartX = 0;
 	let dragStartY = 0;
+	let dragCurX = $state(0);
+	let dragCurY = $state(0);
 	let didStartDrag = false;
 
 	function onStatPointerDown(e, ab) {
@@ -280,6 +282,8 @@
 				dragStat = startAb;
 			}
 			if (!didStartDrag) return;
+			dragCurX = ev.clientX;
+			dragCurY = ev.clientY;
 			// Find which stat pill is under the pointer
 			const el = document.elementFromPoint(ev.clientX, ev.clientY);
 			const pill = el?.closest('.stat-pill');
@@ -446,6 +450,13 @@
 							<span class="stat-value">{fmtMod(mod)}</span>
 						</button>
 					{/each}
+				</div>
+			{/if}
+
+			{#if dragStat && parsed.stats[dragStat] !== undefined}
+				<div class="stat-drag-ghost" style="left: {dragCurX}px; top: {dragCurY}px">
+					<span class="stat-label">{dragStat}</span>
+					<span class="stat-value">{fmtMod(parsed.stats[dragStat])}</span>
 				</div>
 			{/if}
 			</div>
@@ -725,7 +736,25 @@
 	}
 
 	.stat-pill.dragging {
-		opacity: 0.5;
+		opacity: 0;
+	}
+
+	.stat-drag-ghost {
+		position: fixed;
+		transform: translate(-50%, -50%);
+		display: flex;
+		align-items: baseline;
+		gap: 0.3rem;
+		background: #2a2a2a;
+		border: 1px solid #aabbff;
+		border-radius: 999px;
+		padding: 0.2rem 0.6rem;
+		font-size: 0.88rem;
+		white-space: nowrap;
+		color: #ddd;
+		pointer-events: none;
+		z-index: 1000;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 	}
 
 	.stat-pill:hover {

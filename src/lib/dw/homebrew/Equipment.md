@@ -60,33 +60,26 @@ not nearly so dangerous as one in the hands of a skilled fighter.
 Weapons may have tags that are primarily there to help you describe them
 \(like Rusty or Glowing\) but these tags have a specific, mechanical effect.
 
-_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all
-your ammo, you can hang back in a combat and pick off some of the combatants.
-
 _Forceful_: It can knock someone back a pace, maybe even off their feet.
 
-_+n Damage_: It is particularly harmful to your enemies. When you deal damage,
-you add _n_ to it.
+_Messy_: It does damage in a particularly destructive way, ripping people and things apart.
+
+_Thrown_: Throw it at someone to hurt them. If you volley with this weapon, you can’t choose to mark off ammo on a 7–9; once you throw it, it’s gone until you can recover it.
+
+_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all your ammo, you can hang back in a combat and pick off some of the combatants.
+
+_+n Damage_: It is particularly harmful to your enemies. When you deal damage, you add _n_ to it.
 
 _Ignores Armor_: Don’t subtract armor from the damage taken.
-
-_Messy_: It does damage in a particularly destructive way, ripping people and
-things apart.
 
 _n Piercing_: It goes right through armor. When you deal damage with _n_
 piercing, you subtract _n_ from the enemy’s armor for that attack.
 
-_Precise_: It rewards careful strikes. You use DEX to hack and slash with this
-weapon, not STR.
+_Reload_: After you attack with it, it takes more than a moment to reset for another attack.
 
-_Reload_: After you attack with it, it takes more than a moment to reset for
-another attack.
+_Precise_: It rewards careful strikes. You use DEX to hack and slash with this weapon, not STR.
 
-_Stun_: When you attack with it, it does stun damage instead of normal damage.
-
-_Thrown_: Throw it at someone to hurt them. If you volley with this weapon,
-you can’t choose to mark off ammo on a 7–9; once you throw it, it’s gone until
-you can recover it.
+_Stun_: When you attack with it, it does nonlethal damage instead of normal damage.
 
 Weapons have tags to indicate the range at which they are useful. Dungeon
 World doesn’t inflict penalties or grant bonuses for “optimal range” or the
@@ -105,7 +98,7 @@ _Near_: It’s useful for attacking if you can see the whites of their eyes.
 
 _Far_: It’s useful for attacking something in shouting distance.
 
-### Weapon List
+## Weapon List
 
 The stats below are for typical items. There are, of course, variations. A
 dull long sword might be -1 damage instead while a masterwork dagger could be

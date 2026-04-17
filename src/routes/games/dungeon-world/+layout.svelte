@@ -105,6 +105,14 @@
 			isLongPress = false;
 			return;
 		}
+		if (e.shiftKey && category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+			e.preventDefault();
+			e.stopPropagation();
+			const raw = await loadClassRaw(item);
+			if (raw) characterSheet.value = buildCharacterSheet(raw);
+			sidebarOpen = false;
+			return;
+		}
 		sidebarOpen = false;
 	}
 </script>

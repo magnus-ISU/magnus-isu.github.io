@@ -25,9 +25,15 @@
 		const heights = [];
 		for (let i = 0; i < phCount; i++) {
 			const text = lines[i] ?? '';
-			// Use a zero-width space so empty lines still have height
+			const ph = placeholders[i] ?? '';
+			// Measure whichever is taller: the typed text or the placeholder
 			mirror.textContent = text || '\u200b';
-			heights.push(mirror.offsetHeight);
+			let h = mirror.offsetHeight;
+			if (!text && ph) {
+				mirror.textContent = ph;
+				h = Math.max(h, mirror.offsetHeight);
+			}
+			heights.push(h);
 		}
 		lineHeights = heights;
 	}
@@ -120,7 +126,9 @@
 		font-size: 0.88rem;
 		line-height: 1.5;
 		color: #5b9bd5;
-		white-space: nowrap;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 		overflow: hidden;
 		margin-bottom: 0.5px;
 	}
