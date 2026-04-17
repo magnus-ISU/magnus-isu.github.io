@@ -61,19 +61,37 @@
 			: `/games/dungeon-world/${item.slug}`;
 	}
 
+	let longPressItem = null;
+	let longPressTarget = null;
+
 	function handleToggle(item, target, e) {
 		e.preventDefault();
 		e.stopPropagation();
-		const singleOnly = e.shiftKey || isLongPress;
+		if (isLongPress) { isLongPress = false; return; }
+		const singleOnly = e.shiftKey;
 		toggleSource(item.slug, target, singleOnly);
 		const slug = target === 'srd' ? item.srdSlug : item.slug;
 		sidebarOpen = false;
 		goto(`/games/dungeon-world/${slug}`);
 	}
 
-	function onPointerDown() {
+	function onPointerDown(item, category, toggleTarget) {
 		isLongPress = false;
-		longPressTimer = setTimeout(() => { isLongPress = true; }, 500);
+		longPressItem = item;
+		longPressTarget = toggleTarget || null;
+		longPressTimer = setTimeout(async () => {
+			isLongPress = true;
+			if (longPressTarget && longPressItem?.srdSlug) {
+				toggleSource(longPressItem.slug, longPressTarget, true);
+				const slug = longPressTarget === 'srd' ? longPressItem.srdSlug : longPressItem.slug;
+				sidebarOpen = false;
+				goto(`/games/dungeon-world/${slug}`);
+			} else if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
+				const raw = await loadClassRaw(item);
+				if (raw) characterSheet.value = buildCharacterSheet(raw);
+				sidebarOpen = false;
+			}
+		}, 500);
 	}
 
 	function onPointerUp() {
@@ -81,15 +99,11 @@
 	}
 
 	async function handleNavClick(e, item, category) {
-		if (category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-			if (e.shiftKey || isLongPress) {
-				e.preventDefault();
-				e.stopPropagation();
-				const raw = await loadClassRaw(item);
-				if (raw) characterSheet.value = buildCharacterSheet(raw);
-				sidebarOpen = false;
-				return;
-			}
+		if (isLongPress) {
+			e.preventDefault();
+			e.stopPropagation();
+			isLongPress = false;
+			return;
 		}
 		sidebarOpen = false;
 	}
@@ -119,7 +133,7 @@
 							<a
 								href={getHref(item)}
 								onclick={(e) => handleNavClick(e, item, category.category)}
-								onpointerdown={onPointerDown}
+								onpointerdown={() => onPointerDown(item, category.category)}
 								onpointerup={onPointerUp}
 								onpointercancel={onPointerUp}
 								oncontextmenu={(e) => e.preventDefault()}
@@ -134,7 +148,7 @@
 									<button
 										class="toggle-opt"
 										class:active={getSource(item.slug) === 'srd'}
-										onpointerdown={onPointerDown}
+										onpointerdown={() => onPointerDown(item, null, 'srd')}
 										onpointerup={onPointerUp}
 										onpointercancel={onPointerUp}
 										onclick={(e) => handleToggle(item, 'srd', e)}
@@ -142,7 +156,7 @@
 									<button
 										class="toggle-opt"
 										class:active={getSource(item.slug) === 'hb'}
-										onpointerdown={onPointerDown}
+										onpointerdown={() => onPointerDown(item, null, 'hb')}
 										onpointerup={onPointerUp}
 										onpointercancel={onPointerUp}
 										onclick={(e) => handleToggle(item, 'hb', e)}

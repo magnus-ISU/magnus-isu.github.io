@@ -37,19 +37,32 @@
 	function handleToggle(target, e) {
 		e.preventDefault();
 		const singleOnly = e.shiftKey || isLongPress;
+		isLongPress = false;
 		const itemSlug = data.homebrewSlug || data.slug;
 		toggleSource(itemSlug, target, singleOnly);
 		const slug = target === 'srd' ? srdSlug : homebrewSlug;
 		goto(`/games/dungeon-world/${slug}`);
 	}
 
-	function onPointerDown() {
+	let longPressToggleTarget = null;
+
+	function onPointerDown(target) {
 		isLongPress = false;
-		longPressTimer = setTimeout(() => { isLongPress = true; }, 500);
+		longPressToggleTarget = target;
+		longPressTimer = setTimeout(() => {
+			isLongPress = true;
+			if (longPressToggleTarget) {
+				const itemSlug = data.homebrewSlug || data.slug;
+				toggleSource(itemSlug, longPressToggleTarget, true);
+				const slug = longPressToggleTarget === 'srd' ? srdSlug : homebrewSlug;
+				goto(`/games/dungeon-world/${slug}`);
+			}
+		}, 500);
 	}
 
 	function onPointerUp() {
 		clearTimeout(longPressTimer);
+		longPressToggleTarget = null;
 	}
 
 	function stripHtml(s) { return s.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim(); }
@@ -154,7 +167,7 @@
 		<button
 			class="source-opt"
 			class:active={!data.isHomebrew}
-			onpointerdown={onPointerDown}
+			onpointerdown={() => onPointerDown('srd')}
 			onpointerup={onPointerUp}
 			onpointercancel={onPointerUp}
 			onclick={(e) => handleToggle('srd', e)}
@@ -162,7 +175,7 @@
 		<button
 			class="source-opt"
 			class:active={data.isHomebrew}
-			onpointerdown={onPointerDown}
+			onpointerdown={() => onPointerDown('hb')}
 			onpointerup={onPointerUp}
 			onpointercancel={onPointerUp}
 			onclick={(e) => handleToggle('hb', e)}

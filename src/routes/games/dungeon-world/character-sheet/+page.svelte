@@ -232,38 +232,53 @@
 		return 'miss';
 	}
 
-	// --- Stat drag-to-swap ---
+	// --- Stat drag-to-swap (pointer events for touch + mouse) ---
 	let dragStat = $state(null);
 	let dropTarget = $state(null);
+	let dragStartX = 0;
+	let dragStartY = 0;
+	let didStartDrag = false;
 
-	function onStatDragStart(e, ab) {
-		dragStat = ab;
-		e.dataTransfer.effectAllowed = 'move';
-		e.dataTransfer.setData('text/plain', ab);
-	}
+	function onStatPointerDown(e, ab) {
+		dragStartX = e.clientX;
+		dragStartY = e.clientY;
+		didStartDrag = false;
+		const startAb = ab;
 
-	function onStatDragOver(e, ab) {
-		if (dragStat && dragStat !== ab) {
-			e.preventDefault();
-			dropTarget = ab;
+		function onMove(ev) {
+			const dx = ev.clientX - dragStartX;
+			const dy = ev.clientY - dragStartY;
+			if (!didStartDrag && Math.abs(dx) + Math.abs(dy) > 8) {
+				didStartDrag = true;
+				dragStat = startAb;
+			}
+			if (!didStartDrag) return;
+			// Find which stat pill is under the pointer
+			const el = document.elementFromPoint(ev.clientX, ev.clientY);
+			const pill = el?.closest('.stat-pill');
+			if (pill) {
+				const target = pill.dataset.stat;
+				dropTarget = target && target !== dragStat ? target : null;
+			} else {
+				dropTarget = null;
+			}
 		}
-	}
 
-	function onStatDragLeave(ab) {
-		if (dropTarget === ab) dropTarget = null;
-	}
+		function onUp() {
+			window.removeEventListener('pointermove', onMove);
+			window.removeEventListener('pointerup', onUp);
+			window.removeEventListener('pointercancel', onUp);
+			if (didStartDrag && dropTarget && dragStat) {
+				swapStats(dragStat, dropTarget);
+			}
+			dragStat = null;
+			dropTarget = null;
+			didStartDrag = false;
+		}
 
-	function onStatDrop(e, ab) {
-		e.preventDefault();
-		if (!dragStat || dragStat === ab) return;
-		swapStats(dragStat, ab);
-		dragStat = null;
-		dropTarget = null;
-	}
-
-	function onStatDragEnd() {
-		dragStat = null;
-		dropTarget = null;
+		window.addEventListener('pointermove', onMove);
+		window.addEventListener('pointerup', onUp);
+		window.addEventListener('pointercancel', onUp);
 	}
 
 	function swapStats(a, b) {
@@ -381,13 +396,10 @@
 						<button
 							class="stat-pill"
 							class:drag-over={dropTarget === ab}
-							draggable="true"
-							onclick={(e) => rollStat(ab, mod, e)}
-							ondragstart={(e) => onStatDragStart(e, ab)}
-							ondragover={(e) => onStatDragOver(e, ab)}
-							ondragleave={() => onStatDragLeave(ab)}
-							ondrop={(e) => onStatDrop(e, ab)}
-							ondragend={onStatDragEnd}
+							class:dragging={dragStat === ab}
+							data-stat={ab}
+							onclick={(e) => { if (!didStartDrag) rollStat(ab, mod, e); }}
+							onpointerdown={(e) => onStatPointerDown(e, ab)}
 						>
 							<span class="stat-label">{ab}</span>
 							<span class="stat-value">{fmtMod(mod)}</span>
@@ -614,6 +626,13 @@
 		color: #ddd;
 		cursor: pointer;
 		transition: background 0.15s, border-color 0.15s;
+		touch-action: none;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	.stat-pill.dragging {
+		opacity: 0.5;
 	}
 
 	.stat-pill:hover {
@@ -736,5 +755,30 @@
 	.roll-damage {
 		border-color: #e05555;
 		color: #e05555;
+	}
+
+	@media (max-width: 768px) {
+		.sheet-preview {
+			margin-left: -1rem;
+			margin-right: -1rem;
+			border-radius: 0;
+			border-left: none;
+			border-right: none;
+		}
+
+		.sheet-top {
+			border-radius: 0;
+			top: calc(1.5rem * 1.7 + 1.3rem + 1px);
+		}
+
+		.sheet-header {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0.5rem;
+		}
+
+		.header-circles {
+			justify-content: center;
+		}
 	}
 </style>

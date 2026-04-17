@@ -40,11 +40,27 @@
 
 	function onPointerDown() {
 		isLongPress = false;
-		longPressTimer = setTimeout(() => { isLongPress = true; }, 400);
+		longPressTimer = setTimeout(() => {
+			isLongPress = true;
+			doAddToEncounter();
+		}, 400);
 	}
 
 	function onPointerUp() {
 		clearTimeout(longPressTimer);
+	}
+
+	function doAddToEncounter() {
+		const oldTop = el.getBoundingClientRect().top;
+		encounterText.appendName(name);
+		const end = performance.now() + 300;
+		requestAnimationFrame(function track() {
+			const drift = el.getBoundingClientRect().top - oldTop;
+			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			if (performance.now() < end) requestAnimationFrame(track);
+		});
+		copied = true;
+		setTimeout(() => { copied = false; }, 1200);
 	}
 
 	async function handleShiftClick() {
@@ -64,49 +80,28 @@
 		for (const m of moves) lines.push(m);
 		while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
 		await navigator.clipboard.writeText(lines.join('\n'));
-
-		// Also update encounter text — compensate scroll for layout shift (e.g. count 1→2)
-		const oldTop = el.getBoundingClientRect().top;
-		encounterText.appendName(name);
-		const end = performance.now() + 300;
-		requestAnimationFrame(function track() {
-			const drift = el.getBoundingClientRect().top - oldTop;
-			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-			if (performance.now() < end) requestAnimationFrame(track);
-		});
-		copied = true;
-		setTimeout(() => { copied = false; }, 1200);
+		doAddToEncounter();
 	}
 
 	let lastClickTime = 0;
 
 	function handleHeaderClick(e) {
-		if (e.shiftKey || isLongPress) {
+		if (isLongPress) {
 			isLongPress = false;
+			return;
+		}
+		if (e.shiftKey) {
 			handleShiftClick();
 			return;
 		}
 		const now = Date.now();
 		if (now - lastClickTime < 400) {
 			lastClickTime = 0;
-			handleDoubleTap();
+			doAddToEncounter();
 			return;
 		}
 		lastClickTime = now;
 		toggleExpanded();
-	}
-
-	function handleDoubleTap() {
-		const oldTop = el.getBoundingClientRect().top;
-		encounterText.appendName(name);
-		const end = performance.now() + 300;
-		requestAnimationFrame(function track() {
-			const drift = el.getBoundingClientRect().top - oldTop;
-			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-			if (performance.now() < end) requestAnimationFrame(track);
-		});
-		copied = true;
-		setTimeout(() => { copied = false; }, 1200);
 	}
 
 	function toggleExpanded() {
