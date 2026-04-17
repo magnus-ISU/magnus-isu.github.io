@@ -30,12 +30,6 @@ You descend from an ancient martial tradition. Gain +1 to Spout Lore on anything
 ### Human
 Your fighting style is showy and impressive. Gain +1 forward to Parley with anyone who has seen you fight.
 
-## Stats
-
-Damage: d8  
-HP: 8+Constitution  
-Load: 8+STR
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -51,7 +45,7 @@ Choose your weapon:
 
 Choose one:
 - Adventuring gear (1 weight) and dungeon rations (5 uses, 1 weight)
-- Healing potion (0 weight)
+- Healing potion (1 weight)
 
 ## Look
 Choose one for each:
@@ -76,6 +70,11 @@ Evil: Kill a defenseless or surrendered enemy to prove your superiority.
 \\_\\_\\_\\_\\_ and I are regular training partners.  
 I may have killed a relative of \\_\\_\\_\\_\\_ at some point in the past.  
 \\_\\_\\_\\_\\_ seems like they would fold at the first sign of trouble. I don't trust them.
+
+## Stats
+Damage: d8  
+HP: 8+Constitution  
+Load: 8+STR
 
 ## Advanced Moves
 

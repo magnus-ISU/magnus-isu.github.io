@@ -202,7 +202,7 @@ Poultices and Herbs 2 uses, slow, 10 coins, 1 weight
 
 See the **Bandage** recovery move.
 
-Healing Potion 50 coins, 0 weight
+Healing Potion 50 coins, 1 weight
 
 When you drink an entire healing potion, heal yourself of 10 damage or remove
 one debility, your choice.
@@ -218,9 +218,9 @@ Bag of Books 5 uses, 10 coins, 2 weight
 When your bag of books contains just the right book for the subject you’re
 spouting lore on, consult the book, mark off a use, and take +1 to your roll.
 
-Antitoxin 10 coins, 0 weight
+Antitoxin 10 coins, 3 uses, 1 weight
 
-When you drink antitoxin, you’re cured of one poison affecting you.
+When you sip an antitoxin, you’re cured of one poison affecting you.
 
 Dungeon Rations Ration, 5 uses, 3 coins, 1 weight
 

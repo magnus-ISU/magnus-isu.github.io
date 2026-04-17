@@ -46,12 +46,6 @@ When you **use adventurer's gear to craft an effigy of your totem**, set it to w
 When you **Defy Danger or Parley using flattery or deceit**, you take +1 forward.
 When you **use adventurer's gear**, you can produce something strange & magical. Say how you stole/ won it and how it's useful right now, but ask the GM how it's limited and problematic.
 
-## Stats
-
-Damage: d6
-HP: 6+Constitution
-Load: 6+STR
-
 ## Gear
 You start with:
 - Some token of your land, describe it (0 weight)
@@ -68,8 +62,8 @@ Choose your armament:
 Choose one:
 - Adventuring gear (1 weight)
 - Poultices and herbs (2 uses, 1 weight)
-- Halfling pipeleaf (0 weight)
-- 3 antitoxin (0 weight)
+- Halfling pipeleaf (6 uses, 0 weight)
+- Antitoxin (3 uses, 1 weight)
 
 ## Look
 Choose one for each:
@@ -108,6 +102,11 @@ Which of you has also seen the spirit realm?
 Which of you has shared in my adventures?
 Which of you is often the butt of my jokes?
 Which of you most enjoys my tales?
+
+## Stats
+Damage: d6
+HP: 6+Constitution
+Load: 6+STR
 
 ## Advanced Moves
 

@@ -49,12 +49,6 @@ You have been sent to many cities on diplomatic missions from your country. When
 ### A Warring Kingdom
 Your kingdom's strongholds are spread throughout the country. Whenever you come to them they will provide shelter.
 
-## Stats
-
-Damage: d4  
-HP: 6+Constitution  
-Load: 5+STR
-
 ## Gear
 You start with:
 - Dungeon rations (5 uses, 1 weight)
@@ -98,6 +92,11 @@ I have seen \\_\\_\\_\\_\\_ in my dreams.
 I have seen \\_\\_\\_\\_\\_ in my nightmares.  
 \\_\\_\\_\\_\\_ is my trusted confidant.  
 \\_\\_\\_\\_\\_ trusts my word completely.
+
+## Stats
+Damage: d4  
+HP: 6+Constitution  
+Load: 5+STR
 
 ## Advanced Moves
 
