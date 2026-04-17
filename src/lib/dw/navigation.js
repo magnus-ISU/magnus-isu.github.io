@@ -68,6 +68,22 @@ export const navigation = [
 		items: [
 			{ title: 'Introduction', slug: 'introduction', source: 'srd', file: 'Introduction' },
 			{
+				title: 'Playing the Game',
+				slug: 'playing-the-game',
+				source: 'homebrew',
+				file: 'Playing_the_Game',
+				homebrew: true,
+				srdSlug: 'playing-the-game-srd'
+			},
+			{
+				title: 'Playing the Game',
+				slug: 'playing-the-game-srd',
+				source: 'srd',
+				file: 'Playing_the_Game',
+				hidden: true,
+				homebrewSlug: 'playing-the-game'
+			},
+			{
 				title: 'Character Creation',
 				slug: 'character-creation',
 				source: 'homebrew',
@@ -92,22 +108,6 @@ export const navigation = [
 				srdSlug: 'basic-moves-srd'
 			},
 			{ title: 'Basic Moves', slug: 'basic-moves-srd', source: 'srd', file: 'Moves', hidden: true, homebrewSlug: 'basic-moves' },
-			{
-				title: 'Playing the Game',
-				slug: 'playing-the-game',
-				source: 'homebrew',
-				file: 'Playing_the_Game',
-				homebrew: true,
-				srdSlug: 'playing-the-game-srd'
-			},
-			{
-				title: 'Playing the Game',
-				slug: 'playing-the-game-srd',
-				source: 'srd',
-				file: 'Playing_the_Game',
-				hidden: true,
-				homebrewSlug: 'playing-the-game'
-			},
 			{
 				title: 'Equipment',
 				slug: 'equipment',

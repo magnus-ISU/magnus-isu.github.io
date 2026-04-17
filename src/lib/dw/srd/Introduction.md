@@ -114,7 +114,9 @@ it than a band of stalwart heroes?
 You and your friends _are_ those heroes. You go where others can’t or won’t.
 There are monstrous things lurking in the world. Are you ready to face them?
 
-## The Bard
+## The Classes
+
+### The Bard
 
 The poems say an adventurer’s life is all open roads and the glory of coin and
 combat. The tales told in every farmhand-filled inn have to have some ring of
@@ -130,7 +132,7 @@ than you to write the tale of your own heroism?
 
 Nobody. Get going.
 
-## The Cleric
+### The Cleric
 
 The lands of Dungeon World are a gods-forsaken mess. They’re lousy with the
 walking dead, beasts of all sorts, and the vast unnatural spaces between safe
@@ -145,7 +147,7 @@ that’s rubbish. God lives at the edge of a blade.
 
 Show the world who is lord.
 
-## The Druid
+### The Druid
 
 Cast your eyes around the fire. What has brought you to these people, stinking
 of the dust and sweat of the city? Perhaps it is a kindness—do you protect
@@ -164,7 +166,7 @@ Their gods are children, their steel is false protection. You walk the old
 ways, you wear the pelts of the earth itself. You’ll take your share of the
 treasure, but will you ever walk as one of them? Only time will tell.
 
-## The Fighter
+### The Fighter
 
 It’s a thankless job—living day to day by your armor and the skill of your
 arm, diving heedlessly into danger. They won’t be playing golden horns for the
@@ -183,7 +185,7 @@ your scars with pride.
 You are the wall—let every danger smash itself to dust on you. In the end,
 you’ll be the last one standing.
 
-## The Paladin
+### The Paladin
 
 Hell awaits. An eternity of torment in fire or ice or whatever best suits the
 sins of the damned throngs of Dungeon World. All that stands between the pits
@@ -201,7 +203,7 @@ the wastrel world.
 
 Vae victis, right?
 
-## The Ranger
+### The Ranger
 
 These city-born folk you travel with. Have they heard the call of the wolf?
 Felt the winds howl in the bleak deserts of the East? Have they hunted their
@@ -216,7 +218,7 @@ the spaces between.
 Without you, they’d be lost. Blaze a trail through the blood and dark,
 strider.
 
-## The Thief
+### The Thief
 
 You’ve heard them, sitting around the campfire. Bragging about this battle or
 that, or about how their gods are smiling on your merry band. You count your
@@ -230,7 +232,7 @@ When you’re done with all this delving you’ll toast their heroes’ graves.
 
 From your castle. Full of gold. You rogue.
 
-## The Wizard
+### The Wizard
 
 Dungeon World has rules. Not the laws of men or the rule of some petty tyrant.
 Bigger, better rules. You drop something—it falls. You can’t make something
