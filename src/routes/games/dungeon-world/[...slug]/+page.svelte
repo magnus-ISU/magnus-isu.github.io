@@ -234,6 +234,8 @@
 		cursor: pointer;
 		transition: background 0.15s, color 0.15s;
 		font-family: inherit;
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	.source-opt:first-child {
