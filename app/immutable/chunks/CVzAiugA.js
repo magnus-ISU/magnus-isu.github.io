@@ -1,1 +1,0 @@
-import{u as i,v as c,w as _,h,j as r,k,l as u,i as d,m as l,U as v}from"./lTSu4Se7.js";function I(f,n,t){r&&k();var e=f,s=v,a,o=i()?c:_;h(()=>{o(s,s=n())&&(a&&u(a),a=d(()=>t(e)))}),r&&(e=l)}export{I as k};
