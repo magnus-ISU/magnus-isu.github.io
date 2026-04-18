@@ -92,7 +92,10 @@ When **you're dying** you catch a glimpse of what lies beyond the Black Gates of
 ## Travel Moves
 
 ### Take Watch
-When you **are on watch and something approaches**, roll +WIS: On a 10+ you notice in time to alert everyone and prepare a response; all party members take +1 forward. On a 7-9 you manage to sound the alarm, but no one has time to prepare. On a miss mark XP, and whatever approaches has the drop on you.
+When you **are on watch and something approaches**, roll +WIS:
+- On a 10+ you notice in time to alert everyone and prepare a response; all party members take +1 forward.
+- On a 7-9 you manage to sound the alarm, but no one has time to prepare.
+- On a miss mark XP, and whatever approaches has the drop on you.
 
 ### Give Chase
 When you **pursue your quarry**, roll+
@@ -107,6 +110,7 @@ On a 10+, you corner your prey or catch them in the open; on a 7-9, your prey pi
 
 ### Undertake a Perilous Journey
 When you **travel by a known or safe route**, even through dangerous territory, ask the GM how long it takes. They'll tell you one or two things you see along the way, and they may ask the same of you.
+
 When you **venture out into perilous or unfamiliar territory**, indicate the route you'd like to take and your destination (which might just be "a safe place to camp" or "as far as this road takes us"). Then, whoever acts as guide rolls+WIS. On a 10+, all three. On a 7-9, choose two. On a 6-, choose one and don't mark XP.
 - The way back is safe and secure, at least for now.
 - The journey won't require the expenditure of any supplies or resources.

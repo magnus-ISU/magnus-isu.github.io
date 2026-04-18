@@ -49,7 +49,7 @@ When you **use adventurer's gear**, you can produce something strange & magical.
 ## Gear
 You start with:  
 [0 Weight] Some Token of Your Land, describe it  
-Choose your defenses:  
+Choose one for your defenses:  
 [1 Weight] [1 Armor] Hide Armor  
 [1 Weight] [+1 Armor] Wooden Shield  
 Choose your armament:  

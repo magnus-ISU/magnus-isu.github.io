@@ -59,7 +59,7 @@ You do not use a spellbook to prepare spells. They are a part of your blood.
 You start with:  
 [1 Weight] Your Spellbook  
 [1 Weight] Dungeon Rations (5 uses)  
-Choose your defenses:  
+Choose one for your defenses:  
 [1 Weight] [1 Armor] Leather Armor  
 [2 Weight] Bag of Books (5 uses) and [0 Weight] 3 Weightless Healing Potions  
 Choose your weapon:  

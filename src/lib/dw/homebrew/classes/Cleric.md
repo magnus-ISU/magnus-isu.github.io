@@ -75,7 +75,7 @@ You once followed another path, so you know better than most how outsiders feel 
 You start with:  
 [1 Weight] Dungeon Rations (5 uses)  
 [0 Weight] Some Symbol of the Divine, describe it  
-Choose your defenses:  
+Choose one for your defenses:  
 [1 Weight] [1 Armor] Chainmail  
 [2 Weight] [+1 Armor] Shield  
 Choose one armament:  
