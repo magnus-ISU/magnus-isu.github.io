@@ -30,6 +30,7 @@ Choose one enhancement or another range:
 - thrown
 - +2 piercing
 - +1 damage
+- +1 armor
 
 Choose its unique power:
 - It keeps you alive: when it kills a mortal foe, recover 1d4hp
@@ -55,6 +56,11 @@ You can always treat weapons as if they had the precise tag.
 
 ### Dwarf
 When you **share a drink with someone**, you may parley with them using CON instead of CHA.
+
+### Half-orc
+When you **parley by intimidating, threatening, or making a show of raw violence**, you may roll with STR instead of CHA.
+
+You can also use STR for **Interrogate** if you take that advanced move if you make a show of violence.
 
 ### Halfling
 You're weaker than the other races. -1 STR
@@ -107,9 +113,6 @@ I worry about the ability of \_\_\_\_\_ to survive in the dungeon.
 ### Merciless
 When you deal damage, deal +1d4 damage.
 
-### Heirloom
-When you **consult the spirits that reside within your signature weapon**, they will give you an insight relating to the current situation, and might ask you some questions in return, roll+CHA. On a 10+, the GM will give you good detail. On a 7-9, the GM will give you an impression.
-
 ### Armor Mastery
 When you **make your armor take the brunt of damage dealt to you**, the damage is negated but you must reduce the armor value of your armor or shield (your choice) by 1. The value is reduced each time you make this choice. If the reduction leaves the item with 0 armor it is destroyed.
 
@@ -119,23 +122,23 @@ Choose one extra enhancement for your signature weapon.
 ### Seeing Red
 When you discern realities during combat, you take +1.
 
-### Interrogate
-When you use threats of violence to get someone you've cornered to do or tell you something, roll+CHA. On a hit, they'll comply; on a 10+, choose 2. On a 7-9, choose 1.
-- They won't immediately make a break for it, even if given a chance.
-- You don't need to begin to follow through on your threats before they start.
-- You get the message across really fast.
-
 ### Scent of Blood
 When you hack and slash an enemy, the next attack someone else makes against that same foe deals +1d8 damage.
-
-### Multiclass Dabbler
-Get one move from another class. Treat your level as one lower for choosing the move.
 
 ### Iron Hide
 You gain +1 armor.
 
 ### Blacksmith
 When you have access to a forge you can graft the magical powers of a weapon onto your signature weapon. This process destroys the magical weapon. Your signature weapon gains the magical powers of the destroyed weapon.
+
+### Heirloom
+When you **consult the spirits that reside within your signature weapon**, they will give you an insight relating to the current situation, and might ask you some questions in return, roll+CHA. On a 10+, the GM will give you good detail. On a 7-9, the GM will give you an impression.
+
+### Interrogate
+When you use threats of violence to get someone you've cornered to do or tell you something, roll+CHA. On a hit, they'll comply; on a 10+, choose 2. On a 7-9, choose 1.
+- They won't immediately make a break for it, even if given a chance.
+- You don't need to begin to follow through on your threats before they start.
+- You get the message across really fast.
 
 ### Respectful Aura
 Those who see you know you mean business. When you **say something with honesty, conviction, and finality**, no one can doubt you.
@@ -146,6 +149,9 @@ You know whether another person has killed or not, after speaking with them even
 
 ### Strategist
 You know the lore of the ancients. When you **examine how armies move**, you can always tell where the enemy will next strike and what they're preparing for. If you really don't have enough information, you'll know what to look for in order to find out.
+
+### Multiclass Dabbler
+Get one move from another class. Treat your level as one lower for choosing the move.
 
 ## Mastery Moves
 
@@ -166,7 +172,7 @@ When you **enter combat**, roll+CHA. On a 10+, hold 2. On a 7-9, hold 1. Spend y
 When you hack and slash an enemy, all subsequent attacks made by anyone against that same foe deal +1d8 damage.
 
 ### Multiclass Initiate
-*Requires Multiclass Dabbler*
+*Requires Multiclass Dabbler*  
 Get one move from another class. Treat your level as one lower for choosing the move.
 
 ### Steel Hide
