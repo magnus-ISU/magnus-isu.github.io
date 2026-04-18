@@ -12,15 +12,11 @@ Your character has six stats: **Strength (STR), Dexterity (DEX), Constitution (C
 
 The most basic unit of rules in Dungeon World is the move. A move looks like this:
 
----
-
-When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, divide your damage between the targets, and pick 1:
-- Evade, prevent, or counter the enemy's attack
-- Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
-
-On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack.
-
----
+> When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, divide your damage between the targets, and pick 1:
+> - Evade, prevent, or counter the enemy's attack
+> - Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
+> 
+> On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack.
 
 Moves are rules that tell you when they trigger and what effect they have. A move depends on a fictional action and always has some fictional effect. "Fictional" means that the action and effect come from the world of the characters we're describing. In the move above the trigger is "when you fight in melee or close quarters." The effect is what follows: a roll to be made and differing fictional effects based on the outcome.
 

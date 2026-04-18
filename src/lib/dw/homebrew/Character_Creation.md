@@ -1,5 +1,7 @@
 # Character Creation
 
+## By Hand
+
 Making Dungeon World characters is quick and easy. You should all create your
 first characters together at the beginning of your first session. Character
 creation is, just like play, a kind of conversation—everyone should be there
@@ -13,7 +15,7 @@ even replacement characters, start at first level.
 Most everything you need to create a character you’ll find on the character
 sheets. These steps will walk you through filling out a character sheet.
 
-## 1\. Choose a Class
+### 1\. Choose a Class
 
 Look over the character classes and choose one that interests you. Everyone
 chooses a different class; there probably aren’t two of The Wizard.
@@ -22,7 +24,7 @@ chooses a different class; there probably aren’t two of The Wizard.
 > cool ideas for a wizard, so I mention that would be my first choice. No one
 > else was thinking of playing one, so I take the wizard character sheet.
 
-## 2\. Choose Starting Moves
+### 2\. Choose Starting Moves
 
 The front side of each character sheet lists the starting moves. Some classes,
 like the fighter, have choices to make as part of one of their moves. Make
@@ -34,7 +36,7 @@ prepared to start with.
 > I choose Alarm for my other spell, since I can think
 > of some interesting uses for it.
 
-## 3\. Choose a Race or Background
+### 3\. Choose a Race or Background
 
 Most classes have race or background options. Choose one. It gives you a special
 move.
@@ -47,7 +49,7 @@ move.
 If you wish, your GM will probably work with you to make a new move if you
 want a race that isn't listed.
 
-## 4\. Choose Stats
+### 4\. Choose Stats
 
 Assign these scores to your stats: +2, +1, +1, +0, +0, -1
 
@@ -66,7 +68,7 @@ Repeat this process for your remaining scores: 1, 0, 0, -1
 > creatures so I’ll put a 0 there. Living is always nice, so I put my other 0 in
 > Constitution to not lose HP. Strength gets the -1.
 
-## 5\. Set Maximum HP
+### 5\. Set Maximum HP
 
 Your maximum HP is equal to your class’s base HP+Constitution score.
 
@@ -74,7 +76,7 @@ HP is still computed from your full Constitution. That is 9 plus 3 times your CO
 
 > A Wizard's base 4 health, plus 9 equals 13. If I had assigned a +1 for CON, I could have had 16...
 
-## 6\. Choose Gear
+### 6\. Choose Gear
 
 Each class has choices to make for starting gear. Keep your load in mind—it
 limits how much you can easily carry. Make sure to total up your armor and
@@ -85,7 +87,7 @@ note it on your character sheet.
 > healing potion and the antitoxin, but healing wins out. I also end up with
 > some rations.
 
-## 7\. Choose a Look
+### 7\. Choose a Look
 
 Your look is your physical appearance. Choose one item from each list.
 
@@ -95,13 +97,13 @@ Your look is your physical appearance. Choose one item from each list.
 > Beyond as part of a summoning ritual. No time to eat with all that studying
 > and research: thin body.
 
-## 8\. Choose a Name
+### 8\. Choose a Name
 
 A suggested list appears on each class.
 
 > Avon sounds good.
 
-## 9\. Choose Alignment
+### 9\. Choose Alignment
 
 Your alignment is a few words that describe your character’s moral outlook.
 Each class may only start with certain alignments. Choose your alignment—in
@@ -111,7 +113,7 @@ XP.
 > The Neutral option for wizards says I earn extra XP when I discover a magical
 > mystery. Avon is all about discovering mystery—I’ll go with Neutral.
 
-## 10\. Introduce Your Character
+### 10\. Introduce Your Character
 
 Now that you know who your character is, it’s time to introduce them to
 everyone else. Wait until everyone’s finished choosing their name. Then go
@@ -132,7 +134,7 @@ interesting.
 > because they’re literally not of this world: they came to him as part of a
 > summoning ritual.”
 
-## 11\. Choose Bonds
+### 11\. Choose Bonds
 
 Once everyone has described their characters you can choose your bonds. You
 must fill in one bond but it’s in your best interest to fill in more. For each
@@ -158,7 +160,7 @@ in question and add that to the roll.
 > bonds aloud and we all discuss what this means about why we’re together and
 > where we’re going.
 
-## 12\. Get Ready to Play
+### 12\. Get Ready to Play
 
 Take a little break: grab a drink, stretch your legs and let the GM brainstorm
 for a little bit about what they’ve learned about your characters. Once you’re

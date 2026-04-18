@@ -21,6 +21,8 @@ export function renderMarkdown(src) {
 	let inMoveBlock = false;
 	let inH2Section = false;
 	let pendingColumns = false; // true when h2 wants columns but hasn't hit the first h3 yet
+	let inBlockquote = false;
+	let bqLines = [];
 
 	function closeMoveBlock() {
 		if (inMoveBlock) { html += '</div>'; inMoveBlock = false; }
@@ -30,6 +32,13 @@ export function renderMarkdown(src) {
 		closeMoveBlock();
 		if (inH2Section) { html += '</div>'; inH2Section = false; }
 		pendingColumns = false;
+	}
+
+	function flushBlockquote() {
+		if (bqLines.length === 0) return;
+		html += `<blockquote>${renderMarkdown(bqLines.join('\n'))}</blockquote>`;
+		bqLines = [];
+		inBlockquote = false;
 	}
 
 	function closePendingList() {
@@ -80,6 +89,7 @@ export function renderMarkdown(src) {
 		const hm = line.match(/^(#{1,6})\s+(.*)/);
 		if (hm) {
 			flushPara();
+			flushBlockquote();
 			closePendingList();
 			const level = hm[1].length;
 			if (level <= 2) {
@@ -120,11 +130,15 @@ export function renderMarkdown(src) {
 			continue;
 		}
 
-		if (line.startsWith('> ')) {
+		if (line.startsWith('> ') || (inBlockquote && line === '>')) {
 			flushPara();
 			closePendingList();
-			html += `<blockquote><p>${inline(line.slice(2))}</p></blockquote>`;
+			bqLines.push(line === '>' ? '' : line.slice(2));
+			inBlockquote = true;
 			continue;
+		}
+		if (inBlockquote) {
+			flushBlockquote();
 		}
 
 		const ul = line.match(/^[-*]\s+(.*)/);
@@ -153,6 +167,7 @@ export function renderMarkdown(src) {
 		paraLines.push(line);
 	}
 	flushPara();
+	flushBlockquote();
 	closePendingList();
 	closeH2Section();
 	return html;
