@@ -62,9 +62,7 @@ Choose one:
 [1 Weight] Healing Potion
 
 ## Stats
-Damage: d8  
-HP: 6+Constitution  
-Load: 9+STR
+Damage: d8, HP: 6+Constitution, Load: 9+STR
 
 ### Look
 Choose one for each:

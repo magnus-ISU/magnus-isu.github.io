@@ -64,6 +64,13 @@ export function renderMarkdown(src) {
 			return `\x00ESC${escapes.length - 1}\x00`;
 		});
 
+		// Preserve inline HTML tags through escaping
+		const htmlTags = [];
+		t = t.replace(/<(\/?)(span|div|br|em|strong|sub|sup)(\s[^>]*)?\s*\/?>/gi, (match) => {
+			htmlTags.push(match);
+			return `\x00HTML${htmlTags.length - 1}\x00`;
+		});
+
 		t = t
 			.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -79,6 +86,7 @@ export function renderMarkdown(src) {
 			.replace(/\[([^\]]+) Armor\]/g, '<svg class="armor-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;transform:translateY(-2px)" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="295" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>')
 			.replace(/\[([^\]]+) Weight\]/g, '<svg class="weight-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;color:#444;transform:translateY(-2px)" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 46c-45.074 0-82 36.926-82 82 0 25.812 12.123 48.936 30.938 64H128L32 480h448l-96-288h-76.938C325.877 176.936 338 153.812 338 128c0-45.074-36.926-82-82-82zm0 36c25.618 0 46 20.382 46 46s-20.382 46-46 46-46-20.382-46-46 20.382-46 46-46z" fill="currentColor"/><text x="256" y="400" text-anchor="middle" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>');
 
+		t = t.replace(/\x00HTML(\d+)\x00/g, (_, i) => htmlTags[+i]);
 		t = t.replace(/\x00ESC(\d+)\x00/g, (_, i) => escapes[+i].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
 
 		return t;
