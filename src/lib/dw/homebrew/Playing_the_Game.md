@@ -12,7 +12,15 @@ Your character has six stats: **Strength (STR), Dexterity (DEX), Constitution (C
 
 The most basic unit of rules in Dungeon World is the move. A move looks like this:
 
-When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, Deal Damage to every target, and pick 1. On a 7-9, your maneuver works, mostly—Deal Damage but suffer the enemy's attack.
+---
+
+When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, divide your damage between the targets, and pick 1:
+- Evade, prevent, or counter the enemy's attack
+- Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
+
+On a 7-9, your maneuver works, mostly. Deal Damage but suffer the enemy's attack.
+
+---
 
 Moves are rules that tell you when they trigger and what effect they have. A move depends on a fictional action and always has some fictional effect. "Fictional" means that the action and effect come from the world of the characters we're describing. In the move above the trigger is "when you fight in melee or close quarters." The effect is what follows: a roll to be made and differing fictional effects based on the outcome.
 
@@ -107,11 +115,13 @@ Add the *ignores armor* tag if the source of damage is particularly large or if 
 
 HP loss is often only part of the effect. If the harm is generalized, like falling into a pit, losing the HP is probably all there is to it. When the harm is specific, like an orc pulling your arm from its socket, HP should be part of the effect but not the entirety of it. The bigger issue is dealing with the newly busted arm: how do you swing a sword or cast a spell? Likewise having your head chopped off is not HP damage, it's just you being dead.
 
-#### Damage From Multiple Creatures
+#### Damage With Multiple Creatures
 
-If multiple creatures attack at once, roll the highest damage among them and add +1 damage for each creature beyond the first.
+If multiple creatures attack a player at once, roll the highest damage among them and add +1 damage for each creature beyond the first.
 
 > A goblin orkaster (d10+1 damage ignores armor) and three goblins (d6 damage) all throw their weapons at Lux as she assaults their barricade. Roll the highest damage—d10+1 ignores armor—and add +3 for the three other goblins.
+
+A move should describe if and how it affects multiple creatures. Hack and Slash allows you to divide your damage. Volley and Magic Missiles target a single creature. A Fireball explodes and deals its damage to each target.
 
 #### Non-lethal attacks.
 
@@ -276,7 +286,7 @@ A follower's **Cost** is what it takes to keep them with you. If the cost isn't 
 - **Pay Up** by meeting their Cost to increase Loyalty (up to +3).
 - **Do Their Thing:** When a follower acts within the scope of their skills, roll+Quality to see how well they manage it.
 - **Order Hirelings:** When a follower ends up in a dangerous, degrading, or crazy situation because of your orders, roll+Loyalty. On a 10+, they hold firm. On a 7-9, they do it, but may start entertaining serious thoughts about stabbing you in the back.
-- **Call For Assistance:** When a follower helps your move, take +1 but they share the full risk. If you deal damage, roll with advantage.
+- **Call For Assistance:** When a follower helps your move they share the full risk of whatever you're doing. If your move deals damage, roll with advantage. Otherwise take +1 to your roll.
 
 ## The Adventurer's Life
 

@@ -361,7 +361,7 @@
 		return 'miss';
 	}
 
-	// --- Stat drag-to-swap (pointer events for touch + mouse) ---
+	// --- Stat drag-to-swap and drag-to-adjust ---
 	let dragStat = $state(null);
 	let dropTarget = $state(null);
 	let dragStartX = 0;
@@ -369,11 +369,15 @@
 	let dragCurX = $state(0);
 	let dragCurY = $state(0);
 	let didStartDrag = false;
+	let statDragDelta = $state(0);
+	let statDragMode = $state(null); // 'swap' or 'adjust'
 
 	function onStatPointerDown(e, ab) {
 		dragStartX = e.clientX;
 		dragStartY = e.clientY;
 		didStartDrag = false;
+		statDragDelta = 0;
+		statDragMode = null;
 		const startAb = ab;
 
 		function onMove(ev) {
@@ -382,18 +386,24 @@
 			if (!didStartDrag && Math.abs(dx) + Math.abs(dy) > 8) {
 				didStartDrag = true;
 				dragStat = startAb;
+				// Lock to swap or adjust based on initial direction
+				statDragMode = Math.abs(dx) > Math.abs(dy) ? 'swap' : 'adjust';
 			}
 			if (!didStartDrag) return;
 			dragCurX = ev.clientX;
 			dragCurY = ev.clientY;
-			// Find which stat pill is under the pointer
-			const el = document.elementFromPoint(ev.clientX, ev.clientY);
-			const pill = el?.closest('.stat-pill');
-			if (pill) {
-				const target = pill.dataset.stat;
-				dropTarget = target && target !== dragStat ? target : null;
+
+			if (statDragMode === 'swap') {
+				const el = document.elementFromPoint(ev.clientX, ev.clientY);
+				const pill = el?.closest('.stat-pill');
+				if (pill) {
+					const target = pill.dataset.stat;
+					dropTarget = target && target !== dragStat ? target : null;
+				} else {
+					dropTarget = null;
+				}
 			} else {
-				dropTarget = null;
+				statDragDelta = -Math.round(dy / 24);
 			}
 		}
 
@@ -401,12 +411,18 @@
 			window.removeEventListener('pointermove', onMove);
 			window.removeEventListener('pointerup', onUp);
 			window.removeEventListener('pointercancel', onUp);
-			if (didStartDrag && dropTarget && dragStat) {
-				swapStats(dragStat, dropTarget);
+			if (didStartDrag) {
+				if (statDragMode === 'swap' && dropTarget && dragStat) {
+					swapStats(dragStat, dropTarget);
+				} else if (statDragMode === 'adjust' && statDragDelta !== 0 && dragStat) {
+					adjustStat(dragStat, statDragDelta);
+				}
 			}
 			dragStat = null;
 			dropTarget = null;
 			didStartDrag = false;
+			statDragDelta = 0;
+			statDragMode = null;
 		}
 
 		window.addEventListener('pointermove', onMove);
@@ -414,21 +430,37 @@
 		window.addEventListener('pointercancel', onUp);
 	}
 
+	function adjustStat(ab, delta) {
+		pushUndo();
+		const lines = text.split('\n');
+		const parts = lines[2].split(',').map(s => s.trim());
+		const vals = {};
+		for (const p of parts) {
+			const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
+			if (m) vals[m[1].toUpperCase()] = +m[2];
+		}
+		vals[ab] = (vals[ab] ?? 0) + delta;
+		lines[2] = parts.map(p => {
+			const m = p.match(/^([A-Za-z]+)\s*/);
+			if (m) return `${m[1]} ${vals[m[1].toUpperCase()] ?? 0}`;
+			return p;
+		}).join(', ');
+		text = lines.join('\n');
+	}
+
 	function swapStats(a, b) {
+		pushUndo();
 		const lines = text.split('\n');
 		const statsLine = lines[2];
-		// Parse labeled values
 		const parts = statsLine.split(',').map(s => s.trim());
 		const vals = {};
 		for (const p of parts) {
 			const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
 			if (m) vals[m[1].toUpperCase()] = m[2];
 		}
-		// Swap
 		const tmp = vals[a];
 		vals[a] = vals[b];
 		vals[b] = tmp;
-		// Rebuild line preserving order
 		lines[2] = parts.map(p => {
 			const m = p.match(/^([A-Za-z]+)\s*/);
 			if (m) return `${m[1]} ${vals[m[1].toUpperCase()] ?? 0}`;
@@ -603,7 +635,7 @@
 			{#if dragStat && parsed.stats[dragStat] !== undefined}
 				<div class="stat-drag-ghost" style="left: {dragCurX}px; top: {dragCurY}px">
 					<span class="stat-label">{dragStat}</span>
-					<span class="stat-value">{fmtMod(parsed.stats[dragStat])}</span>
+					<span class="stat-value">{fmtMod(parsed.stats[dragStat] + (statDragMode === 'adjust' ? statDragDelta : 0))}</span>
 				</div>
 			{/if}
 			</div>

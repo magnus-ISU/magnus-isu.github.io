@@ -16,7 +16,7 @@ The weapon you hold while casting does +1d4 damage until you dismiss this spell.
 ### Breath
 Breathe in, or breathe into another's mouth. You or they don't need to take another breath for an hour or two.
 ### Heat Metal
-Raise out your hand and call upon a spirit of molten fire. All the metal in a small area begins heating up, eventually glowing red-hot. The spell ends when you touch the metal, or enough total energy is released (which may melt smaller items). Concentration 1
+Raise out your hand and call upon a spirit of molten fire. All the metal in a small area you can see begins heating up, eventually glowing red-hot. The spell ends when cancelled by enough water, or when the full energy is released (when a chunk of iron begins to melt). Concentration 1
 ### Nature's Protection
 You and the person you touch while casting this spell will be treated as friends and stewards by the natural wilds, those whose ancestors grew and hunted and grazed on the earth. Concentration 1
 ### Bendbark

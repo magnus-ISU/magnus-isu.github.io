@@ -47,7 +47,23 @@ When you **closely study a situation or person**, roll+WIS. On a 10+ hold 3 Insi
 - What here is not what it appears to be?
 
 ### Parley
-When you **want something from someone that they don't want to give up**, make your case and roll+CHA: on a 10+, they name their absolute minimum price; on a 7-9, they name a price they could live with; on a 6-, mark XP, and prepare to be milked for all you're worth.
+When you **press or entice an NPC**, say what you want them to do (or not do). If they have reason to resist, roll +CHA:
+- on a 10+, they either do as you want or reveal the easiest way to convince them.
+- on a 7-9, they reveal something you can do to convince them, though it’ll likely be costly, tricky, or distasteful.
+
+## Intelligence Moves
+
+### Flashback
+When you **propose that you took some previously undeclared action in the past** that can affect the current situation, and the GM agrees, roll +INT. On a 10+, it's as you specified. On a 7-9, it's not quite what you specified; the GM can introduce a complication or a cost. On a miss, things have changed that you're only now learning about.
+
+### Draw Them Out
+When you **interact carefully and watchfully with someone**, roll+CHA. On a 10+, hold 3 Empathy. On a 7-9, hold 1 Empathy. While you trying to figure them out, spend Empathy 1-for-1 to ask:
+- What are they really feeling right now?
+- What are they trying to hide?
+- What do they wish I would do?
+- What do they most desire?
+- Whom do they serve?
+- How could I get them to... ?
 
 ## Pushing Moves
 
@@ -56,21 +72,7 @@ When you **act alongside one of your companions**, they roll with Advantage but 
 When you **hinder one of your companions**, they roll with Disadvantage but you also expose yourself to danger, retribution, or cost.
 
 ### Push Yourself
-When you **put all of your effort into one act**, you may take a debility of your choice to take Advantage. The debility does not affect this roll.
-
-## Intelligence Moves
-
-### Flashback
-When you **propose that you took some previously undeclared action in the past** that can affect the current situation, and the GM agrees, roll +INT. On a 10+, it's as you specified. On a 7-9, it's not quite what you specified; the GM can introduce a complication or a cost. On a miss, things have changed that you're only now learning about.
-
-### Draw Them Out
-When you **interact carefully and watchfully with someone**, roll+INT. On a 10+, hold 3 Empathy. On a 7-9, hold 1 Empathy. While you trying to figure them out, spend Empathy 1-for-1 to ask:
-- What are they really feeling right now?
-- What are they trying to hide?
-- What do they wish I would do?
-- What do they most desire?
-- Whom do they serve?
-- How could I get them to... ?
+When you **put all of your effort into one act**, you may take a debility of your choice to reroll any die (except your Last Breath). The debility does not affect this roll.
 
 ## Rest and Recovery Moves
 
@@ -169,10 +171,11 @@ When you **put out word that you're looking to hire help**, roll. Take +1 each i
 - ...that your upfront pay is generous
 - ...what you're setting out to do
 - ...that they'll get a share of whatever you find
-- And +1 if you have a useful reputation around these parts
+- +1 if you have a useful reputation around these parts
+- -1 if you're not in a large town or bustling city
 
 On a 10+ you've got your pick of a number of skilled applicants, your choice who you hire, and no penalty for not taking them along. On a 7-9 you'll have to settle for someone close or turn them away. If you turn away applicants you take -1 forward to Recruit.
-On a miss someone influential and ill-suited declares they'd like to come along (a foolhardy youth, a loose-cannon, or a veiled enemy, for example), bring them and take the consequences or turn them away.
+On a miss someone influential and ill-suited declares they'd like to come along (a foolhardy youth, a loose-cannon, or a veiled enemy, for example), bring them or turn them away, either way you'll face the consequences.
 
 ### Pay Up
 When a follower is compensated for their efforts by having their Cost met, increase their Loyalty by 1 (up to +3). This move cannot be made again until after the follower and their leader have both Made Camp.
