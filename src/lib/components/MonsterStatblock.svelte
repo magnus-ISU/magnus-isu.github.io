@@ -265,7 +265,7 @@
 					<span class="summary-damage">{attacks.map(a => a.damage).filter(Boolean).map(d => d.replace(/\s*keep\s+highest\s*/i, 'kh').replace(/\s*keep\s+lowest\s*/i, 'kl')).join(', ')}</span>
 				{/if}
 				{#if hp !== null}<span class="summary-hp">{hp}</span>{/if}
-				{#if armor !== null}<span class="summary-armor">{armor}</span>{/if}
+				{#if armor !== null}<svg class="summary-armor-shield" width="18" height="18" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{armor}</text></svg>{/if}
 				{#if instinct}<span class="summary-instinct">{instinct}</span>{/if}
 			</div>
 		{:else if instinct}
@@ -315,7 +315,7 @@
 							{/if}
 						{/if}
 						{#if armor !== null}
-							<span class="vital"><span class="vital-label">Armor</span> <span class="armor-value">{armor}</span></span>
+							<span class="vital"><span class="vital-label">Armor</span> <svg class="armor-shield-vital" width="22" height="22" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{armor}</text></svg></span>
 						{/if}
 					</div>
 				</div>
@@ -475,13 +475,16 @@
 		font-family: monospace;
 	}
 
-	.summary-armor {
-		color: #5a8fd4;
-		font-family: monospace;
+	.summary-armor-shield {
+		display: inline-block;
+		vertical-align: middle;
+		transform: translateY(3px);
 	}
 
-	.armor-value {
-		color: #5a8fd4;
+	.armor-shield-vital {
+		display: inline-block;
+		vertical-align: middle;
+		transform: translateY(-3px);
 	}
 
 	.summary-instinct {

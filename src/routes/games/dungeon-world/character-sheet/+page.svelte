@@ -573,11 +573,13 @@
 						{#if parsed.armor !== null}
 							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="armor-display" onclick={startEditArmor}>
-								<svg class="armor-shield" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-									<path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/>
-									<path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/>
+								<svg class="armor-shield" viewBox="0 0 512 549" xmlns="http://www.w3.org/2000/svg">
+									<g transform="translate(0,37)">
+										<path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/>
+										<path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/>
+									</g>
 									{#if !editingArmor}
-										<text x="256" y="280" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
+										<text x="256" y="300" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
 									{/if}
 								</svg>
 								{#if editingArmor}
