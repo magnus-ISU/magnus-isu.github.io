@@ -504,7 +504,7 @@
 	}
 
 	:global(.dw-article a) {
-		color: #aabbff;
+		color: inherit;
 		text-decoration: none;
 	}
 

@@ -65,7 +65,10 @@ Choose one:
 - A tiny friend that follows you everywhere, what is it? \_\_\_\_\_
 - A sack with 2 coins, tied to your neck
 
-## Look
+## Stats
+Damage: d6, HP: 8+Constitution, Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
+
+### Look
 Choose one for each:
 
 Pup, Adult, or Grayfur  
@@ -73,31 +76,25 @@ Growly Bark, Playful Bark, Yappy Bark, or Mournful Bark
 Small, Lanky, Huge, or Stout  
 Sleek Coat, Curly Coat, Shaggy Coat, or Wirey Coat
 
-## Alignment
-
+### Alignment
 Good, Companionship: Offer comfort to a friend or stranger in need.  
 Lawful, Loyalty: Help someone when the odds are against you.  
 Neutral, Playfulness: Cause trouble by being excitable or mischievous.  
 Chaotic, Instability: Act frightened or vicious without any warning.  
 Evil, Appetite: Seek out food at any cost.
 
-## Name
+### Name
 
 *Buddy, Max, Bella, Daisy, Rocky, Luna, Sadie, Bailey, Cooper, Molly, Duke, Lucy, Charlie, Rex, Lucky, Bandit, Shadow, Scout, Rosie, Bear, Ginger, Toby, Marley, Sasha, Jasper, Roxy, Finn, Penny, Hunter, Zoey*
 
 
-## Bonds
+### Bonds
 Which of you is not a dog person? \_\_\_\_\_  
 Which of you gives the best treats? \_\_\_\_\_  
 Which of you gives the best head scratches? \_\_\_\_\_  
 Which of you knew my previous owner? \_\_\_\_\_  
 Which of you had a dog like me when you were young? \_\_\_\_\_  
 Which of you truly understands me? \_\_\_\_\_
-
-## Stats
-Damage: d6  
-HP: 8+Constitution  
-Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
 
 ## Advanced Moves
 

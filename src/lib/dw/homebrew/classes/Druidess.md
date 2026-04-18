@@ -62,48 +62,45 @@ Choose one:
 [0 Weight] Halfling Pipeleaf (3 uses)  
 [1 Weight] Antitoxin (3 uses)
 
-## Look
+## Stats
+Damage: d6, HP: 6+Constitution, Load: 6+STR
+
+### Look
 Choose one for each:
 
 Wise Eyes, Wild Eyes, or Haunting Eyes
 Furry Hood, Messy Hair, or Braided Hair
 Ceremonial Garb, Practical Leathers, or Weathered Hides
 
-## Names
+### Names
 *Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor
 *Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah
 *Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei
 
-## Alignment
-
+### Alignment
 Good: Help someone or something grow.
 Neutral: Eliminate an unnatural menace.
 Chaotic: Destroy a symbol of civilization.
 
-## Bonds
-\_ smells more like prey than a hunter.
-The spirits told me of a great danger following \_
-I have shown \_ a secret rite of the Land
-Which of you also reveres the old gods?
-Which of you dismisses me as a primitive?
-Which of you disregards the natural order?
-Which of you requires my guidance?
-Which of you is also a follower of my sect?
-Which of you am I commanded to protect?
-Which of you is being watched by my sect?
-Which of you has reason to distrust my sect?
-About which of you do the spirits whisper?
-Which of you is followed by a dark presence?
-Which of you thinks thinks me a mummer?
-Which of you has also seen the spirit realm?
-Which of you has shared in my adventures?
-Which of you is often the butt of my jokes?
+### Bonds
+\_ smells more like prey than a hunter.  
+The spirits told me of a great danger following \_  
+I have shown \_ a secret rite of the Land  
+Which of you also reveres the old gods?  
+Which of you dismisses me as a primitive?  
+Which of you disregards the natural order?  
+Which of you requires my guidance?  
+Which of you is also a follower of my sect?  
+Which of you am I commanded to protect?  
+Which of you is being watched by my sect?  
+Which of you has reason to distrust my sect?  
+About which of you do the spirits whisper?  
+Which of you is followed by a dark presence?  
+Which of you thinks thinks me a mummer?  
+Which of you has also seen the spirit realm?  
+Which of you has shared in my adventures?  
+Which of you is often the butt of my jokes?  
 Which of you most enjoys my tales?
-
-## Stats
-Damage: d6
-HP: 6+Constitution
-Load: 6+STR
 
 ## Advanced Moves
 

@@ -44,7 +44,10 @@ Choose one:
 [1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
 [1 Weight] Healing Potion
 
-## Look
+## Stats
+Damage: d8, HP: 8+Constitution, Load: 8+STR
+
+### Look
 Choose one for each:
 
 Fiery Eyes, Cold Eyes, or Weary Eyes  
@@ -52,26 +55,21 @@ Cropped Hair, Flowing Hair, or Hooded Head
 Aristocratic Clothes, Threadbare Clothes, or Training Clothes  
 Muscular Body, Lithe Body, or Scarred Body
 
-## Names
+### Names
 *Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
 *Human*: Yang, Garm, Caleb, Maximillian, Alexander, La Croix, Rodriguez, Scyld
 
-## Alignment
+### Alignment
 
 Good: Defend someone weaker than you in a fight.  
 Neutral: Defeat a worthy opponent in a fair duel.  
 Evil: Kill a defenseless or surrendered enemy to prove your superiority.
 
-## Bonds
+### Bonds
 \_\_\_\_\_ broke up a fight I was involved in. I was probably going to lose, but they don't need to know that part.  
 \_\_\_\_\_ and I are regular training partners.  
 I may have killed a relative of \_\_\_\_\_ at some point in the past.  
 \_\_\_\_\_ seems like they would fold at the first sign of trouble. I don't trust them.
-
-## Stats
-Damage: d8  
-HP: 8+Constitution  
-Load: 8+STR
 
 ## Advanced Moves
 

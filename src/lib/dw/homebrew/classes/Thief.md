@@ -18,18 +18,22 @@ When you **spend a moment to survey a dangerous area**, roll+DEX. On a 10+, hold
 When you **pick locks or pockets or disable traps**, roll+DEX. On a 10+, you do it, no problem. On a 7-9, you still do it, but the GM will offer you two options between suspicion, danger, or cost.
 
 ### Backstab
-When you **attack a surprised or defenseless enemy with a melee weapon**, you deal your damage and roll+DEX. On a 10+ choose two. On a 7-9 choose one.
+When you **attack a surprised or defenseless enemy with a melee weapon**, you deal your damage and then roll+DEX. On a 10+ choose two. On a 7-9 choose one.
 - You don't get into melee with them
-- You deal your damage+1d6
+- You deal +1d6 damage
 - You take the initiative, +1 forward to you or an ally acting on it
 - Reduce their armor by 1 until they repair it
 
 ### Poisoner
 You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. You also start with three uses of the poison you choose. Whenever you have time to gather materials and a safe place to brew you can make three uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
-- Oil of Tagit (applied): The target falls into a light sleep
 - Bloodweed (touch): The target deals -1d4 damage ongoing until cured
+- Serpent's Tears (touch): Anyone dealing damage to the target has advantage.
+- Serrulatus' Sting (touch): This neurotoxin makes the target fly into a spastic rage, unable to be consoled for a few minutes.
+- Curare (touch): The limb touched by this plant extract goes numb and useless.
+- Fiddleback Venom (touch): The target takes 2d4 damage soon unless they fall back to bind, wash, or cauterize the wound.
+- Oil of Tagit (applied): The target falls into a light sleep
 - Goldenroot (applied): The target treats the next creature they see as a trusted ally, until proved otherwise
-- Serpent's Tears (touch): Anyone dealing damage to the target rolls twice and takes the better result.
+- Arsenic Bloom (applied): After an hour, the target begins vomiting; a few hours later they die unless treated with antitoxin.
 
 ## Backgrounds
 
@@ -38,6 +42,9 @@ When you attack with a ranged weapon, deal +2 damage.
 
 ### Human
 You are a professional. When you spout lore or discern realities about criminal activities, take +1.
+
+### Elf
+When you move, you can choose to make no sounds.
 
 ### Tabaxi
 You are a cat, and hold 9 Lives. When you are reduced to 0 hit points, mark off a Life and cheat death. Your body remains - you really did die - but you soon reappear, fully refreshed nearby and ready to continue the fight, or back at some safer location. Only when you lose your last Life do you roll your Last Breath.
@@ -77,7 +84,6 @@ Lithe Body, Knobby Body, or Flabby Body
 *Human*: Sparrow, Shank, Jack, Marlow, Dodge, Rat, Pox, Humble, Farley
 
 ### Alignment
-
 Chaotic: Leap into danger without a plan.  
 Neutral: Avoid detection or infiltrate a location.  
 Evil: Shift danger or blame from yourself to someone else.
@@ -89,6 +95,12 @@ I stole something from \_\_\_\_\_.
 \_\_\_\_\_ and I have a con running.
 
 ## Advanced Moves
+
+### Hide In Shadows
+When you keep still in shadows or darkness, enemies never spot you until you make a movement.
+
+### Darkvision
+You can see in anything but complete darkness as well as daylight.
 
 ### Flexible Morals
 When someone tries to detect your alignment you can tell them any alignment you like.
@@ -127,6 +139,10 @@ When you're outnumbered, you have +1 armor.
 When you put out word to the criminal underbelly about something you want or need, roll+CHA. On a 10+, someone has it, just for you. On a 7-9, you'll have to settle for something close or it comes with strings attached, your call.
 
 ## Mastery Moves
+
+### Walk Through Shadows
+*Requires Hide In Shadows*  
+When you walk through shadows or darkness, enemies never spot you unless they saw you enter them and remained tracking you.
 
 ### Dirty Fighter
 *Replaces Cheap Shot*  
@@ -167,4 +183,4 @@ When you take time to make a plan to steal something, name the thing you want to
 - Who will come after it?
 - Who else wants it?
 
-*A playbook by Sage LaTorra and Adam Koebel*
+*A playbook by Magnus, [waxfire@gmail.com](https://docs.google.com/file/d/0BxI2vfsw1haqQUhsdXZQZUVmZnM/edit?resourcekey=0-o-0MUc9e8a-niWPtvaFXsg), Sage LaTorra and Adam Koebel*

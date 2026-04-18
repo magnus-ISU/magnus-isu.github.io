@@ -53,7 +53,10 @@ Choose two:
 [1 Weight] Bandages (3 uses) and [9 Coin]  
 A noble steed, describe it
 
-## Look
+## Stats
+Damage: d8, HP: 8+Constitution, Load: 7+STR
+
+### Look
 Choose one for each:
 
 Confident Eyes, Bright Eyes, or Always Closed Eyes  
@@ -61,26 +64,21 @@ Fashionable Hat, Flowing Hair, or Magnificent Beard
 Ornate Clothes, Functional Clothes, or Flowing Clothes  
 Muscled Body, Stoic Body, or Toned Body
 
-## Names
+### Names
 *Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z  
 *Elf*: Celeste, Garinith, Gilderoy, Nyhopyri, Tahnea, Tetra, Tome, Valens
 
-## Alignment
+### Alignment
 
 Good: Put yourself at risk for the sake of a friend or lover.  
 Neutral: Go out of your way to show off your skills.  
 Chaotic: Dethrone or destabilize a person in power.
 
-## Bonds
+### Bonds
 \_\_\_\_\_ realizes just how great I am.  
 \_\_\_\_\_ is someone I can rely on to make me look good.  
 \_\_\_\_\_ needs to work on their appearance.  
 \_\_\_\_\_ needs education on this heroing business, and I will provide it whether they want it or not.
-
-## Stats
-Damage: d8  
-HP: 8+Constitution  
-Load: 7+STR
 
 ## Advanced Moves
 

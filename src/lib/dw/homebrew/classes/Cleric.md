@@ -86,6 +86,9 @@ Choose one:
 [1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
 [1 Weight] Healing Potion
 
+## Stats
+Damage: d6, HP: 8+Constitution, Load: 10+STR
+
 ## Look
 Choose one for each:
 
@@ -109,11 +112,6 @@ Evil: Harm another to prove the superiority of your church or god.
 \_\_\_\_\_ is a good and faithful person; I trust them implicitly.  
 \_\_\_\_\_ is in constant danger, I will keep them safe.  
 I am working on converting \_\_\_\_\_ to my faith.
-
-## Stats
-Damage: d6  
-HP: 8+Constitution  
-Load: 10+STR
 
 ## Advanced Moves
 
@@ -186,4 +184,4 @@ When you Work Miracles, on a 10-11 you have the option of choosing from the 7-9 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
 
-*A playbook by Magnus Anderson*
+*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*

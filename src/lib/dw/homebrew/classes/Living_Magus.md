@@ -69,7 +69,10 @@ Choose one:
 [1 Weight] Healing Potion  
 [1 Weight] Antitoxin (3 uses)
 
-## Look
+## Stats
+Damage: d4, HP: 4+Constitution, Load: 6+STR
+
+### Look
 Choose one for each:
 
 Haunted Eyes, Sharp Eyes, or Crazy Eyes  
@@ -77,28 +80,22 @@ Styled Hair, Wild Hair, or Pointed Hat
 Worn Robes, Stylish Robes, or Strange Robes  
 Pudgy Body, Creepy Body, or Thin Body
 
-## Names
+### Names
 *Elf*: Galadiir, Fenfaril, Lilliastre, Phirosalle, Enkirash, Halwyr  
 *Human*: Avon, Morgan, Rath, Ysolde, Ovid, Vitus, Aldara, Xeno, Uri
 
-## Alignment
-
+### Alignment
 Good: Use magic to permanently improve someone's life.  
 Neutral: Discover something about a magical mystery.  
 Evil: Use magic to cause fear and terror.
 
-## Bonds
+### Bonds
 \_ will play an important role in the events to come. I have foreseen it!  
 \_ is keeping an important secret from me.  
 \_ is woefully misinformed about the world; I will teach them all that I can.  
 \_ must help me unlock my full magical power.  
 \_ has seen the terrible power of magic, but I want to show them a better way.  
 \_ wants me to use magic I'm not willing to.
-
-## Stats
-Damage: d4  
-HP: 4+Constitution  
-Load: 6+STR
 
 ## Advanced Moves
 
@@ -192,4 +189,4 @@ When you have time and safety with a magic item in a place of power you can empo
 ### Warrior of the Mind
 When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
 
-*A playbook by Magnus Anderson*
+*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*

@@ -15,7 +15,7 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 ### Ranged Weapons
 
-[10 Coin] [1 Weight] **Throwing Daggers** thrown, near, Ammo
+[10 Coin] [1 Weight] **3 Throwing Daggers** thrown, near, ammo
 
 [15 Coin] [2 Weight] **Ragged Bow** near
 
@@ -137,22 +137,29 @@ When you open a keg of dwarven stout and **let everyone drink freely**, take +1 
 When you **share halfling pipeleaf with someone**, expend a use and take +1 forward to parley with them.
 
 ### Poisons
-
-[12 Coin] [0 Weight] **Bloodweed** Dangerous, touch
-
+[20 Coin] [0 Weight] **Bloodweed** Dangerous, touch  
 Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
 
-[10 Coin] [0 Weight] **Serpent's Tears** Dangerous, touch
-
+[20 Coin] [0 Weight] **Serpent's Tears** Dangerous, touch  
 Anyone dealing damage against the target has advantage.
 
-[15 Coin] [0 Weight] **Oil of Tagit** Dangerous, applied
+[20 Coin] [0 Weight] **Serrulatus' Sting** Dangerous, touch  
+This neurotoxin throws the target into a spastic rage—they become uncontrollably wild and cannot be calmed for several minutes.
 
+[20 Coin] [0 Weight] **Curare** Dangerous, touch  
+The limb touched by this rare plant extract becomes numb and useless.
+
+[20 Coin] [0 Weight] **Fiddleback Venom** Dangerous, touch  
+The target takes 2d4 damage soon after contact unless they take time to bind, wash, or cauterize the wound.
+
+[20 Coin] [0 Weight] **Oil of Tagit** Dangerous, applied  
 The target falls into a light sleep.
 
-[20 Coin] [0 Weight] **Goldenroot** Dangerous, applied
-
+[20 Coin] [0 Weight] **Goldenroot** Dangerous, applied  
 The target treats the next creature they see as a trusted ally, until proved otherwise.
+
+[80 Coin] [0 Weight] **Arsenic Bloom** Dangerous, applied  
+After one hour, the target begins to vomit uncontrollably; a few hours later, they die unless treated with antitoxin.
 
 ### Services
 
@@ -315,7 +322,7 @@ _Messy_: It does damage in a particularly destructive way, ripping people and th
 
 _Thrown_: Throw it at someone to hurt them. If you volley with this weapon, you can't choose to mark off ammo on a 7–9; once you throw it, it's gone until you can recover it.
 
-_Ammo_: It counts as ammunition for appropriate ranged weapons. By expending all your ammo, you can hang back in a combat and pick off some of the combatants.
+_Ammo_: It counts as ammunition for appropriate ranged weapons. **Volley** allows you to expend all your ammo rather than suffer worse consequences. When you track ammo individually (throwing daggers except the first), you can no longer use this for **Volley**.
 
 _+n Damage_: It is particularly harmful to your enemies. When you deal damage, you add _n_ to it.
 

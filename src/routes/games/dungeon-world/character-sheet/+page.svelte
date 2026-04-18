@@ -730,6 +730,9 @@
 		background: rgba(26, 26, 26, 0.88);
 		border-radius: 6px;
 	}
+	.sheet-editor :global(textarea) {
+		height: calc(100vh - 330px);
+	}
 
 	.sheet-preview {
 		border: 1px solid #333;

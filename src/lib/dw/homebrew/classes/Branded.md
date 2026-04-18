@@ -52,7 +52,10 @@ Choose two:
 [1 Weight] Healing Potion  
 [10 Coin]
 
-## Look
+## Stats
+Damage: d8, HP: 4+Constitution, Load: 9+STR
+
+### Look
 Choose one for each:
 
 Strange Brands, Ritual Scars, or Perfect Skin  
@@ -60,13 +63,13 @@ Smouldering Eyes, Warm Eyes, or Searing Eyes
 Crackling Voice, Whispering Voice, or Roaring Voice  
 Imperious Demeanor, Manic Demeanor, or Barely-Hidden Rage
 
-## Names
+### Names
 *Human*: Solomon, Fatia, Kalil, Omen, Hiko, Agasha, Elizabeth, Adur, Ignis, Yajna, Umilio  
 *Dwarf*: Higar, Egdorn, Faldin, Breski, Niona, Odenil, Agar, Kilkarn, Gremma  
 *Halfling*: Leoric, Barlow, Finley, Hart, Weasley, Mallory, Kellen, Clement, Prynne  
 *Elf*: Beldarii, Elsenwyn, Kithduin, Isilmwe, Haeralos, Ostranor, Gemenalle, Sorosthrine, Pelenash
 
-## Alignment
+### Alignment
 
 Evil: Sacrifice an innocent victim to the flames.  
 Chaotic: Spread a dangerous new idea.  
@@ -74,16 +77,11 @@ Neutral: Throw caution to the wind for your own personal gain.
 Lawful: Exchange a sacrifice, freely given, for a service rendered.  
 Good: Make a sacrifice or take a risk to help someone in need.
 
-## Bonds
+### Bonds
 \_\_\_\_\_ has felt the hellish touch of my fire; now they know my strength.  
 I will teach \_\_\_\_\_ the true meaning of sacrifice. They don't understand.  
 I once cast something into the fire for \_\_\_\_\_, and I will collect my due.  
 \_\_\_\_\_ is such a stick in the mud; it's up to me to show them how to have fun.
-
-## Stats
-Damage: d8  
-HP: 4+Constitution  
-Load: 9+STR
 
 ## Advanced Moves
 

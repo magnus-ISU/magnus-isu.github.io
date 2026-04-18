@@ -72,7 +72,10 @@ Choose two:
 [2 Weight] [+1 Armor] Shield  
 [1 Weight] Antitoxin (1 use), [1 Weight] Dungeon Rations, and [1 Weight] Poultices and Herbs (2 uses)
 
-## Look
+## Stats
+Damage: d10, HP: 10+Constitution, Load: 12+STR
+
+### Look
 Choose one for each:
 
 Hard Eyes, Dead Eyes, or Eager Eyes  
@@ -80,28 +83,22 @@ Wild Hair, Shorn Hair, or Battered Helm
 Calloused Skin, Tanned Skin, or Scarred Skin  
 Built Body, Lithe Body, or Ravaged Body
 
-## Names
+### Names
 *Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq  
 *Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
 *Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca  
 *Human*: Hawke, Rudiger, Gregor, Brianne, Walton, Castor, Shanna, Ajax, Hob
 
-## Alignment
-
+### Alignment
 Good: Defend those weaker than you.  
 Neutral: Defeat a worthy opponent.  
 Evil: Kill a defenseless or surrendered enemy.
 
-## Bonds
+### Bonds
 \_\_\_\_\_ owes me their life, whether they admit it or not.  
 I have sworn to protect \_\_\_\_\_.  
 I worry about the ability of \_\_\_\_\_ to survive in the dungeon.  
 \_\_\_\_\_ is soft, but I will make them hard like me.
-
-## Stats
-Damage: d10  
-HP: 10+Constitution  
-Load: 12+STR
 
 ## Advanced Moves
 
@@ -183,4 +180,4 @@ When you look over an enemy's weaponry, ask the GM how much damage they do.
 ### Superior Warrior
 When you hack and slash on a 12+ you deal your damage, avoid their attack, and impress, dismay, or frighten your enemy.
 
-*A playbook by Magnus Anderson*
+*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*
