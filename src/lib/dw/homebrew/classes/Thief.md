@@ -44,6 +44,8 @@ You are a professional. When you spout lore or discern realities about criminal 
 When you move, you can choose to make no sounds.
 
 ### Halfling
+You're weaker than the other races. -1 STR
+
 When you defy danger and **use your small size to your advantage**, take +1.
 
 ### Tabaxi

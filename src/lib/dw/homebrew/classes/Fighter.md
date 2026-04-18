@@ -57,6 +57,8 @@ You can always treat weapons as if they had the precise tag.
 When you **share a drink with someone**, you may parley with them using CON instead of CHA.
 
 ### Halfling
+You're weaker than the other races. -1 STR
+
 When you defy danger and **use your small size to your advantage**, take +1.
 
 ## Gear
