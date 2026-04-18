@@ -41,6 +41,8 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 [15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** close, +1 damage
 
+### Precise Weapons
+
 [25 Coin] [1 Weight] **Rapier** close, precise
 
 [50 Coin] [2 Weight] **Dueling Rapier** close, 1 piercing, precise
