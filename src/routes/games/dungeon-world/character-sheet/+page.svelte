@@ -552,7 +552,7 @@
 						{/if}
 						{#if maxLoad !== null}
 							{@const ldC = loadColor(carriedWeight, maxLoad)}
-							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
 							<div class="circle circle-sm" style="border-color: {ldC}; color: {ldC}" onclick={startEditLoad}>
 								<div class="circle-fill" style="height: {loadFillPct}%; background: {ldC}"></div>
 								{#if editingLoad}
@@ -571,7 +571,7 @@
 							</div>
 						{/if}
 						{#if parsed.armor !== null}
-							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
 							<div class="armor-display" onclick={startEditArmor}>
 								<svg class="armor-shield" viewBox="0 0 512 549" xmlns="http://www.w3.org/2000/svg">
 									<g transform="translate(0,37)">

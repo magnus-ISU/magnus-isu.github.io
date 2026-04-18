@@ -189,6 +189,8 @@ You cannot cast spells that are higher level than you are, unless you're doing s
 
 ## Character Change
 
+### Progression
+
 As their adventures progress, player characters gain experience (XP), which lets them level up. This prepares them for greater danger, bigger adventures, and mightier deeds.
 
 Advancement, like everything else in Dungeon World, is both prescriptive and descriptive. Prescriptive means that when a player changes their character sheet the character changes in the fiction. Descriptive means that when the character changes in the fiction the player should change the character sheet to match. This isn't an excuse to gain more powers or take them away—it's just a reflection of life in Dungeon World.
