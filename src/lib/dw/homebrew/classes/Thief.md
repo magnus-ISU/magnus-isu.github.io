@@ -37,17 +37,20 @@ You've mastered the care and use of a poison. Choose a poison from the list belo
 
 ## Backgrounds
 
-### Halfling
-When you attack with a ranged weapon, deal +2 damage.
-
 ### Human
 You are a professional. When you spout lore or discern realities about criminal activities, take +1.
 
 ### Elf
 When you move, you can choose to make no sounds.
 
+### Halfling
+When you defy danger and **use your small size to your advantage**, take +1.
+
 ### Tabaxi
 You are a cat, and hold 9 Lives. When you are reduced to 0 hit points, mark off a Life and cheat death. Your body remains - you really did die - but you soon reappear, fully refreshed nearby and ready to continue the fight, or back at some safer location. Only when you lose your last Life do you roll your Last Breath.
+
+### Sniper
+When you attack with a ranged weapon, deal +2 damage.
 
 ### Acrobat
 You always land on your feet. When you fall from any height, if you're conscious you are unharmed.

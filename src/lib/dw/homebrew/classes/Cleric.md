@@ -89,7 +89,7 @@ Choose one:
 ## Stats
 Damage: d6, HP: 8+Constitution, Load: 10+STR
 
-## Look
+### Look
 Choose one for each:
 
 Kind Eyes, Sharp Eyes, or Sad Eyes  
@@ -97,17 +97,17 @@ Tonsure, Strange Hair, or Bald
 Flowing Robes, Habit, or Common Garb  
 Thin Body, Knobby Body, or Flabby Body
 
-## Names
+### Names
 *Dwarf*: Durga, Aelfar, Gerda, Rurgosh, Bjorn, Drummond, Helga, Siggrun, Freya  
 *Human*: Wesley, Brinton, Jon, Sara, Hawthorn, Elise, Clarke, Lenore, Piotr, Dahlia, Carmine
 
-## Alignment
+### Alignment
 
 Good: Endanger yourself to heal another.  
 Lawful: Endanger yourself following the precepts of your church or god.  
 Evil: Harm another to prove the superiority of your church or god.
 
-## Bonds
+### Bonds
 \_\_\_\_\_ has insulted my deity; I do not trust them.  
 \_\_\_\_\_ is a good and faithful person; I trust them implicitly.  
 \_\_\_\_\_ is in constant danger, I will keep them safe.  

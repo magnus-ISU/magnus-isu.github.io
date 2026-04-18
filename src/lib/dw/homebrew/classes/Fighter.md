@@ -47,17 +47,17 @@ Choose its unique power:
 
 ## Backgrounds
 
+### Human
+Once per battle you may reroll a single damage roll (yours or someone else's) and choose either result.
+
+### Elf
+You can always treat weapons as if they had the precise tag.
+
 ### Dwarf
 When you **share a drink with someone**, you may parley with them using CON instead of CHA.
 
-### Elf
-Choose one weapon—you can always treat weapons of that type as if they had the precise tag.
-
 ### Halfling
 When you defy danger and **use your small size to your advantage**, take +1.
-
-### Human
-Once per battle you may reroll a single damage roll (yours or someone else's) and choose either result.
 
 ## Gear
 You start with:  

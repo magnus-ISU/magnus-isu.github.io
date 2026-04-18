@@ -68,24 +68,25 @@ Damage: d6, HP: 6+Constitution, Load: 6+STR
 ### Look
 Choose one for each:
 
-Wise Eyes, Wild Eyes, or Haunting Eyes
-Furry Hood, Messy Hair, or Braided Hair
+Wise Eyes, Wild Eyes, or Haunting Eyes  
+Furry Hood, Messy Hair, or Braided Hair  
 Ceremonial Garb, Practical Leathers, or Weathered Hides
 
 ### Names
-*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor
-*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah
-*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei
+*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor  
+*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah  
+*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei  
 
 ### Alignment
-Good: Help someone or something grow.
-Neutral: Eliminate an unnatural menace.
+Good: Help someone or something grow.  
+Neutral: Eliminate an unnatural menace.  
 Chaotic: Destroy a symbol of civilization.
 
 ### Bonds
 \_ smells more like prey than a hunter.  
 The spirits told me of a great danger following \_  
 I have shown \_ a secret rite of the Land  
+\_ has tasted my blood and I theirs. We are bound by it.  
 Which of you also reveres the old gods?  
 Which of you dismisses me as a primitive?  
 Which of you disregards the natural order?  
