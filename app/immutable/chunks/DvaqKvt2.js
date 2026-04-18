@@ -125,7 +125,7 @@ When **someone takes their last breath in your presence**, they take +1 to the r
 When you Work Miracles you ignore the first -1 penalty from ongoing concentration Miracles.
 
 ### First Aid
-You may work the Miracle of Cure Light Wounds even if you do not hold any Miracles.
+You may work the Miracle of Cure Light Wounds even if you do not hold any Miracles. You cannot choose to spend a Miracle in that case on a 7-9.
 
 ### Divine Intervention
 When you gain Miracle(s) from Hallowed Hold, also hold 1 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage.
