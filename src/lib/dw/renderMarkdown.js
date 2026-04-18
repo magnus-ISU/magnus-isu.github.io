@@ -20,6 +20,7 @@ export function renderMarkdown(src) {
 	let paraLines = [];
 	let inMoveBlock = false;
 	let inH2Section = false;
+	let pendingColumns = false; // true when h2 wants columns but hasn't hit the first h3 yet
 
 	function closeMoveBlock() {
 		if (inMoveBlock) { html += '</div>'; inMoveBlock = false; }
@@ -28,6 +29,7 @@ export function renderMarkdown(src) {
 	function closeH2Section() {
 		closeMoveBlock();
 		if (inH2Section) { html += '</div>'; inH2Section = false; }
+		pendingColumns = false;
 	}
 
 	function closePendingList() {
@@ -85,11 +87,23 @@ export function renderMarkdown(src) {
 				html += `<h${level}>${inline(hm[2])}</h${level}>`;
 				if (level === 2) {
 					const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
-					html += `<div class="h2-section${cols ? ' h2-columns' : ''}">`;
+					if (cols) {
+						// Defer opening the columns div until the first h3
+						html += `<div class="h2-section">`;
+						pendingColumns = true;
+					} else {
+						html += `<div class="h2-section">`;
+					}
 					inH2Section = true;
 				}
 			} else if (level === 3) {
 				closeMoveBlock();
+				if (pendingColumns) {
+					// Close the pre-h3 wrapper and open columns
+					html += '</div>';
+					html += '<div class="h2-section h2-columns">';
+					pendingColumns = false;
+				}
 				html += '<div class="move-block">';
 				inMoveBlock = true;
 				html += `<h${level}>${inline(hm[2])}</h${level}>`;
