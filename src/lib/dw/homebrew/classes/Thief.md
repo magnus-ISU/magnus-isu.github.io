@@ -39,23 +39,34 @@ When you attack with a ranged weapon, deal +2 damage.
 ### Human
 You are a professional. When you spout lore or discern realities about criminal activities, take +1.
 
+### Tabaxi
+You are a cat, and hold 9 Lives. When you are reduced to 0 hit points, mark off a Life and cheat death. Your body remains - you really did die - but you soon reappear, fully refreshed nearby and ready to continue the fight, or back at some safer location. Only when you lose your last Life do you roll your Last Breath.
+
+### Acrobat
+You always land on your feet. When you fall from any height, if you're conscious you are unharmed.
+
 ## Gear
 You start with:  
 [1 Weight] Dungeon Rations (5 uses)  
 [1 Weight] [1 Armor] Leather Armor  
 3 uses of your chosen poison  
 [10 Coin]  
-Choose your arms:  
+Choose one for your arms:  
 [1 Weight] Dagger (hand) and [1 Weight] Short Sword (close)  
 [1 Weight] Rapier (close, precise)  
 Choose a ranged weapon:  
-[0 Weight] 3 Throwing Daggers (thrown, near)  
+[1 Weight] 3 Throwing Daggers (thrown, near, ammo)  
 [2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows (3 ammo)  
 Choose one:  
-[1 Weight] Adventuring Gear  
-[0 Weight] Healing Potion
+[1 Weight] Adventuring Gear (3 uses)  
+[1 Weight] Healing Potion
 
-## Look
+## Stats
+Damage: d8  
+HP: 6+Constitution  
+Load: 9+STR
+
+### Look
 Choose one for each:
 
 Shifty Eyes or Criminal Eyes  
@@ -63,26 +74,21 @@ Hooded Head, Messy Hair, or Cropped Hair
 Dark Clothes, Fancy Clothes, or Common Clothes  
 Lithe Body, Knobby Body, or Flabby Body
 
-## Names
+### Names
 *Halfling*: Felix, Rook, Mouse, Sketch, Trixie, Robin, Omar, Brynn, Bug  
 *Human*: Sparrow, Shank, Jack, Marlow, Dodge, Rat, Pox, Humble, Farley
 
-## Alignment
+### Alignment
 
 Chaotic: Leap into danger without a plan.  
 Neutral: Avoid detection or infiltrate a location.  
 Evil: Shift danger or blame from yourself to someone else.
 
-## Bonds
+### Bonds
 I stole something from \_\_\_\_\_.  
 \_\_\_\_\_ has my back when things go wrong.  
 \_\_\_\_\_ knows incriminating details about me.  
 \_\_\_\_\_ and I have a con running.
-
-## Stats
-Damage: d8  
-HP: 6+Constitution  
-Load: 9+STR
 
 ## Advanced Moves
 

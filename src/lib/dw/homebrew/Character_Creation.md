@@ -1,6 +1,10 @@
 # Character Creation
 
-## By Hand
+## Quickstart
+
+Open the Character Sheet panel, long-press the class name you want to play in the sidebar, and go through the sheet deleting choices you do not make.
+
+## Choose Stats
 
 Making Dungeon World characters is quick and easy. You should all create your
 first characters together at the beginning of your first session. Character
@@ -86,6 +90,8 @@ note it on your character sheet.
 > right for rituals; I choose that over a staff. It’s a toss-up between the
 > healing potion and the antitoxin, but healing wins out. I also end up with
 > some rations.
+
+## Choose Fiction
 
 ### 7\. Choose a Look
 
