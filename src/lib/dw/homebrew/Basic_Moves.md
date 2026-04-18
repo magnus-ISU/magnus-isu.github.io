@@ -153,6 +153,8 @@ When you **return triumphant and throw a big party**, spend 100 coin and roll + 
 - You gain useful information
 - You are not entangled, ensorcelled, or tricked.
 
+No matter the roll outcome, everyone marks 1 XP per extra 100 coin spent, up to your next level up.
+
 ### Outstanding Warrants
 When you **return to a civilized place in which you've caused trouble before**, the most notorious among you must roll+CHA. On a 7+, word has spread of your group's troublemaking, and everyone recognizes you but no one wants to turn you in. On a 7-9, the GM chooses a complication:
 - The local constabulary has a warrant out for your arrest.
