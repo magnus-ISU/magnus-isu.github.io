@@ -33,6 +33,9 @@ When you **declare you know someone who can help you**, describe that person and
 - They’re not already in some sort of trouble
 - They don't have a dangerous secret
 
+### Collegium Scholar
+When you roll a 10+ to Spout Lore, you can ask the GM a follow-up question of your choice about the topic; they’ll answer truthfully.
+
 ### Charming and Open
 When you **speak frankly with someone**, you can ask their player a question from the list below. They must answer it truthfully, then they may ask you a question from the list (which you must answer truthfully).
 - Whom do you serve?
@@ -191,9 +194,6 @@ You can always tell whether an NPC finds you attractive (the answer is usually y
 ### Tall Tales
 When you **spend some time trading gossip in a community**, you learn of an interesting opportunity nearby. You can also start a rumor of your own; it will spread like wildfire.
 
-### Collegium Scholar
-When you roll a 7+ to Spout Lore, you can ask the GM a follow-up question of your choice about the topic; they’ll answer truthfully.
-
 ### Duelist’s Parry
 When you **Hack & Slash** or use **Cutting Jibes**, gain +2 armor for the exchange.
 
@@ -204,7 +204,7 @@ When you **hear an enemy cast a spell** the GM will tell you the name of the spe
 When you **successfully aid someone** you take +1 forward as well.
 
 ### No Time To Die
-When **someone else's health drops to or below 5 and you give a rallying cry**, immediately roll for a **Stirring Speech** with doubled effects.
+When **someone else's health drops to 4 or below and you give a rallying cry**, immediately roll for a quick **Stirring Speech** with doubled effects.
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
@@ -215,10 +215,9 @@ Get one move from another class. Treat your level as one lower for choosing the 
 ## Mastery Moves
 
 ### Master of Fate
-*Requires Collegium Scholar*  
 When you roll a 12+ to Spout Lore, you can tell the GM something else about your topic, and how it benefits you. The GM may explain which parts of your tale are legendary, but then explains the truth behind the legend.
 
-### Duelist’s Block
+### Perfect Parry
 *Replaces: Duelist’s Parry*  
 When you **Hack & Slash** or use **Cutting Jibes**, you take +3 armor for the exchange and +3 armor forward.
 

@@ -128,7 +128,7 @@ When you discern realities add "What here is weak or vulnerable?" to the list of
 When you **defy a danger caused by movement** (maybe falling off a narrow bridge or rushing past an armed guard) take +1.
 
 ### A Good Day to Die
-As long as you have less than your CON in current HP (or 1, whichever is higher) take +1 ongoing.
+As long as you have 4 or less health take +1 ongoing.
 
 ## Mastery Moves
 
