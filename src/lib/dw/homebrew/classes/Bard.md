@@ -55,7 +55,7 @@ When your people's traits cause you or an ally trouble, hold 1 Heritage.
 When you **Spout Lore about someone or something's fighting style** and roll 7+, you can Hack & Slash them with INT instead of STR or DEX.
 
 ### A King's Court
-Your reputation precedes you already. Take the **Reputation** advanced move.
+Your reputation precedes you. Take the **Reputation** advanced move.
 
 ### A Port in the Storm
 When you **return to a civilized settlement you’ve visited before**, tell the GM when you were last here. They’ll tell you how it’s changed since then.
@@ -192,7 +192,7 @@ When you **spend some time trading gossip in a community**, you learn of an inte
 When you **Hack & Slash** or use **Cutting Jibes**, gain +2 armor for the exchange.
 
 ### Under Pressure
-When you **Hack & Slash and your reputation is on the line** - people are watching, or you've made repeated public promises to defeat someone and they know it - you take +1d6 damage.
+When you **Hack & Slash and your reputation is on the line** - people are watching, or you've made repeated public promises to defeat someone and they know it - you deal +1d6 damage.
 
 ### Gobsmacked
 When you **reveal a secret of the enemy to their face**, hold 1 Intimidation against them. Spend it at any time to:
