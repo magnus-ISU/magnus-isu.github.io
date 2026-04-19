@@ -31,7 +31,7 @@ When you **gaze intensely into someone's eyes**, you may ask their player: "What
 ### Zuko Style
 When you **bend an existing flame to your will**, roll+WIS. On a 10+ it does as you command, taking the shape and movement that you desire for as long as it has fuel on which to burn. On a 7-9, the effect is short-lived, lasting only for a moment. On a miss, it rages out of control with a mind of its own.
 
-## Backgrounds
+## Background
 
 ### Touched by Flame
 You may be elf, dwarf, halfling, or human, but your soul has been suffused by fire. Tell the GM what you sacrificed to the flames; in return, non-magical heat and fire no longer harm you.

@@ -126,7 +126,7 @@ When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
 [10 Coin] [2 Weight] **Bag of Books** 5 uses
 
-When your bag of books **contains just the right book** for the subject you're spouting lore on, consult the book, mark off a use, and take +1 to your roll.
+When your bag of books **contains just the right book** for the subject you're about to spout lore about, consult the book, mark off a use, and take +1 to your roll.
 
 [10 Coin] [4 Weight] **Keg of Dwarven Stout**
 

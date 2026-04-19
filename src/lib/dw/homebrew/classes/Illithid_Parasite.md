@@ -23,7 +23,7 @@ Neutral: Mask the true source of your power
 Chaotic: Reject the impulses the parasite brings
 Evil: Spread the power of the Elder Brain
 
-## Backgrounds
+## Background
 
 ### Servant of the Deep
 You are a parasite, burrowing deep within your hosts brain. No matter who they were, it is unimportant. You serve the Brain.

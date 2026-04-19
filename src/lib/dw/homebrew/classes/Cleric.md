@@ -48,7 +48,7 @@ You can always work your rotes, and automatically succeed at them.
 ### Turn Undead
 When you **hold your holy symbol aloft and call on your deity for protection**, roll+WIS. On a 7+, so long as you continue to pray and brandish your holy symbol, no undead may come within reach of you. On a 10+, you also momentarily daze intelligent undead and cause mindless undead to flee. Aggression breaks the effects and they are able to act as normal. Intelligent undead may still find ways to harry you from afar. They're clever like that.
 
-## Backgrounds
+## Background
 
 ### Dwarf
 You are one with stone. You know a special version of Words of the Unspeaking which only works on stone. It is a rote for you.

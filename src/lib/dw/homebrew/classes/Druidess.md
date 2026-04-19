@@ -27,7 +27,7 @@ You can always ask the GM "What spirits are active here?" and get an honest answ
 When you **perform a little ritual and make an offering of something they'd like (whisky, incense, blood, etc.)**, the spirits of a place manifest before you—not always friendly, but at least curious and willing to hear you out.
 When you commune with the spirit of a beast and ask to borrow its form, it will ask something of you. Meet its request, and henceforth you can shapechange into that beast, as though it were native to your homeland.
 
-## Backgrounds
+## Background
 
 ### Initiate of the First Circle
 You belong to a far-flung sect devoted to balance and the natural order. When you **send word to your sect asking for aid**, roll +CHA:

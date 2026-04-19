@@ -41,10 +41,10 @@ Choose a person you can see. Until you cast a spell or leave their presence they
 ### Animate Dead
 You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers basic moves, deals your damage, and has 1 HP. Concentration 1, and choose 2:
 - It’s talented. Give one stat a +2 modifier.
-- It’s durable. It has +2 HP for each level you have.
+- It's a horde. Create up to 4 zombies, if there are enough corpses.
 - It has a functioning brain and can complete complex tasks.
 - It does not appear obviously dead, at least for a day or two.
-- You can instead animate 1d6 zombies with 1 HP each (cannot be increased).
+
 ## Level 5
 ### Revelation
 Your deity answers your prayers with a moment of perfect understanding. The GM will shed light on the current situation. When acting on the information, you take +1 forward.

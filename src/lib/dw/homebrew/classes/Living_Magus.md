@@ -35,7 +35,7 @@ When you **draw on a place of power to create a magical effect**, tell the GM wh
 - You and your allies will risk danger from \_
 - You'll have to disenchant \_ to do it
 
-## Backgrounds
+## Background
 
 ### Acolyte
 Add a Cleric Miracle to your spellbook. When you reach level 6, add another.

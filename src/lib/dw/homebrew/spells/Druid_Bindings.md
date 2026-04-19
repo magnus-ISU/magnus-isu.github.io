@@ -24,20 +24,18 @@ For a moment, you control a living tree, bending it temporarily or permanently i
 ## Level 3
 ### Cure Moderate Wounds
 You staunch bleeding and set bones through magic. Heal an ally you touch of 2d8 damage.
-### Darkness
-Choose an area you can see: it’s filled with supernatural darkness and shadow. Concentration 1
 ### Hold Person
 Choose a person you can see. Until you cast a spell or leave their presence they cannot act except to speak. This effect ends immediately if the target takes damage from any source.
 
 ---
-### Animate Dead
-You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers basic moves, deals your damage, and has 1 HP. Concentration 1, and choose 2:
-- It’s talented. Give one stat a +2 modifier.
-- It’s durable. It has +2 HP for each level you have.
-- It has a functioning brain and can complete complex tasks.
-- It does not appear obviously dead, at least for a day or two.
-
----
+### Fog Cloud
+Choose an area you can see: it’s filled with a thick fog which makes it difficult to see into or out of. Concentration 1
+### Conjure Animals
+You call to the spirits of animals. If remotely possible, a physical animal answers your call under your command and choose two. Otherwise, a spirit answers and choose one. It has a +1 modifier for all stats, triggers basic moves, deals 1d6 damage, and has 1 HP. Concentration 1.
+- It has +1 forward
+- It has 4 armor
+- You conjure two animals
+- It lingers for more than a few minutes before wandering off
 ### Transmute Earth
 Stone to mud, or mud to stone; touch one, and it will change in a large area into the other.
 ### Feign Death
@@ -46,12 +44,6 @@ You or an ally you touch is drawn into a seeming death, though they can still fe
 Walk a wide circle as you cast this spell. Those who walk into the circle become confused, losing their memory of the last few hours and what exactly their intents were. Concentration 1
 ### Weedwrap
 Nearby grasses begin to grow very rapidly, a meter or two in a few seconds. You can give them a two word command, which they will try to follow for a few minutes. Examples: Bind them, Cushion ground, Extinguish fire, Show path, Hide sword. Concentration 1
-### Wolfcalling
-Choose some mist, from which two glowing spirits of wolves emerge. They have a +0 modifier, trigger basic moves, deal 1d6 damage (using monster rules for multiple attackers, including if they help you fight), and have 1 HP. Concentration 1, and choose one:
-- They each have +2 forward
-- They have 3 armor
-- You call a third wolf
-- They manifest for more than a few minutes
 ### Wind Ward
 A powerful force emanates from you, creating a blasting wind which prevents most projectiles from passing through, and makes it difficult for others to approach. You cannot breathe until you end the spell; nor can others who reach the innermost vacuum with you.
 ## Level 5

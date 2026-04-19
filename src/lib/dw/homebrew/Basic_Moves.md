@@ -84,7 +84,7 @@ When you **settle in to rest and consume a ration**, when you wake up from at le
 If you’re somewhere dangerous decide the watch order as well. If you have enough XP you may Level Up.
 
 ### Bandage
-When you **spend a few minutes bandaging someone else's wounds and storing energy**, consume a ration and a bandage. They heal 4 hit points, and cannot benefit from this move again until they take damage again. If you also apply poultices, that's the first step to recovering from a debility in the field and will temporarily ensure serious wounds do not get worse.
+When you **spend a few minutes bandaging someone else's wounds as they eat to restore strength**, consume a ration and a bandage. They heal 4 hit points, and cannot benefit from this move again until they take damage again. If you also apply poultices, that's the first step to recovering from a debility in the field and will temporarily ensure serious wounds do not get worse.
 
 ### Last Breath
 When **you're dying** you catch a glimpse of what lies beyond the Black Gates of Death's Kingdom (the GM will describe it). Then roll. On a 10+ you've cheated death — you're in a bad spot but still alive. On a 7-9 Death will offer you a bargain. Take it and return or refuse and pass beyond the Black Gates into whatever fate awaits you. On a miss, your fate is sealed. You're marked as Death's own and you'll cross the threshold soon or be permanently marked and changed according to Death's whim.
@@ -95,7 +95,6 @@ When **you're dying** you catch a glimpse of what lies beyond the Black Gates of
 When you **are on watch and something approaches**, roll +WIS:
 - On a 10+ you notice in time to alert everyone and prepare a response; all party members take +1 forward.
 - On a 7-9 you manage to sound the alarm, but no one has time to prepare.
-- On a miss mark XP, and whatever approaches has the drop on you.
 
 ### Give Chase
 When you **pursue your quarry**, roll+

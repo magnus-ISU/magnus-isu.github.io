@@ -38,7 +38,7 @@ Your voice is particularly arresting. You have no trouble speaking over chatter,
 Your princess has a nemesis. A villain who pursues her and would kill for something she has. What is that thing? A Birthright? A Destiny? An item of power? A power within herself? A love? A slight committed? Choose two tags to describe your nemesis. The GM will choose one additional tag.
 *Cold, Witch, Queen, Dark, Bright, Beautiful, Relative, Ugly, Old, Young, Royal, Wrathful, Chancellor, Faery*
 
-## Backgrounds
+## Background
 
 ### A Poor Kingdom
 When you **prove your worth to a group of naysayers**, many will become your most ardent supporters.

@@ -46,7 +46,7 @@ When you **appear happy and cute**, people's attitudes shift positively, with fr
 ### Skittish
 Choose another Irrational Fear.
 
-## Backgrounds
+## Background
 
 ### Domesticated
 When you **try to communicate with people**, you take +1, and even on a miss they probably understand. When you **meet other domesticated animals**, even those not of your species, you can speak and Parley with them freely.

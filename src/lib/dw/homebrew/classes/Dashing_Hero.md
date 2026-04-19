@@ -31,7 +31,7 @@ There is always a chandelier, rope, window, cart, easily-spooked herd of livesto
 ### True Love and High Adventure
 When you **attempt to enact a daring plan or defend the honor of a friend or lover**, hold 3 Daring. You can spend 1 Daring to take +1 to any You Seem a Decent Fellow, Defy Danger, or Daring Devil roll made to advance your daring plan or defend their honor. You lose all Daring after successfully defending their honor or finishing your plan.
 
-## Backgrounds
+## Background
 
 ### Human
 You are especially resourceful. When you **use Plan of Action**, take +1 to any roll made to make use of hazards created by the move.

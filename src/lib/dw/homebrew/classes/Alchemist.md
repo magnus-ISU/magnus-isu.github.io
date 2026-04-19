@@ -16,7 +16,7 @@ Evil: Stretch science beyond what the Gods allow
 \_ won't tell me a secret I must learn
 Which of you needs something I can make?
 
-## Backgrounds
+## Background
 
 ### Construct
 You are not a man, but a creation of Alchemy. You have a Seal on you somewhere; if it is destroyed, you will forget who you are until a new Seal can be made.

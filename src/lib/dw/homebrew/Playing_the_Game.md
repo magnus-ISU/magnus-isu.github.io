@@ -48,7 +48,7 @@ Items have **tags**—short descriptors like *close*, *messy*, *two-handed*, *cl
 
 ### Equipment
 
-In Dungeon World, you're a competent adventurer; you know what you'll be getting into without needing to enumerate every kind of item you'll be taking along. **Adventurer's Gear** contains limited uses of all the mundane tools you might need. Usually this won't trigger any moves at all, but follow the fiction; if you need something in a split second, there might not be time to rummage around your backpack.
+In Dungeon World, you're a competent adventurer; you know what you'll be getting into without needing to enumerate every kind of item you'll be taking along. **Adventuring Gear** contains limited uses of all the mundane tools you might need. Usually this won't trigger any moves at all, but follow the fiction; if you need something in a split second, there might not be time to rummage around your backpack.
 
 Having many items will help you trigger the moves you want and avoid the ones you don't, but when you carry more than your **Load**, you're encumbered—*noisy, slow, hot, and quick to tire* and have -1 Ongoing.
 

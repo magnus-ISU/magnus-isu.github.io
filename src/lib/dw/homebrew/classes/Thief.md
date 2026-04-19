@@ -35,7 +35,7 @@ You've mastered the care and use of a poison. Choose a poison from the list belo
 - Goldenroot (applied): The target treats the next creature they see as a trusted ally, until proved otherwise
 - Arsenic Bloom (applied): After an hour, the target begins vomiting; a few hours later they die unless treated with antitoxin.
 
-## Backgrounds
+## Background
 
 ### Human
 You are a professional. When you spout lore or discern realities about criminal activities, take +1.

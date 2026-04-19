@@ -46,7 +46,7 @@ Choose its unique power:
 - It is simply an instrument of death, choose two more enhancements or ranges (including range *far*)
 - Your choice, ask your GM...
 
-## Backgrounds
+## Background
 
 ### Human
 Once per battle you may reroll a single damage roll (yours or someone else's) and choose either result.

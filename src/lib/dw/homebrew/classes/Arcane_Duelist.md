@@ -22,7 +22,7 @@ When you **cross swords with a humanoid opponent**, gain +1 forward to discern r
 ### Student of the Blade
 You have 2 + INT techniques.
 
-## Backgrounds
+## Background
 
 ### Elf
 You descend from an ancient martial tradition. Gain +1 to Spout Lore on anything related to warfare.
