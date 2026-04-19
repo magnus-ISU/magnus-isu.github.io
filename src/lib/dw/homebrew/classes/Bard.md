@@ -43,11 +43,8 @@ When you **speak frankly with someone**, you can ask their player a question fro
 
 ## Background
 
-### College of Swords
-When you **Spout Lore about someone or something's fighting style** and roll 7+, you can Hack & Slash them with INT instead of STR or DEX.
-
-### A King's Court
-Your reputation precedes you already. Take the **Reputation** advanced move.
+### Fey Tutelage
+You learned from one or more denizens of the faerie realm. Were you abducted as a child? Was it part of an exchange? Lost in the woods? Maybe you overheard a dryad or nymph singing. Regardless, your music is magical indeed. When you use **Magical Music with a specific person in mind**, on a 7+ you can choose one person in the audience to be affected by your unearthly and beautiful music. The GM chooses which of the 3 options they are afflicted by.
 
 ### The Wandering Folk
 Your people are known for their... (choose one for each)
@@ -59,6 +56,12 @@ Curses and hexes, Faerie blood, or Thieving ways
 At the start of play, hold 1 Heritage. When you make a move that leverages one of your people's traits, spend Heritage to take +1.  
 When your people's traits cause you or an ally trouble, hold 1 Heritage.
 
+### College of Blades
+When you **Spout Lore about someone or something's fighting style** and roll 7+, you can Hack & Slash them with INT instead of STR or DEX.
+
+### A King's Court
+Your reputation precedes you already. Take the **Reputation** advanced move.
+
 ### A Port in the Storm
 When you **return to a civilized settlement you’ve visited before**, tell the GM when you were last here. They’ll tell you how it’s changed since then.
 
@@ -66,12 +69,12 @@ When you **return to a civilized settlement you’ve visited before**, tell the 
 When you enter an important location (your call) you can ask the GM for one fact from the history of that location.
 
 ### Human
-When you first enter a civilized settlement someone who respects the custom of hospitality to minstrels will take you in as their guest.
+When you first enter a civilized settlement someone who respects the custom of hospitality to minstrels will take you and your allies in as their guest.
 
 ## Gear
 You start with:  
 [1 Weight] Dungeon Rations (5 uses)  
-Choose your instrument:  
+Choose your instrument or make up your own:  
 [0 Weight] Your father’s mandolin, repaired  
 [0 Weight] A fine lute, a gift from a noble  
 [0 Weight] The pipes with which you courted your first love  
@@ -79,14 +82,13 @@ Choose your instrument:
 [0 Weight] A fiddle, never before played  
 [0 Weight] A songbook in a forgotten tongue  
 [40 Weight] A grand piano, on your estate grounds  
-[0 Weight] Another item  
 Choose your clothing:  
 [1 Weight] [1 Armor] Leather armor  
 [0 Weight] A thick, worn cloak and [1 Weight] Poultices and Herbs (2 uses, slow)  
 [0 Weight] Ostentatious clothes  
 Choose one for your armaments:  
 [2 Weight] An elaborately crafted longsword (close, +1 damage, precious)  
-[0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand)  
+[0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand, thrown)  
 [2 Weight] Worn bow (near), [1 Weight] Bundle of arrows (ammo), and [1 Weight] Short sword (close)  
 [1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)  
 Choose one:  
@@ -104,25 +106,19 @@ Choose one for each:
 Knowing Eyes, Fiery Eyes, or Joyous Eyes  
 Fancy Hair, Wild Hair, or Stylish Cap  
 Finery, Traveling Clothes, or Poor Clothes  
-Fit Body, Well-fed Body, or Thin Body
+Fit Body, Well-fed Body, or Thin Body  
 
 ### Names
 *Elf*: Astrafel, Daelwyn, Feliana, Damarra, Sistranalle, Pendrell, Melliandre, Dagoliir  
-*Human*: Baldric, Leena, Dunwick, Willem, Edwyn, Florian, Seraphine, Quorra, Charlotte, Lily, Ramonde, Cassandra
+*Human*: Baldric, Leena, Dunwick, Willem, Edwyn, Florian, Seraphine, Quorra, Charlotte, Lily, Ramonde, Cassandra  
 
 ### Alignment
-Good: Perform your art to aid someone else.  
-Neutral: Avoid a conflict or defuse a tense situation.  
-Chaotic: Spur others to significant and unplanned decisive action.  
-
-Fame Ensure that others will spread your name  
-Drama Provoke conflict between others  
-Romance Share a passionate moment with another  
-Wisdom An NPC acts on your honest advice  
-
-Good: Perform your art to aid someone else.  
-Neutral: Avoid a conflict or defuse a tense situation.  
-Chaotic: Spur others to significant and unplanned decisive action.  
+Good, Heroism: Perform your art to aid someone else.  
+Good, Peace: Avoid a conflict or defuse a tense situation.  
+Lawful, Romance: Share a passionate moment with another  
+Neutral, Wisdom: An NPC acts on your honest advice  
+Chaotic, Fame: Ensure that others will spread your name, even if you weren't involved.  
+Evil, Drama: Provoke conflict in order to write a story about it.
 
 ### Bonds
 This is not my first adventure with \_\_\_\_\_\_\_\_.  
@@ -134,29 +130,30 @@ I am writing a ballad about the adventures of \_\_\_\_\_\_\_\_.
 
 \_\_\_\_\_\_\_\_\_\_\_ and I are searching for a legendary artifact or place.  
 I am recording the exploits of \_\_\_\_\_\_\_\_\_\_\_\_.  
+\_\_\_\_\_\_\_\_\_\_\_\_ and I have traveled together for a long time.  
 There’s something about \_\_\_\_\_\_\_\_\_\_\_\_ that they aren’t telling me; I have to figure it out!  
 \_\_\_\_\_\_\_\_\_\_\_\_ and I used to be lovers.  
 \_\_\_\_\_\_\_\_\_\_\_\_ plays an important role in my performances.  
 
-Which of you is in the collegium’s employ?  
-• Which of you thinks I’m a liability?  
-• Which of you is an old drinking pal?  
-• Which of you is the subject of my studies?  
+- Which of you is in the collegium’s employ?  
+- Which of you thinks I’m a liability?  
+- Which of you is an old drinking pal?  
+- Which of you is the subject of my studies?  
 
-Which of you also serves my liege or house?  
-• Which of you is pledged to a rival house?  
-• With which of you do I share a torid past?  
-• Which of you is owed a debt by my liege?  
+- Which of you also serves my liege or house?  
+- Which of you is pledged to a rival house?  
+- With which of you do I share a torid past?  
+- Which of you is owed a debt by my liege?  
 
-• About which of you had I sung before we met?  
-• About which of you am I composing a song?  
-• Which of you cares for me, not my talent?  
-• Which of you seeks to exploit my gifts?  
+- About which of you had I sung before we met?  
+- About which of you am I composing a song?  
+- Which of you cares for me, not my talent?  
+- Which of you seeks to exploit my gifts?  
 
-• Which of you is a friend to my people?  
-• Which of you believes the tales they tell of us?  
-• Which of you has long travelled with me?  
-• Which of you is also an outcast?  
+- Which of you is a friend to my people?  
+- Which of you believes the tales they tell of us?  
+- Which of you has long travelled with me?  
+- Which of you is also an outcast?  
 
 ## Advanced Moves
 
@@ -205,6 +202,9 @@ When you **hear an enemy cast a spell** the GM will tell you the name of the spe
 
 ### A Little Help From My Friends
 When you **successfully aid someone** you take +1 forward as well.
+
+### No Time To Die
+When **someone else's health drops to or below 5 and you give a rallying cry**, immediately roll for a **Stirring Speech** with doubled effects.
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
