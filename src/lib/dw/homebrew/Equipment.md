@@ -171,7 +171,7 @@ After one hour, the target begins to vomit uncontrollably; a few hours later, th
 
 [10 Coin] **A week's unskilled mundane labor**
 
-[30 Coin] **A month's pay for enlistment in an army**
+[75 Coin] **A month's pay for enlistment in an army**
 
 [50+ Coin] **A custom item from a blacksmith** base item cost + 50
 

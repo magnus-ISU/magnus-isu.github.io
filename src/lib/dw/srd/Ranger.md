@@ -53,38 +53,26 @@ When you make camp in a dungeon or city, you don’t need to consume a ration.
 You start with these moves:
 
 ### Hunt and Track \(Wis\)
-
-When you **follow a trail of clues left behind by passing creatures**,
-roll+WIS. ✴On a 7+, you follow the creature’s trail until there’s a
-significant change in its direction or mode of travel. ✴On a 10+, you also
-choose 1:
-
+When you **follow a trail of clues left behind by passing creatures**, roll+WIS. On a 7+, you follow the creature’s trail until there’s a significant change in its direction or mode of travel. On a 10+, you also choose 1:
 - Gain a useful bit of information about your quarry, the GM will tell you what
 - Determine what caused the trail to end
 
 ### Called Shot
-
-When you **attack a defenseless or surprised enemy at range**, you can choose
-to deal your damage or name your target and roll+DEX.
-
+When you **attack a defenseless or surprised enemy at range**, you can choose to deal your damage or name your target and roll+DEX.
 - Head ✴10+: As 7–9, plus your damage ✴7-9: They do nothing but stand and drool for a few moments.
 - Arms ✴10+: As 7-9, plus your damage ✴7-9: They drop anything they’re holding.
 - Legs ✴10+: As 7-9, plus your damage ✴7-9: They’re hobbled and slow moving.
 
 ### Animal Companion
-
-You have a supernatural connection with a loyal animal. You can’t talk to it
-per se but it always acts as you wish it to. Name your animal companion and
-choose a species:
+You have a supernatural connection with a loyal animal. You can’t talk to it per se but it always acts as you wish it to. Name your animal companion and choose a species:
 
 Wolf, cougar, bear, eagle, dog, hawk, cat, owl, pigeon, rat, mule
 
 Choose a base:
-
+- Ferocity +3, Cunning +1, 1 Armor, Instinct +2
 - Ferocity +2, Cunning +1, 1 Armor, Instinct +1
 - Ferocity +2, Cunning +2, 0 Armor, Instinct +1
 - Ferocity +1, Cunning +2, 1 Armor, Instinct +1
-- Ferocity +3, Cunning +1, 1 Armor, Instinct +2
 
 Choose as many strengths as its ferocity:
 
@@ -188,10 +176,7 @@ you make a movement.
 
 ### Man’s Best Friend
 
-When you **allow your animal companion to take a blow that was meant for
-you**, the damage is negated and your animal companion’s ferocity becomes 0.
-If its ferocity is already 0 you can’t use this ability. When you have a few
-hours of rest with your animal companion its ferocity returns to normal.
+When you **allow your animal companion to take a blow that was meant for you**, the damage is negated and your animal companion’s ferocity becomes 0. If its ferocity is already 0 you can’t use this ability. When you have a few hours of rest with your animal companion its ferocity returns to normal.
 
 ### Blot Out the Sun
 
