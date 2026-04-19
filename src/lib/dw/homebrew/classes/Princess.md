@@ -14,7 +14,7 @@ Choose two principles which represent your most deeply held beliefs:
 
 You ignore magical persuasion, thunderous distraction, or any other mental effect which would keep you from upholding these.
 
-When you **invoke these beliefs in a passionate speech**, roll+CHA. On a hit, hold 3. On a 7-9, hold 2. Spend 1 hold to:
+When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 2. Spend 1 hold to:
 - Ask a friendly NPC to do one impossible thing and they will attempt it.
 - Roll+CHA rather than +Bonds to Aid or Interfere.
 - Roll+CHA rather than +STR to Hack & Slash.
@@ -120,7 +120,7 @@ When you **disguise yourself as a commoner or a prince**, roll+CHA. On a 10+ you
 Choose a companion. This companion is your true love. Take +1 ongoing to defend them. When you declare another true love this benefit disappears and is applied to your new true love.
 
 ### Inspiring Grace
-When you **show an NPC a less destructive way**, roll+CHA. On a hit they follow your example, but in a way that makes sense to them. On a 7-9 they are less sure, but they are moved by your gesture if you have other leverage over them.
+When you **show an NPC a less destructive way**, roll+CHA. On a 10+ they follow your example, but in a way that makes sense to them. On a 7-9 they are less sure, but they are moved by your gesture if you have other leverage over them.
 
 ### Ear to the World
 When you **meet a new person of high status**, tell the GM how you know of them.
