@@ -169,13 +169,13 @@ After one hour, the target begins to vomit uncontrollably; a few hours later, th
 
 [30 Coin] **A week's stay at the fanciest inn in town**
 
-[10 Coin] **A week's unskilled mundane labor**
+[15 Coin] **A month's unskilled mundane labor**
 
-[75 Coin] **A month's pay for enlistment in an army**
+[30 Coin] **A month's pay for enlistment in an army**
 
 [50+ Coin] **A custom item from a blacksmith** base item cost + 50
 
-[8-C Coin] **A night's "companionship"**
+[5-C Coin] **A night's "companionship"**
 
 [5-C Coin] **An evening of song and dance**
 

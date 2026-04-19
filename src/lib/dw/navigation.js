@@ -176,7 +176,15 @@ export const navigation = [
 			},
 			{ title: 'Thief', slug: 'thief-srd', source: 'srd', file: 'Thief', hidden: true, homebrewSlug: 'thief' },
 			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
-			{ title: 'Ranger', slug: 'ranger', source: 'srd', file: 'Ranger' },
+			{
+				title: 'Ranger',
+				slug: 'ranger',
+				source: 'homebrew',
+				file: 'classes/Ranger',
+				homebrew: true,
+				srdSlug: 'ranger-srd'
+			},
+			{ title: 'Ranger', slug: 'ranger-srd', source: 'srd', file: 'Ranger', hidden: true, homebrewSlug: 'ranger' },
 			{
 				title: 'Druid',
 				slug: 'druid',
