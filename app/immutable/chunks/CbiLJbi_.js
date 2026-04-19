@@ -9,7 +9,7 @@ From your castle. Full of gold. You rogue.
 ## Starting Moves
 
 ### Trap Expert
-When you **spend a moment to survey a dangerous area**, roll+DEX. On a 10+, hold 3. On a 7-9, hold 1. Spend your hold as you walk through the area to ask these questions:
+When you **spend a moment to survey a dangerous area**, roll+DEX. On a 10+, hold 3 Detection. On a 7-9, hold 1 Detection. Spend Detection as you walk through the area to ask these questions:
 - Is there a trap here and if so, what activates it?
 - What does the trap do when activated?
 - What else is hidden here?
@@ -25,7 +25,7 @@ When you **attack a surprised or defenseless enemy with a melee weapon**, you de
 - Reduce their armor by 1 until they repair it
 
 ### Poisoner
-You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. You also start with three uses of the poison you choose. Whenever you have time to gather materials and a safe place to brew you can make three uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
+You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three weightless uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
 - Bloodweed (touch): The target deals -1d4 damage ongoing until cured
 - Serpent's Tears (touch): Anyone dealing damage to the target has advantage.
 - Serrulatus' Sting (touch): This neurotoxin makes the target fly into a spastic rage, unable to be consoled for a few minutes.
@@ -61,7 +61,7 @@ You always land on your feet. When you fall from any height, if you're conscious
 You start with:  
 [1 Weight] Dungeon Rations (5 uses)  
 [1 Weight] [1 Armor] Leather Armor  
-3 uses of your chosen poison  
+[0 Weight] 3 uses of your chosen poison  
 [10 Coin]  
 Choose one for your arms:  
 [1 Weight] Dagger (hand) and [1 Weight] Short Sword (close)  
@@ -120,7 +120,7 @@ This applies even when you are magically investigated (Detect Thoughts, Scrying,
 When using a precise or hand weapon, your backstab deals an extra +1d6 damage.
 
 ### Cautious
-When you use trap expert you always get +1 hold, even on a 6-.
+When you use trap expert on a 7-9 you hold 2 Detection. On a 6- you hold 1 Detection.
 
 ### Wealth and Taste
 When you **make a show of flashing around your most valuable possession**, choose someone present. They will do anything they can to obtain your item or one like it.
@@ -135,10 +135,10 @@ After you've used a poison once it's no longer dangerous for you to use.
 You can apply even complex poisons with a pinprick. When you apply a poison that's not dangerous for you to use to your weapon it's touch instead of applied.
 
 ### Brewer
-When you have time to gather materials and a safe place to brew you can create three doses of any one poison you've used before.
+When you have time to gather materials and a safe place to brew you can create and have up to three weightless doses of any one poison you've used before.
 
 ### Underdog
-When you're outnumbered, you have +1 armor.
+When you're outnumbered, you have +2 armor.
 
 ### Connections
 When you put out word to the criminal underbelly about something you want or need, roll+CHA. On a 10+, someone has it, just for you. On a 7-9, you'll have to settle for something close or it comes with strings attached, your call.
@@ -159,7 +159,7 @@ When you use trap expert you always get +1 hold, even on a 6-. On a 12+ you get 
 
 ### Alchemist
 *Replaces Brewer*  
-When you have time to gather materials and a safe place to brew you can create three doses of any poison you've used before. Alternately you can describe the effects of a poison you'd like to create. The GM will tell you that you can create it, but with one or more caveats:
+When you have time to gather materials and a safe place to brew you can create and have up to three weightless doses of any poison you've used before. Alternately you can describe the effects of a poison you'd like to create. The GM will tell you that you can create it, but with one or more caveats:
 - It will only work under specific circumstances
 - The best you can manage is a weaker version
 - It'll take a while to take effect
@@ -167,7 +167,7 @@ When you have time to gather materials and a safe place to brew you can create t
 
 ### Serious Underdog
 *Replaces Underdog*  
-You have +1 armor. When you're outnumbered, you have +2 armor instead.
+When you're outnumbered or fighting something much larger than you, you have +2 armor.
 
 ### Evasion
 When you defy danger on a 12+, you transcend the danger. You not only do what you set out to, but the GM will offer you a better outcome, true beauty, or a moment of grace.
