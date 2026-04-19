@@ -14,14 +14,14 @@ Choose two principles which represent your most deeply held beliefs:
 
 You ignore magical persuasion, thunderous distraction, or any other mental effect which would keep you from upholding these.
 
-When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 2. Spend 1 hold to:
+When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, hold 3 Idealism. On a 7-9, hold 2 Idealism. Spend 1 Idealism to:
 - Ask a friendly NPC to do one impossible thing and they will attempt it.
-- Roll+CHA rather than +Bonds to Aid or Interfere.
 - Roll+CHA rather than +STR to Hack & Slash.
 - Roll+CHA rather than +DEX to Volley.
+- When you **Aid or Interfere** with someone, you can roll +CHA instead of them rolling their stat.
 
 ### Gentle Touch
-When you **touch someone and speak words of courage**, roll+CHA. On a hit, they shake off one condition (fear, charm, confusion, despair) and take +1 forward, or you may move one of their debilities to a different stat of your choice. On a 7-9, you also give yourself or them another debility in the process, their choice which one.
+When you **touch someone and speak words of courage**, roll+CHA. On a hit, they shake off one condition (fear, charm, confusion, despair) and take +1 forward. On a 7-9, you also give yourself or them another debility in the process, their choice which one.
 
 ### See the Best in You
 When you **hold a trusting person's hand and look them in the eye**, roll+CHA. On a 10+, ask them (or the GM, for NPCs) two of the following. On a 7-9, ask one:
@@ -29,7 +29,7 @@ When you **hold a trusting person's hand and look them in the eye**, roll+CHA. O
 - What do you need that you won't ask for?
 - What strength do you have that you've forgotten?
 
-Whatever they answer, they take +1 forward when they act on it, or you take +1 forward acting on it against an NPC.
+If you asked a player and they spoke true, they take +1 forward when they act on it. If you asked an NPC, you take +1 forward acting on the answers.
 
 ### Regality and Grace
 Your voice is particularly arresting. You have no trouble speaking over chatter, crowds, or other loud noise.
@@ -41,7 +41,7 @@ Your princess has a nemesis. A villain who pursues her and would kill for someth
 ## Backgrounds
 
 ### A Poor Kingdom
-When you **prove your worth to a group of naysayers**, you don't need any leverage to **Parley** with them.
+When you **prove your worth to a group of naysayers**, many will become your most ardent supporters.
 
 ### A Large Kingdom
 You have been sent to many cities on diplomatic missions from your country. When you **enter a new city**, tell the GM one unique cultural fact about it.
@@ -54,7 +54,7 @@ You start with:
 [1 Weight] Dungeon Rations (5 rations)  
 Choose your arms:  
 [1 Weight] Rapier (close, precise, one-handed)  
-[1 Weight] Short Sword (close, +1 damage)  
+[1 Weight] Masterwork Short Sword (close, +1 damage)  
 [1 Weight] Ornate Bow (near) and [1 Weight] Quiver of Arrows (ammo)  
 Choose your defense:  
 [1 Weight] [1 Armor] Cloth Armor  
@@ -102,7 +102,13 @@ Build: Towering, Skeletal, Solid, or Chubby
 Color: Pastel (+1d6 damage), Dark (add the *messy* tag when in melee), or Luminescent (heal 1d6 with Gentle Touch)
 
 ### Prophetic Dreams
-When you **lay down to sleep**, roll+WIS. On a 10+ choose one: the visions are lucid and detailed; the visions show you what you must do, and you take +1 forward to doing it. On a 7-9 choose one: the visions are confusing and alarming; the visions are lucid and detailed but the GM gets to make a hard move.
+When you **lay down to sleep**, roll+WIS. On a 10+ choose one:
+- the visions are lucid and accurate.
+- the visions show you what you must do, and you take +1 forward to doing it.
+
+On a 7-9 choose one:
+- the visions are confusing and alarming, but they might just be dreams.
+- the visions are lucid and accurate, but they're not pleasant.
 
 ### Cinderella
 You can speak the grunts, chirps, and calls that are the language of small animals just as well as your mother tongue.
@@ -111,16 +117,18 @@ You can speak the grunts, chirps, and calls that are the language of small anima
 Take one non-multiclass move from the Fighter. Your damage die increases to d6.
 
 ### Rebellious Princess
-Take one non-multiclass move from the Thief, the Bard, or the Witch.
+Take one non-multiclass move from the Thief, the Bard, or the Wizard.
 
 ### A Dashing Disguise
 When you **disguise yourself as a commoner or a prince**, roll+CHA. On a 10+ you pull it off. On a 7-9 there is a complication, tell the GM what might give you away.
 
 ### Love is a Battle...
-Choose a companion. This companion is your true love. Take +1 ongoing to defend them. When you declare another true love this benefit disappears and is applied to your new true love.
+Choose a companion. This companion is your true love. Take +1 ongoing when acting to defend them. When you declare another true love this benefit disappears and is applied to your new true love.
 
 ### Inspiring Grace
-When you **show an NPC a less destructive way**, roll+CHA. On a 10+ they follow your example, but in a way that makes sense to them. On a 7-9 they are less sure, but they are moved by your gesture if you have other leverage over them.
+When you **show an NPC a less destructive way**, roll+CHA.
+- On a 10+ they follow your example, but in a way that makes sense to them.
+- On a 7-9 they are less sure, but they are moved by your gesture if they have any reason to listen to you.
 
 ### Ear to the World
 When you **meet a new person of high status**, tell the GM how you know of them.
@@ -157,6 +165,6 @@ Take one more non-multiclass move from the Fighter. Your damage increases to d8.
 
 ### Wicked Princess
 *Requires Rebellious Princess*
-Take one more non-multiclass move from the Thief, the Bard, or the Witch.
+Take one more non-multiclass move from the Thief, the Bard, or the Wizard.
 
 *A playbook by June Shores*

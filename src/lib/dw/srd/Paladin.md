@@ -45,16 +45,13 @@ You are human, so you get this move.
 
 ### Human
 
-When you **pray for guidance, even for a moment, and ask, “What here is
-evil?”** the GM will tell you, honestly.
+When you **pray for guidance, even for a moment, and ask, “What here is evil?”** the GM will tell you, honestly.
 
 You start with these moves:
 
 ### Lay on Hands \(Cha\)
 
-When you **touch someone, skin to skin, and pray for their well-being **,
-roll+CHA. ✴On a 10+ you heal 1d8 damage or remove one disease. ✴On a 7–9, they
-are healed, but the damage or disease is transferred to you.
+When you **touch someone, skin to skin, and pray for their well-being**, roll+CHA. ✴On a 10+ you heal 1d8 damage or remove one disease. ✴On a 7–9, they are healed, but the damage or disease is transferred to you.
 
 ### Armored
 
@@ -69,13 +66,11 @@ When you **give an NPC an order based on your divine authority**, roll+Cha.
 - Back away cautiously, then flee
 - Attack you
 
-✴On a 10+, you also take +1 forward against them. ✴On a miss, they do as they
-please and you take -1 forward against them.
+✴On a 10+, you also take +1 forward against them. ✴On a miss, they do as they please and you take -1 forward against them.
 
 ### Quest
 
-When you **dedicate yourself to a mission through prayer and ritual
-cleansing**, state what you set out to do:
+When you **dedicate yourself to a mission through prayer and ritual cleansing**, state what you set out to do:
 
 - Slay \_\_\_\_\_\_\_, a great blight on the land
 - Defend \_\_\_\_\_\_\_ from the iniquities that beset them
@@ -90,8 +85,7 @@ Then choose up to two boons:
 - A voice that transcends language
 - A freedom from hunger, thirst, and sleep
 
-The GM will then tell you what vow or vows is required of you to maintain your
-blessing:
+The GM will then tell you what vow or vows is required of you to maintain your blessing:
 
 - Honor \(forbidden: cowardly tactics and tricks\)
 - Temperance \(forbidden: gluttony in food, drink, and pleasure of the flesh\)
@@ -114,9 +108,7 @@ Endanger yourself to protect someone weaker than you.
 
 ## Gear
 
-Your load is 12+Str. You start with dungeon rations \(5 uses, 1 weight\),
-scale armor \(2 armor, 3 weight\), and some mark of faith, describe it \(0
-weight\). Choose your weapon:
+Your load is 12+Str. You start with dungeon rations \(5 uses, 1 weight\), scale armor \(2 armor, 3 weight\), and some mark of faith, describe it \(0 weight\). Choose your weapon:
 
 - Halberd \(reach, +1 damage, two-handed, 2 weight\)
 - Long sword \(close, +1 damage, 1 weight\) and shield \(+1 armor, 2 weight\)

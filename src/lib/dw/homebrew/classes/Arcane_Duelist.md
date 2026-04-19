@@ -166,4 +166,4 @@ Get one move from another class. Treat your level as one lower for choosing the 
 - **Grounding**  Energy channels from your blade into the earth beneath you. Until you choose to move from this spot, you cannot be knocked down, pushed, or thrown off balance.
 - **Redirecting**  Your blade traces a sigil in the air that lingers after your strike. Hold 1 Ward; spend it to deflected a nearby ranged attack toward a target of your choosing within near range. Lose your Ward when you stop fighting.
 
-*A playbook by Timothy Schroeder*
+*A playbook by Timothy Schroeder and Magnus Anderson*
