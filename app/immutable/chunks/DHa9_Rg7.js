@@ -51,7 +51,9 @@ You start with these moves:
 
 ### Lay on Hands \\(Cha\\)
 
-When you **touch someone, skin to skin, and pray for their well-being**, roll+CHA. ✴On a 10+ you heal 1d8 damage or remove one disease. ✴On a 7–9, they are healed, but the damage or disease is transferred to you.
+When you **touch someone, skin to skin, and pray for their well-being**, roll+CHA.
+- On a 10+ you heal 1d8 damage or remove one disease.
+- On a 7–9, they are healed, but the damage or disease is transferred to you.
 
 ### Armored
 
@@ -59,14 +61,13 @@ You ignore the clumsy tag on armor you wear.
 
 ### I Am the Law
 
-When you **give an NPC an order based on your divine authority**, roll+Cha.
-✴On a 7+, they choose one:
+When you **give an NPC an order based on your divine authority**, roll+Cha. On a 7+, they choose one:
 
 - Do what you say
 - Back away cautiously, then flee
 - Attack you
 
-✴On a 10+, you also take +1 forward against them. ✴On a miss, they do as they please and you take -1 forward against them.
+On a 10+, you also take +1 forward against them. On a miss, they do as they please and you take -1 forward against them.
 
 ### Quest
 
@@ -79,7 +80,7 @@ When you **dedicate yourself to a mission through prayer and ritual cleansing**,
 Then choose up to two boons:
 
 - An unwavering sense of direction to \\_\\_\\_\\_\\_\\_\\_.
-- Invulnerability to \\_\\_\\_\\_\\_\\_\\_ \\(e.g., edged weapons, fire, enchantment, etc.\\)
+- Invulnerability to \\_\\_\\_\\_\\_\\_\\_ \\(e.g., swords, weapons, fire, enchantment, etc.\\)
 - A mark of divine authority
 - Senses that pierce lies
 - A voice that transcends language
