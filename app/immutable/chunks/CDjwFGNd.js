@@ -24,7 +24,7 @@ When you **insult someone, roll+CHA**. On a 10+ choose two. On a 7-9 choose one.
 ### Magical Music
 When you **sing or play a song before many**, describe it and roll+CHA. On a 7+, you hold the attention of every intelligent creature that can see or hear you until the performance is completed or something else breaks their attention, and choose 1. On a 10+, choose 2.
 - A member of the audience becomes enraptured with you—the GM will tell you who.
-- One or more members of the audience give you gifts—the GM will tell you what.
+- One or more members of the audience give you gifts—you can explain what you need or desire, but they might not have it.
 - A member of the audience requests your services.
 
 ### Web of Contacts
@@ -33,13 +33,8 @@ When you **declare you know someone who can help you**, describe that person and
 - They’re not already in some sort of trouble
 - They don't have a dangerous secret
 
-### Charming and Open
-When you **speak frankly with someone**, you can ask their player a question from the list below. They must answer it truthfully, then they may ask you a question from the list (which you must answer truthfully).
-- Whom do you serve?
-- What do you wish I would do?
-- How can I get you to ________?
-- What are you really feeling right now?
-- What do you most desire?
+### Collegium Scholar
+When you roll a 7+ to Spout Lore, you can ask the GM a follow-up question of your choice about the topic; they’ll answer truthfully.
 
 ## Background
 
@@ -176,14 +171,16 @@ When the GM first establishes a noble, famous, or influential NPC, you can ask t
 
 You always know what a fitting gift would be for a noble who you've heard anything about.
 
-### Silver Tongued
-When you **use words to avoid suspicion or trouble**, roll +CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to:
-- Move about or maneuver unchallenged
-- Stop people from following you around or verifying what you say
-- Direct suspicion or attention where you want it
-
 ### Courtier
 When you Parley, on a 10+, you may also ask them any question, which they must answer truthfully. This information comes from a slip of the tongue or their body language giving it away; they won't notice that they gave up their information.
+
+### Charming and Open
+When you **speak frankly with someone**, you can ask their player a question from the list below. They must answer it truthfully, then they may ask you a question from the list (which you must answer truthfully).
+- Whom do you serve?
+- What do you wish I would do?
+- How can I get you to ________?
+- What are you really feeling right now?
+- What do you most desire?
 
 ### Irresistable
 You can always tell whether an NPC finds you attractive (the answer is usually yes). When you Parley with someone who finds you attractive, you take +1.
@@ -191,11 +188,16 @@ You can always tell whether an NPC finds you attractive (the answer is usually y
 ### Tall Tales
 When you **spend some time trading gossip in a community**, you learn of an interesting opportunity nearby. You can also start a rumor of your own; it will spread like wildfire.
 
-### Collegium Scholar
-When you roll a 7+ to Spout Lore, you can ask the GM a follow-up question of your choice about the topic; they’ll answer truthfully.
-
 ### Duelist’s Parry
 When you **Hack & Slash** or use **Cutting Jibes**, gain +2 armor for the exchange.
+
+### Under Pressure
+When you **Hack & Slash and your reputation is on the line** - people are watching, or you've made repeated public promises to defeat someone and they know it - you take +1d6 damage.
+
+### Gobsmacked
+When you **reveal a secret of the enemy to their face**, hold 1 Intimidation against them. Spend it at any time to:
+- Deal an additional +1d6 damage when you damage them.
+- Defy Danger with CHA instead of another stat when they threaten you.
 
 ### An Ear For Magic
 When you **hear an enemy cast a spell** the GM will tell you the name of the spell and its effects. Take +1 forward when acting on the answers.
@@ -204,7 +206,7 @@ When you **hear an enemy cast a spell** the GM will tell you the name of the spe
 When you **successfully aid someone** you take +1 forward as well.
 
 ### No Time To Die
-When **someone else's health drops to or below 5 and you give a rallying cry**, immediately roll for a **Stirring Speech** with doubled effects.
+When **an ally's health drops to 4 or below and you give a rallying cry**, immediately roll for a quick **Stirring Speech** with doubled effects.
 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower for choosing the move.
@@ -214,15 +216,21 @@ Get one move from another class. Treat your level as one lower for choosing the 
 
 ## Mastery Moves
 
+### Silver Tongued
+When you **use words to avoid suspicion or trouble**, roll +CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to:
+- Move about or maneuver unchallenged
+- Stop people from following you around or verifying what you say
+- Direct suspicion or attention where you want it
+
 ### Master of Fate
-*Requires Collegium Scholar*  
 When you roll a 12+ to Spout Lore, you can tell the GM something else about your topic, and how it benefits you. The GM may explain which parts of your tale are legendary, but then explains the truth behind the legend.
 
-### Duelist’s Block
-*Replaces: Duelist’s Parry*  
+### Perfect Parry
+*Replaces Duelist’s Parry*  
 When you **Hack & Slash** or use **Cutting Jibes**, you take +3 armor for the exchange and +3 armor forward.
 
 ### Devious
+*Requires Charming and Open*  
 When you use charming and open you may also ask “How are you vulnerable to me?” Your subject may not ask this question of you.
 
 ### Unforgettable Face
