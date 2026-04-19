@@ -143,10 +143,10 @@ When you're outnumbered, you have +2 armor.
 ### Connections
 When you put out word to the criminal underbelly about something you want or need, roll+CHA. On a 10+, someone has it, just for you. On a 7-9, you'll have to settle for something close or it comes with strings attached, your call.
 
-### I have a permit
-When you **act as though you're allowed to be where you shouldn't**, roll+CHA.
-- On a 10+, you lie your way past even diligent wardens.
-- On a 7-9, you get away with it if the person isn't very familiar with proper procedure.
+### Con Artist
+When you **tell someone something they're inclined to be skeptical of**, roll+CHA. On a 7+, they believe you. On a 7-9, the GM chooses 1:
+- They'll want some additional proof before they allow you to do anything that could get them in trouble.
+- They'll decide within a few minutes that they were right to be skeptical of you.
 
 ## Mastery Moves
 

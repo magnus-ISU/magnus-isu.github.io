@@ -61,7 +61,7 @@ You start with:
 [1 Weight] Dungeon Rations (5 uses)  
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Leather Armor  
-[2 Weight] Bag of Books (5 uses) and [0 Weight] 3 Weightless Healing Potions  
+[2 Weight] Bag of Books (3 uses) and [0 Weight] 3 Weightless Healing Potions  
 Choose your weapon:  
 [1 Weight] Dagger (hand)  
 [1 Weight] Staff (close, two-handed)  
@@ -100,7 +100,7 @@ Evil: Use magic to cause fear and terror.
 ## Advanced Moves
 
 ### Spellblade
-When you **Cast a Spell**, you get +d4 forward to damage from **Hack and Slash**. When you **Hack and Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
+When you **Cast a Spell**, you get +d4 forward to damage from **Hack & Slash**. When you **Hack & Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
 
 ### Quick Thinking
 When you **spend one minute in contemplation of your spellbook**, you memorize one spell or cantrip from your spellbook, forgetting any others.
@@ -187,6 +187,6 @@ Choose 3 spells which can hardly be forgotten; it takes but a few seconds of tho
 When you have time and safety with a magic item in a place of power you can empower that item so that the next time you use it its effects are amplified, the GM will tell you exactly how.
 
 ### Warrior of the Mind
-When you **already know another's fighting style**, then you can **Hack and Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
+When you **already know another's fighting style**, then you can **Hack & Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
 
 *A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*

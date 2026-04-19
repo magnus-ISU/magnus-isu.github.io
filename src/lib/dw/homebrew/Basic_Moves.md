@@ -68,11 +68,11 @@ When you **interact carefully and watchfully with someone**, roll+CHA. On a 10+,
 ## Pushing Moves
 
 ### Aid or Interfere
-When you **act alongside one of your companions**, they roll with Advantage but you are both exposed to any costs or consequences associated with their move.
+When you **act alongside one of your companions**, they roll with +1 but you are both exposed to any costs or consequences associated with their move.
 When you **hinder one of your companions**, they roll with Disadvantage but you also expose yourself to danger, retribution, or cost.
 
 ### Push Yourself
-When you **put all of your effort into one act**, you may take a debility of your choice to reroll any die (except your Last Breath). The debility does not affect this roll.
+When you **put all of your effort into one act**, you may once take a debility of your choice to reroll any roll you make (except your Last Breath or monster damage). The debility does not affect this roll.
 
 ## Rest and Recovery Moves
 

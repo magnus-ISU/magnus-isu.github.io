@@ -117,7 +117,7 @@ If multiple creatures attack a player at once, roll the highest damage among the
 
 > A goblin orkaster (d10+1 damage ignores armor) and three goblins (d6 damage) all throw their weapons at Lux as she assaults their barricade. Roll the highest damage—d10+1 ignores armor—and add +3 for the three other goblins.
 
-A move should describe if and how it affects multiple creatures. Hack and Slash allows you to divide your damage. Volley and Magic Missiles target a single creature. A Fireball explodes and deals its damage to each target.
+A move should describe if and how it affects multiple creatures. Hack & Slash allows you to divide your damage. Volley and Magic Missiles target a single creature. A Fireball explodes and deals its damage to each target.
 
 #### Non-lethal attacks.
 

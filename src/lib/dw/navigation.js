@@ -175,7 +175,15 @@ export const navigation = [
 				srdSlug: 'thief-srd'
 			},
 			{ title: 'Thief', slug: 'thief-srd', source: 'srd', file: 'Thief', hidden: true, homebrewSlug: 'thief' },
-			{ title: 'Paladin', slug: 'paladin', source: 'srd', file: 'Paladin' },
+			{
+				title: 'Paladin',
+				slug: 'paladin',
+				source: 'homebrew',
+				file: 'classes/Paladin',
+				homebrew: true,
+				srdSlug: 'paladin-srd'
+			},
+			{ title: 'Paladin', slug: 'paladin-srd', source: 'srd', file: 'Paladin', hidden: true, homebrewSlug: 'paladin' },
 			{
 				title: 'Ranger',
 				slug: 'ranger',
@@ -194,8 +202,24 @@ export const navigation = [
 				srdSlug: 'druid-srd'
 			},
 			{ title: 'Druid', slug: 'druid-srd', source: 'srd', file: 'Druid', hidden: true, homebrewSlug: 'druid' },
-			{ title: 'Barbarian', slug: 'barbarian', source: 'srd', file: 'Barbarian' },
-			{ title: 'Bard', slug: 'bard', source: 'srd', file: 'Bard' },
+			{
+				title: 'Barbarian',
+				slug: 'barbarian',
+				source: 'homebrew',
+				file: 'classes/Barbarian',
+				homebrew: true,
+				srdSlug: 'barbarian-srd'
+			},
+			{ title: 'Barbarian', slug: 'barbarian-srd', source: 'srd', file: 'Barbarian', hidden: true, homebrewSlug: 'barbarian' },
+			{
+				title: 'Bard',
+				slug: 'bard',
+				source: 'homebrew',
+				file: 'classes/Bard',
+				homebrew: true,
+				srdSlug: 'bard-srd'
+			},
+			{ title: 'Bard', slug: 'bard-srd', source: 'srd', file: 'Bard', hidden: true, homebrewSlug: 'bard' },
 			{
 				title: 'Alchemist',
 				slug: 'alchemist',

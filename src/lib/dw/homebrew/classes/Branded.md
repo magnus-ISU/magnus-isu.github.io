@@ -34,13 +34,13 @@ When you **bend an existing flame to your will**, roll+WIS. On a 10+ it does as 
 ## Background
 
 ### Touched by Flame
-You may be elf, dwarf, halfling, or human, but your soul has been suffused by fire. Tell the GM what you sacrificed to the flames; in return, non-magical heat and fire no longer harm you.
+You may be elf, dwarf, halfling, or human, but your soul has been suffused by fire. Tell the GM what you sacrificed to the flames; in return, magical and mundane heat and fire no longer harm you.
 
 ### Brand of the Pact
 Name what branded you — a demon, an elemental lord, a dying star. When you **call upon your patron through the flames**, they answer, but they always want something in return.
 
 ### Ash Walker
-You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should.
+You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should; tell the GM about it.
 
 ## Gear
 You carry no weapons and need no armour but the flames that burn within you. You start with:  
