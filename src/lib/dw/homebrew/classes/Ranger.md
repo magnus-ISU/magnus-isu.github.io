@@ -52,7 +52,7 @@ When you **Undertake a Perilous Journey through wilderness**, roll+WIS. Choose 4
 You are tough and adaptable, and know better than most how to survive a grim situation. Bandages heal 6 HP when you apply them, which you can do alone; and you don't need to eat a ration to benefit from them.
 
 ### Civilized
-You’ve traveled among the wilds and the civilized lands, speaking to everyone about both. When you **spout lore about villages, dungeons, ruins, or their peoples,** take +1.
+You’ve traveled among the wilds and the civilized lands, speaking to everyone about both. When you **spout lore about villages, dungeons, ruins, or their peoples**, take +1. In a settlement, you and your animal companion don't need to consume rations as long as someone is interested in your stories.
 
 ### Trapper
 You start with the **Trapper** advanced move.
@@ -60,8 +60,8 @@ You start with the **Trapper** advanced move.
 ### Preferred Enemy
 Choose a creature type, such as dragons, giants, undead, constructs, or elves. Your animal companion is trained in *fighting and finding them*, and you get +1d4 damage against them.
 
-### Birdwatcher
-You can mimic any sound that you've heard a wild animal make.
+### Birdcaller
+You can mimic any sound that you've heard a wild animal make, and communicate with your animal companion from one kilometer away.
 
 ## Gear
 You start with:  
@@ -143,7 +143,7 @@ When you strike an enemy with two weapons at once, add an extra 1d4 damage for y
 When you **keep still in natural surroundings**, enemies never spot you until you make a movement.
 
 ### Man's Best Friend
-When you **allow your animal companion to take a blow that was meant for you**, the damage is negated and your animal companion's ferocity becomes 0. If its ferocity is already 0 you can't use this ability. When you have a few hours of rest with your animal companion its ferocity returns to normal.
+When you **allow your animal companion to take a blow that was meant for you**, the damage is negated and your animal companion gains the *Severly Wounded* tag. It is inadvisable to have it continue fighting in this condition. When you have a few hours of rest with your animal companion it is healed if you hadn't yet done so.
 
 ### Blot Out the Sun
 When you volley you may spend ammo before rolling. For each ammo spent you may choose two extra targets. Roll once and apply damage to all targets.
@@ -174,6 +174,10 @@ When you spout lore about a monster you use WIS instead of INT. On a 12+, in add
 ### Viper's Fangs
 *Replaces Viper's Strike*  
 When you strike an enemy with two weapons at once, add an extra 1d8 damage for your off-hand strike.
+
+### Incredibly Armored
+**Replaces Well-Armored**  
+Whether through your craftsmanship, its own resilience, or special training, your animal companion gets +2 Armor.
 
 ### Smaug's Belly
 When you know and could possibly hit your target's weakest point your arrows ignore armor.

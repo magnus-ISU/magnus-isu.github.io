@@ -15,7 +15,7 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 ### Ranged Weapons
 
-[10 Coin] [1 Weight] **3 Throwing Daggers** thrown, near, ammo
+[10 Coin] [1 Weight] **3 Throwing Daggers** thrown, near
 
 [15 Coin] [2 Weight] **Ragged Bow** near
 
@@ -322,7 +322,7 @@ _Messy_: It does damage in a particularly destructive way, ripping people and th
 
 _Thrown_: Throw it at someone to hurt them. If you volley with this weapon, you can't choose to mark off ammo on a 7–9; once you throw it, it's gone until you can recover it.
 
-_Ammo_: It counts as ammunition for appropriate ranged weapons. **Volley** allows you to expend all your ammo rather than suffer worse consequences. When you track ammo individually (throwing daggers except the first), you can no longer use this for **Volley**.
+_Ammo_: It counts as ammunition for appropriate ranged weapons. **Volley** allows you to expend a full quiver/container of ammo rather than suffer worse consequences.
 
 _+n Damage_: It is particularly harmful to your enemies. When you deal damage, you add _n_ to it.
 

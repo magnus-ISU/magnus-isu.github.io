@@ -2,7 +2,7 @@
 
 You're a good dog. The best dog. You don't understand why your companions spend so much time talking and worrying and reading things when the world is so full of smells and sounds and things to chase. There are bad things out there — you can smell them — and your people need you whether they know it or not.
 
-You can't hold a sword or cast a spell or pick a lock. But you can hear trouble coming from a mile away, you can track anything that bleeds, and when your friends are in danger you will throw yourself between them and death without a second thought. That's what good dogs do.
+You can't hold a sword or cast a spell or pick a lock. But you can hear trouble coming from a kilometer away, you can track anything that bleeds, and when your friends are in danger you will throw yourself between them and death without a second thought. That's what good dogs do.
 
 Now who wants to go for a walk?
 
