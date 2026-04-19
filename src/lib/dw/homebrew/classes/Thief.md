@@ -25,7 +25,7 @@ When you **attack a surprised or defenseless enemy with a melee weapon**, you de
 - Reduce their armor by 1 until they repair it
 
 ### Poisoner
-You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three weightless uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
+You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
 - Bloodweed (touch): The target deals -1d4 damage ongoing until cured
 - Serpent's Tears (touch): Anyone dealing damage to the target has advantage.
 - Serrulatus' Sting (touch): This neurotoxin makes the target fly into a spastic rage, unable to be consoled for a few minutes.
@@ -135,7 +135,7 @@ After you've used a poison once it's no longer dangerous for you to use.
 You can apply even complex poisons with a pinprick. When you apply a poison that's not dangerous for you to use to your weapon it's touch instead of applied.
 
 ### Brewer
-When you have time to gather materials and a safe place to brew you can create and have up to three weightless doses of any one poison you've used before.
+When you have time to gather materials and a safe place to brew you can create and have up to three doses of any one poison you've used before.
 
 ### Underdog
 When you're outnumbered, you have +2 armor.
@@ -159,7 +159,7 @@ When you use trap expert you always get +1 hold, even on a 6-. On a 12+ you get 
 
 ### Alchemist
 *Replaces Brewer*  
-When you have time to gather materials and a safe place to brew you can create and have up to three weightless doses of any poison you've used before. Alternately you can describe the effects of a poison you'd like to create. The GM will tell you that you can create it, but with one or more caveats:
+When you have time to gather materials and a safe place to brew you can create and have up to three doses of any poison you've used before. Alternately you can describe the effects of a poison you'd like to create. The GM will tell you that you can create it, but with one or more caveats:
 - It will only work under specific circumstances
 - The best you can manage is a weaker version
 - It'll take a while to take effect
