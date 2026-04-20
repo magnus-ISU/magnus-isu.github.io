@@ -45,13 +45,10 @@ The stats below are for typical items. There are, of course, variations. A dull 
 [15 Coin] [2 Weight] [+1 Armor] **Shield**  
 [150 Coin] [4 Weight] [+1 Armor] **Tower Shield** *clumsy, cover*  
 
-Armor is heavy, difficult to wear and is damned uncomfortable. Some classes
-are better trained to ignore these drawbacks, but anyone can strap on a suit
-of armor and enjoy the benefits it grants.
+Armor is heavy, difficult to wear and is damned uncomfortable. Some classes are better trained to ignore these drawbacks, but anyone can strap on a suit of armor and enjoy the benefits it grants.
 
 ### Armor Tags
-Armor, like weapons, has tags. Some are purely descriptive but the ones below
-have some mechanical effect on the player wearing them
+Armor, like weapons, has tags. Some are purely descriptive but the ones below have some mechanical effect on the player wearing them
 
 _n Armor_: It protects you from harm and absorbs damage. When you take damage, subtract your armor from the total. If you have more than one item with _n Armor_, only the highest value counts.
 
