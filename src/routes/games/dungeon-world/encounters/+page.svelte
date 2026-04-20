@@ -5,6 +5,7 @@ import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
 import { encounterText } from '$lib/dw/encounterText.svelte.js';
 import { allMonsters } from '$lib/dw/monsters.js';
+import { parseMonsterText } from '$lib/dw/monsterText.js';
 import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
 import { pageArt } from '$lib/dw/navigation.js';
 import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
@@ -73,54 +74,8 @@ function parseParen(str) {
 	return { count: names.length, names };
 }
 
-// Parse inline monster block (same format as user-monster builder)
 function parseInlineMonster(raw) {
-	const lines = raw.split('\n');
-	const get = (i) => lines[i]?.trim() || '';
-
-	// Line 0: name, tag, tag, tag...
-	const nameParts = get(0).split(',').map((s) => s.trim());
-	const name = nameParts[0] || '';
-	const tags = nameParts.slice(1).filter(Boolean).join(', ');
-
-	// Line 1: hp, armor, description
-	const line1 = get(1).split(',').map((s) => s.trim());
-	const hp = line1[0] ? +line1[0] : null;
-	const armor = line1[1] ? +line1[1] : null;
-	const description = line1.slice(2).join(', ').replaceAll('\\n', '\n');
-
-	// Line 2: instinct, special qualities
-	const line2 = get(2).split(',').map((s) => s.trim());
-	const instinct = line2[0] || '';
-	const special = line2.slice(1).filter(Boolean).join(', ');
-
-	const attacks = [];
-	const moves = [];
-	for (let j = 3; j < lines.length; j++) {
-		const line = lines[j].trim();
-		if (!line) continue;
-		if (line.toLowerCase().startsWith('attack:')) {
-			const parts = line.slice(7).split(';').map((s) => s.trim());
-			attacks.push({ name: parts[0] || '', damage: parts[1] || '', tags: parts[2] || '' });
-		} else {
-			for (const m of line.split(';').map((s) => s.trim()).filter(Boolean)) moves.push(m);
-		}
-	}
-
-	return {
-		name: name || 'Unnamed',
-		...(tags && { tags }),
-		...(hp !== null && !isNaN(hp) && { hp }),
-		...(armor !== null && !isNaN(armor) && { armor }),
-		attacks: attacks.filter((a) => a.name),
-		...(special && { special }),
-		...(description && { description }),
-		...(instinct && { instinct }),
-		moves,
-		count: 1,
-		memberNames: [],
-		custom: true,
-	};
+	return { ...parseMonsterText(raw), count: 1, memberNames: [], custom: true };
 }
 
 // Greedy name matching — operates on ranges within each line

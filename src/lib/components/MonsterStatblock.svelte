@@ -22,6 +22,7 @@ let {
 import { descExpanded as globalDesc, globalExpand } from '$lib/dw/descExpanded.svelte.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { encounterText } from '$lib/dw/encounterText.svelte.js';
+import { monsterToText } from '$lib/dw/monsterText.js';
 
 function inlineMd(text) {
 	return text
@@ -72,17 +73,7 @@ function onPointerUp() {
 }
 
 function copyToClipboard() {
-	const line0 = [name, ...(tags ? tags.split(',').map((s) => s.trim()).filter(Boolean) : [])].join(', ');
-	const line1 = [hp ?? '', armor ?? '', description || ''].join(', ');
-	const line2 = [instinct || '', special || ''].join(', ');
-	const lines = [line0, line1, line2];
-	for (const atk of attacks) {
-		const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
-		lines.push(`attack: ${parts.join(' ; ')}`);
-	}
-	if (moves.length) lines.push(moves.join('; '));
-	while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
-	navigator.clipboard.writeText(lines.join('\n'));
+	navigator.clipboard.writeText(monsterToText({ name, tags, hp, armor, description, instinct, special, attacks, moves }));
 }
 
 function doAddToEncounter() {
