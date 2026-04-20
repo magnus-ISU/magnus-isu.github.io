@@ -8,6 +8,8 @@ You can open a spell list and click on a heading to copy everything under the he
 
 To avoid confusion and clutter, you could also delete every move that you will never take and don't need and move everything you have to cluster together.
 
+Modify your damage dice on the second line. Add more damage dice options by using semicolons: Damage d4;2d4;2d6
+
 ## Choose Stats
 
 Making Dungeon World characters is quick and easy. You should all create your
