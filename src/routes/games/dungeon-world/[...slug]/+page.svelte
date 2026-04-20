@@ -347,8 +347,8 @@ onMount(() => {
 
 	:global(.dw-article .weight-icon) {
 		display: inline-block;
-		width: 22px;
-		height: 22px;
+		width: 24px;
+		height: 24px;
 		vertical-align: middle;
 		color: #444;
 		transform: translateY(-2px);
