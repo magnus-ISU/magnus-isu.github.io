@@ -57,7 +57,7 @@ When you **press or entice an NPC**, say what you want them to do (or not do). I
 When you **propose that you took some previously undeclared action in the past** that can affect the current situation, and the GM agrees, roll +INT. On a 10+, it's as you specified. On a 7-9, it's not quite what you specified; the GM can introduce a complication or a cost. On a miss, things have changed that you're only now learning about.
 
 ### Draw Them Out
-When you **interact carefully and watchfully with someone**, roll+CHA. On a 10+, hold 3 Empathy. On a 7-9, hold 1 Empathy. While you trying to figure them out, spend Empathy 1-for-1 to ask:
+When you **interact carefully and watchfully with someone**, roll+INT. On a 10+, hold 3 Empathy. On a 7-9, hold 1 Empathy. While you trying to figure them out, spend Empathy 1-for-1 to ask:
 - What are they really feeling right now?
 - What are they trying to hide?
 - What do they wish I would do?
