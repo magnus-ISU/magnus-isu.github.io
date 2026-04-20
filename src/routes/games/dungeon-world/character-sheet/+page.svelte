@@ -356,6 +356,7 @@
 
 	function rollTier(total, isDamage) {
 		if (isDamage) return 'damage';
+		if (total >= 12) return 'crit';
 		if (total >= 10) return 'strong';
 		if (total >= 7) return 'weak';
 		return 'miss';
@@ -477,6 +478,66 @@
 
 
 	const bodyHtml = $derived(renderMarkdown(parsed.body));
+
+	// --- Radial dice menu ---
+	let radialMenu = $state(null); // { x, y, timer, closing }
+	const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', '2d6', '1d6+1d8'];
+
+	function showRadialMenu(e) {
+		// Only trigger on the header bar itself, not on interactive children
+		const target = e.target;
+		if (target.closest('button, input, .circle, .armor-display, .circle-draggable')) return;
+		e.preventDefault();
+		if (radialMenu && !radialMenu.closing) {
+			closeRadialMenu();
+			return;
+		}
+		clearRadialTimer();
+		const rect = e.currentTarget.getBoundingClientRect();
+		radialMenu = {
+			x: e.clientX - rect.left,
+			y: e.clientY - rect.top,
+			closing: false,
+			timer: setTimeout(() => closeRadialMenu(), 5000)
+		};
+	}
+
+	function clearRadialTimer() {
+		if (radialMenu?.timer) clearTimeout(radialMenu.timer);
+	}
+
+	function closeRadialMenu() {
+		clearRadialTimer();
+		if (!radialMenu) return;
+		radialMenu = { ...radialMenu, closing: true, timer: null };
+		setTimeout(() => { radialMenu = null; }, 200);
+	}
+
+	function rollRadialDie(formula, e) {
+		clearRadialTimer();
+		radialMenu = null;
+		const isMove = formula === '2d6' || formula === '1d6+1d8';
+
+		if (formula === '1d6+1d8') {
+			const d6val = rollDie(6);
+			const d8val = rollDie(8);
+			const total = d6val + d8val;
+			const { lx, ly } = launchDir();
+			rollKey++;
+			rollResult = {
+				ab: 'DMG', mod: 0, total, mx: e.clientX, my: e.clientY, lx, ly,
+				isDamage: false, formula,
+				barbarian: true, barbLabel: `${d6val}+${d8val}`, barbD6Higher: d6val > d8val
+			};
+			return;
+		}
+
+		const total = parseDamageFormula(formula);
+		if (total === null) return;
+		const { lx, ly } = launchDir();
+		rollKey++;
+		rollResult = { ab: 'DMG', mod: 0, total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: !isMove, formula };
+	}
 </script>
 
 <svelte:window onkeydown={(e) => {
@@ -528,7 +589,22 @@
 
 	{#if parsed.name}
 		<div class="sheet-preview">
-			<div class="sheet-top">
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div class="sheet-top" onclick={showRadialMenu}>
+			{#if radialMenu}
+				<div class="radial-menu" class:closing={radialMenu.closing} style="left: {radialMenu.x}px; top: {radialMenu.y}px">
+					{#each RADIAL_DICE as die, i}
+						{@const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2}
+						{@const radius = 70}
+						<button
+							class="radial-btn"
+							style="transform: translate({Math.cos(angle) * radius}px, {Math.sin(angle) * radius}px)"
+							onclick={(e) => { e.stopPropagation(); rollRadialDie(die, e); }}
+						>{die}</button>
+					{/each}
+				</div>
+			{/if}
 			<div class="sheet-header">
 				<div class="header-info">
 					<h2 class="char-name">{parsed.name}</h2>
@@ -659,10 +735,11 @@
 		{@const tier = rollTier(rollResult.total, rollResult.isDamage)}
 		<div
 			class="roll-bubble roll-{tier}"
+			class:roll-barb-white={rollResult.barbarian && rollResult.barbD6Higher}
 			style="left: {rollResult.mx}px; top: {rollResult.my}px; --lx: {rollResult.lx}px; --ly: {rollResult.ly}px"
 			onanimationend={() => { rollResult = null; }}
 		>
-			<span class="roll-total">{rollResult.total}</span>
+			<span class="roll-total">{rollResult.barbarian ? rollResult.barbLabel : rollResult.total}</span>
 			<span class="roll-label">
 				{#if rollResult.isDamage}
 					{rollResult.formula}
@@ -746,6 +823,7 @@
 		top: calc(2rem * 1.7 + 1rem + 1px);
 		z-index: 9;
 		border-radius: 6px 6px 0 0;
+		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
 
 	/* --- Header with circles --- */
@@ -1004,6 +1082,52 @@
 
 	.char-body :global(.move-block) { break-inside: avoid; }
 
+	/* --- Radial dice menu --- */
+	.radial-menu {
+		position: absolute;
+		z-index: 100;
+		pointer-events: none;
+	}
+
+	.radial-btn {
+		position: absolute;
+		pointer-events: auto;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 2px solid #d4a847;
+		background: #1a1a1a;
+		color: #d4a847;
+		font: bold 0.65rem/1 inherit;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		margin-left: -22px;
+		margin-top: -22px;
+		transition: background 0.15s, color 0.15s;
+		animation: radial-pop 0.2s ease-out both;
+	}
+
+	.closing .radial-btn {
+		animation: radial-pop-out 0.2s ease-in both;
+	}
+
+	.radial-btn:hover {
+		background: #d4a847;
+		color: #1a1a1a;
+	}
+
+	@keyframes radial-pop {
+		from { scale: 0; opacity: 0; }
+		to   { scale: 1; opacity: 1; }
+	}
+
+	@keyframes radial-pop-out {
+		from { scale: 1; opacity: 1; }
+		to   { scale: 0; opacity: 0; }
+	}
+
 	/* --- Roll bubble (launches from mouse) --- */
 	@keyframes roll-launch {
 		0%   { transform: translate(-50%, -50%) scale(0); opacity: 0; }
@@ -1055,9 +1179,19 @@
 		color: #e05555;
 	}
 
+	.roll-crit {
+		border-color: #c4f;
+		color: #c4f;
+	}
+
 	.roll-damage {
-		border-color: #e05555;
-		color: #e05555;
+		border-color: #333;
+		color: #fff;
+	}
+
+	.roll-barb-white {
+		background: #ffffffee;
+		color: #111;
 	}
 
 	@media (max-width: 768px) {
