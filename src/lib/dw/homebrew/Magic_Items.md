@@ -38,8 +38,10 @@ Sharp as anything, this simple-seeming sword means to separate one thing from an
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
 
-### [0 Weight] [+1 Armor] Ring of Protection
+### [0 Weight] Ring of Protection
 A slender band of nearly invisible silver. Prince Edrin wore the ring upon his finger during his long captivity in the dungeons of the Usurper. Despite the tortures he endured, blades and blow alike seemed to slide away from his flesh, leaving him bruised but unbroken.
+
+When you would **take Damage**, instead don't. You can use this move again in one hour.
 
 ### [1 Weight] [+1 Armor] Lodestone Shield
 Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Readiness, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.

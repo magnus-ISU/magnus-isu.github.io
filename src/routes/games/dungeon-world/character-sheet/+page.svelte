@@ -1061,6 +1061,10 @@
 	}
 
 	@media (max-width: 768px) {
+		.sheet-editor :global(textarea) {
+			height: calc(100vh - 360px);
+		}
+
 		.sheet-preview {
 			margin-left: -1rem;
 			margin-right: -1rem;
