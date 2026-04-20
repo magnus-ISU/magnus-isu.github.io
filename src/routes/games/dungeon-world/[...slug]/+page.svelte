@@ -164,10 +164,25 @@ onMount(() => {
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 		if (!heading) return;
 		if (heading.tagName === 'H2') {
-			let sib = heading.nextElementSibling;
-			while (sib?.classList.contains('h2-section')) {
-				sib.classList.toggle('collapsed');
-				sib = sib.nextElementSibling;
+			const collapsing = !heading.classList.contains('collapsed-heading');
+			const sib = heading.nextElementSibling;
+			if (sib?.classList.contains('h2-section')) {
+				if (collapsing) {
+					sib.style.maxHeight = sib.scrollHeight + 'px';
+					sib.offsetHeight;
+					sib.style.maxHeight = '0';
+					sib.classList.add('collapsed');
+					sib.addEventListener('transitionend', () => {
+						sib.classList.add('hide');
+						heading.classList.add('collapsed-heading', 'collapsed-inline');
+					}, { once: true });
+				} else {
+					heading.classList.remove('collapsed-heading', 'collapsed-inline');
+					sib.classList.remove('hide');
+					sib.classList.remove('collapsed');
+					sib.style.maxHeight = sib.scrollHeight + 'px';
+					sib.addEventListener('transitionend', () => { sib.style.maxHeight = ''; }, { once: true });
+				}
 			}
 			return;
 		}
@@ -336,26 +351,28 @@ onMount(() => {
 	}
 
 	:global(.dw-article .h2-section) {
-		max-height: 4000px;
 		overflow: hidden;
-		position: relative;
-		transition: max-height 0.3s ease;
+		transition: max-height 0.3s ease, opacity 0.3s ease;
+		opacity: 1;
 	}
 
 	:global(.dw-article .h2-section.collapsed) {
-		max-height: 2.4em;
-		columns: 1 !important;
+		max-height: 0 !important;
+		opacity: 0;
 	}
 
-	:global(.dw-article .h2-section.collapsed::after) {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 2.4em;
-		background: linear-gradient(to bottom, transparent, var(--bg, #1e1e1e));
-		pointer-events: none;
+	:global(.dw-article .h2-section.collapsed.hide) {
+		display: none;
+	}
+
+	:global(.dw-article h2.collapsed-heading) {
+		text-decoration: underline;
+		margin-bottom: 0;
+	}
+
+	:global(.dw-article h2.collapsed-inline) {
+		display: inline-block;
+		margin: 0 0.5rem 0 0;
 	}
 
 	:global(.dw-article .h2-columns) {

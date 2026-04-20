@@ -24,6 +24,7 @@ export function renderMarkdown(src) {
 	let inMoveBlock = false;
 	let inH2Section = false;
 	let pendingColumns = false; // true when h2 wants columns but hasn't hit the first h3 yet
+	let inColumns = false;
 	let h2Collapsed = false;
 	let inBlockquote = false;
 	let bqLines = [];
@@ -35,8 +36,16 @@ export function renderMarkdown(src) {
 		}
 	}
 
+	function closeColumns() {
+		if (inColumns) {
+			html += '</div>';
+			inColumns = false;
+		}
+	}
+
 	function closeH2Section() {
 		closeMoveBlock();
+		closeColumns();
 		if (inH2Section) {
 			html += '</div>';
 			inH2Section = false;
@@ -147,27 +156,21 @@ export function renderMarkdown(src) {
 					h2Text = h2Text.replace(/\s*::\s*$/, '');
 					collapsed = true;
 				}
-				html += `<h${level}>${inline(h2Text)}</h${level}>`;
+				const h2Cls = collapsed ? ' class="collapsed-heading collapsed-inline"' : '';
+				html += `<h${level}${h2Cls}>${inline(h2Text)}</h${level}>`;
 				if (level === 2) {
 					h2Collapsed = collapsed;
 					const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
-					const cls = ['h2-section', collapsed && 'collapsed'].filter(Boolean).join(' ');
-					if (cols) {
-						// Defer opening the columns div until the first h3
-						html += `<div class="${cls}">`;
-						pendingColumns = true;
-					} else {
-						html += `<div class="${cls}">`;
-					}
+					const cls = ['h2-section', collapsed && 'collapsed', collapsed && 'hide'].filter(Boolean).join(' ');
+					html += `<div class="${cls}">`;
 					inH2Section = true;
+					if (cols) pendingColumns = true;
 				}
 			} else if (level === 3) {
 				closeMoveBlock();
 				if (pendingColumns) {
-					// Close the pre-h3 wrapper and open columns
-					html += '</div>';
-					const colCls = ['h2-section', 'h2-columns', h2Collapsed && 'collapsed'].filter(Boolean).join(' ');
-					html += `<div class="${colCls}">`;
+					html += '<div class="h2-columns">';
+					inColumns = true;
 					pendingColumns = false;
 				}
 				html += '<div class="move-block">';

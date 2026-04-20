@@ -913,10 +913,62 @@ function rollRadialDie(formula, e) {
 				<div class="char-body" bind:this={charBodyEl} onclick={(e) => {
 					const h2 = e.target.closest('h2');
 					if (h2) {
-						let sib = h2.nextElementSibling;
-						while (sib?.classList.contains('h2-section')) {
-							sib.classList.toggle('collapsed');
-							sib = sib.nextElementSibling;
+						const h2Text = h2.textContent.trim();
+						const collapsing = !h2.classList.contains('collapsed-heading');
+
+						if (collapsing) {
+							const sib = h2.nextElementSibling;
+							if (sib?.classList.contains('h2-section')) {
+								sib.style.maxHeight = sib.scrollHeight + 'px';
+								sib.offsetHeight;
+								sib.style.maxHeight = '0';
+								sib.classList.add('collapsed');
+							}
+							h2.classList.add('collapsed-heading');
+							setTimeout(() => {
+								const lines = text.split('\n');
+								for (let i = 4; i < lines.length; i++) {
+									const m = lines[i].match(/^##\s+(.*)/);
+									if (!m) continue;
+									const raw = m[1].replace(/\s*::\s*$/, '').trim();
+									if (raw === h2Text) {
+										lines[i] = `## ${raw} ::`;
+										text = lines.join('\n');
+										break;
+									}
+								}
+							}, 300);
+						} else {
+							const lines = text.split('\n');
+							for (let i = 4; i < lines.length; i++) {
+								const m = lines[i].match(/^##\s+(.*)/);
+								if (!m) continue;
+								const raw = m[1].replace(/\s*::\s*$/, '').trim();
+								if (raw === h2Text) {
+									lines[i] = `## ${raw}`;
+									text = lines.join('\n');
+									break;
+								}
+							}
+							tick().then(() => {
+								if (!charBodyEl) return;
+								const allH2s = charBodyEl.querySelectorAll('h2');
+								for (const newH2 of allH2s) {
+									if (newH2.textContent.trim() === h2Text) {
+										const sib = newH2.nextElementSibling;
+										if (sib?.classList.contains('h2-section')) {
+											sib.style.maxHeight = '0';
+											sib.style.opacity = '0';
+											sib.offsetHeight;
+											sib.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+											sib.style.maxHeight = sib.scrollHeight + 'px';
+											sib.style.opacity = '1';
+											sib.addEventListener('transitionend', () => { sib.style.maxHeight = ''; sib.style.opacity = ''; sib.style.transition = ''; }, { once: true });
+										}
+										break;
+									}
+								}
+							});
 						}
 						return;
 					}
@@ -1273,26 +1325,28 @@ function rollRadialDie(formula, e) {
 	}
 
 	.char-body :global(.h2-section) {
-		max-height: 4000px;
 		overflow: hidden;
-		position: relative;
-		transition: max-height 0.3s ease;
+		transition: max-height 0.3s ease, opacity 0.3s ease;
+		opacity: 1;
 	}
 
 	.char-body :global(.h2-section.collapsed) {
-		max-height: 2.4em;
-		columns: 1 !important;
+		max-height: 0 !important;
+		opacity: 0;
 	}
 
-	.char-body :global(.h2-section.collapsed::after) {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 2.4em;
-		background: linear-gradient(to bottom, transparent, var(--bg, #1e1e1e));
-		pointer-events: none;
+	.char-body :global(.h2-section.collapsed.hide) {
+		display: none;
+	}
+
+	.char-body :global(h2.collapsed-heading) {
+		text-decoration: underline;
+		margin-bottom: 0;
+	}
+
+	.char-body :global(h2.collapsed-inline) {
+		display: inline-block;
+		margin: 0 0.5rem 0 0;
 	}
 
 	.char-body :global(h3) {
