@@ -735,7 +735,12 @@
 			</div>
 
 			{#if bodyHtml}
-				<div class="char-body">
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<div class="char-body" onclick={(e) => {
+					const h3 = e.target.closest('h3');
+					if (h3) h3.classList.toggle('glow');
+				}}>
 					{@html bodyHtml}
 				</div>
 			{/if}
@@ -1078,6 +1083,13 @@
 
 	.char-body :global(h3) {
 		margin-top: 0;
+		cursor: pointer;
+		transition: box-shadow 0.2s, border-color 0.2s;
+	}
+
+	.char-body :global(h3.glow) {
+		border-color: #d4a847;
+		box-shadow: 0 0 12px #d4a847aa, inset 0 0 8px #d4a84733;
 	}
 
 	.char-body :global(.move-block + .move-block) {
