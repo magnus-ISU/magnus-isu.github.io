@@ -911,6 +911,15 @@ function rollRadialDie(formula, e) {
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="char-body" bind:this={charBodyEl} onclick={(e) => {
+					const h2 = e.target.closest('h2');
+					if (h2) {
+						let sib = h2.nextElementSibling;
+						while (sib?.classList.contains('h2-section')) {
+							sib.classList.toggle('collapsed');
+							sib = sib.nextElementSibling;
+						}
+						return;
+					}
 					const h3 = e.target.closest('h3');
 					if (!h3) return;
 					const container = h3.closest('.char-body');
@@ -1253,10 +1262,37 @@ function rollRadialDie(formula, e) {
 
 	.char-body :global(h2) {
 		margin-top: 1.5rem;
+		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.char-body :global(h2:first-child) {
 		margin-top: 0;
+	}
+
+	.char-body :global(.h2-section) {
+		max-height: 4000px;
+		overflow: hidden;
+		position: relative;
+		transition: max-height 0.3s ease;
+	}
+
+	.char-body :global(.h2-section.collapsed) {
+		max-height: 2.4em;
+		columns: 1 !important;
+	}
+
+	.char-body :global(.h2-section.collapsed::after) {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2.4em;
+		background: linear-gradient(to bottom, transparent, var(--bg, #1e1e1e));
+		pointer-events: none;
 	}
 
 	.char-body :global(h3) {

@@ -133,7 +133,7 @@ onMount(() => {
 
 	el.addEventListener('pointerdown', (e) => {
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
-		if (!heading || !data.rawSource) return;
+		if (!heading || !data.rawSource || heading.tagName === 'H2') return;
 		longPressHeading = null;
 		longPressTimeout = setTimeout(() => {
 			const text = heading.textContent.trim();
@@ -163,6 +163,14 @@ onMount(() => {
 		}
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 		if (!heading) return;
+		if (heading.tagName === 'H2') {
+			let sib = heading.nextElementSibling;
+			while (sib?.classList.contains('h2-section')) {
+				sib.classList.toggle('collapsed');
+				sib = sib.nextElementSibling;
+			}
+			return;
+		}
 		if (heading.tagName === 'H1' && characterSheet.isEmpty) {
 			characterSheet.value = buildCharacterSheet(data.rawSource);
 			heading.classList.add('copied');
@@ -325,6 +333,29 @@ onMount(() => {
 		color: #8f8;
 		margin-left: 0.75rem;
 		font-weight: normal;
+	}
+
+	:global(.dw-article .h2-section) {
+		max-height: 4000px;
+		overflow: hidden;
+		position: relative;
+		transition: max-height 0.3s ease;
+	}
+
+	:global(.dw-article .h2-section.collapsed) {
+		max-height: 2.4em;
+		columns: 1 !important;
+	}
+
+	:global(.dw-article .h2-section.collapsed::after) {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2.4em;
+		background: linear-gradient(to bottom, transparent, var(--bg, #1e1e1e));
+		pointer-events: none;
 	}
 
 	:global(.dw-article .h2-columns) {
