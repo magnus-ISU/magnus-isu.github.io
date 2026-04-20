@@ -163,6 +163,21 @@ export function renderMarkdown(src) {
 			continue;
 		}
 
+		if (/^```/.test(line.trim())) {
+			flushPara();
+			closePendingList();
+			const codeLines = [];
+			lineIdx++;
+			while (lineIdx < lines.length && !/^```/.test(lines[lineIdx].trim())) {
+				codeLines.push(lines[lineIdx]);
+				lineIdx++;
+			}
+			const raw = codeLines.join('\n');
+			const escaped = raw.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+			html += `<pre class="code-block" onclick="navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)" data-copy="${escaped}">${escaped}</pre>`;
+			continue;
+		}
+
 		if (/^---+$/.test(line.trim())) {
 			flushPara();
 			closePendingList();

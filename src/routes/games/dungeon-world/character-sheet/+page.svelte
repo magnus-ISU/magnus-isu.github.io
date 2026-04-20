@@ -1288,6 +1288,25 @@ function rollRadialDie(formula, e) {
 
 	.char-body :global(.move-block) { break-inside: avoid; }
 
+	.char-body :global(.code-block) {
+		background: #1a1a1a;
+		border: 1px solid #333;
+		border-radius: 4px;
+		padding: 0.75rem 1rem;
+		font-size: 0.85rem;
+		white-space: pre-wrap;
+		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		transition: border-color 0.15s, color 0.15s;
+	}
+
+	.char-body :global(.code-block.copied) {
+		border-color: #8f8;
+		color: #8f8;
+	}
+
 	/* --- Radial dice menu --- */
 	.radial-menu {
 		position: absolute;
