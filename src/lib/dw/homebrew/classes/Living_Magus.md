@@ -65,7 +65,7 @@ Choose one for your defenses:
 Choose your weapon:  
 [0 Weight] Dagger (hand)  
 [1 Weight] Staff (close, two-handed)  
-[1 Weight] Orb of Magical Focus
+[1 Weight] Orb of Magical Focus  
 Choose one:  
 [1 Weight] Healing Potion  
 [1 Weight] Antitoxin (3 uses)
