@@ -54,13 +54,13 @@ Impossibly light and impossibly strong, adamantium can only be found deep in Hel
 
 It's generally thought that if you have the misfortune of facing someone who has it, you should kill their friends and run, run away. But there is no shortage of kingdoms who hope to get their hands on a suit, either.
 
-### [2 Weight] [2 Armor] Elven Chain Mail
+### [2 Weight] [3 Armor] Elven Chain Mail
 Created by secretive and immortal smiths to amplify rather than hinder spellcasting.
 
-### [1 Weight] [1 Armor] Robes of the Evil Archmagi *requires evil*
+### [1 Weight] [2 Armor] Robes of the Evil Archmagi *requires evil*
 When you **kill with an arcane spell**, take +1 forward to work magic.
 
-### [1 Weight] [1 Armor] Robes of the Good Archmagi *requires good*
+### [1 Weight] [2 Armor] Robes of the Good Archmagi *requires good*
 When you **would be affected by any spell**, roll+INT.
 - On a 10+, you cancel the casting. If you could have memorized the spell, choose a new target instead.
 - On a 7-9, you are unaffected, and the robes lose this move until you take an hour to Prepare Spells.
