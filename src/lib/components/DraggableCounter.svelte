@@ -5,6 +5,8 @@ let {
 	value = 0,
 	oncommit = () => {},
 	inputWidth = '2.5rem',
+	dragPx = 24,
+	maxDelta = 0,
 	class: className = '',
 	style = '',
 	children,
@@ -38,11 +40,12 @@ function beginTracking(e) {
 
 	function onMove(ev) {
 		const dy = startY - ev.clientY;
-		const newDelta = Math.round(dy / 24);
+		const newDelta = Math.round(dy / dragPx);
+		const clamped = maxDelta ? Math.max(-maxDelta, Math.min(maxDelta, newDelta)) : newDelta;
 		if (!didDrag && Math.abs(dy) > 4) didDrag = true;
 		if (didDrag) {
 			dragging = true;
-			dragDelta = newDelta;
+			dragDelta = clamped;
 			updatePreviewPos();
 		}
 	}

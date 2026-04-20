@@ -479,7 +479,7 @@ function onStatPointerDown(e, ab) {
 				dropTarget = null;
 			}
 		} else {
-			statDragDelta = -Math.round(dy / 24);
+			statDragDelta = Math.max(-1, Math.min(1, -Math.round(dy / 100)));
 		}
 	}
 
