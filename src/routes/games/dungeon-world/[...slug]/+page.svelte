@@ -68,9 +68,15 @@ function onPointerUp() {
 	longPressToggleTarget = null;
 }
 
-function stripHtml(s) {
+function stripToText(s) {
 	return s
 		.replace(/<[^>]*>/g, '')
+		.replace(/\[([^\]]*?) (?:Coin|Armor|Weight)\]/g, '$1')
+		.replace(/\*\*(.+?)\*\*/g, '$1')
+		.replace(/__(.+?)__/g, '$1')
+		.replace(/\*(.+?)\*/g, '$1')
+		.replace(/_(.+?)_/g, '$1')
+		.replace(/\\([[\](){}])/g, '$1')
 		.replace(/\s+/g, ' ')
 		.trim();
 }
@@ -84,7 +90,7 @@ function extractSection(headingText) {
 	let level = 0;
 	for (let i = 0; i < lines.length; i++) {
 		const m = lines[i].match(/^(#{1,6})\s+(.+)/);
-		if (m && stripHtml(m[2]) === needle) {
+		if (m && stripToText(m[2]) === needle) {
 			startIdx = i;
 			level = m[1].length;
 			break;
@@ -296,10 +302,16 @@ onMount(() => {
 	:global(.dw-article h2, .dw-article h3, .dw-article h4, .dw-article h5, .dw-article h6) {
 		cursor: pointer;
 		position: relative;
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h1) {
 		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h1.copied, .dw-article h2.copied, .dw-article h3.copied, .dw-article h4.copied) {
