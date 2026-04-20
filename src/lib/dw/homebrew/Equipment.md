@@ -78,7 +78,7 @@ See the Bandage recovery move.
 See the Bandage recovery move.
 
 [50 Coin] [1 Weight] **Healing Potion**  
-When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
+When you **drink an entire healing potion**, choose: heal 10 damage or remove one debility.
 
 [30 Coin] [1 Weight] **Antitoxin** *3 uses*  
 When you **sip a use of antitoxin**, you're cured of one poison affecting you.
