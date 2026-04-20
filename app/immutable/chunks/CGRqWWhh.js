@@ -13,49 +13,32 @@ Weapons don't kill monsters, people do. That's why weapons in Dungeon World don'
 The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
 
 ### Ranged Weapons
-
-[10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near*
-
-[15 Coin] [2 Weight] **Ragged Bow** *near*
-
-[60 Coin] [2 Weight] **Fine Bow** *near, far*
-
-[100 Coin] [1 Weight] **Hunter's Bow** *near, far*
-
-[35 Coin] [3 Weight] **Crossbow** *near, +1 damage, reload*
-
-[1 Coin] [1 Weight] **Bundle of Arrows** *ammo*
-
-[20 Coin] [0 Weight] **Elven Arrows** *ammo*
+[10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near*  
+[15 Coin] [2 Weight] **Ragged Bow** *near*  
+[60 Coin] [2 Weight] **Fine Bow** *near, far*  
+[100 Coin] [1 Weight] **Hunter's Bow** *near, far*  
+[35 Coin] [3 Weight] **Crossbow** *near, +1 damage, reload*  
+[1 Coin] [1 Weight] **Bundle of Arrows** *ammo*  
+[20 Coin] [0 Weight] **Elven Arrows** *ammo*  
 
 ### Melee Weapons
-
-[2 Coin] [0 Weight] **Dagger, Shiv, Knife** *hand*
-
-[1 Coin] [2 Weight] **Club, Shillelagh** *close*
-
-[1 Coin] [1 Weight] **Staff** *close, two-handed*
-
-[8 Coin] [1 Weight] **Short Sword, Axe, Warhammer, Mace** *close*
-
-[15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** *close, +1 damage*
+[2 Coin] [0 Weight] **Dagger, Shiv, Knife** *hand*  
+[1 Coin] [2 Weight] **Club, Shillelagh** *close*  
+[1 Coin] [1 Weight] **Staff** *close, two-handed*  
+[8 Coin] [1 Weight] **Short Sword, Axe, Warhammer, Mace** *close*  
+[15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** *close, +1 damage*  
 
 ### Precise Weapons
-
-[25 Coin] [1 Weight] **Rapier** *close, precise*
-
-[50 Coin] [2 Weight] **Dueling Rapier** *close, 1 piercing, precise*
+[25 Coin] [1 Weight] **Rapier** *close, precise*  
+[50 Coin] [2 Weight] **Dueling Rapier** *close, 1 piercing, precise*  
 
 ### Reach Weapons
-
-[5 Coin] [1 Weight] **Spear** *reach, thrown, near*
-
-[9 Coin] [2 Weight] **Halberd** *reach, +1 damage, two-handed*
+[5 Coin] [1 Weight] **Spear** *reach, thrown, near*  
+[9 Coin] [2 Weight] **Halberd** *reach, +1 damage, two-handed*  
 
 ## Armor
 
 ### Armor List
-
 [10 Coin] [1 Weight] [1 Armor] **Leather, Chainmail** *worn*  
 [50 Coin] [3 Weight] [2 Armor] **Scale Mail** *clumsy, worn*  
 [350 Coin] [4 Weight] [3 Armor] **Plate** *clumsy, worn*  
