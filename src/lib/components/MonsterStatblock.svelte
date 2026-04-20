@@ -143,7 +143,7 @@
 	let labels = $state([]);
 	$effect(() => {
 		currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
-		labels = Array.from({ length: count }, (_, i) => memberNames[i] || `#${i + 1}`);
+		labels = Array.from({ length: count }, (_, i) => memberNames[i] || (count <= 1 ? 'HP' : `#${i + 1}`));
 	});
 	function getHpColor(val) {
 		if (val == null) return null;
@@ -164,14 +164,7 @@
 		}
 	}
 
-	// Chunk HP entries into rows of 6
-	const hpRows = $derived.by(() => {
-		const rows = [];
-		for (let i = 0; i < currentHps.length; i += 6) {
-			rows.push(currentHps.slice(i, i + 6).map((_, j) => i + j));
-		}
-		return rows;
-	});
+	const hpIndices = $derived(Array.from({ length: currentHps.length }, (_, i) => i));
 
 	// Dice rolling — rollKey increments on each roll to restart the CSS animation
 	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
@@ -301,20 +294,24 @@
 					</div>
 					<div class="monster-vitals">
 						{#if hp !== null && count <= 1}
-							{#if hpNum !== null}
-								<!-- svelte-ignore a11y_no_static_element_interactions -->
-								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[0]?.handlePointerDown(e); }}>
-									<span class="vital-label">{memberNames[0] || 'HP'}</span>
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[0]?.handlePointerDown(e); }}>
+								<input
+									class="label-input"
+									style="width: {Math.max(2, labels[0]?.length || 2) + 1}ch"
+									bind:value={labels[0]}
+									onclick={(e) => e.stopPropagation()}
+									onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
+									onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
+								/>
+								{#if hpNum !== null}
 									<DraggableCounter bind:this={dcRefs[0]} value={currentHps[0]} oncommit={(raw) => commitMonsterHp(raw, 0)} inputWidth="{String(currentHps[0] ?? 0).length + 2}ch" style="color: {getHpColor(currentHps[0])}">
 										{#snippet children()}<span class="hp-display" style="color: {getHpColor(currentHps[0])}">{currentHps[0]}</span>{/snippet}
 									</DraggableCounter>
-								</span>
-							{:else}
-								<span class="hp-pill">
-									<span class="vital-label">HP</span>
+								{:else}
 									<span>{hp}</span>
-								</span>
-							{/if}
+								{/if}
+							</span>
 						{/if}
 						{#if armor !== null}
 							<span class="vital"><span class="vital-label">Armor</span> <svg class="armor-shield-vital" width="22" height="22" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{armor}</text></svg></span>
@@ -325,29 +322,25 @@
 
 			{#if hp !== null && count > 1}
 				<div class="monster-hp-grid">
-					{#each hpRows as row}
-						<div class="hp-row">
-							{#each row as idx}
-								<!-- svelte-ignore a11y_no_static_element_interactions -->
-								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
-									<input
-										class="label-input"
-										style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
-										bind:value={labels[idx]}
-										onclick={(e) => e.stopPropagation()}
-										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
-										onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
-									/>
-									{#if hpNum !== null}
-										<DraggableCounter bind:this={dcRefs[idx]} value={currentHps[idx]} oncommit={(raw) => commitMonsterHp(raw, idx)} inputWidth="{String(currentHps[idx] ?? 0).length + 1}ch" style="color: {getHpColor(currentHps[idx])}">
-											{#snippet children()}<span class="hp-display" style="color: {getHpColor(currentHps[idx])}">{currentHps[idx]}</span>{/snippet}
-										</DraggableCounter>
-									{:else}
-										<span>{hp}</span>
-									{/if}
-								</span>
-							{/each}
-						</div>
+					{#each hpIndices as idx}
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
+							<input
+								class="label-input"
+								style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
+								bind:value={labels[idx]}
+								onclick={(e) => e.stopPropagation()}
+								onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
+								onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
+							/>
+							{#if hpNum !== null}
+								<DraggableCounter bind:this={dcRefs[idx]} value={currentHps[idx]} oncommit={(raw) => commitMonsterHp(raw, idx)} inputWidth="{String(currentHps[idx] ?? 0).length + 1}ch" style="color: {getHpColor(currentHps[idx])}">
+									{#snippet children()}<span class="hp-display" style="color: {getHpColor(currentHps[idx])}">{currentHps[idx]}</span>{/snippet}
+								</DraggableCounter>
+							{:else}
+								<span>{hp}</span>
+							{/if}
+						</span>
 					{/each}
 				</div>
 			{/if}
@@ -600,17 +593,12 @@
 
 	.monster-hp-grid {
 		display: flex;
-		flex-direction: column;
-		gap: 0.3rem;
+		flex-wrap: wrap;
+		gap: 0.3rem 0.75rem;
+		justify-content: flex-end;
 		padding: 0.4rem 0.75rem;
 		background: #1e1e1e;
 		border-bottom: 1px solid #2c2c2c;
-	}
-
-	.hp-row {
-		display: flex;
-		gap: 0.75rem;
-		justify-content: flex-end;
 	}
 
 	.hp-pill {

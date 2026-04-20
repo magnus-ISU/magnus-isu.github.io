@@ -19,7 +19,7 @@
 	});
 
 	let text = $state(encounterText.value);
-	const encounterPlaceholder = `Bandit King (Boss,)\nBandit (John, Paul, George, Ringo)\nWild Dog (2)`;
+	const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (2)\nOwlbear`;
 
 	// Sync local → store
 	$effect(() => { encounterText.value = text; });
@@ -126,7 +126,7 @@
 
 	// Build parenthetical string from labels
 	function buildParen(labels, count) {
-		if (count === 1 && labels.length === 1 && labels[0] && labels[0] !== '#1') {
+		if (count === 1 && labels.length === 1 && labels[0] && labels[0] !== '#1' && labels[0] !== 'HP') {
 			return `(${labels[0]},)`;
 		}
 		if (count > 1) {
@@ -178,7 +178,7 @@
 	</section>
 
 	{#if matched.length > 0}
-		<section class="encounter-results">
+		<section class="encounter-results" class:two-col={matched.length >= 2}>
 			{#each matched as m, i (i)}
 				<MonsterStatblock {...m} open={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
 			{/each}
@@ -224,6 +224,18 @@
 
 	.encounter-results {
 		margin-bottom: 1rem;
+	}
+
+	.encounter-results.two-col {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+	}
+
+	@media (max-width: 1028px) {
+		.encounter-results.two-col {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.monster-search-section {
