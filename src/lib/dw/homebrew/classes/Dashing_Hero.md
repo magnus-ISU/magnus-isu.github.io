@@ -101,7 +101,7 @@ When you **need to get somewhere quickly**, roll+DEX. On a 10+, you get where yo
 When you are **looting for supplies**, you will always find 1 use of bandages, adventuring gear, weaponry, ammo, or any other basic equipment you need, if it would be remotely plausible.
 
 ### Now I Have the Upper Hand
-Add the following options to **Defend** when you spend Readiness:
+Add the following options to **Defend** when you spend Vigilance:
 - Disarm your opponent, sending their weapon flying across the room.
 - Steal a visible item off of their person. They don't notice it's gone until you inevitably flaunt the fact you have it.
 

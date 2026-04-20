@@ -66,7 +66,7 @@ You came to faith on the road, not in a temple. When you **arrive at a settlemen
 Your order trained you to root out corruption. When you **study a person or place for signs of dark magic, possession, or unholy influence**, roll+WIS. On a 10+ the GM tells you what's wrong and how to fix it. On a 7-9, you know part of what's wrong but not the full picture.
 
 ### Templar
-You served alongside soldiers. You ignore the *clumsy* tag on armor you wear, and your deity's symbol is etched into your shield or weapon. When you **Defend the favored of your god**, you always hold at least one Readiness.
+You served alongside soldiers. You ignore the *clumsy* tag on armor you wear, and your deity's symbol is etched into your shield or weapon. When you **Defend the favored of your god**, you always hold at least one Vigilance.
 
 ### Convert
 You once followed another path, so you know better than most how outsiders feel about your God and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.

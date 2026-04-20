@@ -44,7 +44,7 @@ A slender band of nearly invisible silver. Prince Edrin wore the ring upon his f
 When you would **take Damage**, instead don't. You can use this move again in one hour.
 
 ### [1 Weight] [+1 Armor] Lodestone Shield
-Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Readiness, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.
+Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Vigilance, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.
 
 ### [1 Weight] [1 Armor] Timunn’s Armor
 A stealthy suit of armor, it appears as many things to many people and blends in with appropriate apparel. The wearer always seems the height of fashion to any who gaze upon him.
