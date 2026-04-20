@@ -33,7 +33,17 @@ A legendary blade said to have been thrust backwards in time from some grim futu
 ### [2 Weight] Vorpal Sword _close, 3 piercing_
 Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
 
+---
+
 ## Armor
+
+### [1 Weight] [+1 Armor] Lodestone Shield
+Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Vigilance, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.
+
+### [1 Weight] [1 Armor] Timunn’s Armor
+A stealthy suit of armor, it appears as many things to many people and blends in with appropriate apparel. The wearer always seems the height of fashion to any who gaze upon him.
+
+---
 
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
@@ -42,12 +52,6 @@ The wearer of this helm can see through shadow and falsehood.
 A slender band of nearly invisible silver. Prince Edrin wore the ring upon his finger during his long captivity in the dungeons of the Usurper. Despite the tortures he endured, blades and blow alike seemed to slide away from his flesh, leaving him bruised but unbroken.
 
 When you would **take Damage**, instead don't. You can use this move again in one hour.
-
-### [1 Weight] [+1 Armor] Lodestone Shield
-Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Vigilance, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.
-
-### [1 Weight] [1 Armor] Timunn’s Armor
-A stealthy suit of armor, it appears as many things to many people and blends in with appropriate apparel. The wearer always seems the height of fashion to any who gaze upon him.
 
 ### [1 Weight] [5 Armor] Adamantium Mail *clumsy*
 Impossibly light and impossibly strong, adamantium can only be found deep in Hell, and mortals have at great cost obtained precious little of it. A single man in adamantium is worth more than an army, and that rule has been tested several times.
@@ -158,6 +162,8 @@ lit, none upon whom its light falls is able to tell a lie. They may keep
 silent or dissemble but when asked a question directly, they can speak naught
 but truth.
 
+---
+
 ## Consumables
 
 ### [0 Weight] Common Scroll _1 use_
@@ -207,3 +213,62 @@ When you hold The Burning Wheel and speak a god’s name, roll+CON.
 - On a 7–9, the GM chooses which stat to reduce.
 
 Once used, the Burning Wheel ignites and burns with brilliant light. It does not confer any protection from those flames, nor does it provide any bonus to swimming.
+
+---
+
+## Potions
+A selection of potions that you might find while adventuring.
+
+### [1 Weight] Potion of Resistance To
+When you **drink**, it is very difficult to hurt you in the manner described on the label.
+
+### [1 Weight] Potion of Disgust
+When you **choke this foul-tasting potion down**, you begin to have bad taste. If something that **loves the taste of flesh bites you**, it recoils in disgust.
+
+### [1 Weight] Potion of Invisibility
+When you **drink**, you're invisible for a minute. When you **pour it on something**, you can instead see through about a man's size region of it.
+
+### [1 Weight] Potion of Undeath
+When you **drink**, you appear dead. Mindless undead will not attack you, and if you stay still you appear to be a corpse.
+
+### [1 Weight] Potion of Water Breathing
+When you **drink**, you can breathe water instead of air for an hour or so. In the last few minutes, you will regain the ability to breathe air, but water will give you less and less oxygen.
+
+### [1 Weight] Potion of Invincibility
+When you **drink**, you are immune to damage for a short time.
+
+### [1 Weight] Potion of True Sight
+When you **drink**, you see all things as they truly are, including the effects of magic, for a short time.
+
+### [1 Weight] Potion of Nondetection
+When you **drink**, you stop appearing in mirrors and cannot be scryed by most magics.
+
+### [1 Weight] Potion of Polymorph
+When you **drop in a piece of an animal and drink**, you transform into an exact copy of that creature for an hour or so, but mostly keep your mind unaffected.
+
+### [1 Weight] Potion of Beauty
+When you **drink**, you increase your CHA by 1, permanently.
+
+### [1 Weight] Potion of Courage
+When you **drink**, you cannot become afraid, and might even do something rash. When **something would otherwise frighten you**, take +4 damage forward against it.
+
+### [1 Weight] Potion of Levitation
+When you **drink**, you rise up to wherever you want to go.
+
+### [1 Weight] Bottle of Silver Dust
+Can be poured for about a doorway's length. Demons cannot cross lines of silver.
+
+### [1 Weight] Potion of Frost *dangerous*
+When you **pour it onto a liquid**, an area the size of a small lake freezes and creates a solid surface of ice to walk on for an hour. When you **pour it all out directly on someone**, it expands rapidly and they're completely frozen in ice until it thaws, and might die.
+
+### [1 Weight] Potion of Flame *dangerous*
+When it **shatters**, everything nearby is consumed in fire and takes 2d6 damage (ignores armor).
+
+### [1 Weight] Sovereign Glue *dangerous*
+When it **touches anything except glass**, it won't come off. If you are stuck, you might **carefully scrape away flesh over an hour with a knife** losing 8 health and unsticking yourself without permanent damage.
+
+### [1 Weight] Bottled Void *dangerous*
+When you **drink**, nothing else you swallow today will affect you in any way. If poured on the ground, instead creates a bottomless hole about 2 meters in diameter.
+
+### [1 Weight] Bottled Slime *dangerous*
+An ooze lives in this bottle, highly compressed.

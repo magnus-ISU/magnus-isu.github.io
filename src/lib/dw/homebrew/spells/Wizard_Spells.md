@@ -72,7 +72,7 @@ Mark a shape with chalk, ink, or some other marking. Until the markings are dist
 ### Dimension Door <span style="float:right" >Conjuration 3</span>
 Choose a pair of solid surfaces you can see. A sparking, glowing portal opens between them. It starts big enough to comfortably step through, but slowly closes over time with increasing pressure.
 ### Water Dragon <span style="float:right" >Conjuration 3</span>
-You pull water from an existing body into a large serpentine shape that you can direct around you in long, sweeping arcs. The water is difficult to swim through; those who end up stuck inside are dragged along. You can pressurize the dragon so it deals d8 damage periodically to those trapped inside. Concentration
+You pull water from an existing body into a large serpentine shape that you can direct around you in long, sweeping arcs. The water is *forceful*. Concentration
 ### Locate <span style="float:right" >Divination 3</span>
 Name a single word, such as "axe" or "dress" or "ruby". While ongoing, this spell will indicate which direction the nearest one is, and where it is exactly if it is within a short walking distance. Concentration
 ### Amnesia <span style="float:right" >Enchantment 3</span>
@@ -84,7 +84,7 @@ Describe a figment of your imagination that you would like to manifest nearby, s
 ### Plant Growth <span style="float:right" >Necromancy 3</span>
 A plant, living or dead, fragment or whole, that you touch begins growing quickly out of control, soon entangling everything nearby except you, sprouting new limbs and foliage, and rapidly warping in shape.
 ### Ray of Sickness <span style="float:right" >Necromancy 3</span>
-A beam of green energy strikes a creature nearby and it is afflicted by a disease you yourself have suffered from in the past. Furthermore, for a few minutes it deals 2 less damage and takes 2 additional damage from any source as the magic saps its life to create the illness.
+A beam of green energy strikes a creature nearby and it is afflicted by a disease you yourself have suffered from in the past. Furthermore, it has -3 armor and -3 damage (ongoing). *Concentration*
 ### Orsted's Magnetism <span style="float:right" >Transmutation 3</span>
 An object you touch becomes a powerful magnet for as long as it is in your sight, attracting or repelling (your choice) anything metal.
 ### Silence <span style="float:right" >Transmutation 3</span>
@@ -109,7 +109,7 @@ Your touch reshapes a creature entirely, they stay in the form you craft until y
 
 ---
 ### Summon Monster  <span style="float:right" >Conjuration 5</span>
-A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, uses your damage dice, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
+A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, does 1d4 damage, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
 - It has +2 instead of +1 to one stat
 - It’s not reckless
 - It does 1d8 damage
@@ -149,22 +149,20 @@ If the target takes damage you lose 1 Domination. If you run out of Domination t
 ### Contingency <span style="float:right" >Evocation 7</span>
 Choose a 6th level or lower spell you know. Describe a trigger condition using no more words than your level. The chosen spell is held until you choose to unleash it or the trigger condition is met, whichever happens first. You don’t have to roll for the held spell, it just takes effect. You may only have a single contingent spell held at a time.
 ### Cloudkill <span style="float:right" >Necromancy 7</span>
-A cloud of fog drifts into this realm from beyond the Black Gates of Death, filling as much of the immediate area as you like, as far as you can see. Any creature that is in the area which is wounded takes 1d6 damage immediately, and periodically every few minutes. This spell persists so long as you can see the affected area, or until you dismiss it.
+A cloud of fog drifts into this realm from beyond the Black Gates of Death, filling as much of the immediate area as you like, as far as you can see. Any creature that is in the area which is wounded takes 1d6 damage immediately, and periodically until it dies. This spell persists until you cannot see the fog or dismiss it.
 
 ---
 ### Mind Blank <span style="float:right" >Abjuration 7</span>
 Your mind is separated from the rest of the world, and cannot be targeted by any glamour. Others cannot divine your thoughts, enchant you into doing anything, detect your presence through magic, send telepathic messages to you, or alter your state of mind.
 ### Forked Lightning <span style="float:right" >Evocation 7</span>
-Lightning strikes out at your foes. Roll 2d10, then pick one die to be the number of enemy targets the GM picks, and the other to be the amount of damage each one takes (ignoring armor).
+Lightning strikes out at your foes. Roll 2d10, then pick one die to be the number of enemy targets to pick, and the other to be the amount of damage each one takes (ignoring armor).
 ### Greater Invisibility <span style="float:right" >Illusion 7</span>
-Reach out and touch an ally or an object smaller than yourself. Poof! They are invisible. The spell persists until you dismiss it. Concentration, and you cannot cast any other invisibility spells while the spell is ongoing.
+Reach out and touch someone else or an object smaller than yourself. Poof! They are invisible. The spell persists until you dismiss it. Concentration, until they cannot see you for a few seconds.
 ### Bubble <span style="float:right" >Transmutation 7</span>
 You create a fixed bubble of time around you. Within, time passes extremely quickly or slowly, and the world outside is frozen or very fast. The spell lasts until something leaves or enters the bubble.
 ## Level 9
 ### Perfect Summons <span style="float:right" >Conjuration 9</span>
 You teleport a creature to your presence. Name a creature or give a short description of a type of creature. If you named a creature, that creature appears before you. If you described a type of creature, a creature of that type appears before you.
-### Shelter <span style="float:right" >Conjuration 9</span>
-You create a structure out of pure magical power. It can be as large as a castle or as small as a hut, but is impervious to all non-magical damage. The structure endures until you leave it or you end the spell.
 ### Alert <span style="float:right" >Divination 9</span>
 Describe an event. The GM will tell you when that event occurs, no matter where you are or how far away the event is. If you choose, you can view the location of the event as though you were there in person. You can only have one Alert active at a time.
 ### Antipathy <span style="float:right" >Enchantment 9</span>
@@ -173,8 +171,12 @@ Choose a target and describe a type of creature or an alignment. Creatures of th
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but you may never recapture it once freed.
 
 ---
+### Shelter <span style="float:right" >Conjuration 9</span>
+You create a structure out of pure magical power. It can be as large as a castle or as small as a hut, made of stone or glowing light, and it is impervious. The structure endures until you leave it or you end the spell.
+
+---
 ### Power Word Kill <span style="float:right" >Enchantment 9</span>
-Speak someone's True Name and tell them a secret Word. They die.
+Speak someone's True Name. They die.
 ### Starfall <span style="float:right" >Evocation 9</span>
 You take a star from the sky and bring it low. It roughly strikes your target and roughly obliterates anything smaller than a small castle. Hopefully you've researched what might have come with it.
 
