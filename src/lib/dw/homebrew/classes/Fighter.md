@@ -18,7 +18,7 @@ When you **use pure strength to destroy an inanimate obstacle**, roll+STR. On a 
 - You can fix the thing again without a lot of effort
 
 ### Armored
-You ignore the clumsy tag on armor you wear.
+You ignore the *clumsy* tag on armor you wear.
 
 ### Signature Weapon
 You carry a unique weapon, describe it and give it a name/title. It might be weightless, or you're just used to carrying it around; for you, it is 0 Load.  

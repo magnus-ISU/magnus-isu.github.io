@@ -14,7 +14,7 @@ Vae victis, right?
 When you **touch someone, skin to skin, and pray for their well-being**, roll+CHA. On a 10+ you heal 1d8 damage or remove one disease. On a 7-9, they are healed, but the damage or disease is transferred to you.
 
 ### Armored
-You ignore the clumsy tag on armor you wear.
+You ignore the *clumsy* tag on armor you wear.
 
 ### I Am the Law
 When you **give an NPC an order based on your divine authority**, roll+CHA. On a 7+, they choose one:

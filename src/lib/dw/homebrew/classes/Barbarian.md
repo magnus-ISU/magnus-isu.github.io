@@ -32,7 +32,7 @@ You may be elf, dwarf, halfling, or human, but you and your people are not from 
 ## Starting Moves - Choose one
 
 ### Full Plate and Packing Steel
-You ignore the clumsy tag on armor you wear.
+You ignore the *clumsy* tag on armor you wear.
 
 ### Unencumbered, Unharmed
 So long as you are below your Load and neither wear armor nor carry a shield, take +2 armor.
