@@ -180,7 +180,12 @@
 	{#if matched.length > 0}
 		<section class="encounter-results" class:two-col={matched.length >= 2}>
 			{#each matched as m, i (i)}
-				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
+				{@const myInline = (m.count ?? 1) < 4}
+				{@const peerIdx = i % 2 === 0 ? i + 1 : i - 1}
+				{@const peer = matched.length >= 2 && peerIdx < matched.length ? matched[peerIdx] : null}
+				{@const peerInline = peer ? (peer.count ?? 1) < 4 : true}
+				{@const spacer = myInline && !peerInline ? (peer?.count ?? 1) : 0}
+				<MonsterStatblock {...m} open={true} locked={true} hpGridSpacer={spacer} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
 			{/each}
 		</section>
 	{/if}

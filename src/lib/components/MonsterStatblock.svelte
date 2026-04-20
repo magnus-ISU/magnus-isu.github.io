@@ -14,6 +14,7 @@
 		memberNames = [],
 		open = false,
 		locked = false,
+		hpGridSpacer = 0,
 		onLabelsChange = null
 	} = $props();
 
@@ -372,6 +373,12 @@
 						</span>
 					{/each}
 				</div>
+			{:else if hpGridSpacer > 0}
+				<div class="monster-hp-grid" style="visibility: hidden">
+					{#each Array(hpGridSpacer) as _}
+						<span class="hp-pill"><span class="label-input">&nbsp;</span><span>0</span></span>
+					{/each}
+				</div>
 			{/if}
 
 			{#if description}
@@ -717,7 +724,7 @@
 		font-size: 0.88rem;
 		text-align: right;
 		transition: color 0.2s;
-		cursor: pointer;
+		cursor: ns-resize;
 	}
 
 	.monster-description {
