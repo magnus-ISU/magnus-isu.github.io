@@ -68,32 +68,32 @@ _Worn_: To use it, you have to be wearing it.
 [12 Coin] [1 Weight] **Adventuring Gear** *3 uses*  
 A collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you **rummage through your adventuring gear for some useful mundane item**, you find what you need and mark off a use.
 
+[3 Coin] [1 Weight] **Dungeon Rations** *5 rations*  
+Not tasty, but not bad either.
+
 [5 Coin] [1 Weight] **Bandages** *3 uses, slow*  
 See the Bandage recovery move.
 
 [10 Coin] [1 Weight] **Poultices and Herbs** *2 uses, slow*  
 See the Bandage recovery move.
 
-[3 Coin] [1 Weight] **Dungeon Rations** *5 rations*  
-Not tasty, but not bad either.
+[50 Coin] [1 Weight] **Healing Potion**  
+When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
+
+[30 Coin] [1 Weight] **Antitoxin** *3 uses*  
+When you **sip a use of antitoxin**, you're cured of one poison affecting you.
+
+### Variant Rations
 
 [10 Coin] [1 Weight] **Personal Feast** *1 ration*  
 Ostentatious to say the least.
 
-[3 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf, 7 rations*  
+[1 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf, 7 rations*  
 Dwarves say it tastes like home. Everyone else says it tastes like home, if
 home is a hog farm, and on fire.
 
 [100 Coin] [1 Weight] **Elven Bread** *15 rations*  
 Only the greatest of elf-friends are treated to this rare delicacy.
-
-### Potions & Remedies
-
-[50 Coin] [1 Weight] **Healing Potion**  
-When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
-
-[10 Coin] [1 Weight] **Antitoxin** *3 uses*  
-When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
 ### Bonus-Granting Items
 
