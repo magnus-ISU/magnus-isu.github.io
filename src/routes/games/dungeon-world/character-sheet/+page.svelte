@@ -1345,7 +1345,7 @@ function rollRadialDie(formula, e) {
 
 	.char-body :global(h2.collapsed-inline) {
 		display: inline-block;
-		margin: 0 0.5rem 0 0;
+		margin: 0.75rem 0.5rem 0 0;
 	}
 
 	.char-body :global(h3) {

@@ -133,7 +133,7 @@ onMount(() => {
 
 	el.addEventListener('pointerdown', (e) => {
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
-		if (!heading || !data.rawSource || heading.tagName === 'H2') return;
+		if (!heading || !data.rawSource) return;
 		longPressHeading = null;
 		longPressTimeout = setTimeout(() => {
 			const text = heading.textContent.trim();
@@ -163,29 +163,6 @@ onMount(() => {
 		}
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 		if (!heading) return;
-		if (heading.tagName === 'H2') {
-			const collapsing = !heading.classList.contains('collapsed-heading');
-			const sib = heading.nextElementSibling;
-			if (sib?.classList.contains('h2-section')) {
-				if (collapsing) {
-					sib.style.maxHeight = sib.scrollHeight + 'px';
-					sib.offsetHeight;
-					sib.style.maxHeight = '0';
-					sib.classList.add('collapsed');
-					sib.addEventListener('transitionend', () => {
-						sib.classList.add('hide');
-						heading.classList.add('collapsed-heading', 'collapsed-inline');
-					}, { once: true });
-				} else {
-					heading.classList.remove('collapsed-heading', 'collapsed-inline');
-					sib.classList.remove('hide');
-					sib.classList.remove('collapsed');
-					sib.style.maxHeight = sib.scrollHeight + 'px';
-					sib.addEventListener('transitionend', () => { sib.style.maxHeight = ''; }, { once: true });
-				}
-			}
-			return;
-		}
 		if (heading.tagName === 'H1' && characterSheet.isEmpty) {
 			characterSheet.value = buildCharacterSheet(data.rawSource);
 			heading.classList.add('copied');
