@@ -156,4 +156,10 @@
 	textarea:focus {
 		border-color: #555;
 	}
+
+	@media (max-width: 768px) {
+		textarea, .ph-line, .textbox-mirror {
+			font-size: 1.056rem;
+		}
+	}
 </style>

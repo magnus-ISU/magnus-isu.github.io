@@ -626,6 +626,11 @@
 			left: 0;
 		}
 
+		.dw-sidebar h2 { font-size: 1.32rem; }
+		summary { font-size: 0.9rem; }
+		li a { font-size: 1.02rem; }
+		.hb, .source-toggle .toggle-opt { font-size: 0.72rem; }
+
 		.backdrop {
 			display: block;
 			position: fixed;
