@@ -14,7 +14,6 @@
 		memberNames = [],
 		open = false,
 		locked = false,
-		hpGridSpacer = 0,
 		onLabelsChange = null
 	} = $props();
 
@@ -373,17 +372,13 @@
 						</span>
 					{/each}
 				</div>
-			{:else if hpGridSpacer > 0}
-				<div class="monster-hp-grid" style="visibility: hidden">
-					{#each Array(hpGridSpacer) as _}
-						<span class="hp-pill"><span class="label-input">&nbsp;</span><span>0</span></span>
-					{/each}
-				</div>
 			{/if}
 
 			{#if description}
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>{@html descriptionHtml}</div>
+				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>
+					<div class="desc-inner">{@html descriptionHtml}</div>
+				</div>
 			{/if}
 
 			{#if special}
@@ -732,13 +727,16 @@
 		color: #bbb;
 		font-size: 0.92rem;
 		line-height: 1.6;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
 		cursor: pointer;
 	}
 
-	.monster-description.desc-expanded {
+	.desc-inner {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.monster-description.desc-expanded .desc-inner {
 		white-space: pre-line;
 		overflow: visible;
 		text-overflow: unset;
