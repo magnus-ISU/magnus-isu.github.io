@@ -54,9 +54,9 @@ Created by secretive and immortal smiths to amplify rather than hinder spellcast
 When you **kill with an arcane spell**, take +1 forward to work magic.
 
 ### [1 Weight] [1 Armor] Robes of the Good Archmagi *requires good*
-When you **would be affected by an arcane spell**, roll+INT.
-- On a 10+, you cancel the casting. If you could have memorized the spell, you can choose a new target instead.
-- On a 7-9, you are unaffected, and the robes lose this move until you Prepare Spells.
+When you **would be affected by any spell**, roll+INT.
+- On a 10+, you cancel the casting. If you could have memorized the spell, choose a new target instead.
+- On a 7-9, you are unaffected, and the robes lose this move until you take an hour to Prepare Spells.
 
 ## Artifacts
 
@@ -177,7 +177,7 @@ themselves telling you the whole truth, despite themselves. The consequences,
 after the fact? Those are up to you to deal with.
 
 ### [0 Weight] The Echo _1 use_
-A seemingly empty bottle. Once unstoppered, the whispers of another plane resound once and fall silent. In the silence, the bearer learns in his soul the coming of one great danger and how he can avoid it. At any point after you use the Echo, you can ignore the results of any single die roll—yours or another player’s—and roll again. Once opened, the Echo is released and gone forever.
+A seemingly empty bottle. Once unstoppered, the whispers of another plane resound once and fall silent. In the silence, the bearer learns in his soul the coming of one great danger and how he can avoid it. At any point after you use the Echo, you can ignore the results of any single die roll—yours or another player’s—and set the die to a different value of your choice. Once opened, the Echo is released and gone forever.
 
 ### [0 Weight] Sacred Herbs _3 uses_
 The sacred herbs, collected and prepared by an order of lost wizard-monks, can be found in bundles with two or three uses to them. Kept dry, they last indefinitely. When smoked in a pipe or consumed in an incense burner and the thick, blue smoke inhaled, these herbs will grant you strange visions of faraway places and distant times. If you focus your will on a particular person, place or thing, the herbs will respond: roll+WIS.
