@@ -376,9 +376,7 @@
 
 			{#if description}
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>
-					<div class="desc-inner">{@html descriptionHtml}</div>
-				</div>
+				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>{@html descriptionHtml}</div>
 			{/if}
 
 			{#if special}
@@ -728,15 +726,12 @@
 		font-size: 0.92rem;
 		line-height: 1.6;
 		cursor: pointer;
-	}
-
-	.desc-inner {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
-	.monster-description.desc-expanded .desc-inner {
+	.monster-description.desc-expanded {
 		white-space: pre-line;
 		overflow: visible;
 		text-overflow: unset;

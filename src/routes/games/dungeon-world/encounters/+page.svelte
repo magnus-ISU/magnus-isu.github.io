@@ -152,6 +152,7 @@
 		}
 	}
 
+
 </script>
 
 <svelte:window onkeydown={(e) => {
@@ -227,40 +228,22 @@
 	}
 
 	.encounter-results.two-col {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 0.5rem;
-	}
-
-	.encounter-results.two-col > :global(.monster.is-expanded) {
-		margin: 0;
+		columns: 2;
+		column-gap: 0.5rem;
 	}
 
 	.encounter-results.two-col > :global(.monster) {
-		display: flex;
-		flex-direction: column;
+		break-inside: avoid;
+		margin-bottom: 0.5rem;
 	}
 
-	.encounter-results.two-col > :global(.monster .monster-body.is-open) {
-		flex: 1;
-	}
-
-	.encounter-results.two-col > :global(.monster .monster-body-inner) {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-	}
-
-	.encounter-results.two-col > :global(.monster .monster-description) {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
+	.encounter-results.two-col > :global(.monster.is-expanded) {
+		margin-top: 0;
 	}
 
 	@media (max-width: 1028px) {
 		.encounter-results.two-col {
-			grid-template-columns: 1fr;
+			columns: 1;
 		}
 	}
 
