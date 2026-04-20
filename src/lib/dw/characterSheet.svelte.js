@@ -36,14 +36,18 @@ function saveSlots(slots) {
 	if (!browser) return;
 	try {
 		localStorage.setItem(SLOTS_KEY, JSON.stringify(slots));
-	} catch {}
+	} catch {
+		/* ignore */
+	}
 }
 
 function saveActive(idx) {
 	if (!browser) return;
 	try {
 		localStorage.setItem(ACTIVE_KEY, String(idx));
-	} catch {}
+	} catch {
+		/* ignore */
+	}
 }
 
 const slots = $state(loadSlots());
@@ -67,7 +71,9 @@ export const characterSheet = {
 		if (browser) {
 			try {
 				localStorage.setItem(STORAGE_KEY, v);
-			} catch {}
+			} catch {
+				/* ignore */
+			}
 		}
 	},
 	get isEmpty() {
@@ -97,7 +103,9 @@ export const characterSheet = {
 		if (browser) {
 			try {
 				localStorage.setItem(STORAGE_KEY, slots[i] ?? '');
-			} catch {}
+			} catch {
+				/* ignore */
+			}
 		}
 	},
 
@@ -111,7 +119,9 @@ export const characterSheet = {
 		if (browser) {
 			try {
 				localStorage.setItem(STORAGE_KEY, '');
-			} catch {}
+			} catch {
+				/* ignore */
+			}
 		}
 	},
 
@@ -126,7 +136,9 @@ export const characterSheet = {
 		if (browser) {
 			try {
 				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
-			} catch {}
+			} catch {
+				/* ignore */
+			}
 		}
 	},
 };

@@ -9,4 +9,4 @@ publish: build
 	bun run deploy
 
 localhost:
-	bun run dev
+	vite dev

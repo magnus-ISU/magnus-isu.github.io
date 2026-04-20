@@ -240,8 +240,6 @@ function calculateCampaign() {
 
 	const finalId = campaign[campaign.length - 1];
 	const finalName = territories.find((t) => t.id === finalId).name;
-	const aggregated = [];
-
 	const buckets = {};
 	for (const [key, p] of Object.entries(dist)) {
 		if (key.startsWith('reached')) {
@@ -454,7 +452,7 @@ function importState(event) {
 				colorOrder = imported.colorOrder;
 				saveColorOrder();
 			}
-			const { colorOrder: _, ...territories } = imported;
+			const { colorOrder: _ignored, ...territories } = imported;
 			state = territories;
 			saveState();
 		} catch (err) {

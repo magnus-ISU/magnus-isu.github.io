@@ -108,7 +108,9 @@ export function renderMarkdown(src) {
 				'<svg class="weight-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;color:#444;transform:translateY(-2px)" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 46c-45.074 0-82 36.926-82 82 0 25.812 12.123 48.936 30.938 64H128L32 480h448l-96-288h-76.938C325.877 176.936 338 153.812 338 128c0-45.074-36.926-82-82-82zm0 36c25.618 0 46 20.382 46 46s-20.382 46-46 46-46-20.382-46-46 20.382-46 46-46z" fill="currentColor"/><text x="256" y="400" text-anchor="middle" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
 			);
 
+		// eslint-disable-next-line no-control-regex
 		t = t.replace(/\x00HTML(\d+)\x00/g, (_, i) => htmlTags[+i]);
+		// eslint-disable-next-line no-control-regex
 		t = t.replace(/\x00ESC(\d+)\x00/g, (_, i) =>
 			escapes[+i].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'),
 		);

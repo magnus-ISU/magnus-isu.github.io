@@ -17,7 +17,6 @@ let {
 	onLabelsChange = null,
 } = $props();
 
-import { tick } from 'svelte';
 import { descExpanded as globalDesc, globalExpand } from '$lib/dw/descExpanded.svelte.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { encounterText } from '$lib/dw/encounterText.svelte.js';
@@ -368,7 +367,6 @@ function handleCopy(e) {
 					<div class="monster-vitals">
 						{#if hp !== null && hpInline}
 							{#each hpIndices as idx}
-								<!-- svelte-ignore a11y_no_static_element_interactions -->
 								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 									<input
 										class="label-input"
@@ -398,7 +396,6 @@ function handleCopy(e) {
 			{#if hp !== null && !hpInline}
 				<div class="monster-hp-grid">
 					{#each hpIndices as idx}
-						<!-- svelte-ignore a11y_no_static_element_interactions -->
 						<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 							<input
 								class="label-input"
@@ -421,7 +418,6 @@ function handleCopy(e) {
 			{/if}
 
 			{#if description}
-				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="monster-description" class:desc-expanded={descExpanded} role="button" tabindex="0" onclick={(e) => {
 					if (descLongPress) { descLongPress = false; return; }
 					if (e.shiftKey) { localFlip = !localFlip; }

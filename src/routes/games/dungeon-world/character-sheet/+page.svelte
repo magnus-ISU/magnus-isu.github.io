@@ -258,10 +258,6 @@ function updateExpInText(newExp) {
 	text = lines.join('\n');
 }
 
-function clickExp() {
-	updateExpInText((parsed.exp ?? 0) + 1);
-}
-
 function commitExpRaw(raw) {
 	const result = commitHpFn(raw, parsed.exp ?? 0, null, 0);
 	if (result !== null) updateExpInText(Math.max(0, result));
@@ -760,7 +756,7 @@ function rollRadialDie(formula, e) {
 	<h1>Character Sheet</h1>
 
 	<div class="char-tabs">
-		{#each { length: characterSheet.slotCount } as _, i}
+		{#each { length: characterSheet.slotCount } as _slot, i}
 			<button
 				class="char-tab"
 				class:active={i === activeTab}
@@ -811,7 +807,6 @@ function rollRadialDie(formula, e) {
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
 					<div class="header-circles">
 						{#if parsed.exp !== null}
-							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="circle circle-xs circle-exp circle-draggable" onpointerdown={(e) => expDcRef?.handlePointerDown(e)}>
 								<DraggableCounter bind:this={expDcRef} value={parsed.exp} oncommit={commitExpRaw} inputWidth="1.5rem" class="circle-text" style="font-size: 0.7rem">
 									{#snippet children()}{parsed.exp}{/snippet}
@@ -868,7 +863,6 @@ function rollRadialDie(formula, e) {
 						{/if}
 						{#if parsed.hp !== null && maxHp !== null}
 							{@const hpC = hpColor(parsed.hp, maxHp)}
-							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="circle circle-lg circle-draggable" style="border-color: {hpC}" onpointerdown={(e) => hpDcRef?.handlePointerDown(e)}>
 								<div class="circle-fill" style="height: {hpFillPct}%; background: {hpC}"></div>
 								<DraggableCounter bind:this={hpDcRef} value={parsed.hp} oncommit={commitHpRaw} inputWidth="2.5rem" class="circle-text" style="color: {hpC}">
@@ -877,7 +871,7 @@ function rollRadialDie(formula, e) {
 								<span class="circle-label" style="color: {hpC}">Health</span>
 							</div>
 						{/if}
-						{#each damageEntries as dmgEntry, i}
+						{#each damageEntries as dmgEntry}
 							<button class="circle circle-lg circle-damage" onclick={(e) => rollDamageFormula(dmgEntry, e)} title="Roll {dmgEntry}">
 								<span class="circle-text">{dmgEntry}</span>
 								<span class="circle-label">{'Damage'}</span>

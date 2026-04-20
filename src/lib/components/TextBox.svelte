@@ -1,5 +1,5 @@
 <script>
-import { onMount, tick } from 'svelte';
+import { onMount } from 'svelte';
 
 let { value = $bindable(''), placeholders = [], rows = 12, storageKey = '' } = $props();
 
@@ -47,7 +47,9 @@ onMount(() => {
 	try {
 		const saved = localStorage.getItem(storageKey);
 		if (saved != null) value = saved;
-	} catch {}
+	} catch {
+		/* ignore */
+	}
 });
 
 onMount(() => {
@@ -64,14 +66,16 @@ $effect(() => {
 		} else {
 			localStorage.removeItem(storageKey);
 		}
-	} catch {}
+	} catch {
+		/* ignore */
+	}
 });
 </script>
 
 <div class="textbox-wrap">
 	<div class="textbox-mirror" bind:this={mirror} aria-hidden="true"></div>
 	<div class="textbox-ph" style="transform: translateY({-scrollTop}px)">
-		{#each { length: phCount } as _, i}
+		{#each { length: phCount } as _ph, i}
 			{@const filled = lines[i] != null && lines[i].length > 0}
 			<div class="ph-line" class:filled style="height: {lineHeights[i] ?? 0}px">{placeholders[i] ?? ''}</div>
 		{/each}

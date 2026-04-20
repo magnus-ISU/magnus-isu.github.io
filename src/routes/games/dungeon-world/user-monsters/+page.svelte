@@ -140,7 +140,9 @@ function handleImport(e) {
 		try {
 			const parsed = JSON.parse(ev.target.result);
 			if (Array.isArray(parsed)) userMonsters.import(parsed);
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	};
 	reader.readAsText(file);
 	e.target.value = '';

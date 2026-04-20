@@ -17,7 +17,9 @@ function save(val) {
 	try {
 		if (val.length <= MAX_SIZE) localStorage.setItem(STORAGE_KEY, val);
 		else localStorage.removeItem(STORAGE_KEY);
-	} catch {}
+	} catch {
+		/* ignore */
+	}
 }
 
 let text = $state(load());

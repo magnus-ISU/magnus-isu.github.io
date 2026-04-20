@@ -107,7 +107,6 @@ const parsed = $derived.by(() => {
 			// Try greedy match on basePart
 			let words = basePart.split(/\s+/).filter(Boolean);
 			const mentionUnmatched = [];
-			let matched_any = false;
 
 			while (words.length > 0) {
 				let found = false;
@@ -118,7 +117,6 @@ const parsed = $derived.by(() => {
 						results.push({ ...nameMap.get(candidate), count, memberNames: names });
 						words = words.slice(len);
 						found = true;
-						matched_any = true;
 						break;
 					}
 				}
