@@ -1,5 +1,6 @@
 <script>
 import { onMount } from 'svelte';
+import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
 import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
@@ -22,35 +23,30 @@ onMount(() => {
 });
 
 let text = $state('');
-let nameError = $state(false);
 
 const built = $derived.by(() => {
 	const lines = text.split('\n');
 	const get = (i) => lines[i]?.trim() || '';
 
-	const name = get(0);
-	const tags = get(1);
-	const vitalsRaw = get(2);
+	// Line 0: name, tag, tag, tag...
+	const nameParts = get(0).split(',').map((s) => s.trim());
+	const name = nameParts[0] || '';
+	const tags = nameParts.slice(1).filter(Boolean).join(', ');
 
-	// Parse "3 HP, 3 Armor" or "3,3" or "3 HP" or "3"
-	let hp = null,
-		armor = null;
-	const full = vitalsRaw.match(/(\d+)\s*(?:HP)?\s*,\s*(\d+)\s*(?:Armor)?/i);
-	if (full) {
-		hp = +full[1];
-		armor = +full[2];
-	} else {
-		const hpOnly = vitalsRaw.match(/^(\d+)/);
-		if (hpOnly) hp = +hpOnly[1];
-	}
+	// Line 1: hp, armor, description
+	const line1 = get(1).split(',').map((s) => s.trim());
+	const hp = line1[0] ? +line1[0] : null;
+	const armor = line1[1] ? +line1[1] : null;
+	const description = line1.slice(2).join(', ').replaceAll('\\n', '\n');
 
-	const special = get(3);
-	const description = get(4).replaceAll('\\n', '\n');
-	const instinct = get(5);
+	// Line 2: instinct, special qualities
+	const line2 = get(2).split(',').map((s) => s.trim());
+	const instinct = line2[0] || '';
+	const special = line2.slice(1).filter(Boolean).join(', ');
 
 	const attacks = [];
 	const moves = [];
-	for (let i = 6; i < lines.length; i++) {
+	for (let i = 3; i < lines.length; i++) {
 		const line = lines[i].trim();
 		if (!line) continue;
 		if (line.toLowerCase().startsWith('attack:')) {
@@ -60,15 +56,15 @@ const built = $derived.by(() => {
 				.map((s) => s.trim());
 			attacks.push({ name: parts[0] || '', damage: parts[1] || '', tags: parts[2] || '' });
 		} else {
-			moves.push(line);
+			for (const m of line.split(';').map((s) => s.trim()).filter(Boolean)) moves.push(m);
 		}
 	}
 
 	return {
 		name: name || 'Unnamed',
 		...(tags && { tags }),
-		...(hp !== null && { hp }),
-		...(armor !== null && { armor }),
+		...(hp !== null && !isNaN(hp) && { hp }),
+		...(armor !== null && !isNaN(armor) && { armor }),
 		attacks: attacks.filter((a) => a.name),
 		...(special && { special }),
 		...(description && { description }),
@@ -77,46 +73,52 @@ const built = $derived.by(() => {
 	};
 });
 
+const takenNames = $derived(new Set([
+	...userMonsters.list.map((m) => m.name.toLowerCase()),
+	...allMonsters.map((m) => m.name.toLowerCase()),
+]));
+const canSave = $derived(built.name !== 'Unnamed' && !takenNames.has(built.name.toLowerCase()));
+
 const placeholders = $derived.by(() => {
 	const lines = text.split('\n');
 	const phs = [
-		'Monster name',
-		'Solitary, Large',
-		'hp, armor',
-		'Special qualities',
-		'Description',
-		'Instinct',
+		'Name, Solitary, Large',
+		'hp, armor, description',
+		'Instinct, special qualities',
 	];
 
-	const hasAttack = lines.slice(6).some((l) => l.trim().toLowerCase().startsWith('attack:'));
+	const hasAttack = lines.slice(3).some((l) => l.trim().toLowerCase().startsWith('attack:'));
 	phs.push(
 		hasAttack
 			? 'Move or attack: Name ; damage ; tags'
 			: 'attack: Attack name ; Attack damage ; Attack tags',
 	);
+	phs.push('attack or move; move; move');
 
-	const total = Math.max(lines.length, 10);
+	const total = Math.max(lines.length, phs.length);
 	while (phs.length < total) {
-		phs.push('Move or attack');
+		phs.push('');
 	}
 
 	return phs;
 });
 
-function saveMonster() {
-	const name = text.split('\n')[0]?.trim();
-	if (!name) return;
-	const taken = new Set([
-		...userMonsters.list.map((m) => m.name.toLowerCase()),
-		...allMonsters.map((m) => m.name.toLowerCase()),
-	]);
-	if (taken.has(name.toLowerCase())) {
-		nameError = true;
-		setTimeout(() => {
-			nameError = false;
-		}, 2000);
-		return;
+function monsterToText(m) {
+	const line0 = [m.name, ...(m.tags ? m.tags.split(',').map((s) => s.trim()).filter(Boolean) : [])].join(', ');
+	const line1 = [m.hp ?? '', m.armor ?? '', m.description || ''].join(', ');
+	const line2 = [m.instinct || '', m.special || ''].join(', ');
+	const lines = [line0, line1, line2];
+	for (const atk of m.attacks || []) {
+		const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
+		lines.push(`attack: ${parts.join(' ; ')}`);
 	}
+	if (m.moves?.length) lines.push(m.moves.join('; '));
+	while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
+	return lines.join('\n');
+}
+
+function saveMonster() {
+	if (!canSave) return;
 	userMonsters.add({ ...built });
 	text = '';
 }
@@ -199,16 +201,15 @@ function cancelDelete() {
 
 	<div class="builder">
 		<TextBox bind:value={text} {placeholders} rows={12} />
-		<p class="error-msg" class:visible={nameError}>Name already exists</p>
 
-		{#if text.split('\n')[0]?.trim()}
+		{#if built.name !== 'Unnamed'}
 			<div class="builder-preview">
-				<MonsterStatblock {...built} open={true} />
+				<MonsterStatblock {...built} open={true} custom={true} />
 			</div>
 		{/if}
 
 		<div class="builder-actions">
-			<button class="action-btn primary" onclick={saveMonster}>Save Monster</button>
+			<button class="action-btn primary" onclick={saveMonster} disabled={!canSave}>Save Monster</button>
 			{#if text.trim()}
 				<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
 			{/if}
@@ -230,7 +231,7 @@ function cancelDelete() {
 			{#each userMonsters.list as m (m.name)}
 				<div class="monster-row">
 					<div class="monster-wrap">
-						<MonsterStatblock {...m} />
+						<MonsterStatblock {...m} onEncounterAdd={() => { text = monsterToText(m); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
 					</div>
 					<button class="remove-btn" onclick={() => requestDelete(m.name)} title="Delete">✕</button>
 				</div>
@@ -247,9 +248,17 @@ function cancelDelete() {
 			</label>
 		</div>
 	{/if}
+
+	<section class="monster-search-section">
+		<MonsterSearch />
+	</section>
 </article>
 
 <style>
+	.monster-search-section {
+		margin-top: 2rem;
+	}
+
 	.bg-art {
 		position: fixed;
 		inset: 0;
@@ -359,17 +368,6 @@ function cancelDelete() {
 		margin-bottom: 0;
 	}
 
-	.error-msg {
-		color: #e05555;
-		font-size: 0.85rem;
-		margin: 0.4rem 0 0;
-		visibility: hidden;
-	}
-
-	.error-msg.visible {
-		visibility: visible;
-	}
-
 	.builder-preview {
 		margin-top: 1rem;
 	}
@@ -402,7 +400,12 @@ function cancelDelete() {
 		font-weight: bold;
 	}
 
-	.action-btn.primary:hover { background: #e0b850; }
+	.action-btn.primary:hover:not(:disabled) { background: #e0b850; }
+
+	.action-btn.primary:disabled {
+		opacity: 0.4;
+		cursor: default;
+	}
 
 	.action-btn.primary.danger {
 		background: #c0392b;

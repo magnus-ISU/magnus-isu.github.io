@@ -15,6 +15,8 @@ let {
 	open = false,
 	locked = false,
 	onLabelsChange = null,
+	onEncounterAdd = null,
+	custom = false,
 } = $props();
 
 import { descExpanded as globalDesc, globalExpand } from '$lib/dw/descExpanded.svelte.js';
@@ -57,6 +59,7 @@ let isLongPress = false;
 let copied = $state(false);
 
 function onPointerDown() {
+	if (custom) return;
 	isLongPress = false;
 	longPressTimer = setTimeout(() => {
 		isLongPress = true;
@@ -69,19 +72,15 @@ function onPointerUp() {
 }
 
 function copyToClipboard() {
-	const lines = [name, tags || ''];
-	const vitals = [];
-	if (hp !== null) vitals.push(`${hp} HP`);
-	if (armor !== null) vitals.push(`${armor} Armor`);
-	lines.push(vitals.join(', ') || '0 HP, 0 Armor');
-	lines.push(special || '');
-	lines.push(description || '');
-	lines.push(instinct || '');
+	const line0 = [name, ...(tags ? tags.split(',').map((s) => s.trim()).filter(Boolean) : [])].join(', ');
+	const line1 = [hp ?? '', armor ?? '', description || ''].join(', ');
+	const line2 = [instinct || '', special || ''].join(', ');
+	const lines = [line0, line1, line2];
 	for (const atk of attacks) {
 		const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
 		lines.push(`attack: ${parts.join(' ; ')}`);
 	}
-	for (const m of moves) lines.push(m);
+	if (moves.length) lines.push(moves.join('; '));
 	while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
 	navigator.clipboard.writeText(lines.join('\n'));
 }
@@ -90,12 +89,16 @@ function doAddToEncounter() {
 	const oldTop = el.getBoundingClientRect().top;
 	encounterText.appendName(name);
 	copyToClipboard();
-	const end = performance.now() + 300;
-	requestAnimationFrame(function track() {
-		const drift = el.getBoundingClientRect().top - oldTop;
-		if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-		if (performance.now() < end) requestAnimationFrame(track);
-	});
+	if (onEncounterAdd) {
+		onEncounterAdd();
+	} else {
+		const end = performance.now() + 300;
+		requestAnimationFrame(function track() {
+			const drift = el.getBoundingClientRect().top - oldTop;
+			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			if (performance.now() < end) requestAnimationFrame(track);
+		});
+	}
 	copied = true;
 	setTimeout(() => {
 		copied = false;
@@ -109,12 +112,12 @@ function handleHeaderClick(e) {
 		isLongPress = false;
 		return;
 	}
-	if (e.shiftKey) {
+	if (!custom && e.shiftKey) {
 		doAddToEncounter();
 		return;
 	}
 	const now = Date.now();
-	if (now - lastClickTime < 400) {
+	if (!custom && now - lastClickTime < 400) {
 		lastClickTime = 0;
 		doAddToEncounter();
 		return;
