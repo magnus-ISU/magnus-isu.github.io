@@ -924,7 +924,6 @@ function rollRadialDie(formula, e) {
 								sib.style.maxHeight = '0';
 								sib.classList.add('collapsed');
 							}
-							h2.classList.add('collapsed-heading');
 							setTimeout(() => {
 								const lines = text.split('\n');
 								for (let i = 4; i < lines.length; i++) {
