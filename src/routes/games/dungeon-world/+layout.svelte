@@ -6,6 +6,7 @@
 	import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 	import { loadClassRaw, buildCharacterSheet } from '$lib/dw/classLoader.js';
+	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 
 	let { children } = $props();
 
@@ -199,6 +200,19 @@
 				</ul>
 			</details>
 		{/each}
+		{#if diceHistory.entries.length > 0}
+			<div class="dice-history">
+				<summary>Dice History</summary>
+				{#each diceHistory.entries as entry}
+					<div class="dice-entry tier-{entry.tier}">
+						<span class="dice-formula">{entry.formula}</span>
+						<span class="dice-arrow">&rarr;</span>
+						<span class="dice-breakdown">{entry.breakdown}</span>
+						<span class="dice-total">= {entry.total}</span>
+					</div>
+				{/each}
+			</div>
+		{/if}
 		<div class="sidebar-spacer"></div>
 	</nav>
 
@@ -371,6 +385,68 @@
 		background: #d4a847;
 		color: #1e1e1e;
 	}
+
+	.dice-history {
+		border-top: 1px solid #333;
+		padding: 0.5rem 0;
+		margin-top: 0.5rem;
+	}
+
+	.dice-history summary {
+		padding: 0.4rem 1rem;
+		font-size: 0.75rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #aabbff;
+		cursor: default;
+	}
+
+	.dice-entry {
+		display: flex;
+		gap: 0.5rem;
+		padding: 0.15rem 1rem 0.15rem 1.5rem;
+		font-size: 0.75rem;
+		font-family: monospace;
+		color: #888;
+	}
+
+	.dice-formula {
+		color: #aaa;
+		min-width: 7em;
+	}
+
+	.dice-arrow {
+		color: #555;
+	}
+
+	.dice-breakdown {
+		color: #ccc;
+	}
+
+	.dice-total {
+		color: #888;
+		margin-left: auto;
+	}
+
+	.dice-entry.tier-strong { color: #5aaa6a; }
+	.dice-entry.tier-strong .dice-breakdown,
+	.dice-entry.tier-strong .dice-total { color: #5aaa6a; }
+
+	.dice-entry.tier-weak { color: #d4a847; }
+	.dice-entry.tier-weak .dice-breakdown,
+	.dice-entry.tier-weak .dice-total { color: #d4a847; }
+
+	.dice-entry.tier-miss { color: #e05555; }
+	.dice-entry.tier-miss .dice-breakdown,
+	.dice-entry.tier-miss .dice-total { color: #e05555; }
+
+	.dice-entry.tier-crit { color: #c4f; }
+	.dice-entry.tier-crit .dice-breakdown,
+	.dice-entry.tier-crit .dice-total { color: #c4f; }
+
+	.dice-entry.tier-damage .dice-formula { color: #aaa; }
+	.dice-entry.tier-damage .dice-breakdown { color: #ccc; }
 
 	.sidebar-spacer {
 		height: 50px;

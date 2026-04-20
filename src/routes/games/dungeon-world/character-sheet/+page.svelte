@@ -4,6 +4,7 @@
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 	import { tick, untrack } from 'svelte';
 
 	const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -316,26 +317,39 @@
 	}
 
 	function rollStat(ab, mod, e) {
-		const total = rollDie(6) + rollDie(6) + mod;
+		const r1 = rollDie(6), r2 = rollDie(6);
+		const total = r1 + r2 + mod;
 		const { lx, ly } = launchDir();
 		rollKey++;
 		rollResult = { ab, mod, total, mx: e.clientX, my: e.clientY, lx, ly };
+		const modStr = mod !== 0 ? (mod > 0 ? `+${mod}` : `${mod}`) : '';
+		diceHistory.add({
+			formula: `2d6${modStr} ${ab}`,
+			breakdown: `${r1}+${r2}${modStr}`,
+			total,
+			tier: rollTier(total, false)
+		});
 	}
 
 	function rollDamageFormula(formula, e) {
-		// Parse compound formula like "d10+d4+d8" or "2d6"
-		const total = parseDamageFormula(formula);
-		if (total === null) return;
+		const result = parseDamageFormula(formula);
+		if (result === null) return;
 		const { lx, ly } = launchDir();
 		rollKey++;
-		rollResult = { ab: 'DMG', mod: 0, total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: true, formula };
+		rollResult = { ab: 'DMG', mod: 0, total: result.total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: true, formula };
+		diceHistory.add({
+			formula,
+			breakdown: result.rolls.join('+'),
+			total: result.total,
+			tier: 'damage'
+		});
 	}
 
 	function parseDamageFormula(formula) {
 		// Handles "d10", "2d6", "d10+d4", "d10+d4+d8", "2d4+3" etc.
 		let total = 0;
+		const rolls = [];
 		let rest = formula.replace(/\s+/g, '');
-		// Split on + but keep negative modifiers
 		const parts = rest.match(/[+-]?[^+-]+/g);
 		if (!parts) return null;
 		let anyDice = false;
@@ -345,14 +359,18 @@
 				const sign = dm[1] === '-' ? -1 : 1;
 				const count = +(dm[2] || 1);
 				const sides = +dm[3];
-				for (let i = 0; i < count; i++) total += sign * rollDie(sides);
+				for (let i = 0; i < count; i++) {
+					const v = rollDie(sides);
+					total += sign * v;
+					rolls.push(sign < 0 ? -v : v);
+				}
 				anyDice = true;
 			} else {
 				const n = parseInt(part);
-				if (!isNaN(n)) total += n;
+				if (!isNaN(n)) { total += n; rolls.push(n); }
 			}
 		}
-		return anyDice ? total : null;
+		return anyDice ? { total, rolls } : null;
 	}
 
 	function rollTier(total, isDamage) {
@@ -605,14 +623,26 @@
 				isDamage: false, formula,
 				barbarian: true, barbLabel: `${d6val}+${d8val}`, barbD6Higher: d6val > d8val
 			};
+			diceHistory.add({
+				formula,
+				breakdown: `${d6val}+${d8val}`,
+				total,
+				tier: rollTier(total, false)
+			});
 			return;
 		}
 
-		const total = parseDamageFormula(formula);
-		if (total === null) return;
+		const result = parseDamageFormula(formula);
+		if (result === null) return;
 		const { lx, ly } = launchDir();
 		rollKey++;
-		rollResult = { ab: 'DMG', mod: 0, total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: !isMove, formula };
+		rollResult = { ab: 'DMG', mod: 0, total: result.total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: !isMove, formula };
+		diceHistory.add({
+			formula,
+			breakdown: result.rolls.join('+'),
+			total: result.total,
+			tier: isMove ? rollTier(result.total, false) : 'damage'
+		});
 	}
 </script>
 
