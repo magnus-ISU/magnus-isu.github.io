@@ -315,14 +315,14 @@ export const navigation = [
 	{
 		category: 'Detailed Introduction',
 		items: [
+			{ title: 'Example of Play', slug: 'example-of-play', source: 'srd', file: 'Example' },
+			{ title: 'First Session', slug: 'first-session', source: 'srd', file: 'First_Session' },
 			{
 				title: 'Moves Discussion',
 				slug: 'moves-discussion',
 				source: 'srd',
 				file: 'Moves_Discussion'
 			},
-			{ title: 'Example of Play', slug: 'example-of-play', source: 'srd', file: 'Example' },
-			{ title: 'First Session', slug: 'first-session', source: 'srd', file: 'First_Session' },
 			{
 				title: 'Class Moves Discussion',
 				slug: 'class-moves-discussion',
