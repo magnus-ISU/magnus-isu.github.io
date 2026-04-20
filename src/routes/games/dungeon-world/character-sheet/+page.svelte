@@ -482,10 +482,11 @@
 	// --- Radial dice menu ---
 	let radialMenu = $state(null); // { x, y, timer, closing }
 	let suppressRadialClick = false;
-	const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', '2d6', '1d6+1d8'];
+	const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
 
 	function onHeaderPointerDown(e) {
 		const target = e.target;
+		if (target.closest('.radial-btn')) return;
 		if (target.closest('.circle, .armor-display, .circle-draggable, button, input')) {
 			suppressRadialClick = true;
 			if (radialMenu && !radialMenu.closing) closeRadialMenu();
