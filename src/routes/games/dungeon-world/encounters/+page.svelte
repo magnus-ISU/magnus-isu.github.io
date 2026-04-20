@@ -139,12 +139,22 @@ const parsed = $derived.by(() => {
 		if (trimmed === '{') {
 			i++;
 			const block = [];
-			while (i < lines.length && lines[i].trim() !== '}') {
+			while (i < lines.length && !lines[i].trim().startsWith('}')) {
 				block.push(lines[i]);
 				i++;
 			}
-			if (i < lines.length) i++; // skip }
+			let closingParen = null;
+			if (i < lines.length) {
+				const closeMatch = lines[i].trim().match(/^\}\s*(\(.*\))?\s*$/);
+				if (closeMatch?.[1]) closingParen = closeMatch[1];
+				i++; // skip }
+			}
 			const m = parseInlineMonster(block.join('\n'));
+			if (closingParen) {
+				const { count, names } = parseParen(closingParen);
+				m.count = count;
+				m.memberNames = names;
+			}
 			if (m.name !== 'Unnamed') results.push(m);
 			continue;
 		}
