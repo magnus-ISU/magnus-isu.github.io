@@ -27,7 +27,7 @@ Choose one precept of your religion:
 When you **petition your deity according to the precept of your religion**, you are granted some useful knowledge or boon related to your deity's domain. The GM will tell you what.
 
 ### Hallowed Hold
-When you *stand on sanctified, holy ground* for some time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adevnturer's Gear) to temporarily sanctify a site until it is disturbed by evil, and it usually won't take much longer after that to reconnect with your God.
+When you *stand on sanctified, holy ground* for some time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a site until it is disturbed by evil, and it usually won't take much longer after that to reconnect with your God.
 
 When you *stand in a place of holy worship and significance*, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
 - You must redeem someone before the holy site
@@ -73,7 +73,7 @@ You once followed another path, so you know better than most how outsiders feel 
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 [0 Weight] Some Symbol of the Divine, describe it  
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Chainmail  
@@ -83,7 +83,7 @@ Choose one armament:
 [1 Weight] Mace (close)  
 [1 Weight] Staff (close, two-handed) and [1 Weight] Bandages (3 uses)  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Healing Potion
 
 ## Stats

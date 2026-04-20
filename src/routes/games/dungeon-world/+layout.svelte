@@ -405,6 +405,7 @@
 		top: 0;
 		background: #1e1e1e;
 		z-index: 10;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h2) {
@@ -412,6 +413,7 @@
 		margin: 2.5rem 0 1rem;
 		color: #fff;
 		text-align: center;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h3) {
@@ -422,6 +424,7 @@
 		border: 1px solid #444;
 		padding: 0.4rem 0.75rem;
 		border-radius: 6px;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h4) {

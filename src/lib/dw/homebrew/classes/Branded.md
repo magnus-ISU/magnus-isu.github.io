@@ -48,7 +48,7 @@ You carry no weapons and need no armour but the flames that burn within you. You
 [1 Weight] Adventuring Gear (3 uses)  
 [1 Weight] Healing Potion  
 Choose two:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Healing Potion  
 [10 Coin]
 

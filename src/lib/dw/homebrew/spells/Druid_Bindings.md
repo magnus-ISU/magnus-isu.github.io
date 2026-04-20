@@ -1,5 +1,5 @@
 # Druid Bindings
-## Level 0
+## Whispers
 ### Calming Aura
 The air immediately around you is purified, driving away smoke or miasma, cooling a desert or calming a blizzard. Muddy water clears, blinding light dims, and unbearable noises quiet. The spell lasts until it would have no effect, because the area around you is clear.
 ### Magnetize
@@ -34,7 +34,7 @@ Choose an area you can see: it’s filled with a thick fog which makes it diffic
 You call to the spirits of animals. If remotely possible, a physical animal answers your call under your command and choose two. Otherwise, a spirit answers and choose one. It has a +1 modifier for all stats, triggers basic moves, deals 1d6 damage, and has 1 HP. Concentration 1.
 - It has +1 forward
 - It has 4 armor
-- You conjure two animals
+- You conjure three animals
 - It lingers for more than a few minutes before wandering off
 ### Transmute Earth
 Stone to mud, or mud to stone; touch one, and it will change in a large area into the other.

@@ -107,9 +107,9 @@ Which of you most enjoys my tales?
 
 ### God Amidst The Wastes
 You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
-When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your cantrips and a number of leveled spells equal to your level. The spells must be your level or lower.
+When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your whispers and a number of leveled spells equal to your level. The spells must be your level or lower.
 
-When you are in your natural form and channel a spell you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
+When you are in your natural form and channel a whisper or binding you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
 - The spell comes out dangerously or unpredictably; or you anger one or more spirits; or draw attention to yourself; or put yourself in a spot.
 - The primal become distant; take -1 ongoing to cast a spell until you sleep
 

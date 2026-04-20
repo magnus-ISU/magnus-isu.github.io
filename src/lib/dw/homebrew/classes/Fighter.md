@@ -70,7 +70,7 @@ When you defy danger and **use your small size to your advantage**, take +1.
 ## Gear
 You start with:  
 [0 Weight] Your Signature Weapon  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Chainmail and [1 Weight] Adventuring Gear (3 uses)  
 [3 Weight] [2 Armor] Scale Armor  

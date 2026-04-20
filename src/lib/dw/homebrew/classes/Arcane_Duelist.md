@@ -32,7 +32,7 @@ Your fighting style is showy and impressive. Gain +1 forward to Parley with anyo
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 Choose one from each:  
 [0 Weight] Noble's Silks and [10 Coin]  
 [1 Weight] [1 Armor] Duelist's Leathers (worn)  
@@ -41,7 +41,7 @@ Choose your weapon:
 [2 Weight] Rapier (precise, close)  
 [1 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Healing Potion
 
 ## Stats

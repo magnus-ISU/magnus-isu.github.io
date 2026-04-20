@@ -1,10 +1,10 @@
 # Cleric Miracles
 ## Rotes
-### Light Rote
+### Light
 An item you touch glows with divine light, about as bright as a torch. It gives off no heat or sound and requires no fuel but is otherwise like a mundane torch. You have complete control of the color of the flame. The spell lasts as long as it is in your presence.
-### Sanctify Rote
-Food or water you hold in your hands while you cast this spell is consecrated by your deity. In addition to now being holy or unholy, the affected substance is purified of any mundane spoilage.
-### Guidance Rote
+### Sanctify
+Food or water you hold in your hands while you cast this spell is consecrated by your deity. In addition to now being holy or unholy for a time, the affected substance is purified of any mundane spoilage.
+### Guidance
 The symbol of your deity appears before you and gestures towards the direction or course of action your deity would have you take then disappears. The message is through gesture only; your communication through this spell is severely limited.
 ## Level 1
 ### Bless

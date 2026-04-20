@@ -59,7 +59,7 @@ You always land on your feet. When you fall from any height, if you're conscious
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] [1 Armor] Leather Armor  
 [0 Weight] 3 uses of your chosen poison  
 [10 Coin]  

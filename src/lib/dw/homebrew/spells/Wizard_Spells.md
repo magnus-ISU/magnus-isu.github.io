@@ -1,5 +1,5 @@
 # Wizard Spells
-## Level 0
+## Cantrips
 ### Unseen Servant <span style="float:right"> Conjuration 0 </span> 
 You conjure a simple invisible construct that can do nothing but carry items. It has load 3 and carries anything you hand to it. It cannot pick up items on its own and can only carry those you give to it. Items carried by an unseen servant appear to float in the air a few paces behind you. An unseen servant that takes damage or leaves your presence is immediately dispelled, dropping any items it carried. Otherwise the unseen servant serves you until you end the spell.
 ### Prestidigitation <span style="float:right"> Illusion 0 </span> 

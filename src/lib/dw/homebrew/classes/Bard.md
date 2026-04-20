@@ -68,7 +68,7 @@ When you first enter a civilized settlement someone who respects the custom of h
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 Choose your instrument or make up your own:  
 [0 Weight] Your father’s mandolin, repaired  
 [0 Weight] A fine lute, a gift from a noble  
@@ -87,7 +87,7 @@ Choose one for your armaments:
 [2 Weight] Worn bow (near), [1 Weight] Bundle of arrows (ammo), and [1 Weight] Short sword (close)  
 [1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)  
 Choose one:  
-[1 Weight] Adventuring gear (3 uses)  
+[1 Weight] Adventuring Gear (3 uses)  
 [1 Weight] Bandages (3 uses)  
 [0 Weight] Halfling pipeleaf (3 uses)  
 [2 Weight] Bag of Books (3 uses)  

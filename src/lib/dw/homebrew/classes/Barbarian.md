@@ -53,14 +53,14 @@ The spirits of your ancestors still guide you. When you sleep, you can speak wit
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Dagger (hand)  
 [0 Weight] Some token of where you've traveled or where you're from  
 Choose your weapon:  
 [1 Weight] Axe (close)  
 [2 Weight] Two-Handed Sword (close, +1 damage)  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] [1 Armor] Chainmail
 
 ## Stats

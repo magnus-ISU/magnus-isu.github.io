@@ -23,7 +23,7 @@ When you **sleep with spells still memorized**, your rest is subpar (not cantrip
 When you **cast a memorized spell**, roll+INT. On a 7-9, choose one:
 - The spell is released unpredictably or disturbs the fabric of reality; or you draw unwelcome attention; or you are put in a spot by the casting.
 - The casting agitates your memorized spells; take -1 ongoing to Cast a Spell and Prepare a Spell until you have no prepared spells.
-- The living spell is cast, not a copy. You must memorize it again.
+- The living spell is cast, and you forget. You must memorize it again.
 
 ### Ritual
 When you **draw on a place of power to create a magical effect**, tell the GM what you're trying to achieve. Ritual effects are always possible, but the GM will give you one to four of the following conditions:
@@ -58,7 +58,7 @@ You do not use a spellbook to prepare spells. They are a part of your blood.
 ## Gear
 You start with:  
 [1 Weight] Your Spellbook  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Leather Armor  
 [2 Weight] Bag of Books (3 uses) and [0 Weight] 3 Weightless Healing Potions  

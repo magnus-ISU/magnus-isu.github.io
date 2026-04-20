@@ -41,7 +41,7 @@ Your blades dance around your enemies' defenses with ease. When you **deal +1d6 
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Dueling Rapier (close, precise)  
 [1 Weight] [1 Armor] Shining Armor  
 Choose your backup weapon:  

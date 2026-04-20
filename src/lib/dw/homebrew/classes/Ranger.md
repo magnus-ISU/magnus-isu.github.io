@@ -69,7 +69,7 @@ You start with:
 [1 Weight] Hunter's Bow (near, far)  
 [1 Weight] Bundle of Arrows (ammo)  
 [1 Weight] Adventuring Gear (3 uses)  
-[1 Weight] Dungeon Rations (5 uses)  
+[1 Weight] Dungeon Rations (5 rations)  
 Choose your melee weapon:  
 [1 Weight] Short Sword (close)  
 [1 Weight] Spear (reach)  
@@ -110,9 +110,9 @@ Somewhere in your lineage lies mixed blood and it begins to show its presence. Y
 
 ### God Amidst the Wastes
 You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
-When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your cantrips and a number of leveled spells equal to your level minus three. The spells must be at least three levels lower than your own.
+When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your whispers and a number of leveled spells equal to your level minus three. The spells must be at least three levels lower than your own.
 
-When you channel a spell you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
+When you channel a whisper or binding you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
 - The spell comes out dangerously or unpredictably; or you anger one or more spirits; or draw attention to yourself; or put yourself in a spot.
 - The primal become distant; take -1 ongoing to cast a spell until you sleep
 
