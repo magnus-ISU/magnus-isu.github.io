@@ -1204,9 +1204,8 @@
 		color: #fff;
 	}
 
-	.roll-barb-white {
+	.roll-bubble.roll-barb-white {
 		background: #ffffffee;
-		color: #111;
 	}
 
 	@media (max-width: 768px) {
