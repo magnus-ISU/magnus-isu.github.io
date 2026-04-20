@@ -2,6 +2,7 @@
 	import MonsterStatblock from './MonsterStatblock.svelte';
 	import { monsterSections } from '$lib/dw/monsters.js';
 	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+	import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
 
 	let {
 		/** Show all sections when search is empty */
@@ -63,6 +64,9 @@
 			<MonsterStatblock {...m} open={autoExpand} />
 		{/each}
 	{/each}
+	{#if filteredCount >= 2}
+		<button class="expand-all-btn" onclick={() => globalExpand.toggle()}>{globalExpand.value ? 'Collapse All' : 'Expand All'}</button>
+	{/if}
 </div>
 
 <style>
@@ -87,5 +91,25 @@
 	.monster-search.hint {
 		color: #e05555;
 		border-color: #e05555;
+	}
+
+	.expand-all-btn {
+		display: block;
+		margin: 1.5rem auto 0;
+		background: transparent;
+		border: 1px solid #444;
+		border-radius: 4px;
+		color: #999;
+		cursor: pointer;
+		font-size: 0.8rem;
+		padding: 0.4rem 1.2rem;
+		font-family: inherit;
+		transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+
+	.expand-all-btn:hover {
+		background: #252525;
+		color: #ddd;
+		border-color: #666;
 	}
 </style>

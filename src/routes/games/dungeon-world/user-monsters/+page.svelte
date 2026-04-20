@@ -4,6 +4,7 @@
 	import { pageArt } from '$lib/dw/navigation.js';
 	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 	import TextBox from '$lib/components/TextBox.svelte';
+	import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
 	import { onMount } from 'svelte';
 
 	const artUrl = typeof pageArt['user-monsters'] === 'string' ? pageArt['user-monsters'] : pageArt['user-monsters']?.url;
@@ -176,7 +177,8 @@
 {/if}
 
 <article class="dw-article">
-	<h1>User Monsters</h1>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<h1 onclick={() => { if (userMonsters.list.length >= 2) globalExpand.toggle(); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">User Monsters</h1>
 
 	<div class="builder">
 		<TextBox bind:value={text} {placeholders} rows={12} />
@@ -217,6 +219,9 @@
 				</div>
 			{/each}
 		</section>
+		{#if userMonsters.list.length >= 2}
+			<button class="expand-all-btn" onclick={() => globalExpand.toggle()}>{globalExpand.value ? 'Collapse All' : 'Expand All'}</button>
+		{/if}
 	{:else}
 		<div class="toolbar">
 			<label class="action-btn import-label">
@@ -397,5 +402,25 @@
 
 	.import-label input[type='file'] {
 		display: none;
+	}
+
+	.expand-all-btn {
+		display: block;
+		margin: 1.5rem auto 0;
+		background: transparent;
+		border: 1px solid #444;
+		border-radius: 4px;
+		color: #999;
+		cursor: pointer;
+		font-size: 0.8rem;
+		padding: 0.4rem 1.2rem;
+		font-family: inherit;
+		transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+
+	.expand-all-btn:hover {
+		background: #252525;
+		color: #ddd;
+		border-color: #666;
 	}
 </style>

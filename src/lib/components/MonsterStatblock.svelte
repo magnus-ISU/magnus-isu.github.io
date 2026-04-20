@@ -20,7 +20,7 @@
 	import { tick } from 'svelte';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
-	import { descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
+	import { globalExpand, descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
 
 	function inlineMd(text) {
 		return text
@@ -36,6 +36,13 @@
 
 	let expanded = $state(open);
 	$effect(() => { expanded = open; });
+	let globalMounted = false;
+	$effect(() => {
+		const g = globalExpand.value;
+		if (!globalMounted) { globalMounted = true; return; }
+		if (g) expanded = true;
+		else if (!locked) expanded = false;
+	});
 	let el;
 
 	// Long-press / shift-click to copy name

@@ -7,6 +7,7 @@
 	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
 	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 	import { buildCharacterSheet } from '$lib/dw/classLoader.js';
+	import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
 
 	let { data } = $props();
 	const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
@@ -185,7 +186,8 @@
 
 <article bind:this={articleEl} class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	{#if data.render === 'monsters'}
-		<h1>{data.title}</h1>
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<h1 onclick={() => globalExpand.toggle()} style="cursor: pointer; -webkit-tap-highlight-color: transparent">{data.title}</h1>
 		{#if isAllMonsters}
 			<MonsterSearch showAll />
 		{:else}
@@ -196,6 +198,7 @@
 				{/each}
 			{/each}
 		{/if}
+		<button class="expand-all-btn" onclick={() => globalExpand.toggle()}>{globalExpand.value ? 'Collapse All' : 'Expand All'}</button>
 	{:else if contentHtml}
 		{@html contentHtml}
 	{:else}
@@ -337,6 +340,26 @@
 		height: 22px;
 		vertical-align: middle;
 		transform: translateY(-2px);
+	}
+
+	.expand-all-btn {
+		display: block;
+		margin: 1.5rem auto 0;
+		background: transparent;
+		border: 1px solid #444;
+		border-radius: 4px;
+		color: #999;
+		cursor: pointer;
+		font-size: 0.8rem;
+		padding: 0.4rem 1.2rem;
+		font-family: inherit;
+		transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+
+	.expand-all-btn:hover {
+		background: #252525;
+		color: #ddd;
+		border-color: #666;
 	}
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
