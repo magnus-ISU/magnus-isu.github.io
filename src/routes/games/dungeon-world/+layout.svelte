@@ -75,11 +75,19 @@
 		goto(`/games/dungeon-world/${slug}`);
 	}
 
+	function resolveClassItem(item) {
+		if (item.srdSlug && getSource(item.slug) === 'srd') {
+			return contentIndex[item.srdSlug] || item;
+		}
+		return item;
+	}
+
 	function onPointerDown(e, item, category, toggleTarget) {
 		if (e.shiftKey && !toggleTarget) {
 			e.preventDefault();
 			if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				loadClassRaw(item).then(raw => {
+				const resolved = resolveClassItem(item);
+				loadClassRaw(resolved).then(raw => {
 					if (raw) characterSheet.value = buildCharacterSheet(raw);
 				});
 			}
@@ -98,7 +106,8 @@
 				sidebarOpen = false;
 				goto(`/games/dungeon-world/${slug}`);
 			} else if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				const raw = await loadClassRaw(item);
+				const resolved = resolveClassItem(item);
+				const raw = await loadClassRaw(resolved);
 				if (raw) characterSheet.value = buildCharacterSheet(raw);
 				sidebarOpen = false;
 			}
@@ -120,7 +129,8 @@
 			e.preventDefault();
 			e.stopPropagation();
 			if (category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				const raw = await loadClassRaw(item);
+				const resolved = resolveClassItem(item);
+				const raw = await loadClassRaw(resolved);
 				if (raw) characterSheet.value = buildCharacterSheet(raw);
 			}
 			sidebarOpen = false;
