@@ -481,14 +481,31 @@
 	const bodyHtml = $derived(renderMarkdown(parsed.body));
 
 	let charBodyEl = $state();
+	let animatingH3 = -1;
 
 	$effect(() => {
 		void bodyHtml;
 		if (!charBodyEl) return;
-		// Apply glow class after render so CSS transition animates
-		requestAnimationFrame(() => {
-			charBodyEl?.querySelectorAll('h3[data-glow]').forEach(h3 => h3.classList.add('glow'));
+		const idx = animatingH3;
+		// Apply glow instantly to all except the one being animated
+		charBodyEl.querySelectorAll('h3[data-glow]').forEach(h3 => {
+			const allH3s = [...charBodyEl.querySelectorAll('h3')];
+			const thisIdx = allH3s.indexOf(h3);
+			if (thisIdx !== idx) {
+				h3.style.transition = 'none';
+				h3.classList.add('glow');
+				h3.offsetHeight; // force reflow
+				h3.style.transition = '';
+			}
 		});
+		// Animate only the toggled one
+		if (idx >= 0) {
+			requestAnimationFrame(() => {
+				const h3 = charBodyEl?.querySelectorAll('h3')?.[idx];
+				if (h3?.hasAttribute('data-glow')) h3.classList.add('glow');
+				animatingH3 = -1;
+			});
+		}
 	});
 
 	function toggleH3Glow(h3Index) {
@@ -512,6 +529,7 @@
 							}, 200);
 						}
 					} else {
+						animatingH3 = h3Index;
 						pushUndo();
 						lines[i] = lines[i] + ' ###';
 						text = lines.join('\n');
