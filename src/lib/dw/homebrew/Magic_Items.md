@@ -38,6 +38,9 @@ Sharp as anything, this simple-seeming sword means to separate one thing from an
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
 
+### [0 Weight] [+1 Armor] Ring of Protection
+A slender band of nearly invisible silver. Prince Edrin wore the ring upon his finger during his long captivity in the dungeons of the Usurper. Despite the tortures he endured, blades and blow alike seemed to slide away from his flesh, leaving him bruised but unbroken.
+
 ### [1 Weight] [+1 Armor] Lodestone Shield
 Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blades and arrows to it. When you **Defend against enemies who wield metal weapons** you can spend one Readiness, per target, to disarm them. Also, sometimes you’ll find a handful of loose change stuck to it.
 
@@ -46,6 +49,8 @@ A stealthy suit of armor, it appears as many things to many people and blends in
 
 ### [1 Weight] [5 Armor] Adamantium Mail *clumsy*
 Impossibly light and impossibly strong, adamantium can only be found deep in Hell, and mortals have at great cost obtained precious little of it. A single man in adamantium is worth more than an army, and that rule has been tested several times.
+
+It's generally thought that if you have the misfortune of facing someone who has it, you should kill their friends and run, run away. But there is no shortage of kingdoms who hope to get their hands on a suit, either.
 
 ### [2 Weight] [2 Armor] Elven Chain Mail
 Created by secretive and immortal smiths to amplify rather than hinder spellcasting.
