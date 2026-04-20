@@ -178,7 +178,7 @@ When you're outnumbered or fighting something much larger than you, you have +2 
 When you defy danger on a 12+, you transcend the danger. You not only do what you set out to, but the GM will offer you a better outcome, true beauty, or a moment of grace.
 
 ### Use Any Item
-You can use any weapon as if it is thrown or precise. You can ignore the requirements of any magical item.
+You can use any weapon as if it is thrown or precise. If you are The Thief, you can ignore the requirements of any magical item.
 
 ### Escape Route
 When you're in too deep and need a way out, name your escape route and roll+DEX. On a 10+ you're gone. On a 7-9 you can stay or go, but if you go it costs you: leave something behind or take something with you, the GM will tell you what.

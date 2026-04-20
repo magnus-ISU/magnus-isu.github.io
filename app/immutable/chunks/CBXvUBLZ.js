@@ -74,7 +74,7 @@ I may have killed a relative of \\_\\_\\_\\_\\_ at some point in the past.
 ## Advanced Moves
 
 ### Armored
-Ignore the clumsy tag on any armor you wear.
+Ignore the *clumsy* tag on any armor you wear.
 
 ### Wind Slash
 When you **attack at near range with blades of cutting air**, roll+INT. On a 10+, deal your damage and apply one technique. On a 7-9, deal your damage, apply one technique, and choose one:

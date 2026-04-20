@@ -5,7 +5,6 @@ The musty tombs and forgotten treasure troves of the world are filled with usefu
 Each piece of equipment will have a number of tags. These will tell you something about how the equipment affects the character using it \\(like +Armor\\) or suggest something about the way it is used \\(like the Range tags\\). Like everything else in Dungeon World, these guide the fiction you're creating in play. If a weapon is awkward, it might mean that you're more likely to drop it when you fail that hack and slash roll.
 
 ## Weapons
-
 Weapons don't kill monsters, people do. That's why weapons in Dungeon World don't have a listed damage. A weapon is useful primarily for its tags which describe what the weapon is useful for. A dagger is not useful because it does more or less damage than some other blade. It's useful because it's small and easy to strike with at close distance. A dagger in the hands of the wizard is not nearly so dangerous as one in the hands of a skilled fighter.
 
 ## Weapon List
@@ -15,43 +14,43 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 ### Ranged Weapons
 
-[10 Coin] [1 Weight] **3 Throwing Daggers** thrown, near
+[10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near*
 
-[15 Coin] [2 Weight] **Ragged Bow** near
+[15 Coin] [2 Weight] **Ragged Bow** *near*
 
-[60 Coin] [2 Weight] **Fine Bow** near, far
+[60 Coin] [2 Weight] **Fine Bow** *near, far*
 
-[100 Coin] [1 Weight] **Hunter's Bow** near, far
+[100 Coin] [1 Weight] **Hunter's Bow** *near, far*
 
-[35 Coin] [3 Weight] **Crossbow** near, +1 damage, reload
+[35 Coin] [3 Weight] **Crossbow** *near, +1 damage, reload*
 
-[1 Coin] [1 Weight] **Bundle of Arrows** Ammo
+[1 Coin] [1 Weight] **Bundle of Arrows** *ammo*
 
-[20 Coin] [0 Weight] **Elven Arrows** Ammo
+[20 Coin] [0 Weight] **Elven Arrows** *ammo*
 
 ### Melee Weapons
 
-[2 Coin] [1 Weight] **Dagger, Shiv, Knife** hand
+[2 Coin] [1 Weight] **Dagger, Shiv, Knife** *hand*
 
-[1 Coin] [2 Weight] **Club, Shillelagh** close
+[1 Coin] [2 Weight] **Club, Shillelagh** *close*
 
-[1 Coin] [1 Weight] **Staff** close, two-handed
+[1 Coin] [1 Weight] **Staff** *close, two-handed*
 
-[8 Coin] [1 Weight] **Short Sword, Axe, Warhammer, Mace** close
+[8 Coin] [1 Weight] **Short Sword, Axe, Warhammer, Mace** *close*
 
-[15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** close, +1 damage
+[15 Coin] [2 Weight] **Long Sword, Battle Axe, Flail** *close, +1 damage*
 
 ### Precise Weapons
 
-[25 Coin] [1 Weight] **Rapier** close, precise
+[25 Coin] [1 Weight] **Rapier** *close, precise*
 
-[50 Coin] [2 Weight] **Dueling Rapier** close, 1 piercing, precise
+[50 Coin] [2 Weight] **Dueling Rapier** *close, 1 piercing, precise*
 
 ### Reach Weapons
 
-[5 Coin] [1 Weight] **Spear** reach, thrown, near
+[5 Coin] [1 Weight] **Spear** *reach, thrown, near*
 
-[9 Coin] [2 Weight] **Halberd** reach, +1 damage, two-handed
+[9 Coin] [2 Weight] **Halberd** *reach, +1 damage, two-handed*
 
 ## Armor
 
@@ -67,7 +66,6 @@ are better trained to ignore these drawbacks, but anyone can strap on a suit
 of armor and enjoy the benefits it grants.
 
 ### Armor Tags
-
 Armor, like weapons, has tags. Some are purely descriptive but the ones below
 have some mechanical effect on the player wearing them
 
@@ -83,60 +81,49 @@ _Worn_: To use it, you have to be wearing it.
 
 ### Staples
 
-[12 Coin] [1 Weight] **Adventuring Gear** 3 uses
-
+[12 Coin] [1 Weight] **Adventuring Gear** *3 uses*  
 A collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you **rummage through your adventuring gear for some useful mundane item**, you find what you need and mark off a use.
 
-[5 Coin] [1 Weight] **Bandages** 3 uses, slow
-
+[5 Coin] [1 Weight] **Bandages** *3 uses, slow*  
 See the Bandage recovery move.
 
-[10 Coin] [1 Weight] **Poultices and Herbs** 2 uses, slow
-
+[10 Coin] [1 Weight] **Poultices and Herbs** *2 uses, slow*  
 See the Bandage recovery move.
 
-[3 Coin] [1 Weight] **Dungeon Rations** Ration, 5 uses
-
+[3 Coin] [1 Weight] **Dungeon Rations** *5 rations*  
 Not tasty, but not bad either.
 
-[10 Coin] [1 Weight] **Personal Feast** Ration, 1 use
-
+[10 Coin] [1 Weight] **Personal Feast** *1 ration*  
 Ostentatious to say the least.
 
-[3 Coin] [1 Weight] **Dwarven Hardtack** Requires Dwarf, ration, 7 uses
-
+[3 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf, 7 rations*  
 Dwarves say it tastes like home. Everyone else says it tastes like home, if
 home is a hog farm, and on fire.
 
-[100 Coin] [1 Weight] **Elven Bread** Ration, 15 uses
-
+[100 Coin] [1 Weight] **Elven Bread** *15 rations*  
 Only the greatest of elf-friends are treated to this rare delicacy.
 
 ### Potions & Remedies
 
-[50 Coin] [1 Weight] **Healing Potion**
-
+[50 Coin] [1 Weight] **Healing Potion**  
 When you **drink an entire healing potion**, heal yourself of 10 damage or remove one debility, your choice.
 
-[10 Coin] [1 Weight] **Antitoxin** 3 uses
-
+[10 Coin] [1 Weight] **Antitoxin** *3 uses*  
 When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
 ### Bonus-Granting Items
 
-[10 Coin] [2 Weight] **Bag of Books** 5 uses
+[10 Coin] [2 Weight] **Bag of Books** *3 uses*  
+When your bag of books **contains just the right book** for the subject you're about to spout lore about, consult the book, expend a use, and take +1 to your roll.
 
-When your bag of books **contains just the right book** for the subject you're about to spout lore about, consult the book, mark off a use, and take +1 to your roll.
-
-[10 Coin] [4 Weight] **Keg of Dwarven Stout**
-
-When you open a keg of dwarven stout and **let everyone drink freely**, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.
-
-[25 Coin] [0 Weight] **Halfling Pipeleaf** 3 uses
-
+[25 Coin] [0 Weight] **Halfling Pipeleaf** *3 uses*  
 When you **share halfling pipeleaf with someone**, expend a use and take +1 forward to parley with them.
 
+[30 Coin] [4 Weight] **Keg of Dwarven Stout**  
+When you open a keg of dwarven stout and **let everyone drink freely**, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.
+
 ### Poisons
+
 [20 Coin] [0 Weight] **Bloodweed** Dangerous, touch  
 Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
 
@@ -160,6 +147,8 @@ The target treats the next creature they see as a trusted ally, until proved oth
 
 [80 Coin] [0 Weight] **Arsenic Bloom** Dangerous, applied  
 After one hour, the target begins to vomit uncontrollably; a few hours later, they die unless treated with antitoxin.
+
+## The Wider World
 
 ### Services
 
