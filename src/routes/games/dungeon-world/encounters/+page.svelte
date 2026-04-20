@@ -1,16 +1,16 @@
 <script>
-import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
+import { onMount, tick } from 'svelte';
 import MonsterSearch from '$lib/components/MonsterSearch.svelte';
+import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
-import { allMonsters } from '$lib/dw/monsters.js';
-import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 import { encounterText } from '$lib/dw/encounterText.svelte.js';
-import { pageArt } from '$lib/dw/navigation.js';
+import { allMonsters } from '$lib/dw/monsters.js';
 import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
-import { tick, onMount } from 'svelte';
+import { pageArt } from '$lib/dw/navigation.js';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 
 const artUrl =
-	typeof pageArt['encounters'] === 'string' ? pageArt['encounters'] : pageArt['encounters']?.url;
+	typeof pageArt.encounters === 'string' ? pageArt.encounters : pageArt.encounters?.url;
 let art = $state(null);
 onMount(() => {
 	function loadArt() {

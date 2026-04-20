@@ -1,9 +1,9 @@
 import { redirect } from '@sveltejs/kit';
-import { postsPerPage } from '$lib/config';
 import fetchPosts from '$lib/assets/js/fetchPosts';
+import { postsPerPage } from '$lib/config';
 
 export const load = async ({ url, params, fetch }) => {
-	const page = parseInt(params.page) || 1;
+	const page = parseInt(params.page, 10) || 1;
 	const { category } = params;
 
 	// Prevents duplication of page 1 as the index page
@@ -11,7 +11,7 @@ export const load = async ({ url, params, fetch }) => {
 		redirect(301, `/blog/category/${category}`);
 	}
 
-	let offset = page * postsPerPage - postsPerPage;
+	const offset = page * postsPerPage - postsPerPage;
 
 	const totalPostsRes = await fetch(`${url.origin}/api/posts/count`);
 	const total = await totalPostsRes.json();

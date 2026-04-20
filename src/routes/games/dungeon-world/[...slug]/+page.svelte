@@ -1,13 +1,13 @@
 <script>
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
-import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
-import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import MonsterSearch from '$lib/components/MonsterSearch.svelte';
-import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 import { buildCharacterSheet } from '$lib/dw/classLoader.js';
 import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
+import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 let { data } = $props();
 const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);

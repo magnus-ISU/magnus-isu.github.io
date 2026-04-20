@@ -18,7 +18,7 @@ function addCity() {
 	/*if (cities["thing"] !== undefined) {
 			return;
 		}*/
-	cities['State ' + (1 + Object.entries(cities).length)] = {
+	cities[`State ${1 + Object.entries(cities).length}`] = {
 		obelisk: 1,
 		walls: 1,
 		barracks: 1,
@@ -38,10 +38,9 @@ function gameTick() {
 		// This has values corresponding to the index in actions[]
 		if (cities[cityName].action === 0) {
 			cities[cityName].soldiers++;
-			continue;
 			// Now ensure that we did a legal move
 		} else if (cities[cityName].action < 0 || cities[cityName].action >= actions.length) {
-			alert("Illegal game state reached! action was '" + cities[cityName].action + "'");
+			alert(`Illegal game state reached! action was '${cities[cityName].action}'`);
 		}
 	}
 	// Next, process attacks
@@ -101,7 +100,7 @@ function gameTick() {
 			}
 			if (cities[targetName].obelisk < 0) {
 				cities[targetName].obelisk = 0;
-				alert(targetName + "'s Obelisk has been demolished!");
+				alert(`${targetName}'s Obelisk has been demolished!`);
 			}
 		}
 	}
@@ -122,7 +121,7 @@ function gameTick() {
 			case 1:
 				cities[cityName].obelisk++;
 				if (cities[cityName].obelisk === 10) {
-					alert(cityName + "'s obelisk has been completed! Hooray!");
+					alert(`${cityName}'s obelisk has been completed! Hooray!`);
 				}
 				break;
 			case 2:
@@ -137,7 +136,7 @@ function gameTick() {
 			case 7: {
 				// Cheat after we get attacked to always set to the right values
 				let cheatStrings = cities[cityName].target.split(' ');
-				if (cheatStrings.length != 4) {
+				if (cheatStrings.length !== 4) {
 					alert(
 						"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'",
 					);
@@ -145,7 +144,7 @@ function gameTick() {
 				}
 				let cheatValues = [];
 				for (let j = 0; j < 4; j++) {
-					cheatValues[j] = parseInt(cheatStrings[j]);
+					cheatValues[j] = parseInt(cheatStrings[j], 10);
 					if (Number.isNaN(cheatValues[j])) {
 						alert(
 							"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'",

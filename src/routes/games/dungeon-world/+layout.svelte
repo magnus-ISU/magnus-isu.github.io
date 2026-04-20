@@ -1,12 +1,12 @@
 <script>
-import { page } from '$app/state';
 import { goto } from '$app/navigation';
-import { navigation, contentIndex } from '$lib/dw/navigation.js';
-import { monsterSections } from '$lib/dw/monsters.js';
-import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
+import { page } from '$app/state';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-import { loadClassRaw, buildCharacterSheet } from '$lib/dw/classLoader.js';
+import { buildCharacterSheet, loadClassRaw } from '$lib/dw/classLoader.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+import { monsterSections } from '$lib/dw/monsters.js';
+import { contentIndex, navigation } from '$lib/dw/navigation.js';
+import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 let { children } = $props();
 

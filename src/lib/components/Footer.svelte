@@ -4,7 +4,7 @@ import { navItems } from '$lib/config';
 import { currentPage, isMenuOpen } from '../assets/js/store';
 
 const maybeCloseMenu = (route) => {
-	if (route != $currentPage) {
+	if (route !== $currentPage) {
 		isMenuOpen.set(false);
 	}
 };

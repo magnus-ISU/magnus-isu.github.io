@@ -60,7 +60,7 @@ function handleGuess() {
 
 	const guess = parseFloat(guessInput);
 	// Validate input
-	if (isNaN(guess) || guess <= 0) {
+	if (Number.isNaN(guess) || guess <= 0) {
 		feedback = 'Please enter a valid positive number.';
 		return;
 	}

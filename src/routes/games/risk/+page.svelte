@@ -1,9 +1,10 @@
 <script>
 import { onMount } from 'svelte';
-import paths from './paths.json';
 import background from './background.json';
 import connections from './connections.json';
+import paths from './paths.json';
 import defaultStateJson from './risk_state.json';
+
 const { colorOrder: defaultColorOrder, ...defaultState } = defaultStateJson;
 
 let territories = [
@@ -215,7 +216,7 @@ function calculateCampaign() {
 			}
 
 			const parts = key.split('-');
-			const attackers = parseInt(parts[2]);
+			const attackers = parseInt(parts[2], 10);
 
 			if (attackers <= 1) {
 				nextDist[`fail-${i - 1}`] = (nextDist[`fail-${i - 1}`] || 0) + p;
@@ -225,7 +226,7 @@ function calculateCampaign() {
 			const battleDist = solveBattle(attackers, initialDefenders);
 			for (const [outcome, battleP] of Object.entries(battleDist)) {
 				const combinedP = p * battleP;
-				const res = parseInt(outcome);
+				const res = parseInt(outcome, 10);
 				if (res > 0) {
 					nextDist[`reached-${i}-${res}`] = (nextDist[`reached-${i}-${res}`] || 0) + combinedP;
 				} else {
@@ -249,7 +250,7 @@ function calculateCampaign() {
 			buckets[label] = (buckets[label] || 0) + p;
 		} else if (key.startsWith('fail')) {
 			const parts = key.split('-');
-			const failIdx = parseInt(parts[1]);
+			const failIdx = parseInt(parts[1], 10);
 			const failedName = territories.find((t) => t.id === campaign[failIdx]).name;
 			if (parts.length === 3) {
 				const count = parts[2];
@@ -268,7 +269,7 @@ function calculateCampaign() {
 	const sorted = Object.entries(buckets)
 		.map(([label, prob]) => {
 			const numMatch = label.match(/^(-?\d+)/);
-			const num = numMatch ? parseInt(numMatch[1]) : -999999;
+			const num = numMatch ? parseInt(numMatch[1], 10) : -999999;
 			// Extract territory name for grouping losses
 			const nameMatch = label.match(/^-?\d+\s+(.+)/) || label.match(/^Stopped before\s+(.+)/);
 			const territory = nameMatch ? nameMatch[1] : '';
@@ -433,8 +434,7 @@ function changeColor(color) {
 
 function exportState() {
 	const exportData = { ...state, colorOrder };
-	const dataStr =
-		'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportData, null, 2));
+	const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(exportData, null, 2))}`;
 	const downloadAnchorNode = document.createElement('a');
 	downloadAnchorNode.setAttribute('href', dataStr);
 	downloadAnchorNode.setAttribute('download', 'risk_state.json');
@@ -481,7 +481,6 @@ onMount(() => {
 				argentina: { dx: -5, dy: -10 },
 				north_africa: { dx: -5, dy: 5 },
 				east_africa: { dx: -8, dy: -20 },
-				great_britain: { dx: 8, dy: 15 },
 				southern_europe: { dx: 7, dy: 0 },
 				western_europe: { dx: -7, dy: 16, lines: ['Western', 'Europe'] },
 				northern_europe: { dx: 5, dy: 4 },

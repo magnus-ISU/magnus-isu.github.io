@@ -151,7 +151,7 @@ function generateNewNote() {
 
 // Play the current note
 function playCurrentNote() {
-	if (!level || !level.noteToGuess) return;
+	if (!level?.noteToGuess) return;
 
 	playNote(level.noteToGuess);
 	level.isPlaying = true;

@@ -10,16 +10,16 @@ export function commitHp(raw, current, max, armor = 0) {
 	raw = raw.trim();
 	if (!raw) return null;
 	if (raw.startsWith('+')) {
-		const heal = parseInt(raw.slice(1));
-		if (isNaN(heal)) return null;
+		const heal = parseInt(raw.slice(1), 10);
+		if (Number.isNaN(heal)) return null;
 		return Math.min(current + heal, max ?? Infinity);
 	}
 	if (raw.startsWith('-')) {
-		const dmg = parseInt(raw.slice(1));
-		if (isNaN(dmg)) return null;
+		const dmg = parseInt(raw.slice(1), 10);
+		if (Number.isNaN(dmg)) return null;
 		const effective = Math.max(0, dmg - armor);
 		return Math.max(0, current - effective);
 	}
-	const val = parseInt(raw);
-	return isNaN(val) ? null : val;
+	const val = parseInt(raw, 10);
+	return Number.isNaN(val) ? null : val;
 }

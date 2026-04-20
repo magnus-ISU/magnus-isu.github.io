@@ -18,7 +18,7 @@ const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
 // Measure the rendered height of each line using a mirror div
 function measureLines() {
 	if (!mirror || !textarea) return;
-	mirror.style.width = textarea.clientWidth + 'px';
+	mirror.style.width = `${textarea.clientWidth}px`;
 	const heights = [];
 	for (let i = 0; i < phCount; i++) {
 		const text = lines[i] ?? '';

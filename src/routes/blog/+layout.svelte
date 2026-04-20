@@ -1,5 +1,6 @@
 <script>
 import { fade } from 'svelte/transition';
+
 let { data, children } = $props();
 
 const transitionIn = { delay: 150, duration: 150 };

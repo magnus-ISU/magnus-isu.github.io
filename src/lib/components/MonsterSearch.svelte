@@ -1,8 +1,8 @@
 <script>
-import MonsterStatblock from './MonsterStatblock.svelte';
+import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
 import { monsterSections } from '$lib/dw/monsters.js';
 import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
-import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
+import MonsterStatblock from './MonsterStatblock.svelte';
 
 let {
 	/** Show all sections when search is empty */

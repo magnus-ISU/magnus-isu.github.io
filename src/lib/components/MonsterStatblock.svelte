@@ -18,9 +18,9 @@ let {
 } = $props();
 
 import { tick } from 'svelte';
-import { encounterText } from '$lib/dw/encounterText.svelte.js';
+import { descExpanded as globalDesc, globalExpand } from '$lib/dw/descExpanded.svelte.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
-import { globalExpand, descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
+import { encounterText } from '$lib/dw/encounterText.svelte.js';
 
 function inlineMd(text) {
 	return text
@@ -139,7 +139,7 @@ function toggleExpanded() {
 
 const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
 const atkNameWidth = $derived(
-	attacks.length > 1 ? Math.max(...attacks.map((a) => a.name.length)) + 'ch' : 'auto',
+	attacks.length > 1 ? `${Math.max(...attacks.map((a) => a.name.length))}ch` : 'auto',
 );
 
 // Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
@@ -182,9 +182,10 @@ function getHpColor(val) {
 	if (val == null) return null;
 	return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
 }
+
+import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
-import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 
 let dcRefs = $state({});
 
@@ -292,18 +293,18 @@ function handleCopy(e) {
 	if (tags) md += ` _${tags}_`;
 	md += '\n';
 	for (const atk of attacks) {
-		md += `${atk.name} (${atk.damage ? atk.damage + ' damage' : '??'})`;
+		md += `${atk.name} (${atk.damage ? `${atk.damage} damage` : '??'})`;
 		if (atk.tags) md += ` ${atk.tags}`;
 		md += '\n';
 	}
 	const vitals = [];
 	if (hp !== null) vitals.push(`${hp} HP`);
 	if (armor !== null) vitals.push(`${armor} Armor`);
-	if (vitals.length) md += vitals.join(', ') + '\n';
+	if (vitals.length) md += `${vitals.join(', ')}\n`;
 	if (special) md += `**Special Qualities:** ${special}\n`;
 	if (description) md += `\n${description}\n`;
 	if (instinct) md += `\n_Instinct:_ ${instinct}\n`;
-	if (moves.length) md += '\n' + moves.map((m) => `- ${m}`).join('\n') + '\n';
+	if (moves.length) md += `\n${moves.map((m) => `- ${m}`).join('\n')}\n`;
 	if (notes) md += `\n> ${notes}\n`;
 
 	e.clipboardData.setData('text/plain', md.trim());

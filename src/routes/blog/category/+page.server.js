@@ -1,8 +1,8 @@
 export const load = async ({ url, fetch }) => {
 	const res = await fetch(`${url.origin}/api/posts.json`);
-	let posts = await res.json();
+	const posts = await res.json();
 
-	let uniqueCategories = {};
+	const uniqueCategories = {};
 
 	posts.forEach((post) => {
 		if (post.categories === undefined) return;

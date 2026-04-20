@@ -6,7 +6,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "biome check . && eslint --ignore-path .gitignore .",
-		"format": "biome format --write .",
+		"format": "biome check --write .",
 		"deploy": "bun gh-pages -d build"
 	},
 	"devDependencies": {

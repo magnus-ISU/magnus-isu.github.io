@@ -1,7 +1,7 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
 	"files": {
-		"includes": ["**", "!*.md", "!build", "!static/piano-mp3"]
+		"includes": ["**", "!*.md", "!build", "!.svelte-kit", "!static/piano-mp3"]
 	},
 	"formatter": {
 		"indentStyle": "tab",
@@ -14,6 +14,36 @@
 		}
 	},
 	"linter": {
-		"enabled": false
+		"enabled": true,
+		"rules": {
+			// Biome can't see Svelte template usage — these produce false positives
+			"correctness": {
+				"noUnusedVariables": "off",
+				"noUnusedImports": "off",
+				"noUnusedFunctionParameters": "off",
+				"noSelfAssign": "warn"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				// Used intentionally in renderMarkdown regex
+				"noControlCharactersInRegex": "off",
+				// Used for ||= init patterns
+				"noAssignInExpressions": "off",
+				"noImplicitAnyLet": "off"
+			},
+			"complexity": {
+				"noBannedTypes": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "off"
+			}
+		}
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
 	}
 }

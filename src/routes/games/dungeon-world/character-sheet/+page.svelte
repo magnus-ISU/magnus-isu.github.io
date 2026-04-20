@@ -1,11 +1,11 @@
 <script>
-import TextBox from '$lib/components/TextBox.svelte';
+import { tick, untrack } from 'svelte';
 import DraggableCounter from '$lib/components/DraggableCounter.svelte';
+import TextBox from '$lib/components/TextBox.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
-import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
-import { tick, untrack } from 'svelte';
 
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
@@ -140,7 +140,6 @@ const parsed = $derived.by(() => {
 		}
 		if ((m = p.match(/^HP\s+(-?\d+)$/i))) {
 			hp = +m[1];
-			continue;
 		}
 	}
 
@@ -155,7 +154,7 @@ const parsed = $derived.by(() => {
 			const nums = statsRaw
 				.split(/[,\s]+/)
 				.map(Number)
-				.filter((n) => !isNaN(n));
+				.filter((n) => !Number.isNaN(n));
 			for (let i = 0; i < Math.min(nums.length, STAT_NAMES.length); i++) {
 				stats[STAT_NAMES[i]] = nums[i];
 			}
@@ -293,8 +292,8 @@ function startEditArmor() {
 
 function commitArmor(el) {
 	editingArmor = false;
-	const val = parseInt(el.value);
-	if (isNaN(val)) return;
+	const val = parseInt(el.value, 10);
+	if (Number.isNaN(val)) return;
 	const newBaseArmor = val - wornArmor;
 	pushUndo();
 	const lines = text.split('\n');
@@ -318,8 +317,8 @@ function startEditLoad() {
 
 function commitLoad(el) {
 	editingLoad = false;
-	const val = parseInt(el.value);
-	if (isNaN(val)) return;
+	const val = parseInt(el.value, 10);
+	if (Number.isNaN(val)) return;
 	const newBaseLoad = val - (parsed.stats.STR ?? 0);
 	pushUndo();
 	const lines = text.split('\n');
@@ -424,8 +423,8 @@ function parseDamageFormula(formula) {
 			}
 			anyDice = true;
 		} else {
-			const n = parseInt(part);
-			if (!isNaN(n)) {
+			const n = parseInt(part, 10);
+			if (!Number.isNaN(n)) {
 				total += n;
 				rolls.push(n);
 			}
@@ -616,7 +615,7 @@ function toggleH3Glow(h3Index) {
 				} else {
 					animatingH3 = h3Index;
 					pushUndo();
-					lines[i] = lines[i] + ' ###';
+					lines[i] = `${lines[i]} ###`;
 					text = lines.join('\n');
 				}
 				return;

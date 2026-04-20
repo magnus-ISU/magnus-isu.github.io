@@ -13,7 +13,7 @@ let { currentPage, totalPosts, path = '/blog/page' } = $props();
 
 let pagesAvailable = $derived(Math.ceil(totalPosts / postsPerPage));
 
-const isCurrentPage = (page) => page == currentPage;
+const isCurrentPage = (page) => page === currentPage;
 </script>
 
 <!-- For some reason, the pagination wasn't re-rendering properly during navigation without the #key block -->

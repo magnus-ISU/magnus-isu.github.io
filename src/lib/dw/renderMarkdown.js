@@ -62,8 +62,8 @@ export function renderMarkdown(src) {
 		const content = paraLines
 			.map((l, i) => {
 				const isLast = i === paraLines.length - 1;
-				if (!isLast && / {2,}$/.test(l)) return inline(l.replace(/ {2,}$/, '')) + '<br>';
-				if (!isLast && /\\$/.test(l)) return inline(l.slice(0, -1)) + '<br>';
+				if (!isLast && / {2,}$/.test(l)) return `${inline(l.replace(/ {2,}$/, ''))}<br>`;
+				if (!isLast && /\\$/.test(l)) return `${inline(l.slice(0, -1))}<br>`;
 				return inline(l);
 			})
 			.join('\n');
@@ -73,7 +73,7 @@ export function renderMarkdown(src) {
 
 	function inline(t) {
 		const escapes = [];
-		t = t.replace(/\\([\\`*_\[\]{}()#+\-.!|~])/g, (_, ch) => {
+		t = t.replace(/\\([\\`*_[\]{}()#+\-.!|~])/g, (_, ch) => {
 			escapes.push(ch);
 			return `\x00ESC${escapes.length - 1}\x00`;
 		});

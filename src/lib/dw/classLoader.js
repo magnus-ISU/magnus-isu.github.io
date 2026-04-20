@@ -46,5 +46,5 @@ export function buildCharacterSheet(raw) {
 		``,
 	].join('\n');
 
-	return header + '\n' + raw;
+	return `${header}\n${raw}`;
 }

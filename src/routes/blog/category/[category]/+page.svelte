@@ -1,7 +1,7 @@
 <!-- Renders any page at /blog/category/* -->
 <script>
-import PostsList from '$lib/components/PostsList.svelte';
 import Pagination from '$lib/components/Pagination.svelte';
+import PostsList from '$lib/components/PostsList.svelte';
 
 let { data } = $props();
 

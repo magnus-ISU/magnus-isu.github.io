@@ -1,12 +1,13 @@
 <!-- This is the global layout file; it "wraps" every page on the site. (Or more accurately: is the parent component to every page component on the site.) -->
 <script>
-import Footer from '$lib/components/Footer.svelte';
-import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
-import { navItems } from '$lib/config';
-import { preloadCode } from '$app/navigation';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
+import { preloadCode } from '$app/navigation';
+import Footer from '$lib/components/Footer.svelte';
+import { navItems } from '$lib/config';
 import { siteTitle, siteURL } from '$lib/config.js';
+import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
+
 let { data, children } = $props();
 
 const isDW = (p) => p?.startsWith('/games/dungeon-world');

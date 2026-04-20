@@ -1,6 +1,6 @@
 <script>
-import PostsList from '$lib/components/PostsList.svelte';
 import Pagination from '$lib/components/Pagination.svelte';
+import PostsList from '$lib/components/PostsList.svelte';
 import { siteDescription } from '$lib/config';
 
 let { data } = $props();
