@@ -93,6 +93,17 @@ export default [
 		moves: ['Circle ominously overhead', 'Descend on the fallen', 'Spread disease with their presence'],
 	},
 	{
+		name: 'Hawk',
+		tags: 'Group, Small',
+		hp: 3,
+		armor: 0,
+		attacks: [{ name: 'Talons', damage: 'd6', tags: 'Close' }],
+		special: 'Wings, Keen eyesight',
+		description: 'High above the fields and forests, the hawk rides the thermals with effortless grace, scanning the ground below with eyes that can spot a mouse from a mile up. They are hunters of breathtaking precision—folding their wings and dropping like a stone, striking with talons that hit like a hammer blow. Falconers prize them above all other birds, training them with patience and fresh meat to hunt on command. In the wild, they are fiercely territorial, shrieking their high keening cry at anything that strays too near their nesting grounds. More than one careless climber has lost an eye to a nesting hawk defending its young.',
+		instinct: 'To hunt from above',
+		moves: ['Dive with blinding speed', 'Spot prey from tremendous height', 'Shriek a territorial warning'],
+	},
+	{
 		name: 'Giant Spider',
 		tags: 'Solitary, Large, Stealthy',
 		hp: 10,
