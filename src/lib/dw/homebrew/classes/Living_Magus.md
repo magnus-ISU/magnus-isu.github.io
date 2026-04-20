@@ -63,7 +63,7 @@ Choose one for your defenses:
 [1 Weight] [1 Armor] Leather Armor  
 [2 Weight] Bag of Books (3 uses) and [0 Weight] 3 Weightless Healing Potions  
 Choose your weapon:  
-[1 Weight] Dagger (hand)  
+[0 Weight] Dagger (hand)  
 [1 Weight] Staff (close, two-handed)  
 Choose one:  
 [1 Weight] Healing Potion  

@@ -30,7 +30,7 @@ The stats below are for typical items. There are, of course, variations. A dull 
 
 ### Melee Weapons
 
-[2 Coin] [1 Weight] **Dagger, Shiv, Knife** *hand*
+[2 Coin] [0 Weight] **Dagger, Shiv, Knife** *hand*
 
 [1 Coin] [2 Weight] **Club, Shillelagh** *close*
 

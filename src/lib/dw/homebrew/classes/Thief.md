@@ -64,7 +64,7 @@ You start with:
 [0 Weight] 3 uses of your chosen poison  
 [10 Coin]  
 Choose one for your arms:  
-[1 Weight] Dagger (hand) and [1 Weight] Short Sword (close)  
+[0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)  
 [1 Weight] Rapier (close, precise)  
 Choose a ranged weapon:  
 [1 Weight] 3 Throwing Daggers (thrown, near)  

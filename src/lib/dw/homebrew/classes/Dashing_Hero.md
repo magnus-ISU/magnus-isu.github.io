@@ -46,7 +46,7 @@ You start with:
 [1 Weight] [1 Armor] Shining Armor  
 Choose your backup weapon:  
 [1 Weight] Hidden Stiletto (hand), which is never found when you are searched  
-[1 Weight] Throwing Daggers (hand, near, ammo)
+[1 Weight] 3 Throwing Daggers (hand, near, ammo)
 [2 Weight] [+1 Armor] Parrying Gauntlet (hand)  
 Choose two:  
 [1 Weight] Adventuring Gear (3 uses) and a map, describe it  

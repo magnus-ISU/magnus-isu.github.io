@@ -39,7 +39,7 @@ Choose one from each:
 Choose your weapon:  
 [2 Weight] Bastard Sword (+1 damage, two-handed, close)  
 [2 Weight] Rapier (precise, close)  
-[1 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
+[0 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
 Choose one:  
 [1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 rations)  
 [1 Weight] Healing Potion
