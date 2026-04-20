@@ -46,7 +46,7 @@ function saveActive(idx) {
 	} catch {}
 }
 
-let slots = $state(loadSlots());
+const slots = $state(loadSlots());
 let activeIdx = $state(loadActive());
 
 // Clamp active index
@@ -104,7 +104,6 @@ export const characterSheet = {
 	/** Add a new empty slot and switch to it */
 	addSlot() {
 		slots.push('');
-		slots = slots; // trigger reactivity
 		const newIdx = slots.length - 1;
 		activeIdx = newIdx;
 		saveActive(newIdx);
@@ -120,7 +119,6 @@ export const characterSheet = {
 	deleteSlot(i) {
 		if (slots.length <= 1) return;
 		slots.splice(i, 1);
-		slots = slots;
 		if (activeIdx >= slots.length) activeIdx = slots.length - 1;
 		else if (activeIdx > i) activeIdx--;
 		saveActive(activeIdx);

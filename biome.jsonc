@@ -1,7 +1,7 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
 	"files": {
-		"includes": ["**", "!*.md", "!build", "!.svelte-kit", "!static/piano-mp3"]
+		"includes": ["**", "!*.md", "!build", "!.svelte-kit", "!.claude", "!static/piano-mp3"]
 	},
 	"formatter": {
 		"indentStyle": "tab",
