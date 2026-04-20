@@ -2,7 +2,11 @@ const e=`# Character Creation
 
 ## Quickstart
 
-Open the Character Sheet panel, long-press the class name you want to play in the sidebar, and go through the sheet deleting choices you do not make.
+Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Scroll down and click on moves you want to take.
+
+You can open a spell list and click on a heading to copy everything under the heading to paste into your character sheet. It's recommended to click on spells to indicate they are memorized and ready to cast.
+
+To avoid confusion and clutter, you could also delete every move that you will never take and don't need.
 
 ## Choose Stats
 
