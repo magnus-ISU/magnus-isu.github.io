@@ -68,7 +68,7 @@ However, there are some mechanical effects that many moves share, described belo
 
 ...Say **"take +1 ongoing."** That means +1 to all move rolls (not damage) until a stated condition ends it, like "until you dismiss the spell" or "until you atone to your deity."
 
-...Give you **"hold."** Hold is a currency that allows you to make choices later by spending it as the move describes. Moves give hold specific names—**Readiness** from Defend, **Insight** from Discern Realities, **Empathy** from Draw Them Out—but the principle is the same: hold is always tied to the move that generated it and spent in the way that it describes.
+...Give you **"hold."** Hold is a currency that allows you to make choices later by spending it as the move describes. Moves give hold specific names—**Vigilance** from Defend, **Insight** from Discern Realities, **Empathy** from Draw Them Out—but the principle is the same: hold is always tied to the move that generated it and spent in the way that it describes.
 
 ...Present a **choice**. The choice you make dictates things that happen in the fiction in addition to any mechanical effects. The choice on a 10+ Hack & Slash to deal extra damage at the cost of suffering the enemy's attack is exactly what's happening to your character: they have enough advantage that they can stay safe or push their luck.
 

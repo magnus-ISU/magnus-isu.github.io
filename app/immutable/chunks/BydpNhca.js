@@ -7,8 +7,6 @@ Each piece of equipment will have a number of tags. These will tell you somethin
 ## Weapons
 Weapons don't kill monsters, people do. That's why weapons in Dungeon World don't have a listed damage. A weapon is useful primarily for its tags which describe what the weapon is useful for. A dagger is not useful because it does more or less damage than some other blade. It's useful because it's small and easy to strike with at close distance. A dagger in the hands of the wizard is not nearly so dangerous as one in the hands of a skilled fighter.
 
-## Weapon List
-
 ### Quality
 The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
 

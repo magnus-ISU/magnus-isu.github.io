@@ -26,13 +26,13 @@ When you **take aim and shoot at an enemy at range**, roll+DEX. On a 10+ you hav
 - It isn't easy. You have to aim for a while, or move into position, or cannot pay attention nearby; and the GM will move against you.
 
 ### Defend
-When you **take up a defensive stance or jump in to protect others**, roll+CON: on a 10+, hold 3 Readiness; on a 7-9, hold 1 Readiness. You can spend Readiness 1-for-1 to:
+When you **take up a defensive stance or jump in to protect others**, roll+CON: on a 10+, hold 3 Vigilance; on a 7-9, hold 1 Vigilance. You can spend Vigilance 1-for-1 to:
 - Suffer an attack's damage/effects instead of your ward
 - Halve an attack's damage/effects
 - Draw all attention from your ward to yourself
 - Strike back at an attacker (Deal Damage, with Disadvantage).
 
-When you **go on the offense, cease to focus on defense, or the threat passes**, lose any Readiness that you hold.
+When you **go on the offense, cease to focus on defense, or the threat passes**, lose any Vigilance that you hold.
 
 ### Spout Lore
 When you **recall something you know about the subject at hand**, say how you might have come by such knowledge. If the GM buys it, roll +INT: on a 10+, the GM will tell you a relevant truth, or ask you to establish one; on a 7-9, the GM will say what you recall, but you won't know how true it is until you put it to the test. If the GM doesn't buy how you might have come by such knowledge, it turns out you don't know much about the thing after all.
