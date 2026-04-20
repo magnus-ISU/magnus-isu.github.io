@@ -481,9 +481,22 @@
 
 	// --- Radial dice menu ---
 	let radialMenu = $state(null); // { x, y, timer, closing }
+	let suppressRadialClick = false;
 	const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', '2d6', '1d6+1d8'];
 
+	function onHeaderPointerDown(e) {
+		const target = e.target;
+		if (target.closest('.circle, .armor-display, .circle-draggable, button, input')) {
+			suppressRadialClick = true;
+			if (radialMenu && !radialMenu.closing) closeRadialMenu();
+		}
+	}
+
 	function showRadialMenu(e) {
+		if (suppressRadialClick) {
+			suppressRadialClick = false;
+			return;
+		}
 		// Only trigger on the header bar itself, not on interactive children
 		const target = e.target;
 		if (target.closest('button, input, .circle, .armor-display, .circle-draggable')) return;
@@ -591,7 +604,7 @@
 		<div class="sheet-preview">
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div class="sheet-top" onclick={showRadialMenu}>
+			<div class="sheet-top" onclick={showRadialMenu} onpointerdown={onHeaderPointerDown}>
 			{#if radialMenu}
 				<div class="radial-menu" class:closing={radialMenu.closing} style="left: {radialMenu.x}px; top: {radialMenu.y}px">
 					{#each RADIAL_DICE as die, i}
