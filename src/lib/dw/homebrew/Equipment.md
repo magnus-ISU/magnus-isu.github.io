@@ -57,10 +57,10 @@ The stats below are for typical items. There are, of course, variations. A dull 
 ### Armor List
 
 [10 Coin] [1 Weight] [1 Armor] **Leather, Chainmail** *worn*  
-[50 Coin] [3 Weight] [2 Armor] **Scale Mail** *worn, clumsy*  
-[350 Coin] [4 Weight] [3 Armor] **Plate** *worn, clumsy*  
+[50 Coin] [3 Weight] [2 Armor] **Scale Mail** *clumsy, worn*  
+[350 Coin] [4 Weight] [3 Armor] **Plate** *clumsy, worn*  
 [15 Coin] [2 Weight] [+1 Armor] **Shield**  
-[15 Coin] [4 Weight] [+1 Armor] **Tower Shield** *cover*  
+[150 Coin] [4 Weight] [+1 Armor] **Tower Shield** *cover, clumsy*  
 
 Armor is heavy, difficult to wear and is damned uncomfortable. Some classes
 are better trained to ignore these drawbacks, but anyone can strap on a suit
