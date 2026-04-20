@@ -62,7 +62,7 @@ You start with:
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Leather Armor  
 [2 Weight] Bag of Books (3 uses) and [0 Weight] 3 Weightless Healing Potions  
-Choose your weapon:  
+Choose one for your weapon:  
 [0 Weight] Dagger (hand)  
 [1 Weight] Staff (close, two-handed)  
 [1 Weight] Orb of Magical Focus  
