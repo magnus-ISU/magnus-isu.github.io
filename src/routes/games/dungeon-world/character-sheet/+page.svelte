@@ -479,6 +479,17 @@
 
 	const bodyHtml = $derived(renderMarkdown(parsed.body));
 
+	let charBodyEl = $state();
+
+	$effect(() => {
+		void bodyHtml;
+		if (!charBodyEl) return;
+		// Apply glow class after render so CSS transition animates
+		requestAnimationFrame(() => {
+			charBodyEl?.querySelectorAll('h3[data-glow]').forEach(h3 => h3.classList.add('glow'));
+		});
+	});
+
 	function toggleH3Glow(h3Index) {
 		const lines = text.split('\n');
 		let count = 0;
@@ -486,13 +497,24 @@
 		for (let i = 4; i < lines.length; i++) {
 			if (/^###\s/.test(lines[i])) {
 				if (count === h3Index) {
-					pushUndo();
-					if (/\s*###\s*$/.test(lines[i])) {
-						lines[i] = lines[i].replace(/\s*###\s*$/, '');
+					const isGlowing = /\s*###\s*$/.test(lines[i]);
+					if (isGlowing) {
+						// Animate out: remove class first, then update text after transition
+						const h3El = charBodyEl?.querySelectorAll('h3')[h3Index];
+						if (h3El) {
+							h3El.classList.remove('glow');
+							setTimeout(() => {
+								pushUndo();
+								const l = text.split('\n');
+								l[i] = l[i].replace(/\s*###\s*$/, '');
+								text = l.join('\n');
+							}, 200);
+						}
 					} else {
+						pushUndo();
 						lines[i] = lines[i] + ' ###';
+						text = lines.join('\n');
 					}
-					text = lines.join('\n');
 					return;
 				}
 				count++;
@@ -758,7 +780,7 @@
 			{#if bodyHtml}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="char-body" onclick={(e) => {
+				<div class="char-body" bind:this={charBodyEl} onclick={(e) => {
 					const h3 = e.target.closest('h3');
 					if (!h3) return;
 					const container = h3.closest('.char-body');

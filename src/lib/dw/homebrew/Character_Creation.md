@@ -6,7 +6,7 @@ Open the Character Sheet panel and long-press the class name you want to play in
 
 You can open a spell list and click on a heading to copy everything under the heading to paste into your character sheet. It's recommended to click on spells to indicate they are memorized and ready to cast.
 
-To avoid confusion and clutter, you could also delete every move that you will never take and don't need.
+To avoid confusion and clutter, you could also delete every move that you will never take and don't need and move everything you have to cluster together.
 
 ## Choose Stats
 
