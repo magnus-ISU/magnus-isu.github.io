@@ -8,15 +8,15 @@ Food or water you hold in your hands while you cast this spell is consecrated by
 The symbol of your deity appears before you and gestures towards the direction or course of action your deity would have you take then disappears. The message is through gesture only; your communication through this spell is severely limited.
 ## Level 1
 ### Bless
-Your deity smiles upon a combatant of your choice. They take +1 ongoing so long as battle continues and they stand and fight. Concentration 1
+Your deity smiles upon a combatant of your choice. They take +1 ongoing so long as battle continues and they stand and fight. Concentration
 ### Cure Light Wounds
 At your touch wounds scab and bones cease to ache. Heal an ally you touch of 1d8 damage.
 ### Detect Alignment
 When you cast this spell choose an alignment: Good, Evil, Lawful, or Chaotic. One of your senses is briefly able to detect that alignment. The GM will tell you what here is of that alignment.
 ### Cause Fear
-Choose a target you can see and a nearby object. The target is afraid of the object so long as you maintain the spell. Their reaction is up to them: flee, panic, beg, fight. You cannot target entities with less than animal intelligence (magical constructs, undead, automatons, and the like). Concentration 1
+Choose a target you can see and a nearby object. The target is afraid of the object so long as you maintain the spell. Their reaction is up to them: flee, panic, beg, fight. You cannot target entities with less than animal intelligence (magical constructs, undead, automatons, and the like). Concentration
 ### Magic Weapon
-The weapon you hold while casting does +1d4 damage until you let go or dismiss this spell. When you Miss while attacking with it, you can instead treat your roll as a 10. The spell then ends. Concentration 1
+The weapon you hold while casting does +1d4 damage until you let go or dismiss this spell. When you Miss while attacking with it, you can instead treat your roll as a 10. The spell then ends. Concentration
 ### Sanctuary
 As you cast this spell, you walk the perimeter of an area, consecrating it to your deity. As long as you stay within that area you are alerted whenever someone acts with malice within the sanctuary (including entering with harmful intent). Anyone who receives healing within a sanctuary heals +1d4 HP.
 ### Speak With Dead
@@ -25,7 +25,7 @@ A corpse converses with you briefly. It will answer any three questions you pose
 ### Cure Moderate Wounds
 You staunch bleeding and set bones through magic. Heal an ally you touch of 2d8 damage.
 ### Darkness
-Choose an area you can see: it’s filled with supernatural darkness and shadow. Concentration 1
+Choose an area you can see: it’s filled with supernatural darkness and shadow. Concentration
 ### Resurrection
 Tell the GM you would like to resurrect a corpse whose soul has not yet fully departed this world. Resurrection is always possible, but the GM will give you one or more (possibly all) of these conditions to fulfill:
 - It’s going to take days/weeks/months
@@ -39,7 +39,7 @@ Choose a person you can see. Until you cast a spell or leave their presence they
 
 ---
 ### Animate Dead
-You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers basic moves, deals your damage, and has 1 HP. Concentration 1, and choose 2:
+You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers basic moves, deals your damage, and has 1 HP. Concentration, and choose 2:
 - It’s talented. Give one stat a +2 modifier.
 - It's a horde. Create up to 4 zombies, if there are enough corpses.
 - It has a functioning brain and can complete complex tasks.
@@ -53,11 +53,11 @@ Heal an ally you touch of 3d8 damage.
 ### Divination
 Name a person, place, or thing you want to learn about. Your deity grants you visions of the target, as clear as if you were there.
 ### Contagion
-Choose a creature you can see. Until you end this spell, the target suffers from a disease of your choice. Concentration 1
+Choose a creature you can see. Until you end this spell, the target suffers from a disease of your choice. Concentration
 ### Words of the Unspeaking
 With a touch you speak to the spirits within things. The non-living object you touch answers three questions you pose, as best it can.
 ### True Seeing
-You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie or dismiss the spell. Concentration 1
+You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie or dismiss the spell. Concentration
 ### Trap Soul
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but it can never be recaptured once freed.
 ## Level 7
@@ -79,9 +79,9 @@ Choose an appendage on a nearby living target, such as an arm, tentacle, or wing
 ### Storm of Vengeance
 Your deity brings the unnatural weather of your choice to pass. Rain of blood or acid, clouds of souls, wind that can carry away buildings, or any other weather you can imagine: ask and it shall come.
 ### Divine Presence
-Every creature must ask your leave to enter your presence, and you must give permission aloud for them to enter. Any creature without your leave takes an extra 1d10 damage whenever they take damage in your presence. Concentration 1
+Every creature must ask your leave to enter your presence, and you must give permission aloud for them to enter. Any creature without your leave takes an extra 1d10 damage whenever they take damage in your presence. Concentration
 ### Plague
-Name a city, town, encampment, or other place where people live. As long as this spell is active that place is beset by a plague appropriate to your deity’s domains (locusts, death of the first born, etc). Concentration 1
+Name a city, town, encampment, or other place where people live. As long as this spell is active that place is beset by a plague appropriate to your deity’s domains (locusts, death of the first born, etc). Concentration
 
 ---
 ### Consume Unlife

@@ -206,7 +206,7 @@ When **a follower helps you make a move and you roll**, take +1, but that follow
 ### Deal Damage
 When you **deal damage** roll your class damage dice plus any bonuses or penalties. If a move specifies an amount of damage, use that instead.
 
-### Concentration 1
+### Concentration
 While the spell is ongoing, take -1 ongoing to cast a spell.
 
 ## GM Moves

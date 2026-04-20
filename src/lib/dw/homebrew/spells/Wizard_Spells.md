@@ -36,7 +36,7 @@ Receive a brief vision of your own death, overwhelming your senses, answering "W
 ### Visibility <span style="float:right" >Divination 1</span>
 Touch an object. While you Concentrate on this spell, you can see the object, no matter where it is. A thin layer of lead blocks this.
 ### Calm Emotions <span style="float:right" >Enchantment 1</span>
-You begin to speak, and those who can hear your voice feel the lingering magic in it. Anyone affected by a magical compulsion below your level is freed from it, and regular emotions - such as greed, anger, regret, or happiness - dull. Concentration 1
+You begin to speak, and those who can hear your voice feel the lingering magic in it. Anyone affected by a magical compulsion below your level is freed from it, and regular emotions - such as greed, anger, regret, or happiness - dull. Concentration
 ### Gust <span style="float:right" >Evocation 1</span>
 You summon a single powerful gust of air. The strong must brace themselves; the weak are blown off their feet.
 ### Illusory Script <span style="float:right" >Illusion 1</span>
@@ -47,8 +47,6 @@ Briefly inhabit a corpse you can see as if it was your body, having it perform a
 Imagine a specific object you can see. It becomes stuck to whatever it is currently touching, and cannot be separated without damaging it or the thing(s) it is stuck to. The spell lasts until you dismiss it or cast another spell.
 ### Splinter <span style="float:right" >Transmutation 1</span>
 Rest your hand on a wooden, glass, or stone object for a long moment, as you focus power into it. It then explodes violently, leaving behind the splintered ruins.
-### Feather fall
-You all those you can see acquire a terminal velocity that is merely painful, not deadly, for a few seconds.
 ## Level 2
 ### Vanastalem <span style="float:right" >Conjuration 2</span>
 Summon rich, expensive clothes tailored just for you to wear, onto your body. Fashionable, by the standards of 150 years ago.
@@ -74,15 +72,15 @@ Mark a shape with chalk, ink, or some other marking. Until the markings are dist
 ### Dimension Door <span style="float:right" >Conjuration 3</span>
 Choose a pair of solid surfaces you can see. A sparking, glowing portal opens between them. It starts big enough to comfortably step through, but slowly closes over time with increasing pressure.
 ### Water Dragon <span style="float:right" >Conjuration 3</span>
-You pull water from an existing body into a large serpentine shape that you can direct around you in long, sweeping arcs. The water is difficult to swim through; those who end up stuck inside are dragged along. You can pressurize the dragon so it deals d8 damage periodically to those trapped inside. Concentration 1
+You pull water from an existing body into a large serpentine shape that you can direct around you in long, sweeping arcs. The water is difficult to swim through; those who end up stuck inside are dragged along. You can pressurize the dragon so it deals d8 damage periodically to those trapped inside. Concentration
 ### Locate <span style="float:right" >Divination 3</span>
-Name a single word, such as "axe" or "dress" or "ruby". While ongoing, this spell will indicate which direction the nearest one is, and where it is exactly if it is within a short walking distance. Concentration 1
+Name a single word, such as "axe" or "dress" or "ruby". While ongoing, this spell will indicate which direction the nearest one is, and where it is exactly if it is within a short walking distance. Concentration
 ### Amnesia <span style="float:right" >Enchantment 3</span>
 One creature which can see you forgets everything you do happening after casting, once you leave and it stops being able to see you.
 ### Frostwalk <span style="float:right" >Evocation 3</span>
 The ground and any liquids around you becomes slick with ice, and you can skate along it at rapid speeds if uninterrupted. The ice is robust enough to hold other creatures that don't test it.
 ### Minor Image <span style="float:right" >Illusion 3</span>
-Describe a figment of your imagination that you would like to manifest nearby, smaller than a house. It can move as directed by your thoughts and make noises, but not intelligible speech. Anyone who touches the illusion will pass right through it and realize it is fake. Concentration 1
+Describe a figment of your imagination that you would like to manifest nearby, smaller than a house. It can move as directed by your thoughts and make noises, but not intelligible speech. Anyone who touches the illusion will pass right through it and realize it is fake. Concentration
 ### Plant Growth <span style="float:right" >Necromancy 3</span>
 A plant, living or dead, fragment or whole, that you touch begins growing quickly out of control, soon entangling everything nearby except you, sprouting new limbs and foliage, and rapidly warping in shape.
 ### Ray of Sickness <span style="float:right" >Necromancy 3</span>
@@ -92,12 +90,12 @@ An object you touch becomes a powerful magnet for as long as it is in your sight
 ### Silence <span style="float:right" >Transmutation 3</span>
 Nothing you could normally hear makes any noise at all.
 ### Weightlessness <span style="float:right" >Transmutation 3</span>
-One object or creature no larger than a wagon you can see becomes weightless, experiencing no gravity as long as you watch. Concentration 1
+One object or creature no larger than a wagon you can see becomes weightless, experiencing no gravity as long as you watch. Concentration
 ## Level 4
 ### Embrace of the Lost Star <span style="float:right" >Conjuration 4</span>
 You raise your hand and with a brilliant flash of light, you teleport a creature or object you touch to another location on the ground which you can see. It teleports instantly upon contact, leaving you unharmed in melee.
 ### Withering Aura  <span style="float:right" >Necromancy 4</span>
-All life around you is drained; plants wither to dust, living creatures take 1d6 damage when they come nearby and again while they linger. Concentration 1
+All life around you is drained; plants wither to dust, living creatures take 1d6 damage when they come nearby and again while they linger. Concentration
 ## Level 5
 ### Cage  <span style="float:right" >Abjuration 5</span>
 The target is held in a cage of magical force. Nothing can get in or out of the cage. The cage remains until you cast another spell or dismiss it. While the spell is ongoing, the caged creature can hear your thoughts and you cannot leave sight of the cage.
@@ -111,7 +109,7 @@ Your touch reshapes a creature entirely, they stay in the form you craft until y
 
 ---
 ### Summon Monster  <span style="float:right" >Conjuration 5</span>
-A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers basic moves, uses your damage dice, and has 1 HP. Concentration 1, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
+A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers basic moves, uses your damage dice, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
 - It has +2 instead of +1 to one stat
 - It’s not reckless
 - It does 1d8 damage
@@ -139,7 +137,7 @@ You touch another person, who sprouts wings. They can fly faster than a horse, u
 ### Shadow Walk <span style="float:right" >Conjuration 7</span>
 The shadows you target with this spell become a portal for you and your allies. Name a location, describing it with no more words than your level. Stepping through the portal deposits you and any allies present when you cast the spell at the location you described so long as the area is not lit up and you do not cast this spell again.
 ### True Seeing <span style="float:right" >Divination 7</span>
-You see all things as they truly are, including the effects of magic. This effect persists until you tell a lie or dismiss the spell. Concentration 1
+You see all things as they truly are, including the effects of magic. This effect persists until you tell a lie or dismiss the spell. Concentration
 ### Dominate <span style="float:right" >Enchantment 7</span>
 Your touch pushes your mind into someone else’s. Hold 3 Domination. Spend one Domination to make the target:
 - Speak some words of your choice
@@ -159,7 +157,7 @@ Your mind is separated from the rest of the world, and cannot be targeted by any
 ### Forked Lightning <span style="float:right" >Evocation 7</span>
 Lightning strikes out at your foes. Roll 2d10, then pick one die to be the number of enemy targets the GM picks, and the other to be the amount of damage each one takes (ignoring armor).
 ### Greater Invisibility <span style="float:right" >Illusion 7</span>
-Reach out and touch an ally or an object smaller than yourself. Poof! They are invisible. The spell persists until you dismiss it. Concentration 1, and you cannot cast any other invisibility spells while the spell is ongoing.
+Reach out and touch an ally or an object smaller than yourself. Poof! They are invisible. The spell persists until you dismiss it. Concentration, and you cannot cast any other invisibility spells while the spell is ongoing.
 ### Bubble <span style="float:right" >Transmutation 7</span>
 You create a fixed bubble of time around you. Within, time passes extremely quickly or slowly, and the world outside is frozen or very fast. The spell lasts until something leaves or enters the bubble.
 ## Level 9
@@ -170,7 +168,7 @@ You create a structure out of pure magical power. It can be as large as a castle
 ### Alert <span style="float:right" >Divination 9</span>
 Describe an event. The GM will tell you when that event occurs, no matter where you are or how far away the event is. If you choose, you can view the location of the event as though you were there in person. You can only have one Alert active at a time.
 ### Antipathy <span style="float:right" >Enchantment 9</span>
-Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or you dismiss the spell. Concentration 1
+Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or you dismiss the spell. Concentration
 ### Soul Gem <span style="float:right" >Necromancy 9</span>
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but you may never recapture it once freed.
 
