@@ -449,7 +449,7 @@
 	.dice-entry.tier-damage .dice-breakdown { color: #ccc; }
 
 	.sidebar-spacer {
-		height: 50px;
+		height: 50vh;
 	}
 
 	/* Content */
