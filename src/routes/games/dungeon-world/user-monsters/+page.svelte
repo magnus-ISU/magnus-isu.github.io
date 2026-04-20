@@ -279,7 +279,7 @@
 	.remove-btn {
 		flex-shrink: 0;
 		align-self: flex-start;
-		margin-top: 0.45rem;
+		margin-top: calc(0.45rem + 5px);
 		background: none;
 		border: 1px solid #3a3a3a;
 		border-radius: 4px;
@@ -292,7 +292,7 @@
 	}
 
 	.monster-row:has(:global(.monster.is-expanded)) .remove-btn {
-		margin-top: calc(1.25rem + 0.45rem);
+		margin-top: calc(1.25rem + 0.45rem + 11px);
 	}
 
 	.remove-btn:hover {

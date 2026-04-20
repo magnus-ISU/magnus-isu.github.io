@@ -62,21 +62,7 @@
 		clearTimeout(longPressTimer);
 	}
 
-	function doAddToEncounter() {
-		const oldTop = el.getBoundingClientRect().top;
-		encounterText.appendName(name);
-		const end = performance.now() + 300;
-		requestAnimationFrame(function track() {
-			const drift = el.getBoundingClientRect().top - oldTop;
-			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-			if (performance.now() < end) requestAnimationFrame(track);
-		});
-		copied = true;
-		setTimeout(() => { copied = false; }, 1200);
-	}
-
-	async function handleShiftClick() {
-		// Copy full statblock to clipboard in user-monsters-pasteable format
+	function copyToClipboard() {
 		const lines = [name, tags || ''];
 		const vitals = [];
 		if (hp !== null) vitals.push(`${hp} HP`);
@@ -91,8 +77,21 @@
 		}
 		for (const m of moves) lines.push(m);
 		while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
-		await navigator.clipboard.writeText(lines.join('\n'));
-		doAddToEncounter();
+		navigator.clipboard.writeText(lines.join('\n'));
+	}
+
+	function doAddToEncounter() {
+		const oldTop = el.getBoundingClientRect().top;
+		encounterText.appendName(name);
+		copyToClipboard();
+		const end = performance.now() + 300;
+		requestAnimationFrame(function track() {
+			const drift = el.getBoundingClientRect().top - oldTop;
+			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+			if (performance.now() < end) requestAnimationFrame(track);
+		});
+		copied = true;
+		setTimeout(() => { copied = false; }, 1200);
 	}
 
 	let lastClickTime = 0;
@@ -103,7 +102,7 @@
 			return;
 		}
 		if (e.shiftKey) {
-			handleShiftClick();
+			doAddToEncounter();
 			return;
 		}
 		const now = Date.now();
