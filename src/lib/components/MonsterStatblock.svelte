@@ -401,8 +401,7 @@
 
 <style>
 	.monster {
-		border: 1px solid #333;
-		border-radius: 6px;
+		border: none;
 		overflow: hidden;
 		margin: 0;
 		transition: margin 0.25s ease;
@@ -435,7 +434,6 @@
 		background: transparent;
 		padding: 0.45rem 0.75rem;
 		border: none;
-		border-bottom: 1px solid #333;
 		cursor: pointer;
 		text-align: left;
 		font: inherit;
@@ -444,6 +442,10 @@
 		user-select: none;
 		touch-action: manipulation;
 		-webkit-tap-highlight-color: transparent;
+	}
+
+	.is-expanded .monster-header {
+		border-bottom: 1px solid #333;
 	}
 
 	.monster-header:hover {
