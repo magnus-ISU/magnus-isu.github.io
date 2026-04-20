@@ -118,7 +118,7 @@ A monster appears and aids you as best it can, until it dies or you dismiss it. 
 
 ---
 ### Doubling <span style="float:right" >Conjuration 5</span>
-Summon a perfect nonmagical replica of the item in one hand into the other. All metals in the replica are lead, with a surprising variety of potential finishes.
+Summon a perfect nonmagical replica of the item in one hand into the other. All metals in the replica are lead, though it holds up to casual scrutiny.
 ### Falsehood <span style="float:right" >Enchantment 5</span>
 Tell a single lie to someone you're alone with. They will believe it with zealous conviction. If they learn the truth, they will also know you cast this spell.
 ### Thunderstep <span style="float:right" >Evocation 5</span>
