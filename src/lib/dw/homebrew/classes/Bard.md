@@ -12,7 +12,7 @@ Nobody. Get going.
 When you **deliver a stirring speech before a conflict**, roll+CHA. On a 10+, choose 2. On a 7-9, choose 1.
 - Your allies take +2 armor forward.
 - Your allies take +1d4 damage forward.
-- Your allies take +1 ongoing against fear until the conflict ends.
+- Your allies take +1 ongoing against fear, enchantment, or mental effects until the conflict ends.
 
 ### Cutting Jibe
 When you **insult someone, roll+CHA**. On a 10+ choose two. On a 7-9 choose one.
