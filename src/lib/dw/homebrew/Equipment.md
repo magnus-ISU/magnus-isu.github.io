@@ -5,7 +5,6 @@ The musty tombs and forgotten treasure troves of the world are filled with usefu
 Each piece of equipment will have a number of tags. These will tell you something about how the equipment affects the character using it \(like +Armor\) or suggest something about the way it is used \(like the Range tags\). Like everything else in Dungeon World, these guide the fiction you're creating in play. If a weapon is awkward, it might mean that you're more likely to drop it when you fail that hack and slash roll.
 
 ## Weapons
-
 Weapons don't kill monsters, people do. That's why weapons in Dungeon World don't have a listed damage. A weapon is useful primarily for its tags which describe what the weapon is useful for. A dagger is not useful because it does more or less damage than some other blade. It's useful because it's small and easy to strike with at close distance. A dagger in the hands of the wizard is not nearly so dangerous as one in the hands of a skilled fighter.
 
 ## Weapon List
@@ -148,6 +147,8 @@ The target treats the next creature they see as a trusted ally, until proved oth
 
 [80 Coin] [0 Weight] **Arsenic Bloom** Dangerous, applied  
 After one hour, the target begins to vomit uncontrollably; a few hours later, they die unless treated with antitoxin.
+
+## The Wider World
 
 ### Services
 
