@@ -20,6 +20,7 @@
 	import { tick } from 'svelte';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
 	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+	import { descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
 
 	function inlineMd(text) {
 		return text
@@ -131,8 +132,12 @@
 		moves.length === 4 ? 2 : 3
 	);
 
-	// Description expand toggle
-	let descExpanded = $state(false);
+	// Description expand toggle — shift/long-press flips this one until next global toggle
+	let localFlip = $state(false);
+	const descExpanded = $derived(localFlip ? !globalDesc.value : globalDesc.value);
+	$effect(() => { globalDesc.value; localFlip = false; });
+	let descLongPress = false;
+	let descLongTimer;
 
 	// Move toggle
 	let usedMoves = $state(new Set());
@@ -376,7 +381,13 @@
 
 			{#if description}
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>{@html descriptionHtml}</div>
+				<div class="monster-description" class:desc-expanded={descExpanded} onclick={(e) => {
+					if (descLongPress) { descLongPress = false; return; }
+					if (e.shiftKey) { localFlip = !localFlip; }
+					else { localFlip = false; globalDesc.toggle(); }
+				}} onpointerdown={() => { descLongPress = false; descLongTimer = setTimeout(() => { descLongPress = true; localFlip = !localFlip; }, 400); }}
+				onpointerup={() => clearTimeout(descLongTimer)}
+				onpointercancel={() => clearTimeout(descLongTimer)}>{@html descriptionHtml}</div>
 			{/if}
 
 			{#if special}

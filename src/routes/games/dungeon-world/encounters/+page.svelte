@@ -19,7 +19,7 @@
 	});
 
 	let text = $state(encounterText.value);
-	const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (2)\nOwlbear`;
+	const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (2)\nHawk`;
 
 	// Sync local → store
 	$effect(() => { encounterText.value = text; });
@@ -152,6 +152,7 @@
 		}
 	}
 
+	let h1Copied = $state(false);
 
 </script>
 
@@ -168,7 +169,7 @@
 
 <article class="dw-article">
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<h1 onclick={() => { if (text.trim()) navigator.clipboard.writeText(text.trim()); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">Encounters</h1>
+	<h1 class:copied={h1Copied} onclick={() => { if (text.trim()) { navigator.clipboard.writeText(text.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">Encounters</h1>
 
 	<section class="encounter-input" bind:this={encounterInputEl}>
 		<label for="encounter-text">
@@ -249,5 +250,18 @@
 
 	.monster-search-section {
 		margin-top: 2rem;
+	}
+
+	h1.copied {
+		color: #8f8;
+		transition: color 0.15s;
+	}
+
+	h1.copied::after {
+		content: 'Copied!';
+		font-size: 0.6em;
+		color: #8f8;
+		margin-left: 0.75rem;
+		font-weight: normal;
 	}
 </style>
