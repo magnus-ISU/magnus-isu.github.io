@@ -1,8 +1,8 @@
 <script>
-	import Header from '$lib/components/Header.svelte';
-	import { siteTitle } from '$lib/config';
+import Header from '$lib/components/Header.svelte';
+import { siteTitle } from '$lib/config';
 
-	let { data } = $props();
+let { data } = $props();
 </script>
 
 <svelte:head>

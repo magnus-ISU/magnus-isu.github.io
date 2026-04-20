@@ -19,6 +19,6 @@ export const load = async ({ fetch, params }) => {
 	return {
 		posts,
 		page,
-		totalPosts: total
+		totalPosts: total,
 	};
 };

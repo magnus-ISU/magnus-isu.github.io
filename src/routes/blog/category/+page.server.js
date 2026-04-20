@@ -12,7 +12,7 @@ export const load = async ({ url, fetch }) => {
 			} else {
 				uniqueCategories[category] = {
 					title: category,
-					count: 1
+					count: 1,
 				};
 			}
 		});
@@ -21,6 +21,6 @@ export const load = async ({ url, fetch }) => {
 	const sortedUniqueCategories = Object.values(uniqueCategories).sort((a, b) => a.title > b.title);
 
 	return {
-		uniqueCategories: sortedUniqueCategories
+		uniqueCategories: sortedUniqueCategories,
 	};
 };

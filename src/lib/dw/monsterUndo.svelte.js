@@ -4,7 +4,9 @@
 let stack = $state([]);
 
 export const monsterUndo = {
-	push(undoFn) { stack = [...stack, undoFn]; },
+	push(undoFn) {
+		stack = [...stack, undoFn];
+	},
 	pop() {
 		if (!stack.length) return false;
 		const fn = stack[stack.length - 1];
@@ -12,5 +14,7 @@ export const monsterUndo = {
 		fn();
 		return true;
 	},
-	get length() { return stack.length; },
+	get length() {
+		return stack.length;
+	},
 };

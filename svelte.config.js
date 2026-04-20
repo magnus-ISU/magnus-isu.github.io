@@ -20,9 +20,9 @@ const config = {
 				'/blog/category/page/',
 				'/blog/category/page/*',
 				'/blog/page/',
-				'/blog/page/*'
-			]
-		}
+				'/blog/page/*',
+			],
+		},
 	},
 
 	preprocess: [
@@ -32,9 +32,9 @@ const config = {
 			extensions: ['.md'],
 
 			// Adds IDs to headings, and anchor links to those IDs. Note: must stay in this order to work.
-			rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings]
-		})
-	]
+			rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+		}),
+	],
 };
 
 export default config;

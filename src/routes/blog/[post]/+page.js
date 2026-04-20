@@ -6,7 +6,7 @@ export const load = async ({ params }) => {
 
 		return {
 			PostContent: post.default,
-			meta: { ...post.metadata, slug: params.post }
+			meta: { ...post.metadata, slug: params.post },
 		};
 	} catch (err) {
 		error(404, err);

@@ -1,90 +1,90 @@
 <script>
-	import { tick } from 'svelte';
+import { tick } from 'svelte';
 
-	let {
-		value = 0,
-		oncommit = () => {},
-		inputWidth = '2.5rem',
-		class: className = '',
-		style = '',
-		children,
-	} = $props();
+let {
+	value = 0,
+	oncommit = () => {},
+	inputWidth = '2.5rem',
+	class: className = '',
+	style = '',
+	children,
+} = $props();
 
-	let editing = $state(false);
-	let inputEl = $state();
-	let wrapEl = $state();
+let editing = $state(false);
+let inputEl = $state();
+let wrapEl = $state();
 
-	// Drag state
-	let dragging = $state(false);
-	let dragDelta = $state(0);
-	let previewX = $state(0);
-	let previewY = $state(0);
-	let startY = 0;
-	let didDrag = false;
+// Drag state
+let dragging = $state(false);
+let dragDelta = $state(0);
+let previewX = $state(0);
+let previewY = $state(0);
+let startY = 0;
+let didDrag = false;
 
-	function updatePreviewPos() {
-		if (!wrapEl) return;
-		const r = wrapEl.getBoundingClientRect();
-		previewX = r.left + r.width / 2;
-		previewY = r.top - 32;
+function updatePreviewPos() {
+	if (!wrapEl) return;
+	const r = wrapEl.getBoundingClientRect();
+	previewX = r.left + r.width / 2;
+	previewY = r.top - 32;
+}
+
+function beginTracking(e) {
+	if (editing) return;
+	e.preventDefault();
+	startY = e.clientY;
+	didDrag = false;
+	dragDelta = 0;
+
+	function onMove(ev) {
+		const dy = startY - ev.clientY;
+		const newDelta = Math.round(dy / 24);
+		if (!didDrag && Math.abs(dy) > 4) didDrag = true;
+		if (didDrag) {
+			dragging = true;
+			dragDelta = newDelta;
+			updatePreviewPos();
+		}
 	}
 
-	function beginTracking(e) {
-		if (editing) return;
-		e.preventDefault();
-		startY = e.clientY;
-		didDrag = false;
+	function onUp() {
+		window.removeEventListener('pointermove', onMove);
+		window.removeEventListener('pointerup', onUp);
+		if (didDrag && dragDelta !== 0) {
+			const sign = dragDelta > 0 ? '+' : '';
+			oncommit(`${sign}${dragDelta}`);
+		} else if (!didDrag) {
+			editing = true;
+			tick().then(() => inputEl?.select());
+		}
+		dragging = false;
 		dragDelta = 0;
-
-		function onMove(ev) {
-			const dy = startY - ev.clientY;
-			const newDelta = Math.round(dy / 24);
-			if (!didDrag && Math.abs(dy) > 4) didDrag = true;
-			if (didDrag) {
-				dragging = true;
-				dragDelta = newDelta;
-				updatePreviewPos();
-			}
-		}
-
-		function onUp() {
-			window.removeEventListener('pointermove', onMove);
-			window.removeEventListener('pointerup', onUp);
-			if (didDrag && dragDelta !== 0) {
-				const sign = dragDelta > 0 ? '+' : '';
-				oncommit(`${sign}${dragDelta}`);
-			} else if (!didDrag) {
-				editing = true;
-				tick().then(() => inputEl?.select());
-			}
-			dragging = false;
-			dragDelta = 0;
-		}
-
-		window.addEventListener('pointermove', onMove);
-		window.addEventListener('pointerup', onUp);
 	}
 
-	// Exposed so parents can forward pointerdown from a larger hit area
-	export function handlePointerDown(e) {
-		if (e.button !== 0) return;
-		beginTracking(e);
-	}
+	window.addEventListener('pointermove', onMove);
+	window.addEventListener('pointerup', onUp);
+}
 
-	function onPointerDown(e) {
-		if (e.button !== 0) return;
-		beginTracking(e);
-	}
+// Exposed so parents can forward pointerdown from a larger hit area
+export function handlePointerDown(e) {
+	if (e.button !== 0) return;
+	beginTracking(e);
+}
 
-	function commit(e) {
-		const raw = e.target.value.trim();
-		if (raw) oncommit(raw);
-		editing = false;
-	}
+function onPointerDown(e) {
+	if (e.button !== 0) return;
+	beginTracking(e);
+}
 
-	function fmtDelta(d) {
-		return d > 0 ? `+${d}` : `${d}`;
-	}
+function commit(e) {
+	const raw = e.target.value.trim();
+	if (raw) oncommit(raw);
+	editing = false;
+}
+
+function fmtDelta(d) {
+	return d > 0 ? `+${d}` : `${d}`;
+}
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->

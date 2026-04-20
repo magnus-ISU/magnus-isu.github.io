@@ -1,5 +1,5 @@
 <script>
-	let { posts = [] } = $props();
+let { posts = [] } = $props();
 </script>
 
 

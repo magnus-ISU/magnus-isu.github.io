@@ -1,286 +1,314 @@
 <script>
-	let {
-		name,
-		tags = '',
-		hp = null,
-		armor = null,
-		attacks = [],
-		special = '',
-		description = '',
-		instinct = '',
-		moves = [],
-		notes = '',
-		count = 1,
-		memberNames = [],
-		open = false,
-		locked = false,
-		onLabelsChange = null
-	} = $props();
+let {
+	name,
+	tags = '',
+	hp = null,
+	armor = null,
+	attacks = [],
+	special = '',
+	description = '',
+	instinct = '',
+	moves = [],
+	notes = '',
+	count = 1,
+	memberNames = [],
+	open = false,
+	locked = false,
+	onLabelsChange = null,
+} = $props();
 
-	import { tick } from 'svelte';
-	import { encounterText } from '$lib/dw/encounterText.svelte.js';
-	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
-	import { globalExpand, descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
+import { tick } from 'svelte';
+import { encounterText } from '$lib/dw/encounterText.svelte.js';
+import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+import { globalExpand, descExpanded as globalDesc } from '$lib/dw/descExpanded.svelte.js';
 
-	function inlineMd(text) {
-		return text
-			.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-			.replace(/__(.+?)__/g, '<strong>$1</strong>')
-			.replace(/\*(.+?)\*/g, '<em>$1</em>')
-			.replace(/_(.+?)_/g, '<em>$1</em>')
-			.replace(/`(.+?)`/g, '<code>$1</code>');
+function inlineMd(text) {
+	return text
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+		.replace(/__(.+?)__/g, '<strong>$1</strong>')
+		.replace(/\*(.+?)\*/g, '<em>$1</em>')
+		.replace(/_(.+?)_/g, '<em>$1</em>')
+		.replace(/`(.+?)`/g, '<code>$1</code>');
+}
+
+const descriptionHtml = $derived(description ? inlineMd(description) : '');
+
+let expanded = $state(open);
+$effect(() => {
+	expanded = open;
+});
+let globalMounted = false;
+$effect(() => {
+	const g = globalExpand.value;
+	if (!globalMounted) {
+		globalMounted = true;
+		return;
 	}
+	if (g) expanded = true;
+	else if (!locked) expanded = false;
+});
+let el;
 
-	const descriptionHtml = $derived(description ? inlineMd(description) : '');
+// Long-press / shift-click to copy name
+let longPressTimer;
+let isLongPress = false;
+let copied = $state(false);
 
-	let expanded = $state(open);
-	$effect(() => { expanded = open; });
-	let globalMounted = false;
-	$effect(() => {
-		const g = globalExpand.value;
-		if (!globalMounted) { globalMounted = true; return; }
-		if (g) expanded = true;
-		else if (!locked) expanded = false;
+function onPointerDown() {
+	isLongPress = false;
+	longPressTimer = setTimeout(() => {
+		isLongPress = true;
+		doAddToEncounter();
+	}, 400);
+}
+
+function onPointerUp() {
+	clearTimeout(longPressTimer);
+}
+
+function copyToClipboard() {
+	const lines = [name, tags || ''];
+	const vitals = [];
+	if (hp !== null) vitals.push(`${hp} HP`);
+	if (armor !== null) vitals.push(`${armor} Armor`);
+	lines.push(vitals.join(', ') || '0 HP, 0 Armor');
+	lines.push(special || '');
+	lines.push(description || '');
+	lines.push(instinct || '');
+	for (const atk of attacks) {
+		const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
+		lines.push(`attack: ${parts.join(' ; ')}`);
+	}
+	for (const m of moves) lines.push(m);
+	while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
+	navigator.clipboard.writeText(lines.join('\n'));
+}
+
+function doAddToEncounter() {
+	const oldTop = el.getBoundingClientRect().top;
+	encounterText.appendName(name);
+	copyToClipboard();
+	const end = performance.now() + 300;
+	requestAnimationFrame(function track() {
+		const drift = el.getBoundingClientRect().top - oldTop;
+		if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+		if (performance.now() < end) requestAnimationFrame(track);
 	});
-	let el;
+	copied = true;
+	setTimeout(() => {
+		copied = false;
+	}, 1200);
+}
 
-	// Long-press / shift-click to copy name
-	let longPressTimer;
-	let isLongPress = false;
-	let copied = $state(false);
+let lastClickTime = 0;
 
-	function onPointerDown() {
+function handleHeaderClick(e) {
+	if (isLongPress) {
 		isLongPress = false;
-		longPressTimer = setTimeout(() => {
-			isLongPress = true;
-			doAddToEncounter();
-		}, 400);
+		return;
 	}
-
-	function onPointerUp() {
-		clearTimeout(longPressTimer);
+	if (e.shiftKey) {
+		doAddToEncounter();
+		return;
 	}
-
-	function copyToClipboard() {
-		const lines = [name, tags || ''];
-		const vitals = [];
-		if (hp !== null) vitals.push(`${hp} HP`);
-		if (armor !== null) vitals.push(`${armor} Armor`);
-		lines.push(vitals.join(', ') || '0 HP, 0 Armor');
-		lines.push(special || '');
-		lines.push(description || '');
-		lines.push(instinct || '');
-		for (const atk of attacks) {
-			const parts = [atk.name, atk.damage, atk.tags].filter(Boolean);
-			lines.push(`attack: ${parts.join(' ; ')}`);
-		}
-		for (const m of moves) lines.push(m);
-		while (lines.length > 1 && !lines[lines.length - 1]) lines.pop();
-		navigator.clipboard.writeText(lines.join('\n'));
+	const now = Date.now();
+	if (now - lastClickTime < 400) {
+		lastClickTime = 0;
+		doAddToEncounter();
+		return;
 	}
+	lastClickTime = now;
+	if (!locked) toggleExpanded();
+}
 
-	function doAddToEncounter() {
-		const oldTop = el.getBoundingClientRect().top;
-		encounterText.appendName(name);
-		copyToClipboard();
-		const end = performance.now() + 300;
-		requestAnimationFrame(function track() {
-			const drift = el.getBoundingClientRect().top - oldTop;
-			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-			if (performance.now() < end) requestAnimationFrame(track);
-		});
-		copied = true;
-		setTimeout(() => { copied = false; }, 1200);
-	}
+function toggleExpanded() {
+	const oldTop = el.getBoundingClientRect().top;
+	expanded = !expanded;
 
-	let lastClickTime = 0;
-
-	function handleHeaderClick(e) {
-		if (isLongPress) {
-			isLongPress = false;
-			return;
-		}
-		if (e.shiftKey) {
-			doAddToEncounter();
-			return;
-		}
-		const now = Date.now();
-		if (now - lastClickTime < 400) {
-			lastClickTime = 0;
-			doAddToEncounter();
-			return;
-		}
-		lastClickTime = now;
-		if (!locked) toggleExpanded();
-	}
-
-	function toggleExpanded() {
-		const oldTop = el.getBoundingClientRect().top;
-		expanded = !expanded;
-
-		// Track element position each frame and compensate scroll to keep it pinned
-		const end = performance.now() + 300;
-		requestAnimationFrame(function track() {
-			const drift = el.getBoundingClientRect().top - oldTop;
-			if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
-			if (performance.now() < end) requestAnimationFrame(track);
-		});
-	}
-
-	const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
-	const atkNameWidth = $derived(attacks.length > 1 ? Math.max(...attacks.map(a => a.name.length)) + 'ch' : 'auto');
-
-	// Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
-	const moveColumns = $derived(
-		moves.length === 1 ? 1 :
-		moves.length === 2 ? 2 :
-		moves.length === 4 ? 2 : 3
-	);
-
-	// Description expand toggle — shift/long-press flips this one until next global toggle
-	let localFlip = $state(false);
-	const descExpanded = $derived(localFlip ? !globalDesc.value : globalDesc.value);
-	$effect(() => { globalDesc.value; localFlip = false; });
-	let descLongPress = false;
-	let descLongTimer;
-
-	// Move toggle
-	let usedMoves = $state(new Set());
-	function toggleMove(i) {
-		const next = new Set(usedMoves);
-		if (next.has(i)) next.delete(i); else next.add(i);
-		usedMoves = next;
-	}
-
-	// HP tracking — supports multiple instances via count prop
-	const hpNum = $derived(typeof hp === 'number' ? hp : null);
-	let currentHps = $state([]);
-	let labels = $state([]);
-	$effect(() => {
-		currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
-		labels = Array.from({ length: count }, (_, i) => memberNames[i] || (count <= 1 ? 'HP' : `#${i + 1}`));
+	// Track element position each frame and compensate scroll to keep it pinned
+	const end = performance.now() + 300;
+	requestAnimationFrame(function track() {
+		const drift = el.getBoundingClientRect().top - oldTop;
+		if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+		if (performance.now() < end) requestAnimationFrame(track);
 	});
-	const hpInline = $derived(count < 4);
-	function getHpColor(val) {
-		if (val == null) return null;
-		return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
-	}
-	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
-	import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
-	import DraggableCounter from '$lib/components/DraggableCounter.svelte';
+}
 
-	let dcRefs = $state({});
+const hasStats = $derived(hp !== null || armor !== null || attacks.length > 0);
+const atkNameWidth = $derived(
+	attacks.length > 1 ? Math.max(...attacks.map((a) => a.name.length)) + 'ch' : 'auto',
+);
 
-	function commitMonsterHp(raw, idx) {
-		const result = commitHpFn(raw, currentHps[idx], hpNum, armor ?? 0);
-		if (result !== null) {
-			const prev = currentHps[idx];
-			monsterUndo.push(() => { currentHps[idx] = prev; });
-			currentHps[idx] = result;
-		}
-	}
+// Grid columns: 1→1, 2→2, 4→2 (2×2), everything else→3
+const moveColumns = $derived(
+	moves.length === 1 ? 1 : moves.length === 2 ? 2 : moves.length === 4 ? 2 : 3,
+);
 
-	const hpIndices = $derived(
-		Array.from({ length: currentHps.length }, (_, i) => i)
-			.sort((a, b) => (currentHps[a] <= 0 ? 1 : 0) - (currentHps[b] <= 0 ? 1 : 0))
+// Description expand toggle — shift/long-press flips this one until next global toggle
+let localFlip = $state(false);
+const descExpanded = $derived(localFlip ? !globalDesc.value : globalDesc.value);
+$effect(() => {
+	globalDesc.value;
+	localFlip = false;
+});
+let descLongPress = false;
+let descLongTimer;
+
+// Move toggle
+let usedMoves = $state(new Set());
+function toggleMove(i) {
+	const next = new Set(usedMoves);
+	if (next.has(i)) next.delete(i);
+	else next.add(i);
+	usedMoves = next;
+}
+
+// HP tracking — supports multiple instances via count prop
+const hpNum = $derived(typeof hp === 'number' ? hp : null);
+let currentHps = $state([]);
+let labels = $state([]);
+$effect(() => {
+	currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
+	labels = Array.from(
+		{ length: count },
+		(_, i) => memberNames[i] || (count <= 1 ? 'HP' : `#${i + 1}`),
 	);
+});
+const hpInline = $derived(count < 4);
+function getHpColor(val) {
+	if (val == null) return null;
+	return val <= 0 ? '#e05555' : val < hpNum ? '#d4a847' : '#5aaa6a';
+}
+import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+import { monsterUndo } from '$lib/dw/monsterUndo.svelte.js';
+import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 
-	// Dice rolling — rollKey increments on each roll to restart the CSS animation
-	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
-	let rollKey = $state(0);
+let dcRefs = $state({});
 
-	function rollDie(sides) {
-		return Math.ceil(Math.random() * sides);
+function commitMonsterHp(raw, idx) {
+	const result = commitHpFn(raw, currentHps[idx], hpNum, armor ?? 0);
+	if (result !== null) {
+		const prev = currentHps[idx];
+		monsterUndo.push(() => {
+			currentHps[idx] = prev;
+		});
+		currentHps[idx] = result;
 	}
+}
 
-	function parseAndRoll(dmg) {
-		if (!dmg || dmg === '??') return null;
+const hpIndices = $derived(
+	Array.from({ length: currentHps.length }, (_, i) => i).sort(
+		(a, b) => (currentHps[a] <= 0 ? 1 : 0) - (currentHps[b] <= 0 ? 1 : 0),
+	),
+);
 
-		// "3d12 keep lowest 2 +3"
-		const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)\s*([+-]\d+)?/i);
-		if (keepLowest) {
-			const cnt = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3], mod = +(keepLowest[4] || 0);
-			const rolls = Array.from({ length: cnt }, () => rollDie(sides));
-			const kept = [...rolls].sort((a, b) => a - b).slice(0, keep);
-			const total = kept.reduce((a, b) => a + b, 0) + mod;
-			const formula = `${cnt}d${sides}kl${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
-			const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
-			return { total, formula, breakdown };
-		}
+// Dice rolling — rollKey increments on each roll to restart the CSS animation
+let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
+let rollKey = $state(0);
 
-		// "3d12 keep highest 2 +9"
-		const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)\s*([+-]\d+)?/i);
-		if (keepHighest) {
-			const cnt = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3], mod = +(keepHighest[4] || 0);
-			const rolls = Array.from({ length: cnt }, () => rollDie(sides));
-			const kept = [...rolls].sort((a, b) => b - a).slice(0, keep);
-			const total = kept.reduce((a, b) => a + b, 0) + mod;
-			const formula = `${cnt}d${sides}kh${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
-			const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
-			return { total, formula, breakdown };
-		}
+function rollDie(sides) {
+	return Math.ceil(Math.random() * sides);
+}
 
-		// "NdX+M" / "dX+M" / "dX"
-		const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
-		if (!m) {
-			// Plain number
-			const n = dmg.match(/^([+-]?\d+)$/);
-			if (!n) return null;
-			const total = +n[1];
-			return { total, formula: `${total}`, breakdown: `${total}` };
-		}
-		const cnt = +(m[1] || 1), sides = +m[2], modifier = +(m[3] || 0);
+function parseAndRoll(dmg) {
+	if (!dmg || dmg === '??') return null;
+
+	// "3d12 keep lowest 2 +3"
+	const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)\s*([+-]\d+)?/i);
+	if (keepLowest) {
+		const cnt = +keepLowest[1],
+			sides = +keepLowest[2],
+			keep = +keepLowest[3],
+			mod = +(keepLowest[4] || 0);
 		const rolls = Array.from({ length: cnt }, () => rollDie(sides));
-		const total = rolls.reduce((a, b) => a + b, 0) + modifier;
-		const formula = `${cnt}d${sides}${modifier ? (modifier > 0 ? ` + ${modifier}` : ` - ${-modifier}`) : ''}`;
-		const breakdown = rolls.join('+') + (modifier ? (modifier > 0 ? `+${modifier}` : `${modifier}`) : '');
+		const kept = [...rolls].sort((a, b) => a - b).slice(0, keep);
+		const total = kept.reduce((a, b) => a + b, 0) + mod;
+		const formula = `${cnt}d${sides}kl${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+		const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
 		return { total, formula, breakdown };
 	}
 
-	function doRoll(dmg, atkIdx) {
-		const result = parseAndRoll(dmg);
-		if (result === null) return;
-		rollKey++;
-		rollResult = { atkIdx, total: result.total };
-		diceHistory.add({
-			formula: `${result.formula} ${name}`,
-			breakdown: result.breakdown,
-			total: result.total,
-			tier: 'damage'
-		});
+	// "3d12 keep highest 2 +9"
+	const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)\s*([+-]\d+)?/i);
+	if (keepHighest) {
+		const cnt = +keepHighest[1],
+			sides = +keepHighest[2],
+			keep = +keepHighest[3],
+			mod = +(keepHighest[4] || 0);
+		const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+		const kept = [...rolls].sort((a, b) => b - a).slice(0, keep);
+		const total = kept.reduce((a, b) => a + b, 0) + mod;
+		const formula = `${cnt}d${sides}kh${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+		const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+		return { total, formula, breakdown };
 	}
 
-	function handleCopy(e) {
-		const sel = window.getSelection();
-		if (!sel.rangeCount) return;
-		const range = sel.getRangeAt(0);
-		if (!el.contains(range.commonAncestorContainer)) return;
-		// Only intercept if the selection includes the monster name
-		const nameEl = el.querySelector('.monster-name');
-		if (!nameEl || !sel.containsNode(nameEl, true)) return;
+	// "NdX+M" / "dX+M" / "dX"
+	const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
+	if (!m) {
+		// Plain number
+		const n = dmg.match(/^([+-]?\d+)$/);
+		if (!n) return null;
+		const total = +n[1];
+		return { total, formula: `${total}`, breakdown: `${total}` };
+	}
+	const cnt = +(m[1] || 1),
+		sides = +m[2],
+		modifier = +(m[3] || 0);
+	const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+	const total = rolls.reduce((a, b) => a + b, 0) + modifier;
+	const formula = `${cnt}d${sides}${modifier ? (modifier > 0 ? ` + ${modifier}` : ` - ${-modifier}`) : ''}`;
+	const breakdown =
+		rolls.join('+') + (modifier ? (modifier > 0 ? `+${modifier}` : `${modifier}`) : '');
+	return { total, formula, breakdown };
+}
 
-		let md = `**${name}**`;
-		if (tags) md += ` _${tags}_`;
+function doRoll(dmg, atkIdx) {
+	const result = parseAndRoll(dmg);
+	if (result === null) return;
+	rollKey++;
+	rollResult = { atkIdx, total: result.total };
+	diceHistory.add({
+		formula: `${result.formula} ${name}`,
+		breakdown: result.breakdown,
+		total: result.total,
+		tier: 'damage',
+	});
+}
+
+function handleCopy(e) {
+	const sel = window.getSelection();
+	if (!sel.rangeCount) return;
+	const range = sel.getRangeAt(0);
+	if (!el.contains(range.commonAncestorContainer)) return;
+	// Only intercept if the selection includes the monster name
+	const nameEl = el.querySelector('.monster-name');
+	if (!nameEl || !sel.containsNode(nameEl, true)) return;
+
+	let md = `**${name}**`;
+	if (tags) md += ` _${tags}_`;
+	md += '\n';
+	for (const atk of attacks) {
+		md += `${atk.name} (${atk.damage ? atk.damage + ' damage' : '??'})`;
+		if (atk.tags) md += ` ${atk.tags}`;
 		md += '\n';
-		for (const atk of attacks) {
-			md += `${atk.name} (${atk.damage ? atk.damage + ' damage' : '??'})`;
-			if (atk.tags) md += ` ${atk.tags}`;
-			md += '\n';
-		}
-		const vitals = [];
-		if (hp !== null) vitals.push(`${hp} HP`);
-		if (armor !== null) vitals.push(`${armor} Armor`);
-		if (vitals.length) md += vitals.join(', ') + '\n';
-		if (special) md += `**Special Qualities:** ${special}\n`;
-		if (description) md += `\n${description}\n`;
-		if (instinct) md += `\n_Instinct:_ ${instinct}\n`;
-		if (moves.length) md += '\n' + moves.map(m => `- ${m}`).join('\n') + '\n';
-		if (notes) md += `\n> ${notes}\n`;
-
-		e.clipboardData.setData('text/plain', md.trim());
-		e.preventDefault();
 	}
+	const vitals = [];
+	if (hp !== null) vitals.push(`${hp} HP`);
+	if (armor !== null) vitals.push(`${armor} Armor`);
+	if (vitals.length) md += vitals.join(', ') + '\n';
+	if (special) md += `**Special Qualities:** ${special}\n`;
+	if (description) md += `\n${description}\n`;
+	if (instinct) md += `\n_Instinct:_ ${instinct}\n`;
+	if (moves.length) md += '\n' + moves.map((m) => `- ${m}`).join('\n') + '\n';
+	if (notes) md += `\n> ${notes}\n`;
+
+	e.clipboardData.setData('text/plain', md.trim());
+	e.preventDefault();
+}
 </script>
 
 <div class="monster" class:is-expanded={expanded} bind:this={el} oncopy={handleCopy}>

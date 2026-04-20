@@ -1,11 +1,11 @@
 <!-- Renders any page at /blog/category/* -->
 <script>
-	import PostsList from '$lib/components/PostsList.svelte'
-	import Pagination from '$lib/components/Pagination.svelte'
+import PostsList from '$lib/components/PostsList.svelte';
+import Pagination from '$lib/components/Pagination.svelte';
 
-	let { data } = $props();
+let { data } = $props();
 
-  const { page, posts, category, total } = data
+const { page, posts, category, total } = data;
 </script>
 
 

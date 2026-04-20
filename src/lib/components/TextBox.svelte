@@ -1,74 +1,71 @@
 <script>
-	import { onMount, tick } from 'svelte';
+import { onMount, tick } from 'svelte';
 
-	let {
-		value = $bindable(''),
-		placeholders = [],
-		rows = 12,
-		storageKey = '',
-	} = $props();
+let { value = $bindable(''), placeholders = [], rows = 12, storageKey = '' } = $props();
 
-	let scrollTop = $state(0);
-	let mirror;
-	let textarea;
-	let lineHeights = $state([]);
+let scrollTop = $state(0);
+let mirror;
+let textarea;
+let lineHeights = $state([]);
 
-	export function focus() { textarea?.focus(); }
+export function focus() {
+	textarea?.focus();
+}
 
-	const lines = $derived(value.split('\n'));
-	const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
+const lines = $derived(value.split('\n'));
+const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
 
-	// Measure the rendered height of each line using a mirror div
-	function measureLines() {
-		if (!mirror || !textarea) return;
-		mirror.style.width = textarea.clientWidth + 'px';
-		const heights = [];
-		for (let i = 0; i < phCount; i++) {
-			const text = lines[i] ?? '';
-			const ph = placeholders[i] ?? '';
-			// Measure whichever is taller: the typed text or the placeholder
-			mirror.textContent = text || '\u200b';
-			let h = mirror.offsetHeight;
-			if (!text && ph) {
-				mirror.textContent = ph;
-				h = Math.max(h, mirror.offsetHeight);
-			}
-			heights.push(h);
+// Measure the rendered height of each line using a mirror div
+function measureLines() {
+	if (!mirror || !textarea) return;
+	mirror.style.width = textarea.clientWidth + 'px';
+	const heights = [];
+	for (let i = 0; i < phCount; i++) {
+		const text = lines[i] ?? '';
+		const ph = placeholders[i] ?? '';
+		// Measure whichever is taller: the typed text or the placeholder
+		mirror.textContent = text || '\u200b';
+		let h = mirror.offsetHeight;
+		if (!text && ph) {
+			mirror.textContent = ph;
+			h = Math.max(h, mirror.offsetHeight);
 		}
-		lineHeights = heights;
+		heights.push(h);
 	}
+	lineHeights = heights;
+}
 
-	$effect(() => {
-		// Re-measure when value or phCount changes
-		void lines;
-		void phCount;
-		measureLines();
-	});
+$effect(() => {
+	// Re-measure when value or phCount changes
+	void lines;
+	void phCount;
+	measureLines();
+});
 
-	onMount(() => {
-		if (!storageKey) return;
-		try {
-			const saved = localStorage.getItem(storageKey);
-			if (saved != null) value = saved;
-		} catch {}
-	});
+onMount(() => {
+	if (!storageKey) return;
+	try {
+		const saved = localStorage.getItem(storageKey);
+		if (saved != null) value = saved;
+	} catch {}
+});
 
-	onMount(() => {
-		const ro = new ResizeObserver(() => measureLines());
-		ro.observe(textarea);
-		return () => ro.disconnect();
-	});
+onMount(() => {
+	const ro = new ResizeObserver(() => measureLines());
+	ro.observe(textarea);
+	return () => ro.disconnect();
+});
 
-	$effect(() => {
-		if (!storageKey) return;
-		try {
-			if (value.length <= 1024) {
-				localStorage.setItem(storageKey, value);
-			} else {
-				localStorage.removeItem(storageKey);
-			}
-		} catch {}
-	});
+$effect(() => {
+	if (!storageKey) return;
+	try {
+		if (value.length <= 1024) {
+			localStorage.setItem(storageKey, value);
+		} else {
+			localStorage.removeItem(storageKey);
+		}
+	} catch {}
+});
 </script>
 
 <div class="textbox-wrap">

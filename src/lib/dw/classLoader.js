@@ -1,5 +1,8 @@
 const srdRaw = import.meta.glob('/src/lib/dw/srd/*.md', { query: '?raw', import: 'default' });
-const homebrewRaw = import.meta.glob('/src/lib/dw/homebrew/**/*.md', { query: '?raw', import: 'default' });
+const homebrewRaw = import.meta.glob('/src/lib/dw/homebrew/**/*.md', {
+	query: '?raw',
+	import: 'default',
+});
 
 export async function loadClassRaw(entry) {
 	let path, modules;

@@ -1,19 +1,19 @@
 <script>
-	import { isMenuOpen } from '../assets/js/store';
-	import HamburgerSVG from './svg/HamburgerSVG.svelte';
-	import XSVG from './svg/XSVG.svelte';
+import { isMenuOpen } from '../assets/js/store';
+import HamburgerSVG from './svg/HamburgerSVG.svelte';
+import XSVG from './svg/XSVG.svelte';
 
-	/**
-	 * @typedef {Object} Props
-	 * @property {boolean} [closeOnly]
-	 */
+/**
+ * @typedef {Object} Props
+ * @property {boolean} [closeOnly]
+ */
 
-	/** @type {Props} */
-	let { closeOnly = false } = $props();
+/** @type {Props} */
+let { closeOnly = false } = $props();
 
-	const toggleIsMenuOpen = () => {
-		isMenuOpen.set(!$isMenuOpen);
-	};
+const toggleIsMenuOpen = () => {
+	isMenuOpen.set(!$isMenuOpen);
+};
 </script>
 
 <button

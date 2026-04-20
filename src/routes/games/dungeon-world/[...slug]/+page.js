@@ -4,7 +4,10 @@ import { contentIndex, pageArt } from '$lib/dw/navigation.js';
 const srdModules = import.meta.glob('/src/lib/dw/srd/*.md');
 const homebrewModules = import.meta.glob('/src/lib/dw/homebrew/**/*.md');
 const srdRaw = import.meta.glob('/src/lib/dw/srd/*.md', { query: '?raw', import: 'default' });
-const homebrewRaw = import.meta.glob('/src/lib/dw/homebrew/**/*.md', { query: '?raw', import: 'default' });
+const homebrewRaw = import.meta.glob('/src/lib/dw/homebrew/**/*.md', {
+	query: '?raw',
+	import: 'default',
+});
 
 function resolveArt(...keys) {
 	for (const k of keys) {
@@ -23,7 +26,7 @@ export const load = async ({ params }) => {
 	if (!entry) {
 		// Check auto-discovered monster sections not in static nav
 		const { monsterSections } = await import('$lib/dw/monsters.js');
-		const section = monsterSections.find(s => s.slug === slug);
+		const section = monsterSections.find((s) => s.slug === slug);
 		if (!section) error(404, 'Page not found');
 		return {
 			title: section.name,
@@ -33,7 +36,7 @@ export const load = async ({ params }) => {
 			monsterSections: [section],
 			...resolveArt(slug),
 			srdSlug: null,
-			homebrewSlug: null
+			homebrewSlug: null,
 		};
 	}
 
@@ -51,7 +54,7 @@ export const load = async ({ params }) => {
 			monsterSections: sections,
 			...resolveArt(slug, entry.monsterSection),
 			srdSlug: entry.srdSlug || null,
-			homebrewSlug: entry.homebrewSlug || null
+			homebrewSlug: entry.homebrewSlug || null,
 		};
 	}
 
@@ -80,7 +83,7 @@ export const load = async ({ params }) => {
 		slug,
 		...resolveArt(slug, slug.replace('-srd', '')),
 		srdSlug: entry.srdSlug || null,
-		homebrewSlug: entry.homebrewSlug || null
+		homebrewSlug: entry.homebrewSlug || null,
 	};
 };
 
@@ -90,7 +93,9 @@ export const entries = async () => {
 		.filter(([, e]) => !e.skipSlug)
 		.map(([slug]) => ({ slug }));
 	const knownMonsterSections = new Set(
-		Object.values(contentIndex).filter((e) => e.monsterSection).map((e) => e.monsterSection)
+		Object.values(contentIndex)
+			.filter((e) => e.monsterSection)
+			.map((e) => e.monsterSection),
 	);
 	const dynamicSlugs = monsterSections
 		.filter((s) => !contentIndex[s.slug] && !knownMonsterSections.has(s.slug))

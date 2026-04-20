@@ -1,59 +1,63 @@
 <script>
-	import MonsterStatblock from './MonsterStatblock.svelte';
-	import { monsterSections } from '$lib/dw/monsters.js';
-	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
-	import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
+import MonsterStatblock from './MonsterStatblock.svelte';
+import { monsterSections } from '$lib/dw/monsters.js';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
 
-	let {
-		/** Show all sections when search is empty */
-		showAll = false,
-		/** External search hint (used when the user hasn't typed anything) */
-		hint = '',
-	} = $props();
+let {
+	/** Show all sections when search is empty */
+	showAll = false,
+	/** External search hint (used when the user hasn't typed anything) */
+	hint = '',
+} = $props();
 
-	let userTyped = $state(false);
-	let search = $state('');
-	const isHint = $derived(!userTyped && !!hint);
+let userTyped = $state(false);
+let search = $state('');
+const isHint = $derived(!userTyped && !!hint);
 
-	$effect(() => {
-		if (!userTyped) search = hint;
-	});
+$effect(() => {
+	if (!userTyped) search = hint;
+});
 
-	function onSearchInput(e) {
-		search = e.target.value;
-		userTyped = !!e.target.value;
-	}
+function onSearchInput(e) {
+	search = e.target.value;
+	userTyped = !!e.target.value;
+}
 
-	const filteredSections = $derived.by(() => {
-		if (!search.trim()) {
-			if (!showAll) return [];
-			const sections = [...monsterSections];
-			if (userMonsters.list.length > 0) {
-				sections.unshift({ slug: 'user-monsters', name: 'User Monsters', monsters: userMonsters.list });
-			}
-			return sections;
-		}
-		const q = search.trim();
-		let test;
-		try {
-			const re = new RegExp(q, 'i');
-			test = (name) => re.test(name);
-		} catch {
-			const lower = q.toLowerCase();
-			test = (name) => name.toLowerCase().includes(lower);
-		}
-		const sections = monsterSections
-			.map(s => ({ ...s, monsters: s.monsters.filter(m => test(m.name)) }))
-			.filter(s => s.monsters.length > 0);
-		const matchedUser = userMonsters.list.filter(m => test(m.name));
-		if (matchedUser.length > 0) {
-			sections.unshift({ slug: 'user-monsters', name: 'User Monsters', monsters: matchedUser });
+const filteredSections = $derived.by(() => {
+	if (!search.trim()) {
+		if (!showAll) return [];
+		const sections = [...monsterSections];
+		if (userMonsters.list.length > 0) {
+			sections.unshift({
+				slug: 'user-monsters',
+				name: 'User Monsters',
+				monsters: userMonsters.list,
+			});
 		}
 		return sections;
-	});
+	}
+	const q = search.trim();
+	let test;
+	try {
+		const re = new RegExp(q, 'i');
+		test = (name) => re.test(name);
+	} catch {
+		const lower = q.toLowerCase();
+		test = (name) => name.toLowerCase().includes(lower);
+	}
+	const sections = monsterSections
+		.map((s) => ({ ...s, monsters: s.monsters.filter((m) => test(m.name)) }))
+		.filter((s) => s.monsters.length > 0);
+	const matchedUser = userMonsters.list.filter((m) => test(m.name));
+	if (matchedUser.length > 0) {
+		sections.unshift({ slug: 'user-monsters', name: 'User Monsters', monsters: matchedUser });
+	}
+	return sections;
+});
 
-	const filteredCount = $derived(filteredSections.reduce((n, s) => n + s.monsters.length, 0));
-	const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
+const filteredCount = $derived(filteredSections.reduce((n, s) => n + s.monsters.length, 0));
+const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount <= 3);
 </script>
 
 <div class="monster-search-wrap">

@@ -1,144 +1,158 @@
 <script>
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { navigation, contentIndex } from '$lib/dw/navigation.js';
-	import { monsterSections } from '$lib/dw/monsters.js';
-	import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
-	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-	import { loadClassRaw, buildCharacterSheet } from '$lib/dw/classLoader.js';
-	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+import { page } from '$app/state';
+import { goto } from '$app/navigation';
+import { navigation, contentIndex } from '$lib/dw/navigation.js';
+import { monsterSections } from '$lib/dw/monsters.js';
+import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
+import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { loadClassRaw, buildCharacterSheet } from '$lib/dw/classLoader.js';
+import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 
-	let { children } = $props();
+let { children } = $props();
 
-	const charImage = $derived.by(() => {
-		const lines = characterSheet.value.split('\n');
-		return lines[3]?.trim() || '';
-	});
+const charImage = $derived.by(() => {
+	const lines = characterSheet.value.split('\n');
+	return lines[3]?.trim() || '';
+});
 
-	const isCharSheet = $derived(
-		page.url.pathname.replace(/\/$/, '').endsWith('/character-sheet')
-	);
+const isCharSheet = $derived(page.url.pathname.replace(/\/$/, '').endsWith('/character-sheet'));
 
-	const knownMonsterSections = new Set(
-		Object.values(contentIndex).filter(e => e.monsterSection).map(e => e.monsterSection)
-	);
+const knownMonsterSections = new Set(
+	Object.values(contentIndex)
+		.filter((e) => e.monsterSection)
+		.map((e) => e.monsterSection),
+);
 
-	const dynamicMonsterItems = monsterSections
-		.filter(s => !contentIndex[s.slug] && !knownMonsterSections.has(s.slug))
-		.map(s => ({
-			title: s.name,
-			slug: s.slug,
-			render: 'monsters',
-			monsterSection: s.slug,
-			homebrew: true
-		}));
+const dynamicMonsterItems = monsterSections
+	.filter((s) => !contentIndex[s.slug] && !knownMonsterSections.has(s.slug))
+	.map((s) => ({
+		title: s.name,
+		slug: s.slug,
+		render: 'monsters',
+		monsterSection: s.slug,
+		homebrew: true,
+	}));
 
-	const mergedNavigation = navigation.map(cat =>
-		cat.category === 'Monsters'
-			? { ...cat, items: [...cat.items, ...dynamicMonsterItems] }
-			: cat
-	);
-	let sidebarOpen = $state(false);
-	let longPressTimer;
-	let isLongPress = false;
+const mergedNavigation = navigation.map((cat) =>
+	cat.category === 'Monsters' ? { ...cat, items: [...cat.items, ...dynamicMonsterItems] } : cat,
+);
+let sidebarOpen = $state(false);
+let longPressTimer;
+let isLongPress = false;
 
-	const currentSlug = $derived(
-		page.url.pathname
-			.replace('/games/dungeon-world/', '')
-			.replace(/\/$/, '') || 'introduction'
-	);
+const currentSlug = $derived(
+	page.url.pathname.replace('/games/dungeon-world/', '').replace(/\/$/, '') || 'introduction',
+);
 
-	function isActive(item, slug) {
-		if (slug === item.slug) return true;
-		if (item.srdSlug && slug === item.srdSlug) return true;
-		if (item.homebrewSlug && slug === item.homebrewSlug) return true;
-		return false;
+function isActive(item, slug) {
+	if (slug === item.slug) return true;
+	if (item.srdSlug && slug === item.srdSlug) return true;
+	if (item.homebrewSlug && slug === item.homebrewSlug) return true;
+	return false;
+}
+
+function getHref(item) {
+	if (!item.srdSlug) return `/games/dungeon-world/${item.slug}`;
+	return getSource(item.slug) === 'srd'
+		? `/games/dungeon-world/${item.srdSlug}`
+		: `/games/dungeon-world/${item.slug}`;
+}
+
+let longPressItem = null;
+let longPressTarget = null;
+
+function handleToggle(item, target, e) {
+	e.preventDefault();
+	e.stopPropagation();
+	if (isLongPress) {
+		isLongPress = false;
+		return;
+	}
+	const singleOnly = e.shiftKey;
+	toggleSource(item.slug, target, singleOnly);
+	const slug = target === 'srd' ? item.srdSlug : item.slug;
+	sidebarOpen = false;
+	goto(`/games/dungeon-world/${slug}`);
+}
+
+function resolveClassItem(item) {
+	if (item.srdSlug && getSource(item.slug) === 'srd') {
+		return contentIndex[item.srdSlug] || item;
+	}
+	return item;
+}
+
+function onPointerDown(e, item, category, toggleTarget) {
+	if (e.shiftKey && !toggleTarget) {
+		e.preventDefault();
+		if (
+			category === 'Classes' &&
+			item?.file &&
+			currentSlug === 'character-sheet' &&
+			characterSheet.isEmpty
+		) {
+			const resolved = resolveClassItem(item);
+			loadClassRaw(resolved).then((raw) => {
+				if (raw) characterSheet.value = buildCharacterSheet(raw);
+			});
+		}
+		sidebarOpen = false;
+		return;
 	}
 
-	function getHref(item) {
-		if (!item.srdSlug) return `/games/dungeon-world/${item.slug}`;
-		return getSource(item.slug) === 'srd'
-			? `/games/dungeon-world/${item.srdSlug}`
-			: `/games/dungeon-world/${item.slug}`;
-	}
+	isLongPress = false;
+	longPressItem = item;
+	longPressTarget = toggleTarget || null;
+	longPressTimer = setTimeout(async () => {
+		isLongPress = true;
+		if (longPressTarget && longPressItem?.srdSlug) {
+			toggleSource(longPressItem.slug, longPressTarget, true);
+			const slug = longPressTarget === 'srd' ? longPressItem.srdSlug : longPressItem.slug;
+			sidebarOpen = false;
+			goto(`/games/dungeon-world/${slug}`);
+		} else if (
+			category === 'Classes' &&
+			item?.file &&
+			currentSlug === 'character-sheet' &&
+			characterSheet.isEmpty
+		) {
+			const resolved = resolveClassItem(item);
+			const raw = await loadClassRaw(resolved);
+			if (raw) characterSheet.value = buildCharacterSheet(raw);
+			sidebarOpen = false;
+		}
+	}, 500);
+}
 
-	let longPressItem = null;
-	let longPressTarget = null;
+function onPointerUp() {
+	clearTimeout(longPressTimer);
+}
 
-	function handleToggle(item, target, e) {
+async function handleNavClick(e, item, category) {
+	if (isLongPress) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (isLongPress) { isLongPress = false; return; }
-		const singleOnly = e.shiftKey;
-		toggleSource(item.slug, target, singleOnly);
-		const slug = target === 'srd' ? item.srdSlug : item.slug;
-		sidebarOpen = false;
-		goto(`/games/dungeon-world/${slug}`);
-	}
-
-	function resolveClassItem(item) {
-		if (item.srdSlug && getSource(item.slug) === 'srd') {
-			return contentIndex[item.srdSlug] || item;
-		}
-		return item;
-	}
-
-	function onPointerDown(e, item, category, toggleTarget) {
-		if (e.shiftKey && !toggleTarget) {
-			e.preventDefault();
-			if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				const resolved = resolveClassItem(item);
-				loadClassRaw(resolved).then(raw => {
-					if (raw) characterSheet.value = buildCharacterSheet(raw);
-				});
-			}
-			sidebarOpen = false;
-			return;
-		}
-
 		isLongPress = false;
-		longPressItem = item;
-		longPressTarget = toggleTarget || null;
-		longPressTimer = setTimeout(async () => {
-			isLongPress = true;
-			if (longPressTarget && longPressItem?.srdSlug) {
-				toggleSource(longPressItem.slug, longPressTarget, true);
-				const slug = longPressTarget === 'srd' ? longPressItem.srdSlug : longPressItem.slug;
-				sidebarOpen = false;
-				goto(`/games/dungeon-world/${slug}`);
-			} else if (category === 'Classes' && item?.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				const resolved = resolveClassItem(item);
-				const raw = await loadClassRaw(resolved);
-				if (raw) characterSheet.value = buildCharacterSheet(raw);
-				sidebarOpen = false;
-			}
-		}, 500);
+		return;
 	}
-
-	function onPointerUp() {
-		clearTimeout(longPressTimer);
-	}
-
-	async function handleNavClick(e, item, category) {
-		if (isLongPress) {
-			e.preventDefault();
-			e.stopPropagation();
-			isLongPress = false;
-			return;
-		}
-		if (e.shiftKey) {
-			e.preventDefault();
-			e.stopPropagation();
-			if (category === 'Classes' && item.file && currentSlug === 'character-sheet' && characterSheet.isEmpty) {
-				const resolved = resolveClassItem(item);
-				const raw = await loadClassRaw(resolved);
-				if (raw) characterSheet.value = buildCharacterSheet(raw);
-			}
-			sidebarOpen = false;
-			return;
+	if (e.shiftKey) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (
+			category === 'Classes' &&
+			item.file &&
+			currentSlug === 'character-sheet' &&
+			characterSheet.isEmpty
+		) {
+			const resolved = resolveClassItem(item);
+			const raw = await loadClassRaw(resolved);
+			if (raw) characterSheet.value = buildCharacterSheet(raw);
 		}
 		sidebarOpen = false;
+		return;
 	}
+	sidebarOpen = false;
+}
 </script>
 
 <div class="dw-layout">

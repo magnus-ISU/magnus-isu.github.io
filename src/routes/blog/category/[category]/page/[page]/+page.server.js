@@ -21,6 +21,6 @@ export const load = async ({ url, params, fetch }) => {
 		posts,
 		page,
 		category,
-		totalPosts: total
+		totalPosts: total,
 	};
 };

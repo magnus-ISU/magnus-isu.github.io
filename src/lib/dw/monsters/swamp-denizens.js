@@ -6,7 +6,8 @@ export default [
 		armor: 2,
 		attacks: [{ name: 'Bite', damage: 'd10+3', tags: 'Close, Reach, 1 piercing' }],
 		special: 'Amphibious',
-		description: 'Dragon-Turtle’s sister is a mighty serpent queen. Ten yards of scales and muscle, they say she wakes with a hunger when the sun disappears from the sky. She is attracted by bright light in the darkness and like any snake, the Bakunawa is sneaky. She will seek first to beguile and mislead and will only strike out with violence when no other option is available. When she does, though, her jaws are strong enough to crack the hull of any swamp-boat and certainly enough to slice through a steel breastplate or two. Give the greedy snake your treasures and she might just leave you alone.',
+		description:
+			'Dragon-Turtle’s sister is a mighty serpent queen. Ten yards of scales and muscle, they say she wakes with a hunger when the sun disappears from the sky. She is attracted by bright light in the darkness and like any snake, the Bakunawa is sneaky. She will seek first to beguile and mislead and will only strike out with violence when no other option is available. When she does, though, her jaws are strong enough to crack the hull of any swamp-boat and certainly enough to slice through a steel breastplate or two. Give the greedy snake your treasures and she might just leave you alone.',
 		instinct: 'To devour',
 		moves: ['Lure prey with lies and illusions', 'Lash out at light', 'Devour'],
 	},
@@ -16,7 +17,8 @@ export default [
 		hp: 12,
 		armor: 2,
 		attacks: [{ name: 'Bite', damage: 'd10', tags: 'Close' }],
-		description: '“Few have seen a basilisk and lived to tell the tale. Get it? Seen a basilisk? Little bit of basilisk humor there. Sorry, I know you’re looking for something helpful, sirs. Serious stuff, I understand. The basilisk, even without its ability to turn your flesh to stone with a gaze, is a dangerous creature. A bit like a frog, bulbous eyes and six muscled legs built for leaping. A bit like an alligator, with snapping jaws and sawing teeth. Covered in stony scales and very hard to kill. Best avoided, if possible.”',
+		description:
+			'“Few have seen a basilisk and lived to tell the tale. Get it? Seen a basilisk? Little bit of basilisk humor there. Sorry, I know you’re looking for something helpful, sirs. Serious stuff, I understand. The basilisk, even without its ability to turn your flesh to stone with a gaze, is a dangerous creature. A bit like a frog, bulbous eyes and six muscled legs built for leaping. A bit like an alligator, with snapping jaws and sawing teeth. Covered in stony scales and very hard to kill. Best avoided, if possible.”',
 		instinct: 'To create new statuary',
 		moves: ['Turn flesh to stone with a gaze', 'Retreat into a maze of stone'],
 	},
@@ -27,12 +29,10 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Corrosive touch', damage: 'd10', tags: 'Close, ignores armor' }],
 		special: 'Amorphous',
-		description: 'How do you kill a pile of goo? A great, squishy pile of goo that also happens to want to dissolve you and slurp you up? That is a good question to which I have no answer. Do let us know when you find out.',
+		description:
+			'How do you kill a pile of goo? A great, squishy pile of goo that also happens to want to dissolve you and slurp you up? That is a good question to which I have no answer. Do let us know when you find out.',
 		instinct: 'To dissolve',
-		moves: [
-			'Eat away metal, flesh, or wood',
-			'Ooze into a troubling place: food, armor, stomach',
-		],
+		moves: ['Eat away metal, flesh, or wood', 'Ooze into a troubling place: food, armor, stomach'],
 	},
 	{
 		name: 'Coutal',
@@ -41,7 +41,8 @@ export default [
 		armor: 2,
 		attacks: [{ name: 'Light ray', damage: 'd8', tags: 'Close, ignores armor' }],
 		special: 'Wings, Halo',
-		description: 'As if in direct defiance of the decay and filth of the world, the gods granted us the coutal. As if to say, “there is beauty, even in this grim place.” A serpent in flight on jeweled wings, these beautiful creatures glow with a soft light, as the sun does through stained glass. Bright, wise, and calm, a coutal often knows many things and sees many more. You might be able to make a trade with it in exchange for some favor. They seek to cleanse and to purge and to make of this dark world a better one. Shame we have so few. The gods are cruel.',
+		description:
+			'As if in direct defiance of the decay and filth of the world, the gods granted us the coutal. As if to say, “there is beauty, even in this grim place.” A serpent in flight on jeweled wings, these beautiful creatures glow with a soft light, as the sun does through stained glass. Bright, wise, and calm, a coutal often knows many things and sees many more. You might be able to make a trade with it in exchange for some favor. They seek to cleanse and to purge and to make of this dark world a better one. Shame we have so few. The gods are cruel.',
 		instinct: 'To cleanse',
 		moves: [
 			'Pass judgment on a person or place',
@@ -71,7 +72,8 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Dagger', damage: 'd6', tags: 'Close' }],
 		special: 'Shapeshifting',
-		description: 'Their natural form, if you ever see it, is hideous. Like a creature who stopped growing part-way, before it decided it was elf or man or dwarf. Then again, maybe that’s how you get to be the way a doppelgänger is—without form, without shape to call their own, maybe all they really seek is a place to fit in. If you go out into the world, when you come back home, make sure your friends are who you think they are. They might, instead, be a doppelgänger and your friend might be dead at the bottom of a well somewhere. Then again, depending on your friends, that might be an improvement.',
+		description:
+			'Their natural form, if you ever see it, is hideous. Like a creature who stopped growing part-way, before it decided it was elf or man or dwarf. Then again, maybe that’s how you get to be the way a doppelgänger is—without form, without shape to call their own, maybe all they really seek is a place to fit in. If you go out into the world, when you come back home, make sure your friends are who you think they are. They might, instead, be a doppelgänger and your friend might be dead at the bottom of a well somewhere. Then again, depending on your friends, that might be an improvement.',
 		instinct: 'To infiltrate',
 		moves: [
 			'Assume the shape of a person whose flesh it’s tasted',
@@ -86,7 +88,8 @@ export default [
 		armor: 4,
 		attacks: [{ name: 'Bite', damage: 'd10+3', tags: 'Reach' }],
 		special: 'Shell, Amphibious',
-		description: 'Bakunawa has a brother. Where she is quick to anger and hungry for gold, he is slow and sturdy. She is a knife and he is a shield. A great turtle that lies in the muck and mire for ages as they pass, mud piled upon his back—sometimes trees and shrubs. Sometimes a whole misguided clan of goblins will build their huts and cook their ratty meals on the shell of the dragon turtle. His snapping jaws may be glacier-slow, but they can rend a castle wall. Careful where you tread.',
+		description:
+			'Bakunawa has a brother. Where she is quick to anger and hungry for gold, he is slow and sturdy. She is a knife and he is a shield. A great turtle that lies in the muck and mire for ages as they pass, mud piled upon his back—sometimes trees and shrubs. Sometimes a whole misguided clan of goblins will build their huts and cook their ratty meals on the shell of the dragon turtle. His snapping jaws may be glacier-slow, but they can rend a castle wall. Careful where you tread.',
 		instinct: 'To resist change',
 		moves: [
 			'Move forward implacably',
@@ -101,7 +104,8 @@ export default [
 		armor: 3,
 		attacks: [{ name: 'Elemental breath', damage: 'd10+2', tags: 'Close, Near' }],
 		special: 'Wings, Elemental Blood',
-		description: 'What? Did you think they were all a mile long? Did you think they didn’t come smaller than that? Sure, they may be no bigger than a dog and no smarter than an ape, but a dragon whelp can still belch up a hellish ball of fire that’ll melt your armor shut and drop you screaming into the mud. Their scales, too, are softer than those of their bigger kin, but can still turn aside an arrow or sword not perfectly aimed. Size is not the only measure of might.',
+		description:
+			'What? Did you think they were all a mile long? Did you think they didn’t come smaller than that? Sure, they may be no bigger than a dog and no smarter than an ape, but a dragon whelp can still belch up a hellish ball of fire that’ll melt your armor shut and drop you screaming into the mud. Their scales, too, are softer than those of their bigger kin, but can still turn aside an arrow or sword not perfectly aimed. Size is not the only measure of might.',
 		instinct: 'To grow in power',
 		moves: [
 			'Start a lair, form a base of power',
@@ -116,7 +120,8 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Talons', damage: 'd6', tags: 'Close' }],
 		special: 'Wing-arms',
-		description: 'Ugly, wrinkled bird-folk, these. Once, maybe, in some ancient past, they were a race of angelic men from on high, but now they eat rats that they fish from the murk with talon-feet and devour with needle-teeth. They understand the tongues of men and dwarves but speak in little more than gibbering tongues, mimicking the words they hear with mocking laughter. It’s a chilling thing to see a beast so close to man or bird but not quite either one.',
+		description:
+			'Ugly, wrinkled bird-folk, these. Once, maybe, in some ancient past, they were a race of angelic men from on high, but now they eat rats that they fish from the murk with talon-feet and devour with needle-teeth. They understand the tongues of men and dwarves but speak in little more than gibbering tongues, mimicking the words they hear with mocking laughter. It’s a chilling thing to see a beast so close to man or bird but not quite either one.',
 		instinct: 'To lash out',
 		moves: ['Attack from the air', 'Carry out the bidding of a more powerful creature'],
 	},
@@ -127,7 +132,8 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Burning touch', damage: 'd6-2', tags: 'Hand, ignores armor' }],
 		special: 'Flammable oil, aquatic',
-		description: 'These strange creatures are no bigger or smarter than their mundane kin. They have the same vicious nature. Over their relations they have one advantage—an oily secretion that oozes from their skin. It makes them hard to catch. On top of that, with a twist of their body they can ignite the stuff, leaving pools of burning oil atop the surface of the water and roasting prey and predator alike. I hear the slimy things make good ingredients for fire-resistant gear, but you have to get your hands on one, first.',
+		description:
+			'These strange creatures are no bigger or smarter than their mundane kin. They have the same vicious nature. Over their relations they have one advantage—an oily secretion that oozes from their skin. It makes them hard to catch. On top of that, with a twist of their body they can ignite the stuff, leaving pools of burning oil atop the surface of the water and roasting prey and predator alike. I hear the slimy things make good ingredients for fire-resistant gear, but you have to get your hands on one, first.',
 		instinct: 'To ignite',
 		moves: ['Catch someone or something on fire (even underwater)', 'Consume burning prey'],
 	},
@@ -138,7 +144,8 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Spear', damage: 'd6', tags: 'Close' }],
 		special: 'Amphibious',
-		description: 'Croak croak croak. Little warty munchkins. Some wizard or godling’s idea of a bad joke, these creatures are. They stand as men, dress in scavenged cloth and hold court in their froggy villages. They speak a rumbling pidgin form of the tongue of man and are constantly at war with their neighbors. They’re greedy and stupid but clever enough when they need to defend themselves. Some say, too, their priests have a remarkable skill at healing. Or maybe they’re just really, really hard to kill.',
+		description:
+			'Croak croak croak. Little warty munchkins. Some wizard or godling’s idea of a bad joke, these creatures are. They stand as men, dress in scavenged cloth and hold court in their froggy villages. They speak a rumbling pidgin form of the tongue of man and are constantly at war with their neighbors. They’re greedy and stupid but clever enough when they need to defend themselves. Some say, too, their priests have a remarkable skill at healing. Or maybe they’re just really, really hard to kill.',
 		instinct: 'To wage war',
 		moves: ['Launch an amphibious assault', 'Heal at a prodigious rate'],
 	},
@@ -149,7 +156,8 @@ export default [
 		armor: 2,
 		attacks: [{ name: 'Bite', damage: 'd10+3', tags: 'Close, Reach' }],
 		special: 'Many heads, Only killed by a blow to the heart',
-		description: 'A bit like a dragon, wingless though it may be. Heads, nine in number at birth, spring from a muscled trunk and weave a sinuous pattern in the air. A hydra is to be feared—a scaled terror of the marsh. The older ones, though, they have more heads, for every failed attempt to murder it just makes it stronger. Cut off a head and two more grow in its place. Only a strike, true and strong, to the heart can end a hydra’s life. Not time or tide or any other thing but this.',
+		description:
+			'A bit like a dragon, wingless though it may be. Heads, nine in number at birth, spring from a muscled trunk and weave a sinuous pattern in the air. A hydra is to be feared—a scaled terror of the marsh. The older ones, though, they have more heads, for every failed attempt to murder it just makes it stronger. Cut off a head and two more grow in its place. Only a strike, true and strong, to the heart can end a hydra’s life. Not time or tide or any other thing but this.',
 		instinct: 'To grow',
 		moves: ['Attack many enemies at once', 'Regenerate a body part (especially a head)'],
 	},
@@ -160,7 +168,8 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Spear', damage: 'd6', tags: 'Close, Reach' }],
 		special: 'Dragon connection',
-		description: 'Some are wont to lump these little, rat-like dragon-men in with goblins and orcs, bugbears and hobgoblins. They are smarter and wiser than their kin, however. The kobolds are beholden slaves to dragons and were, in ancient times, their lorekeepers and sorcerer-servants. Their clans, with names like Ironscale and Whitewing, form around a dragon master and live to serve and do its bidding. Spotting a kobold means more are near—and if more are near then a mighty dragon cannot be far, either.',
+		description:
+			'Some are wont to lump these little, rat-like dragon-men in with goblins and orcs, bugbears and hobgoblins. They are smarter and wiser than their kin, however. The kobolds are beholden slaves to dragons and were, in ancient times, their lorekeepers and sorcerer-servants. Their clans, with names like Ironscale and Whitewing, form around a dragon master and live to serve and do its bidding. Spotting a kobold means more are near—and if more are near then a mighty dragon cannot be far, either.',
 		instinct: 'To serve dragons',
 		moves: ['Lay a trap', 'Call on dragons or draconic allies', 'Retreat and regroup'],
 	},
@@ -171,7 +180,8 @@ export default [
 		armor: 2,
 		attacks: [{ name: 'Spear', damage: 'd8', tags: 'Close, Reach' }],
 		special: 'Amphibious',
-		description: 'A traveling sorcerer once told me that lizardmen came before we did. That before elves and dwarves and men built even the first of their wattle huts, a race of proud lizard kings strode the land. That they lived in palaces of crystal and worshipped their own scaly gods. Maybe that’s true and maybe it ain’t—now they dwell in places men long forgot or abandoned, crafting tools from volcano-glass and lashing against the works of the civilized world. Maybe they just want back what they lost.',
+		description:
+			'A traveling sorcerer once told me that lizardmen came before we did. That before elves and dwarves and men built even the first of their wattle huts, a race of proud lizard kings strode the land. That they lived in palaces of crystal and worshipped their own scaly gods. Maybe that’s true and maybe it ain’t—now they dwell in places men long forgot or abandoned, crafting tools from volcano-glass and lashing against the works of the civilized world. Maybe they just want back what they lost.',
 		instinct: 'To destroy civilization',
 		moves: ['Ambush the unsuspecting', 'Launch an amphibious assault'],
 	},
@@ -182,7 +192,8 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Claws', damage: 'd6', tags: 'Close' }],
 		special: 'Look turns you to stone',
-		description: 'The medusa are children of a serpent-haired mother, birthing them in ancient times to bear her name across the ages. They dwell near places of civilization—luring folks to their caves with promises of beauty or riches untold. Fine appreciators of art, the medusa curate strange collections of their victims, terror or ecstasy frozen forever in stone. It satisfies their vanity to know they were the last thing seen in so many lives. Arrogant, proud, and spiteful, in their way, they seek what so many do—endless company.',
+		description:
+			'The medusa are children of a serpent-haired mother, birthing them in ancient times to bear her name across the ages. They dwell near places of civilization—luring folks to their caves with promises of beauty or riches untold. Fine appreciators of art, the medusa curate strange collections of their victims, terror or ecstasy frozen forever in stone. It satisfies their vanity to know they were the last thing seen in so many lives. Arrogant, proud, and spiteful, in their way, they seek what so many do—endless company.',
 		instinct: 'To collect',
 		moves: [
 			'Turn a body part to stone with a look',
@@ -199,7 +210,8 @@ export default [
 			{ name: 'Endless teeth', damage: 'd6+4', tags: 'Close, Forceful, Messy, 1 piercing' },
 		],
 		special: 'Amphibious',
-		description: 'The shape and craft of men wedded to the hunger and the endless teeth of a shark. Voracious and filled only with hate, these creatures will not stop until all life has been consumed. They cannot be reasoned with, they cannot be controlled or sated. They are hunger and bloodlust, driven up from the depths of the sea to ravage coastal towns and swallow island villages.',
+		description:
+			'The shape and craft of men wedded to the hunger and the endless teeth of a shark. Voracious and filled only with hate, these creatures will not stop until all life has been consumed. They cannot be reasoned with, they cannot be controlled or sated. They are hunger and bloodlust, driven up from the depths of the sea to ravage coastal towns and swallow island villages.',
 		instinct: 'To spill blood',
 		moves: ['Bite off a limb', 'Hurl a poisoned spear', 'Frenzy at the sight of blood'],
 	},
@@ -210,7 +222,8 @@ export default [
 		armor: 4,
 		attacks: [{ name: 'Trample', damage: 'd10+5', tags: 'Reach' }],
 		special: 'Armor plated body',
-		description: 'Great lumbering beasts, they live in places long since forgotten by the thinking races of the world. Gentle if unprovoked, but mighty if their ire is raised, they trample smaller creatures with the care we might give to crushing an ant beneath our boots. If you see one, drift by and gaze in awe, but do not wake the giant.',
+		description:
+			'Great lumbering beasts, they live in places long since forgotten by the thinking races of the world. Gentle if unprovoked, but mighty if their ire is raised, they trample smaller creatures with the care we might give to crushing an ant beneath our boots. If you see one, drift by and gaze in awe, but do not wake the giant.',
 		instinct: 'To endure',
 		moves: ['Stampede', 'Knock something down', 'Unleash a deafening bellow'],
 	},
@@ -221,7 +234,8 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Lash', damage: 'd10+1', tags: 'Close, Reach, Forceful' }],
 		special: 'Swamp form',
-		description: 'Some elementals are conjured up in sacred circles etched in chalk. Most, in fact. There’s a sort of science to it. Others, though, aren’t so orderly—they don’t fall under the carefully controlled assignments of fire, air, water, or earth. Some are a natural confluence of vine and mire and fungus. They do not think the way a man might think. They cannot be understood as one might understand an elf. They simply are. Spirits of the swamp. Shamblers in the mud.',
+		description:
+			'Some elementals are conjured up in sacred circles etched in chalk. Most, in fact. There’s a sort of science to it. Others, though, aren’t so orderly—they don’t fall under the carefully controlled assignments of fire, air, water, or earth. Some are a natural confluence of vine and mire and fungus. They do not think the way a man might think. They cannot be understood as one might understand an elf. They simply are. Spirits of the swamp. Shamblers in the mud.',
 		instinct: 'To preserve and create swamps',
 		moves: [
 			'Call on the swamp itself for aid',
@@ -236,7 +250,8 @@ export default [
 		armor: 1,
 		attacks: [{ name: 'Club', damage: 'd10+3', tags: 'Close, Reach, Forceful' }],
 		special: 'Regeneration',
-		description: 'Tall. Real tall. Eight or nine feet when they’re young or weak. Covered all over in warty, tough skin, too. Big teeth, stringy hair like swamp moss and long, dirty nails. Some are green, some gray, some black. They’re clannish and hateful of each other, not to mention all the rest of us. Near impossible to kill, too, unless you’ve fire or acid to spare—cut a limb off and watch. In a few days, you’ve got two trolls where you once had one. A real serious problem, as you can imagine.',
+		description:
+			'Tall. Real tall. Eight or nine feet when they’re young or weak. Covered all over in warty, tough skin, too. Big teeth, stringy hair like swamp moss and long, dirty nails. Some are green, some gray, some black. They’re clannish and hateful of each other, not to mention all the rest of us. Near impossible to kill, too, unless you’ve fire or acid to spare—cut a limb off and watch. In a few days, you’ve got two trolls where you once had one. A real serious problem, as you can imagine.',
 		instinct: 'To smash',
 		moves: [
 			'Undo the effects of an attack (unless caused by a weakness, your call)',
@@ -250,7 +265,8 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Ray', damage: '2d8 keep lowest 1 -2', tags: 'Near' }],
 		special: 'Body of light',
-		description: 'Spot a lantern floating in the darkness, lost traveler in the swamp. Hope—a beacon of shimmering light. You call out to it, but there’s no answer. It begins to fade and so you follow, sloshing through the muck, tiring at the chase, hoping you’re being led to safety. Such a sad tale that always ends in doom. These creatures are a mystery—some say they’re ghosts, others beacons of faerie light. Nobody knows the truth. They are cruel, however. All can agree on that.',
+		description:
+			'Spot a lantern floating in the darkness, lost traveler in the swamp. Hope—a beacon of shimmering light. You call out to it, but there’s no answer. It begins to fade and so you follow, sloshing through the muck, tiring at the chase, hoping you’re being led to safety. Such a sad tale that always ends in doom. These creatures are a mystery—some say they’re ghosts, others beacons of faerie light. Nobody knows the truth. They are cruel, however. All can agree on that.',
 		instinct: 'To misguide',
 		moves: ['Lead someone astray', 'Clear a path to the worst place possible'],
 	},

@@ -17,7 +17,9 @@ function loadSlots() {
 		const slots = [legacy];
 		localStorage.setItem(SLOTS_KEY, JSON.stringify(slots));
 		return slots;
-	} catch { return ['']; }
+	} catch {
+		return [''];
+	}
 }
 
 function loadActive() {
@@ -25,17 +27,23 @@ function loadActive() {
 	try {
 		const v = localStorage.getItem(ACTIVE_KEY);
 		return v !== null ? +v : 0;
-	} catch { return 0; }
+	} catch {
+		return 0;
+	}
 }
 
 function saveSlots(slots) {
 	if (!browser) return;
-	try { localStorage.setItem(SLOTS_KEY, JSON.stringify(slots)); } catch {}
+	try {
+		localStorage.setItem(SLOTS_KEY, JSON.stringify(slots));
+	} catch {}
 }
 
 function saveActive(idx) {
 	if (!browser) return;
-	try { localStorage.setItem(ACTIVE_KEY, String(idx)); } catch {}
+	try {
+		localStorage.setItem(ACTIVE_KEY, String(idx));
+	} catch {}
 }
 
 let slots = $state(loadSlots());
@@ -49,19 +57,29 @@ if (activeIdx >= slots.length) activeIdx = 0;
 activeIdx = 0;
 
 export const characterSheet = {
-	get value() { return slots[activeIdx] ?? ''; },
+	get value() {
+		return slots[activeIdx] ?? '';
+	},
 	set value(v) {
 		slots[activeIdx] = v;
 		saveSlots(slots);
 		// Also keep legacy key in sync for the layout's charImage
 		if (browser) {
-			try { localStorage.setItem(STORAGE_KEY, v); } catch {}
+			try {
+				localStorage.setItem(STORAGE_KEY, v);
+			} catch {}
 		}
 	},
-	get isEmpty() { return !(slots[activeIdx] ?? '').trim(); },
+	get isEmpty() {
+		return !(slots[activeIdx] ?? '').trim();
+	},
 
-	get activeIndex() { return activeIdx; },
-	get slotCount() { return slots.length; },
+	get activeIndex() {
+		return activeIdx;
+	},
+	get slotCount() {
+		return slots.length;
+	},
 
 	/** Get the name from a slot's first line */
 	slotName(i) {
@@ -77,7 +95,9 @@ export const characterSheet = {
 		saveActive(i);
 		// Sync legacy key
 		if (browser) {
-			try { localStorage.setItem(STORAGE_KEY, slots[i] ?? ''); } catch {}
+			try {
+				localStorage.setItem(STORAGE_KEY, slots[i] ?? '');
+			} catch {}
 		}
 	},
 
@@ -90,7 +110,9 @@ export const characterSheet = {
 		saveActive(newIdx);
 		saveSlots(slots);
 		if (browser) {
-			try { localStorage.setItem(STORAGE_KEY, ''); } catch {}
+			try {
+				localStorage.setItem(STORAGE_KEY, '');
+			} catch {}
 		}
 	},
 
@@ -104,7 +126,9 @@ export const characterSheet = {
 		saveActive(activeIdx);
 		saveSlots(slots);
 		if (browser) {
-			try { localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? ''); } catch {}
+			try {
+				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
+			} catch {}
 		}
 	},
 };

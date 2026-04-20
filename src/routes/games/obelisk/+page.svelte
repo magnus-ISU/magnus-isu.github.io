@@ -1,167 +1,167 @@
 <script>
-	import City from './city.svelte';
+import City from './city.svelte';
 
-	let cities = {};
+let cities = {};
 
-	let actions = [
-		'Declare a Holiday',
-		'Build the Obelisk',
-		'Fortify the Walls',
-		'Construct a Barracks',
-		'Recruit more Soldiers',
-		'Defend the City',
-		'Attack your Foes',
-		'Cheat'
-	];
+let actions = [
+	'Declare a Holiday',
+	'Build the Obelisk',
+	'Fortify the Walls',
+	'Construct a Barracks',
+	'Recruit more Soldiers',
+	'Defend the City',
+	'Attack your Foes',
+	'Cheat',
+];
 
-	function addCity() {
-		/*if (cities["thing"] !== undefined) {
+function addCity() {
+	/*if (cities["thing"] !== undefined) {
 			return;
 		}*/
-		cities['State ' + (1 + Object.entries(cities).length)] = {
-			obelisk: 1,
-			walls: 1,
-			barracks: 1,
-			soldiers: 1,
-			action: 0,
-			target: '',
-			lore: ''
-		};
-	}
+	cities['State ' + (1 + Object.entries(cities).length)] = {
+		obelisk: 1,
+		walls: 1,
+		barracks: 1,
+		soldiers: 1,
+		action: 0,
+		target: '',
+		lore: '',
+	};
+}
 
-	function gameTick() {
-		let cityEntries = Object.entries(cities);
-		let deadMen = {};
-		// Gain troops from an emergency Holiday first
-		for (let i = 0; i < cityEntries.length; i++) {
-			let cityName = cityEntries[i][0];
-			// This has values corresponding to the index in actions[]
-			if (cities[cityName].action === 0) {
-				cities[cityName].soldiers++;
-				continue;
-				// Now ensure that we did a legal move
-			} else if (cities[cityName].action < 0 || cities[cityName].action >= actions.length) {
-				alert("Illegal game state reached! action was '" + cities[cityName].action + "'");
-			}
+function gameTick() {
+	let cityEntries = Object.entries(cities);
+	let deadMen = {};
+	// Gain troops from an emergency Holiday first
+	for (let i = 0; i < cityEntries.length; i++) {
+		let cityName = cityEntries[i][0];
+		// This has values corresponding to the index in actions[]
+		if (cities[cityName].action === 0) {
+			cities[cityName].soldiers++;
+			continue;
+			// Now ensure that we did a legal move
+		} else if (cities[cityName].action < 0 || cities[cityName].action >= actions.length) {
+			alert("Illegal game state reached! action was '" + cities[cityName].action + "'");
 		}
-		// Next, process attacks
-		for (let i = 0; i < cityEntries.length; i++) {
-			let cityName = cityEntries[i][0];
-			// This has values corresponding to the index in actions[]
-			if (cities[cityName].action === 6) {
-				// Find the highest other attacking army
-				let targetName = cities[cityName].target;
-				// If they didn't select a target at the start - this is difficult to change and also funny if it happens so I think we should leave it in
-				if (!(targetName in cities)) {
+	}
+	// Next, process attacks
+	for (let i = 0; i < cityEntries.length; i++) {
+		let cityName = cityEntries[i][0];
+		// This has values corresponding to the index in actions[]
+		if (cities[cityName].action === 6) {
+			// Find the highest other attacking army
+			let targetName = cities[cityName].target;
+			// If they didn't select a target at the start - this is difficult to change and also funny if it happens so I think we should leave it in
+			if (!(targetName in cities)) {
+				continue;
+			}
+			let blockingSoldiers = 0;
+			for (let j = 0; j < cityEntries.length; j++) {
+				if (i === j) {
 					continue;
 				}
-				let blockingSoldiers = 0;
-				for (let j = 0; j < cityEntries.length; j++) {
-					if (i === j) {
-						continue;
-					}
-					let otherName = cityEntries[j][0];
-					if (cities[otherName].action === 6) {
-						if (cities[otherName].target === cities[cityName].target) {
-							if (cities[otherName].soldiers > blockingSoldiers) {
-								blockingSoldiers = cities[otherName].soldiers;
-							}
+				let otherName = cityEntries[j][0];
+				if (cities[otherName].action === 6) {
+					if (cities[otherName].target === cities[cityName].target) {
+						if (cities[otherName].soldiers > blockingSoldiers) {
+							blockingSoldiers = cities[otherName].soldiers;
 						}
 					}
 				}
-				// Find the number of defending soldiers
-				let defendingSoldiers = cities[targetName].soldiers;
-				let defenseless_actions = { 4: true, 6: true };
-				if (defenseless_actions[cities[targetName].action]) {
-					defendingSoldiers = 0;
+			}
+			// Find the number of defending soldiers
+			let defendingSoldiers = cities[targetName].soldiers;
+			let defenseless_actions = { 4: true, 6: true };
+			if (defenseless_actions[cities[targetName].action]) {
+				defendingSoldiers = 0;
+			}
+			// Find the number of defending walls
+			let defendingWalls = cities[targetName].walls;
+			if (cities[targetName].action === 5) {
+				defendingWalls *= 2;
+			}
+			// Mark to remove blocking_soldiers + defending_soldiers + defending_walls from soldiers
+			// (can't do it yet because then further calculations of blocking_soldiers, defending_soldiers will be off)
+			if (!(cityName in deadMen)) {
+				deadMen[cityName] = 0;
+			}
+			deadMen[cityName] += blockingSoldiers + defendingSoldiers + defendingWalls;
+			// Mark to remove dead_men - defending soldiers - defending walls from the defenders
+			let deadDefenders = deadMen[cityName] - defendingWalls - blockingSoldiers;
+			if (deadDefenders > 0) {
+				if (!(targetName in deadMen)) {
+					deadMen[targetName] = 0;
 				}
-				// Find the number of defending walls
-				let defendingWalls = cities[targetName].walls;
-				if (cities[targetName].action === 5) {
-					defendingWalls *= 2;
-				}
-				// Mark to remove blocking_soldiers + defending_soldiers + defending_walls from soldiers
-				// (can't do it yet because then further calculations of blocking_soldiers, defending_soldiers will be off)
-				if (!(cityName in deadMen)) {
-					deadMen[cityName] = 0;
-				}
-				deadMen[cityName] += blockingSoldiers + defendingSoldiers + defendingWalls;
-				// Mark to remove dead_men - defending soldiers - defending walls from the defenders
-				let deadDefenders = deadMen[cityName] - defendingWalls - blockingSoldiers;
-				if (deadDefenders > 0) {
-					if (!(targetName in deadMen)) {
-						deadMen[targetName] = 0;
-					}
-					deadMen[targetName] += deadDefenders;
-				}
-				// Destroy the Obelisk!
-				if (cities[cityName].soldiers > deadMen[cityName]) {
-					cities[targetName].obelisk =
-						cities[targetName].obelisk - cities[cityName].soldiers + deadMen[cityName];
-				}
-				if (cities[targetName].obelisk < 0) {
-					cities[targetName].obelisk = 0;
-					alert(targetName + "'s Obelisk has been demolished!");
-				}
+				deadMen[targetName] += deadDefenders;
+			}
+			// Destroy the Obelisk!
+			if (cities[cityName].soldiers > deadMen[cityName]) {
+				cities[targetName].obelisk =
+					cities[targetName].obelisk - cities[cityName].soldiers + deadMen[cityName];
+			}
+			if (cities[targetName].obelisk < 0) {
+				cities[targetName].obelisk = 0;
+				alert(targetName + "'s Obelisk has been demolished!");
 			}
 		}
-		// Remove the dead now that we don't need the old numbers any longer. You cannot train soldiers and lose soldiers, so that is no issue
-		let deadMenEntries = Object.entries(deadMen);
-		for (let i = 0; i < deadMenEntries.length; i++) {
-			let deadCount = deadMenEntries[i][1];
-			cities[deadMenEntries[i][0]].soldiers = Math.max(
-				cities[deadMenEntries[i][0]].soldiers - deadCount,
-				0
-			);
-		}
-		// Build buildings now that we have lost stuff.
-		for (let i = 0; i < cityEntries.length; i++) {
-			let cityName = cityEntries[i][0];
-			// This has values corresponding to the index in actions[]
-			switch (cities[cityName].action) {
-				case 1:
-					cities[cityName].obelisk++;
-					if (cities[cityName].obelisk === 10) {
-						alert(cityName + "'s obelisk has been completed! Hooray!");
-					}
+	}
+	// Remove the dead now that we don't need the old numbers any longer. You cannot train soldiers and lose soldiers, so that is no issue
+	let deadMenEntries = Object.entries(deadMen);
+	for (let i = 0; i < deadMenEntries.length; i++) {
+		let deadCount = deadMenEntries[i][1];
+		cities[deadMenEntries[i][0]].soldiers = Math.max(
+			cities[deadMenEntries[i][0]].soldiers - deadCount,
+			0,
+		);
+	}
+	// Build buildings now that we have lost stuff.
+	for (let i = 0; i < cityEntries.length; i++) {
+		let cityName = cityEntries[i][0];
+		// This has values corresponding to the index in actions[]
+		switch (cities[cityName].action) {
+			case 1:
+				cities[cityName].obelisk++;
+				if (cities[cityName].obelisk === 10) {
+					alert(cityName + "'s obelisk has been completed! Hooray!");
+				}
+				break;
+			case 2:
+				cities[cityName].walls++;
+				break;
+			case 3:
+				cities[cityName].barracks++;
+				break;
+			case 4:
+				cities[cityName].soldiers += cities[cityName].barracks;
+				break;
+			case 7: {
+				// Cheat after we get attacked to always set to the right values
+				let cheatStrings = cities[cityName].target.split(' ');
+				if (cheatStrings.length != 4) {
+					alert(
+						"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'",
+					);
 					break;
-				case 2:
-					cities[cityName].walls++;
-					break;
-				case 3:
-					cities[cityName].barracks++;
-					break;
-				case 4:
-					cities[cityName].soldiers += cities[cityName].barracks;
-					break;
-				case 7: {
-					// Cheat after we get attacked to always set to the right values
-					let cheatStrings = cities[cityName].target.split(' ');
-					if (cheatStrings.length != 4) {
+				}
+				let cheatValues = [];
+				for (let j = 0; j < 4; j++) {
+					cheatValues[j] = parseInt(cheatStrings[j]);
+					if (Number.isNaN(cheatValues[j])) {
 						alert(
-							"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'"
+							"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'",
 						);
 						break;
 					}
-					let cheatValues = [];
-					for (let j = 0; j < 4; j++) {
-						cheatValues[j] = parseInt(cheatStrings[j]);
-						if (Number.isNaN(cheatValues[j])) {
-							alert(
-								"To cheat, put 4 space-seperated integers as the values of your 4 resources. Example: '9 1 3 20'"
-							);
-							break;
-						}
-					}
-					cities[cityName].obelisk = cheatValues[0];
-					cities[cityName].walls = cheatValues[1];
-					cities[cityName].barracks = cheatValues[2];
-					cities[cityName].soldiers = cheatValues[3];
-					break;
 				}
+				cities[cityName].obelisk = cheatValues[0];
+				cities[cityName].walls = cheatValues[1];
+				cities[cityName].barracks = cheatValues[2];
+				cities[cityName].soldiers = cheatValues[3];
+				break;
 			}
 		}
 	}
+}
 </script>
 
 <pre class="centered">u/revesvans'

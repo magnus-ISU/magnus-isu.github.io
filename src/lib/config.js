@@ -11,10 +11,10 @@ export const postsPerPage = 100;
 export const navItems = [
 	{
 		title: 'Blog',
-		route: '/blog'
+		route: '/blog',
 	},
 	{
 		title: 'Games',
-		route: '/games'
-	}
+		route: '/games',
+	},
 ];

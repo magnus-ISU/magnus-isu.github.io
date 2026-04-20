@@ -1,9 +1,9 @@
 <script>
-	let { data } = $props();
+let { data } = $props();
 
-	const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
-		data.meta;
-	const { PostContent } = data;
+const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
+	data.meta;
+const { PostContent } = data;
 </script>
 
 <svelte:head>

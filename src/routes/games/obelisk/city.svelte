@@ -1,15 +1,14 @@
 <script>
-	export let name;
-	export let obelisk;
-	export let walls;
-	export let barracks;
-	export let soldiers;
-	export let action;
-	export let target;
-	export let lore;
-	export let cities = {};
-	export let actions = {};
-
+export let name;
+export let obelisk;
+export let walls;
+export let barracks;
+export let soldiers;
+export let action;
+export let target;
+export let lore;
+export let cities = {};
+export let actions = {};
 </script>
 
 <div id="card">

@@ -12,12 +12,7 @@ const srdSections = new Set([
 	'undead-legions',
 ]);
 
-const order = [
-	...srdSections,
-	'wild-beasts',
-	'godlike-beings',
-	'random-homebrew',
-];
+const order = [...srdSections, 'wild-beasts', 'godlike-beings', 'random-homebrew'];
 
 function slugToName(slug) {
 	return slug

@@ -1,324 +1,324 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+import { onMount } from 'svelte';
 
-	// Core state
-	type Level = {
-		points: number;
-		notes: string[];
-		noteToGuess: string;
-		isPlaying: boolean;
-		userGuess: undefined | string;
-		levelCleared: boolean;
+// Core state
+type Level = {
+	points: number;
+	notes: string[];
+	noteToGuess: string;
+	isPlaying: boolean;
+	userGuess: undefined | string;
+	levelCleared: boolean;
+};
+let level: undefined | Level = $state(undefined);
+let streak: number = $state(0);
+let lifetime_points: number = $state(0);
+let last_score: undefined | { date: string; points: number; doublePoints: boolean } =
+	$state(undefined);
+
+// Audio handling
+const audioCache: Record<string, HTMLAudioElement> = {};
+
+// Game levels configuration
+const levels: {
+	points: number;
+	name: string;
+	description: string;
+	notes: string[];
+}[] = [
+	{
+		points: 1,
+		name: 'Level 1: Basic C Notes',
+		description: 'Distinguish between middle C (C4), C5 (octave above), and C3 (octave below)',
+		notes: ['C3', 'C4', 'C5'],
+	},
+	{
+		points: 2,
+		name: 'Level 2: Extended C Range',
+		description: 'Adds F#',
+		notes: ['Gb2', 'C3', 'Gb3', 'C4', 'Gb4', 'C5', 'Gb5'],
+	},
+	{
+		points: 3,
+		name: 'Level 3: Tritones',
+		description: 'Adds more intermediate notes around C4',
+		notes: ['Gb2', 'C3', 'Eb3', 'Gb3', 'A4', 'C4', 'Eb4', 'Gb4', 'A5', 'C5', 'Gb5'],
+	},
+	{
+		points: 4,
+		name: 'Level 4: Half Tones',
+		description: 'Adds all notes 2 spaces away around C4',
+		notes: ['C3', 'D3', 'E3', 'Gb3', 'Bb4', 'C4', 'D4', 'E4', 'Gb4', 'Bb5', 'C5'],
+	},
+	{
+		points: 5,
+		name: 'Level 5: Natural Tones',
+		description: 'Adds all natural notes around C4',
+		notes: [
+			'C3',
+			'D3',
+			'E3',
+			'F3',
+			'G3',
+			'A4',
+			'B4',
+			'C4',
+			'D4',
+			'E4',
+			'F4',
+			'G4',
+			'A5',
+			'B5',
+			'C5',
+		],
+	},
+	{
+		points: 6,
+		name: 'Level 6: Standard Octave',
+		description: 'Adds all notes around C4',
+		notes: [
+			'C3',
+			'Db3',
+			'D3',
+			'Eb3',
+			'E3',
+			'F3',
+			'Gb3',
+			'G3',
+			'Ab4',
+			'A4',
+			'Bb4',
+			'B4',
+			'C4',
+			'Db4',
+			'D4',
+			'Eb4',
+			'E4',
+			'F4',
+			'Gb4',
+			'G4',
+			'Ab5',
+			'A5',
+			'Bb5',
+			'B5',
+			'C5',
+		],
+	},
+];
+
+// Function to start practice at a specific level
+function startLevel(levelIndex: number) {
+	const levelConfig = levels[levelIndex];
+
+	if (!levelConfig) return;
+
+	// Initialize the level
+	level = {
+		points: levelConfig.points,
+		notes: levelConfig.notes,
+		noteToGuess: '',
+		isPlaying: false,
+		userGuess: undefined,
+		levelCleared: false,
 	};
-	let level: undefined | Level = $state(undefined);
-	let streak: number = $state(0);
-	let lifetime_points: number = $state(0);
-	let last_score: undefined | { date: string; points: number; doublePoints: boolean } =
-		$state(undefined);
 
-	// Audio handling
-	const audioCache: Record<string, HTMLAudioElement> = {};
+	// Reset streak for the new level
+	streak = 0;
 
-	// Game levels configuration
-	const levels: {
-		points: number;
-		name: string;
-		description: string;
-		notes: string[];
-	}[] = [
-		{
-			points: 1,
-			name: 'Level 1: Basic C Notes',
-			description: 'Distinguish between middle C (C4), C5 (octave above), and C3 (octave below)',
-			notes: ['C3', 'C4', 'C5']
-		},
-		{
-			points: 2,
-			name: 'Level 2: Extended C Range',
-			description: 'Adds F#',
-			notes: ['Gb2', 'C3', 'Gb3', 'C4', 'Gb4', 'C5', 'Gb5']
-		},
-		{
-			points: 3,
-			name: 'Level 3: Tritones',
-			description: 'Adds more intermediate notes around C4',
-			notes: ['Gb2', 'C3', 'Eb3', 'Gb3', 'A4', 'C4', 'Eb4', 'Gb4', 'A5', 'C5', 'Gb5']
-		},
-		{
-			points: 4,
-			name: 'Level 4: Half Tones',
-			description: 'Adds all notes 2 spaces away around C4',
-			notes: ['C3', 'D3', 'E3', 'Gb3', 'Bb4', 'C4', 'D4', 'E4', 'Gb4', 'Bb5', 'C5']
-		},
-		{
-			points: 5,
-			name: 'Level 5: Natural Tones',
-			description: 'Adds all natural notes around C4',
-			notes: [
-				'C3',
-				'D3',
-				'E3',
-				'F3',
-				'G3',
-				'A4',
-				'B4',
-				'C4',
-				'D4',
-				'E4',
-				'F4',
-				'G4',
-				'A5',
-				'B5',
-				'C5'
-			]
-		},
-		{
-			points: 6,
-			name: 'Level 6: Standard Octave',
-			description: 'Adds all notes around C4',
-			notes: [
-				'C3',
-				'Db3',
-				'D3',
-				'Eb3',
-				'E3',
-				'F3',
-				'Gb3',
-				'G3',
-				'Ab4',
-				'A4',
-				'Bb4',
-				'B4',
-				'C4',
-				'Db4',
-				'D4',
-				'Eb4',
-				'E4',
-				'F4',
-				'Gb4',
-				'G4',
-				'Ab5',
-				'A5',
-				'Bb5',
-				'B5',
-				'C5'
-			]
+	// Generate first note to guess
+	generateNewNote();
+}
+
+// Generate a new note for the user to guess
+function generateNewNote() {
+	if (!level) return;
+
+	const randomNoteIndex = Math.floor(Math.random() * level.notes.length);
+	const noteToGuess = level.notes[randomNoteIndex];
+
+	level.noteToGuess = noteToGuess;
+	level.isPlaying = false;
+	level.userGuess = undefined;
+
+	// Preload the audio
+	preloadAudio(noteToGuess);
+
+	// Automatically play the note after a short delay
+	setTimeout(() => {
+		playCurrentNote();
+	}, 300);
+}
+
+// Play the current note
+function playCurrentNote() {
+	if (!level || !level.noteToGuess) return;
+
+	playNote(level.noteToGuess);
+	level.isPlaying = true;
+
+	// Reset isPlaying after a short delay to allow replaying
+	setTimeout(() => {
+		if (level) {
+			level.isPlaying = false;
 		}
-	];
+	}, 1000);
+}
 
-	// Function to start practice at a specific level
-	function startLevel(levelIndex: number) {
-		const levelConfig = levels[levelIndex];
+// Preload audio file
+function preloadAudio(noteId: string) {
+	// If already cached, don't reload
+	if (audioCache[noteId]) return;
 
-		if (!levelConfig) return;
+	const audio = new Audio(`/piano-mp3/piano-mp3/${noteId}.mp3`);
+	audio.load();
+	audioCache[noteId] = audio;
+}
 
-		// Initialize the level
-		level = {
-			points: levelConfig.points,
-			notes: levelConfig.notes,
-			noteToGuess: '',
-			isPlaying: false,
-			userGuess: undefined,
-			levelCleared: false
-		};
-
-		// Reset streak for the new level
-		streak = 0;
-
-		// Generate first note to guess
-		generateNewNote();
-	}
-
-	// Generate a new note for the user to guess
-	function generateNewNote() {
-		if (!level) return;
-
-		const randomNoteIndex = Math.floor(Math.random() * level.notes.length);
-		const noteToGuess = level.notes[randomNoteIndex];
-
-		level.noteToGuess = noteToGuess;
-		level.isPlaying = false;
-		level.userGuess = undefined;
-
-		// Preload the audio
-		preloadAudio(noteToGuess);
-
-		// Automatically play the note after a short delay
-		setTimeout(() => {
-			playCurrentNote();
-		}, 300);
-	}
-
-	// Play the current note
-	function playCurrentNote() {
-		if (!level || !level.noteToGuess) return;
-
-		playNote(level.noteToGuess);
-		level.isPlaying = true;
-
-		// Reset isPlaying after a short delay to allow replaying
-		setTimeout(() => {
-			if (level) {
-				level.isPlaying = false;
-			}
-		}, 1000);
-	}
-
-	// Preload audio file
-	function preloadAudio(noteId: string) {
-		// If already cached, don't reload
-		if (audioCache[noteId]) return;
-
+// Play a note by its ID
+function playNote(noteId: string) {
+	if (audioCache[noteId]) {
+		// Reset the audio if it's already been played
+		audioCache[noteId].currentTime = 0;
+		audioCache[noteId].play();
+	} else {
+		// Create and play if not cached
 		const audio = new Audio(`/piano-mp3/piano-mp3/${noteId}.mp3`);
-		audio.load();
+		audio.play();
 		audioCache[noteId] = audio;
 	}
+}
 
-	// Play a note by its ID
-	function playNote(noteId: string) {
-		if (audioCache[noteId]) {
-			// Reset the audio if it's already been played
-			audioCache[noteId].currentTime = 0;
-			audioCache[noteId].play();
-		} else {
-			// Create and play if not cached
-			const audio = new Audio(`/piano-mp3/piano-mp3/${noteId}.mp3`);
-			audio.play();
-			audioCache[noteId] = audio;
-		}
-	}
+// Handle user's guess
+function makeGuess(note: string, octave: number) {
+	if (!level || level.userGuess !== undefined) return;
 
-	// Handle user's guess
-	function makeGuess(note: string, octave: number) {
-		if (!level || level.userGuess !== undefined) return;
+	const fullGuess = `${note}${octave}`;
+	level.userGuess = fullGuess;
 
-		const fullGuess = `${note}${octave}`;
-		level.userGuess = fullGuess;
+	const isCorrect = fullGuess === level.noteToGuess;
 
-		const isCorrect = fullGuess === level.noteToGuess;
+	if (isCorrect) {
+		streak++;
 
-		if (isCorrect) {
-			streak++;
-
-			// Award points if streak reaches 20
-			if (streak === 20) {
-				beatLevel(level);
-			}
-
-			// Short delay before the next note
-			setTimeout(() => {
-				generateNewNote();
-			}, 1000);
-		} else {
-			// Reset streak on wrong answer
-			streak = 0;
-
-			// Allow retry after a short delay
-			setTimeout(() => {
-				if (level) {
-					level.userGuess = undefined;
-					// Auto-play the note again when retry is available
-					playCurrentNote();
-				}
-			}, 1500);
-		}
-	}
-
-	// Add points to lifetime total
-	function beatLevel(level: Level) {
-		level.levelCleared = true;
-
-		const today = new Date().toISOString().split('T')[0];
-		const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-
-		// Calculate how many points to award
-		let points = level.points;
-		let pointsToAdd = points;
-		let pointsMultiplier = 1;
-
-		if (last_score) {
-			if (last_score.date === today) {
-				pointsMultiplier = last_score.doublePoints ? 2 : 1;
-				// Already got some points today
-				if (points > last_score.points) {
-					// If new level is higher than previous one, add the difference
-					const difference = points - last_score.points;
-					pointsToAdd = difference * pointsMultiplier;
-				} else return; // No need to update anything
-			} else if (last_score.date === yesterday) {
-				// Yesterday's score exists, double points today
-				pointsToAdd = points * 2;
-				pointsMultiplier = 2;
-			}
+		// Award points if streak reaches 20
+		if (streak === 20) {
+			beatLevel(level);
 		}
 
-		lifetime_points += pointsToAdd;
-		last_score = {
-			date: today,
-			points: points,
-			doublePoints: pointsMultiplier === 2
-		};
-
-		// Save to localStorage
-		saveProgress();
-	}
-
-	// Save progress to localStorage
-	function saveProgress() {
-		const data = {
-			lifetime_points,
-			last_score
-		};
-
-		localStorage.setItem('perfectPitchProgress', JSON.stringify(data));
-	}
-
-	// Load progress from localStorage
-	function loadProgress() {
-		const savedData = localStorage.getItem('perfectPitchProgress');
-
-		if (savedData) {
-			try {
-				const data = JSON.parse(savedData);
-				lifetime_points = data.lifetime_points || 0;
-
-				// Handle migration from old format to new format with doublePoints
-				if (data.last_score) {
-					last_score = data.last_score;
-				}
-			} catch (e) {
-				console.error('Error loading saved progress:', e);
-			}
-		}
-	}
-
-	// Get feedback class for a specific note button
-	function getFeedbackClass(note: string, octave: number): string {
-		if (!level || level.userGuess === undefined) return '';
-
-		const fullNote = `${note}${octave}`;
-		const correct = fullNote === level.noteToGuess;
-		const wasGuessed = fullNote === level.userGuess;
-
-		if (wasGuessed) {
-			return correct ? 'correct' : 'incorrect';
-		} else if (level.noteToGuess === fullNote && level.userGuess) {
-			return 'correct-answer';
-		}
-
-		return '';
-	}
-
-	// Exit current practice session
-	function exitPractice() {
-		level = undefined;
+		// Short delay before the next note
+		setTimeout(() => {
+			generateNewNote();
+		}, 1000);
+	} else {
+		// Reset streak on wrong answer
 		streak = 0;
+
+		// Allow retry after a short delay
+		setTimeout(() => {
+			if (level) {
+				level.userGuess = undefined;
+				// Auto-play the note again when retry is available
+				playCurrentNote();
+			}
+		}, 1500);
+	}
+}
+
+// Add points to lifetime total
+function beatLevel(level: Level) {
+	level.levelCleared = true;
+
+	const today = new Date().toISOString().split('T')[0];
+	const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+	// Calculate how many points to award
+	let points = level.points;
+	let pointsToAdd = points;
+	let pointsMultiplier = 1;
+
+	if (last_score) {
+		if (last_score.date === today) {
+			pointsMultiplier = last_score.doublePoints ? 2 : 1;
+			// Already got some points today
+			if (points > last_score.points) {
+				// If new level is higher than previous one, add the difference
+				const difference = points - last_score.points;
+				pointsToAdd = difference * pointsMultiplier;
+			} else return; // No need to update anything
+		} else if (last_score.date === yesterday) {
+			// Yesterday's score exists, double points today
+			pointsToAdd = points * 2;
+			pointsMultiplier = 2;
+		}
 	}
 
-	// Load saved progress on component mount
-	onMount(() => {
-		loadProgress();
-	});
+	lifetime_points += pointsToAdd;
+	last_score = {
+		date: today,
+		points: points,
+		doublePoints: pointsMultiplier === 2,
+	};
+
+	// Save to localStorage
+	saveProgress();
+}
+
+// Save progress to localStorage
+function saveProgress() {
+	const data = {
+		lifetime_points,
+		last_score,
+	};
+
+	localStorage.setItem('perfectPitchProgress', JSON.stringify(data));
+}
+
+// Load progress from localStorage
+function loadProgress() {
+	const savedData = localStorage.getItem('perfectPitchProgress');
+
+	if (savedData) {
+		try {
+			const data = JSON.parse(savedData);
+			lifetime_points = data.lifetime_points || 0;
+
+			// Handle migration from old format to new format with doublePoints
+			if (data.last_score) {
+				last_score = data.last_score;
+			}
+		} catch (e) {
+			console.error('Error loading saved progress:', e);
+		}
+	}
+}
+
+// Get feedback class for a specific note button
+function getFeedbackClass(note: string, octave: number): string {
+	if (!level || level.userGuess === undefined) return '';
+
+	const fullNote = `${note}${octave}`;
+	const correct = fullNote === level.noteToGuess;
+	const wasGuessed = fullNote === level.userGuess;
+
+	if (wasGuessed) {
+		return correct ? 'correct' : 'incorrect';
+	} else if (level.noteToGuess === fullNote && level.userGuess) {
+		return 'correct-answer';
+	}
+
+	return '';
+}
+
+// Exit current practice session
+function exitPractice() {
+	level = undefined;
+	streak = 0;
+}
+
+// Load saved progress on component mount
+onMount(() => {
+	loadProgress();
+});
 </script>
 
 <header>

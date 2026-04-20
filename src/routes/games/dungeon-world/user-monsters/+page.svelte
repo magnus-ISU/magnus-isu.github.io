@@ -1,157 +1,172 @@
 <script>
-	import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
-	import { allMonsters } from '$lib/dw/monsters.js';
-	import { pageArt } from '$lib/dw/navigation.js';
-	import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
-	import TextBox from '$lib/components/TextBox.svelte';
-	import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
-	import { onMount } from 'svelte';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+import { allMonsters } from '$lib/dw/monsters.js';
+import { pageArt } from '$lib/dw/navigation.js';
+import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
+import TextBox from '$lib/components/TextBox.svelte';
+import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
+import { onMount } from 'svelte';
 
-	const artUrl = typeof pageArt['user-monsters'] === 'string' ? pageArt['user-monsters'] : pageArt['user-monsters']?.url;
-	let art = $state(null);
-	onMount(() => {
-		function loadArt() { art = artUrl; }
-		if (document.readyState === 'complete') loadArt();
-		else window.addEventListener('load', loadArt, { once: true });
-		return () => window.removeEventListener('load', loadArt);
-	});
+const artUrl =
+	typeof pageArt['user-monsters'] === 'string'
+		? pageArt['user-monsters']
+		: pageArt['user-monsters']?.url;
+let art = $state(null);
+onMount(() => {
+	function loadArt() {
+		art = artUrl;
+	}
+	if (document.readyState === 'complete') loadArt();
+	else window.addEventListener('load', loadArt, { once: true });
+	return () => window.removeEventListener('load', loadArt);
+});
 
-	let text = $state('');
-	let nameError = $state(false);
+let text = $state('');
+let nameError = $state(false);
 
-	const built = $derived.by(() => {
-		const lines = text.split('\n');
-		const get = (i) => lines[i]?.trim() || '';
+const built = $derived.by(() => {
+	const lines = text.split('\n');
+	const get = (i) => lines[i]?.trim() || '';
 
-		const name = get(0);
-		const tags = get(1);
-		const vitalsRaw = get(2);
+	const name = get(0);
+	const tags = get(1);
+	const vitalsRaw = get(2);
 
-		// Parse "3 HP, 3 Armor" or "3,3" or "3 HP" or "3"
-		let hp = null, armor = null;
-		const full = vitalsRaw.match(/(\d+)\s*(?:HP)?\s*,\s*(\d+)\s*(?:Armor)?/i);
-		if (full) {
-			hp = +full[1];
-			armor = +full[2];
+	// Parse "3 HP, 3 Armor" or "3,3" or "3 HP" or "3"
+	let hp = null,
+		armor = null;
+	const full = vitalsRaw.match(/(\d+)\s*(?:HP)?\s*,\s*(\d+)\s*(?:Armor)?/i);
+	if (full) {
+		hp = +full[1];
+		armor = +full[2];
+	} else {
+		const hpOnly = vitalsRaw.match(/^(\d+)/);
+		if (hpOnly) hp = +hpOnly[1];
+	}
+
+	const special = get(3);
+	const description = get(4).replaceAll('\\n', '\n');
+	const instinct = get(5);
+
+	const attacks = [];
+	const moves = [];
+	for (let i = 6; i < lines.length; i++) {
+		const line = lines[i].trim();
+		if (!line) continue;
+		if (line.toLowerCase().startsWith('attack:')) {
+			const parts = line
+				.slice(7)
+				.split(';')
+				.map((s) => s.trim());
+			attacks.push({ name: parts[0] || '', damage: parts[1] || '', tags: parts[2] || '' });
 		} else {
-			const hpOnly = vitalsRaw.match(/^(\d+)/);
-			if (hpOnly) hp = +hpOnly[1];
-		}
-
-		const special = get(3);
-		const description = get(4).replaceAll('\\n', '\n');
-		const instinct = get(5);
-
-		const attacks = [];
-		const moves = [];
-		for (let i = 6; i < lines.length; i++) {
-			const line = lines[i].trim();
-			if (!line) continue;
-			if (line.toLowerCase().startsWith('attack:')) {
-				const parts = line.slice(7).split(';').map(s => s.trim());
-				attacks.push({ name: parts[0] || '', damage: parts[1] || '', tags: parts[2] || '' });
-			} else {
-				moves.push(line);
-			}
-		}
-
-		return {
-			name: name || 'Unnamed',
-			...(tags && { tags }),
-			...(hp !== null && { hp }),
-			...(armor !== null && { armor }),
-			attacks: attacks.filter(a => a.name),
-			...(special && { special }),
-			...(description && { description }),
-			...(instinct && { instinct }),
-			moves,
-		};
-	});
-
-	const placeholders = $derived.by(() => {
-		const lines = text.split('\n');
-		const phs = [
-			'Monster name',
-			'Solitary, Large',
-			'hp, armor',
-			'Special qualities',
-			'Description',
-			'Instinct',
-		];
-
-		const hasAttack = lines.slice(6).some(l => l.trim().toLowerCase().startsWith('attack:'));
-		phs.push(hasAttack ? 'Move or attack: Name ; damage ; tags' : 'attack: Attack name ; Attack damage ; Attack tags');
-
-		const total = Math.max(lines.length, 10);
-		while (phs.length < total) {
-			phs.push('Move or attack');
-		}
-
-		return phs;
-	});
-
-	function saveMonster() {
-		const name = text.split('\n')[0]?.trim();
-		if (!name) return;
-		const taken = new Set([
-			...userMonsters.list.map(m => m.name.toLowerCase()),
-			...allMonsters.map(m => m.name.toLowerCase()),
-		]);
-		if (taken.has(name.toLowerCase())) {
-			nameError = true;
-			setTimeout(() => { nameError = false; }, 2000);
-			return;
-		}
-		userMonsters.add({ ...built });
-		text = '';
-	}
-
-	function exportMonsters() {
-		const json = JSON.stringify(userMonsters.list, null, 2);
-		const blob = new Blob([json], { type: 'application/json' });
-		const url = URL.createObjectURL(blob);
-		const a = document.createElement('a');
-		a.href = url;
-		a.download = 'user-monsters.json';
-		a.click();
-		URL.revokeObjectURL(url);
-	}
-
-	function handleImport(e) {
-		const file = e.target.files?.[0];
-		if (!file) return;
-		const reader = new FileReader();
-		reader.onload = (ev) => {
-			try {
-				const parsed = JSON.parse(ev.target.result);
-				if (Array.isArray(parsed)) userMonsters.import(parsed);
-			} catch {}
-		};
-		reader.readAsText(file);
-		e.target.value = '';
-	}
-
-	// Delete confirmation — prompt once, then allow for 1 minute
-	let pendingDelete = $state(null);
-	let lastConfirmed = 0;
-
-	function requestDelete(name) {
-		if (Date.now() - lastConfirmed < 60_000) {
-			userMonsters.remove(name);
-		} else {
-			pendingDelete = name;
+			moves.push(line);
 		}
 	}
 
-	function confirmDelete() {
-		lastConfirmed = Date.now();
-		userMonsters.remove(pendingDelete);
-		pendingDelete = null;
+	return {
+		name: name || 'Unnamed',
+		...(tags && { tags }),
+		...(hp !== null && { hp }),
+		...(armor !== null && { armor }),
+		attacks: attacks.filter((a) => a.name),
+		...(special && { special }),
+		...(description && { description }),
+		...(instinct && { instinct }),
+		moves,
+	};
+});
+
+const placeholders = $derived.by(() => {
+	const lines = text.split('\n');
+	const phs = [
+		'Monster name',
+		'Solitary, Large',
+		'hp, armor',
+		'Special qualities',
+		'Description',
+		'Instinct',
+	];
+
+	const hasAttack = lines.slice(6).some((l) => l.trim().toLowerCase().startsWith('attack:'));
+	phs.push(
+		hasAttack
+			? 'Move or attack: Name ; damage ; tags'
+			: 'attack: Attack name ; Attack damage ; Attack tags',
+	);
+
+	const total = Math.max(lines.length, 10);
+	while (phs.length < total) {
+		phs.push('Move or attack');
 	}
 
-	function cancelDelete() {
-		pendingDelete = null;
+	return phs;
+});
+
+function saveMonster() {
+	const name = text.split('\n')[0]?.trim();
+	if (!name) return;
+	const taken = new Set([
+		...userMonsters.list.map((m) => m.name.toLowerCase()),
+		...allMonsters.map((m) => m.name.toLowerCase()),
+	]);
+	if (taken.has(name.toLowerCase())) {
+		nameError = true;
+		setTimeout(() => {
+			nameError = false;
+		}, 2000);
+		return;
 	}
+	userMonsters.add({ ...built });
+	text = '';
+}
+
+function exportMonsters() {
+	const json = JSON.stringify(userMonsters.list, null, 2);
+	const blob = new Blob([json], { type: 'application/json' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'user-monsters.json';
+	a.click();
+	URL.revokeObjectURL(url);
+}
+
+function handleImport(e) {
+	const file = e.target.files?.[0];
+	if (!file) return;
+	const reader = new FileReader();
+	reader.onload = (ev) => {
+		try {
+			const parsed = JSON.parse(ev.target.result);
+			if (Array.isArray(parsed)) userMonsters.import(parsed);
+		} catch {}
+	};
+	reader.readAsText(file);
+	e.target.value = '';
+}
+
+// Delete confirmation — prompt once, then allow for 1 minute
+let pendingDelete = $state(null);
+let lastConfirmed = 0;
+
+function requestDelete(name) {
+	if (Date.now() - lastConfirmed < 60_000) {
+		userMonsters.remove(name);
+	} else {
+		pendingDelete = name;
+	}
+}
+
+function confirmDelete() {
+	lastConfirmed = Date.now();
+	userMonsters.remove(pendingDelete);
+	pendingDelete = null;
+}
+
+function cancelDelete() {
+	pendingDelete = null;
+}
 </script>
 
 <svelte:head>

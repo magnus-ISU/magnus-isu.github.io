@@ -1,14 +1,14 @@
 <!-- Renders posts listed by category -->
 <script>
-	import PostsList from '$lib/components/PostsList.svelte'
-	import Pagination from '$lib/components/Pagination.svelte'
-	import { siteDescription, postsPerPage } from '$lib/config'
+import PostsList from '$lib/components/PostsList.svelte';
+import Pagination from '$lib/components/Pagination.svelte';
+import { siteDescription, postsPerPage } from '$lib/config';
 
-	let { data } = $props();
-	const { page, category, totalPosts, posts } = data 
+let { data } = $props();
+const { page, category, totalPosts, posts } = data;
 
-	let lowerBound = $derived((page * postsPerPage) - (postsPerPage - 1) || 1)
-	let upperBound = $derived(Math.min(page * postsPerPage, totalPosts))
+let lowerBound = $derived(page * postsPerPage - (postsPerPage - 1) || 1);
+let upperBound = $derived(Math.min(page * postsPerPage, totalPosts));
 </script>
 
 

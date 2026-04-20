@@ -5,7 +5,8 @@ export default [
 		hp: 3,
 		armor: 1,
 		attacks: [{ name: 'Bite', damage: 'd6', tags: 'Close' }],
-		description: 'The wolf is the symbol of the wild, of the untamed and of nature red in tooth and claw. They travel in packs, coordinating their hunts with howls and yips, bringing down prey much larger than any single wolf could manage. To the common folk, they are a menace—stealing sheep and chickens and, when winter grows lean, sometimes a child. To the ranger or the druid, though, they are brothers and sisters of the hunt, worthy of respect. A lone wolf is a pitiable thing, but a pack? That\'s a force of nature.',
+		description:
+			"The wolf is the symbol of the wild, of the untamed and of nature red in tooth and claw. They travel in packs, coordinating their hunts with howls and yips, bringing down prey much larger than any single wolf could manage. To the common folk, they are a menace—stealing sheep and chickens and, when winter grows lean, sometimes a child. To the ranger or the druid, though, they are brothers and sisters of the hunt, worthy of respect. A lone wolf is a pitiable thing, but a pack? That's a force of nature.",
 		instinct: 'To hunt in packs',
 		moves: ['Coordinate with others', 'Drag prey to the ground', 'Flee with the pack'],
 	},
@@ -16,9 +17,14 @@ export default [
 		armor: 2,
 		attacks: [{ name: 'Freezing bite', damage: 'd10+2', tags: 'Close, Reach' }],
 		special: 'Immune to cold',
-		description: 'Not mere wolves grown large, but something else entirely. Winter wolves are creatures of cold intelligence, born of the harshest blizzards in the frozen north. Their fur is white as fresh snow and their eyes gleam with a cunning that no natural beast possesses. They can speak, after a fashion—in a tongue of growls and howls that the frost giants understand. Some serve as mounts and hunting companions to those giants, but others roam free, leading packs of lesser wolves and terrorizing northern settlements. Their breath carries the killing cold of the deepest winter, freezing flesh and steel alike.',
+		description:
+			'Not mere wolves grown large, but something else entirely. Winter wolves are creatures of cold intelligence, born of the harshest blizzards in the frozen north. Their fur is white as fresh snow and their eyes gleam with a cunning that no natural beast possesses. They can speak, after a fashion—in a tongue of growls and howls that the frost giants understand. Some serve as mounts and hunting companions to those giants, but others roam free, leading packs of lesser wolves and terrorizing northern settlements. Their breath carries the killing cold of the deepest winter, freezing flesh and steel alike.',
 		instinct: 'To embody the cold',
-		moves: ['Breathe a cone of killing frost', 'Command lesser wolves', 'Stalk through blizzards unseen'],
+		moves: [
+			'Breathe a cone of killing frost',
+			'Command lesser wolves',
+			'Stalk through blizzards unseen',
+		],
 	},
 	{
 		name: 'Wild Dog',
@@ -26,7 +32,8 @@ export default [
 		hp: 3,
 		armor: 0,
 		attacks: [{ name: 'Bite', damage: 'd4', tags: 'Close' }],
-		description: 'Once, their ancestors were loyal companions—hearth-dogs and hunting hounds that served their masters faithfully. But times change. Villages burn, families scatter, and the dogs that are left behind must learn to fend for themselves. Within a generation, the domesticity is bred out of them. They run in packs through ruins and along the edges of civilization, gaunt and desperate and mean. They\'re not so dangerous as wolves, perhaps, but they\'re far less afraid of people. They know what a campfire means, and they know that where there\'s a campfire, there\'s food to be stolen or taken by force.',
+		description:
+			"Once, their ancestors were loyal companions—hearth-dogs and hunting hounds that served their masters faithfully. But times change. Villages burn, families scatter, and the dogs that are left behind must learn to fend for themselves. Within a generation, the domesticity is bred out of them. They run in packs through ruins and along the edges of civilization, gaunt and desperate and mean. They're not so dangerous as wolves, perhaps, but they're far less afraid of people. They know what a campfire means, and they know that where there's a campfire, there's food to be stolen or taken by force.",
 		instinct: 'To scavenge',
 		moves: ['Swarm in numbers', 'Harass and nip at the edges', 'Scavenge from the unwary'],
 	},
@@ -36,7 +43,8 @@ export default [
 		hp: 3,
 		armor: 0,
 		attacks: [{ name: 'Bite', damage: 'd8', tags: 'Close, Messy' }],
-		description: 'Their laughter echoes across the savannah at dusk—a cackling, whooping chorus that turns the blood cold. Don\'t let the sound fool you into thinking them jesters. Hyenas are cunning pack hunters with jaws strong enough to crack bone and devour every last scrap of their prey. They\'ll harry a wounded beast for miles, nipping at its flanks, wearing it down. They\'re patient, too. They\'ll watch your camp from the darkness, waiting for you to sleep, waiting for the fire to die down. And that laughing? That\'s them telling each other that supper is almost ready.',
+		description:
+			"Their laughter echoes across the savannah at dusk—a cackling, whooping chorus that turns the blood cold. Don't let the sound fool you into thinking them jesters. Hyenas are cunning pack hunters with jaws strong enough to crack bone and devour every last scrap of their prey. They'll harry a wounded beast for miles, nipping at its flanks, wearing it down. They're patient, too. They'll watch your camp from the darkness, waiting for you to sleep, waiting for the fire to die down. And that laughing? That's them telling each other that supper is almost ready.",
 		instinct: 'To pick at the weak',
 		moves: ['Cackle to unnerve prey', 'Mob the weakest target', 'Crack bones with powerful jaws'],
 	},
@@ -46,7 +54,8 @@ export default [
 		hp: 11,
 		armor: 0,
 		attacks: [{ name: 'Hooves', damage: 'd6+2', tags: 'Close, Reach' }],
-		description: 'The wild horses of the plains run free in great herds, thundering across the grasslands like a storm given flesh. They are proud creatures—not the docile, broken things you see pulling carts in the city. A wild stallion will fight to the death to protect its herd, rearing and striking with iron-hard hooves. The nomadic peoples of the steppe have learned to ride them bareback, bonding with their mounts through patience and respect rather than whip and bridle. To tame a wild horse is no small feat, but those who manage it gain a companion of fierce loyalty and breathtaking speed.',
+		description:
+			'The wild horses of the plains run free in great herds, thundering across the grasslands like a storm given flesh. They are proud creatures—not the docile, broken things you see pulling carts in the city. A wild stallion will fight to the death to protect its herd, rearing and striking with iron-hard hooves. The nomadic peoples of the steppe have learned to ride them bareback, bonding with their mounts through patience and respect rather than whip and bridle. To tame a wild horse is no small feat, but those who manage it gain a companion of fierce loyalty and breathtaking speed.',
 		instinct: 'To run free',
 		moves: ['Rear up and kick', 'Stampede as a herd', 'Flee with incredible speed'],
 	},
@@ -56,7 +65,8 @@ export default [
 		hp: 7,
 		armor: 1,
 		attacks: [{ name: 'Antlers', damage: 'd8+2', tags: 'Close, Forceful' }],
-		description: 'In autumn, the bugling of the elk echoes through the mountain valleys—a haunting, whistling cry that carries for miles. The great stags stand taller than a horse, crowned with antlers that spread wide as a man\'s outstretched arms. During the rut, they are fearless and furious, clashing with rivals in thunderous contests of strength that shake the ground. Even outside the mating season, a bull elk is not to be trifled with. They\'ve been known to charge horses, overturn carts, and gore hunters who thought them easy prey. The herds migrate with the seasons, and wise folk plan their journeys around those routes rather than through them.',
+		description:
+			"In autumn, the bugling of the elk echoes through the mountain valleys—a haunting, whistling cry that carries for miles. The great stags stand taller than a horse, crowned with antlers that spread wide as a man's outstretched arms. During the rut, they are fearless and furious, clashing with rivals in thunderous contests of strength that shake the ground. Even outside the mating season, a bull elk is not to be trifled with. They've been known to charge horses, overturn carts, and gore hunters who thought them easy prey. The herds migrate with the seasons, and wise folk plan their journeys around those routes rather than through them.",
 		instinct: 'To dominate the herd',
 		moves: ['Charge with lowered antlers', 'Bugle a territorial challenge', 'Stampede the herd'],
 	},
@@ -66,7 +76,8 @@ export default [
 		hp: 10,
 		armor: 2,
 		attacks: [{ name: 'Claws', damage: 'd8+2', tags: 'Close, Forceful' }],
-		description: 'Contrary to the tavern tales, most bears would rather be left alone. They forage for berries, fish the streams, and sleep the winter away in their dens. Cross one, though—stumble between a mother and her cubs, or threaten its food—and you\'ll see the reason they\'ve earned their fearsome reputation. A black bear stands as tall as a man when it rears up, and those claws can rend bark from a tree. Wise travellers hang their food from branches and give any bear they spot a wide berth.',
+		description:
+			"Contrary to the tavern tales, most bears would rather be left alone. They forage for berries, fish the streams, and sleep the winter away in their dens. Cross one, though—stumble between a mother and her cubs, or threaten its food—and you'll see the reason they've earned their fearsome reputation. A black bear stands as tall as a man when it rears up, and those claws can rend bark from a tree. Wise travellers hang their food from branches and give any bear they spot a wide berth.",
 		instinct: 'To protect its territory',
 		moves: ['Rear up and intimidate', 'Swat with tremendous force', 'Protect its cubs ferociously'],
 	},
@@ -77,7 +88,8 @@ export default [
 		armor: 3,
 		attacks: [{ name: 'Bite', damage: 'd8+3', tags: 'Close, Reach, Messy' }],
 		special: 'Amphibious',
-		description: 'Ancient as the rivers they inhabit, crocodiles are living remnants of a primordial age. They drift like logs in murky water, only their eyes and nostrils breaking the surface—still as stone until some poor creature comes to drink. Then the water erupts in a fury of thrashing and snapping jaws. Their bite is a thing of terrible force, and once those jaws close, they drag their prey beneath the surface in a death roll that no mortal strength can break. Rivermen know to watch for the telltale ripples, but travellers from drier lands rarely think to look before they kneel to fill their waterskins.',
+		description:
+			'Ancient as the rivers they inhabit, crocodiles are living remnants of a primordial age. They drift like logs in murky water, only their eyes and nostrils breaking the surface—still as stone until some poor creature comes to drink. Then the water erupts in a fury of thrashing and snapping jaws. Their bite is a thing of terrible force, and once those jaws close, they drag their prey beneath the surface in a death roll that no mortal strength can break. Rivermen know to watch for the telltale ripples, but travellers from drier lands rarely think to look before they kneel to fill their waterskins.',
 		instinct: 'To lurk',
 		moves: ['Lunge from the water', 'Drag prey beneath the surface', 'Death roll'],
 	},
@@ -88,9 +100,14 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Beak', damage: 'd4', tags: 'Close' }],
 		special: 'Wings',
-		description: 'Where death goes, vultures follow. They wheel in lazy circles high above the battlefield, the plague-stricken village, the dying caravan. Patient as saints, they are, content to wait until the last spark of life gutters out before they descend. Some folk see them as ill omens—harbingers of doom. The druids know better. Vultures are cleaners, the world\'s undertakers. Without them, the dead would fester and spread sickness far worse than any the vultures themselves might carry. Still, it\'s an unsettling thing to look up and see them circling overhead. Makes you wonder what they know that you don\'t.',
+		description:
+			"Where death goes, vultures follow. They wheel in lazy circles high above the battlefield, the plague-stricken village, the dying caravan. Patient as saints, they are, content to wait until the last spark of life gutters out before they descend. Some folk see them as ill omens—harbingers of doom. The druids know better. Vultures are cleaners, the world's undertakers. Without them, the dead would fester and spread sickness far worse than any the vultures themselves might carry. Still, it's an unsettling thing to look up and see them circling overhead. Makes you wonder what they know that you don't.",
 		instinct: 'To feast on the dead',
-		moves: ['Circle ominously overhead', 'Descend on the fallen', 'Spread disease with their presence'],
+		moves: [
+			'Circle ominously overhead',
+			'Descend on the fallen',
+			'Spread disease with their presence',
+		],
 	},
 	{
 		name: 'Hawk',
@@ -99,9 +116,14 @@ export default [
 		armor: 0,
 		attacks: [{ name: 'Talons', damage: 'd4', tags: 'Close' }],
 		special: 'Wings, Keen eyesight',
-		description: 'High above the fields and forests, the hawk rides the thermals with effortless grace, scanning the ground below with eyes that can spot a mouse from a mile up. They are hunters of breathtaking precision—folding their wings and dropping like a stone, striking with talons that hit like a hammer blow. Falconers prize them above all other birds, training them with patience and fresh meat to hunt on command. In the wild, they are fiercely territorial, shrieking their high keening cry at anything that strays too near their nesting grounds. More than one careless climber has lost an eye to a nesting hawk defending its young.',
+		description:
+			'High above the fields and forests, the hawk rides the thermals with effortless grace, scanning the ground below with eyes that can spot a mouse from a mile up. They are hunters of breathtaking precision—folding their wings and dropping like a stone, striking with talons that hit like a hammer blow. Falconers prize them above all other birds, training them with patience and fresh meat to hunt on command. In the wild, they are fiercely territorial, shrieking their high keening cry at anything that strays too near their nesting grounds. More than one careless climber has lost an eye to a nesting hawk defending its young.',
 		instinct: 'To hunt from above',
-		moves: ['Dive with blinding speed', 'Spot prey from tremendous height', 'Shriek a territorial warning'],
+		moves: [
+			'Dive with blinding speed',
+			'Spot prey from tremendous height',
+			'Shriek a territorial warning',
+		],
 	},
 	{
 		name: 'Giant Spider',
@@ -109,7 +131,8 @@ export default [
 		hp: 10,
 		armor: 1,
 		attacks: [{ name: 'Venomous bite', damage: 'd8+2', tags: 'Close, Reach' }],
-		description: 'Deep in the darkest thickets, where the canopy blocks out the sun, the giant spiders spin their webs. Each strand is thick as rope and stronger than steel, strung between ancient trees in elaborate patterns that glitter with dew at dawn—beautiful, if you don\'t know what they\'re for. The spiders themselves are patient hunters, sitting motionless for days at the center of their webs, waiting for the telltale vibration that means a meal has wandered in. Their venom can drop a horse, and once wrapped in silk, even the strongest warrior finds escape all but impossible.',
+		description:
+			"Deep in the darkest thickets, where the canopy blocks out the sun, the giant spiders spin their webs. Each strand is thick as rope and stronger than steel, strung between ancient trees in elaborate patterns that glitter with dew at dawn—beautiful, if you don't know what they're for. The spiders themselves are patient hunters, sitting motionless for days at the center of their webs, waiting for the telltale vibration that means a meal has wandered in. Their venom can drop a horse, and once wrapped in silk, even the strongest warrior finds escape all but impossible.",
 		instinct: 'To trap prey',
 		moves: ['Ensnare in webbing', 'Inject paralyzing venom', 'Drop from above'],
 	},
@@ -119,8 +142,13 @@ export default [
 		hp: 3,
 		armor: 2,
 		attacks: [{ name: 'Sting', damage: 'd4', tags: 'Close' }],
-		description: 'In the dry places of the world—the deserts and the sun-baked badlands—the scorpion reigns as a tiny tyrant. Most are no bigger than your hand, but their venom punches well above their weight. A sting from a common scorpion will leave your arm numb for a day. The rarer breeds, the ones with black shells or red-tipped tails, can stop a heart in minutes. They hide in boots, under rocks, in the folds of bedrolls left on the ground. Every desert traveller learns to shake out their gear each morning, and the smart ones learn it before they get stung rather than after.',
+		description:
+			'In the dry places of the world—the deserts and the sun-baked badlands—the scorpion reigns as a tiny tyrant. Most are no bigger than your hand, but their venom punches well above their weight. A sting from a common scorpion will leave your arm numb for a day. The rarer breeds, the ones with black shells or red-tipped tails, can stop a heart in minutes. They hide in boots, under rocks, in the folds of bedrolls left on the ground. Every desert traveller learns to shake out their gear each morning, and the smart ones learn it before they get stung rather than after.',
 		instinct: 'To sting',
-		moves: ['Sting with venomous tail', 'Hide in gear or clothing', 'Skitter out from a dark crevice'],
+		moves: [
+			'Sting with venomous tail',
+			'Hide in gear or clothing',
+			'Skitter out from a dark crevice',
+		],
 	},
 ];

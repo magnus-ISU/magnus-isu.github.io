@@ -1,13 +1,13 @@
 <script>
-	import { navItems } from '$lib/config';
+import { navItems } from '$lib/config';
 
-	import { currentPage, isMenuOpen } from '../assets/js/store';
+import { currentPage, isMenuOpen } from '../assets/js/store';
 
-	const maybeCloseMenu = (route) => {
-		if (route != $currentPage) {
-			isMenuOpen.set(false);
-		}
-	};
+const maybeCloseMenu = (route) => {
+	if (route != $currentPage) {
+		isMenuOpen.set(false);
+	}
+};
 </script>
 
 <footer>

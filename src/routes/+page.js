@@ -6,7 +6,7 @@ export const load = async () => {
 		const ReadMe = ReadMeFile.default;
 
 		return {
-			ReadMe
+			ReadMe,
 		};
 	} catch (err) {
 		error(500, err);

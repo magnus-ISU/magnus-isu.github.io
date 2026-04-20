@@ -1,39 +1,41 @@
 <!-- This is the global layout file; it "wraps" every page on the site. (Or more accurately: is the parent component to every page component on the site.) -->
 <script>
-	import Footer from '$lib/components/Footer.svelte';
-	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
-	import { navItems } from '$lib/config';
-	import { preloadCode } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
-	import { siteTitle, siteURL } from '$lib/config.js';
-	let { data, children } = $props();
+import Footer from '$lib/components/Footer.svelte';
+import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
+import { navItems } from '$lib/config';
+import { preloadCode } from '$app/navigation';
+import { onMount } from 'svelte';
+import { fade } from 'svelte/transition';
+import { siteTitle, siteURL } from '$lib/config.js';
+let { data, children } = $props();
 
-	const isDW = (p) => p?.startsWith('/games/dungeon-world');
-	let prevPath = $state(data.path);
-	$effect(() => { prevPath = data.path; });
-	const skipTransition = $derived(isDW(data.path) && isDW(prevPath));
+const isDW = (p) => p?.startsWith('/games/dungeon-world');
+let prevPath = $state(data.path);
+$effect(() => {
+	prevPath = data.path;
+});
+const skipTransition = $derived(isDW(data.path) && isDW(prevPath));
 
-	const transitionIn = $derived(skipTransition ? { duration: 0 } : { delay: 150, duration: 150 });
-	const transitionOut = $derived(skipTransition ? { duration: 0 } : { duration: 100 });
+const transitionIn = $derived(skipTransition ? { duration: 0 } : { delay: 150, duration: 150 });
+const transitionOut = $derived(skipTransition ? { duration: 0 } : { duration: 100 });
 
-	/**
-	 * Updates the global store with the current path. (Used for highlighting
-	 * the current page in the nav, but could be useful for other purposes.)
-	 **/
-	currentPage.set(data.path);
+/**
+ * Updates the global store with the current path. (Used for highlighting
+ * the current page in the nav, but could be useful for other purposes.)
+ **/
+currentPage.set(data.path);
 
-	/**
-	 * This pre-fetches all top-level routes on the site in the background for faster loading.
-	 * https://kit.svelte.dev/docs/modules#$app-navigation-preloaddata
-	 *
-	 * Any route added in src/lib/config.js will be preloaded automatically. You can add your
-	 * own preloadData() calls here, too.
-	 **/
-	onMount(() => {
-		const navRoutes = navItems.map((item) => item.route);
-		preloadCode(...navRoutes);
-	});
+/**
+ * This pre-fetches all top-level routes on the site in the background for faster loading.
+ * https://kit.svelte.dev/docs/modules#$app-navigation-preloaddata
+ *
+ * Any route added in src/lib/config.js will be preloaded automatically. You can add your
+ * own preloadData() calls here, too.
+ **/
+onMount(() => {
+	const navRoutes = navItems.map((item) => item.route);
+	preloadCode(...navRoutes);
+});
 </script>
 
 <svelte:head>

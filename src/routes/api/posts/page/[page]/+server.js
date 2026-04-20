@@ -9,7 +9,7 @@ export const GET = async ({ params }) => {
 
 	const options = {
 		offset: (page - 1) * postsPerPage,
-		limit: postsPerPage
+		limit: postsPerPage,
 	};
 
 	const { posts } = await fetchPosts(options);

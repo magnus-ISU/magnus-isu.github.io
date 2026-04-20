@@ -1,1 +1,220 @@
-{"name":"Dungeon World","blocks":[{"type":"inline","id":"2a0a187b899a","properties":[],"nested":[{"type":"heading","id":"5a6b199aa9da","properties":["name"],"fallback":"-","size":1},{"type":"subheading","id":"986908e89a28","properties":["tags"],"fallback":"-","conditioned":true}]},{"type":"group","id":"1bfa9bc81a4a","properties":[],"nested":[{"type":"inline","id":"781818ca7ba8","properties":[],"nested":[{"type":"property","id":"39c93a79c9aa","properties":["attack"],"fallback":"-","dice":true,"display":"","diceProperty":"","conditioned":true},{"type":"property","id":"18d8e8f8bb89","properties":["attack_tags"],"fallback":"-","display":" ","conditioned":true},{"type":"text","id":"b9eb5ab9da1a","properties":[],"text":"        ","fallback":"     "},{"type":"text","id":"a99bd93b584a","properties":[],"text":null,"fallback":" "},{"type":"text","id":"ebbb1b3b3bcb","properties":[],"text":null,"fallback":" "},{"type":"text","id":"888aeb2b1b3b","properties":[],"text":null,"fallback":" "},{"type":"text","id":"792a2beba929","properties":[],"text":null,"fallback":" "},{"type":"property","id":"7bab19ca192a","properties":["hp"],"fallback":"-","display":"HP","dice":true,"conditioned":true},{"type":"property","id":"7868a988fb68","properties":["armor"],"fallback":"-","display":"Armor","conditioned":true}]},{"type":"group","id":"7a2989aa4aba","properties":[],"nested":[{"type":"property","id":"a829db89eb28","properties":["special"],"fallback":"-","display":" Special Qualities:","conditioned":true}]}],"hasRule":true},{"type":"text","id":"194bf88b899b","properties":["description"],"text":null,"fallback":"-","conditioned":true,"markdown":true,"dice":false},{"type":"inline","id":"093a5a6b8b68","properties":[],"nested":[{"type":"text","id":"0a495bcbba8b","properties":[],"text":null,"fallback":" "},{"type":"text","id":"6a78fad8bbe9","properties":["move1"],"text":null,"fallback":"-","markdown":true,"conditioned":true},{"type":"text","id":"9af81acae9b9","properties":["move2"],"text":null,"fallback":"-","conditioned":true,"markdown":true},{"type":"text","id":"e94acbdafac8","properties":["move3"],"text":null,"fallback":"-","conditioned":true,"markdown":true},{"type":"text","id":"1a7ac9ab799a","properties":[],"text":null,"fallback":" "}]},{"type":"inline","id":"19a9594a6a8b","properties":[],"nested":[{"type":"text","id":"e84a0b480b19","properties":[],"text":null,"fallback":" "},{"type":"text","id":"c9285a3b0bab","properties":["move4"],"text":null,"fallback":"-","conditioned":true,"markdown":true},{"type":"text","id":"6bf9b8797ae8","properties":["move5"],"text":null,"fallback":"-","conditioned":true,"markdown":true},{"type":"text","id":"cbe97b2838aa","properties":["move6"],"text":null,"fallback":"-","conditioned":true,"markdown":true},{"type":"text","id":"5bcb7a298a2a","properties":[],"text":null,"fallback":" "}]},{"type":"property","id":"dae9bb5abb88","properties":["instinct"],"fallback":"-","display":"Instinct","doNotAddClass":true,"conditioned":true,"markdown":true}],"id":"6ab8b87a4b49","diceParsing":[]}
+{
+	"name": "Dungeon World",
+	"blocks": [
+		{
+			"type": "inline",
+			"id": "2a0a187b899a",
+			"properties": [],
+			"nested": [
+				{
+					"type": "heading",
+					"id": "5a6b199aa9da",
+					"properties": ["name"],
+					"fallback": "-",
+					"size": 1
+				},
+				{
+					"type": "subheading",
+					"id": "986908e89a28",
+					"properties": ["tags"],
+					"fallback": "-",
+					"conditioned": true
+				}
+			]
+		},
+		{
+			"type": "group",
+			"id": "1bfa9bc81a4a",
+			"properties": [],
+			"nested": [
+				{
+					"type": "inline",
+					"id": "781818ca7ba8",
+					"properties": [],
+					"nested": [
+						{
+							"type": "property",
+							"id": "39c93a79c9aa",
+							"properties": ["attack"],
+							"fallback": "-",
+							"dice": true,
+							"display": "",
+							"diceProperty": "",
+							"conditioned": true
+						},
+						{
+							"type": "property",
+							"id": "18d8e8f8bb89",
+							"properties": ["attack_tags"],
+							"fallback": "-",
+							"display": " ",
+							"conditioned": true
+						},
+						{
+							"type": "text",
+							"id": "b9eb5ab9da1a",
+							"properties": [],
+							"text": "        ",
+							"fallback": "     "
+						},
+						{
+							"type": "text",
+							"id": "a99bd93b584a",
+							"properties": [],
+							"text": null,
+							"fallback": " "
+						},
+						{
+							"type": "text",
+							"id": "ebbb1b3b3bcb",
+							"properties": [],
+							"text": null,
+							"fallback": " "
+						},
+						{
+							"type": "text",
+							"id": "888aeb2b1b3b",
+							"properties": [],
+							"text": null,
+							"fallback": " "
+						},
+						{
+							"type": "text",
+							"id": "792a2beba929",
+							"properties": [],
+							"text": null,
+							"fallback": " "
+						},
+						{
+							"type": "property",
+							"id": "7bab19ca192a",
+							"properties": ["hp"],
+							"fallback": "-",
+							"display": "HP",
+							"dice": true,
+							"conditioned": true
+						},
+						{
+							"type": "property",
+							"id": "7868a988fb68",
+							"properties": ["armor"],
+							"fallback": "-",
+							"display": "Armor",
+							"conditioned": true
+						}
+					]
+				},
+				{
+					"type": "group",
+					"id": "7a2989aa4aba",
+					"properties": [],
+					"nested": [
+						{
+							"type": "property",
+							"id": "a829db89eb28",
+							"properties": ["special"],
+							"fallback": "-",
+							"display": " Special Qualities:",
+							"conditioned": true
+						}
+					]
+				}
+			],
+			"hasRule": true
+		},
+		{
+			"type": "text",
+			"id": "194bf88b899b",
+			"properties": ["description"],
+			"text": null,
+			"fallback": "-",
+			"conditioned": true,
+			"markdown": true,
+			"dice": false
+		},
+		{
+			"type": "inline",
+			"id": "093a5a6b8b68",
+			"properties": [],
+			"nested": [
+				{ "type": "text", "id": "0a495bcbba8b", "properties": [], "text": null, "fallback": " " },
+				{
+					"type": "text",
+					"id": "6a78fad8bbe9",
+					"properties": ["move1"],
+					"text": null,
+					"fallback": "-",
+					"markdown": true,
+					"conditioned": true
+				},
+				{
+					"type": "text",
+					"id": "9af81acae9b9",
+					"properties": ["move2"],
+					"text": null,
+					"fallback": "-",
+					"conditioned": true,
+					"markdown": true
+				},
+				{
+					"type": "text",
+					"id": "e94acbdafac8",
+					"properties": ["move3"],
+					"text": null,
+					"fallback": "-",
+					"conditioned": true,
+					"markdown": true
+				},
+				{ "type": "text", "id": "1a7ac9ab799a", "properties": [], "text": null, "fallback": " " }
+			]
+		},
+		{
+			"type": "inline",
+			"id": "19a9594a6a8b",
+			"properties": [],
+			"nested": [
+				{ "type": "text", "id": "e84a0b480b19", "properties": [], "text": null, "fallback": " " },
+				{
+					"type": "text",
+					"id": "c9285a3b0bab",
+					"properties": ["move4"],
+					"text": null,
+					"fallback": "-",
+					"conditioned": true,
+					"markdown": true
+				},
+				{
+					"type": "text",
+					"id": "6bf9b8797ae8",
+					"properties": ["move5"],
+					"text": null,
+					"fallback": "-",
+					"conditioned": true,
+					"markdown": true
+				},
+				{
+					"type": "text",
+					"id": "cbe97b2838aa",
+					"properties": ["move6"],
+					"text": null,
+					"fallback": "-",
+					"conditioned": true,
+					"markdown": true
+				},
+				{ "type": "text", "id": "5bcb7a298a2a", "properties": [], "text": null, "fallback": " " }
+			]
+		},
+		{
+			"type": "property",
+			"id": "dae9bb5abb88",
+			"properties": ["instinct"],
+			"fallback": "-",
+			"display": "Instinct",
+			"doNotAddClass": true,
+			"conditioned": true,
+			"markdown": true
+		}
+	],
+	"id": "6ab8b87a4b49",
+	"diceParsing": []
+}

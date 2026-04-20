@@ -1,9 +1,9 @@
 <script>
-	import { fade } from 'svelte/transition';
-	let { data, children } = $props();
+import { fade } from 'svelte/transition';
+let { data, children } = $props();
 
-	const transitionIn = { delay: 150, duration: 150 };
-	const transitionOut = { duration: 100 };
+const transitionIn = { delay: 150, duration: 150 };
+const transitionOut = { duration: 100 };
 </script>
 
 <div class="blog-layout">

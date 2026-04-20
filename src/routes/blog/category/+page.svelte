@@ -1,6 +1,6 @@
 <script>
-	let { data } = $props();
-  const { uniqueCategories } = data
+let { data } = $props();
+const { uniqueCategories } = data;
 </script>
 
 

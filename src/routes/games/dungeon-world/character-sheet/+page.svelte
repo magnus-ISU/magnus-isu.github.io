@@ -1,649 +1,737 @@
 <script>
-	import TextBox from '$lib/components/TextBox.svelte';
-	import DraggableCounter from '$lib/components/DraggableCounter.svelte';
-	import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-	import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
-	import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
-	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
-	import { tick, untrack } from 'svelte';
+import TextBox from '$lib/components/TextBox.svelte';
+import DraggableCounter from '$lib/components/DraggableCounter.svelte';
+import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+import { tick, untrack } from 'svelte';
 
-	const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
-	let text = $state(characterSheet.value);
+let text = $state(characterSheet.value);
 
-	$effect(() => {
-		const t = text;
-		untrack(() => { characterSheet.value = t; });
+$effect(() => {
+	const t = text;
+	untrack(() => {
+		characterSheet.value = t;
 	});
+});
 
-	$effect(() => {
-		const storeVal = characterSheet.value;
-		if (storeVal !== text) text = storeVal;
-	});
+$effect(() => {
+	const storeVal = characterSheet.value;
+	if (storeVal !== text) text = storeVal;
+});
 
-	// --- Multi-character tabs ---
-	let activeTab = $state(characterSheet.activeIndex);
+// --- Multi-character tabs ---
+let activeTab = $state(characterSheet.activeIndex);
 
-	function switchTab(i) {
-		if (i === activeTab) return;
-		characterSheet.switchTo(i);
-		activeTab = i;
-		text = characterSheet.value;
-		undoStack = [];
+function switchTab(i) {
+	if (i === activeTab) return;
+	characterSheet.switchTo(i);
+	activeTab = i;
+	text = characterSheet.value;
+	undoStack = [];
+}
+
+function addCharacter() {
+	characterSheet.addSlot();
+	activeTab = characterSheet.activeIndex;
+	text = '';
+	undoStack = [];
+}
+
+function tabName(i) {
+	return characterSheet.slotName(i) || 'Untitled';
+}
+
+// --- Delete character confirmation ---
+let pendingDeleteIdx = $state(null);
+let lastDeleteConfirmed = 0;
+let longPressTimer = null;
+
+function requestDelete(i) {
+	if (characterSheet.slotCount <= 1) return;
+	if (Date.now() - lastDeleteConfirmed < 60_000) {
+		doDelete(i);
+	} else {
+		pendingDeleteIdx = i;
+	}
+}
+
+function confirmDelete() {
+	lastDeleteConfirmed = Date.now();
+	doDelete(pendingDeleteIdx);
+	pendingDeleteIdx = null;
+}
+
+function cancelDelete() {
+	pendingDeleteIdx = null;
+}
+
+function doDelete(i) {
+	characterSheet.deleteSlot(i);
+	activeTab = characterSheet.activeIndex;
+	text = characterSheet.value;
+	undoStack = [];
+}
+
+function onTabPointerDown(e, i) {
+	clearTimeout(longPressTimer);
+	longPressTimer = setTimeout(() => {
+		requestDelete(i);
+	}, 500);
+}
+
+function onTabPointerUp() {
+	clearTimeout(longPressTimer);
+}
+
+const showNewButton = $derived(
+	// Show "New Character" when there's no empty trailing slot
+	characterSheet.slotCount === 0 ||
+		!characterSheet.isEmpty ||
+		activeTab !== characterSheet.slotCount - 1,
+);
+
+const parsed = $derived.by(() => {
+	const lines = text.split('\n');
+	const get = (i) => lines[i]?.trim() || '';
+
+	// Line 0: "Name, Class Level"
+	const line0 = get(0);
+	const commaIdx = line0.indexOf(',');
+	const name = commaIdx >= 0 ? line0.slice(0, commaIdx).trim() : line0;
+	const classLevel = commaIdx >= 0 ? line0.slice(commaIdx + 1).trim() : '';
+	const clMatch = classLevel.match(/^(.+?)\s+(\d+)$/);
+	const clazz = clMatch ? clMatch[1] : classLevel;
+	const level = clMatch ? clMatch[2] : '';
+
+	// Line 1: "Base HP 15, Armor 0, Damage d6, Base Load 6, HP 6"
+	const vitalsLine = get(1);
+	const vParts = vitalsLine.split(',').map((s) => s.trim());
+	let exp = null,
+		baseHp = null,
+		armor = null,
+		damage = null,
+		baseLoad = null,
+		hp = null;
+	for (const p of vParts) {
+		let m;
+		if ((m = p.match(/^EXP\s+(\d+)$/i))) {
+			exp = +m[1];
+			continue;
+		}
+		if ((m = p.match(/^Base\s*HP\s+(\d+)$/i))) {
+			baseHp = +m[1];
+			continue;
+		}
+		if ((m = p.match(/^Armor\s+(-?\d+)$/i))) {
+			armor = +m[1];
+			continue;
+		}
+		if ((m = p.match(/^Damage\s+(.+)$/i))) {
+			damage = m[1];
+			continue;
+		}
+		if ((m = p.match(/^Base\s*Load\s+(\d+)$/i))) {
+			baseLoad = +m[1];
+			continue;
+		}
+		if ((m = p.match(/^HP\s+(-?\d+)$/i))) {
+			hp = +m[1];
+			continue;
+		}
 	}
 
-	function addCharacter() {
-		characterSheet.addSlot();
-		activeTab = characterSheet.activeIndex;
-		text = '';
-		undoStack = [];
-	}
-
-	function tabName(i) {
-		return characterSheet.slotName(i) || 'Untitled';
-	}
-
-	// --- Delete character confirmation ---
-	let pendingDeleteIdx = $state(null);
-	let lastDeleteConfirmed = 0;
-	let longPressTimer = null;
-
-	function requestDelete(i) {
-		if (characterSheet.slotCount <= 1) return;
-		if (Date.now() - lastDeleteConfirmed < 60_000) {
-			doDelete(i);
+	// Line 2: "STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1"
+	const statsRaw = get(2);
+	const stats = {};
+	if (statsRaw) {
+		const labeled = [...statsRaw.matchAll(/([A-Za-z]+)\s*([+-]?\d+)/g)];
+		if (labeled.length > 0) {
+			for (const m of labeled) stats[m[1].toUpperCase()] = +m[2];
 		} else {
-			pendingDeleteIdx = i;
-		}
-	}
-
-	function confirmDelete() {
-		lastDeleteConfirmed = Date.now();
-		doDelete(pendingDeleteIdx);
-		pendingDeleteIdx = null;
-	}
-
-	function cancelDelete() {
-		pendingDeleteIdx = null;
-	}
-
-	function doDelete(i) {
-		characterSheet.deleteSlot(i);
-		activeTab = characterSheet.activeIndex;
-		text = characterSheet.value;
-		undoStack = [];
-	}
-
-	function onTabPointerDown(e, i) {
-		clearTimeout(longPressTimer);
-		longPressTimer = setTimeout(() => {
-			requestDelete(i);
-		}, 500);
-	}
-
-	function onTabPointerUp() {
-		clearTimeout(longPressTimer);
-	}
-
-	const showNewButton = $derived(
-		// Show "New Character" when there's no empty trailing slot
-		characterSheet.slotCount === 0 || !characterSheet.isEmpty || activeTab !== characterSheet.slotCount - 1
-	);
-
-	const parsed = $derived.by(() => {
-		const lines = text.split('\n');
-		const get = (i) => lines[i]?.trim() || '';
-
-		// Line 0: "Name, Class Level"
-		const line0 = get(0);
-		const commaIdx = line0.indexOf(',');
-		const name = commaIdx >= 0 ? line0.slice(0, commaIdx).trim() : line0;
-		const classLevel = commaIdx >= 0 ? line0.slice(commaIdx + 1).trim() : '';
-		const clMatch = classLevel.match(/^(.+?)\s+(\d+)$/);
-		const clazz = clMatch ? clMatch[1] : classLevel;
-		const level = clMatch ? clMatch[2] : '';
-
-		// Line 1: "Base HP 15, Armor 0, Damage d6, Base Load 6, HP 6"
-		const vitalsLine = get(1);
-		const vParts = vitalsLine.split(',').map(s => s.trim());
-		let exp = null, baseHp = null, armor = null, damage = null, baseLoad = null, hp = null;
-		for (const p of vParts) {
-			let m;
-			if ((m = p.match(/^EXP\s+(\d+)$/i))) { exp = +m[1]; continue; }
-			if ((m = p.match(/^Base\s*HP\s+(\d+)$/i))) { baseHp = +m[1]; continue; }
-			if ((m = p.match(/^Armor\s+(-?\d+)$/i))) { armor = +m[1]; continue; }
-			if ((m = p.match(/^Damage\s+(.+)$/i))) { damage = m[1]; continue; }
-			if ((m = p.match(/^Base\s*Load\s+(\d+)$/i))) { baseLoad = +m[1]; continue; }
-			if ((m = p.match(/^HP\s+(-?\d+)$/i))) { hp = +m[1]; continue; }
-		}
-
-		// Line 2: "STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1"
-		const statsRaw = get(2);
-		const stats = {};
-		if (statsRaw) {
-			const labeled = [...statsRaw.matchAll(/([A-Za-z]+)\s*([+-]?\d+)/g)];
-			if (labeled.length > 0) {
-				for (const m of labeled) stats[m[1].toUpperCase()] = +m[2];
-			} else {
-				const nums = statsRaw.split(/[,\s]+/).map(Number).filter(n => !isNaN(n));
-				for (let i = 0; i < Math.min(nums.length, STAT_NAMES.length); i++) {
-					stats[STAT_NAMES[i]] = nums[i];
-				}
+			const nums = statsRaw
+				.split(/[,\s]+/)
+				.map(Number)
+				.filter((n) => !isNaN(n));
+			for (let i = 0; i < Math.min(nums.length, STAT_NAMES.length); i++) {
+				stats[STAT_NAMES[i]] = nums[i];
 			}
 		}
+	}
 
-		// Line 3: character art image URL
-		const image = get(3);
+	// Line 3: character art image URL
+	const image = get(3);
 
-		const body = lines.slice(4).join('\n');
+	const body = lines.slice(4).join('\n');
 
-		return { name, clazz, level, exp, baseHp, armor, damage, baseLoad, hp, stats, image, body };
-	});
+	return { name, clazz, level, exp, baseHp, armor, damage, baseLoad, hp, stats, image, body };
+});
 
-	// Computed max values from base + stat modifiers
-	const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
-	const maxLoad = $derived(parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null);
+// Computed max values from base + stat modifiers
+const maxHp = $derived(parsed.baseHp !== null ? parsed.baseHp + 3 * (parsed.stats.CON ?? 0) : null);
+const maxLoad = $derived(
+	parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null,
+);
 
-	// Carried weight and worn armor parsed from body in a single pass
-	const bodyStats = $derived.by(() => {
-		const body = parsed.body;
-		let weight = 0, coins = 0, baseArmor = 0, bonusArmor = 0;
-		for (const m of body.matchAll(/\[([+-]?)(\d+)\s+(Weight|Armor|Coin)\]/gi)) {
-			const val = (m[1] === '-' ? -1 : 1) * +m[2];
-			const type = m[3].toLowerCase();
-			if (type === 'weight') weight += val;
-			else if (type === 'coin') coins += val;
-			else if (type === 'armor' && m[1]) bonusArmor += val;
-			else if (type === 'armor') baseArmor = Math.max(baseArmor, val);
-		}
-		return { weight: weight + Math.floor(coins / 100), armor: baseArmor + bonusArmor };
-	});
-	const carriedWeight = $derived(bodyStats.weight);
-	const wornArmor = $derived(bodyStats.armor);
-	const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
+// Carried weight and worn armor parsed from body in a single pass
+const bodyStats = $derived.by(() => {
+	const body = parsed.body;
+	let weight = 0,
+		coins = 0,
+		baseArmor = 0,
+		bonusArmor = 0;
+	for (const m of body.matchAll(/\[([+-]?)(\d+)\s+(Weight|Armor|Coin)\]/gi)) {
+		const val = (m[1] === '-' ? -1 : 1) * +m[2];
+		const type = m[3].toLowerCase();
+		if (type === 'weight') weight += val;
+		else if (type === 'coin') coins += val;
+		else if (type === 'armor' && m[1]) bonusArmor += val;
+		else if (type === 'armor') baseArmor = Math.max(baseArmor, val);
+	}
+	return { weight: weight + Math.floor(coins / 100), armor: baseArmor + bonusArmor };
+});
+const carriedWeight = $derived(bodyStats.weight);
+const wornArmor = $derived(bodyStats.armor);
+const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
 
-	const placeholders = $derived.by(() => {
-		if (!text.trim()) {
-			return ['Shift+click or long-press a class in the sidebar to get started, or open a class and click its name'];
-		}
-		const lines = text.split('\n');
-		const hints = [
-			'Name, Class Level',
-			'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
-			'STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1',
-			'Character art image URL',
+const placeholders = $derived.by(() => {
+	if (!text.trim()) {
+		return [
+			'Shift+click or long-press a class in the sidebar to get started, or open a class and click its name',
 		];
-		const phs = hints.map((h, i) => (lines[i]?.trim() ? '' : h));
-		const total = Math.max(lines.length + 1, phs.length);
-		while (phs.length < total) phs.push('');
-		return phs;
+	}
+	const lines = text.split('\n');
+	const hints = [
+		'Name, Class Level',
+		'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
+		'STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1',
+		'Character art image URL',
+	];
+	const phs = hints.map((h, i) => (lines[i]?.trim() ? '' : h));
+	const total = Math.max(lines.length + 1, phs.length);
+	while (phs.length < total) phs.push('');
+	return phs;
+});
+
+function fmtMod(n) {
+	return n > 0 ? `+${n}` : `${n}`;
+}
+
+// --- Undo stack for programmatic edits (HP/EXP) ---
+let undoStack = [];
+
+function pushUndo() {
+	undoStack.push(text);
+}
+
+function undo() {
+	if (!undoStack.length) return;
+	text = undoStack.pop();
+}
+
+// --- HP editing ---
+function updateHpInText(newHp) {
+	const lines = text.split('\n');
+	const parts = lines[1].split(',').map((s) => s.trim());
+	const idx = parts.findIndex((p) => /^HP\s/i.test(p) && !/^Base/i.test(p));
+	if (idx !== -1) {
+		pushUndo();
+		parts[idx] = `HP ${newHp}`;
+		lines[1] = parts.join(', ');
+		text = lines.join('\n');
+	}
+}
+
+function updateExpInText(newExp) {
+	pushUndo();
+	const lines = text.split('\n');
+	const parts = lines[1].split(',').map((s) => s.trim());
+	const idx = parts.findIndex((p) => /^EXP\s/i.test(p));
+	if (idx !== -1) {
+		parts[idx] = `EXP ${newExp}`;
+	} else {
+		parts.unshift(`EXP ${newExp}`);
+	}
+	lines[1] = parts.join(', ');
+	text = lines.join('\n');
+}
+
+function clickExp() {
+	updateExpInText((parsed.exp ?? 0) + 1);
+}
+
+function commitExpRaw(raw) {
+	const result = commitHpFn(raw, parsed.exp ?? 0, null, 0);
+	if (result !== null) updateExpInText(Math.max(0, result));
+}
+
+let hpDcRef = $state();
+let expDcRef = $state();
+
+function commitHpRaw(raw) {
+	const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, totalArmor);
+	if (result !== null) updateHpInText(result);
+}
+
+const hpFillPct = $derived(
+	maxHp ? Math.max(0, Math.min(100, ((parsed.hp ?? 0) / maxHp) * 100)) : 0,
+);
+
+// --- Editable Armor ---
+let editingArmor = $state(false);
+let armorInputEl = $state();
+
+function startEditArmor() {
+	editingArmor = true;
+	tick().then(() => {
+		armorInputEl?.select();
 	});
+}
 
-	function fmtMod(n) {
-		return n > 0 ? `+${n}` : `${n}`;
-	}
+function commitArmor(el) {
+	editingArmor = false;
+	const val = parseInt(el.value);
+	if (isNaN(val)) return;
+	const newBaseArmor = val - wornArmor;
+	pushUndo();
+	const lines = text.split('\n');
+	const parts = lines[1].split(',').map((s) => s.trim());
+	const idx = parts.findIndex((p) => /^Armor\s/i.test(p));
+	if (idx !== -1) parts[idx] = `Armor ${newBaseArmor}`;
+	lines[1] = parts.join(', ');
+	text = lines.join('\n');
+}
 
-	// --- Undo stack for programmatic edits (HP/EXP) ---
-	let undoStack = [];
+// --- Editable Load ---
+let editingLoad = $state(false);
+let loadInputEl = $state();
 
-	function pushUndo() { undoStack.push(text); }
+function startEditLoad() {
+	editingLoad = true;
+	tick().then(() => {
+		loadInputEl?.select();
+	});
+}
 
-	function undo() {
-		if (!undoStack.length) return;
-		text = undoStack.pop();
-	}
+function commitLoad(el) {
+	editingLoad = false;
+	const val = parseInt(el.value);
+	if (isNaN(val)) return;
+	const newBaseLoad = val - (parsed.stats.STR ?? 0);
+	pushUndo();
+	const lines = text.split('\n');
+	const parts = lines[1].split(',').map((s) => s.trim());
+	const idx = parts.findIndex((p) => /^Base\s*Load\s/i.test(p));
+	if (idx !== -1) parts[idx] = `Base Load ${newBaseLoad}`;
+	lines[1] = parts.join(', ');
+	text = lines.join('\n');
+}
 
-	// --- HP editing ---
-	function updateHpInText(newHp) {
-		const lines = text.split('\n');
-		const parts = lines[1].split(',').map(s => s.trim());
-		const idx = parts.findIndex(p => /^HP\s/i.test(p) && !/^Base/i.test(p));
-		if (idx !== -1) {
-			pushUndo();
-			parts[idx] = `HP ${newHp}`;
-			lines[1] = parts.join(', ');
-			text = lines.join('\n');
-		}
-	}
+function hpColor(current, max) {
+	if (current == null || max == null) return '#5aaa6a';
+	if (current <= 0) return '#e05555';
+	const pct = current / max;
+	if (pct > 0.5) return '#5aaa6a';
+	if (pct > 0.25) return '#d4a847';
+	return '#e05555';
+}
 
-	function updateExpInText(newExp) {
-		pushUndo();
-		const lines = text.split('\n');
-		const parts = lines[1].split(',').map(s => s.trim());
-		const idx = parts.findIndex(p => /^EXP\s/i.test(p));
-		if (idx !== -1) {
-			parts[idx] = `EXP ${newExp}`;
+// --- Load helpers ---
+const loadFillPct = $derived(
+	maxLoad ? Math.max(0, Math.min(100, (carriedWeight / maxLoad) * 100)) : 0,
+);
+
+function loadColor(carried, max) {
+	if (max == null) return '#d4a847';
+	return carried > max ? '#e05555' : '#d4a847';
+}
+
+// --- Dice rolling ---
+let rollResult = $state(null);
+let rollKey = $state(0);
+
+function rollDie(sides) {
+	return Math.ceil(Math.random() * sides);
+}
+
+function launchDir() {
+	const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
+	const dist = 120 + Math.random() * 60;
+	return { lx: Math.cos(angle) * dist, ly: Math.sin(angle) * dist };
+}
+
+function rollStat(ab, mod, e) {
+	const r1 = rollDie(6),
+		r2 = rollDie(6);
+	const total = r1 + r2 + mod;
+	const { lx, ly } = launchDir();
+	rollKey++;
+	rollResult = { ab, mod, total, mx: e.clientX, my: e.clientY, lx, ly };
+	const modStr = mod !== 0 ? (mod > 0 ? `+${mod}` : `${mod}`) : '';
+	diceHistory.add({
+		formula: `2d6${modStr} ${ab}`,
+		breakdown: `${r1}+${r2}${modStr}`,
+		total,
+		tier: rollTier(total, false),
+	});
+}
+
+function rollDamageFormula(formula, e) {
+	const result = parseDamageFormula(formula);
+	if (result === null) return;
+	const { lx, ly } = launchDir();
+	rollKey++;
+	rollResult = {
+		ab: 'DMG',
+		mod: 0,
+		total: result.total,
+		mx: e.clientX,
+		my: e.clientY,
+		lx,
+		ly,
+		isDamage: true,
+		formula,
+	};
+	diceHistory.add({
+		formula,
+		breakdown: result.rolls.join('+'),
+		total: result.total,
+		tier: 'damage',
+	});
+}
+
+function parseDamageFormula(formula) {
+	// Handles "d10", "2d6", "d10+d4", "d10+d4+d8", "2d4+3" etc.
+	let total = 0;
+	const rolls = [];
+	let rest = formula.replace(/\s+/g, '');
+	const parts = rest.match(/[+-]?[^+-]+/g);
+	if (!parts) return null;
+	let anyDice = false;
+	for (const part of parts) {
+		const dm = part.match(/^([+-]?)(\d+)?d(\d+)$/i);
+		if (dm) {
+			const sign = dm[1] === '-' ? -1 : 1;
+			const count = +(dm[2] || 1);
+			const sides = +dm[3];
+			for (let i = 0; i < count; i++) {
+				const v = rollDie(sides);
+				total += sign * v;
+				rolls.push(sign < 0 ? -v : v);
+			}
+			anyDice = true;
 		} else {
-			parts.unshift(`EXP ${newExp}`);
-		}
-		lines[1] = parts.join(', ');
-		text = lines.join('\n');
-	}
-
-	function clickExp() {
-		updateExpInText((parsed.exp ?? 0) + 1);
-	}
-
-	function commitExpRaw(raw) {
-		const result = commitHpFn(raw, parsed.exp ?? 0, null, 0);
-		if (result !== null) updateExpInText(Math.max(0, result));
-	}
-
-	let hpDcRef = $state();
-	let expDcRef = $state();
-
-	function commitHpRaw(raw) {
-		const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, totalArmor);
-		if (result !== null) updateHpInText(result);
-	}
-
-	const hpFillPct = $derived(maxHp ? Math.max(0, Math.min(100, ((parsed.hp ?? 0) / maxHp) * 100)) : 0);
-
-	// --- Editable Armor ---
-	let editingArmor = $state(false);
-	let armorInputEl = $state();
-
-	function startEditArmor() {
-		editingArmor = true;
-		tick().then(() => { armorInputEl?.select(); });
-	}
-
-	function commitArmor(el) {
-		editingArmor = false;
-		const val = parseInt(el.value);
-		if (isNaN(val)) return;
-		const newBaseArmor = val - wornArmor;
-		pushUndo();
-		const lines = text.split('\n');
-		const parts = lines[1].split(',').map(s => s.trim());
-		const idx = parts.findIndex(p => /^Armor\s/i.test(p));
-		if (idx !== -1) parts[idx] = `Armor ${newBaseArmor}`;
-		lines[1] = parts.join(', ');
-		text = lines.join('\n');
-	}
-
-	// --- Editable Load ---
-	let editingLoad = $state(false);
-	let loadInputEl = $state();
-
-	function startEditLoad() {
-		editingLoad = true;
-		tick().then(() => { loadInputEl?.select(); });
-	}
-
-	function commitLoad(el) {
-		editingLoad = false;
-		const val = parseInt(el.value);
-		if (isNaN(val)) return;
-		const newBaseLoad = val - (parsed.stats.STR ?? 0);
-		pushUndo();
-		const lines = text.split('\n');
-		const parts = lines[1].split(',').map(s => s.trim());
-		const idx = parts.findIndex(p => /^Base\s*Load\s/i.test(p));
-		if (idx !== -1) parts[idx] = `Base Load ${newBaseLoad}`;
-		lines[1] = parts.join(', ');
-		text = lines.join('\n');
-	}
-
-	function hpColor(current, max) {
-		if (current == null || max == null) return '#5aaa6a';
-		if (current <= 0) return '#e05555';
-		const pct = current / max;
-		if (pct > 0.5) return '#5aaa6a';
-		if (pct > 0.25) return '#d4a847';
-		return '#e05555';
-	}
-
-	// --- Load helpers ---
-	const loadFillPct = $derived(maxLoad ? Math.max(0, Math.min(100, (carriedWeight / maxLoad) * 100)) : 0);
-
-	function loadColor(carried, max) {
-		if (max == null) return '#d4a847';
-		return carried > max ? '#e05555' : '#d4a847';
-	}
-
-	// --- Dice rolling ---
-	let rollResult = $state(null);
-	let rollKey = $state(0);
-
-	function rollDie(sides) {
-		return Math.ceil(Math.random() * sides);
-	}
-
-	function launchDir() {
-		const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
-		const dist = 120 + Math.random() * 60;
-		return { lx: Math.cos(angle) * dist, ly: Math.sin(angle) * dist };
-	}
-
-	function rollStat(ab, mod, e) {
-		const r1 = rollDie(6), r2 = rollDie(6);
-		const total = r1 + r2 + mod;
-		const { lx, ly } = launchDir();
-		rollKey++;
-		rollResult = { ab, mod, total, mx: e.clientX, my: e.clientY, lx, ly };
-		const modStr = mod !== 0 ? (mod > 0 ? `+${mod}` : `${mod}`) : '';
-		diceHistory.add({
-			formula: `2d6${modStr} ${ab}`,
-			breakdown: `${r1}+${r2}${modStr}`,
-			total,
-			tier: rollTier(total, false)
-		});
-	}
-
-	function rollDamageFormula(formula, e) {
-		const result = parseDamageFormula(formula);
-		if (result === null) return;
-		const { lx, ly } = launchDir();
-		rollKey++;
-		rollResult = { ab: 'DMG', mod: 0, total: result.total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: true, formula };
-		diceHistory.add({
-			formula,
-			breakdown: result.rolls.join('+'),
-			total: result.total,
-			tier: 'damage'
-		});
-	}
-
-	function parseDamageFormula(formula) {
-		// Handles "d10", "2d6", "d10+d4", "d10+d4+d8", "2d4+3" etc.
-		let total = 0;
-		const rolls = [];
-		let rest = formula.replace(/\s+/g, '');
-		const parts = rest.match(/[+-]?[^+-]+/g);
-		if (!parts) return null;
-		let anyDice = false;
-		for (const part of parts) {
-			const dm = part.match(/^([+-]?)(\d+)?d(\d+)$/i);
-			if (dm) {
-				const sign = dm[1] === '-' ? -1 : 1;
-				const count = +(dm[2] || 1);
-				const sides = +dm[3];
-				for (let i = 0; i < count; i++) {
-					const v = rollDie(sides);
-					total += sign * v;
-					rolls.push(sign < 0 ? -v : v);
-				}
-				anyDice = true;
-			} else {
-				const n = parseInt(part);
-				if (!isNaN(n)) { total += n; rolls.push(n); }
+			const n = parseInt(part);
+			if (!isNaN(n)) {
+				total += n;
+				rolls.push(n);
 			}
 		}
-		return anyDice ? { total, rolls } : null;
+	}
+	return anyDice ? { total, rolls } : null;
+}
+
+function rollTier(total, isDamage) {
+	if (isDamage) return 'damage';
+	if (total >= 12) return 'crit';
+	if (total >= 10) return 'strong';
+	if (total >= 7) return 'weak';
+	return 'miss';
+}
+
+// --- Stat drag-to-swap and drag-to-adjust ---
+let dragStat = $state(null);
+let dropTarget = $state(null);
+let dragStartX = 0;
+let dragStartY = 0;
+let dragCurX = $state(0);
+let dragCurY = $state(0);
+let didStartDrag = false;
+let statDragDelta = $state(0);
+let statDragMode = $state(null); // 'swap' or 'adjust'
+
+function onStatPointerDown(e, ab) {
+	dragStartX = e.clientX;
+	dragStartY = e.clientY;
+	didStartDrag = false;
+	statDragDelta = 0;
+	statDragMode = null;
+	const startAb = ab;
+
+	function onMove(ev) {
+		const dx = ev.clientX - dragStartX;
+		const dy = ev.clientY - dragStartY;
+		if (!didStartDrag && Math.abs(dx) + Math.abs(dy) > 8) {
+			didStartDrag = true;
+			dragStat = startAb;
+			// Lock to swap or adjust based on initial direction
+			statDragMode = Math.abs(dx) > Math.abs(dy) ? 'swap' : 'adjust';
+		}
+		if (!didStartDrag) return;
+		dragCurX = ev.clientX;
+		dragCurY = ev.clientY;
+
+		if (statDragMode === 'swap') {
+			const el = document.elementFromPoint(ev.clientX, ev.clientY);
+			const pill = el?.closest('.stat-pill');
+			if (pill) {
+				const target = pill.dataset.stat;
+				dropTarget = target && target !== dragStat ? target : null;
+			} else {
+				dropTarget = null;
+			}
+		} else {
+			statDragDelta = -Math.round(dy / 24);
+		}
 	}
 
-	function rollTier(total, isDamage) {
-		if (isDamage) return 'damage';
-		if (total >= 12) return 'crit';
-		if (total >= 10) return 'strong';
-		if (total >= 7) return 'weak';
-		return 'miss';
-	}
-
-	// --- Stat drag-to-swap and drag-to-adjust ---
-	let dragStat = $state(null);
-	let dropTarget = $state(null);
-	let dragStartX = 0;
-	let dragStartY = 0;
-	let dragCurX = $state(0);
-	let dragCurY = $state(0);
-	let didStartDrag = false;
-	let statDragDelta = $state(0);
-	let statDragMode = $state(null); // 'swap' or 'adjust'
-
-	function onStatPointerDown(e, ab) {
-		dragStartX = e.clientX;
-		dragStartY = e.clientY;
+	function onUp() {
+		window.removeEventListener('pointermove', onMove);
+		window.removeEventListener('pointerup', onUp);
+		window.removeEventListener('pointercancel', onUp);
+		if (didStartDrag) {
+			if (statDragMode === 'swap' && dropTarget && dragStat) {
+				swapStats(dragStat, dropTarget);
+			} else if (statDragMode === 'adjust' && statDragDelta !== 0 && dragStat) {
+				adjustStat(dragStat, statDragDelta);
+			}
+		}
+		dragStat = null;
+		dropTarget = null;
 		didStartDrag = false;
 		statDragDelta = 0;
 		statDragMode = null;
-		const startAb = ab;
-
-		function onMove(ev) {
-			const dx = ev.clientX - dragStartX;
-			const dy = ev.clientY - dragStartY;
-			if (!didStartDrag && Math.abs(dx) + Math.abs(dy) > 8) {
-				didStartDrag = true;
-				dragStat = startAb;
-				// Lock to swap or adjust based on initial direction
-				statDragMode = Math.abs(dx) > Math.abs(dy) ? 'swap' : 'adjust';
-			}
-			if (!didStartDrag) return;
-			dragCurX = ev.clientX;
-			dragCurY = ev.clientY;
-
-			if (statDragMode === 'swap') {
-				const el = document.elementFromPoint(ev.clientX, ev.clientY);
-				const pill = el?.closest('.stat-pill');
-				if (pill) {
-					const target = pill.dataset.stat;
-					dropTarget = target && target !== dragStat ? target : null;
-				} else {
-					dropTarget = null;
-				}
-			} else {
-				statDragDelta = -Math.round(dy / 24);
-			}
-		}
-
-		function onUp() {
-			window.removeEventListener('pointermove', onMove);
-			window.removeEventListener('pointerup', onUp);
-			window.removeEventListener('pointercancel', onUp);
-			if (didStartDrag) {
-				if (statDragMode === 'swap' && dropTarget && dragStat) {
-					swapStats(dragStat, dropTarget);
-				} else if (statDragMode === 'adjust' && statDragDelta !== 0 && dragStat) {
-					adjustStat(dragStat, statDragDelta);
-				}
-			}
-			dragStat = null;
-			dropTarget = null;
-			didStartDrag = false;
-			statDragDelta = 0;
-			statDragMode = null;
-		}
-
-		window.addEventListener('pointermove', onMove);
-		window.addEventListener('pointerup', onUp);
-		window.addEventListener('pointercancel', onUp);
 	}
 
-	function adjustStat(ab, delta) {
-		pushUndo();
-		const lines = text.split('\n');
-		const parts = lines[2].split(',').map(s => s.trim());
-		const vals = {};
-		for (const p of parts) {
-			const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
-			if (m) vals[m[1].toUpperCase()] = +m[2];
-		}
-		vals[ab] = (vals[ab] ?? 0) + delta;
-		lines[2] = parts.map(p => {
+	window.addEventListener('pointermove', onMove);
+	window.addEventListener('pointerup', onUp);
+	window.addEventListener('pointercancel', onUp);
+}
+
+function adjustStat(ab, delta) {
+	pushUndo();
+	const lines = text.split('\n');
+	const parts = lines[2].split(',').map((s) => s.trim());
+	const vals = {};
+	for (const p of parts) {
+		const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
+		if (m) vals[m[1].toUpperCase()] = +m[2];
+	}
+	vals[ab] = (vals[ab] ?? 0) + delta;
+	lines[2] = parts
+		.map((p) => {
 			const m = p.match(/^([A-Za-z]+)\s*/);
 			if (m) return `${m[1]} ${vals[m[1].toUpperCase()] ?? 0}`;
 			return p;
-		}).join(', ');
-		text = lines.join('\n');
-	}
+		})
+		.join(', ');
+	text = lines.join('\n');
+}
 
-	function swapStats(a, b) {
-		pushUndo();
-		const lines = text.split('\n');
-		const statsLine = lines[2];
-		const parts = statsLine.split(',').map(s => s.trim());
-		const vals = {};
-		for (const p of parts) {
-			const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
-			if (m) vals[m[1].toUpperCase()] = m[2];
-		}
-		const tmp = vals[a];
-		vals[a] = vals[b];
-		vals[b] = tmp;
-		lines[2] = parts.map(p => {
+function swapStats(a, b) {
+	pushUndo();
+	const lines = text.split('\n');
+	const statsLine = lines[2];
+	const parts = statsLine.split(',').map((s) => s.trim());
+	const vals = {};
+	for (const p of parts) {
+		const m = p.match(/^([A-Za-z]+)\s*([+-]?\d+)$/);
+		if (m) vals[m[1].toUpperCase()] = m[2];
+	}
+	const tmp = vals[a];
+	vals[a] = vals[b];
+	vals[b] = tmp;
+	lines[2] = parts
+		.map((p) => {
 			const m = p.match(/^([A-Za-z]+)\s*/);
 			if (m) return `${m[1]} ${vals[m[1].toUpperCase()] ?? 0}`;
 			return p;
-		}).join(', ');
-		text = lines.join('\n');
-	}
+		})
+		.join(', ');
+	text = lines.join('\n');
+}
 
-	// Parse damage field into rollable entries (split on semicolons)
-	const damageEntries = $derived.by(() => {
-		if (!parsed.damage) return [];
-		return parsed.damage.split(';').map(s => s.trim()).filter(Boolean);
+// Parse damage field into rollable entries (split on semicolons)
+const damageEntries = $derived.by(() => {
+	if (!parsed.damage) return [];
+	return parsed.damage
+		.split(';')
+		.map((s) => s.trim())
+		.filter(Boolean);
+});
+
+const bodyHtml = $derived(renderMarkdown(parsed.body));
+
+let charBodyEl = $state();
+let animatingH3 = -1;
+
+$effect(() => {
+	void bodyHtml;
+	if (!charBodyEl) return;
+	const idx = animatingH3;
+	// Apply glow instantly to all except the one being animated
+	charBodyEl.querySelectorAll('h3[data-glow]').forEach((h3) => {
+		const allH3s = [...charBodyEl.querySelectorAll('h3')];
+		const thisIdx = allH3s.indexOf(h3);
+		if (thisIdx !== idx) {
+			h3.style.transition = 'none';
+			h3.classList.add('glow');
+			h3.offsetHeight; // force reflow
+			h3.style.transition = '';
+		}
 	});
-
-
-	const bodyHtml = $derived(renderMarkdown(parsed.body));
-
-	let charBodyEl = $state();
-	let animatingH3 = -1;
-
-	$effect(() => {
-		void bodyHtml;
-		if (!charBodyEl) return;
-		const idx = animatingH3;
-		// Apply glow instantly to all except the one being animated
-		charBodyEl.querySelectorAll('h3[data-glow]').forEach(h3 => {
-			const allH3s = [...charBodyEl.querySelectorAll('h3')];
-			const thisIdx = allH3s.indexOf(h3);
-			if (thisIdx !== idx) {
-				h3.style.transition = 'none';
-				h3.classList.add('glow');
-				h3.offsetHeight; // force reflow
-				h3.style.transition = '';
-			}
+	// Animate only the toggled one
+	if (idx >= 0) {
+		requestAnimationFrame(() => {
+			const h3 = charBodyEl?.querySelectorAll('h3')?.[idx];
+			if (h3?.hasAttribute('data-glow')) h3.classList.add('glow');
+			animatingH3 = -1;
 		});
-		// Animate only the toggled one
-		if (idx >= 0) {
-			requestAnimationFrame(() => {
-				const h3 = charBodyEl?.querySelectorAll('h3')?.[idx];
-				if (h3?.hasAttribute('data-glow')) h3.classList.add('glow');
-				animatingH3 = -1;
-			});
-		}
-	});
+	}
+});
 
-	function toggleH3Glow(h3Index) {
-		const lines = text.split('\n');
-		let count = 0;
-		// Body starts at line 4
-		for (let i = 4; i < lines.length; i++) {
-			if (/^###\s/.test(lines[i])) {
-				if (count === h3Index) {
-					const isGlowing = /\s*###\s*$/.test(lines[i]);
-					if (isGlowing) {
-						// Animate out: remove class first, then update text after transition
-						const h3El = charBodyEl?.querySelectorAll('h3')[h3Index];
-						if (h3El) {
-							h3El.classList.remove('glow');
-							setTimeout(() => {
-								pushUndo();
-								const l = text.split('\n');
-								l[i] = l[i].replace(/\s*###\s*$/, '');
-								text = l.join('\n');
-							}, 200);
-						}
-					} else {
-						animatingH3 = h3Index;
-						pushUndo();
-						lines[i] = lines[i] + ' ###';
-						text = lines.join('\n');
+function toggleH3Glow(h3Index) {
+	const lines = text.split('\n');
+	let count = 0;
+	// Body starts at line 4
+	for (let i = 4; i < lines.length; i++) {
+		if (/^###\s/.test(lines[i])) {
+			if (count === h3Index) {
+				const isGlowing = /\s*###\s*$/.test(lines[i]);
+				if (isGlowing) {
+					// Animate out: remove class first, then update text after transition
+					const h3El = charBodyEl?.querySelectorAll('h3')[h3Index];
+					if (h3El) {
+						h3El.classList.remove('glow');
+						setTimeout(() => {
+							pushUndo();
+							const l = text.split('\n');
+							l[i] = l[i].replace(/\s*###\s*$/, '');
+							text = l.join('\n');
+						}, 200);
 					}
-					return;
+				} else {
+					animatingH3 = h3Index;
+					pushUndo();
+					lines[i] = lines[i] + ' ###';
+					text = lines.join('\n');
 				}
-				count++;
+				return;
 			}
+			count++;
 		}
 	}
+}
 
-	// --- Radial dice menu ---
-	let radialMenu = $state(null); // { x, y, timer, closing }
-	let suppressRadialClick = false;
-	const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
+// --- Radial dice menu ---
+let radialMenu = $state(null); // { x, y, timer, closing }
+let suppressRadialClick = false;
+const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
 
-	function onHeaderPointerDown(e) {
-		const target = e.target;
-		if (target.closest('.radial-btn')) return;
-		if (target.closest('.circle, .armor-display, .circle-draggable, button, input')) {
-			suppressRadialClick = true;
-			if (radialMenu && !radialMenu.closing) closeRadialMenu();
-		}
+function onHeaderPointerDown(e) {
+	const target = e.target;
+	if (target.closest('.radial-btn')) return;
+	if (target.closest('.circle, .armor-display, .circle-draggable, button, input')) {
+		suppressRadialClick = true;
+		if (radialMenu && !radialMenu.closing) closeRadialMenu();
 	}
+}
 
-	function showRadialMenu(e) {
-		if (suppressRadialClick) {
-			suppressRadialClick = false;
-			return;
-		}
-		// Only trigger on the header bar itself, not on interactive children
-		const target = e.target;
-		if (target.closest('button, input, .circle, .armor-display, .circle-draggable')) return;
-		e.preventDefault();
-		if (radialMenu && !radialMenu.closing) {
-			closeRadialMenu();
-			return;
-		}
-		clearRadialTimer();
-		const rect = e.currentTarget.getBoundingClientRect();
-		radialMenu = {
-			x: e.clientX - rect.left,
-			y: e.clientY - rect.top,
-			closing: false,
-			timer: setTimeout(() => closeRadialMenu(), 5000)
-		};
+function showRadialMenu(e) {
+	if (suppressRadialClick) {
+		suppressRadialClick = false;
+		return;
 	}
-
-	function clearRadialTimer() {
-		if (radialMenu?.timer) clearTimeout(radialMenu.timer);
+	// Only trigger on the header bar itself, not on interactive children
+	const target = e.target;
+	if (target.closest('button, input, .circle, .armor-display, .circle-draggable')) return;
+	e.preventDefault();
+	if (radialMenu && !radialMenu.closing) {
+		closeRadialMenu();
+		return;
 	}
+	clearRadialTimer();
+	const rect = e.currentTarget.getBoundingClientRect();
+	radialMenu = {
+		x: e.clientX - rect.left,
+		y: e.clientY - rect.top,
+		closing: false,
+		timer: setTimeout(() => closeRadialMenu(), 5000),
+	};
+}
 
-	function closeRadialMenu() {
-		clearRadialTimer();
-		if (!radialMenu) return;
-		radialMenu = { ...radialMenu, closing: true, timer: null };
-		setTimeout(() => { radialMenu = null; }, 200);
-	}
+function clearRadialTimer() {
+	if (radialMenu?.timer) clearTimeout(radialMenu.timer);
+}
 
-	function rollRadialDie(formula, e) {
-		clearRadialTimer();
+function closeRadialMenu() {
+	clearRadialTimer();
+	if (!radialMenu) return;
+	radialMenu = { ...radialMenu, closing: true, timer: null };
+	setTimeout(() => {
 		radialMenu = null;
-		const isMove = formula === '2d6' || formula === '1d6+1d8';
+	}, 200);
+}
 
-		if (formula === '1d6+1d8') {
-			const d6val = rollDie(6);
-			const d8val = rollDie(8);
-			const total = d6val + d8val;
-			const { lx, ly } = launchDir();
-			rollKey++;
-			rollResult = {
-				ab: 'DMG', mod: 0, total, mx: e.clientX, my: e.clientY, lx, ly,
-				isDamage: false, formula,
-				barbarian: true, barbLabel: `${d6val}+${d8val}`, barbD6Higher: d6val > d8val
-			};
-			diceHistory.add({
-				formula,
-				breakdown: `${d6val}+${d8val}`,
-				total,
-				tier: rollTier(total, false)
-			});
-			return;
-		}
+function rollRadialDie(formula, e) {
+	clearRadialTimer();
+	radialMenu = null;
+	const isMove = formula === '2d6' || formula === '1d6+1d8';
 
-		const result = parseDamageFormula(formula);
-		if (result === null) return;
+	if (formula === '1d6+1d8') {
+		const d6val = rollDie(6);
+		const d8val = rollDie(8);
+		const total = d6val + d8val;
 		const { lx, ly } = launchDir();
 		rollKey++;
-		rollResult = { ab: 'DMG', mod: 0, total: result.total, mx: e.clientX, my: e.clientY, lx, ly, isDamage: !isMove, formula };
+		rollResult = {
+			ab: 'DMG',
+			mod: 0,
+			total,
+			mx: e.clientX,
+			my: e.clientY,
+			lx,
+			ly,
+			isDamage: false,
+			formula,
+			barbarian: true,
+			barbLabel: `${d6val}+${d8val}`,
+			barbD6Higher: d6val > d8val,
+		};
 		diceHistory.add({
 			formula,
-			breakdown: result.rolls.join('+'),
-			total: result.total,
-			tier: isMove ? rollTier(result.total, false) : 'damage'
+			breakdown: `${d6val}+${d8val}`,
+			total,
+			tier: rollTier(total, false),
 		});
+		return;
 	}
+
+	const result = parseDamageFormula(formula);
+	if (result === null) return;
+	const { lx, ly } = launchDir();
+	rollKey++;
+	rollResult = {
+		ab: 'DMG',
+		mod: 0,
+		total: result.total,
+		mx: e.clientX,
+		my: e.clientY,
+		lx,
+		ly,
+		isDamage: !isMove,
+		formula,
+	};
+	diceHistory.add({
+		formula,
+		breakdown: result.rolls.join('+'),
+		total: result.total,
+		tier: isMove ? rollTier(result.total, false) : 'damage',
+	});
+}
 </script>
 
 <svelte:window onkeydown={(e) => {
