@@ -144,8 +144,6 @@ When you attempt to **counter an arcane spell** which you see being cast, stake 
 ### Memorius
 When you **Prepare Spells**, prepare two additional spells (3+½ Level).
 
-If you have **Quick Thinking**, you may prepare two additional spells or cantrips when using it.
-
 ### Familiar
 Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar. If your familiar dies, you can perform a **Ritual** to bring it back.
 
