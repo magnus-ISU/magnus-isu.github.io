@@ -159,6 +159,7 @@
 	});
 	const carriedWeight = $derived(bodyStats.weight);
 	const wornArmor = $derived(bodyStats.armor);
+	const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
 
 	const placeholders = $derived.by(() => {
 		if (!text.trim()) {
@@ -231,7 +232,7 @@
 	let expDcRef = $state();
 
 	function commitHpRaw(raw) {
-		const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, parsed.armor ?? 0);
+		const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, totalArmor);
 		if (result !== null) updateHpInText(result);
 	}
 
@@ -714,7 +715,7 @@
 										<path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/>
 									</g>
 									{#if !editingArmor}
-										<text x="256" y="300" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{parsed.armor + wornArmor}</text>
+										<text x="256" y="300" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">{totalArmor}</text>
 									{/if}
 								</svg>
 								{#if editingArmor}
@@ -722,7 +723,7 @@
 										bind:this={armorInputEl}
 										class="armor-input"
 										type="number"
-										value={parsed.armor + wornArmor}
+										value={totalArmor}
 										onblur={(e) => commitArmor(e.target)}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); if (e.key === 'Escape') { editingArmor = false; } }}
 									/>
