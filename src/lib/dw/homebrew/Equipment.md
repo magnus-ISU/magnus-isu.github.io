@@ -19,7 +19,7 @@ The stats below are for typical items. There are, of course, variations. A dull 
 [100 Coin] [1 Weight] **Hunter's Bow** *near, far*  
 [35 Coin] [3 Weight] **Crossbow** *near, +1 damage, reload*  
 [1 Coin] [1 Weight] **Bundle of Arrows** *ammo*  
-[20 Coin] [0 Weight] **Elven Arrows** *ammo*  
+[20 Coin] [0 Weight] **Elven Arrows** *ammo, worn*  
 
 ### Melee Weapons
 [2 Coin] [0 Weight] **Dagger, Shiv, Knife** *hand*  

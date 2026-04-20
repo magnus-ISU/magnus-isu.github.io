@@ -393,6 +393,19 @@ onMount(() => {
 		color: #8f8;
 	}
 
+	:global(.dw-article .copy-line) {
+		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		transition: color 0.15s;
+	}
+
+	:global(.dw-article .copy-line.copied),
+	:global(.dw-article .copy-line.copied strong) {
+		color: #8f8 !important;
+	}
+
 	.expand-all-btn {
 		display: block;
 		margin: 1.5rem auto 0;

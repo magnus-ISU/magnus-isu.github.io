@@ -62,9 +62,20 @@ export function renderMarkdown(src) {
 		const content = paraLines
 			.map((l, i) => {
 				const isLast = i === paraLines.length - 1;
-				if (!isLast && / {2,}$/.test(l)) return `${inline(l.replace(/ {2,}$/, ''))}<br>`;
-				if (!isLast && /\\$/.test(l)) return `${inline(l.slice(0, -1))}<br>`;
-				return inline(l);
+				const hasBreak = !isLast && / {2,}$/.test(l);
+				const hasBackslash = !isLast && /\\$/.test(l);
+				const stripped = hasBreak ? l.replace(/ {2,}$/, '') : hasBackslash ? l.slice(0, -1) : l;
+				let rendered = inline(stripped);
+
+				if (/^\[/.test(l.trim())) {
+					const afterCoin = l.trim().replace(/^\[\d+\s*Coin\]\s*/, '').replace(/ {2,}$/, '');
+					if (afterCoin) {
+						const esc = afterCoin.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+						rendered = `<span class="copy-line" data-copy="${esc}" onclick="navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
+					}
+				}
+
+				return hasBreak || hasBackslash ? `${rendered}<br>` : rendered;
 			})
 			.join('\n');
 		html += `<p>${content}</p>`;
