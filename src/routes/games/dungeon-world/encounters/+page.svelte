@@ -180,7 +180,7 @@
 	{#if matched.length > 0}
 		<section class="encounter-results" class:two-col={matched.length >= 2}>
 			{#each matched as m, i (i)}
-				<MonsterStatblock {...m} open={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
+				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
 			{/each}
 		</section>
 	{/if}

@@ -13,6 +13,7 @@
 		count = 1,
 		memberNames = [],
 		open = false,
+		locked = false,
 		onLabelsChange = null
 	} = $props();
 
@@ -104,7 +105,7 @@
 			return;
 		}
 		lastClickTime = now;
-		toggleExpanded();
+		if (!locked) toggleExpanded();
 	}
 
 	function toggleExpanded() {
@@ -165,7 +166,10 @@
 		}
 	}
 
-	const hpIndices = $derived(Array.from({ length: currentHps.length }, (_, i) => i));
+	const hpIndices = $derived(
+		Array.from({ length: currentHps.length }, (_, i) => i)
+			.sort((a, b) => (currentHps[a] <= 0 ? 1 : 0) - (currentHps[b] <= 0 ? 1 : 0))
+	);
 
 	// Dice rolling — rollKey increments on each roll to restart the CSS animation
 	let rollResult = $state(null); // { attackKey: 'atk1'|'atk2', total: number }
@@ -424,7 +428,7 @@
 		align-items: baseline;
 		gap: 0.25rem 0.75rem;
 		width: 100%;
-		background: #252525;
+		background: transparent;
 		padding: 0.45rem 0.75rem;
 		border: none;
 		border-bottom: 1px solid #333;
@@ -439,7 +443,7 @@
 	}
 
 	.monster-header:hover {
-		background: #2c2c2c;
+		background: #2a2a2a;
 	}
 
 	.monster-header.copied {
