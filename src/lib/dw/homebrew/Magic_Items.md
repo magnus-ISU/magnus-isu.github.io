@@ -217,22 +217,21 @@ Once used, the Burning Wheel ignites and burns with brilliant light. It does not
 ---
 
 ## Potions
-A selection of potions that you might find while adventuring.
 
 ### [1 Weight] Potion of Resistance To
-When you **drink**, it is very difficult to hurt you in the manner described on the label.
+When you **drink**, you take a maximum of 1 damage from whatever is on the label.
 
 ### [1 Weight] Potion of Disgust
 When you **choke this foul-tasting potion down**, you begin to have bad taste. If something that **loves the taste of flesh bites you**, it recoils in disgust.
 
 ### [1 Weight] Potion of Invisibility
-When you **drink**, you're invisible for a minute. When you **pour it on something**, you can instead see through about a man's size region of it.
+When you **drink**, you're invisible for a minute. When you **pour it on something**, you can instead see through it.
 
 ### [1 Weight] Potion of Undeath
-When you **drink**, you appear dead. Mindless undead will not attack you, and if you stay still you appear to be a corpse.
+When you **drink**, you appear to be a corpse, and mindless undead will not attack you.
 
 ### [1 Weight] Potion of Water Breathing
-When you **drink**, you can breathe water instead of air for an hour or so. In the last few minutes, you will regain the ability to breathe air, but water will give you less and less oxygen.
+When you **drink**, you can breathe water instead of air for an hour or so.
 
 ### [1 Weight] Potion of Invincibility
 When you **drink**, you are immune to damage for a short time.
@@ -265,10 +264,10 @@ When you **pour it onto a liquid**, an area the size of a small lake freezes and
 When it **shatters**, everything nearby is consumed in fire and takes 2d6 damage (ignores armor).
 
 ### [1 Weight] Sovereign Glue *dangerous*
-When it **touches anything except glass**, it won't come off. If you are stuck, you might **carefully scrape away flesh over an hour with a knife** losing 8 health and unsticking yourself without permanent damage.
-
-### [1 Weight] Bottled Void *dangerous*
-When you **drink**, nothing else you swallow today will affect you in any way. If poured on the ground, instead creates a bottomless hole about 2 meters in diameter.
+When it **touches anything except glass**, it won't come off, ever. If it's on you, you might be able to slowly get yourself off without permanent harm.
 
 ### [1 Weight] Bottled Slime *dangerous*
 An ooze lives in this bottle, highly compressed.
+
+### [1 Weight] Bottled Void *dangerous*
+When you **drink**, nothing else you swallow today will affect you in any way. If poured on the ground, instead creates a bottomless hole about 2 meters in diameter.
