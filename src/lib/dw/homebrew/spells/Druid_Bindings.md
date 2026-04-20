@@ -33,7 +33,7 @@ Choose a person you can see. Until you cast a spell or leave their presence they
 ### Fog Cloud
 Choose an area you can see: it’s filled with a thick fog which makes it difficult to see into or out of. Concentration
 ### Conjure Animals
-You call to the spirits of animals. If remotely possible, a physical animal answers your call under your command and choose two. Otherwise, a spirit answers and choose one. It has a +1 modifier for all stats, triggers basic moves, deals 1d6 damage, and has 1 HP. Concentration.
+You call to the spirits of animals. If remotely possible, a physical animal answers your call under your command and choose two. Otherwise, a spirit answers and choose one. It has a +1 modifier for all stats, triggers core moves, deals 1d6 damage, and has 1 HP. Concentration.
 - It has +1 forward
 - It has 4 armor
 - You conjure three animals

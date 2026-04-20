@@ -39,7 +39,7 @@ Choose a person you can see. Until you cast a spell or leave their presence they
 
 ---
 ### Animate Dead
-You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers basic moves, deals your damage, and has 1 HP. Concentration, and choose 2:
+You invoke a hungry spirit to possess a recently-dead body and serve you. This creates a zombie that follows your orders to the best of its limited abilities. The zombie has a +1 modifier for all stats, triggers core moves, deals your damage, and has 1 HP. Concentration, and choose 2:
 - It’s talented. Give one stat a +2 modifier.
 - It's a horde. Create up to 4 zombies, if there are enough corpses.
 - It has a functioning brain and can complete complex tasks.

@@ -109,7 +109,7 @@ Your touch reshapes a creature entirely, they stay in the form you craft until y
 
 ---
 ### Summon Monster  <span style="float:right" >Conjuration 5</span>
-A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers basic moves, uses your damage dice, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
+A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, uses your damage dice, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
 - It has +2 instead of +1 to one stat
 - It’s not reckless
 - It does 1d8 damage

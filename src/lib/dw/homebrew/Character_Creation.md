@@ -63,7 +63,7 @@ want a race that isn't listed.
 
 Assign these scores to your stats: +2, +1, +1, +0, +0, -1
 
-Start by looking over the basic moves and the starting moves for your class.
+Start by looking over the core moves and the starting moves for your class.
 Pick out the move that interests you the most: something you’ll be doing a lot,
 or something that you excel at. Put your 2 in the stat for that move. Look over the
 list again and pick out the next most important move to your character, maybe
