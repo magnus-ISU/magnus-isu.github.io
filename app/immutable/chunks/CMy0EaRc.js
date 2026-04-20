@@ -65,14 +65,21 @@ When you **interact carefully and watchfully with someone**, roll+INT. On a 10+,
 - Whom do they serve?
 - How could I get them to... ?
 
-## Pushing Moves
+## Party Moves
 
 ### Aid or Interfere
 When you **act alongside one of your companions**, they roll with +1 but you are both exposed to any costs or consequences associated with their move.
 When you **hinder one of your companions**, they roll with Disadvantage but you also expose yourself to danger, retribution, or cost.
 
 ### Push Yourself
-When you **put all of your effort into one act**, you may once take a debility of your choice to reroll any roll you make (except your Last Breath or monster damage). The debility does not affect this roll.
+When you **put all of your effort into one act**, you may once take a debility of your choice to reroll any roll you make (except your Last Breath or damage you take). The debility does not affect this roll.
+
+### Struggle As One
+
+When the GM calls on you to Defy Danger as a group, they’ll describe the struggle you face. Say how you deal with it and roll +STAT:
+- on a 6-, you find yourself in a spot, the GM will describe it;
+- on a 7+, you pull your weight;
+- on a 10+, you can get someone out of a spot (they don't mark XP), if you can tell us how.
 
 ## Rest and Recovery Moves
 
