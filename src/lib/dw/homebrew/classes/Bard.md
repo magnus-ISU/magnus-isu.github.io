@@ -196,7 +196,7 @@ When you **Hack & Slash and your reputation is on the line** - people are watchi
 
 ### Gobsmacked
 When you **reveal a secret of the enemy to their face**, hold 1 Intimidation against them. Spend it at any time to:
-- Deal an additional +1d6 damage when you damage them.
+- Deal +1d6 damage when you damage them.
 - Defy Danger with CHA instead of another stat when they threaten you.
 
 ### An Ear For Magic

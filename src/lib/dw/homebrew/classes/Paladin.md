@@ -51,7 +51,17 @@ The GM will then tell you what vow or vows is required of you to maintain your b
 
 ## Background
 
-None
+### Ward of the Temple
+You were raised from childhood within a sacred temple, trained in discipline and divine service. When you **seek guidance from the temple's archives or senior clergy,** roll+WIS. On a 10+, you gain clear insight and +1 forward on acting on that knowledge. On a 7-9, the answer is cryptic or requires a favor in return.
+
+### Knight Errant
+You ride from land to land seeking wrongs to right. When you **arrive in a new settlement and ask locals about injustice**, they will tell you what they know, but you won't always be able to help.
+
+### Penitent
+You came to your oaths through suffering or sin. When you **refuse comfort or safety that others offer you,** mark XP.
+
+### Dovoted
+Your oaths sustain and revitalize you. When you **spend a night in prayer and meditation**, you recover from one debility as if it never was, but you must spend the night doing nothing else.
 
 ## Gear
 You start with:  
