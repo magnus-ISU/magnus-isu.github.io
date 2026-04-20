@@ -445,8 +445,30 @@
 	}
 
 	.is-expanded .monster-header {
-		border-bottom: 1px solid #333;
+		border-bottom: none;
+		position: relative;
 	}
+
+	.is-expanded .monster-header::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 10px;
+		right: 10px;
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			#666 4px,
+			#aaa 12px,
+			#ddd 20%,
+			#ddd 80%,
+			#aaa calc(100% - 12px),
+			#666 calc(100% - 4px),
+			transparent
+		);
+	}
+
 
 	.monster-header:hover {
 		background: #2a2a2a;
