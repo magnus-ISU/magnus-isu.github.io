@@ -177,8 +177,8 @@
 {/if}
 
 <article class="dw-article">
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<h1 onclick={() => { if (userMonsters.list.length >= 2) globalExpand.toggle(); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">User Monsters</h1>
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<h1 onclick={() => { if (userMonsters.list.length >= 2) globalExpand.toggle(); }} onkeydown={(e) => { if (e.key === 'Enter' && userMonsters.list.length >= 2) globalExpand.toggle(); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">User Monsters</h1>
 
 	<div class="builder">
 		<TextBox bind:value={text} {placeholders} rows={12} />

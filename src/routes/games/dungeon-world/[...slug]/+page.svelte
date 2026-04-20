@@ -186,8 +186,8 @@
 
 <article bind:this={articleEl} class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	{#if data.render === 'monsters'}
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<h1 onclick={() => globalExpand.toggle()} style="cursor: pointer; -webkit-tap-highlight-color: transparent">{data.title}</h1>
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+		<h1 onclick={() => globalExpand.toggle()} onkeydown={(e) => { if (e.key === 'Enter') globalExpand.toggle(); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">{data.title}</h1>
 		{#if isAllMonsters}
 			<MonsterSearch showAll />
 		{:else}
@@ -364,7 +364,6 @@
 
 	:global(.dw-article.is-homebrew h1:first-child::after) {
 		content: 'HB';
-		display: inline-block;
 		background: #d4a847;
 		color: #1e1e1e;
 		padding: 0.15rem 0.5rem;
@@ -373,7 +372,6 @@
 		font-weight: bold;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		vertical-align: middle;
 		margin-left: 0.75rem;
 		float: right;
 		margin-top: 0.3em;

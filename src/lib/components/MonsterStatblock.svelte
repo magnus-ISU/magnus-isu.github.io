@@ -393,11 +393,12 @@
 
 			{#if description}
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="monster-description" class:desc-expanded={descExpanded} onclick={(e) => {
+				<div class="monster-description" class:desc-expanded={descExpanded} role="button" tabindex="0" onclick={(e) => {
 					if (descLongPress) { descLongPress = false; return; }
 					if (e.shiftKey) { localFlip = !localFlip; }
 					else { localFlip = false; globalDesc.toggle(); }
-				}} onpointerdown={() => { descLongPress = false; descLongTimer = setTimeout(() => { descLongPress = true; localFlip = !localFlip; }, 400); }}
+				}} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (e.shiftKey) { localFlip = !localFlip; } else { localFlip = false; globalDesc.toggle(); } } }}
+				onpointerdown={() => { descLongPress = false; descLongTimer = setTimeout(() => { descLongPress = true; localFlip = !localFlip; }, 400); }}
 				onpointerup={() => clearTimeout(descLongTimer)}
 				onpointercancel={() => clearTimeout(descLongTimer)}>{@html descriptionHtml}</div>
 			{/if}

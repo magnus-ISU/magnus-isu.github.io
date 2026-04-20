@@ -1505,5 +1505,6 @@
 	}
 	.armor-input, .circle-input {
 		-moz-appearance: textfield;
+		appearance: textfield;
 	}
 </style>

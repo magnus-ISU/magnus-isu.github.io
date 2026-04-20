@@ -168,8 +168,8 @@
 </svelte:head>
 
 <article class="dw-article">
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<h1 class:copied={h1Copied} onclick={() => { if (text.trim()) { navigator.clipboard.writeText(text.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">Encounters</h1>
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<h1 class:copied={h1Copied} onclick={() => { if (text.trim()) { navigator.clipboard.writeText(text.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} onkeydown={(e) => { if (e.key === 'Enter' && text.trim()) { navigator.clipboard.writeText(text.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">Encounters</h1>
 
 	<section class="encounter-input" bind:this={encounterInputEl}>
 		<label for="encounter-text">
