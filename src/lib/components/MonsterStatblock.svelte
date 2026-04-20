@@ -131,6 +131,9 @@
 		moves.length === 4 ? 2 : 3
 	);
 
+	// Description expand toggle
+	let descExpanded = $state(false);
+
 	// Move toggle
 	let usedMoves = $state(new Set());
 	function toggleMove(i) {
@@ -369,7 +372,8 @@
 			{/if}
 
 			{#if description}
-				<div class="monster-description">{@html descriptionHtml}</div>
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<div class="monster-description" class:desc-expanded={descExpanded} onclick={() => { descExpanded = !descExpanded; }}>{@html descriptionHtml}</div>
 			{/if}
 
 			{#if special}
@@ -694,7 +698,16 @@
 		color: #bbb;
 		font-size: 0.92rem;
 		line-height: 1.6;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		cursor: pointer;
+	}
+
+	.monster-description.desc-expanded {
 		white-space: pre-line;
+		overflow: visible;
+		text-overflow: unset;
 	}
 
 	.monster-instinct {
