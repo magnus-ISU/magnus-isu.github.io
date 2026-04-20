@@ -1,16 +1,16 @@
 # Character Creation
 
-## Quickstart
+## Using This Website
 
-Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Scroll down and click on moves you want to take.
+Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Go through the sheet and delete the moves / gear / options that you don't take.
 
-You can open a spell list and click on a heading to copy everything under the heading to paste into your character sheet. It's recommended to click on spells to indicate they are memorized and ready to cast.
-
-To avoid confusion and clutter, you could also delete every move that you will never take and don't need and move everything you have to cluster together.
+You can open a spell list and click on a heading to copy everything under the heading to paste into your character sheet. Click on spell names to indicate they are memorized and ready to cast. (Or click on any heading to mark it as selected or special in some way)
 
 Modify your damage dice on the second line. Add more damage dice options by using semicolons: Damage d4;2d4;2d6
 
-## Choose Stats
+This website will allow you to create any number of characters and store them in the browser.
+
+## Pen and Paper
 
 Making Dungeon World characters is quick and easy. You should all create your
 first characters together at the beginning of your first session. Character
