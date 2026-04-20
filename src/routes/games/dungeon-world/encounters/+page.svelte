@@ -19,7 +19,7 @@
 	});
 
 	let text = $state(encounterText.value);
-	const encounterPlaceholder = `Bandit King\n3 bandit\nowlbear`;
+	const encounterPlaceholder = `Bandit King (Boss,)\nBandit (John, Paul, George, Ringo)\nWild Dog (2)`;
 
 	// Sync local → store
 	$effect(() => { encounterText.value = text; });
@@ -44,44 +44,113 @@
 	// Keep the store aware of valid monster names for cleanup on shift+click
 	$effect(() => { encounterText.setKnownNames(knownMonsters.map(m => m.name)); });
 
-	// Greedy name matching — tries longest prefix first
+	// Parse parenthetical after a monster name:
+	// (4) → count=4 unnamed, (Boss,) → 1 named "Boss", (2,) → 1 named "2"
+	// (John, Paul) → 2 named
+	function parseParen(str) {
+		const m = str.match(/^\((.+)\)$/);
+		if (!m) return { count: 1, names: [] };
+		const inner = m[1].trim();
+		// Trailing comma with single item → singular named monster
+		if (inner.endsWith(',')) {
+			const singleName = inner.slice(0, -1).trim();
+			if (singleName) return { count: 1, names: [singleName] };
+		}
+		// Pure number → count of unnamed
+		if (/^\d+$/.test(inner)) return { count: +inner, names: [] };
+		// Comma-separated names
+		const names = inner.split(',').map(s => s.trim()).filter(Boolean);
+		return { count: names.length, names };
+	}
+
+	// Greedy name matching — operates on ranges within each line
 	const parsed = $derived.by(() => {
 		if (!text.trim()) return { matched: [], unmatched: '' };
 		const nameMap = new Map(knownMonsters.map((m) => [m.name.toLowerCase(), m]));
 		const results = [];
 		const missed = [];
 		for (const line of text.split('\n')) {
-			let words = line.trim().replace(/,/g, '').split(/\s+/).filter(Boolean);
-			const lineUnmatched = [];
-			while (words.length > 0) {
-				let count = 1;
-				let offset = 0;
-				if (/^\d+$/.test(words[0]) && words.length > 1) {
-					count = +words[0];
-					offset = 1;
-				}
-				let found = false;
-				for (let len = Math.min(words.length - offset, maxWords); len > 0; len--) {
-					const candidate = words.slice(offset, offset + len).join(' ').toLowerCase();
-					if (nameMap.has(candidate)) {
-						results.push({ ...nameMap.get(candidate), count });
-						words = words.slice(offset + len);
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					lineUnmatched.push(words[0]);
-					words = words.slice(1);
+			const trimmed = line.trim();
+			if (!trimmed) continue;
+			// Split on commas that are NOT inside parentheses
+			const mentions = [];
+			let depth = 0, current = '';
+			for (const ch of trimmed) {
+				if (ch === '(') depth++;
+				else if (ch === ')') depth = Math.max(0, depth - 1);
+				if (ch === ',' && depth === 0) {
+					mentions.push(current.trim());
+					current = '';
+				} else {
+					current += ch;
 				}
 			}
-			if (lineUnmatched.length) missed.push(lineUnmatched.join(' '));
+			if (current.trim()) mentions.push(current.trim());
+
+			for (const mention of mentions) {
+				// Extract optional parenthetical at end
+				const parenMatch = mention.match(/^(.+?)\s*(\([^)]*\))\s*$/);
+				const basePart = parenMatch ? parenMatch[1].trim() : mention;
+				const parenPart = parenMatch ? parenMatch[2] : null;
+
+				// Try greedy match on basePart
+				let words = basePart.split(/\s+/).filter(Boolean);
+				const mentionUnmatched = [];
+				let matched_any = false;
+
+				while (words.length > 0) {
+					let found = false;
+					for (let len = Math.min(words.length, maxWords); len > 0; len--) {
+						const candidate = words.slice(0, len).join(' ').toLowerCase();
+						if (nameMap.has(candidate)) {
+							const { count, names } = parenPart ? parseParen(parenPart) : { count: 1, names: [] };
+							results.push({ ...nameMap.get(candidate), count, memberNames: names });
+							words = words.slice(len);
+							found = true;
+							matched_any = true;
+							break;
+						}
+					}
+					if (!found) {
+						mentionUnmatched.push(words[0]);
+						words = words.slice(1);
+					}
+				}
+				if (mentionUnmatched.length) missed.push(mentionUnmatched.join(' '));
+			}
 		}
 		return { matched: results, unmatched: missed.join(' ') };
 	});
 	const matched = $derived(parsed.matched);
 	const unmatched = $derived(parsed.unmatched);
 
+	// Build parenthetical string from labels
+	function buildParen(labels, count) {
+		if (count === 1 && labels.length === 1 && labels[0] && labels[0] !== '#1') {
+			return `(${labels[0]},)`;
+		}
+		if (count > 1) {
+			const allDefault = labels.every((l, i) => l === `#${i + 1}`);
+			if (allDefault) return `(${count})`;
+			return `(${labels.join(', ')})`;
+		}
+		return '';
+	}
+
+	function onLabelsChange(monsterName, newLabels, count) {
+		const lines = text.split('\n');
+		const lowerName = monsterName.toLowerCase();
+		for (let i = 0; i < lines.length; i++) {
+			const stripped = lines[i].trim().replace(/\s*\(.*\)\s*$/, '').toLowerCase();
+			if (stripped === lowerName) {
+				const baseName = lines[i].trim().replace(/\s*\(.*\)\s*$/, '');
+				const paren = buildParen(newLabels, count);
+				lines[i] = paren ? `${baseName} ${paren}` : baseName;
+				text = lines.join('\n');
+				return;
+			}
+		}
+	}
 
 </script>
 
@@ -97,7 +166,8 @@
 </svelte:head>
 
 <article class="dw-article">
-	<h1>Encounters</h1>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<h1 onclick={() => { if (text.trim()) navigator.clipboard.writeText(text.trim()); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">Encounters</h1>
 
 	<section class="encounter-input" bind:this={encounterInputEl}>
 		<label for="encounter-text">
@@ -110,7 +180,7 @@
 	{#if matched.length > 0}
 		<section class="encounter-results">
 			{#each matched as m, i (i)}
-				<MonsterStatblock {...m} open={true} />
+				<MonsterStatblock {...m} open={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
 			{/each}
 		</section>
 	{/if}

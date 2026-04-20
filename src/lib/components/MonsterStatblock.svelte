@@ -11,7 +11,9 @@
 		moves = [],
 		notes = '',
 		count = 1,
-		open = false
+		memberNames = [],
+		open = false,
+		onLabelsChange = null
 	} = $props();
 
 	import { tick } from 'svelte';
@@ -141,7 +143,7 @@
 	let labels = $state([]);
 	$effect(() => {
 		currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
-		labels = Array.from({ length: count }, (_, i) => `#${i + 1}`);
+		labels = Array.from({ length: count }, (_, i) => memberNames[i] || `#${i + 1}`);
 	});
 	function getHpColor(val) {
 		if (val == null) return null;
@@ -302,7 +304,7 @@
 							{#if hpNum !== null}
 								<!-- svelte-ignore a11y_no_static_element_interactions -->
 								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[0]?.handlePointerDown(e); }}>
-									<span class="vital-label">HP</span>
+									<span class="vital-label">{memberNames[0] || 'HP'}</span>
 									<DraggableCounter bind:this={dcRefs[0]} value={currentHps[0]} oncommit={(raw) => commitMonsterHp(raw, 0)} inputWidth="{String(currentHps[0] ?? 0).length + 2}ch" style="color: {getHpColor(currentHps[0])}">
 										{#snippet children()}<span class="hp-display" style="color: {getHpColor(currentHps[0])}">{currentHps[0]}</span>{/snippet}
 									</DraggableCounter>
@@ -334,6 +336,7 @@
 										bind:value={labels[idx]}
 										onclick={(e) => e.stopPropagation()}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
+										onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
 									/>
 									{#if hpNum !== null}
 										<DraggableCounter bind:this={dcRefs[idx]} value={currentHps[idx]} oncommit={(raw) => commitMonsterHp(raw, idx)} inputWidth="{String(currentHps[idx] ?? 0).length + 1}ch" style="color: {getHpColor(currentHps[idx])}">

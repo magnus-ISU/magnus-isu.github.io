@@ -20,11 +20,13 @@ function save(val) {
 let text = $state(load());
 let knownNames = new Set();
 
-function lineMonsterName(line) {
-	const t = line.trim();
+// Extract the monster name from a monster mention like "Bandit (3)" or "Bandit (John, Paul)"
+// Returns lowercase name, or empty string if not parseable
+function mentionMonsterName(mention) {
+	const t = mention.trim();
 	if (!t) return '';
-	const m = t.match(/^(\d+)\s+(.+)/);
-	return (m ? m[2] : t).toLowerCase();
+	// Strip parenthetical suffix
+	return t.replace(/\s*\(.*\)\s*$/, '').toLowerCase();
 }
 
 export const encounterText = {
@@ -39,16 +41,22 @@ export const encounterText = {
 
 		// Strip lines that don't match any known monster
 		const clean = knownNames.size > 0
-			? lines.filter(l => { const n = lineMonsterName(l); return !n || knownNames.has(n); })
+			? lines.filter(l => { const n = mentionMonsterName(l); return !n || knownNames.has(n); })
 			: lines;
 
 		// Find existing line with this monster name
-		const idx = clean.findIndex(l => lineMonsterName(l) === lowerName);
+		const idx = clean.findIndex(l => mentionMonsterName(l) === lowerName);
 
 		if (idx !== -1) {
-			const m = clean[idx].trim().match(/^(\d+)\s+(.+)/);
-			const count = m ? +m[1] : 1;
-			clean[idx] = `${count + 1} ${name}`;
+			const parenMatch = clean[idx].trim().match(/^(.+?)\s*\((\d+)\)\s*$/);
+			if (parenMatch) {
+				const count = +parenMatch[2];
+				clean[idx] = `${parenMatch[1]} (${count + 1})`;
+			} else {
+				// No parenthetical count, or has named members — just add (2)
+				const baseName = clean[idx].trim().replace(/\s*\(.*\)\s*$/, '');
+				clean[idx] = `${baseName} (2)`;
+			}
 		} else {
 			clean.push(name);
 		}
