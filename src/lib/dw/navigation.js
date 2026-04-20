@@ -20,6 +20,10 @@ export const pageArt = {
 		url: 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/11/Metallic-Dragon-with-Hoard.jpg',
 		mirror: true,
 	},
+	'magic-items': {
+		url: 'https://i.pinimg.com/736x/c7/75/26/c77526a4563cde545b1c5078b0097021.jpg',
+		mirror: true,
+	},
 	'first-session':
 		'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-crystal-caves-adventure-lesbian-couple.jpg',
 	'class-moves-discussion':
