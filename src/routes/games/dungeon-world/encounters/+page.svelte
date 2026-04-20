@@ -232,6 +232,25 @@
 		gap: 0;
 	}
 
+	.encounter-results.two-col > :global(.monster) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.encounter-results.two-col > :global(.monster .monster-body.is-open) {
+		flex: 1;
+	}
+
+	.encounter-results.two-col > :global(.monster .monster-body-inner) {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.encounter-results.two-col > :global(.monster .monster-description) {
+		flex: 1;
+	}
+
 	@media (max-width: 1028px) {
 		.encounter-results.two-col {
 			grid-template-columns: 1fr;

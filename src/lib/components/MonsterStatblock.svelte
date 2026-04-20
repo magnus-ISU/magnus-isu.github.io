@@ -18,6 +18,7 @@
 
 	import { tick } from 'svelte';
 	import { encounterText } from '$lib/dw/encounterText.svelte.js';
+	import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 
 	function inlineMd(text) {
 		return text
@@ -180,31 +181,49 @@
 		// "3d12 keep lowest 2 +3"
 		const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)\s*([+-]\d+)?/i);
 		if (keepLowest) {
-			const count = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3], mod = +(keepLowest[4] || 0);
-			const rolls = Array.from({ length: count }, () => rollDie(sides));
-			return [...rolls].sort((a, b) => a - b).slice(0, keep).reduce((a, b) => a + b, 0) + mod;
+			const cnt = +keepLowest[1], sides = +keepLowest[2], keep = +keepLowest[3], mod = +(keepLowest[4] || 0);
+			const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+			const kept = [...rolls].sort((a, b) => a - b).slice(0, keep);
+			const total = kept.reduce((a, b) => a + b, 0) + mod;
+			const formula = `${cnt}d${sides}kl${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+			const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+			return { total, formula, breakdown };
 		}
 
 		// "3d12 keep highest 2 +9"
 		const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)\s*([+-]\d+)?/i);
 		if (keepHighest) {
-			const count = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3], mod = +(keepHighest[4] || 0);
-			const rolls = Array.from({ length: count }, () => rollDie(sides));
-			return [...rolls].sort((a, b) => b - a).slice(0, keep).reduce((a, b) => a + b, 0) + mod;
+			const cnt = +keepHighest[1], sides = +keepHighest[2], keep = +keepHighest[3], mod = +(keepHighest[4] || 0);
+			const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+			const kept = [...rolls].sort((a, b) => b - a).slice(0, keep);
+			const total = kept.reduce((a, b) => a + b, 0) + mod;
+			const formula = `${cnt}d${sides}kh${keep}${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+			const breakdown = `(${rolls.join(' or ')})${mod ? (mod > 0 ? ` + ${mod}` : ` - ${-mod}`) : ''}`;
+			return { total, formula, breakdown };
 		}
 
 		// "NdX+M" / "dX+M" / "dX"
 		const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
 		if (!m) return null;
-		const count = +(m[1] || 1), sides = +m[2], modifier = +(m[3] || 0);
-		return Array.from({ length: count }, () => rollDie(sides)).reduce((a, b) => a + b, 0) + modifier;
+		const cnt = +(m[1] || 1), sides = +m[2], modifier = +(m[3] || 0);
+		const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+		const total = rolls.reduce((a, b) => a + b, 0) + modifier;
+		const formula = `${cnt}d${sides}${modifier ? (modifier > 0 ? ` + ${modifier}` : ` - ${-modifier}`) : ''}`;
+		const breakdown = rolls.join('+') + (modifier ? (modifier > 0 ? `+${modifier}` : `${modifier}`) : '');
+		return { total, formula, breakdown };
 	}
 
 	function doRoll(dmg, atkIdx) {
-		const total = parseAndRoll(dmg);
-		if (total === null) return;
+		const result = parseAndRoll(dmg);
+		if (result === null) return;
 		rollKey++;
-		rollResult = { atkIdx, total };
+		rollResult = { atkIdx, total: result.total };
+		diceHistory.add({
+			formula: `${result.formula} ${name}`,
+			breakdown: result.breakdown,
+			total: result.total,
+			tier: 'damage'
+		});
 	}
 
 	function handleCopy(e) {
@@ -501,8 +520,6 @@
 		flex-wrap: wrap;
 		gap: 0.25rem 0.5rem;
 		padding: 0.4rem 0.75rem;
-		background: #1e1e1e;
-		border-bottom: 1px solid #2c2c2c;
 	}
 
 	.monster-attacks {
@@ -521,7 +538,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		background: #2a2a2a;
+		background: transparent;
 		border: 1px solid #3a3a3a;
 		border-radius: 999px;
 		padding: 0.15rem 0.55rem;
@@ -535,7 +552,7 @@
 	}
 
 	.attack-btn:hover {
-		background: #333;
+		background: #2a2a2a;
 		border-color: #555;
 	}
 
@@ -597,8 +614,6 @@
 		gap: 0.3rem 0.75rem;
 		justify-content: flex-end;
 		padding: 0.4rem 0.75rem;
-		background: #1e1e1e;
-		border-bottom: 1px solid #2c2c2c;
 	}
 
 	.hp-pill {
@@ -606,7 +621,7 @@
 		justify-content: space-between;
 		align-items: baseline;
 		min-width: 5rem;
-		background: #2a2a2a;
+		background: transparent;
 		border: 1px solid #3a3a3a;
 		border-radius: 999px;
 		padding: 0.2rem 0.6rem;
@@ -619,7 +634,7 @@
 	}
 
 	.hp-pill:hover {
-		background: #333;
+		background: #2a2a2a;
 		border-color: #555;
 	}
 
@@ -675,7 +690,6 @@
 		color: #bbb;
 		font-size: 0.92rem;
 		line-height: 1.6;
-		background: #1a1a1a;
 		white-space: pre-line;
 	}
 
@@ -687,8 +701,6 @@
 		padding: 0.35rem 0.75rem 0.4rem;
 		font-size: 0.88rem;
 		color: #ccc;
-		background: #1a1a1a;
-		border-top: 1px solid #2c2c2c;
 	}
 
 	.monster-instinct strong {
@@ -706,12 +718,10 @@
 		display: grid;
 		gap: 0.35rem;
 		padding: 0.5rem 0.75rem;
-		background: #1a1a1a;
-		border-top: 1px solid #2c2c2c;
 	}
 
 	.move-pill {
-		background: #222;
+		background: transparent;
 		border: 1px solid #393939;
 		border-radius: 4px;
 		padding: 0.3rem 0.5rem;
@@ -732,14 +742,13 @@
 	}
 
 	.move-pill.used {
-		background: #1e1a0f;
+		background: transparent;
 		border-color: #6b5a2a;
 		color: #c8a84b;
 	}
 
 	.monster-notes {
 		border-top: 1px solid #333;
-		background: #1e1e1e;
 		border-left: 3px solid #d4a847;
 		padding: 0.5rem 0.75rem;
 		color: #999;
