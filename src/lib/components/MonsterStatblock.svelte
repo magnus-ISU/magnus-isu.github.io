@@ -224,7 +224,13 @@
 
 		// "NdX+M" / "dX+M" / "dX"
 		const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
-		if (!m) return null;
+		if (!m) {
+			// Plain number
+			const n = dmg.match(/^([+-]?\d+)$/);
+			if (!n) return null;
+			const total = +n[1];
+			return { total, formula: `${total}`, breakdown: `${total}` };
+		}
 		const cnt = +(m[1] || 1), sides = +m[2], modifier = +(m[3] || 0);
 		const rolls = Array.from({ length: cnt }, () => rollDie(sides));
 		const total = rolls.reduce((a, b) => a + b, 0) + modifier;
