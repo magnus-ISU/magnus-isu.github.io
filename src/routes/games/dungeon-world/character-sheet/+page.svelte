@@ -1133,6 +1133,7 @@
 		margin-top: 0;
 		cursor: pointer;
 		transition: box-shadow 0.2s, border-color 0.2s;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.char-body :global(h3.glow) {

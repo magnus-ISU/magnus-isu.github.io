@@ -420,6 +420,7 @@
 		-webkit-user-select: none;
 		user-select: none;
 		touch-action: manipulation;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.monster-header:hover {
