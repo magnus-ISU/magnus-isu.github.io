@@ -9,7 +9,7 @@ Weapons don't kill monsters, people do. That's why weapons in Dungeon World don'
 
 ## Weapon List
 
-### Reasonable Quality
+### Quality
 The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
 
 ### Ranged Weapons
