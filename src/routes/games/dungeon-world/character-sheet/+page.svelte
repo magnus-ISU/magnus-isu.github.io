@@ -479,6 +479,27 @@
 
 	const bodyHtml = $derived(renderMarkdown(parsed.body));
 
+	function toggleH3Glow(h3Index) {
+		const lines = text.split('\n');
+		let count = 0;
+		// Body starts at line 4
+		for (let i = 4; i < lines.length; i++) {
+			if (/^###\s/.test(lines[i])) {
+				if (count === h3Index) {
+					pushUndo();
+					if (/\s*###\s*$/.test(lines[i])) {
+						lines[i] = lines[i].replace(/\s*###\s*$/, '');
+					} else {
+						lines[i] = lines[i] + ' ###';
+					}
+					text = lines.join('\n');
+					return;
+				}
+				count++;
+			}
+		}
+	}
+
 	// --- Radial dice menu ---
 	let radialMenu = $state(null); // { x, y, timer, closing }
 	let suppressRadialClick = false;
@@ -739,7 +760,12 @@
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="char-body" onclick={(e) => {
 					const h3 = e.target.closest('h3');
-					if (h3) h3.classList.toggle('glow');
+					if (!h3) return;
+					const container = h3.closest('.char-body');
+					const allH3s = [...container.querySelectorAll('h3')];
+					const h3Index = allH3s.indexOf(h3);
+					if (h3Index < 0) return;
+					toggleH3Glow(h3Index);
 				}}>
 					{@html bodyHtml}
 				</div>

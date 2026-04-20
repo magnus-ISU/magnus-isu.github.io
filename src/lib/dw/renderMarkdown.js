@@ -124,7 +124,13 @@ export function renderMarkdown(src) {
 				}
 				html += '<div class="move-block">';
 				inMoveBlock = true;
-				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				let h3Text = hm[2];
+				let h3Class = '';
+				if (/\s*###\s*$/.test(h3Text)) {
+					h3Text = h3Text.replace(/\s*###\s*$/, '');
+					h3Class = ' class="glow"';
+				}
+				html += `<h${level}${h3Class}>${inline(h3Text)}</h${level}>`;
 			} else {
 				html += `<h${level}>${inline(hm[2])}</h${level}>`;
 			}
