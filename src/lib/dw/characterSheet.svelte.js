@@ -56,10 +56,6 @@ let activeIdx = $state(loadActive());
 // Clamp active index
 if (activeIdx >= slots.length) activeIdx = 0;
 
-// Always open index 0 on startup — but keep stored index for the tab highlight
-// (The user said "always open character index 1" meaning the first one)
-activeIdx = 0;
-
 export const characterSheet = {
 	get value() {
 		return slots[activeIdx] ?? '';
