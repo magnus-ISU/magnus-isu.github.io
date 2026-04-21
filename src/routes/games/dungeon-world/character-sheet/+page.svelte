@@ -1063,7 +1063,6 @@ function rollRadialDie(formula, e) {
 
 	.sheet-editor {
 		margin-bottom: 1.5rem;
-		background: rgba(26, 26, 26, 0.88);
 		border-radius: 6px;
 	}
 	.sheet-editor :global(textarea) {
