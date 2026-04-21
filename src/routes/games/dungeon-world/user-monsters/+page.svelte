@@ -57,12 +57,9 @@ function parseBatch(raw) {
 const built = $derived(isBatch ? null : parseMonsterText(text));
 const batchMonsters = $derived(isBatch ? parseBatch(text) : []);
 
-const takenNames = $derived(new Set([
-	...userMonsters.list.map((m) => m.name.toLowerCase()),
-	...allMonsters.map((m) => m.name.toLowerCase()),
-]));
-const canSave = $derived(!isBatch && built && built.name !== 'Unnamed' && !takenNames.has(built.name.toLowerCase()));
-const canSaveBatch = $derived(isBatch && batchMonsters.some((m) => !takenNames.has(m.name.toLowerCase())));
+const builtinNames = $derived(new Set(allMonsters.map((m) => m.name.toLowerCase())));
+const canSave = $derived(!isBatch && built && built.name !== 'Unnamed' && !builtinNames.has(built.name.toLowerCase()));
+const canSaveBatch = $derived(isBatch && batchMonsters.some((m) => !builtinNames.has(m.name.toLowerCase())));
 
 const placeholders = $derived.by(() => {
 	const lines = text.split('\n');
@@ -90,6 +87,7 @@ const placeholders = $derived.by(() => {
 
 function saveMonster() {
 	if (!canSave) return;
+	if (userMonsters.hasName(built.name)) userMonsters.remove(built.name);
 	userMonsters.add({ ...built });
 	text = '';
 	window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -98,9 +96,9 @@ function saveMonster() {
 function saveBatch() {
 	if (!canSaveBatch) return;
 	for (const m of batchMonsters) {
-		if (!takenNames.has(m.name.toLowerCase())) {
-			userMonsters.add({ ...m });
-		}
+		if (builtinNames.has(m.name.toLowerCase())) continue;
+		if (userMonsters.hasName(m.name)) userMonsters.remove(m.name);
+		userMonsters.add({ ...m });
 	}
 	text = '';
 	window.scrollTo({ top: 0, behavior: 'smooth' });
