@@ -92,6 +92,7 @@ function saveMonster() {
 	if (!canSave) return;
 	userMonsters.add({ ...built });
 	text = '';
+	window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function saveBatch() {
@@ -102,6 +103,7 @@ function saveBatch() {
 		}
 	}
 	text = '';
+	window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function exportMonsters() {
