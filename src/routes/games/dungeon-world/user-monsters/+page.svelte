@@ -25,13 +25,44 @@ onMount(() => {
 
 let text = $state('');
 
-const built = $derived(parseMonsterText(text));
+const isBatch = $derived(text.includes('{'));
+
+function parseBatch(raw) {
+	const lines = raw.split('\n');
+	const monsters = [];
+	let i = 0;
+	while (i < lines.length) {
+		const trimmed = lines[i].trim();
+		if (!trimmed || trimmed === '{') {
+			if (trimmed === '{') {
+				i++;
+				const block = [];
+				while (i < lines.length && !lines[i].trim().startsWith('}')) {
+					block.push(lines[i]);
+					i++;
+				}
+				if (i < lines.length) i++; // skip }
+				const m = parseMonsterText(block.join('\n'));
+				if (m.name !== 'Unnamed') monsters.push(m);
+			} else {
+				i++;
+			}
+			continue;
+		}
+		i++;
+	}
+	return monsters;
+}
+
+const built = $derived(isBatch ? null : parseMonsterText(text));
+const batchMonsters = $derived(isBatch ? parseBatch(text) : []);
 
 const takenNames = $derived(new Set([
 	...userMonsters.list.map((m) => m.name.toLowerCase()),
 	...allMonsters.map((m) => m.name.toLowerCase()),
 ]));
-const canSave = $derived(built.name !== 'Unnamed' && !takenNames.has(built.name.toLowerCase()));
+const canSave = $derived(!isBatch && built && built.name !== 'Unnamed' && !takenNames.has(built.name.toLowerCase()));
+const canSaveBatch = $derived(isBatch && batchMonsters.some((m) => !takenNames.has(m.name.toLowerCase())));
 
 const placeholders = $derived.by(() => {
 	const lines = text.split('\n');
@@ -60,6 +91,16 @@ const placeholders = $derived.by(() => {
 function saveMonster() {
 	if (!canSave) return;
 	userMonsters.add({ ...built });
+	text = '';
+}
+
+function saveBatch() {
+	if (!canSaveBatch) return;
+	for (const m of batchMonsters) {
+		if (!takenNames.has(m.name.toLowerCase())) {
+			userMonsters.add({ ...m });
+		}
+	}
 	text = '';
 }
 
@@ -142,18 +183,33 @@ function cancelDelete() {
 	<div class="builder">
 		<TextBox bind:value={text} {placeholders} rows={12} />
 
-		{#if built.name !== 'Unnamed'}
-			<div class="builder-preview">
-				<MonsterStatblock {...built} open={true} custom={true} />
+		{#if isBatch}
+			{#if batchMonsters.length > 0}
+				<div class="builder-preview">
+					{#each batchMonsters as m (m.name)}
+						<MonsterStatblock {...m} open={true} custom={true} />
+					{/each}
+				</div>
+			{/if}
+			<div class="builder-actions">
+				<button class="action-btn primary" onclick={saveBatch} disabled={!canSaveBatch}>Save All ({batchMonsters.length})</button>
+				{#if text.trim()}
+					<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
+				{/if}
+			</div>
+		{:else}
+			{#if built && built.name !== 'Unnamed'}
+				<div class="builder-preview">
+					<MonsterStatblock {...built} open={true} custom={true} />
+				</div>
+			{/if}
+			<div class="builder-actions">
+				<button class="action-btn primary" onclick={saveMonster} disabled={!canSave}>Save Monster</button>
+				{#if text.trim()}
+					<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
+				{/if}
 			</div>
 		{/if}
-
-		<div class="builder-actions">
-			<button class="action-btn primary" onclick={saveMonster} disabled={!canSave}>Save Monster</button>
-			{#if text.trim()}
-				<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
-			{/if}
-		</div>
 	</div>
 
 	{#if userMonsters.list.length > 0}
