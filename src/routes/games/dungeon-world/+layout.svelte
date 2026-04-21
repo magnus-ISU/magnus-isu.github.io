@@ -5,7 +5,7 @@ import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 import { buildCharacterSheet, loadClassRaw } from '$lib/dw/classLoader.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { monsterSections } from '$lib/dw/monsters.js';
-import { contentIndex, navigation } from '$lib/dw/navigation.js';
+import { contentIndex, navigation, pageArt } from '$lib/dw/navigation.js';
 import { getSource, toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 let { children } = $props();
@@ -75,6 +75,12 @@ function handleToggle(item, target, e) {
 	goto(`/games/dungeon-world/${slug}`);
 }
 
+function getArtUrl(slug) {
+	const v = pageArt[slug];
+	if (!v) return '';
+	return typeof v === 'string' ? v : v.url;
+}
+
 function resolveClassItem(item) {
 	if (item.srdSlug && getSource(item.slug) === 'srd') {
 		return contentIndex[item.srdSlug] || item;
@@ -92,8 +98,9 @@ function onPointerDown(e, item, category, toggleTarget) {
 			characterSheet.isEmpty
 		) {
 			const resolved = resolveClassItem(item);
+			const art = getArtUrl(resolved.slug || item.slug);
 			loadClassRaw(resolved).then((raw) => {
-				if (raw) characterSheet.value = buildCharacterSheet(raw);
+				if (raw) characterSheet.value = buildCharacterSheet(raw, art);
 			});
 		}
 		sidebarOpen = false;
@@ -118,7 +125,7 @@ function onPointerDown(e, item, category, toggleTarget) {
 		) {
 			const resolved = resolveClassItem(item);
 			const raw = await loadClassRaw(resolved);
-			if (raw) characterSheet.value = buildCharacterSheet(raw);
+			if (raw) characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
 			sidebarOpen = false;
 		}
 	}, 500);
@@ -146,7 +153,7 @@ async function handleNavClick(e, item, category) {
 		) {
 			const resolved = resolveClassItem(item);
 			const raw = await loadClassRaw(resolved);
-			if (raw) characterSheet.value = buildCharacterSheet(raw);
+			if (raw) characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
 		}
 		sidebarOpen = false;
 		return;

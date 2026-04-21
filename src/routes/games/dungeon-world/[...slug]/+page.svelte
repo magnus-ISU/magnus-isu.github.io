@@ -164,7 +164,7 @@ onMount(() => {
 		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 		if (!heading) return;
 		if (heading.tagName === 'H1' && characterSheet.isEmpty) {
-			characterSheet.value = buildCharacterSheet(data.rawSource);
+			characterSheet.value = buildCharacterSheet(data.rawSource, data.art);
 			heading.classList.add('copied');
 			setTimeout(() => heading.classList.remove('copied'), 1000);
 			return;

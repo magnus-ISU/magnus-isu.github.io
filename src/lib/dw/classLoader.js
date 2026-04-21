@@ -18,7 +18,7 @@ export async function loadClassRaw(entry) {
 	return await resolver();
 }
 
-export function buildCharacterSheet(raw) {
+export function buildCharacterSheet(raw, artUrl) {
 	// Extract class name from "# The Fighter" → "Fighter"
 	const nameMatch = raw.match(/^#\s+(?:The\s+)?(.+)/m);
 	const className = nameMatch ? nameMatch[1].trim() : 'Unknown';
@@ -43,7 +43,7 @@ export function buildCharacterSheet(raw) {
 		`The ${className}, ${className} 1`,
 		`EXP 0, Base HP ${baseHp}, Armor 0, Damage ${damage}, Base Load ${baseLoad}, HP ${initialMaxHp}`,
 		`STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1`,
-		``,
+		artUrl || '',
 	].join('\n');
 
 	return `${header}\n${raw}`;
