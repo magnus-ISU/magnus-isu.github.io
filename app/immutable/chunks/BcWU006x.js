@@ -60,10 +60,10 @@ Choose your defense:
 [1 Weight] [1 Armor] Cloth Armor  
 [0 Weight] A Loaf of Bread from Your Kingdom (3 rations) and [1 Weight] Healing Potion  
 Choose one:  
-[1 Weight] Ornate Jewelry (valuable)  
 [1 Weight] Adventuring Gear (3 uses)  
 [1 Weight] Bandages (3 uses) and Silk Robes  
-[1 Weight] Looking Glass
+[0 Weight] Ornate Jewelry (valuable)  
+[0 Weight] Looking Glass
 
 ## Stats
 Damage: d4, HP: 6+Constitution, Load: 5+STR
