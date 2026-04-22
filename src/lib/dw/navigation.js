@@ -211,7 +211,7 @@ export const navigation = [
 		category: 'Classes',
 		items: [
 			{
-				title: 'Fighter',
+				title: 'The Fighter',
 				slug: 'fighter',
 				source: 'homebrew',
 				file: 'classes/Fighter',
@@ -219,7 +219,7 @@ export const navigation = [
 				srdSlug: 'fighter-srd',
 			},
 			{
-				title: 'Fighter',
+				title: 'The Fighter',
 				slug: 'fighter-srd',
 				source: 'srd',
 				file: 'Fighter',
@@ -227,7 +227,7 @@ export const navigation = [
 				homebrewSlug: 'fighter',
 			},
 			{
-				title: 'Wizard',
+				title: 'The Wizard',
 				slug: 'wizard',
 				source: 'homebrew',
 				file: 'classes/Living_Magus',
@@ -235,7 +235,7 @@ export const navigation = [
 				srdSlug: 'wizard-srd',
 			},
 			{
-				title: 'Wizard',
+				title: 'The Wizard',
 				slug: 'wizard-srd',
 				source: 'srd',
 				file: 'Wizard',
@@ -243,7 +243,7 @@ export const navigation = [
 				homebrewSlug: 'wizard',
 			},
 			{
-				title: 'Cleric',
+				title: 'The Cleric',
 				slug: 'cleric',
 				source: 'homebrew',
 				file: 'classes/Cleric',
@@ -251,7 +251,7 @@ export const navigation = [
 				srdSlug: 'cleric-srd',
 			},
 			{
-				title: 'Cleric',
+				title: 'The Cleric',
 				slug: 'cleric-srd',
 				source: 'srd',
 				file: 'Cleric',
@@ -259,7 +259,7 @@ export const navigation = [
 				homebrewSlug: 'cleric',
 			},
 			{
-				title: 'Thief',
+				title: 'The Thief',
 				slug: 'thief',
 				source: 'homebrew',
 				file: 'classes/Thief',
@@ -267,7 +267,7 @@ export const navigation = [
 				srdSlug: 'thief-srd',
 			},
 			{
-				title: 'Thief',
+				title: 'The Thief',
 				slug: 'thief-srd',
 				source: 'srd',
 				file: 'Thief',
@@ -275,7 +275,7 @@ export const navigation = [
 				homebrewSlug: 'thief',
 			},
 			{
-				title: 'Paladin',
+				title: 'The Paladin',
 				slug: 'paladin',
 				source: 'homebrew',
 				file: 'classes/Paladin',
@@ -283,7 +283,7 @@ export const navigation = [
 				srdSlug: 'paladin-srd',
 			},
 			{
-				title: 'Paladin',
+				title: 'The Paladin',
 				slug: 'paladin-srd',
 				source: 'srd',
 				file: 'Paladin',
@@ -291,7 +291,7 @@ export const navigation = [
 				homebrewSlug: 'paladin',
 			},
 			{
-				title: 'Ranger',
+				title: 'The Ranger',
 				slug: 'ranger',
 				source: 'homebrew',
 				file: 'classes/Ranger',
@@ -299,7 +299,7 @@ export const navigation = [
 				srdSlug: 'ranger-srd',
 			},
 			{
-				title: 'Ranger',
+				title: 'The Ranger',
 				slug: 'ranger-srd',
 				source: 'srd',
 				file: 'Ranger',
@@ -307,7 +307,7 @@ export const navigation = [
 				homebrewSlug: 'ranger',
 			},
 			{
-				title: 'Druid',
+				title: 'The Druid',
 				slug: 'druid',
 				source: 'homebrew',
 				file: 'classes/Druidess',
@@ -315,7 +315,7 @@ export const navigation = [
 				srdSlug: 'druid-srd',
 			},
 			{
-				title: 'Druid',
+				title: 'The Druid',
 				slug: 'druid-srd',
 				source: 'srd',
 				file: 'Druid',
@@ -323,7 +323,7 @@ export const navigation = [
 				homebrewSlug: 'druid',
 			},
 			{
-				title: 'Barbarian',
+				title: 'The Barbarian',
 				slug: 'barbarian',
 				source: 'homebrew',
 				file: 'classes/Barbarian',
@@ -331,7 +331,7 @@ export const navigation = [
 				srdSlug: 'barbarian-srd',
 			},
 			{
-				title: 'Barbarian',
+				title: 'The Barbarian',
 				slug: 'barbarian-srd',
 				source: 'srd',
 				file: 'Barbarian',
@@ -339,7 +339,7 @@ export const navigation = [
 				homebrewSlug: 'barbarian',
 			},
 			{
-				title: 'Bard',
+				title: 'The Bard',
 				slug: 'bard',
 				source: 'homebrew',
 				file: 'classes/Bard',
@@ -347,7 +347,7 @@ export const navigation = [
 				srdSlug: 'bard-srd',
 			},
 			{
-				title: 'Bard',
+				title: 'The Bard',
 				slug: 'bard-srd',
 				source: 'srd',
 				file: 'Bard',
@@ -355,7 +355,7 @@ export const navigation = [
 				homebrewSlug: 'bard',
 			},
 			{
-				title: 'Alchemist',
+				title: 'The Alchemist',
 				slug: 'alchemist',
 				source: 'homebrew',
 				file: 'classes/Alchemist',
@@ -363,7 +363,7 @@ export const navigation = [
 				hidden: true,
 			},
 			{
-				title: 'Illithid Parasite',
+				title: 'The Illithid Parasite',
 				slug: 'illithid-parasite',
 				source: 'homebrew',
 				file: 'classes/Illithid_Parasite',
@@ -371,7 +371,7 @@ export const navigation = [
 				hidden: true,
 			},
 			{
-				title: 'Trenchcoat',
+				title: 'The Trenchcoat',
 				slug: 'trenchcoat',
 				source: 'homebrew',
 				file: 'classes/Trenchcoat',

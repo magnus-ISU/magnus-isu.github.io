@@ -624,35 +624,42 @@ function toggleH3Glow(h3Index) {
 // --- Radial dice menu ---
 let radialMenu = $state(null); // { x, y, timer, closing }
 let suppressRadialClick = false;
+let pointerDownPos = null;
 const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
 
-function onHeaderPointerDown(e) {
+function onArticlePointerDown(e) {
+	pointerDownPos = { x: e.clientX, y: e.clientY };
 	const target = e.target;
 	if (target.closest('.radial-btn')) return;
-	if (target.closest('.circle, .armor-display, .circle-draggable, button, input')) {
+	if (target.closest('.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs')) {
 		suppressRadialClick = true;
 		if (radialMenu && !radialMenu.closing) closeRadialMenu();
 	}
 }
 
-function showRadialMenu(e) {
+function onArticleClick(e) {
 	if (suppressRadialClick) {
 		suppressRadialClick = false;
 		return;
 	}
-	// Only trigger on the header bar itself, not on interactive children
+	// Must be same spot as pointerdown (not a drag/scroll)
+	if (pointerDownPos) {
+		const dx = e.clientX - pointerDownPos.x;
+		const dy = e.clientY - pointerDownPos.y;
+		if (dx * dx + dy * dy > 100) return;
+	}
 	const target = e.target;
-	if (target.closest('button, input, .circle, .armor-display, .circle-draggable')) return;
+	if (target.closest('button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs')) return;
+	if (target.closest('.char-body') && target.closest('h2, h3')) return;
 	e.preventDefault();
 	if (radialMenu && !radialMenu.closing) {
 		closeRadialMenu();
 		return;
 	}
 	clearRadialTimer();
-	const rect = e.currentTarget.getBoundingClientRect();
 	radialMenu = {
-		x: e.clientX - rect.left,
-		y: e.clientY - rect.top,
+		x: e.clientX,
+		y: e.clientY,
 		closing: false,
 		timer: setTimeout(() => closeRadialMenu(), 5000),
 	};
@@ -752,7 +759,9 @@ function rollRadialDie(formula, e) {
 	</div>
 {/if}
 
-<article class="dw-article">
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<article class="dw-article cs-article" onclick={onArticleClick} onpointerdown={onArticlePointerDown}>
 	<h1>Character Sheet</h1>
 
 	<div class="char-tabs">
@@ -778,22 +787,7 @@ function rollRadialDie(formula, e) {
 
 	{#if parsed.name}
 		<div class="sheet-preview">
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div class="sheet-top" onclick={showRadialMenu} onpointerdown={onHeaderPointerDown}>
-			{#if radialMenu}
-				<div class="radial-menu" class:closing={radialMenu.closing} style="left: {radialMenu.x}px; top: {radialMenu.y}px">
-					{#each RADIAL_DICE as die, i}
-						{@const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2}
-						{@const radius = 70}
-						<button
-							class="radial-btn"
-							style="transform: translate({Math.cos(angle) * radius}px, {Math.sin(angle) * radius}px)"
-							onclick={(e) => { e.stopPropagation(); rollRadialDie(die, e); }}
-						>{die}</button>
-					{/each}
-				</div>
-			{/if}
+			<div class="sheet-top">
 			<div class="sheet-header">
 				<div class="header-info">
 					<h2 class="char-name">{parsed.name}</h2>
@@ -984,6 +978,19 @@ function rollRadialDie(formula, e) {
 			{/if}
 		</div>
 	{/if}
+	{#if radialMenu}
+		<div class="radial-menu" class:closing={radialMenu.closing} style="left: {radialMenu.x}px; top: {radialMenu.y}px">
+			{#each RADIAL_DICE as die, i}
+				{@const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2}
+				{@const radius = 70}
+				<button
+					class="radial-btn"
+					style="transform: translate({Math.cos(angle) * radius}px, {Math.sin(angle) * radius}px)"
+					onclick={(e) => { e.stopPropagation(); rollRadialDie(die, e); }}
+				>{die}</button>
+			{/each}
+		</div>
+	{/if}
 </article>
 
 <!-- Roll result -->
@@ -1009,6 +1016,30 @@ function rollRadialDie(formula, e) {
 {/key}
 
 <style>
+	/* Full-width: remove parent padding, add margins to non-sticky elements */
+	:global(.dw-content:has(> .cs-article)) {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	:global(.cs-article) > :global(h1),
+	.char-tabs,
+	.sheet-editor,
+	.char-body {
+		margin-left: 2.5rem;
+		margin-right: 2.5rem;
+	}
+
+	@media (max-width: 768px) {
+		:global(.cs-article) > :global(h1),
+		.char-tabs,
+		.sheet-editor,
+		.char-body {
+			margin-left: 1rem;
+			margin-right: 1rem;
+		}
+	}
+
 	.char-tabs {
 		display: flex;
 		gap: 0.25rem;
@@ -1069,16 +1100,10 @@ function rollRadialDie(formula, e) {
 		height: calc(100vh - 330px);
 	}
 
-	.sheet-preview {
-		border: 1px solid #333;
-		border-radius: 6px;
-	}
-
 	.sheet-top {
 		position: sticky;
-		top: calc(2rem * 1.7 + 1rem + 1px);
+		top: 0;
 		z-index: 9;
-		border-radius: 6px 6px 0 0;
 		-webkit-tap-highlight-color: transparent;
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
@@ -1397,7 +1422,7 @@ function rollRadialDie(formula, e) {
 
 	/* --- Radial dice menu --- */
 	.radial-menu {
-		position: absolute;
+		position: fixed;
 		z-index: 100;
 		pointer-events: none;
 	}
@@ -1511,26 +1536,46 @@ function rollRadialDie(formula, e) {
 			height: calc(100vh - 360px);
 		}
 
-		.sheet-preview {
-			margin-left: -1rem;
-			margin-right: -1rem;
-			border-radius: 0;
-			border-left: none;
-			border-right: none;
-		}
-
 		.sheet-top {
-			border-radius: 0;
-			top: calc(0.65rem + 2.5rem + 0.65rem + 1px);
+			top: 0;
 		}
 
 		.sheet-header {
-			flex-direction: column;
-			align-items: stretch;
-			gap: 0.5rem;
+			flex-wrap: wrap;
+			padding: 0 1rem 0.4rem 4rem;
+			gap: 0.25rem 0.5rem;
+		}
+
+		.header-info {
+			display: flex;
+			align-items: baseline;
+			gap: 0.4rem;
+			flex-wrap: nowrap;
+			overflow: hidden;
+			width: 100%;
+			min-height: 2.5rem;
+			padding-top: 0.4rem;
+		}
+
+		.char-name {
+			font-size: 1rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			flex-shrink: 1;
+			min-width: 0;
+		}
+
+		.char-subtitle {
+			margin: 0;
+			margin-left: auto;
+			font-size: 0.8rem;
+			white-space: nowrap;
+			flex-shrink: 0;
 		}
 
 		.header-circles {
+			width: 100%;
 			justify-content: center;
 		}
 

@@ -36,6 +36,7 @@ const dynamicMonsterItems = monsterSections
 const mergedNavigation = navigation.map((cat) =>
 	cat.category === 'Monsters' ? { ...cat, items: [...cat.items, ...dynamicMonsterItems] } : cat,
 );
+let scrolled = $state(false);
 let sidebarOpen = $state(false);
 let longPressTimer;
 let isLongPress = false;
@@ -50,6 +51,15 @@ function isActive(item, slug) {
 	if (item.homebrewSlug && slug === item.homebrewSlug) return true;
 	return false;
 }
+
+const pageTitle = $derived.by(() => {
+	for (const cat of mergedNavigation) {
+		for (const item of cat.items) {
+			if (isActive(item, currentSlug)) return item.title;
+		}
+	}
+	return '';
+});
 
 function getHref(item) {
 	if (!item.srdSlug) return `/games/dungeon-world/${item.slug}`;
@@ -162,21 +172,22 @@ async function handleNavClick(e, item, category) {
 }
 </script>
 
+<svelte:window onscroll={() => { scrolled = window.scrollY > 0; }} />
+
 <div class="dw-layout">
 	<button
 		class="sidebar-toggle"
-		onclick={() => (sidebarOpen = !sidebarOpen)}
+		class:hide={sidebarOpen}
+		onclick={() => (sidebarOpen = true)}
 		aria-label="Toggle navigation"
 	>
-		<span class="hamburger" class:open={sidebarOpen}></span>
+		<span class="hamburger"></span>
 	</button>
 
-	{#if sidebarOpen}
-		<div class="backdrop" onclick={() => (sidebarOpen = false)} role="presentation"></div>
-	{/if}
+	<div class="backdrop" class:open={sidebarOpen} onclick={() => (sidebarOpen = false)} role="presentation"></div>
 
 	<nav class="dw-sidebar" class:open={sidebarOpen}>
-		<h2><a href="/games/dungeon-world/">Dungeon World</a></h2>
+		<h2><a href="/games/dungeon-world/">{scrolled && pageTitle ? pageTitle : 'Dungeon World'}</a></h2>
 		{#each mergedNavigation as category}
 			<details open>
 				<summary>{category.category}</summary>
@@ -261,7 +272,7 @@ async function handleNavClick(e, item, category) {
 	.dw-sidebar {
 		background: #161616;
 		border-right: 1px solid #333;
-		padding: 1.5rem 0;
+		padding: 0 0 1.5rem;
 		position: sticky;
 		top: 0;
 		height: 100vh;
@@ -272,8 +283,12 @@ async function handleNavClick(e, item, category) {
 
 	.dw-sidebar h2 {
 		margin: 0 0 1rem;
-		padding: 0 1rem;
+		padding: 1.5rem 1rem 0.5rem;
 		font-size: 1.1rem;
+		position: sticky;
+		top: 0;
+		background: #161616;
+		z-index: 1;
 	}
 
 	.dw-sidebar h2 a {
@@ -497,11 +512,7 @@ async function handleNavClick(e, item, category) {
 		margin-right: -2.5rem;
 		padding: 0.5rem 2.5rem;
 		color: #fff;
-		border-bottom: 1px solid #333;
-		position: sticky;
-		top: 0;
-		background: #1e1e1e;
-		z-index: 10;
+		background: transparent;
 		-webkit-tap-highlight-color: transparent;
 	}
 
@@ -695,22 +706,20 @@ async function handleNavClick(e, item, category) {
 		top: 6px;
 	}
 
-	.hamburger.open {
-		background: transparent;
-	}
-
-	.hamburger.open::before {
-		transform: rotate(45deg);
-		top: 0;
-	}
-
-	.hamburger.open::after {
-		transform: rotate(-45deg);
-		top: 0;
-	}
-
 	.backdrop {
 		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 999;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.25s ease, visibility 0.25s ease;
+	}
+
+	.backdrop.open {
+		opacity: 1;
+		visibility: visible;
 	}
 
 	/* Mobile */
@@ -725,15 +734,22 @@ async function handleNavClick(e, item, category) {
 
 		.dw-sidebar {
 			position: fixed;
-			left: -280px;
+			left: 0;
 			top: 0;
 			width: 280px;
 			z-index: 1000;
-			transition: left 0.25s ease;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.25s ease, visibility 0.25s ease;
 		}
 
 		.dw-sidebar.open {
-			left: 0;
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.sidebar-toggle.hide {
+			display: none;
 		}
 
 		.dw-sidebar h2 { font-size: 1.32rem; }
@@ -743,10 +759,6 @@ async function handleNavClick(e, item, category) {
 
 		.backdrop {
 			display: block;
-			position: fixed;
-			inset: 0;
-			background: rgba(0, 0, 0, 0.5);
-			z-index: 999;
 		}
 
 		.dw-content {
@@ -754,7 +766,7 @@ async function handleNavClick(e, item, category) {
 		}
 
 		:global(.dw-article h1) {
-			padding-left: 4.5rem;
+			padding-left: 4rem;
 			padding-top: 0.65rem;
 			padding-bottom: 0.65rem;
 			margin-left: -1rem;
