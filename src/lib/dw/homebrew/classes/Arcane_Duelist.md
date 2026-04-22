@@ -5,6 +5,8 @@ Battle is not a means to an end: it is an art. Where others see nothing but chao
 ## Starting Moves
 
 ### Arcane Bladework
+You know 2 + INT techniques - magical effects you can apply to your swordplay. When your INT increases, learn another technique.
+
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply 1 technique.
 
 ### Throw Down the Gauntlet
@@ -19,16 +21,13 @@ When you **cross swords with a humanoid opponent**, gain +1 forward to discern r
 - What emotion drives this person?
 - What is this person trying to hide?
 
-### Student of the Blade
-You have 2 + INT techniques.
-
 ## Background
 
 ### Elf
-You descend from an ancient martial tradition. Gain +1 to Spout Lore on anything related to warfare.
+You descend from an ancient martial tradition. Take +1 to Spout Lore on anything related to warfare.
 
 ### Human
-Your fighting style is showy and impressive. Gain +1 forward to Parley with anyone who has seen you fight.
+Your fighting style is showy and impressive. Take +1 forward to Parley with anyone who has seen you fight.
 
 ## Gear
 You start with:  
@@ -98,7 +97,7 @@ When you **re-encounter somebody who has wronged you**, roll+INT. On a 10+, choo
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply INT techniques.
 
 ### Blade Artist
-Learn 3 techniques.
+Learn 3 techniques; you know a total of 5 + INT.
 
 ### Show Off
 When you **attempt to wow an audience with a display of your power**, roll+INT. On a 10+, choose 2. On a 7-9, choose 1.
@@ -112,7 +111,7 @@ Get one move from another class. Treat your level as one lower for choosing the 
 ## Mastery Moves
 
 ### Blade Savant
-Learn Techniques until you know Level + INT techniques.
+Learn many techniques; you know a total of Level + INT techniques.
 
 ### Two Men Enter, One Man Leaves
 *Replaces To the Death*  
@@ -150,16 +149,16 @@ Get one move from another class. Treat your level as one lower for choosing the 
 
 ## Techniques
 
-- **Freezing**  Your attack freezes and shatters a portion of your opponent's armor. After you deal your damage, reduce their armor by 1 until they repair it.
-- **Galvanic**  Electricity courses through your blade, numbing one of your target's limbs.
+- **Burning**  Your attack deals an extra 1d4 damage and lights anything flammable.
+- **Burst**  Your attack deals an additional 1d4 damage and gains the *forceful* tag.
+- **Quicksilver**  Your blade cuts faster than the eye can see, preventing your opponent from mounting a proper defense. Gain 4 piercing on your attack.
 - **Void-Edged**  The edge of your weapon hums with an unearthly light. You may slice through inanimate objects with ease and add the *messy* tag to your attack.
-- **Mirage**  You create illusions of yourself near your target that cannot fight but might confuse your enemies. You can instantly teleport to one of these illusions, dispelling them.
+- **Freezing**  Your attack freezes and shatters a portion of your opponent's armor. After you deal your damage, reduce their armor by 1 until they repair it.
+- **Soul-Siphoning**  Your attack heals you for 1d4. Heal 1d8 instead if this attack kills your target.
+- **Galvanic**  Electricity courses through your blade, numbing one of your target's limbs.
+- **Mirage**  You create illusions of yourself near your target that cannot fight but might confuse your enemies for a few seconds. You can instantly teleport to one of these illusions, dispelling them.
 - **Tethering**  You leave your weapon behind, pinning your target's shadow to the ground and preventing them from moving more than a few feet from it until they free themselves.
 - **Earthshaker**  Your attack concludes with an eruption of stone and earth from the ground, launching your target into the air.
-- **Burning**  Your attack deals an extra 1d4 damage and lights anything flammable.
-- **Soul-Siphoning**  Your attack heals you for 1d4. Heal 1d8 instead if this attack kills your target.
-- **Burst**  Your attack deals an additional 1d4 damage and gains the *forceful* tag.
-- **Quicksilver**  Your blade cuts faster than the eye can see, preventing your opponent from mounting a proper defense. Gain 2 piercing on your attack.
 - **Warding**  Your attack creates a ring of light around you and your target that other creatures (and their projectiles) cannot cross.
 - **Dust Devil**  Your attack kicks up a small tornado of dust and grit at your target's feet, obscuring visibility.
 - **Repelling**  A concussive wave follows your blade, forcing you and your opponent apart. You choose which direction you leap.
