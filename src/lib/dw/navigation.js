@@ -1,115 +1,68 @@
 import { monsterSections } from './monsters.js';
 
+const A = '/games/dungeon-world/art';
 export const pageArt = {
 	// Playing
-	introduction: {
-		url: 'https://www.enworld.org/attachments/flying_castle_by_asganafer-d6ufj92-png.73830/',
-		mirror: true,
-	},
-	'character-creation':
-		'https://assetsio.gnwcdn.com/D%26D-carfeul-planning-artwork.jpg?width=690&quality=85&format=jpg&dpr=3&auto=webp',
-	'basic-moves':
-		'https://travisdanielbow.weebly.com/uploads/3/8/3/9/38395353/dragon-s-fury-by-benwootten-d574oag_orig.jpg',
-	'playing-the-game':
-		'https://images.stockcake.com/public/7/e/e/7ee410d1-36aa-4cfc-b20c-a4db0d45314c_large/wizard-reading-spellbook-stockcake.jpg',
-	'moves-discussion':
-		'https://assetsio.gnwcdn.com/0_TheKingsDilemma.png?width=1200&height=600&fit=crop&enable=upscale&auto=webp',
-	'example-of-play':
-		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/08/DD-Fighter-dead-giant.jpg',
-	equipment: {
-		url: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0236e8e-8042-4ee1-8dd6-c64bb219d5be/dg3jlt8-886c488f-7b24-46c0-968f-5169e03eea7f.png/v1/fill/w_1920,h_1280,q_80,strp/dnd__inner_interior_blacksmith__by_bergionstyle_dg3jlt8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiIvZi9jMDIzNmU4ZS04MDQyLTRlZTEtOGRkNi1jNjRiYjIxOWQ1YmUvZGczamx0OC04ODZjNDg4Zi03YjI0LTQ2YzAtOTY4Zi01MTY5ZTAzZWVhN2YucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ._U_Dhcg1SNZtTx9TCqCl1QZxLAlimOUSvbZlpb8FoBg',
-		mirror: false,
-	},
-	'magic-items': {
-		url: 'https://i.pinimg.com/736x/c7/75/26/c77526a4563cde545b1c5078b0097021.jpg',
-		mirror: true,
-	},
-	'first-session':
-		'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-crystal-caves-adventure-lesbian-couple.jpg',
-	'class-moves-discussion':
-		'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2025/07/dungeon-master-university-hero.png?fit=800%2C450&ssl=1',
+	introduction: { url: `${A}/introduction.png`, mirror: true },
+	'character-creation': `${A}/character-creation.jpg`,
+	'basic-moves': `${A}/basic-moves.jpg`,
+	'playing-the-game': `${A}/playing-the-game.jpg`,
+	'moves-discussion': `${A}/moves-discussion.png`,
+	'example-of-play': `${A}/example-of-play.jpg`,
+	equipment: { url: `${A}/equipment.jpg`, mirror: false },
+	'magic-items': { url: `${A}/magic-items.jpg`, mirror: true },
+	'first-session': `${A}/first-session.jpg`,
+	'class-moves-discussion': `${A}/class-moves-discussion.png`,
 	// Classes
-	fighter:
-		'https://everhearthinn.com/wp-content/uploads/2022/08/Fighter-5E-Class-Guide-Featured-Image.webp',
-	wizard:
-		'https://imgcdn.stablediffusionweb.com/2025/1/28/efdf78a6-f201-4b00-bd0d-3f7cf0eb87f8.jpg',
-	cleric: 'https://i.pinimg.com/736x/35/40/48/354048c51b3a8d929d93bd5dd5b85a8b.jpg',
-	thief:
-		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/02/DD-Assassin-Rogue.jpg?w=1600&h=900&fit=crop',
-	paladin: 'https://nat1gaming.com/wp-content/uploads/2024/10/Silverblade-Paladin-MtG-Art.webp',
-	ranger:
-		'https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/10/ranger-s-hawk-by-robin-olausson-1.jpg?q=50&fit=crop&w=825&dpr=1.5',
-	druid: 'https://cosmicdraft.com/wp-content/uploads/2023/05/Druidcraft-Flowers.png',
-	barbarian:
-		'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/path-of-the-wild-heart-barbarian-subclass-dnd-6.png?resize=800%2C450&ssl=1',
-	bard: 'https://www.wargamer.com/wp-content/sites/wargamer/2024/06/dnd-dance-bard-nerf.jpg',
-	branded: 'https://simple-carry.com/cdn/shop/articles/firemage_1445x.jpg?v=1687386175',
-	'dashing-hero': 'https://litrpgreads.com/wp-content/uploads/2023/11/dnd-swashbuckler.jpg',
-	princess:
-		'https://wallup.net/wp-content/uploads/2018/09/28/961597-fantasy-original-girl-woman-character-long-hair-beautiful-princess-horse.jpg',
-	'arcane-duelist':
-		'https://i0.wp.com/dungeonmister.com/wp-content/uploads/2024/06/soulknife.jpg?resize=510%2C267&ssl=1',
-	dog: {
-		url: 'https://static.vecteezy.com/system/resources/previews/063/105/369/large_2x/german-shepherd-standing-in-mountain-meadow-at-sunrise-with-golden-light-free-photo.jpg',
-		mirror: false,
-	},
+	fighter: `${A}/fighter.webp`,
+	wizard: `${A}/wizard.jpg`,
+	cleric: `${A}/cleric.jpg`,
+	thief: `${A}/thief.jpg`,
+	paladin: `${A}/paladin.webp`,
+	ranger: `${A}/ranger.jpg`,
+	druid: `${A}/druid.png`,
+	barbarian: `${A}/barbarian.png`,
+	bard: `${A}/bard.jpg`,
+	branded: `${A}/branded.jpg`,
+	'dashing-hero': `${A}/dashing-hero.jpg`,
+	princess: `${A}/princess.jpg`,
+	'arcane-duelist': `${A}/arcane-duelist.jpg`,
+	dog: { url: `${A}/dog.jpg`, mirror: false },
 	// Monster Zones
-	'cavern-dwellers':
-		'https://cros.land/wp-content/uploads/2021/07/crystal_caves_by_josheiten_d5z8fes-pre.jpeg',
-	'dark-woods':
-		'https://static.wixstatic.com/media/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/70fbf4_efa7a0b016194fb1bcad489b08b80f64~mv2.jpeg',
-	'lower-depths':
-		'https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/07/forgotten-realms-swamp-cave-swamp-by-piotr-dura.jpg',
-	'twisted-experiments':
-		'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2025/05/dnd-reanimator-artificer-subclass-hero.png?fit=800%2C450&ssl=1',
-	'the-common-folk': 'https://www.aidedd.org/monster/img/bandit.jpg',
+	'cavern-dwellers': `${A}/cavern-dwellers.jpeg`,
+	'dark-woods': `${A}/dark-woods.jpeg`,
+	'lower-depths': `${A}/lower-depths.jpg`,
+	'twisted-experiments': `${A}/twisted-experiments.png`,
+	'the-common-folk': `${A}/the-common-folk.jpg`,
 	'ravenous-hordes':
 		'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/484151884_2299055003814839_3187383080746407242_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=Ujz8IbJ5InUQ7kNvwF_rJzQ&_nc_oc=Adqeuqy3pEbZIdyPQeZ2SbyCipRzzwX_FyNj0m_839Izq2AXgNLG2XaX46tnwYZd4lQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=uqJZn0S7DQkLjqcJKiI1Ig&_nc_ss=7a3a8&oh=00_Af0f6FTkol7hged-AwqrGammRvQSnPS79Tvp_DtRWV6knA&oe=69E6C7C2',
-	'planar-powers': 'https://i.redd.it/r8wvm0ou93k91.jpg',
-	'swamp-denizens':
-		'https://spriggans-den.com/wp-content/uploads/2019/05/the_marsh_by_johnofthenorth-d5wajrj-e1559130315634.jpg',
-	'undead-legions':
-		'https://www.worldanvil.com/uploads/images/b7e966bce728ddbaf67f65ddca76e6c0.jpg',
-	'wild-beasts':
-		'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
-	'godlike-beings':
-		'https://i.ytimg.com/vi/i_Ln4tY8cPA/maxresdefault.jpg',
-	'random-homebrew': {
-		url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp',
-		mirror: true,
-	},
+	'planar-powers': `${A}/planar-powers.jpg`,
+	'swamp-denizens': `${A}/swamp-denizens.jpg`,
+	'undead-legions': `${A}/undead-legions.jpg`,
+	'wild-beasts': `${A}/wild-beasts.jpg`,
+	'godlike-beings': `${A}/godlike-beings.jpg`,
+	'random-homebrew': { url: `${A}/random-homebrew.webp`, mirror: true },
 	// GMing
-	gm: 'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/dnd-gods-2024-6.png?resize=800%2C450&ssl=1',
-	'the-world':
-		'https://images.squarespace-cdn.com/content/v1/5dadaf88e03a4e6bb69307dd/904f0cc0-7846-4576-ac91-176528727e4b/Vhaledhon+No+Text+Map+Blog.jpg',
-	fronts: 'https://www.slashfilm.com/img/gallery/dark-tower-tv-series-cast/intro-import.jpg',
-	'advanced-delving':
-		'https://i.pinimg.com/736x/e4/14/9b/e4149b3cd7fc0a532bd536760976354f.jpg',
+	gm: `${A}/gm.png`,
+	'the-world': `${A}/the-world.jpg`,
+	fronts: `${A}/fronts.jpg`,
+	'advanced-delving': `${A}/advanced-delving.jpg`,
 	// Appendices
-	conversion:
-		'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/02/tasha-with-spellbooks.jpg',
-	npcs: 'https://i.redd.it/zekid8146y3g1.jpeg',
-	teaching:
-		'https://static0.srcdn.com/wordpress/wp-content/uploads/2022/11/dnd-school-of-adventure-campaign.jpg',
-	thanks: 'https://www.dndspeak.com/wp-content/uploads/2021/04/RoyalFamily-1.jpg',
+	conversion: `${A}/conversion.jpg`,
+	npcs: `${A}/npcs.jpeg`,
+	teaching: `${A}/teaching.jpg`,
+	thanks: `${A}/thanks.jpg`,
 	// Special pages
-	'monsters-srd':
-		'https://cdn.shopify.com/s/files/1/0828/6568/4757/files/chinese-god-dragon_480x480.jpg?v=1718627014',
-	encounters: '/games/dungeon-world/art/encounters.webp',
-	'all-monsters':
-		'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
-	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
+	'monsters-srd': `${A}/monsters-srd.jpg`,
+	encounters: `${A}/encounters.webp`,
+	'all-monsters': `${A}/all-monsters.jpg`,
+	'user-monsters': `${A}/user-monsters.jpg`,
 	// Spells
-	'wizard-spells':
-		'https://mysterydicegoblin.com/cdn/shop/articles/a93025da-294f-4951-bb6d-ff3735e83838.webp?v=1724242177',
-	'wizard-spells-srd':
-		'https://mysterydicegoblin.com/cdn/shop/articles/a93025da-294f-4951-bb6d-ff3735e83838.webp?v=1724242177',
-	'cleric-miracles':
-		'https://www.wargamer.com/wp-content/sites/wargamer/2021/05/dnd-5e-cleric-life-cleric-casting-spell.jpg',
-	'cleric-spells-srd':
-		'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
-	'druid-bindings':
-		'https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/535019244_10234767612704294_4457784100332717442_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=NgyQASvxctwQ7kNvwGkuBKn&_nc_oc=Adp9f4T4As636q_I1-mY7AD75tcT-Q32WNXNDvQ8byY1fo53xvRQ_1chpVQ5DEwEVbU&_nc_zt=23&_nc_ht=scontent-dfw5-1.xx&_nc_gid=uHkyCyBoiMQksO9tjFK6rg&_nc_ss=7a3a8&oh=00_Af3-gyc4BxeYpCSZ-NgjHJB3HezwiBrD7d9z9WNbDQg3tg&oe=69EE07E7',
+	'wizard-spells': `${A}/wizard-spells.webp`,
+	'wizard-spells-srd': `${A}/wizard-spells.webp`,
+	'cleric-miracles': `${A}/cleric-miracles.jpg`,
+	'cleric-spells-srd': `${A}/cleric-spells-srd.png`,
+	'druid-bindings': `${A}/druid-bindings.jpg`,
 };
 
 export const navigation = [
