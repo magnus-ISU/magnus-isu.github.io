@@ -65,6 +65,8 @@ const pageTitle = $derived.by(() => {
 let sidebarHasFocus = false;
 
 function onSidebarKeydown(e) {
+	if (!sidebarHasFocus) return;
+	if (e.target.closest('input, textarea, select')) return;
 	const key = e.key;
 	const down = key === 'ArrowDown' || key === 'j';
 	const up = key === 'ArrowUp' || key === 'k';
@@ -76,11 +78,6 @@ function onSidebarKeydown(e) {
 	sidebarOpen = false;
 	goto(getHref(allItems[next]));
 }
-
-$effect(() => {
-	void currentSlug;
-	if (sidebarHasFocus) requestAnimationFrame(() => sidebarEl?.focus());
-});
 
 function getHref(item) {
 	if (!item.srdSlug) return `/games/dungeon-world/${item.slug}`;
@@ -190,12 +187,10 @@ async function handleNavClick(e, item, category) {
 		return;
 	}
 	sidebarOpen = false;
-	sidebarHasFocus = true;
-	sidebarEl?.focus();
 }
 </script>
 
-<svelte:window onscroll={() => { scrolled = window.scrollY > 0; }} />
+<svelte:window onscroll={() => { scrolled = window.scrollY > 0; }} onkeydown={onSidebarKeydown} onclick={(e) => { if (!sidebarEl?.contains(e.target)) sidebarHasFocus = false; }} />
 
 <div class="dw-layout">
 	<button
@@ -209,8 +204,7 @@ async function handleNavClick(e, item, category) {
 
 	<div class="backdrop" class:open={sidebarOpen} onclick={() => (sidebarOpen = false)} role="presentation"></div>
 
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-	<nav class="dw-sidebar" class:open={sidebarOpen} tabindex="0" bind:this={sidebarEl} onkeydown={onSidebarKeydown} onfocusin={() => { sidebarHasFocus = true; }} onfocusout={(e) => { if (e.relatedTarget && !sidebarEl?.contains(e.relatedTarget)) sidebarHasFocus = false; }}>
+	<nav class="dw-sidebar" class:open={sidebarOpen} bind:this={sidebarEl} onclick={() => { sidebarHasFocus = true; }}>
 		<h2><a href="/games/dungeon-world/">{scrolled && pageTitle ? pageTitle : 'Dungeon World'}</a></h2>
 		{#each mergedNavigation as category}
 			<details open>
@@ -306,7 +300,6 @@ async function handleNavClick(e, item, category) {
 		background: #161616;
 		border-right: 1px solid #333;
 		padding: 0 0 1.5rem;
-		outline: none;
 		position: sticky;
 		top: 0;
 		height: 100vh;
