@@ -80,6 +80,12 @@ When you **attack at near range with blades of cutting air**, roll+INT. On a 10+
 - You have to move to get a clear shot, placing you in danger.
 - You lose control of the wind, one way or another.
 
+### Spell Ripper
+When you **slash entirely through an arcane spell**, roll+INT. On a 10+, you rip the spell apart. On a 7-9, you disrupt it, but choose:
+- You suffer a backlash of arcane energy as the spell is torn into unpredictable threads
+- The caster can turn their spell aside and strike another with it
+- The mental strain is beyond you: gain the Stunned debility as the spell rips into your own mind.
+
 ### To the Death
 You have +1 armor against any opponent that you have challenged to a duel.
 
@@ -147,6 +153,10 @@ You take on a student to carry on the techniques you have learned. The student c
 *Requires Multiclass Dabbler*  
 Get one move from another class. Treat your level as one lower for choosing the move.
 
+### Spell Capture
+*Requires Spell Ripper*  
+On a 10+, you can choose to gain the Stunned debility. When you gain the Stunned debility from this move, Hold 1 Spell. Spend your spell to cast the same spell back at whatever target you choose. Lose your Spell when you are cured of the Stunned debility.
+
 ## Techniques
 
 - **Burning**  Your attack deals an extra 1d4 damage and lights anything flammable.
@@ -164,6 +174,7 @@ Get one move from another class. Treat your level as one lower for choosing the 
 - **Repelling**  A concussive wave follows your blade, forcing you and your opponent apart. You choose which direction you leap.
 - **Grounding**  Energy channels from your blade into the earth beneath you. Until you choose to move from this spot, you cannot be knocked down, pushed, or thrown off balance.
 - **Redirecting**  Your blade traces a sigil in the air that lingers after your strike. Hold 1 Ward; spend it to deflected a nearby ranged attack toward a target of your choosing within near range. Lose your Ward when you stop fighting.
+- **Phasing**  Your blade flickers, not in this realm for a moment. Your attack gains *ethereal* and *insubstantial*.
 
 *A playbook by Timothy Schroeder and Magnus Anderson*
 `;export{e as default};
