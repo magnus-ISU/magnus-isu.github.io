@@ -90,7 +90,7 @@ When you **slash entirely through an arcane spell**, roll+INT. On a 10+, you rip
 You have +1 armor against any opponent that you have challenged to a duel.
 
 ### Floating Step
-When you get a 10+ with Arcane Bladework, take +1 forward to any Defy Danger rolls to navigate the battlefield.
+When you get a 10+ to **Hack & Slash**, take +1 forward to any Defy Danger rolls to navigate the battlefield.
 
 ### Know Your Enemy
 When you **re-encounter somebody who has wronged you**, roll+INT. On a 10+, choose 2. On a 7-9, choose 1:
@@ -134,7 +134,7 @@ When you **attack at near range with blades of cutting air**, roll+INT. On a 10+
 
 ### Dance With the Sky
 *Replaces Floating Step*  
-You move with inhuman grace and are capable of leaping distances that would be impossible for mere mortals. In addition, when you get a 10+ with Arcane Bladework, take +1 ongoing to any Defy Danger rolls to navigate the battlefield until the battle ends.
+You move with inhuman grace and are capable of leaping distances that would be impossible for mere mortals. In addition, when you get a 10+ on **Hack & Slash**, take +1 ongoing to any Defy Danger rolls to navigate the battlefield until the battle ends.
 
 ### Steel Tells No Lies
 *Replaces Know Your Enemy*  
