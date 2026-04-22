@@ -1081,7 +1081,6 @@ function rollRadialDie(formula, e) {
 	.char-tab {
 		flex-shrink: 0;
 		padding: 0.3rem 0.75rem;
-		transform: translateY(9px);
 		background: #2a2a2a;
 		border: 1px solid #3a3a3a;
 		border-radius: 4px 4px 0 0;
@@ -1101,9 +1100,9 @@ function rollRadialDie(formula, e) {
 	}
 
 	.char-tab.active {
-		background: #1a1a1a;
+		background: transparent;
 		border-color: #555;
-		border-bottom-color: #1a1a1a;
+		border-bottom-color: transparent;
 		color: #fff;
 	}
 
@@ -1122,6 +1121,7 @@ function rollRadialDie(formula, e) {
 	}
 
 	.sheet-editor {
+		margin-top: -8px;
 		margin-bottom: 1.5rem;
 		border-radius: 6px;
 	}
