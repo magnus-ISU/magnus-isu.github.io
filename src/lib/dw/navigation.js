@@ -34,8 +34,7 @@ export const pageArt = {
 	'lower-depths': `${A}/lower-depths.jpg`,
 	'twisted-experiments': `${A}/twisted-experiments.png`,
 	'the-common-folk': `${A}/the-common-folk.jpg`,
-	'ravenous-hordes':
-		'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/484151884_2299055003814839_3187383080746407242_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=Ujz8IbJ5InUQ7kNvwF_rJzQ&_nc_oc=Adqeuqy3pEbZIdyPQeZ2SbyCipRzzwX_FyNj0m_839Izq2AXgNLG2XaX46tnwYZd4lQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=uqJZn0S7DQkLjqcJKiI1Ig&_nc_ss=7a3a8&oh=00_Af0f6FTkol7hged-AwqrGammRvQSnPS79Tvp_DtRWV6knA&oe=69E6C7C2',
+	'ravenous-hordes': `${A}/ravenous-hordes.jpeg`,
 	'planar-powers': `${A}/planar-powers.jpg`,
 	'swamp-denizens': `${A}/swamp-denizens.jpg`,
 	'undead-legions': `${A}/undead-legions.jpg`,
