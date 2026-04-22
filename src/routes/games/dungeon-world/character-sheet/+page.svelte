@@ -561,7 +561,25 @@ const damageEntries = $derived.by(() => {
 const bodyHtml = $derived(renderMarkdown(parsed.body));
 
 let charBodyEl = $state();
+let editorEl = $state();
+let sheetTopEl = $state();
 let animatingH3 = -1;
+
+function sizeEditor() {
+	if (!editorEl || !sheetTopEl) return;
+	const textarea = editorEl.querySelector('textarea');
+	if (!textarea) return;
+	const editorTop = editorEl.getBoundingClientRect().top + window.scrollY;
+	const sheetTopH = sheetTopEl.offsetHeight;
+	const gap = parseFloat(getComputedStyle(editorEl).marginBottom) || 0;
+	const h = window.innerHeight - editorTop - gap - sheetTopH;
+	textarea.style.height = Math.max(100, h) + 'px';
+}
+
+$effect(() => {
+	if (!editorEl || !sheetTopEl) return;
+	requestAnimationFrame(sizeEditor);
+});
 
 $effect(() => {
 	void bodyHtml;
@@ -741,7 +759,7 @@ function rollRadialDie(formula, e) {
 		e.preventDefault();
 		undo();
 	}
-}} />
+}} onresize={sizeEditor} />
 
 <svelte:head>
 	<title>Character Sheet - Dungeon World</title>
@@ -781,13 +799,13 @@ function rollRadialDie(formula, e) {
 		{/if}
 	</div>
 
-	<div class="sheet-editor">
+	<div class="sheet-editor" bind:this={editorEl}>
 		<TextBox bind:value={text} {placeholders} rows={12} />
 	</div>
 
 	{#if parsed.name}
 		<div class="sheet-preview">
-			<div class="sheet-top">
+			<div class="sheet-top" bind:this={sheetTopEl}>
 			<div class="sheet-header">
 				<div class="header-info">
 					<h2 class="char-name">{parsed.name}</h2>
@@ -1016,6 +1034,10 @@ function rollRadialDie(formula, e) {
 {/key}
 
 <style>
+	:global(.cs-article) {
+		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
+	}
+
 	/* Full-width: remove parent padding, add margins to non-sticky elements */
 	:global(.dw-content:has(> .cs-article)) {
 		padding-left: 0 !important;
@@ -1092,12 +1114,16 @@ function rollRadialDie(formula, e) {
 		border-color: #aabbff;
 	}
 
+	.sheet-editor, .char-tabs {
+		cursor: auto;
+	}
+
 	.sheet-editor {
 		margin-bottom: 1.5rem;
 		border-radius: 6px;
 	}
 	.sheet-editor :global(textarea) {
-		height: calc(100vh - 330px);
+		height: 200px;
 	}
 
 	.sheet-top {
@@ -1105,7 +1131,6 @@ function rollRadialDie(formula, e) {
 		top: 0;
 		z-index: 9;
 		-webkit-tap-highlight-color: transparent;
-		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
 
 	/* --- Header with circles --- */
@@ -1269,7 +1294,7 @@ function rollRadialDie(formula, e) {
 		font-size: 0.88rem;
 		white-space: nowrap;
 		color: #ddd;
-		cursor: pointer;
+		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 		transition: background 0.15s, border-color 0.15s;
 		touch-action: none;
 		-webkit-user-select: none;
@@ -1327,6 +1352,7 @@ function rollRadialDie(formula, e) {
 		padding: 0.75rem 1rem;
 		white-space: normal;
 		word-wrap: break-word;
+		cursor: auto;
 	}
 
 	.char-body :global(h1) {
@@ -1532,10 +1558,6 @@ function rollRadialDie(formula, e) {
 	}
 
 	@media (max-width: 768px) {
-		.sheet-editor :global(textarea) {
-			height: calc(100vh - 360px);
-		}
-
 		.sheet-top {
 			top: 0;
 		}
