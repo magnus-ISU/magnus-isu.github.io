@@ -607,9 +607,8 @@ async function handleNavClick(e, item, category) {
 		border-left: 3px solid #d4a847;
 		margin: 1rem 0;
 		padding: 0.5rem 1rem;
-		background: #222;
+		background: transparent;
 		color: #ccc;
-		border-radius: 0 4px 4px 0;
 	}
 
 	:global(.dw-article pre) {
