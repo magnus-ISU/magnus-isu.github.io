@@ -1070,6 +1070,8 @@ function rollRadialDie(formula, e) {
 		scrollbar-width: none;
 		padding-bottom: 0.25rem;
 		margin-bottom: 0.25rem;
+		position: relative;
+		z-index: 2;
 	}
 
 	.char-tabs::-webkit-scrollbar {
@@ -1079,6 +1081,7 @@ function rollRadialDie(formula, e) {
 	.char-tab {
 		flex-shrink: 0;
 		padding: 0.3rem 0.75rem;
+		transform: translateY(9px);
 		background: #2a2a2a;
 		border: 1px solid #3a3a3a;
 		border-radius: 4px 4px 0 0;
@@ -1355,11 +1358,16 @@ function rollRadialDie(formula, e) {
 	}
 
 	.char-body :global(p),
-	.char-body :global(li),
+	.char-body :global(li) {
+		width: fit-content;
+		max-width: 100%;
+		cursor: text;
+	}
+
 	.char-body :global(td),
 	.char-body :global(th),
 	.char-body :global(blockquote) {
-		cursor: auto;
+		cursor: text;
 	}
 
 	.char-body :global(h1) {
