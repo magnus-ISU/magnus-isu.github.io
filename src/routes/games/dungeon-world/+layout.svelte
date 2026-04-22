@@ -213,6 +213,8 @@ async function handleNavClick(e, item, category) {
 
 	<div class="backdrop" class:open={sidebarOpen} onclick={() => (sidebarOpen = false)} role="presentation"></div>
 
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<nav class="dw-sidebar" class:open={sidebarOpen} bind:this={sidebarEl} onclick={() => { sidebarHasFocus = true; }}>
 		<h2><a href="/games/dungeon-world/">{scrolled && pageTitle ? pageTitle : 'Dungeon World'}</a></h2>
 		{#each mergedNavigation as category}

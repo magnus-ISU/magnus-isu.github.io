@@ -6,7 +6,7 @@ export const pageArt = {
 	introduction: { url: `${A}/introduction.png`, mirror: true },
 	'character-creation': `${A}/character-creation.jpg`,
 	'basic-moves': `${A}/basic-moves.jpg`,
-	'playing-the-game': `${A}/playing-the-game.jpg`,
+	'playing-the-game': `${A}/playing-the-game.png`,
 	'moves-discussion': `${A}/moves-discussion.png`,
 	'example-of-play': `${A}/example-of-play.jpg`,
 	equipment: { url: `${A}/equipment.jpg`, mirror: false },
