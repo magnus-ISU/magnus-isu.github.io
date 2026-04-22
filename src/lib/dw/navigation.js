@@ -95,7 +95,7 @@ export const pageArt = {
 	// Special pages
 	'monsters-srd':
 		'https://cdn.shopify.com/s/files/1/0828/6568/4757/files/chinese-god-dragon_480x480.jpg?v=1718627014',
-	encounters: 'https://static.wikia.nocookie.net/forgottenrealms/images/f/f3/Black_Pits_art.png',
+	encounters: 'https://static.wikia.nocookie.net/forgottenrealms/images/f/f3/Black_Pits_art.png/revision/latest/',
 	'all-monsters':
 		'https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/01/d-d-monster-manual-2024.jpg?w=1600&h=900&fit=crop',
 	'user-monsters': 'https://i.pinimg.com/originals/e7/9f/0c/e79f0c7fe795133f04cfda406bfb6290.jpg',
