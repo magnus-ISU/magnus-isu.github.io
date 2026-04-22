@@ -667,7 +667,7 @@ function onArticleClick(e) {
 		if (dx * dx + dy * dy > 100) return;
 	}
 	const target = e.target;
-	if (target.closest('button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs')) return;
+	if (target.closest('button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line')) return;
 	if (target.closest('.char-body') && target.closest('h2, h3')) return;
 	e.preventDefault();
 	if (radialMenu && !radialMenu.closing) {
