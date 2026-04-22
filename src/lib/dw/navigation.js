@@ -48,7 +48,7 @@ export const pageArt = {
 	princess:
 		'https://wallup.net/wp-content/uploads/2018/09/28/961597-fantasy-original-girl-woman-character-long-hair-beautiful-princess-horse.jpg',
 	'arcane-duelist':
-		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/08/DD-Fighter-dead-giant.jpg?q=49&fit=crop&w=825&dpr=2',
+		'https://i0.wp.com/dungeonmister.com/wp-content/uploads/2024/06/soulknife.jpg?resize=510%2C267&ssl=1',
 	dog: {
 		url: 'https://www.oilpaintings.com/images/eugene-verboeckhoven-paintings-sheep-dog-guarding-his-flock/44885/600x600/49804.webp',
 		mirror: true,
@@ -109,7 +109,7 @@ export const pageArt = {
 	'cleric-spells-srd':
 		'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
 	'druid-bindings':
-		'https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/535019244_10234767612704294_4457784100332717442_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=gd3K4P19Y1YQ7kNvwH8UYVu&_nc_oc=AdomhH8Ulyqp8BPIr9gCQo6w0SJFQXBhg608rKUngZ0IURejqgaPqIuKbF_kWsXFAAQ&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=qeeML3ud3q80rzTp5vjf_A&_nc_ss=7a3a8&oh=00_Af06j5MTgve2Q9Tw8EmIIT1_L7X6k9jb1fgsqT8APzfGaA&oe=69E6C7A7',
+		'https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/535019244_10234767612704294_4457784100332717442_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e06c5d&_nc_ohc=NgyQASvxctwQ7kNvwGkuBKn&_nc_oc=Adp9f4T4As636q_I1-mY7AD75tcT-Q32WNXNDvQ8byY1fo53xvRQ_1chpVQ5DEwEVbU&_nc_zt=23&_nc_ht=scontent-dfw5-1.xx&_nc_gid=uHkyCyBoiMQksO9tjFK6rg&_nc_ss=7a3a8&oh=00_Af3-gyc4BxeYpCSZ-NgjHJB3HezwiBrD7d9z9WNbDQg3tg&oe=69EE07E7',
 };
 
 export const navigation = [

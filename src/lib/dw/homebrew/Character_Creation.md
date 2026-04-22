@@ -4,7 +4,7 @@
 
 Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Go through the sheet and delete the moves / gear / options that you don't take.
 
-You can open a spell list and click on a heading to copy everything under the heading to paste into your character sheet. Click on spell names to indicate they are memorized and ready to cast. (Or click on any heading to mark it as selected or special in some way)
+You can open a spell list and click on a heading (click cantrips) to copy everything under the heading to paste into your character sheet. Long click more to append to the clipboard. Click on spell names to indicate they are memorized and ready to cast.
 
 Modify your damage dice on the second line. Add more damage dice options by using semicolons: Damage d4;2d4;2d6
 

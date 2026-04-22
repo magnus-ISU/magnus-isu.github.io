@@ -38,6 +38,7 @@ const mergedNavigation = navigation.map((cat) =>
 );
 let scrolled = $state(false);
 let sidebarOpen = $state(false);
+let sidebarEl = $state();
 let longPressTimer;
 let isLongPress = false;
 
@@ -52,13 +53,33 @@ function isActive(item, slug) {
 	return false;
 }
 
+const allItems = $derived(mergedNavigation.flatMap((cat) => cat.items.filter((i) => !i.hidden)));
+
 const pageTitle = $derived.by(() => {
-	for (const cat of mergedNavigation) {
-		for (const item of cat.items) {
-			if (isActive(item, currentSlug)) return item.title;
-		}
+	for (const item of allItems) {
+		if (isActive(item, currentSlug)) return item.title;
 	}
 	return '';
+});
+
+let sidebarHasFocus = false;
+
+function onSidebarKeydown(e) {
+	const key = e.key;
+	const down = key === 'ArrowDown' || key === 'j';
+	const up = key === 'ArrowUp' || key === 'k';
+	if (!down && !up) return;
+	e.preventDefault();
+	const idx = allItems.findIndex((item) => isActive(item, currentSlug));
+	const next = idx + (down ? 1 : -1);
+	if (next < 0 || next >= allItems.length) return;
+	sidebarOpen = false;
+	goto(getHref(allItems[next]));
+}
+
+$effect(() => {
+	void currentSlug;
+	if (sidebarHasFocus) requestAnimationFrame(() => sidebarEl?.focus());
 });
 
 function getHref(item) {
@@ -169,6 +190,8 @@ async function handleNavClick(e, item, category) {
 		return;
 	}
 	sidebarOpen = false;
+	sidebarHasFocus = true;
+	sidebarEl?.focus();
 }
 </script>
 
@@ -186,7 +209,8 @@ async function handleNavClick(e, item, category) {
 
 	<div class="backdrop" class:open={sidebarOpen} onclick={() => (sidebarOpen = false)} role="presentation"></div>
 
-	<nav class="dw-sidebar" class:open={sidebarOpen}>
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<nav class="dw-sidebar" class:open={sidebarOpen} tabindex="0" bind:this={sidebarEl} onkeydown={onSidebarKeydown} onfocusin={() => { sidebarHasFocus = true; }} onfocusout={(e) => { if (e.relatedTarget && !sidebarEl?.contains(e.relatedTarget)) sidebarHasFocus = false; }}>
 		<h2><a href="/games/dungeon-world/">{scrolled && pageTitle ? pageTitle : 'Dungeon World'}</a></h2>
 		{#each mergedNavigation as category}
 			<details open>
@@ -282,6 +306,7 @@ async function handleNavClick(e, item, category) {
 		background: #161616;
 		border-right: 1px solid #333;
 		padding: 0 0 1.5rem;
+		outline: none;
 		position: sticky;
 		top: 0;
 		height: 100vh;
