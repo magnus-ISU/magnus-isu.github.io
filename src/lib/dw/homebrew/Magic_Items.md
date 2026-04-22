@@ -58,9 +58,6 @@ Impossibly light and impossibly strong, adamantium can only be found deep in Hel
 
 It's generally thought that if you have the misfortune of facing someone who has it, you should kill their friends and run, run away. But there is no shortage of kingdoms who hope to get their hands on a suit, either.
 
-### [2 Weight] [3 Armor] Elven Chain Mail
-Created by secretive and immortal smiths to amplify rather than hinder spellcasting.
-
 ### [1 Weight] [2 Armor] Robes of the Evil Archmagi *requires evil*
 When you **kill with an arcane spell**, take +1 forward to work magic.
 

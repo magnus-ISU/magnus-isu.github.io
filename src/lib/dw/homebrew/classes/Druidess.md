@@ -120,7 +120,7 @@ Take +1 to Spout Lore about the natural world or things civilization has forgot.
 You no longer need to eat, drink, or breathe.
 
 ### Barkskin
-So long as your feet touch the ground, you have +2 armor.
+So long as your feet touch the ground, you have +1 armor.
 
 ### Eyes of the Tiger
 When you mark an animal (with mud, dirt, or blood) you can see through that animal's eyes as if they were your own, no matter what distance separates you. Only one animal at a time may be marked in this way.

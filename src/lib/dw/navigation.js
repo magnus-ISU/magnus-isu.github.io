@@ -17,8 +17,8 @@ export const pageArt = {
 	'example-of-play':
 		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/08/DD-Fighter-dead-giant.jpg',
 	equipment: {
-		url: 'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/11/Metallic-Dragon-with-Hoard.jpg',
-		mirror: true,
+		url: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0236e8e-8042-4ee1-8dd6-c64bb219d5be/dg3jlt8-886c488f-7b24-46c0-968f-5169e03eea7f.png/v1/fill/w_1920,h_1280,q_80,strp/dnd__inner_interior_blacksmith__by_bergionstyle_dg3jlt8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiIvZi9jMDIzNmU4ZS04MDQyLTRlZTEtOGRkNi1jNjRiYjIxOWQ1YmUvZGczamx0OC04ODZjNDg4Zi03YjI0LTQ2YzAtOTY4Zi01MTY5ZTAzZWVhN2YucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ._U_Dhcg1SNZtTx9TCqCl1QZxLAlimOUSvbZlpb8FoBg',
+		mirror: false,
 	},
 	'magic-items': {
 		url: 'https://i.pinimg.com/736x/c7/75/26/c77526a4563cde545b1c5078b0097021.jpg',
@@ -84,7 +84,7 @@ export const pageArt = {
 		'https://images.squarespace-cdn.com/content/v1/5dadaf88e03a4e6bb69307dd/904f0cc0-7846-4576-ac91-176528727e4b/Vhaledhon+No+Text+Map+Blog.jpg',
 	fronts: 'https://www.slashfilm.com/img/gallery/dark-tower-tv-series-cast/intro-import.jpg',
 	'advanced-delving':
-		'https://static.wikia.nocookie.net/medievalhogwartsroleplay/images/0/06/Dungeon_Hall.png',
+		'https://i.pinimg.com/736x/e4/14/9b/e4149b3cd7fc0a532bd536760976354f.jpg',
 	// Appendices
 	conversion:
 		'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/02/tasha-with-spellbooks.jpg',
