@@ -20,7 +20,7 @@ export const pageArt = {
 	thief: `${A}/thief.jpg`,
 	paladin: `${A}/paladin.webp`,
 	ranger: `${A}/ranger.jpg`,
-	druid: `${A}/druid.png`,
+	druid: `${A}/druid.webp`,
 	barbarian: `${A}/barbarian.png`,
 	bard: `${A}/bard.jpg`,
 	branded: `${A}/branded.jpg`,
