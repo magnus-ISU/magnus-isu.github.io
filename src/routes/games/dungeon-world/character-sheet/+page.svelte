@@ -1133,7 +1133,7 @@ function rollRadialDie(formula, e) {
 		position: sticky;
 		top: 0;
 		z-index: 9;
-		-webkit-tap-highlight-color: transparent;
+
 	}
 
 	/* --- Header with circles --- */
@@ -1381,7 +1381,7 @@ function rollRadialDie(formula, e) {
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 	}
 
 	.char-body :global(h2:first-child) {
@@ -1417,7 +1417,7 @@ function rollRadialDie(formula, e) {
 		margin-top: 0;
 		cursor: pointer;
 		transition: box-shadow 0.2s, border-color 0.2s;
-		-webkit-tap-highlight-color: transparent;
+
 	}
 
 	.char-body :global(h3.glow) {
@@ -1452,7 +1452,7 @@ function rollRadialDie(formula, e) {
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 		transition: border-color 0.15s, color 0.15s;
 	}
 

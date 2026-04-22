@@ -261,6 +261,15 @@ async function handleNavClick(e, item, category) {
 {/if}
 
 <style>
+	.dw-layout, .dw-layout :global(*) {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.dw-layout :global(button:active),
+	.dw-layout :global(a:active) {
+		filter: brightness(1.3);
+	}
+
 	.dw-layout {
 		display: grid;
 		grid-template-columns: 260px 1fr;
@@ -513,7 +522,6 @@ async function handleNavClick(e, item, category) {
 		padding: 0.5rem 2.5rem;
 		color: #fff;
 		background: transparent;
-		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h2) {
@@ -521,7 +529,6 @@ async function handleNavClick(e, item, category) {
 		margin: 2.5rem 0 1rem;
 		color: #fff;
 		text-align: center;
-		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h3) {
@@ -532,7 +539,6 @@ async function handleNavClick(e, item, category) {
 		border: 1px solid #444;
 		padding: 0.4rem 0.75rem;
 		border-radius: 6px;
-		-webkit-tap-highlight-color: transparent;
 	}
 
 	:global(.dw-article h4) {

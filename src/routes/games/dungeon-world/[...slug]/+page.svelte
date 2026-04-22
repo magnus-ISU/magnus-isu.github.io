@@ -213,7 +213,7 @@ onMount(() => {
 <article bind:this={articleEl} class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
 	{#if data.render === 'monsters'}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-		<h1 onclick={() => globalExpand.toggle()} onkeydown={(e) => { if (e.key === 'Enter') globalExpand.toggle(); }} style="cursor: pointer; -webkit-tap-highlight-color: transparent">{data.title}</h1>
+		<h1 onclick={() => globalExpand.toggle()} onkeydown={(e) => { if (e.key === 'Enter') globalExpand.toggle(); }} style="cursor: pointer">{data.title}</h1>
 		{#if isAllMonsters}
 			<MonsterSearch showAll />
 		{:else}
@@ -304,14 +304,14 @@ onMount(() => {
 		position: relative;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 	}
 
 	:global(.dw-article h1) {
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 	}
 
 	:global(.dw-article h1.copied, .dw-article h2.copied, .dw-article h3.copied, .dw-article h4.copied) {
@@ -409,7 +409,7 @@ onMount(() => {
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 		transition: border-color 0.15s, color 0.15s;
 	}
 
@@ -422,7 +422,7 @@ onMount(() => {
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		-webkit-tap-highlight-color: transparent;
+
 		transition: color 0.15s;
 	}
 
