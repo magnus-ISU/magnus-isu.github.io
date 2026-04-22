@@ -1352,6 +1352,13 @@ function rollRadialDie(formula, e) {
 		padding: 0.75rem 1rem;
 		white-space: normal;
 		word-wrap: break-word;
+	}
+
+	.char-body :global(p),
+	.char-body :global(li),
+	.char-body :global(td),
+	.char-body :global(th),
+	.char-body :global(blockquote) {
 		cursor: auto;
 	}
 
