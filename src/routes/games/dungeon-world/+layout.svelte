@@ -81,9 +81,9 @@ function onSidebarKeydown(e) {
 		if (!li || !sidebarEl) return;
 		const liRect = li.getBoundingClientRect();
 		const navRect = sidebarEl.getBoundingClientRect();
-		const quarterH = navRect.height / 4;
-		if (liRect.top < navRect.top + quarterH || liRect.bottom > navRect.bottom - quarterH) {
-			li.scrollIntoView({ block: 'center' });
+		const boundary = navRect.height / 8;
+		if (liRect.top < navRect.top + boundary || liRect.bottom > navRect.bottom - boundary) {
+			li.scrollIntoView({ block: 'center', behavior: 'smooth' });
 		}
 	});
 }
