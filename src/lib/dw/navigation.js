@@ -38,7 +38,7 @@ export const pageArt = {
 		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/02/DD-Assassin-Rogue.jpg?w=1600&h=900&fit=crop',
 	paladin: 'https://nat1gaming.com/wp-content/uploads/2024/10/Silverblade-Paladin-MtG-Art.webp',
 	ranger:
-		'https://static0.cbrimages.com/wordpress/wp-content/uploads/2021/03/DD-Ranger.jpg?w=1600&h=1200&fit=crop',
+		'https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/10/ranger-s-hawk-by-robin-olausson-1.jpg?q=50&fit=crop&w=825&dpr=1.5',
 	druid: 'https://cosmicdraft.com/wp-content/uploads/2023/05/Druidcraft-Flowers.png',
 	barbarian:
 		'https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/09/path-of-the-wild-heart-barbarian-subclass-dnd-6.png?resize=800%2C450&ssl=1',
@@ -50,8 +50,8 @@ export const pageArt = {
 	'arcane-duelist':
 		'https://i0.wp.com/dungeonmister.com/wp-content/uploads/2024/06/soulknife.jpg?resize=510%2C267&ssl=1',
 	dog: {
-		url: 'https://www.oilpaintings.com/images/eugene-verboeckhoven-paintings-sheep-dog-guarding-his-flock/44885/600x600/49804.webp',
-		mirror: true,
+		url: 'https://static.vecteezy.com/system/resources/previews/063/105/369/large_2x/german-shepherd-standing-in-mountain-meadow-at-sunrise-with-golden-light-free-photo.jpg',
+		mirror: false,
 	},
 	// Monster Zones
 	'cavern-dwellers':
@@ -105,7 +105,7 @@ export const pageArt = {
 	'wizard-spells-srd':
 		'https://mysterydicegoblin.com/cdn/shop/articles/a93025da-294f-4951-bb6d-ff3735e83838.webp?v=1724242177',
 	'cleric-miracles':
-		'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
+		'https://www.wargamer.com/wp-content/sites/wargamer/2021/05/dnd-5e-cleric-life-cleric-casting-spell.jpg',
 	'cleric-spells-srd':
 		'https://www.runicdice.com/cdn/shop/articles/Light_Domain_Cleric_Guide_for_Beginners_Mastering_the_Light_Cleric_in_D_D_5e_a07934a9-5e54-4bfe-be90-6889fb4a540a.png?v=1770986261',
 	'druid-bindings':
