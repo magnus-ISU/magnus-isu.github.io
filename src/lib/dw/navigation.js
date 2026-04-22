@@ -73,7 +73,7 @@ export const pageArt = {
 	'wild-beasts':
 		'https://cdna.artstation.com/p/assets/images/images/056/629/076/large/joacim-lord-jl-wolf-ambush-final.jpg?1669730976',
 	'godlike-beings':
-		'https://static.wikia.nocookie.net/pathfinderenchanter/images/c/c0/Fire_demon-wallpaper-2560x1920.jpg',
+		'https://i.ytimg.com/vi/i_Ln4tY8cPA/maxresdefault.jpg',
 	'random-homebrew': {
 		url: 'https://media.craiyon.com/2025-07-16/pX0exCUOT-ysW9IzON9zMA.webp',
 		mirror: true,
