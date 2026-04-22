@@ -21,7 +21,7 @@ When you **shoot a defenseless or surprised enemy**, name your target and roll+D
 - **Legs** 10+: Deal Damage. 7+: They're hobbled and slow moving.
 
 ### Animal Companion
-You have a supernatural connection with a loyal animal. It may not speak back to you but it always acts as you wish it to. Name your animal companion and choose a species and stats: *Wolf, cougar, bear, eagle, dog, hawk, cat, owl, pigeon, rat, mule, other*
+You have a supernatural connection with a loyal animal. It may not speak back to you but it always acts as you wish it to. Name your animal companion and choose a species and stats: *Wolf, cougar, bear, eagle, dog, hawk, cat, owl, pigeon, rat, mule, horse, other*
 - Ferocity +3, Cunning +1, 1 Armor, 2 Weaknesses
 - Ferocity +2, Cunning +1, 1 Armor, 1 Weakness
 - Ferocity +2, Cunning +2, 0 Armor, 1 Weakness

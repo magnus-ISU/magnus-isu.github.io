@@ -27,9 +27,9 @@ Choose one precept of your religion:
 When you **petition your deity according to the precept of your religion**, you are granted some useful knowledge or boon related to your deity's domain. The GM will tell you what.
 
 ### Hallowed Hold
-When you *stand on sanctified, holy ground* for some time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a site until it is disturbed by evil, and it usually won't take much longer after that to reconnect with your God.
+When you *stand on sanctified, holy ground* for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil.
 
-When you *stand in a place of holy worship and significance*, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
+When you *stand in a place of holy worship or significance*, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
 - You must redeem someone before the holy site
 - You must dedicate something to your God here
 - You must repair something which infidels have defaced
@@ -142,7 +142,7 @@ When you Work Miracles, on a 10+ you have the option of choosing from the 7-9 li
 When you **sacrifice something of value to your deity and pray for guidance**, your deity tells you what it would have you do. If you do it, mark experience.
 
 ### Divine Protection
-When you or your allies stand on Consecrated Ground or your allies stand next to you, they have +1 armor.
+When you or your allies stand on sanctified, holy ground, they have +1 armor.
 
 ### Devoted Healer
 When you heal someone else of damage, add your level to the amount of damage healed.
@@ -173,7 +173,7 @@ When you **take damage**, take +1 forward to Work Miracles and add your level to
 
 ### Divine Armor
 *Replaces Divine Protection*  
-When you or your allies stand on Consecrated Ground or your allies stand next to you, they have +2 armor.
+When you or your allies stand on sanctified, holy ground, they have +2 armor.
 
 ### Greater Empower
 *Replaces Empower*  
