@@ -12,13 +12,16 @@ let {
 	notes = '',
 	count = 1,
 	memberNames = [],
+	memberHps = [],
 	open = false,
 	locked = false,
 	onLabelsChange = null,
+	onHpChange = null,
 	onEncounterAdd = null,
 	custom = false,
 } = $props();
 
+import { untrack } from 'svelte';
 import { descExpanded as globalDesc, globalExpand } from '$lib/dw/descExpanded.svelte.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { encounterText } from '$lib/dw/encounterText.svelte.js';
@@ -163,8 +166,15 @@ function toggleMove(i) {
 const hpNum = $derived(typeof hp === 'number' ? hp : null);
 let currentHps = $state([]);
 let labels = $state([]);
+// Re-init HP when monster identity or count changes, but not when memberHps
+// updates from our own callback — untrack memberHps to avoid feedback loop
 $effect(() => {
-	currentHps = hpNum !== null ? Array.from({ length: count }, () => hpNum) : [];
+	const n = count, h = hpNum;
+	currentHps = h !== null
+		? Array.from({ length: n }, (_, i) => untrack(() => memberHps[i]) ?? h)
+		: [];
+});
+$effect(() => {
 	labels = Array.from(
 		{ length: count },
 		(_, i) => memberNames[i] || (count <= 1 ? 'HP' : `#${i + 1}`),
@@ -188,8 +198,10 @@ function commitMonsterHp(raw, idx) {
 		const prev = currentHps[idx];
 		monsterUndo.push(() => {
 			currentHps[idx] = prev;
+			if (onHpChange) onHpChange([...currentHps], labels, count);
 		});
 		currentHps[idx] = result;
+		if (onHpChange) onHpChange([...currentHps], labels, count);
 	}
 }
 
@@ -368,7 +380,7 @@ function handleCopy(e) {
 										bind:value={labels[idx]}
 										onclick={(e) => e.stopPropagation()}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
-										onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
+										onblur={() => { if (onLabelsChange) onLabelsChange(labels, count, currentHps.length ? [...currentHps] : undefined); }}
 									/>
 									{#if hpNum !== null}
 										<DraggableCounter bind:this={dcRefs[idx]} value={currentHps[idx]} oncommit={(raw) => commitMonsterHp(raw, idx)} inputWidth="{String(currentHps[idx] ?? 0).length + 1}ch" style="color: {getHpColor(currentHps[idx])}">
@@ -397,7 +409,7 @@ function handleCopy(e) {
 								bind:value={labels[idx]}
 								onclick={(e) => e.stopPropagation()}
 								onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
-								onblur={() => { if (onLabelsChange) onLabelsChange(labels, count); }}
+								onblur={() => { if (onLabelsChange) onLabelsChange(labels, count, currentHps.length ? [...currentHps] : undefined); }}
 							/>
 							{#if hpNum !== null}
 								<DraggableCounter bind:this={dcRefs[idx]} value={currentHps[idx]} oncommit={(raw) => commitMonsterHp(raw, idx)} inputWidth="{String(currentHps[idx] ?? 0).length + 1}ch" style="color: {getHpColor(currentHps[idx])}">

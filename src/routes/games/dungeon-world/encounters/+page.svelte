@@ -23,7 +23,7 @@ onMount(() => {
 });
 
 let text = $state(encounterText.value);
-const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (2)\nHawk`;
+const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (3)\nHawk`;
 
 // Sync local → store
 $effect(() => {
@@ -55,23 +55,45 @@ $effect(() => {
 // Parse parenthetical after a monster name:
 // (4) → count=4 unnamed, (Boss,) → 1 named "Boss", (2,) → 1 named "2"
 // (John, Paul) → 2 named
+// (11 Vizzini,) → 1 named "Vizzini" with hp=11
+// (2 Fezzik, 2 Inigo Montoya) → 2 named with hp values
+// (2 HP,) → 1 unnamed with hp=2
+// (2 #1, 2 #2, 2 #3) → 3 unnamed with hp values
 function parseParen(str) {
 	const m = str.match(/^\((.+)\)$/);
-	if (!m) return { count: 1, names: [] };
+	if (!m) return { count: 1, names: [], hps: [] };
 	const inner = m[1].trim();
 	// Trailing comma with single item → singular named monster
 	if (inner.endsWith(',')) {
 		const singleName = inner.slice(0, -1).trim();
-		if (singleName) return { count: 1, names: [singleName] };
+		if (singleName) {
+			const hpMatch = singleName.match(/^(-?\d+)\s+(.+)$/);
+			if (hpMatch) return { count: 1, names: [hpMatch[2]], hps: [+hpMatch[1]] };
+			return { count: 1, names: [singleName], hps: [] };
+		}
 	}
 	// Pure number → count of unnamed
-	if (/^\d+$/.test(inner)) return { count: +inner, names: [] };
-	// Comma-separated names
-	const names = inner
+	if (/^\d+$/.test(inner)) return { count: +inner, names: [], hps: [] };
+	// Comma-separated entries (possibly with HP prefix)
+	const entries = inner
 		.split(',')
 		.map((s) => s.trim())
 		.filter(Boolean);
-	return { count: names.length, names };
+	const names = [];
+	const hps = [];
+	let hasHp = false;
+	for (const entry of entries) {
+		const hpMatch = entry.match(/^(-?\d+)\s+(.+)$/);
+		if (hpMatch) {
+			hps.push(+hpMatch[1]);
+			names.push(hpMatch[2]);
+			hasHp = true;
+		} else {
+			hps.push(null);
+			names.push(entry);
+		}
+	}
+	return { count: names.length, names, hps: hasHp ? hps : [] };
 }
 
 function parseInlineMonster(raw) {
@@ -106,9 +128,10 @@ const parsed = $derived.by(() => {
 			}
 			const m = parseInlineMonster(block.join('\n'));
 			if (closingParen) {
-				const { count, names } = parseParen(closingParen);
+				const { count, names, hps } = parseParen(closingParen);
 				m.count = count;
 				m.memberNames = names;
+				if (hps.length) m.memberHps = hps;
 			}
 			if (m.name !== 'Unnamed') results.push(m);
 			continue;
@@ -145,8 +168,8 @@ const parsed = $derived.by(() => {
 				for (let len = Math.min(words.length, maxWords); len > 0; len--) {
 					const candidate = words.slice(0, len).join(' ').toLowerCase();
 					if (nameMap.has(candidate)) {
-						const { count, names } = parenPart ? parseParen(parenPart) : { count: 1, names: [] };
-						results.push({ ...nameMap.get(candidate), count, memberNames: names });
+						const { count, names, hps } = parenPart ? parseParen(parenPart) : { count: 1, names: [], hps: [] };
+						results.push({ ...nameMap.get(candidate), count, memberNames: names, ...(hps.length ? { memberHps: hps } : {}) });
 						words = words.slice(len);
 						found = true;
 						break;
@@ -166,8 +189,14 @@ const parsed = $derived.by(() => {
 const matched = $derived(parsed.matched);
 const unmatched = $derived(parsed.unmatched);
 
-// Build parenthetical string from labels
-function buildParen(labels, count) {
+// Build parenthetical string from labels and optional HP values
+function buildParen(labels, count, hps) {
+	const hasHps = hps && hps.length > 0;
+	if (hasHps) {
+		const parts = labels.map((l, i) => hps[i] != null ? `${hps[i]} ${l}` : l);
+		if (count === 1) return `(${parts[0]},)`;
+		return `(${parts.join(', ')})`;
+	}
 	if (count === 1 && labels.length === 1 && labels[0] && labels[0] !== '#1' && labels[0] !== 'HP') {
 		return `(${labels[0]},)`;
 	}
@@ -179,7 +208,7 @@ function buildParen(labels, count) {
 	return '';
 }
 
-function onLabelsChange(monsterName, newLabels, count) {
+function updateMonsterParen(monsterName, newLabels, count, hps) {
 	const lines = text.split('\n');
 	const lowerName = monsterName.toLowerCase();
 	for (let i = 0; i < lines.length; i++) {
@@ -189,12 +218,20 @@ function onLabelsChange(monsterName, newLabels, count) {
 			.toLowerCase();
 		if (stripped === lowerName) {
 			const baseName = lines[i].trim().replace(/\s*\(.*\)\s*$/, '');
-			const paren = buildParen(newLabels, count);
+			const paren = buildParen(newLabels, count, hps);
 			lines[i] = paren ? `${baseName} ${paren}` : baseName;
 			text = lines.join('\n');
 			return;
 		}
 	}
+}
+
+function onLabelsChange(monsterName, newLabels, count, hps) {
+	updateMonsterParen(monsterName, newLabels, count, hps);
+}
+
+function onHpChange(monsterName, newHps, newLabels, count) {
+	updateMonsterParen(monsterName, newLabels, count, newHps);
 }
 
 let h1Copied = $state(false);
@@ -226,7 +263,7 @@ let h1Copied = $state(false);
 	{#if matched.length > 0}
 		<section class="encounter-results" class:two-col={matched.length >= 2}>
 			{#each matched as m, i (i)}
-				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count) => onLabelsChange(m.name, newLabels, count)} />
+				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count, hps) => onLabelsChange(m.name, newLabels, count, hps)} onHpChange={(newHps, newLabels, count) => onHpChange(m.name, newHps, newLabels, count)} />
 			{/each}
 		</section>
 	{/if}
