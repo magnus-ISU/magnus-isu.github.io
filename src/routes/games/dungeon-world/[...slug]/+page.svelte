@@ -343,13 +343,19 @@ onMount(() => {
 	}
 
 	:global(.dw-article h2.collapsed-heading) {
-		text-decoration: underline;
+		text-decoration: none;
 		margin-bottom: 0;
+		font-size: 0.85em;
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		border-radius: 999px;
+		padding: 0.15em 0.7em;
+		background: transparent;
+		cursor: pointer;
 	}
 
 	:global(.dw-article h2.collapsed-inline) {
 		display: inline-block;
-		margin: 0 0.5rem 0 0;
+		margin: 0.25rem 0.35rem 0.25rem 0;
 	}
 
 	:global(.dw-article .h2-columns) {
