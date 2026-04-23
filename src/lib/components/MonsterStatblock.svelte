@@ -198,10 +198,10 @@ function commitMonsterHp(raw, idx) {
 		const prev = currentHps[idx];
 		monsterUndo.push(() => {
 			currentHps[idx] = prev;
-			if (onHpChange) onHpChange([...currentHps], labels, count);
+			if (onHpChange) onHpChange([...currentHps], labels, count, hpNum);
 		});
 		currentHps[idx] = result;
-		if (onHpChange) onHpChange([...currentHps], labels, count);
+		if (onHpChange) onHpChange([...currentHps], labels, count, hpNum);
 	}
 }
 

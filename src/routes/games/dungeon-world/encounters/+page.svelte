@@ -67,7 +67,7 @@ function parseParen(str) {
 	if (inner.endsWith(',')) {
 		const singleName = inner.slice(0, -1).trim();
 		if (singleName) {
-			const hpMatch = singleName.match(/^(-?\d+)\s+(.+)$/);
+			const hpMatch = singleName.match(/^(-?\d+)hp\s+(.+)$/);
 			if (hpMatch) return { count: 1, names: [hpMatch[2]], hps: [+hpMatch[1]] };
 			return { count: 1, names: [singleName], hps: [] };
 		}
@@ -83,7 +83,7 @@ function parseParen(str) {
 	const hps = [];
 	let hasHp = false;
 	for (const entry of entries) {
-		const hpMatch = entry.match(/^(-?\d+)\s+(.+)$/);
+		const hpMatch = entry.match(/^(-?\d+)hp\s+(.+)$/);
 		if (hpMatch) {
 			hps.push(+hpMatch[1]);
 			names.push(hpMatch[2]);
@@ -191,9 +191,9 @@ const unmatched = $derived(parsed.unmatched);
 
 // Build parenthetical string from labels and optional HP values
 function buildParen(labels, count, hps) {
-	const hasHps = hps && hps.length > 0;
+	const hasHps = hps && hps.some(h => h != null);
 	if (hasHps) {
-		const parts = labels.map((l, i) => hps[i] != null ? `${hps[i]} ${l}` : l);
+		const parts = labels.map((l, i) => hps[i] != null ? `${hps[i]}hp ${l}` : l);
 		if (count === 1) return `(${parts[0]},)`;
 		return `(${parts.join(', ')})`;
 	}
@@ -230,8 +230,10 @@ function onLabelsChange(monsterName, newLabels, count, hps) {
 	updateMonsterParen(monsterName, newLabels, count, hps);
 }
 
-function onHpChange(monsterName, newHps, newLabels, count) {
-	updateMonsterParen(monsterName, newLabels, count, newHps);
+function onHpChange(monsterName, newHps, newLabels, count, maxHp) {
+	// Omit HP number for instances at full health
+	const hpsToSave = newHps.map(h => h === maxHp ? null : h);
+	updateMonsterParen(monsterName, newLabels, count, hpsToSave);
 }
 
 let h1Copied = $state(false);
@@ -263,7 +265,7 @@ let h1Copied = $state(false);
 	{#if matched.length > 0}
 		<section class="encounter-results" class:two-col={matched.length >= 2}>
 			{#each matched as m, i (i)}
-				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count, hps) => onLabelsChange(m.name, newLabels, count, hps)} onHpChange={(newHps, newLabels, count) => onHpChange(m.name, newHps, newLabels, count)} />
+				<MonsterStatblock {...m} open={true} locked={true} onLabelsChange={(newLabels, count, hps) => onLabelsChange(m.name, newLabels, count, hps)} onHpChange={(newHps, newLabels, count, maxHp) => onHpChange(m.name, newHps, newLabels, count, maxHp)} />
 			{/each}
 		</section>
 	{/if}
