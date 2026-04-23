@@ -254,6 +254,9 @@ When you **drink**, you rise up to wherever you want to go.
 ### [1 Weight] Bottle of Silver Dust
 Can be poured for about a doorway's length. Demons cannot cross lines of silver.
 
+### [1 Weight] Potion of Forgetfulness
+When you **drink**, you forget everything that happened since you woke up.
+
 ### [1 Weight] Potion of Frost *dangerous*
 When you **pour it onto a liquid**, an area the size of a small lake freezes and creates a solid surface of ice to walk on for an hour. When you **pour it all out directly on someone**, it expands rapidly and they're completely frozen in ice until it thaws, and might die.
 
