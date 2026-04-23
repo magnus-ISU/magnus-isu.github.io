@@ -109,8 +109,8 @@ I have guided \\_\\_\\_\\_\\_ before and they owe me for it.
 Somewhere in your lineage lies mixed blood and it begins to show its presence. You gain the elf or human starting move.
 
 ### God Amidst the Wastes
-You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
-When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your whispers and a number of leveled spells equal to your level minus three. The spells must be at least three levels lower than your own.
+You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.  
+Your caster level is your level minus two. When you **awake from a deep and undisturbed slumber**, lose all your spells, then attune to your whispers and a number of leveled spells equal to your caster level. The spells must be of your caster level or less.
 
 When you channel a whisper or binding you have attuned, roll+WIS. On a 10+, cast the spell and lose it until you sleep; on a 7-9, do so, but choose 1:
 - The spell comes out dangerously or unpredictably; or you anger one or more spirits; or draw attention to yourself; or put yourself in a spot.

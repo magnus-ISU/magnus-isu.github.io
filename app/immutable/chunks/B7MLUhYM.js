@@ -83,7 +83,7 @@ Chaotic: Dethrone or destabilize a person in power.
 ## Advanced Moves
 
 ### Anything You Can Do...
-You are a quick student, and a bit of a showboat. When you **Make Camp**, choose one move another player knows and gain hold equal to the number of bonds you have with that player. You can spend 1 hold to use that move. When you **Make Camp**, lose any remaining hold from this move.
+You are a quick student, and a bit of a showboat. When you **Make Camp**, choose one move another player knows and hold Showoff equal to the number of bonds you have with that player. You can spend 1 Showoff to use that move. When you **Make Camp**, lose any remaining Showoff.
 
 ### Draw Your Blade
 When your **honor is insulted and you demand a duel**, your opponent cannot decline. They may propose conditions and ask to use a substitute, but they cannot decline.
@@ -112,10 +112,10 @@ When you **meet an enemy you've met before** (your call), tell the GM of your la
 When you **spend the night in any town you've saved in the past**, you don't need to spend any money to use the Carouse move. Take +CHA to Carouse.
 
 ### Worldly
-Gain one move from a playbook no one else is currently using.
+Gain one move from a class no one else is currently using. Treat your casting level as three lower.
 
 ### Multiclass Dabbler
-Gain one move from another class. Treat your level as one lower for choosing the move.
+Gain one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ### The Best Defense
 When you **hold your blade and see a projectile** loosed at you, you can parry it, causing it to miss you. Explosives, boulders, or magical attacks might still harm you.
@@ -133,7 +133,7 @@ You have a personal minstrel who follows you everywhere and sings your praises. 
 
 ### ...I Can Do Better
 *Replaces Anything You Can Do...*  
-Your skill is beyond compare. When you **Make Camp**, choose one move another player knows, and gain hold equal to the number of bonds you have with that player. When you **use the chosen move**, you can spend 1 hold to take +1 to your roll. When you **Make Camp**, lose any remaining hold from this move.
+Your skill is beyond compare. When you **Make Camp**, choose one move another player knows, and hold Showoff equal to the number of bonds you have with that player. When you **use the chosen move**, you can spend 1 Showoff to take +1 to your roll. When you **Make Camp**, lose any remaining Showoff.
 
 ### Just a Flesh Wound
 When you **take a truly grievous wound**, roll+CON. On a 10+, choose two. On a 7-9, choose one:
@@ -158,11 +158,11 @@ When an **enemy gets the drop on you** or you **enact an excessively reckless pl
 
 ### Otherworldly
 *Requires Worldly*  
-Gain one move from a playbook no one else is currently using.
+Gain one move from a class no one else is currently using. Treat your casting level as three lower.
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*  
-Gain one move from another class. Treat your level as one lower for choosing the move.
+Gain one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 *A playbook by Jacob Randolph*
 `;export{e as default};

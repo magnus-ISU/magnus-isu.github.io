@@ -115,7 +115,7 @@ When you **attempt to wow an audience with a display of your power**, roll+INT. 
 - The performance does not fatigue you, causing -1 ongoing to all rolls to use techniques until you have a chance to rest.
 
 ### Multiclass Dabbler
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ## Mastery Moves
 
@@ -154,7 +154,7 @@ You take on a student to carry on the techniques you have learned. The student c
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*  
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ### Spell Capture
 *Requires Spell Ripper*  

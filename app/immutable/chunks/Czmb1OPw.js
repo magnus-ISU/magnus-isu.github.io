@@ -95,7 +95,7 @@ Neutral: Teach someone the ways of your people.
 Choose an additional appetite.
 
 ### Appetite for Destruction
-Take a move from the fighter, bard or thief class list. You may not take multiclass moves from those classes.
+Take a non-multiclass move from the fighter, bard or thief class list.
 
 ### My Love For You Is Like a Truck
 When you **perform a feat of strength**, name someone present whom you have impressed and take +1 forward to parley with them.
