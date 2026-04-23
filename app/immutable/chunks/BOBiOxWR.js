@@ -189,7 +189,7 @@ You can always tell whether an NPC finds you attractive (the answer is usually y
 When you **spend some time trading gossip in a community**, you learn of an interesting opportunity nearby. You can also start a rumor of your own; it will spread like wildfire.
 
 ### Duelist’s Parry
-When you **Hack & Slash** or use **Cutting Jibes**, gain +2 armor for the exchange.
+When you **Hack & Slash** or use **Cutting Jibes**, gain +1 armor for the exchange.
 
 ### Under Pressure
 When you **Hack & Slash and your reputation is on the line** - people are watching, or you've made repeated public promises to defeat someone and they know it - you deal +1d6 damage.
@@ -235,6 +235,9 @@ When you use charming and open you may also ask “How are you vulnerable to me?
 
 ### Unforgettable Face
 When you **meet someone you’ve met before** (your call) after some time apart you take +1 forward against them.
+
+### Duelist’s Armor
+When you **Hack & Slash** or use **Cutting Jibes**, gain +2 armor for the exchange.
 
 ### Multiclass Master
 Get one move from another class. Treat your level as one lower, and your casting level as three lower.

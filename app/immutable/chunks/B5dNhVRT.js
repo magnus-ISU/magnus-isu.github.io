@@ -121,7 +121,7 @@ While on a quest you deal +1d4 damage.
 When you **speak aloud your promise to defeat an enemy**, you deal +2d4 damage against that enemy and -4 damage against anyone else. This effect lasts until the enemy is defeated. If you fail to defeat the enemy or give up the fight, you can admit your failure, but the effect continues until you find a way to redeem yourself.
 
 ### Charge!
-When you **lead the charge into combat**, those you lead take +1 forward.
+When you **lead the charge into combat**, those who charge with you take +1 forward.
 
 ### Staunch Defender
 When you defend you always get +1 hold, even on a 6-.
@@ -150,7 +150,7 @@ While on a quest you deal +1d8 damage.
 
 ### Ever Onward
 *Replaces Charge!*  
-When you lead the charge into combat, those you lead take +1 forward and +2 armor forward.
+When you lead the charge into combat, those who charge with you take +1 forward and +2 armor forward.
 
 ### Impervious Defender
 *Replaces Staunch Defender*  

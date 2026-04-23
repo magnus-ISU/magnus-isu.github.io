@@ -138,7 +138,7 @@ You can apply even complex poisons with a pinprick. When you apply a poison that
 When you have time to gather materials and a safe place to brew you can create and have up to three doses of any one poison you've used before.
 
 ### Underdog
-When you're outnumbered, you have +2 armor.
+When you're outnumbered, you have +1 armor.
 
 ### Connections
 When you put out word to the criminal underbelly about something you want or need, roll+CHA. On a 10+, someone has it, just for you. On a 7-9, you'll have to settle for something close or it comes with strings attached, your call.
@@ -172,7 +172,7 @@ When you have time to gather materials and a safe place to brew you can create a
 
 ### Serious Underdog
 *Replaces Underdog*  
-When you're outnumbered or fighting something much larger than you, you have +2 armor.
+When you're outnumbered, you have +2 armor.
 
 ### Evasion
 When you defy danger on a 12+, you transcend the danger. You not only do what you set out to, but the GM will offer you a better outcome, true beauty, or a moment of grace.
