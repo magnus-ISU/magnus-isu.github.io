@@ -20,7 +20,9 @@ $effect(() => {
 
 $effect(() => {
 	const storeVal = characterSheet.value;
-	if (storeVal !== text) text = storeVal;
+	untrack(() => {
+		if (storeVal !== text) text = storeVal;
+	});
 });
 
 // --- Multi-character tabs ---

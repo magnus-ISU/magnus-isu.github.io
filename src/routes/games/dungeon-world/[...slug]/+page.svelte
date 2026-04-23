@@ -1,5 +1,4 @@
 <script>
-import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
 import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
@@ -108,75 +107,65 @@ function extractSection(headingText) {
 	return lines.slice(startIdx, endIdx).join('\n').trimEnd();
 }
 
-let articleEl;
-onMount(() => {
-	const el = articleEl;
-	if (!el) return;
-	let longPressHeading = null;
-	let longPressTimeout;
+let longPressHeading = null;
+let longPressTimeout;
 
-	function doCopy(section, heading, append) {
-		if (append) {
-			navigator.clipboard
-				.readText()
-				.then((existing) => {
-					const sep = existing ? '\n\n' : '';
-					navigator.clipboard.writeText(existing + sep + section);
-				})
-				.catch(() => navigator.clipboard.writeText(section));
-		} else {
-			navigator.clipboard.writeText(section);
-		}
-		heading.classList.add('copied');
-		setTimeout(() => heading.classList.remove('copied'), 1000);
+function doCopy(section, heading, append) {
+	if (append) {
+		navigator.clipboard
+			.readText()
+			.then((existing) => {
+				const sep = existing ? '\n\n' : '';
+				navigator.clipboard.writeText(existing + sep + section);
+			})
+			.catch(() => navigator.clipboard.writeText(section));
+	} else {
+		navigator.clipboard.writeText(section);
 	}
+	heading.classList.add('copied');
+	setTimeout(() => heading.classList.remove('copied'), 1000);
+}
 
-	el.addEventListener('pointerdown', (e) => {
-		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
-		if (!heading || !data.rawSource) return;
-		longPressHeading = null;
-		longPressTimeout = setTimeout(() => {
-			const text = heading.textContent.trim();
-			const section = extractSection(text);
-			if (!section) return;
-			longPressHeading = heading;
-			doCopy(section, heading, true);
-		}, 500);
-	});
-
-	el.addEventListener('pointerup', () => {
-		clearTimeout(longPressTimeout);
-	});
-	el.addEventListener('pointercancel', () => {
-		clearTimeout(longPressTimeout);
-	});
-
-	el.addEventListener('contextmenu', (e) => {
-		if (e.target.closest('h1, h2, h3, h4, h5, h6')) e.preventDefault();
-	});
-
-	function handleClick(e) {
-		if (!data.rawSource) return;
-		if (longPressHeading) {
-			longPressHeading = null;
-			return;
-		}
-		const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
-		if (!heading) return;
-		if (heading.tagName === 'H1' && characterSheet.isEmpty) {
-			characterSheet.value = buildCharacterSheet(data.rawSource, data.art);
-			heading.classList.add('copied');
-			setTimeout(() => heading.classList.remove('copied'), 1000);
-			return;
-		}
+function onArticlePointerDown(e) {
+	const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+	if (!heading || !data.rawSource) return;
+	longPressHeading = null;
+	longPressTimeout = setTimeout(() => {
 		const text = heading.textContent.trim();
 		const section = extractSection(text);
 		if (!section) return;
-		doCopy(section, heading, e.shiftKey);
+		longPressHeading = heading;
+		doCopy(section, heading, true);
+	}, 500);
+}
+
+function onArticlePointerUp() {
+	clearTimeout(longPressTimeout);
+}
+
+function onArticleContextMenu(e) {
+	if (e.target.closest('h1, h2, h3, h4, h5, h6')) e.preventDefault();
+}
+
+function onArticleClick(e) {
+	if (!data.rawSource) return;
+	if (longPressHeading) {
+		longPressHeading = null;
+		return;
 	}
-	el.addEventListener('click', handleClick);
-	return () => el.removeEventListener('click', handleClick);
-});
+	const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+	if (!heading) return;
+	if (heading.tagName === 'H1' && characterSheet.isEmpty) {
+		characterSheet.value = buildCharacterSheet(data.rawSource, data.art);
+		heading.classList.add('copied');
+		setTimeout(() => heading.classList.remove('copied'), 1000);
+		return;
+	}
+	const text = heading.textContent.trim();
+	const section = extractSection(text);
+	if (!section) return;
+	doCopy(section, heading, e.shiftKey);
+}
 </script>
 
 <svelte:head>
@@ -210,7 +199,8 @@ onMount(() => {
 	</div>
 {/if}
 
-<article bind:this={articleEl} class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair}>
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<article class="dw-article" class:is-homebrew={data.isHomebrew && !hasPair} onclick={onArticleClick} onpointerdown={onArticlePointerDown} onpointerup={onArticlePointerUp} onpointercancel={onArticlePointerUp} oncontextmenu={onArticleContextMenu}>
 	{#if data.render === 'monsters'}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<h1 onclick={() => globalExpand.toggle()} onkeydown={(e) => { if (e.key === 'Enter') globalExpand.toggle(); }} style="cursor: pointer">{data.title}</h1>
