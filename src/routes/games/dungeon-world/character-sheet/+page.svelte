@@ -1,5 +1,5 @@
 <script>
-import { tick, untrack } from 'svelte';
+import { tick } from 'svelte';
 import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
@@ -8,22 +8,7 @@ import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
 
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-
-let text = $state(characterSheet.value);
-
-$effect(() => {
-	const t = text;
-	untrack(() => {
-		characterSheet.value = t;
-	});
-});
-
-$effect(() => {
-	const storeVal = characterSheet.value;
-	untrack(() => {
-		if (storeVal !== text) text = storeVal;
-	});
-});
+const cs = characterSheet;
 
 // --- Multi-character tabs ---
 let activeTab = $state(characterSheet.activeIndex);
@@ -32,14 +17,12 @@ function switchTab(i) {
 	if (i === activeTab) return;
 	characterSheet.switchTo(i);
 	activeTab = i;
-	text = characterSheet.value;
 	undoStack = [];
 }
 
 function addCharacter() {
 	characterSheet.addSlot();
 	activeTab = characterSheet.activeIndex;
-	text = '';
 	undoStack = [];
 }
 
@@ -74,7 +57,6 @@ function cancelDelete() {
 function doDelete(i) {
 	characterSheet.deleteSlot(i);
 	activeTab = characterSheet.activeIndex;
-	text = characterSheet.value;
 	undoStack = [];
 }
 
@@ -97,7 +79,7 @@ const showNewButton = $derived(
 );
 
 const parsed = $derived.by(() => {
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const get = (i) => lines[i]?.trim() || '';
 
 	// Line 0: "Name, Class Level"
@@ -199,12 +181,12 @@ const wornArmor = $derived(bodyStats.armor);
 const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
 
 const placeholders = $derived.by(() => {
-	if (!text.trim()) {
+	if (!cs.value.trim()) {
 		return [
 			'Shift+click or long-press a class in the sidebar to get started, or open a class and click its name',
 		];
 	}
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const hints = [
 		'Name, Class Level',
 		'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
@@ -227,30 +209,30 @@ function fmtMod(n) {
 let undoStack = [];
 
 function pushUndo() {
-	undoStack.push(text);
+	undoStack.push(cs.value);
 }
 
 function undo() {
 	if (!undoStack.length) return;
-	text = undoStack.pop();
+	cs.value = undoStack.pop();
 }
 
 // --- HP editing ---
 function updateHpInText(newHp) {
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const parts = lines[1].split(',').map((s) => s.trim());
 	const idx = parts.findIndex((p) => /^HP\s/i.test(p) && !/^Base/i.test(p));
 	if (idx !== -1) {
 		pushUndo();
 		parts[idx] = `HP ${newHp}`;
 		lines[1] = parts.join(', ');
-		text = lines.join('\n');
+		cs.value = lines.join('\n');
 	}
 }
 
 function updateExpInText(newExp) {
 	pushUndo();
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const parts = lines[1].split(',').map((s) => s.trim());
 	const idx = parts.findIndex((p) => /^EXP\s/i.test(p));
 	if (idx !== -1) {
@@ -259,7 +241,7 @@ function updateExpInText(newExp) {
 		parts.unshift(`EXP ${newExp}`);
 	}
 	lines[1] = parts.join(', ');
-	text = lines.join('\n');
+	cs.value = lines.join('\n');
 }
 
 function commitExpRaw(raw) {
@@ -296,12 +278,12 @@ function commitArmor(el) {
 	if (Number.isNaN(val)) return;
 	const newBaseArmor = val - wornArmor;
 	pushUndo();
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const parts = lines[1].split(',').map((s) => s.trim());
 	const idx = parts.findIndex((p) => /^Armor\s/i.test(p));
 	if (idx !== -1) parts[idx] = `Armor ${newBaseArmor}`;
 	lines[1] = parts.join(', ');
-	text = lines.join('\n');
+	cs.value = lines.join('\n');
 }
 
 // --- Editable Load ---
@@ -321,12 +303,12 @@ function commitLoad(el) {
 	if (Number.isNaN(val)) return;
 	const newBaseLoad = val - (parsed.stats.STR ?? 0);
 	pushUndo();
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const parts = lines[1].split(',').map((s) => s.trim());
 	const idx = parts.findIndex((p) => /^Base\s*Load\s/i.test(p));
 	if (idx !== -1) parts[idx] = `Base Load ${newBaseLoad}`;
 	lines[1] = parts.join(', ');
-	text = lines.join('\n');
+	cs.value = lines.join('\n');
 }
 
 function hpColor(current, max) {
@@ -512,7 +494,7 @@ function onStatPointerDown(e, ab) {
 
 function adjustStat(ab, delta) {
 	pushUndo();
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const parts = lines[2].split(',').map((s) => s.trim());
 	const vals = {};
 	for (const p of parts) {
@@ -527,12 +509,12 @@ function adjustStat(ab, delta) {
 			return p;
 		})
 		.join(', ');
-	text = lines.join('\n');
+	cs.value = lines.join('\n');
 }
 
 function swapStats(a, b) {
 	pushUndo();
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	const statsLine = lines[2];
 	const parts = statsLine.split(',').map((s) => s.trim());
 	const vals = {};
@@ -550,7 +532,7 @@ function swapStats(a, b) {
 			return p;
 		})
 		.join(', ');
-	text = lines.join('\n');
+	cs.value = lines.join('\n');
 }
 
 // Parse damage field into rollable entries (split on semicolons)
@@ -611,7 +593,7 @@ $effect(() => {
 });
 
 function toggleH3Glow(h3Index) {
-	const lines = text.split('\n');
+	const lines = cs.value.split('\n');
 	let count = 0;
 	// Body starts at line 4
 	for (let i = 4; i < lines.length; i++) {
@@ -625,16 +607,16 @@ function toggleH3Glow(h3Index) {
 						h3El.classList.remove('glow');
 						setTimeout(() => {
 							pushUndo();
-							const l = text.split('\n');
+							const l = cs.value.split('\n');
 							l[i] = l[i].replace(/\s*###\s*$/, '');
-							text = l.join('\n');
+							cs.value = l.join('\n');
 						}, 200);
 					}
 				} else {
 					animatingH3 = h3Index;
 					pushUndo();
 					lines[i] = `${lines[i]} ###`;
-					text = lines.join('\n');
+					cs.value = lines.join('\n');
 				}
 				return;
 			}
@@ -804,10 +786,10 @@ function rollRadialDie(formula, e) {
 	</div>
 
 	<div class="sheet-editor" bind:this={editorEl}>
-		<TextBox bind:value={text} {placeholders} rows={12} onkeydown={(e) => {
-			if (e.key === 'ArrowRight' && !text.trim()) {
+		<TextBox bind:value={cs.value} {placeholders} rows={12} onkeydown={(e) => {
+			if (e.key === 'ArrowRight' && !cs.value.trim()) {
 				e.preventDefault();
-				text = charSheetDefault;
+				cs.value = charSheetDefault;
 			}
 		}} />
 	</div>
@@ -938,27 +920,27 @@ function rollRadialDie(formula, e) {
 						const collapsing = !h2.classList.contains('collapsed-heading');
 
 						if (collapsing) {
-							const lines = text.split('\n');
+							const lines = cs.value.split('\n');
 							for (let i = 4; i < lines.length; i++) {
 								const m = lines[i].match(/^##\s+(.*)/);
 								if (!m) continue;
 								const raw = m[1].replace(/\s*::\s*$/, '').trim();
 								if (raw === h2Text) {
 									lines[i] = `## ${raw} ::`;
-									text = lines.join('\n');
+									cs.value = lines.join('\n');
 									break;
 								}
 							}
 						} else {
 							const savedScroll = window.scrollY;
-							const lines = text.split('\n');
+							const lines = cs.value.split('\n');
 							for (let i = 4; i < lines.length; i++) {
 								const m = lines[i].match(/^##\s+(.*)/);
 								if (!m) continue;
 								const raw = m[1].replace(/\s*::\s*$/, '').trim();
 								if (raw === h2Text) {
 									lines[i] = `## ${raw}`;
-									text = lines.join('\n');
+									cs.value = lines.join('\n');
 									break;
 								}
 							}
