@@ -131,7 +131,7 @@ You may work the Miracle of Cure Light Wounds even if you do not hold any Miracl
 When you gain Miracle(s) from Hallowed Hold, also hold 1 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage.
 
 ### Penitent
-When you **take damage**, take +1 forward to Work Miracles.
+When you **take 4 or more damage**, take +1 forward to Work Miracles.
 
 ### Empower
 When you Work Miracles, on a 10+ you have the option of choosing from the 7-9 list. If you do, you may choose one of these effects as well:
@@ -169,7 +169,7 @@ When you gain Miracle(s) from Hallowed Hold, also hold 2 Intervention. Spend Int
 
 ### Martyr
 *Replaces Penitent*  
-When you **take damage**, take +1 forward to Work Miracles and add your level to any damage done or healed by the Miracle.
+When you **take 4 or more damage**, take +1 forward to Work Miracles and add your level to any damage done or healed by the Miracle.
 
 ### Divine Armor
 *Replaces Divine Protection*  
