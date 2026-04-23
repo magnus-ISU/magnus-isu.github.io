@@ -7,7 +7,7 @@ Battle is not a means to an end: it is an art. Where others see nothing but chao
 ### Student of the Blade
 You know 2 + INT techniques - magical effects you can apply to your swordplay. When your INT increases, learn another technique.
 
-When you **focus through a practiced kata**, you cause one of your techniques to take effect around you - you might create a stunning display of fire, leave an enchantment unraveled, conjure a warding sphere, or repel yourself upwards.
+When you **focus through a practiced kata**, you cause one of your techniques to take effect with your sword - you might create a stunning display of fire, leave an enchantment unraveled, conjure a warding sphere, or repel yourself upwards.
 
 ### Arcane Bladework
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply 1 technique.
