@@ -29,20 +29,19 @@ $effect(() => {
 const et = encounterText;
 const encounterPlaceholder = `Bandit King (Vizzini,)\nBandit (Fezzik, Inigo Montoya)\nWild Dog (3)\nHawk`;
 
-// Scroll + focus when store changes externally (shift+click from monster statblocks)
-let encounterInputEl;
 let textBox;
-let _lastLen = et.value.length;
-$effect(() => {
-	const len = et.value.length;
-	if (len > _lastLen) {
-		tick().then(() => {
-			encounterInputEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			textBox?.focus();
-		});
-	}
-	_lastLen = len;
-});
+let textBoxEl;
+
+function scrollToTextarea() {
+	// Scroll immediately to prevent the browser from jumping to the top
+	// when search results disappear due to layout shift
+	textBoxEl?.scrollIntoView({ block: 'start' });
+	// Then smooth-scroll to the final position after Svelte updates the DOM
+	tick().then(() => {
+		textBoxEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		textBox?.focus();
+	});
+}
 
 const knownMonsters = $derived([...userMonsters.list, ...allMonsters]);
 const maxWords = $derived(Math.max(...knownMonsters.map((m) => m.name.split(/\s+/).length), 1));
@@ -264,11 +263,12 @@ let h1Copied = $state(false);
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<h1 class:copied={h1Copied} onclick={() => { if (et.value.trim()) { navigator.clipboard.writeText(et.value.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} onkeydown={(e) => { if (e.key === 'Enter' && et.value.trim()) { navigator.clipboard.writeText(et.value.trim()); h1Copied = true; setTimeout(() => { h1Copied = false; }, 1000); } }} style="cursor: pointer">Encounters</h1>
 
-	<section class="encounter-input" bind:this={encounterInputEl}>
+	<section class="encounter-input">
 		<label for="encounter-text">
 			Type monster names to build an encounter. Shift click, long-press, or double-click monster names to add them.
 			Click on HP to track it, attacks to roll them, moves to note usage.
 		</label>
+		<div bind:this={textBoxEl}></div>
 		<TextBox bind:this={textBox} bind:value={et.value} placeholders={et.value.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} onkeydown={(e) => {
 			if (e.key === 'ArrowRight' && !et.value.trim()) {
 				e.preventDefault();
@@ -286,7 +286,7 @@ let h1Copied = $state(false);
 	{/if}
 
 	<section class="monster-search-section">
-		<MonsterSearch hint={unmatched} />
+		<MonsterSearch hint={unmatched} onEncounterAdd={scrollToTextarea} />
 	</section>
 </article>
 

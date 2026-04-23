@@ -9,6 +9,8 @@ let {
 	showAll = false,
 	/** External search hint (used when the user hasn't typed anything) */
 	hint = '',
+	/** Forwarded to each MonsterStatblock */
+	onEncounterAdd = null,
 } = $props();
 
 let userTyped = $state(false);
@@ -65,7 +67,7 @@ const autoExpand = $derived(search.trim() && filteredCount > 0 && filteredCount 
 	{#each filteredSections as section}
 		<h2>{section.name}</h2>
 		{#each section.monsters as m}
-			<MonsterStatblock {...m} open={autoExpand} />
+			<MonsterStatblock {...m} open={autoExpand} {onEncounterAdd} />
 		{/each}
 	{/each}
 	{#if filteredCount >= 2}
