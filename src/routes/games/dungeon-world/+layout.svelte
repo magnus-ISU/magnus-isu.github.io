@@ -162,7 +162,8 @@ function onPointerDown(e, item, category, toggleTarget) {
 		) {
 			const resolved = resolveClassItem(item);
 			const raw = await loadClassRaw(resolved);
-			if (raw) characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
+			if (raw)
+				characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
 			sidebarOpen = false;
 		}
 	}, 500);
@@ -190,7 +191,8 @@ async function handleNavClick(e, item, category) {
 		) {
 			const resolved = resolveClassItem(item);
 			const raw = await loadClassRaw(resolved);
-			if (raw) characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
+			if (raw)
+				characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
 		}
 		sidebarOpen = false;
 		return;

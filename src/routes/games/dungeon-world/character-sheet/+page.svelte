@@ -199,7 +199,8 @@ const placeholders = $derived.by(() => {
 	return phs;
 });
 
-const charSheetDefault = 'Name, Class 1\nEXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 15\nSTR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1\n/games/dungeon-world/art/magic-items.jpg';
+const charSheetDefault =
+	'Name, Class 1\nEXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 15\nSTR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1\n/games/dungeon-world/art/magic-items.jpg';
 
 function fmtMod(n) {
 	return n > 0 ? `+${n}` : `${n}`;
@@ -559,7 +560,7 @@ function sizeEditor() {
 	const sheetTopH = sheetTopEl.offsetHeight;
 	const gap = parseFloat(getComputedStyle(editorEl).marginBottom) || 0;
 	const h = window.innerHeight - editorTop - gap - sheetTopH;
-	textarea.style.height = Math.max(100, h) + 'px';
+	textarea.style.height = `${Math.max(100, h)}px`;
 }
 
 $effect(() => {
@@ -635,7 +636,11 @@ function onArticlePointerDown(e) {
 	pointerDownPos = { x: e.clientX, y: e.clientY };
 	const target = e.target;
 	if (target.closest('.radial-btn')) return;
-	if (target.closest('.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs')) {
+	if (
+		target.closest(
+			'.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs',
+		)
+	) {
 		suppressRadialClick = true;
 		if (radialMenu && !radialMenu.closing) closeRadialMenu();
 	}
@@ -653,7 +658,12 @@ function onArticleClick(e) {
 		if (dx * dx + dy * dy > 100) return;
 	}
 	const target = e.target;
-	if (target.closest('button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line')) return;
+	if (
+		target.closest(
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line',
+		)
+	)
+		return;
 	if (target.closest('.char-body') && target.closest('h2, h3')) return;
 	e.preventDefault();
 	if (radialMenu && !radialMenu.closing) {

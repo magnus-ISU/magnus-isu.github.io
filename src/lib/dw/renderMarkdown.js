@@ -26,7 +26,7 @@ export function renderMarkdown(src) {
 	let inH2Section = false;
 	let pendingColumns = false; // true when h2 wants columns but hasn't hit the first h3 yet
 	let inColumns = false;
-	let h2Collapsed = false;
+	let _h2Collapsed = false;
 	let inBlockquote = false;
 	let bqLines = [];
 
@@ -52,7 +52,7 @@ export function renderMarkdown(src) {
 			inH2Section = false;
 		}
 		pendingColumns = false;
-		h2Collapsed = false;
+		_h2Collapsed = false;
 	}
 
 	function flushBlockquote() {
@@ -80,9 +80,16 @@ export function renderMarkdown(src) {
 				let rendered = inline(stripped);
 
 				if (/^\[/.test(l.trim())) {
-					const afterCoin = l.trim().replace(/^\[\d+\s*Coin\]\s*/, '').replace(/ {2,}$/, '');
+					const afterCoin = l
+						.trim()
+						.replace(/^\[\d+\s*Coin\]\s*/, '')
+						.replace(/ {2,}$/, '');
 					if (afterCoin) {
-						const esc = afterCoin.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+						const esc = afterCoin
+							.replace(/&/g, '&amp;')
+							.replace(/</g, '&lt;')
+							.replace(/>/g, '&gt;')
+							.replace(/"/g, '&quot;');
 						rendered = `<span class="copy-line" data-copy="${esc}" onclick="navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
 					}
 				}
@@ -161,9 +168,11 @@ export function renderMarkdown(src) {
 				const h2Cls = collapsed ? ' class="collapsed-heading collapsed-inline"' : '';
 				html += `<h${level}${h2Cls}>${inline(h2Text)}</h${level}>`;
 				if (level === 2) {
-					h2Collapsed = collapsed;
+					_h2Collapsed = collapsed;
 					const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
-					const cls = ['h2-section', collapsed && 'collapsed', collapsed && 'hide'].filter(Boolean).join(' ');
+					const cls = ['h2-section', collapsed && 'collapsed', collapsed && 'hide']
+						.filter(Boolean)
+						.join(' ');
 					html += `<div class="${cls}">`;
 					inH2Section = true;
 					if (cols) pendingColumns = true;
@@ -200,7 +209,11 @@ export function renderMarkdown(src) {
 				lineIdx++;
 			}
 			const raw = codeLines.join('\n');
-			const escaped = raw.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+			const escaped = raw
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;');
 			html += `<pre class="code-block" onclick="navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)" data-copy="${escaped}">${escaped}</pre>`;
 			continue;
 		}

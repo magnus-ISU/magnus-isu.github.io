@@ -18,7 +18,9 @@ $effect(() => {
 	if (document.readyState === 'complete') {
 		art = artUrl;
 	} else {
-		const handler = () => { art = artUrl; };
+		const handler = () => {
+			art = artUrl;
+		};
 		window.addEventListener('load', handler, { once: true });
 		return () => window.removeEventListener('load', handler);
 	}
@@ -59,16 +61,16 @@ const built = $derived(isBatch ? null : parseMonsterText(text));
 const batchMonsters = $derived(isBatch ? parseBatch(text) : []);
 
 const builtinNames = $derived(new Set(allMonsters.map((m) => m.name.toLowerCase())));
-const canSave = $derived(!isBatch && built && built.name !== 'Unnamed' && !builtinNames.has(built.name.toLowerCase()));
-const canSaveBatch = $derived(isBatch && batchMonsters.some((m) => !builtinNames.has(m.name.toLowerCase())));
+const canSave = $derived(
+	!isBatch && built && built.name !== 'Unnamed' && !builtinNames.has(built.name.toLowerCase()),
+);
+const canSaveBatch = $derived(
+	isBatch && batchMonsters.some((m) => !builtinNames.has(m.name.toLowerCase())),
+);
 
 const placeholders = $derived.by(() => {
 	const lines = text.split('\n');
-	const phs = [
-		'Name, Solitary, Large',
-		'hp, armor, description',
-		'Instinct, special qualities',
-	];
+	const phs = ['Name, Solitary, Large', 'hp, armor, description', 'Instinct, special qualities'];
 
 	const hasAttack = lines.slice(3).some((l) => l.trim().toLowerCase().startsWith('attack:'));
 	phs.push(
@@ -86,7 +88,8 @@ const placeholders = $derived.by(() => {
 	return phs;
 });
 
-const userMonsterDefault = 'Name, Solitary, Large\nhp, armor, description\nInstinct, special qualities\nattack: Attack name ; Attack damage ; Attack tags\nattack or move; move; move';
+const userMonsterDefault =
+	'Name, Solitary, Large\nhp, armor, description\nInstinct, special qualities\nattack: Attack name ; Attack damage ; Attack tags\nattack or move; move; move';
 
 function saveMonster() {
 	if (!canSave) return;

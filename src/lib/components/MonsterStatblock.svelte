@@ -76,7 +76,9 @@ function onPointerUp() {
 }
 
 function copyToClipboard() {
-	navigator.clipboard.writeText(monsterToText({ name, tags, hp, armor, description, instinct, special, attacks, moves }));
+	navigator.clipboard.writeText(
+		monsterToText({ name, tags, hp, armor, description, instinct, special, attacks, moves }),
+	);
 }
 
 function doAddToEncounter() {
@@ -169,10 +171,10 @@ let labels = $state([]);
 // Re-init HP when monster identity or count changes, but not when memberHps
 // updates from our own callback — untrack memberHps to avoid feedback loop
 $effect(() => {
-	const n = count, h = hpNum;
-	currentHps = h !== null
-		? Array.from({ length: n }, (_, i) => untrack(() => memberHps[i]) ?? h)
-		: [];
+	const n = count,
+		h = hpNum;
+	currentHps =
+		h !== null ? Array.from({ length: n }, (_, i) => untrack(() => memberHps[i]) ?? h) : [];
 });
 $effect(() => {
 	labels = Array.from(

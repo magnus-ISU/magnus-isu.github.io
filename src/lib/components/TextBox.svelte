@@ -1,7 +1,13 @@
 <script>
 import { onMount } from 'svelte';
 
-let { value = $bindable(''), placeholders = [], rows = 12, storageKey = '', onkeydown = null } = $props();
+let {
+	value = $bindable(''),
+	placeholders = [],
+	rows = 12,
+	storageKey = '',
+	onkeydown = null,
+} = $props();
 
 let scrollTop = $state(0);
 let mirror;

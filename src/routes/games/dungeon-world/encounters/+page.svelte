@@ -18,7 +18,9 @@ $effect(() => {
 	if (document.readyState === 'complete') {
 		art = artUrl;
 	} else {
-		const handler = () => { art = artUrl; };
+		const handler = () => {
+			art = artUrl;
+		};
 		window.addEventListener('load', handler, { once: true });
 		return () => window.removeEventListener('load', handler);
 	}
@@ -112,7 +114,10 @@ const parsed = $derived.by(() => {
 	let i = 0;
 	while (i < lines.length) {
 		const trimmed = lines[i].trim();
-		if (!trimmed) { i++; continue; }
+		if (!trimmed) {
+			i++;
+			continue;
+		}
 
 		// Inline monster block
 		if (trimmed === '{') {
@@ -170,8 +175,15 @@ const parsed = $derived.by(() => {
 				for (let len = Math.min(words.length, maxWords); len > 0; len--) {
 					const candidate = words.slice(0, len).join(' ').toLowerCase();
 					if (nameMap.has(candidate)) {
-						const { count, names, hps } = parenPart ? parseParen(parenPart) : { count: 1, names: [], hps: [] };
-						results.push({ ...nameMap.get(candidate), count, memberNames: names, ...(hps.length ? { memberHps: hps } : {}) });
+						const { count, names, hps } = parenPart
+							? parseParen(parenPart)
+							: { count: 1, names: [], hps: [] };
+						results.push({
+							...nameMap.get(candidate),
+							count,
+							memberNames: names,
+							...(hps.length ? { memberHps: hps } : {}),
+						});
 						words = words.slice(len);
 						found = true;
 						break;
@@ -193,9 +205,9 @@ const unmatched = $derived(parsed.unmatched);
 
 // Build parenthetical string from labels and optional HP values
 function buildParen(labels, count, hps) {
-	const hasHps = hps && hps.some(h => h != null);
+	const hasHps = hps?.some((h) => h != null);
 	if (hasHps) {
-		const parts = labels.map((l, i) => hps[i] != null ? `${hps[i]}hp ${l}` : l);
+		const parts = labels.map((l, i) => (hps[i] != null ? `${hps[i]}hp ${l}` : l));
 		if (count === 1) return `(${parts[0]},)`;
 		return `(${parts.join(', ')})`;
 	}
@@ -234,7 +246,7 @@ function onLabelsChange(monsterName, newLabels, count, hps) {
 
 function onHpChange(monsterName, newHps, newLabels, count, maxHp) {
 	// Omit HP number for instances at full health
-	const hpsToSave = newHps.map(h => h === maxHp ? null : h);
+	const hpsToSave = newHps.map((h) => (h === maxHp ? null : h));
 	updateMonsterParen(monsterName, newLabels, count, hpsToSave);
 }
 
