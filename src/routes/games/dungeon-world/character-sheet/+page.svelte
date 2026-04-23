@@ -199,7 +199,7 @@ const placeholders = $derived.by(() => {
 	return phs;
 });
 
-const charSheetDefault = 'Name, Class 1\nEXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 15\nSTR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1';
+const charSheetDefault = 'Name, Class 1\nEXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 15\nSTR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1\n/games/dungeon-world/art/magic-items.jpg';
 
 function fmtMod(n) {
 	return n > 0 ? `+${n}` : `${n}`;
