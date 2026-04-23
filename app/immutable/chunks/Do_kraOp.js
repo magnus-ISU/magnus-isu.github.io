@@ -4,9 +4,12 @@ Battle is not a means to an end: it is an art. Where others see nothing but chao
 
 ## Starting Moves
 
-### Arcane Bladework
+### Student of the Blade
 You know 2 + INT techniques - magical effects you can apply to your swordplay. When your INT increases, learn another technique.
 
+When you **focus through a practiced kata**, you cause one of your techniques to take effect around you - you might create a stunning display of fire, leave an enchantment unraveled, conjure a warding sphere, or repel yourself upwards.
+
+### Arcane Bladework
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply 1 technique.
 
 ### Throw Down the Gauntlet
@@ -175,6 +178,11 @@ On a 10+, you can choose to gain the Stunned debility. When you gain the Stunned
 - **Grounding**  Energy channels from your blade into the earth beneath you. Until you choose to move from this spot, you cannot be knocked down, pushed, or thrown off balance.
 - **Redirecting**  Your blade traces a sigil in the air that lingers after your strike. Hold 1 Ward; spend it to deflected a nearby ranged attack toward a target of your choosing within near range. Lose your Ward when you stop fighting.
 - **Phasing**  Your blade flickers, not in this realm for a moment. Your attack gains *ethereal* and *insubstantial*.
+- **Prismatic**  Your blade shatters light into a dazzling display, confusing and disturbing any who are watching you fight.
+- **Thunderclap**  A deafening noise sounds that everyone can hear, and you and the target are deafened.
+- **Silencing**  Your blade traces a glowing seal on your target, and speech is impossible for a few critical moments until the seal breaks or fades.
+- **Fracturing**  Your sword swings progress through the air or target's armor and onto the ground, leaving glowing fractures that could cause unstable structures to break.
+- **Unraveling**  Your blade dispels basic enchantments, and roll+INT to undo complex ones.
 
 *A playbook by Timothy Schroeder and Magnus Anderson*
 `;export{e as default};
