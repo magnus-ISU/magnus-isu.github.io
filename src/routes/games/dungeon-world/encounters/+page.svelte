@@ -1,5 +1,5 @@
 <script>
-import { onMount, tick } from 'svelte';
+import { tick } from 'svelte';
 import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
@@ -13,13 +13,15 @@ import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 const artUrl =
 	typeof pageArt.encounters === 'string' ? pageArt.encounters : pageArt.encounters?.url;
 let art = $state(null);
-onMount(() => {
-	function loadArt() {
+$effect(() => {
+	if (!artUrl) return;
+	if (document.readyState === 'complete') {
 		art = artUrl;
+	} else {
+		const handler = () => { art = artUrl; };
+		window.addEventListener('load', handler, { once: true });
+		return () => window.removeEventListener('load', handler);
 	}
-	if (document.readyState === 'complete') loadArt();
-	else window.addEventListener('load', loadArt, { once: true });
-	return () => window.removeEventListener('load', loadArt);
 });
 
 let text = $state(encounterText.value);
