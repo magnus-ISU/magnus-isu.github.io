@@ -102,7 +102,14 @@ I respect the beliefs of \_\_\_\_\_ but hope they will someday see the true way.
 ## Advanced Moves
 
 ### Divine Favor
-Dedicate yourself to a deity (name a new one or choose one that's already been established). You gain the commune and cast a spell cleric moves. When you select this move, treat yourself as a cleric of level 1 for using spells. Every time you gain a level thereafter, increase your effective cleric level by 1.
+Dedicate yourself to a deity, and be granted a cleric's spells. When you **stand on sanctified, holy ground** for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil. When you **complete a Quest**, hold 3 Miracles.
+
+Your caster level is your level minus two. You know all the Miracles of your caster level and below. When you *hold Miracle and pray for a saint's Miracle*, roll+WIS. On a 10+, it goes off. On a 7-9, choose 1:
+- Spend 1 Miracle as you lose some access to the divine.
+- -1 ongoing to Work Miracles until you prove yourself; listen to your God to learn how.
+- The casting takes longer than expected; or you call attention to yourself; or are put in a spot; or your connection is off and the Miracle has unexpected/lesser effects.
+
+You can always work your rotes, and automatically succeed at them.
 
 ### Bloody Aegis
 When you take damage you can grit your teeth and accept the blow. If you do you take no damage but instead suffer a debility of your choice. If you already have all six debilities you can't use this move.

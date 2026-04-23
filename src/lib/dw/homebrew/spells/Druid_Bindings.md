@@ -3,7 +3,7 @@
 ### Calming Aura
 The air immediately around you is purified, driving away smoke or miasma, cooling a desert or calming a blizzard. Muddy water clears, blinding light dims, and unbearable noises quiet. The spell lasts until it would have no effect, because the area around you is clear.
 ### Magnetize
-The pebbles, sand, dirt, or other small objects or powder you choose within arms reach magnetize. You can also create minor magnetic fields which can move small objects, hold them in unlikely shapes and places, or arrange into geometric patterns. The spell lasts as long as you are nearby, or the magnetic bond is not tested too hard.
+The pebbles, sand, dirt, or other small objects or powder you choose within arms reach magnetize. You can also create minor magnetic fields which can move 1 Weight, hold them in unlikely shapes and places with surprising force, or arrange them and even animate in patterns. The spell lasts as long as you are nearby.
 ### Wildwords
 When you cast this spell name your recipient, and a small animal, such as a squirrel, songbird, rat, or lizard will approach, if any nearby could deliver your message. Tell them your message, and they will find and deliver the words.
 ## Level 1
