@@ -112,10 +112,10 @@ When you **meet an enemy you've met before** (your call), tell the GM of your la
 When you **spend the night in any town you've saved in the past**, you don't need to spend any money to use the Carouse move. Take +CHA to Carouse.
 
 ### Worldly
-Gain one move from a playbook no one else is currently using.
+Gain one move from a class no one else is currently using. Treat your casting level as three lower.
 
 ### Multiclass Dabbler
-Gain one move from another class. Treat your level as one lower for choosing the move.
+Gain one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ### The Best Defense
 When you **hold your blade and see a projectile** loosed at you, you can parry it, causing it to miss you. Explosives, boulders, or magical attacks might still harm you.
@@ -158,10 +158,10 @@ When an **enemy gets the drop on you** or you **enact an excessively reckless pl
 
 ### Otherworldly
 *Requires Worldly*  
-Gain one move from a playbook no one else is currently using.
+Gain one move from a class no one else is currently using. Treat your casting level as three lower.
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*  
-Gain one move from another class. Treat your level as one lower for choosing the move.
+Gain one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 *A playbook by Jacob Randolph*

@@ -209,10 +209,10 @@ When you **successfully aid someone** you take +1 forward as well.
 When **an ally's health drops to 4 or below and you give a rallying cry**, immediately roll for a quick **Stirring Speech** with doubled effects.
 
 ### Multiclass Dabbler
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ### Multiclass Initiate
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ## Mastery Moves
 
@@ -237,6 +237,6 @@ When you use charming and open you may also ask “How are you vulnerable to me?
 When you **meet someone you’ve met before** (your call) after some time apart you take +1 forward against them.
 
 ### Multiclass Master
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 *A playbook by Homebrew World, Awful Good Games, Unlimited Dungeons, and Magnus Anderson*

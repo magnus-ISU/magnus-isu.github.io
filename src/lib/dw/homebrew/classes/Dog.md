@@ -154,6 +154,6 @@ When you **suddenly arrive on the scene to help**, choose 1:
 - Your presence gives each of your allies +1 forward on their next roll.
 
 ### Newer Tricks
-Choose a non-multiclass move from the Druid, Fighter, Ranger, or Thief playbooks.
+Choose a non-multiclass move from the Druid, Fighter, Ranger, or Thief classes.
 
 *A playbook by CoreyKenn82*

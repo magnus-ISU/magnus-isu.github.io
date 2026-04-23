@@ -151,7 +151,7 @@ You know whether another person has killed or not, after speaking with them even
 You know the lore of the ancients. When you **examine how armies move**, you can always tell where the enemy will next strike and what they're preparing for. If you really don't have enough information, you'll know what to look for in order to find out.
 
 ### Multiclass Dabbler
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ## Mastery Moves
 
@@ -173,7 +173,7 @@ When you hack and slash an enemy, all subsequent attacks made by anyone against 
 
 ### Multiclass Initiate
 *Requires Multiclass Dabbler*  
-Get one move from another class. Treat your level as one lower for choosing the move.
+Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
 ### Steel Hide
 *Replaces Iron Hide*  
