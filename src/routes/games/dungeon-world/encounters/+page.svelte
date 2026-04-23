@@ -259,7 +259,12 @@ let h1Copied = $state(false);
 			Type monster names to build an encounter. Shift click, long-press, or double-click monster names to add them.
 			Click on HP to track it, attacks to roll them, moves to note usage.
 		</label>
-		<TextBox bind:this={textBox} bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} />
+		<TextBox bind:this={textBox} bind:value={text} placeholders={text.trim() ? [] : encounterPlaceholder.split('\n')} rows={5} onkeydown={(e) => {
+			if (e.key === 'ArrowRight' && !text.trim()) {
+				e.preventDefault();
+				text = encounterPlaceholder;
+			}
+		}} />
 	</section>
 
 	{#if matched.length > 0}

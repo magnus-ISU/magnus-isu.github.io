@@ -85,6 +85,8 @@ const placeholders = $derived.by(() => {
 	return phs;
 });
 
+const userMonsterDefault = 'Name, Solitary, Large\nhp, armor, description\nInstinct, special qualities\nattack: Attack name ; Attack damage ; Attack tags\nattack or move; move; move';
+
 function saveMonster() {
 	if (!canSave) return;
 	if (userMonsters.hasName(built.name)) userMonsters.remove(built.name);
@@ -181,7 +183,12 @@ function cancelDelete() {
 	<h1 onclick={() => { if (userMonsters.list.length >= 2) globalExpand.toggle(); }} onkeydown={(e) => { if (e.key === 'Enter' && userMonsters.list.length >= 2) globalExpand.toggle(); }} style="cursor: pointer">User Monsters</h1>
 
 	<div class="builder">
-		<TextBox bind:value={text} {placeholders} rows={12} />
+		<TextBox bind:value={text} {placeholders} rows={12} onkeydown={(e) => {
+			if (e.key === 'ArrowRight' && !text.trim()) {
+				e.preventDefault();
+				text = userMonsterDefault;
+			}
+		}} />
 
 		{#if isBatch}
 			{#if batchMonsters.length > 0}

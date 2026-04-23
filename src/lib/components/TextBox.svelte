@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte';
 
-let { value = $bindable(''), placeholders = [], rows = 12, storageKey = '' } = $props();
+let { value = $bindable(''), placeholders = [], rows = 12, storageKey = '', onkeydown = null } = $props();
 
 let scrollTop = $state(0);
 let mirror;
@@ -85,6 +85,7 @@ $effect(() => {
 		bind:value
 		{rows}
 		onscroll={(e) => { scrollTop = e.target.scrollTop; }}
+		{onkeydown}
 		spellcheck="false"
 	></textarea>
 </div>

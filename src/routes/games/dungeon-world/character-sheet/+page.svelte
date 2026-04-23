@@ -215,6 +215,8 @@ const placeholders = $derived.by(() => {
 	return phs;
 });
 
+const charSheetDefault = 'Name, Class 1\nEXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 15\nSTR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1';
+
 function fmtMod(n) {
 	return n > 0 ? `+${n}` : `${n}`;
 }
@@ -800,7 +802,12 @@ function rollRadialDie(formula, e) {
 	</div>
 
 	<div class="sheet-editor" bind:this={editorEl}>
-		<TextBox bind:value={text} {placeholders} rows={12} />
+		<TextBox bind:value={text} {placeholders} rows={12} onkeydown={(e) => {
+			if (e.key === 'ArrowRight' && !text.trim()) {
+				e.preventDefault();
+				text = charSheetDefault;
+			}
+		}} />
 	</div>
 
 	{#if parsed.name}
