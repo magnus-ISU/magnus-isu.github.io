@@ -274,6 +274,8 @@ let h1Copied = $state(false);
 				e.preventDefault();
 				et.value = encounterPlaceholder;
 			}
+		}} oninput={() => {
+			textBoxEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}} />
 	</section>
 

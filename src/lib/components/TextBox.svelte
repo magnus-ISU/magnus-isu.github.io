@@ -7,6 +7,7 @@ let {
 	rows = 12,
 	storageKey = '',
 	onkeydown = null,
+	oninput = null,
 } = $props();
 
 let scrollTop = $state(0);
@@ -92,6 +93,7 @@ $effect(() => {
 		{rows}
 		onscroll={(e) => { scrollTop = e.target.scrollTop; }}
 		{onkeydown}
+		{oninput}
 		spellcheck="false"
 	></textarea>
 </div>
