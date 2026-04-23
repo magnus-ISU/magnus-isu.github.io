@@ -183,7 +183,7 @@ const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
 const placeholders = $derived.by(() => {
 	if (!cs.value.trim()) {
 		return [
-			'Shift+click or long-press a class in the sidebar to get started, or open a class and click its name',
+			'Shift+click or long-press a class in the sidebar to get started, or open a class and click its name, or press right to type anything',
 		];
 	}
 	const lines = cs.value.split('\n');
