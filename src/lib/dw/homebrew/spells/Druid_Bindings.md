@@ -113,6 +113,6 @@ level 9: Consume Unlife, True Seeing (was level 5)
 All the Rotes
 level 1: Bless, Sanctuary, Speak with Dead, Detect Alignment, Cause Fear  
 level 3: Resurrection, Darkness  
-level 5: Revelation, Cure Critical Wounds, Divination, Trap Soul  
+level 5: Revelation, Cure Critical Wounds, Divination, Trap the Soul  
 level 7: Word of Recall, Heal, Mark of Death  
 level 9: Storm of Vengeance, Repair, Divine Presence, Plague

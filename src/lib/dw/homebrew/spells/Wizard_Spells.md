@@ -167,7 +167,7 @@ You teleport a creature to your presence. Name a creature or give a short descri
 Describe an event. The GM will tell you when that event occurs, no matter where you are or how far away the event is. If you choose, you can view the location of the event as though you were there in person. You can only have one Alert active at a time.
 ### Antipathy <span style="float:right" >Enchantment 9</span>
 Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or you dismiss the spell. Concentration
-### Soul Gem <span style="float:right" >Necromancy 9</span>
+### Trap the Soul <span style="float:right" >Necromancy 9</span>
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but you may never recapture it once freed.
 ---
 ### Shelter <span style="float:right" >Conjuration 9</span>
