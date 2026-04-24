@@ -593,6 +593,43 @@ async function handleNavClick(e, item, category) {
 		line-height: 1.5;
 	}
 
+	:global(.dw-article .lore-tip) {
+		color: #8b1a1a;
+		font-weight: bold;
+		cursor: default;
+		position: relative;
+		text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+	}
+
+	:global(.dw-article .lore-tip)::after {
+		content: attr(data-tip);
+		white-space: pre-line;
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(4px);
+		background: #1a1a1a;
+		border: 1px solid #444;
+		color: #ccc;
+		font-weight: normal;
+		padding: 0.4rem 0.7rem;
+		border-radius: 4px;
+		font-size: 0.85rem;
+		line-height: 1.4;
+		width: max-content;
+		max-width: 280px;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 0.12s ease-out, transform 0.12s ease-out;
+		z-index: 100;
+	}
+
+	:global(.dw-article .lore-tip:hover)::after {
+		opacity: 1;
+		transform: translateX(-50%) translateY(-4px);
+		transition: opacity 0.08s ease-out, transform 0.08s ease-out;
+	}
+
 	:global(.dw-article strong) {
 		color: #fff;
 	}

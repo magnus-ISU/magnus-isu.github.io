@@ -1,6 +1,12 @@
 // Simple markdown → HTML (CommonMark-ish) with two-column layout for h2 sections with 2+ h3s
 export function renderMarkdown(src) {
 	if (!src.trim()) return '';
+
+	// Pre-pass: collapse multiline [text](tooltip) where tooltip contains newlines
+	src = src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
+		return `[${text}](${body.replace(/\n/g, '\x01')})`;
+	});
+
 	const lines = src.split('\n');
 
 	// Pre-scan: count h3s under each h2 (by line index)
@@ -124,7 +130,23 @@ export function renderMarkdown(src) {
 			.replace(/\*(.+?)\*/g, '<em>$1</em>')
 			.replace(/_(.+?)_/g, '<em>$1</em>')
 			.replace(/`(.+?)`/g, '<code>$1</code>')
-			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, href) => {
+				function makeTip(raw) {
+					// eslint-disable-next-line no-control-regex
+					return raw.replace(/\x01/g, '&#10;').replace(/"/g, '&quot;');
+				}
+				// [text](## "GitHub-flavored tooltip")
+				const ghMatch = href.match(/^##?\s+"(.+)"$/s);
+				if (ghMatch) return `<span class="lore-tip" data-tip="${makeTip(ghMatch[1])}">${text}</span>`;
+				// [text]("Quoted tooltip")
+				const quotedMatch = href.match(/^"(.+)"$/s);
+				if (quotedMatch) return `<span class="lore-tip" data-tip="${makeTip(quotedMatch[1])}">${text}</span>`;
+				// [text](tooltip with spaces) — contains a space, not a URL
+				if ((/\s/.test(href) || /\x01/.test(href)) && !/^https?:\/\//.test(href)) {
+					return `<span class="lore-tip" data-tip="${makeTip(href)}">${text}</span>`;
+				}
+				return `<a href="${href}">${text}</a>`;
+			})
 			.replace(/\[([^\]]+) Coin\]/g, (_, val) => {
 				const fs = Math.min(50, Math.floor(130 / val.length));
 				const gid = `cg${coinId++}`;
