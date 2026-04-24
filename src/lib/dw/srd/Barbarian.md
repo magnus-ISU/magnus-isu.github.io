@@ -53,12 +53,10 @@ your appetites if you would roll for a move, instead of rolling 2d6 you roll
 1d6+1d8. If the d6 is the higher die of the pair, the GM will also introduce a
 complication or danger that comes about due to your heedless pursuits.
 
-- Pure destruction
-- Power over others
-- Mortal pleasures
-- Conquest
-- Riches and property
-- Fame and glory
+<div style="display:flex;justify-content:space-between">
+<div>• Pure destruction<br>• Power over others<br>• Mortal pleasures</div>
+<div>• Conquest<br>• Riches and property<br>• Fame and glory</div>
+</div>
 
 ### The Upper Hand
 

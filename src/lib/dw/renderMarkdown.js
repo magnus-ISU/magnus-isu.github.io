@@ -268,6 +268,13 @@ export function renderMarkdown(src) {
 			continue;
 		}
 
+		if (/^\s*<\/?(?:ul|ol|li|div|table|tr|td|th)[\s>]/i.test(line)) {
+			flushPara();
+			closePendingList();
+			html += line;
+			continue;
+		}
+
 		closePendingList();
 		paraLines.push(line);
 	}
