@@ -199,9 +199,47 @@ async function handleNavClick(e, item, category) {
 	}
 	sidebarOpen = false;
 }
+
+let loreTipEl = null;
+
+function onLoreTipOver(e) {
+	const target = e.target.closest?.('.lore-tip');
+	if (!target) return;
+	if (!loreTipEl) {
+		loreTipEl = document.createElement('div');
+		loreTipEl.className = 'lore-tooltip';
+		document.body.appendChild(loreTipEl);
+	}
+	loreTipEl.textContent = target.dataset.tip;
+	loreTipEl.classList.remove('visible');
+	const rect = target.getBoundingClientRect();
+	loreTipEl.style.left = '';
+	loreTipEl.style.right = '';
+	loreTipEl.style.top = '';
+	loreTipEl.style.visibility = 'hidden';
+	loreTipEl.style.opacity = '0';
+	loreTipEl.style.display = 'block';
+	requestAnimationFrame(() => {
+		const tw = loreTipEl.offsetWidth;
+		let left = rect.left + rect.width / 2 - tw / 2;
+		if (left + tw > window.innerWidth - 8) left = window.innerWidth - 8 - tw;
+		if (left < 8) left = 8;
+		loreTipEl.style.left = left + 'px';
+		loreTipEl.style.top = (rect.top - loreTipEl.offsetHeight - 6) + 'px';
+		loreTipEl.style.visibility = '';
+		loreTipEl.style.opacity = '';
+		loreTipEl.classList.add('visible');
+	});
+}
+
+function onLoreTipOut(e) {
+	const target = e.target.closest?.('.lore-tip');
+	if (!target || !loreTipEl) return;
+	loreTipEl.classList.remove('visible');
+}
 </script>
 
-<svelte:window onscroll={() => { scrolled = window.scrollY > 0; }} onkeydown={onSidebarKeydown} onclick={(e) => { if (!sidebarEl?.contains(e.target)) sidebarHasFocus = false; }} />
+<svelte:window onscroll={() => { scrolled = window.scrollY > 0; }} onkeydown={onSidebarKeydown} onclick={(e) => { if (!sidebarEl?.contains(e.target)) sidebarHasFocus = false; }} onpointerover={onLoreTipOver} onpointerout={onLoreTipOut} />
 
 <div class="dw-layout">
 	<button
@@ -597,17 +635,12 @@ async function handleNavClick(e, item, category) {
 		color: #8b1a1a;
 		font-weight: bold;
 		cursor: default;
-		position: relative;
 		text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 	}
 
-	:global(.dw-article .lore-tip)::after {
-		content: attr(data-tip);
-		white-space: pre-line;
-		position: absolute;
-		bottom: 100%;
-		left: 50%;
-		transform: translateX(-50%) translateY(4px);
+	:global(.lore-tooltip) {
+		position: fixed;
+		z-index: 2147483647;
 		background: #1a1a1a;
 		border: 1px solid #444;
 		color: #ccc;
@@ -618,15 +651,16 @@ async function handleNavClick(e, item, category) {
 		line-height: 1.4;
 		width: max-content;
 		max-width: 280px;
+		white-space: pre-line;
 		pointer-events: none;
 		opacity: 0;
+		transform: translateY(4px);
 		transition: opacity 0.12s ease-out, transform 0.12s ease-out;
-		z-index: 100;
 	}
 
-	:global(.dw-article .lore-tip:hover)::after {
+	:global(.lore-tooltip.visible) {
 		opacity: 1;
-		transform: translateX(-50%) translateY(-4px);
+		transform: translateY(0);
 		transition: opacity 0.08s ease-out, transform 0.08s ease-out;
 	}
 
