@@ -195,6 +195,12 @@ function cancelDelete() {
 		}} />
 
 		{#if isBatch}
+			<div class="builder-actions">
+				<button class="action-btn primary" onclick={saveBatch} disabled={!canSaveBatch}>Save All ({batchMonsters.length})</button>
+				{#if text.trim()}
+					<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
+				{/if}
+			</div>
 			{#if batchMonsters.length > 0}
 				<div class="builder-preview">
 					{#each batchMonsters as m (m.name)}
@@ -202,24 +208,18 @@ function cancelDelete() {
 					{/each}
 				</div>
 			{/if}
-			<div class="builder-actions">
-				<button class="action-btn primary" onclick={saveBatch} disabled={!canSaveBatch}>Save All ({batchMonsters.length})</button>
-				{#if text.trim()}
-					<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
-				{/if}
-			</div>
 		{:else}
-			{#if built && built.name !== 'Unnamed'}
-				<div class="builder-preview">
-					<MonsterStatblock {...built} open={true} custom={true} />
-				</div>
-			{/if}
 			<div class="builder-actions">
 				<button class="action-btn primary" onclick={saveMonster} disabled={!canSave}>Save Monster</button>
 				{#if text.trim()}
 					<button class="action-btn" onclick={() => { text = ''; }}>Clear</button>
 				{/if}
 			</div>
+			{#if built && built.name !== 'Unnamed'}
+				<div class="builder-preview">
+					<MonsterStatblock {...built} open={true} custom={true} />
+				</div>
+			{/if}
 		{/if}
 	</div>
 
