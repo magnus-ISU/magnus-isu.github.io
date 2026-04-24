@@ -58,7 +58,7 @@ Choose a creature you can see. Until you end this spell, the target suffers from
 With a touch you speak to the spirits within things. The non-living object you touch answers three questions you pose, as best it can.
 ### True Seeing
 You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie or dismiss the spell. Concentration
-### Trap Soul
+### Trap the Soul
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but it can never be recaptured once freed.
 ## Level 7
 ### Harm
