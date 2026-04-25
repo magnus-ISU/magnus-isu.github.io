@@ -247,6 +247,39 @@ export function renderMarkdown(src) {
 			continue;
 		}
 
+		// Markdown pipe tables
+		if (/^\|(.+)\|/.test(line.trim()) && lineIdx + 1 < lines.length && /^\|[\s:-]+\|/.test(lines[lineIdx + 1].trim())) {
+			flushPara();
+			closePendingList();
+			const parseCells = (row) => row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+			const headers = parseCells(line);
+			const sepCells = parseCells(lines[lineIdx + 1]);
+			const aligns = sepCells.map(c => {
+				const l = c.startsWith(':'), r = c.endsWith(':');
+				return l && r ? 'center' : r ? 'right' : null;
+			});
+			lineIdx += 2; // skip header + separator
+			html += '<table><thead><tr>';
+			for (let ci = 0; ci < headers.length; ci++) {
+				const a = aligns[ci] ? ` style="text-align:${aligns[ci]}"` : '';
+				html += `<th${a}>${inline(headers[ci])}</th>`;
+			}
+			html += '</tr></thead><tbody>';
+			while (lineIdx < lines.length && /^\|(.+)\|/.test(lines[lineIdx].trim())) {
+				const cells = parseCells(lines[lineIdx]);
+				html += '<tr>';
+				for (let ci = 0; ci < headers.length; ci++) {
+					const a = aligns[ci] ? ` style="text-align:${aligns[ci]}"` : '';
+					html += `<td${a}>${inline(cells[ci] || '')}</td>`;
+				}
+				html += '</tr>';
+				lineIdx++;
+			}
+			html += '</tbody></table>';
+			lineIdx--; // outer loop will increment
+			continue;
+		}
+
 		if (line.startsWith('> ') || (inBlockquote && line === '>')) {
 			flushPara();
 			closePendingList();
