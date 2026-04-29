@@ -10,6 +10,81 @@ import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 const cs = characterSheet;
 
+// --- Collapsed-section display layer ---
+// The textarea shows a stripped view where collapsed (::) section bodies are hidden.
+// The store always holds the full text.
+
+function stripCollapsed(full) {
+	const lines = full.split('\n');
+	const out = [];
+	let skipping = false;
+	for (let i = 0; i < lines.length; i++) {
+		if (i < 4) { out.push(lines[i]); continue; }
+		if (/^##\s/.test(lines[i])) {
+			skipping = /\s*::\s*$/.test(lines[i]);
+			out.push(lines[i]);
+			continue;
+		}
+		if (!skipping) out.push(lines[i]);
+	}
+	return out.join('\n');
+}
+
+function getCollapsedSections(full) {
+	const lines = full.split('\n');
+	const sections = [];
+	let heading = null;
+	let content = [];
+	for (let i = 4; i < lines.length; i++) {
+		if (/^##\s/.test(lines[i])) {
+			if (heading) sections.push({ heading, lines: content });
+			if (/\s*::\s*$/.test(lines[i])) { heading = lines[i]; content = []; }
+			else { heading = null; }
+			continue;
+		}
+		if (heading) content.push(lines[i]);
+	}
+	if (heading) sections.push({ heading, lines: content });
+	return sections;
+}
+
+function reconstruct(displayText, sections) {
+	const lines = displayText.split('\n');
+	const queue = new Map();
+	for (const s of sections) {
+		if (!queue.has(s.heading)) queue.set(s.heading, []);
+		queue.get(s.heading).push(s.lines);
+	}
+	const out = [];
+	for (const line of lines) {
+		out.push(line);
+		if (/^##\s/.test(line) && /\s*::\s*$/.test(line)) {
+			const q = queue.get(line);
+			if (q?.length) out.push(...q.shift());
+		}
+	}
+	// Append any orphaned collapsed sections expanded at the bottom
+	for (const [heading, remaining] of queue) {
+		for (const lines of remaining) {
+			if (!lines.length) continue;
+			out.push(heading.replace(/\s*::\s*$/, ''));
+			out.push(...lines);
+		}
+	}
+	return out.join('\n');
+}
+
+let displayValue = $state(stripCollapsed(cs.value));
+
+$effect(() => {
+	displayValue = stripCollapsed(cs.value);
+});
+
+function onDisplayInput() {
+	const sections = getCollapsedSections(cs.value);
+	cs.value = reconstruct(displayValue, sections);
+}
+
 // --- Multi-character tabs ---
 let activeTab = $state(characterSheet.activeIndex);
 
@@ -181,12 +256,12 @@ const wornArmor = $derived(bodyStats.armor);
 const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
 
 const placeholders = $derived.by(() => {
-	if (!cs.value.trim()) {
+	if (!displayValue.trim()) {
 		return [
 			'Shift+click or long-press a class in the sidebar to get started, or open a class and click its name, or press right to type anything',
 		];
 	}
-	const lines = cs.value.split('\n');
+	const lines = displayValue.split('\n');
 	const hints = [
 		'Name, Class Level',
 		'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
@@ -638,7 +713,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs',
+			'.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name',
 		)
 	) {
 		suppressRadialClick = true;
@@ -660,7 +735,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name',
 		)
 	)
 		return;
@@ -796,7 +871,7 @@ function rollRadialDie(formula, e) {
 	</div>
 
 	<div class="sheet-editor" bind:this={editorEl}>
-		<TextBox bind:value={cs.value} {placeholders} rows={12} onkeydown={(e) => {
+		<TextBox bind:value={displayValue} {placeholders} rows={12} oninput={onDisplayInput} onkeydown={(e) => {
 			if (e.key === 'ArrowRight' && !cs.value.trim()) {
 				e.preventDefault();
 				cs.value = charSheetDefault;
@@ -809,7 +884,7 @@ function rollRadialDie(formula, e) {
 			<div class="sheet-top" bind:this={sheetTopEl}>
 			<div class="sheet-header">
 				<div class="header-info">
-					<h2 class="char-name">{parsed.name}</h2>
+					<h2 class="char-name" onclick={(e) => { navigator.clipboard.writeText(cs.value); const el = e.currentTarget; el.classList.add('copied'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('copied'), 1200); }}>{parsed.name}</h2>
 					{#if parsed.clazz || parsed.level}
 						<p class="char-subtitle">
 							{#if parsed.clazz}<span class="char-class">{parsed.clazz}</span>{/if}
@@ -1149,6 +1224,11 @@ function rollRadialDie(formula, e) {
 		margin: 0;
 		font-size: 1.4rem;
 		text-align: left;
+		cursor: pointer;
+		transition: color 0.2s;
+	}
+	.char-name:global(.copied) {
+		color: #8f8;
 	}
 
 	.char-subtitle {
