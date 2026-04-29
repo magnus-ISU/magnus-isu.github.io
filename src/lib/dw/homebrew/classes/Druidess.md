@@ -149,7 +149,7 @@ Your personality is as distant and inevitable as Nature herself. You become immu
 Additionally, when you Parley, those who look on nature with awe and without knowledge will take just your promise to do something as evidence that it will get done.
 
 ### Flesh of my Flesh
-When you **borrow a form**, you may spend a minute to grant the form to your companions as well. They may change back at will but after each time they roll 2d6 they take -1 ongoing while shapechanged until they revert to their natural form.
+When you **borrow a form**, you may spend a minute to grant the form to your companions as well. They may change back at will but after each time they roll (except damage) they take -1 ongoing while shapechanged until they revert to their natural form.
 
 ## Mastery Moves
 
@@ -157,18 +157,18 @@ When you **borrow a form**, you may spend a minute to grant the form to your com
 When you **Shapechange**, you can take -1 to the roll in order to take on the form of a specific individual or creature you have seen. Even if you succeed, take -1 ongoing until you release the form.
 
 ### Formshaper
-*Requires Formcrafter*
+*Requires Formcrafter*  
 When you **Shapechange**, choose to increase your armor by 1 or deal an additional d4 damage.
 
 ### Grove of the Gods
 You know and walk the secret paths to the eldest glens. Even in the busiest city or the harshest dungeons, when you **seek the Grove**, you and those you directly lead will find it. You can always return the way you came; but the spirits may show you other ways out, for a price.
 
 ### Forms of the Divine
-*Requires God Amidst the Wastes*
+*Requires God Amidst the Wastes*  
 You can Channel a Spell from any form, not just your natural one.
 
 ### In Nature Reborn
-*Requires By Nature Sustained*
+*Requires By Nature Sustained*  
 You no longer age or sleep except to restore bindings. When you **fall to 0 hit points**, do not roll your Last Breath. A seed (like an acorn?) somewhere on your corpse will grow in a few days back into yourself, so long as it is not destroyed.
 
 ### Chimera
