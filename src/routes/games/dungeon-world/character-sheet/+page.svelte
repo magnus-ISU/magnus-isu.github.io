@@ -1540,9 +1540,10 @@ function expandSection(sectionName) {
 	}
 
 	.collapsed-sidebar {
+		box-sizing: border-box;
 		width: var(--sidebar-w);
 		flex-shrink: 0;
-		padding: 0rem;
+		padding: 1rem 0.3rem 0.4rem 0.2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
