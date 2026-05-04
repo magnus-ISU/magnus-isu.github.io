@@ -7,7 +7,8 @@ function headers(token) {
 async function jsonFetch(url, token, opts = {}) {
 	const res = await fetch(url, { ...opts, headers: { ...headers(token), ...opts.headers } });
 	if (!res.ok) {
-		const err = new Error(`Drive API ${res.status}`);
+		const body = await res.text().catch(() => '');
+		const err = new Error(`Drive API ${res.status}: ${body}`);
 		err.status = res.status;
 		throw err;
 	}
@@ -46,9 +47,9 @@ export async function createFile(token, name, folderId, content) {
 	const body =
 		`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n` +
 		JSON.stringify(metadata) +
-		`\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n` +
+		`\r\n--${boundary}\r\nContent-Type: application/octet-stream\r\n\r\n` +
 		JSON.stringify(content) +
-		`\r\n--${boundary}--`;
+		`\r\n--${boundary}--\r\n`;
 
 	return (
 		await jsonFetch(`${API}/upload/drive/v3/files?uploadType=multipart&fields=id,modifiedTime`, token, {
@@ -62,7 +63,8 @@ export async function createFile(token, name, folderId, content) {
 export async function readFile(token, fileId) {
 	const res = await fetch(`${API}/drive/v3/files/${fileId}?alt=media`, { headers: headers(token) });
 	if (!res.ok) {
-		const err = new Error(`Drive API ${res.status}`);
+		const body = await res.text().catch(() => '');
+		const err = new Error(`Drive API ${res.status}: ${body}`);
 		err.status = res.status;
 		throw err;
 	}
@@ -76,7 +78,8 @@ export async function updateFile(token, fileId, content) {
 		body: JSON.stringify(content),
 	});
 	if (!res.ok) {
-		const err = new Error(`Drive API ${res.status}`);
+		const body = await res.text().catch(() => '');
+		const err = new Error(`Drive API ${res.status}: ${body}`);
 		err.status = res.status;
 		throw err;
 	}

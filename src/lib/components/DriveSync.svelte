@@ -1,26 +1,60 @@
 <script>
 import { onMount } from 'svelte';
+import { googleAuth } from '$lib/google/auth.svelte.js';
 import { driveSync } from '$lib/google/sync.svelte.js';
+
+let longPressTimer = null;
 
 onMount(() => {
 	const handleVisibility = () => driveSync.handleVisibilityChange();
 	document.addEventListener('visibilitychange', handleVisibility);
+	driveSync.startStorageListener();
 	driveSync.autoReconnect();
 	const unsubscribe = driveSync.onKeysChanged(() => {
 		window.location.reload();
 	});
 	return () => {
 		document.removeEventListener('visibilitychange', handleVisibility);
+		driveSync.stopStorageListener();
 		unsubscribe();
+		if (longPressTimer) clearTimeout(longPressTimer);
 	};
 });
 
-async function selectDrive() {
+async function selectDrive(e) {
+	if (e.shiftKey && googleAuth.isSignedIn) {
+		logout();
+		return;
+	}
 	if (driveSync.isDrive) {
 		driveSync.pullFromDrive();
 		return;
 	}
 	await driveSync.switchToDrive();
+}
+
+function handleDrivePointerDown() {
+	if (!googleAuth.isSignedIn) return;
+	longPressTimer = setTimeout(() => {
+		longPressTimer = null;
+		logout();
+	}, 800);
+}
+
+function handleDrivePointerUp() {
+	if (longPressTimer) {
+		clearTimeout(longPressTimer);
+		longPressTimer = null;
+	}
+}
+
+function handleDriveDblClick() {
+	if (googleAuth.isSignedIn) logout();
+}
+
+function logout() {
+	driveSync.switchToLocal();
+	googleAuth.signOut();
 }
 
 async function selectLocal() {
@@ -29,12 +63,15 @@ async function selectLocal() {
 }
 
 const driveLabel = $derived.by(() => {
-	if (!driveSync.isDrive) return 'Google Drive';
+	let emailStr = '';
+	if (googleAuth.email) {
+		const addr = googleAuth.email;
+		emailStr = ` - ${addr.endsWith('@gmail.com') ? addr.slice(0, -10) : addr}`;
+	}
 	if (driveSync.status === 'waiting') return 'Waiting…';
 	if (driveSync.status === 'syncing') return 'Syncing…';
 	if (driveSync.status === 'error') return 'Sync error';
-	if (driveSync.lastSynced) return `Synced ${driveSync.lastSynced.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
-	return 'Google Drive';
+	return `Drive${emailStr}`;
 });
 </script>
 
@@ -43,7 +80,7 @@ const driveLabel = $derived.by(() => {
 		class="toggle-half left"
 		class:active={!driveSync.isDrive}
 		onclick={selectLocal}
-	>Local</button>
+	>Local Storage</button>
 	<button
 		class="toggle-half right"
 		class:active={driveSync.isDrive}
@@ -51,6 +88,10 @@ const driveLabel = $derived.by(() => {
 		class:syncing={driveSync.isDrive && driveSync.status === 'syncing'}
 		class:error={driveSync.isDrive && driveSync.status === 'error'}
 		onclick={selectDrive}
+		ondblclick={handleDriveDblClick}
+		onpointerdown={handleDrivePointerDown}
+		onpointerup={handleDrivePointerUp}
+		onpointercancel={handleDrivePointerUp}
 	>{driveLabel}</button>
 </div>
 

@@ -25,6 +25,8 @@ let saveTimeout = null;
 let waiting = $state(false);
 let listeners = [];
 let mode = $state(browser ? (localStorage.getItem(MODE_KEY) || 'local') : 'local');
+let storageDebounce = null;
+let storageListener = null;
 
 async function withRetry(fn) {
 	try {
@@ -185,6 +187,14 @@ export const driveSync = {
 			lastSynced = new Date();
 			syncStatus = 'idle';
 		} catch (err) {
+			if (err.status === 404) {
+				fileId = null;
+				folderId = null;
+				lastKnownModified = null;
+				try { localStorage.removeItem(FILE_ID_KEY); } catch {}
+				await this.pushToDrive();
+				return;
+			}
 			console.error('Drive push failed:', err);
 			syncStatus = 'error';
 		}
@@ -221,6 +231,14 @@ export const driveSync = {
 			syncStatus = 'idle';
 			if (changedKeys.length > 0) notifyListeners(changedKeys);
 		} catch (err) {
+			if (err.status === 404) {
+				fileId = null;
+				folderId = null;
+				lastKnownModified = null;
+				try { localStorage.removeItem(FILE_ID_KEY); } catch {}
+				syncStatus = 'idle';
+				return;
+			}
 			console.error('Drive pull failed:', err);
 			syncStatus = 'error';
 		}
@@ -228,10 +246,16 @@ export const driveSync = {
 
 	async switchToDrive() {
 		if (mode === 'drive' && googleAuth.isSignedIn) return;
-		if (!googleAuth.isSignedIn) {
+		const wasSignedIn = googleAuth.isSignedIn;
+		if (!wasSignedIn) {
 			await googleAuth.signIn();
 			if (!googleAuth.isSignedIn) return;
 		}
+
+		fileId = null;
+		folderId = null;
+		lastKnownModified = null;
+		try { localStorage.removeItem(FILE_ID_KEY); } catch {}
 
 		snapshotLocal();
 
@@ -247,16 +271,18 @@ export const driveSync = {
 		try { localStorage.setItem(MODE_KEY, 'drive'); } catch {}
 
 		await ensureFile(seed);
+		lastKnownModified = null;
 		await this.pullFromDrive();
 	},
 
 	async switchToLocal() {
+		const hadPendingWrite = saveTimeout !== null;
 		if (saveTimeout) {
 			clearTimeout(saveTimeout);
 			saveTimeout = null;
 			waiting = false;
 		}
-		if (googleAuth.isSignedIn && mode === 'drive') {
+		if (hadPendingWrite && googleAuth.isSignedIn && mode === 'drive') {
 			await this.pushToDrive();
 		}
 		mode = 'local';
@@ -295,6 +321,30 @@ export const driveSync = {
 		if (!browser) return;
 		if (!document.hidden && googleAuth.isSignedIn && mode === 'drive') {
 			this.pullFromDrive();
+		}
+	},
+
+	startStorageListener() {
+		if (storageListener) return;
+		storageListener = (e) => {
+			if (!e.key || !registeredKeys.includes(e.key)) return;
+			if (e.oldValue === e.newValue) return;
+			if (storageDebounce) clearTimeout(storageDebounce);
+			storageDebounce = setTimeout(() => {
+				storageDebounce = null;
+				notifyListeners([e.key]);
+			}, 500);
+		};
+		window.addEventListener('storage', storageListener);
+	},
+
+	stopStorageListener() {
+		if (!storageListener) return;
+		window.removeEventListener('storage', storageListener);
+		storageListener = null;
+		if (storageDebounce) {
+			clearTimeout(storageDebounce);
+			storageDebounce = null;
 		}
 	},
 };
