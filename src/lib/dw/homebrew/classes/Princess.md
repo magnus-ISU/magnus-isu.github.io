@@ -160,11 +160,11 @@ When you **meet a new person of high status**, roll+CHA and tell the GM your pre
 While you **fight for the honor or safety of your True Love**, take +1 ongoing until you have secured their honor or safety.
 
 ### Battle Princess
-*Requires Warrior Princess*
+*Requires Warrior Princess*  
 Take one more non-multiclass move from the Fighter. Your damage increases to d8.
 
 ### Wicked Princess
-*Requires Rebellious Princess*
+*Requires Rebellious Princess*  
 Take one more non-multiclass move from the Thief, the Bard, or the Wizard.
 
 *A playbook by June Shores*

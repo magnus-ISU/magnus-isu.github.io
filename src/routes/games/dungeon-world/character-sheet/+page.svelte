@@ -908,12 +908,14 @@ function collapseSection(sectionName) {
 		}
 		if (group) {
 			const fullH = group.scrollHeight;
+			group.classList.add('collapsing');
 			group.style.maxHeight = fullH + 'px';
 			group.style.overflow = 'hidden';
 			group.offsetHeight; // force reflow
 			group.style.transition = 'max-height 0.3s ease';
 			group.style.maxHeight = '0';
 			group.addEventListener('transitionend', () => {
+				group.classList.remove('collapsing');
 				group.style.maxHeight = '';
 				group.style.overflow = '';
 				group.style.transition = '';
@@ -1670,6 +1672,11 @@ function expandSection(sectionName) {
 
 	.char-body :global(.h2-group:has(> h2:hover)::before) {
 		border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	.char-body :global(.h2-group.collapsing::before) {
+		transition: none;
+		border-color: transparent;
 	}
 
 	.char-body :global(.h2-section) {
