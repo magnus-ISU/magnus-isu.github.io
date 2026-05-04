@@ -1,21 +1,24 @@
 import { browser } from '$app/environment';
+import { driveSync } from '$lib/google/sync.svelte.js';
 
 const STORAGE_KEY = 'dw-character-sheet';
 const SLOTS_KEY = 'dw-character-slots';
 const ACTIVE_KEY = 'dw-character-active';
 
+driveSync.registerKey(SLOTS_KEY);
+driveSync.registerKey(ACTIVE_KEY);
+
 function loadSlots() {
 	if (!browser) return [''];
 	try {
-		const raw = localStorage.getItem(SLOTS_KEY);
+		const raw = driveSync.load(SLOTS_KEY);
 		if (raw) {
 			const arr = JSON.parse(raw);
 			if (Array.isArray(arr) && arr.length > 0) return arr;
 		}
-		// Migrate from old single-sheet key
-		const legacy = localStorage.getItem(STORAGE_KEY) ?? '';
+		const legacy = driveSync.load(STORAGE_KEY) ?? '';
 		const slots = [legacy];
-		localStorage.setItem(SLOTS_KEY, JSON.stringify(slots));
+		driveSync.save(SLOTS_KEY, JSON.stringify(slots));
 		return slots;
 	} catch {
 		return [''];
@@ -25,7 +28,7 @@ function loadSlots() {
 function loadActive() {
 	if (!browser) return 0;
 	try {
-		const v = localStorage.getItem(ACTIVE_KEY);
+		const v = driveSync.load(ACTIVE_KEY);
 		return v !== null ? +v : 0;
 	} catch {
 		return 0;
@@ -34,20 +37,12 @@ function loadActive() {
 
 function saveSlots(slots) {
 	if (!browser) return;
-	try {
-		localStorage.setItem(SLOTS_KEY, JSON.stringify(slots));
-	} catch {
-		/* ignore */
-	}
+	driveSync.save(SLOTS_KEY, JSON.stringify(slots));
 }
 
 function saveActive(idx) {
 	if (!browser) return;
-	try {
-		localStorage.setItem(ACTIVE_KEY, String(idx));
-	} catch {
-		/* ignore */
-	}
+	driveSync.save(ACTIVE_KEY, String(idx));
 }
 
 const slots = $state(loadSlots());

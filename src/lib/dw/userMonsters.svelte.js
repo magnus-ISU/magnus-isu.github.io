@@ -1,18 +1,21 @@
 import { browser } from '$app/environment';
+import { driveSync } from '$lib/google/sync.svelte.js';
 
 const STORAGE_KEY = 'dw-user-monsters';
+
+driveSync.registerKey(STORAGE_KEY);
 
 function load() {
 	if (!browser) return [];
 	try {
-		return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
+		return JSON.parse(driveSync.load(STORAGE_KEY) ?? '[]');
 	} catch {
 		return [];
 	}
 }
 
 function save(arr) {
-	if (browser) localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+	if (browser) driveSync.save(STORAGE_KEY, JSON.stringify(arr));
 }
 
 let monsters = $state(load());

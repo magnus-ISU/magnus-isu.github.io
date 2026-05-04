@@ -1,6 +1,7 @@
 <script>
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
+import DriveSync from '$lib/components/DriveSync.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 import { buildCharacterSheet, loadClassRaw } from '$lib/dw/classLoader.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
@@ -314,6 +315,7 @@ function onLoreTipOut(e) {
 				{/each}
 			</div>
 		{/if}
+		<DriveSync />
 		<div class="sidebar-spacer"></div>
 	</nav>
 
