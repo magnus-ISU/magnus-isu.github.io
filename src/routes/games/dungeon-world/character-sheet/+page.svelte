@@ -1202,6 +1202,13 @@ function expandSection(sectionName) {
 							el._lastClick = now;
 							section.collapsed ? expandSection(section.name) : scrollToSection(section.name);
 						}}
+						oncontextmenu={(e) => {
+							e.preventDefault();
+							const el = e.currentTarget;
+							clearTimeout(el._lpt);
+							el._suppressClick = true;
+							section.collapsed ? expandAllAndScrollTo(section.name) : collapseSection(section.name);
+						}}
 						onpointerdown={(e) => {
 							const el = e.currentTarget;
 							el._suppressClick = false;
@@ -1597,6 +1604,7 @@ function expandSection(sectionName) {
 		width: var(--sidebar-w);
 		flex-shrink: 0;
 		padding: 1rem 0.3rem 0.4rem 0.2rem;
+		overscroll-behavior: contain;
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
@@ -1619,7 +1627,8 @@ function expandSection(sectionName) {
 		color: #999;
 		font-size: 0.68rem;
 		font-family: inherit;
-		padding: 0.22em 0.5em;
+		padding: 0;
+		min-height: 2.6rem;
 		cursor: pointer;
 		text-align: center;
 		line-height: 1.3;
@@ -1628,6 +1637,9 @@ function expandSection(sectionName) {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.sidebar-section-btn:hover {
@@ -1637,6 +1649,8 @@ function expandSection(sectionName) {
 
 	.sidebar-section-btn.sidebar-section-collapsed {
 		opacity: 0.5;
+		border-color: transparent;
+		font-style: italic;
 	}
 
 	.char-body :global(p),
