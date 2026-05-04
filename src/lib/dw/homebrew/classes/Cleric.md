@@ -157,7 +157,7 @@ When you **take time after a conflict to dedicate your victory to your deity and
 
 ### Providence
 *Replaces Serenity*  
-You ignore the -1 penalty from two ongoing Miracles you maintain.
+You ignore the -1 penalty from two ongoing concentration Miracles you maintain.
 
 ### Greater First Aid
 *Requires First Aid*  

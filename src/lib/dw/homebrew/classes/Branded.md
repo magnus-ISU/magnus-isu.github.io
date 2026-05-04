@@ -18,7 +18,7 @@ When you **conjure a weapon of pure flame**, roll+CON. You may treat your DEX as
 - Remove the *Dangerous* tag
 
 ### Fuel for the Pyre
-When you **take damage while unarmoured**, the flames within you come to your aid. Hold 1 fuel. At any time, you may spend 1 fuel to:
+When you **take damage while unarmoured**, the flames within you come to your aid. Hold +1 fuel. At any time, you may spend 1 fuel to:
 - Heal 1d4 HP
 - Take +1 forward to conjure your Firebrand
 - Take +1d4 forward to your next damage roll
@@ -86,7 +86,7 @@ I once cast something into the fire for \_\_\_\_\_, and I will collect my due.
 ## Advanced Moves
 
 ### Burning Bridges
-You take +1 ongoing to last breath rolls. When you **take your last breath**, on a 7-9 you offer to sacrifice something to Death which is inherent and valuable to you instead of your eternal soul. If Death accepts, he will return you to life. If not, you die.
+You take +1 ongoing to Last Breath rolls. When you would **take your Last Breath**, you can offer to sacrifice something to Death which is inherent and valuable to you instead of your eternal soul. If Death accepts, he will return you to life. If not, roll your Last Breath.
 
 ### Lore of Flame
 When you **seek answers from the flames**, roll+WIS. On a hit, the GM will tell you something new and interesting about the current situation. On a 10+, the GM will give you good detail. On a 7-9, the GM will give you an impression. If you already know all there is to know, the GM will tell you that.
@@ -101,7 +101,7 @@ When you **conjure a weapon of pure flame** using Firebrand, choose one extra ta
 When you **conjure a weapon of pure flame** using Firebrand, add the following tags to your options: *messy*, *forceful*, *reach*, *near*, *far*.
 
 ### Reckless Fighter
-When you **Hack & Slash** and choose to expose yourself to your enemy on a 10+, you do +2d4 damage instead of +1d6.
+When you **Hack & Slash** and choose to expose yourself to your enemy on a 10+, you do +2d6 damage instead of +1d6.
 
 ### Moth to the Flame
 When you **tempt a weak mind**, roll+CHA. On a 10+, their will is suppressed; they'll follow your commands as long as nothing startles or surprises them. On a 7-9, the effect is only strong enough to distract or confuse them for a few moments. On a miss, your temptations have the opposite effect; they become agitated, alert, and distrustful of you in particular.
@@ -144,7 +144,7 @@ When you **Make Camp** next to a large, open fire, you may choose to either rega
 
 ### Relentless Fighter
 *Replaces Reckless Fighter*
-When you **Hack & Slash** and choose to expose yourself to your enemy on a 10+, you do +2d4 damage and your aggression catches them off guard; tell the GM how and why.
+When you **Hack & Slash** and choose to expose yourself to your enemy on a 10+, you do +2d6 damage (instead of 1d6) and your aggression catches them off guard; tell the GM how and why.
 
 ### Watch the World Burn
 When you **open a channel to the burning planes** and call down a firestorm, tell the GM what you're sacrificing and roll+WIS. The sky opens up and fire pours like rain within an area proportionate to your sacrifice; everyone and everything in the area takes damage as appropriate. On a 10+ you can extinguish the storm with a little effort. On a 7-9 the fires rage out of your control, spreading and dusting where they are carried by wind and weather. On a miss, something cruel, intelligent, and hungry comes with the storm.

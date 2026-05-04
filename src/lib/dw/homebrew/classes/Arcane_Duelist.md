@@ -5,7 +5,7 @@ Battle is not a means to an end: it is an art. Where others see nothing but chao
 ## Starting Moves
 
 ### Student of the Blade
-You know 2 + INT techniques - magical effects you can apply to your swordplay. When your INT increases, learn another technique.
+You know 2 \* INT techniques - magical effects you can apply to your swordplay. When your INT increases, learn 2 more techniques.
 
 When you **focus through a practiced kata**, you cause one of your techniques to take effect with your sword - you might create a stunning display of fire, leave an enchantment unraveled, conjure a warding sphere, or repel yourself upwards.
 
@@ -13,7 +13,7 @@ When you **focus through a practiced kata**, you cause one of your techniques to
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply 1 technique.
 
 ### Throw Down the Gauntlet
-When you **challenge someone to a duel**, roll+CHA. On a 10+, they choose 2 if they do not accept. On a 7-9, they choose 1 if they do not accept.
+When you **challenge someone to a duel** (with or without your companions), roll+CHA. On a 10+, they choose 2 if they do not accept. On a 7-9, they choose 1 if they do not accept.
 - You take +1 ongoing against them until they defeat you
 - They lose the respect of their peers and underlings
 - They retreat
@@ -106,7 +106,7 @@ When you **re-encounter somebody who has wronged you**, roll+INT. On a 10+, choo
 When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply INT techniques.
 
 ### Blade Artist
-Learn 3 techniques; you know a total of 5 + INT.
+Learn 3 techniques; you know a total of 3 + 2 \* INT.
 
 ### Show Off
 When you **attempt to wow an audience with a display of your power**, roll+INT. On a 10+, choose 2. On a 7-9, choose 1.
@@ -120,7 +120,7 @@ Get one move from another class. Treat your level as one lower, and your casting
 ## Mastery Moves
 
 ### Blade Savant
-Learn many techniques; you know a total of Level + INT techniques.
+Learn many techniques; you know a total of Level + 2 \* INT techniques.
 
 ### Two Men Enter, One Man Leaves
 *Replaces To the Death*  
@@ -167,7 +167,7 @@ On a 10+, you can choose to gain the Stunned debility. When you gain the Stunned
 - **Quicksilver**  Your blade cuts faster than the eye can see, preventing your opponent from mounting a proper defense. Gain 4 piercing on your attack.
 - **Void-Edged**  The edge of your weapon hums with an unearthly light. You may slice through inanimate objects with ease and add the *messy* tag to your attack.
 - **Freezing**  Your attack freezes and shatters a portion of your opponent's armor. After you deal your damage, reduce their armor by 1 until they repair it.
-- **Soul-Siphoning**  Your attack heals you for 1d4. Heal 1d8 instead if this attack kills your target.
+- **Soul-Siphoning**  Your attack heals you for 1d4 if it deals damage. Heal 1d8 instead if this attack kills your target.
 - **Galvanic**  Electricity courses through your blade, numbing one of your target's limbs.
 - **Mirage**  You create illusions of yourself near your target that cannot fight but might confuse your enemies for a few seconds. You can instantly teleport to one of these illusions, dispelling them.
 - **Tethering**  You leave your weapon behind, pinning your target's shadow to the ground and preventing them from moving more than a few feet from it until they free themselves.
@@ -180,8 +180,8 @@ On a 10+, you can choose to gain the Stunned debility. When you gain the Stunned
 - **Phasing**  Your blade flickers, not in this realm for a moment. Your attack gains *ethereal* and *insubstantial*.
 - **Prismatic**  Your blade shatters light into a dazzling display, confusing and disturbing any who are watching you fight.
 - **Thunderclap**  A deafening noise sounds that everyone can hear, and you and the target are deafened.
-- **Silencing**  Your blade traces a glowing seal on your target, and speech is impossible for a few critical moments until the seal breaks or fades.
-- **Fracturing**  Your sword swings progress through the air or target's armor and onto the ground, leaving glowing fractures that could cause unstable structures to break.
+- **Silencing**  Your blade sweeps in a glowing circle around your target, and speech is impossible for a few critical moments within the circle which follows you.
+- **Fracturing**  Your sword swings progress through the air and onto the ground, leaving glowing fractures that weaken and cause unstable structures to break.
 - **Unraveling**  Your blade dispels basic enchantments, and roll+INT to undo complex ones.
 
 *A playbook by Timothy Schroeder and Magnus Anderson*
