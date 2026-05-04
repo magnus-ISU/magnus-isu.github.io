@@ -906,11 +906,24 @@ function collapseSection(sectionName) {
 				}
 			}
 		}
-		if (sib?.classList.contains('h2-section') && !sib.classList.contains('collapsed')) {
-			const h = sib.scrollHeight;
-			sib.style.maxHeight = h + 'px';
+		const hasSib = sib?.classList.contains('h2-section') && !sib.classList.contains('collapsed');
+		// Capture heights before any style changes
+		const h2H = h2.scrollHeight;
+		const h2Margin = parseFloat(getComputedStyle(h2).marginTop) || 0;
+		// Set explicit starting values for both elements
+		h2.style.maxHeight = h2H + 'px';
+		h2.style.overflow = 'hidden';
+		h2.style.marginTop = h2Margin + 'px';
+		if (hasSib) {
+			sib.style.maxHeight = sib.scrollHeight + 'px';
 			sib.style.overflow = 'hidden';
-			sib.offsetHeight;
+		}
+		h2.offsetHeight; // force reflow
+		// Animate both to 0
+		h2.style.transition = 'max-height 0.3s ease, margin-top 0.3s ease, outline-color 0.2s ease, box-shadow 0.2s ease';
+		h2.style.maxHeight = '0';
+		h2.style.marginTop = '0';
+		if (hasSib) {
 			sib.style.transition = 'max-height 0.3s ease';
 			sib.style.maxHeight = '0';
 			sib.addEventListener('transitionend', () => {
@@ -920,7 +933,7 @@ function collapseSection(sectionName) {
 				commitCollapse();
 			}, { once: true });
 		} else {
-			commitCollapse();
+			h2.addEventListener('transitionend', () => commitCollapse(), { once: true });
 		}
 		break;
 	}
@@ -1648,6 +1661,15 @@ function expandSection(sectionName) {
 		cursor: n-resize;
 		user-select: none;
 		-webkit-user-select: none;
+		outline: 1px solid transparent;
+		outline-offset: 1rem;
+		border-radius: 3px;
+		transition: outline-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.char-body :global(h2:hover) {
+		outline-color: rgba(255, 255, 255, 0.18);
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
 	}
 
 	.char-body :global(h2:first-child) {
@@ -1656,13 +1678,15 @@ function expandSection(sectionName) {
 
 	.char-body :global(.h2-section) {
 		overflow: hidden;
-		border-radius: 4px;
-		box-shadow: 0 0 0 0 transparent;
-		transition: box-shadow 0.2s ease;
+		border-radius: 3px;
+		outline: 1px solid transparent;
+		outline-offset: 1rem;
+		transition: outline-color 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.char-body :global(h2:hover + .h2-section) {
-		box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 10px rgba(255, 255, 255, 0.09);
+		outline-color: rgba(255, 255, 255, 0.18);
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
 	}
 
 	.char-body :global(.h2-section.collapsed) {
