@@ -1254,6 +1254,12 @@ function expandSection(sectionName) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
 
+	/* Reset layout's negative margins that assume 2.5rem parent padding */
+	:global(.cs-article > h1) {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
 	/* Full-width: remove parent padding, hide spacer and footer */
 	:global(.dw-content:has(> .cs-article)) {
 		padding-left: 0 !important;
