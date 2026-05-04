@@ -414,8 +414,13 @@ function rollDie(sides) {
 	return Math.ceil(Math.random() * sides);
 }
 
-function launchDir() {
-	const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
+function launchDir(originX, originY) {
+	const cx = window.innerWidth / 2;
+	const cy = window.innerHeight / 2;
+	const dx = cx - (originX ?? cx);
+	const dy = cy - (originY ?? cy);
+	const base = Math.atan2(dy, dx);
+	const angle = base + (Math.random() - 0.5) * 0.8;
 	const dist = 120 + Math.random() * 60;
 	return { lx: Math.cos(angle) * dist, ly: Math.sin(angle) * dist };
 }
@@ -424,7 +429,7 @@ function rollStat(ab, mod, e) {
 	const r1 = rollDie(6),
 		r2 = rollDie(6);
 	const total = r1 + r2 + mod;
-	const { lx, ly } = launchDir();
+	const { lx, ly } = launchDir(e?.clientX, e?.clientY);
 	rollKey++;
 	rollResult = { ab, mod, total, mx: e.clientX, my: e.clientY, lx, ly };
 	const modStr = mod !== 0 ? (mod > 0 ? `+${mod}` : `${mod}`) : '';
@@ -439,7 +444,7 @@ function rollStat(ab, mod, e) {
 function rollDamageFormula(formula, e) {
 	const result = parseDamageFormula(formula);
 	if (result === null) return;
-	const { lx, ly } = launchDir();
+	const { lx, ly } = launchDir(e?.clientX, e?.clientY);
 	rollKey++;
 	rollResult = {
 		ab: 'DMG',
@@ -765,10 +770,18 @@ function onArticleClick(e) {
 		closeRadialMenu();
 		return;
 	}
+	const rx = e.clientX, ry = e.clientY;
+	const radius = 70, btnR = 22;
+	for (let i = 0; i < RADIAL_DICE.length; i++) {
+		const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2;
+		const bx = rx + Math.cos(angle) * radius;
+		const by = ry + Math.sin(angle) * radius;
+		if (bx - btnR < 0 || bx + btnR > window.innerWidth || by - btnR < 0 || by + btnR > window.innerHeight) return;
+	}
 	clearRadialTimer();
 	radialMenu = {
-		x: e.clientX,
-		y: e.clientY,
+		x: rx,
+		y: ry,
 		closing: false,
 		timer: setTimeout(() => closeRadialMenu(), 5000),
 	};
@@ -796,7 +809,7 @@ function rollRadialDie(formula, e) {
 		const d6val = rollDie(6);
 		const d8val = rollDie(8);
 		const total = d6val + d8val;
-		const { lx, ly } = launchDir();
+		const { lx, ly } = launchDir(e?.clientX, e?.clientY);
 		rollKey++;
 		rollResult = {
 			ab: 'DMG',
@@ -823,7 +836,7 @@ function rollRadialDie(formula, e) {
 
 	const result = parseDamageFormula(formula);
 	if (result === null) return;
-	const { lx, ly } = launchDir();
+	const { lx, ly } = launchDir(e?.clientX, e?.clientY);
 	rollKey++;
 	rollResult = {
 		ab: 'DMG',
@@ -1594,6 +1607,8 @@ function expandSection(sectionName) {
 
 	.sidebar-section-btn {
 		flex-shrink: 0;
+		user-select: none;
+		-webkit-user-select: none;
 		background: transparent;
 		border: 1px solid rgba(255, 255, 255, 0.18);
 		border-radius: 999px;
