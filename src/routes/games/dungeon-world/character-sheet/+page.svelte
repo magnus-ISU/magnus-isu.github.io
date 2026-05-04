@@ -1218,6 +1218,7 @@ function expandSection(sectionName) {
 	:global(.dw-content:has(> .cs-article)) {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
+		padding-bottom: 0 !important;
 	}
 
 	:global(.dw-content:has(> .cs-article) .content-spacer) {
@@ -1541,7 +1542,7 @@ function expandSection(sectionName) {
 	.collapsed-sidebar {
 		width: var(--sidebar-w);
 		flex-shrink: 0;
-		padding: 0.4rem 0.3rem 0.4rem 0.2rem;
+		padding: 0rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
