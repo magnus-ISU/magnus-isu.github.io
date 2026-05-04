@@ -889,16 +889,40 @@ function expandAllAndScrollTo(sectionName) {
 }
 
 function collapseSection(sectionName) {
-	const lines = cs.value.split('\n');
-	for (let i = 4; i < lines.length; i++) {
-		const m = lines[i].match(/^##\s+(.*)/);
-		if (!m) continue;
-		const raw = m[1].replace(/\s*::\s*$/, '').trim();
-		if (raw === sectionName) {
-			lines[i] = `## ${raw} ::`;
-			cs.value = lines.join('\n');
-			break;
+	if (!charBodyEl) return;
+	for (const h2 of charBodyEl.querySelectorAll('h2')) {
+		if (h2.textContent.trim() !== sectionName) continue;
+		const sib = h2.nextElementSibling;
+		function commitCollapse() {
+			const lines = cs.value.split('\n');
+			for (let i = 4; i < lines.length; i++) {
+				const m = lines[i].match(/^##\s+(.*)/);
+				if (!m) continue;
+				const raw = m[1].replace(/\s*::\s*$/, '').trim();
+				if (raw === sectionName) {
+					lines[i] = `## ${raw} ::`;
+					cs.value = lines.join('\n');
+					break;
+				}
+			}
 		}
+		if (sib?.classList.contains('h2-section') && !sib.classList.contains('collapsed')) {
+			const h = sib.scrollHeight;
+			sib.style.maxHeight = h + 'px';
+			sib.style.overflow = 'hidden';
+			sib.offsetHeight;
+			sib.style.transition = 'max-height 0.3s ease';
+			sib.style.maxHeight = '0';
+			sib.addEventListener('transitionend', () => {
+				sib.style.maxHeight = '';
+				sib.style.overflow = '';
+				sib.style.transition = '';
+				commitCollapse();
+			}, { once: true });
+		} else {
+			commitCollapse();
+		}
+		break;
 	}
 }
 
@@ -928,30 +952,27 @@ function expandSection(sectionName) {
 	}
 	tick().then(() => {
 		if (!charBodyEl) return;
-		const allH2s = charBodyEl.querySelectorAll('h2');
-		for (const newH2 of allH2s) {
-			if (newH2.textContent.trim() === sectionName) {
-				const sib = newH2.nextElementSibling;
-				if (sib?.classList.contains('h2-section')) {
-					sib.classList.remove('collapsed');
-					sib.style.maxHeight = '0';
-					sib.style.overflow = 'hidden';
-					sib.offsetHeight;
-					sib.style.transition = 'max-height 0.3s ease';
-					sib.style.maxHeight = sib.scrollHeight + 'px';
-					sib.addEventListener('transitionend', () => {
-						sib.style.maxHeight = '';
-						sib.style.overflow = '';
-						sib.style.transition = '';
-						const top = newH2.getBoundingClientRect().top + window.scrollY - sheetTopHeight - 8;
-						window.scrollTo({ top, behavior: 'smooth' });
-					}, { once: true });
-				} else {
-					const top = newH2.getBoundingClientRect().top + window.scrollY - sheetTopHeight - 8;
-					window.scrollTo({ top, behavior: 'smooth' });
-				}
-				break;
+		for (const newH2 of charBodyEl.querySelectorAll('h2')) {
+			if (newH2.textContent.trim() !== sectionName) continue;
+			const sib = newH2.nextElementSibling;
+			// Compute and scroll to final position immediately (section is at full height after tick)
+			const top = newH2.getBoundingClientRect().top + window.scrollY - sheetTopHeight - 8;
+			window.scrollTo({ top, behavior: 'smooth' });
+			if (sib?.classList.contains('h2-section')) {
+				const fullH = sib.scrollHeight;
+				sib.classList.remove('collapsed');
+				sib.style.maxHeight = '0';
+				sib.style.overflow = 'hidden';
+				sib.offsetHeight;
+				sib.style.transition = 'max-height 0.3s ease';
+				sib.style.maxHeight = fullH + 'px';
+				sib.addEventListener('transitionend', () => {
+					sib.style.maxHeight = '';
+					sib.style.overflow = '';
+					sib.style.transition = '';
+				}, { once: true });
 			}
+			break;
 		}
 	});
 }
@@ -1136,52 +1157,10 @@ function expandSection(sectionName) {
 					if (h2) {
 						const h2Text = h2.textContent.trim();
 						const collapsing = !h2.classList.contains('collapsed-heading');
-
 						if (collapsing) {
-							const lines = cs.value.split('\n');
-							for (let i = 4; i < lines.length; i++) {
-								const m = lines[i].match(/^##\s+(.*)/);
-								if (!m) continue;
-								const raw = m[1].replace(/\s*::\s*$/, '').trim();
-								if (raw === h2Text) {
-									lines[i] = `## ${raw} ::`;
-									cs.value = lines.join('\n');
-									break;
-								}
-							}
+							collapseSection(h2Text);
 						} else {
-							const savedScroll = window.scrollY;
-							const lines = cs.value.split('\n');
-							for (let i = 4; i < lines.length; i++) {
-								const m = lines[i].match(/^##\s+(.*)/);
-								if (!m) continue;
-								const raw = m[1].replace(/\s*::\s*$/, '').trim();
-								if (raw === h2Text) {
-									lines[i] = `## ${raw}`;
-									cs.value = lines.join('\n');
-									break;
-								}
-							}
-							tick().then(() => {
-								window.scrollTo(0, savedScroll);
-								if (!charBodyEl) return;
-								const allH2s = charBodyEl.querySelectorAll('h2');
-								for (const newH2 of allH2s) {
-									if (newH2.textContent.trim() === h2Text) {
-										const sib = newH2.nextElementSibling;
-										if (sib?.classList.contains('h2-section')) {
-											sib.classList.remove('collapsed');
-											sib.style.maxHeight = '0';
-											sib.style.overflow = 'hidden';
-											sib.offsetHeight;
-											sib.style.transition = 'max-height 0.3s ease';
-											sib.style.maxHeight = sib.scrollHeight + 'px';
-											sib.addEventListener('transitionend', () => { sib.style.maxHeight = ''; sib.style.overflow = ''; sib.style.transition = ''; }, { once: true });
-										}
-										break;
-									}
-								}
-							});
+							expandSection(h2Text);
 						}
 						return;
 					}
@@ -1666,10 +1645,9 @@ function expandSection(sectionName) {
 
 	.char-body :global(h2) {
 		margin-top: 1.5rem;
-		cursor: pointer;
+		cursor: n-resize;
 		user-select: none;
 		-webkit-user-select: none;
-
 	}
 
 	.char-body :global(h2:first-child) {
@@ -1678,6 +1656,13 @@ function expandSection(sectionName) {
 
 	.char-body :global(.h2-section) {
 		overflow: hidden;
+		border-radius: 4px;
+		box-shadow: 0 0 0 0 transparent;
+		transition: box-shadow 0.2s ease;
+	}
+
+	.char-body :global(h2:hover + .h2-section) {
+		box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 10px rgba(255, 255, 255, 0.09);
 	}
 
 	.char-body :global(.h2-section.collapsed) {
