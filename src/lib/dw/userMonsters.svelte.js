@@ -43,4 +43,7 @@ export const userMonsters = {
 	hasName(name) {
 		return monsters.some((m) => m.name.toLowerCase() === name.toLowerCase());
 	},
+	refresh() {
+		monsters = load();
+	},
 };

@@ -2,6 +2,9 @@
 import { onMount } from 'svelte';
 import { googleAuth } from '$lib/google/auth.svelte.js';
 import { driveSync } from '$lib/google/sync.svelte.js';
+import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
+import { encounterText } from '$lib/dw/encounterText.svelte.js';
 
 let longPressTimer = null;
 
@@ -11,7 +14,9 @@ onMount(() => {
 	driveSync.startStorageListener();
 	driveSync.autoReconnect();
 	const unsubscribe = driveSync.onKeysChanged(() => {
-		window.location.reload();
+		characterSheet.refresh();
+		userMonsters.refresh();
+		encounterText.refresh();
 	});
 	return () => {
 		document.removeEventListener('visibilitychange', handleVisibility);

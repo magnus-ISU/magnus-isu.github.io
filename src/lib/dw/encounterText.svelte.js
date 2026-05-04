@@ -75,4 +75,7 @@ export const encounterText = {
 		text = clean.filter((l) => l.trim()).join('\n');
 		save(text);
 	},
+	refresh() {
+		text = load();
+	},
 };

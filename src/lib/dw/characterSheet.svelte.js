@@ -138,6 +138,17 @@ export const characterSheet = {
 		return { slots: [...slots], activeIdx };
 	},
 
+	refresh() {
+		const newSlots = loadSlots();
+		const newActive = loadActive();
+		slots.length = 0;
+		slots.push(...newSlots);
+		activeIdx = Math.min(newActive, slots.length - 1);
+		if (browser) {
+			try { localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? ''); } catch {}
+		}
+	},
+
 	/** Restore a full slot snapshot (for undo) */
 	restoreSlots(newSlots, newActiveIdx) {
 		slots.length = 0;
