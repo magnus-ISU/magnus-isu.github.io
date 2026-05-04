@@ -541,7 +541,7 @@ function onStatPointerDown(e, ab) {
 				dropTarget = null;
 			}
 		} else {
-			statDragDelta = Math.max(-1, Math.min(1, -Math.round(dy / 100)));
+			statDragDelta = Math.max(-1, Math.min(1, -Math.round(dy / 300)));
 		}
 	}
 
@@ -622,9 +622,22 @@ const damageEntries = $derived.by(() => {
 
 const bodyHtml = $derived(renderMarkdown(parsed.body));
 
+const allSections = $derived(
+	cs.value.split('\n').slice(4)
+		.filter(l => /^##\s+/.test(l))
+		.map(l => {
+			const collapsed = /\s*::\s*$/.test(l);
+			const name = collapsed
+				? l.match(/^##\s+(.*?)\s*::\s*$/)[1].trim()
+				: l.match(/^##\s+(.*)/)[1].trim();
+			return { name, collapsed };
+		})
+);
+
 let charBodyEl = $state();
 let editorEl = $state();
 let sheetTopEl = $state();
+let sheetTopHeight = $state(0);
 let animatingH3 = -1;
 
 function sizeEditor() {
@@ -641,6 +654,13 @@ function sizeEditor() {
 $effect(() => {
 	if (!editorEl || !sheetTopEl) return;
 	requestAnimationFrame(sizeEditor);
+});
+
+$effect(() => {
+	if (!sheetTopEl) return;
+	const ro = new ResizeObserver(() => { sheetTopHeight = sheetTopEl.offsetHeight; });
+	ro.observe(sheetTopEl);
+	return () => ro.disconnect();
 });
 
 $effect(() => {
@@ -823,6 +843,73 @@ function rollRadialDie(formula, e) {
 		tier: isMove ? rollTier(result.total, false) : 'damage',
 	});
 }
+
+function collapseSection(sectionName) {
+	const lines = cs.value.split('\n');
+	for (let i = 4; i < lines.length; i++) {
+		const m = lines[i].match(/^##\s+(.*)/);
+		if (!m) continue;
+		const raw = m[1].replace(/\s*::\s*$/, '').trim();
+		if (raw === sectionName) {
+			lines[i] = `## ${raw} ::`;
+			cs.value = lines.join('\n');
+			break;
+		}
+	}
+}
+
+function scrollToSection(sectionName) {
+	if (!charBodyEl) return;
+	const allH2s = charBodyEl.querySelectorAll('h2');
+	for (const h2 of allH2s) {
+		if (h2.textContent.trim() === sectionName) {
+			const top = window.scrollY + h2.getBoundingClientRect().top - sheetTopHeight - 8;
+			window.scrollTo({ top, behavior: 'smooth' });
+			break;
+		}
+	}
+}
+
+function expandSection(sectionName) {
+	const savedScroll = window.scrollY;
+	const lines = cs.value.split('\n');
+	for (let i = 4; i < lines.length; i++) {
+		const m = lines[i].match(/^##\s+(.*)/);
+		if (!m) continue;
+		const raw = m[1].replace(/\s*::\s*$/, '').trim();
+		if (raw === sectionName) {
+			lines[i] = `## ${raw}`;
+			cs.value = lines.join('\n');
+			break;
+		}
+	}
+	tick().then(() => {
+		window.scrollTo(0, savedScroll);
+		if (!charBodyEl) return;
+		const allH2s = charBodyEl.querySelectorAll('h2');
+		for (const newH2 of allH2s) {
+			if (newH2.textContent.trim() === sectionName) {
+				const sib = newH2.nextElementSibling;
+				if (sib?.classList.contains('h2-section')) {
+					sib.classList.remove('collapsed');
+					sib.style.maxHeight = '0';
+					sib.style.overflow = 'hidden';
+					sib.offsetHeight;
+					sib.style.transition = 'max-height 0.3s ease';
+					sib.style.maxHeight = sib.scrollHeight + 'px';
+					sib.addEventListener('transitionend', () => {
+						sib.style.maxHeight = '';
+						sib.style.overflow = '';
+						sib.style.transition = '';
+					}, { once: true });
+				}
+				const top = window.scrollY + newH2.getBoundingClientRect().top - sheetTopHeight - 8;
+				window.scrollTo({ top, behavior: 'smooth' });
+				break;
+			}
+		}
+	});
+}
 </script>
 
 <svelte:window onkeydown={(e) => {
@@ -995,6 +1082,7 @@ function rollRadialDie(formula, e) {
 			{/if}
 			</div>
 
+			<div class="body-with-sidebar" style="--sheet-top-h: {sheetTopHeight}px">
 			{#if bodyHtml}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -1063,8 +1151,27 @@ function rollRadialDie(formula, e) {
 					{@html bodyHtml}
 				</div>
 			{/if}
+			<div class="collapsed-sidebar">
+				{#each allSections as section}
+					<button
+						class="sidebar-section-btn"
+						class:sidebar-section-collapsed={section.collapsed}
+						onclick={(e) => {
+							if (e.shiftKey) { collapseSection(section.name); return; }
+							const el = e.currentTarget;
+							el._ct = setTimeout(() => { section.collapsed ? expandSection(section.name) : scrollToSection(section.name); }, 200);
+						}}
+						ondblclick={(e) => { clearTimeout(e.currentTarget._ct); collapseSection(section.name); }}
+						onpointerdown={(e) => { const t = setTimeout(() => { clearTimeout(e.currentTarget._ct); collapseSection(section.name); }, 500); e.currentTarget._lpt = t; }}
+						onpointermove={(e) => { clearTimeout(e.currentTarget._lpt); }}
+						onpointerup={(e) => { clearTimeout(e.currentTarget._lpt); }}
+						onpointercancel={(e) => { clearTimeout(e.currentTarget._lpt); }}
+					>{section.name}</button>
+				{/each}
+			</div>
 		</div>
-	{/if}
+	</div>
+{/if}
 	{#if radialMenu}
 		<div class="radial-menu" class:closing={radialMenu.closing} style="left: {radialMenu.x}px; top: {radialMenu.y}px">
 			{#each RADIAL_DICE as die, i}
@@ -1107,29 +1214,20 @@ function rollRadialDie(formula, e) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
 
-	/* Full-width: remove parent padding, add margins to non-sticky elements */
+	/* Full-width: remove parent padding, hide spacer and footer */
 	:global(.dw-content:has(> .cs-article)) {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
 
-	:global(.cs-article) > :global(h1),
-	.char-tabs,
-	.sheet-editor,
-	.char-body {
-		margin-left: 2.5rem;
-		margin-right: 2.5rem;
+	:global(.dw-content:has(> .cs-article) .content-spacer) {
+		display: none;
 	}
 
-	@media (max-width: 768px) {
-		:global(.cs-article) > :global(h1),
-		.char-tabs,
-		.sheet-editor,
-		.char-body {
-			margin-left: 1rem;
-			margin-right: 1rem;
-		}
+	:global(body:has(.cs-article) footer) {
+		display: none;
 	}
+
 
 	.char-tabs {
 		display: flex;
@@ -1424,11 +1522,64 @@ function rollRadialDie(formula, e) {
 		font-weight: bold;
 	}
 
+	/* --- Body + sidebar layout --- */
+	.body-with-sidebar {
+		--sidebar-w: 100px;
+		display: flex;
+		align-items: flex-start;
+	}
+
 	/* --- Body --- */
 	.char-body {
-		padding: 0.75rem 1rem;
+		flex: 1;
+		min-width: 0;
+		padding: 0.75rem 1.25rem;
 		white-space: normal;
 		word-wrap: break-word;
+	}
+
+	.collapsed-sidebar {
+		width: var(--sidebar-w);
+		flex-shrink: 0;
+		padding: 0.4rem 0.3rem 0.4rem 0.2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		align-self: flex-start;
+		position: sticky;
+		top: var(--sheet-top-h, 0px);
+		height: calc(100vh - var(--sheet-top-h, 0px));
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: #444 transparent;
+	}
+
+	.sidebar-section-btn {
+		flex-shrink: 0;
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 999px;
+		color: #999;
+		font-size: 0.68rem;
+		font-family: inherit;
+		padding: 0.22em 0.5em;
+		cursor: pointer;
+		text-align: center;
+		line-height: 1.3;
+		transition: border-color 0.15s, color 0.15s;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 100%;
+	}
+
+	.sidebar-section-btn:hover {
+		border-color: rgba(255, 255, 255, 0.45);
+		color: #ddd;
+	}
+
+	.sidebar-section-btn.sidebar-section-collapsed {
+		opacity: 0.5;
 	}
 
 	.char-body :global(p),
@@ -1470,20 +1621,9 @@ function rollRadialDie(formula, e) {
 		display: none;
 	}
 
-	.char-body :global(h2.collapsed-heading) {
-		text-decoration: none;
-		margin-bottom: 0;
-		font-size: 0.85em;
-		border: 1px solid rgba(255, 255, 255, 0.25);
-		border-radius: 999px;
-		padding: 0.15em 0.7em;
-		background: transparent;
-		cursor: pointer;
-	}
-
+	.char-body :global(h2.collapsed-heading),
 	.char-body :global(h2.collapsed-inline) {
-		display: inline-block;
-		margin: 0.25rem 0.35rem 0.25rem 0;
+		display: none;
 	}
 
 	.char-body :global(h3) {
