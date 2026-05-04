@@ -69,14 +69,15 @@ async function selectLocal() {
 
 const driveLabel = $derived.by(() => {
 	let emailStr = '';
-	if (googleAuth.email) {
-		const addr = googleAuth.email;
-		emailStr = ` - ${addr.endsWith('@gmail.com') ? addr.slice(0, -10) : addr}`;
-	}
 	if (driveSync.status === 'waiting') return 'Waiting…';
 	if (driveSync.status === 'syncing') return 'Syncing…';
 	if (driveSync.status === 'error') return 'Sync error';
-	return `Drive${emailStr}`;
+	if (googleAuth.email) {
+		const addr = googleAuth.email;
+		emailStr = ` - ${addr.endsWith('@gmail.com') ? addr.slice(0, -10) : addr}`;
+		return `Drive${emailStr}`;
+	}
+	return `Google Drive`;
 });
 </script>
 
