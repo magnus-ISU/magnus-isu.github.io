@@ -844,6 +844,27 @@ function rollRadialDie(formula, e) {
 	});
 }
 
+function expandAllAndScrollTo(sectionName) {
+	const lines = cs.value.split('\n');
+	for (let i = 4; i < lines.length; i++) {
+		const m = lines[i].match(/^##\s+(.*)/);
+		if (!m) continue;
+		if (/\s*::\s*$/.test(lines[i]))
+			lines[i] = `## ${m[1].replace(/\s*::\s*$/, '').trim()}`;
+	}
+	cs.value = lines.join('\n');
+	tick().then(() => {
+		if (!charBodyEl) return;
+		for (const h2 of charBodyEl.querySelectorAll('h2')) {
+			if (h2.textContent.trim() === sectionName) {
+				const top = window.scrollY + h2.getBoundingClientRect().top - sheetTopHeight - 8;
+				window.scrollTo({ top, behavior: 'smooth' });
+				break;
+			}
+		}
+	});
+}
+
 function collapseSection(sectionName) {
 	const lines = cs.value.split('\n');
 	for (let i = 4; i < lines.length; i++) {
@@ -1157,12 +1178,26 @@ function expandSection(sectionName) {
 						class="sidebar-section-btn"
 						class:sidebar-section-collapsed={section.collapsed}
 						onclick={(e) => {
-							if (e.shiftKey) { collapseSection(section.name); return; }
+							if (e.shiftKey) { section.collapsed ? expandAllAndScrollTo(section.name) : collapseSection(section.name); return; }
 							const el = e.currentTarget;
-							el._ct = setTimeout(() => { section.collapsed ? expandSection(section.name) : scrollToSection(section.name); }, 200);
+							if (el._suppressClick) { el._suppressClick = false; return; }
+							const now = Date.now();
+							if (now - (el._lastClick || 0) < 400) {
+								el._lastClick = 0;
+								section.collapsed ? expandAllAndScrollTo(section.name) : collapseSection(section.name);
+								return;
+							}
+							el._lastClick = now;
+							section.collapsed ? expandSection(section.name) : scrollToSection(section.name);
 						}}
-						ondblclick={(e) => { clearTimeout(e.currentTarget._ct); collapseSection(section.name); }}
-						onpointerdown={(e) => { const t = setTimeout(() => { clearTimeout(e.currentTarget._ct); collapseSection(section.name); }, 500); e.currentTarget._lpt = t; }}
+						onpointerdown={(e) => {
+							const el = e.currentTarget;
+							el._suppressClick = false;
+							el._lpt = setTimeout(() => {
+								el._suppressClick = true;
+								section.collapsed ? expandAllAndScrollTo(section.name) : collapseSection(section.name);
+							}, 500);
+						}}
 						onpointermove={(e) => { clearTimeout(e.currentTarget._lpt); }}
 						onpointerup={(e) => { clearTimeout(e.currentTarget._lpt); }}
 						onpointercancel={(e) => { clearTimeout(e.currentTarget._lpt); }}
