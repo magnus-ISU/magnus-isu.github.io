@@ -731,6 +731,22 @@ let radialMenu = $state(null); // { x, y, timer, closing }
 let suppressRadialClick = false;
 let pointerDownPos = null;
 const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
+let radialCursorOk = $state(false);
+
+function checkRadialBounds(x, y) {
+	const radius = 70, btnR = 22;
+	for (let i = 0; i < RADIAL_DICE.length; i++) {
+		const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2;
+		const bx = x + Math.cos(angle) * radius;
+		const by = y + Math.sin(angle) * radius;
+		if (bx - btnR < 0 || bx + btnR > window.innerWidth || by - btnR < 0 || by + btnR > window.innerHeight) return false;
+	}
+	return true;
+}
+
+function onArticleMouseMove(e) {
+	radialCursorOk = checkRadialBounds(e.clientX, e.clientY);
+}
 
 function onArticlePointerDown(e) {
 	pointerDownPos = { x: e.clientX, y: e.clientY };
@@ -771,13 +787,7 @@ function onArticleClick(e) {
 		return;
 	}
 	const rx = e.clientX, ry = e.clientY;
-	const radius = 70, btnR = 22;
-	for (let i = 0; i < RADIAL_DICE.length; i++) {
-		const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2;
-		const bx = rx + Math.cos(angle) * radius;
-		const by = ry + Math.sin(angle) * radius;
-		if (bx - btnR < 0 || bx + btnR > window.innerWidth || by - btnR < 0 || by + btnR > window.innerHeight) return;
-	}
+	if (!checkRadialBounds(rx, ry)) return;
 	clearRadialTimer();
 	radialMenu = {
 		x: rx,
@@ -972,7 +982,7 @@ function expandSection(sectionName) {
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<article class="dw-article cs-article" onclick={onArticleClick} onpointerdown={onArticlePointerDown}>
+<article class="dw-article cs-article" class:radial-cursor={radialCursorOk} onclick={onArticleClick} onpointerdown={onArticlePointerDown} onmousemove={onArticleMouseMove}>
 	<h1>Character Sheet</h1>
 
 	<div class="char-tabs">
@@ -1259,7 +1269,7 @@ function expandSection(sectionName) {
 {/key}
 
 <style>
-	:global(.cs-article) {
+	:global(.cs-article.radial-cursor) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
 	}
 
