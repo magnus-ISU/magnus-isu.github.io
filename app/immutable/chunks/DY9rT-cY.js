@@ -10,7 +10,7 @@ You know 2 \\* INT techniques - magical effects you can apply to your swordplay.
 When you **focus through a practiced kata**, you cause one of your techniques to take effect with your sword - you might create a stunning display of fire, leave an enchantment unraveled, conjure a warding sphere, or repel yourself upwards.
 
 ### Arcane Bladework
-When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply 1 technique.
+When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, apply 1 technique.
 
 ### Throw Down the Gauntlet
 When you **challenge someone to a duel** (with or without your companions), roll+CHA. On a 10+, they choose 2 if they do not accept. On a 7-9, they choose 1 if they do not accept.
@@ -103,7 +103,7 @@ When you **re-encounter somebody who has wronged you**, roll+INT. On a 10+, choo
 
 ### Flawless Bladework
 *Replaces Arcane Bladework*  
-When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, deal your damage and apply INT techniques.
+When you **strike with magic and steel**, roll to **Hack & Slash**. On a 10+, apply INT techniques.
 
 ### Blade Artist
 Learn 3 techniques; you know a total of 3 + 2 \\* INT.
