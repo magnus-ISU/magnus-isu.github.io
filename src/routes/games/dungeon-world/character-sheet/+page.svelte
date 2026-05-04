@@ -892,7 +892,6 @@ function scrollToSection(sectionName) {
 }
 
 function expandSection(sectionName) {
-	const savedScroll = window.scrollY;
 	const lines = cs.value.split('\n');
 	for (let i = 4; i < lines.length; i++) {
 		const m = lines[i].match(/^##\s+(.*)/);
@@ -905,7 +904,6 @@ function expandSection(sectionName) {
 		}
 	}
 	tick().then(() => {
-		window.scrollTo(0, savedScroll);
 		if (!charBodyEl) return;
 		const allH2s = charBodyEl.querySelectorAll('h2');
 		for (const newH2 of allH2s) {
@@ -922,10 +920,13 @@ function expandSection(sectionName) {
 						sib.style.maxHeight = '';
 						sib.style.overflow = '';
 						sib.style.transition = '';
+						const top = newH2.getBoundingClientRect().top + window.scrollY - sheetTopHeight - 8;
+						window.scrollTo({ top, behavior: 'smooth' });
 					}, { once: true });
+				} else {
+					const top = newH2.getBoundingClientRect().top + window.scrollY - sheetTopHeight - 8;
+					window.scrollTo({ top, behavior: 'smooth' });
 				}
-				const top = window.scrollY + newH2.getBoundingClientRect().top - sheetTopHeight - 8;
-				window.scrollTo({ top, behavior: 'smooth' });
 				break;
 			}
 		}
