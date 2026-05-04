@@ -892,7 +892,7 @@ function collapseSection(sectionName) {
 	if (!charBodyEl) return;
 	for (const h2 of charBodyEl.querySelectorAll('h2')) {
 		if (h2.textContent.trim() !== sectionName) continue;
-		const sib = h2.nextElementSibling;
+		const group = h2.closest('.h2-group');
 		function commitCollapse() {
 			const lines = cs.value.split('\n');
 			for (let i = 4; i < lines.length; i++) {
@@ -906,34 +906,21 @@ function collapseSection(sectionName) {
 				}
 			}
 		}
-		const hasSib = sib?.classList.contains('h2-section') && !sib.classList.contains('collapsed');
-		// Capture heights before any style changes
-		const h2H = h2.scrollHeight;
-		const h2Margin = parseFloat(getComputedStyle(h2).marginTop) || 0;
-		// Set explicit starting values for both elements
-		h2.style.maxHeight = h2H + 'px';
-		h2.style.overflow = 'hidden';
-		h2.style.marginTop = h2Margin + 'px';
-		if (hasSib) {
-			sib.style.maxHeight = sib.scrollHeight + 'px';
-			sib.style.overflow = 'hidden';
-		}
-		h2.offsetHeight; // force reflow
-		// Animate both to 0
-		h2.style.transition = 'max-height 0.3s ease, margin-top 0.3s ease, outline-color 0.2s ease, box-shadow 0.2s ease';
-		h2.style.maxHeight = '0';
-		h2.style.marginTop = '0';
-		if (hasSib) {
-			sib.style.transition = 'max-height 0.3s ease';
-			sib.style.maxHeight = '0';
-			sib.addEventListener('transitionend', () => {
-				sib.style.maxHeight = '';
-				sib.style.overflow = '';
-				sib.style.transition = '';
+		if (group) {
+			const fullH = group.scrollHeight;
+			group.style.maxHeight = fullH + 'px';
+			group.style.overflow = 'hidden';
+			group.offsetHeight; // force reflow
+			group.style.transition = 'max-height 0.3s ease';
+			group.style.maxHeight = '0';
+			group.addEventListener('transitionend', () => {
+				group.style.maxHeight = '';
+				group.style.overflow = '';
+				group.style.transition = '';
 				commitCollapse();
 			}, { once: true });
 		} else {
-			h2.addEventListener('transitionend', () => commitCollapse(), { once: true });
+			commitCollapse();
 		}
 		break;
 	}
@@ -1661,32 +1648,32 @@ function expandSection(sectionName) {
 		cursor: n-resize;
 		user-select: none;
 		-webkit-user-select: none;
-		outline: 1px solid transparent;
-		outline-offset: 1rem;
-		border-radius: 3px;
-		transition: outline-color 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	.char-body :global(h2:hover) {
-		outline-color: rgba(255, 255, 255, 0.18);
-		box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
 	}
 
 	.char-body :global(h2:first-child) {
 		margin-top: 0;
 	}
 
-	.char-body :global(.h2-section) {
-		overflow: hidden;
-		border-radius: 3px;
-		outline: 1px solid transparent;
-		outline-offset: 1rem;
-		transition: outline-color 0.2s ease, box-shadow 0.2s ease;
+	.char-body :global(.h2-group) {
+		position: relative;
 	}
 
-	.char-body :global(h2:hover + .h2-section) {
-		outline-color: rgba(255, 255, 255, 0.18);
-		box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
+	.char-body :global(.h2-group::before) {
+		content: '';
+		position: absolute;
+		inset: 0 -0.5rem;
+		border: 1px solid transparent;
+		border-radius: 12px;
+		pointer-events: none;
+		transition: border-color 0.2s ease;
+	}
+
+	.char-body :global(.h2-group:has(> h2:hover)::before) {
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	.char-body :global(.h2-section) {
+		overflow: hidden;
 	}
 
 	.char-body :global(.h2-section.collapsed) {

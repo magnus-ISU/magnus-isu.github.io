@@ -54,7 +54,7 @@ export function renderMarkdown(src) {
 		closeMoveBlock();
 		closeColumns();
 		if (inH2Section) {
-			html += '</div>';
+			html += '</div></div>'; // close h2-section, then h2-group
 			inH2Section = false;
 		}
 		pendingColumns = false;
@@ -188,6 +188,9 @@ export function renderMarkdown(src) {
 					collapsed = true;
 				}
 				const h2Cls = collapsed ? ' class="collapsed-heading collapsed-inline"' : '';
+				if (level === 2) {
+					html += '<div class="h2-group">';
+				}
 				html += `<h${level}${h2Cls}>${inline(h2Text)}</h${level}>`;
 				if (level === 2) {
 					_h2Collapsed = collapsed;
