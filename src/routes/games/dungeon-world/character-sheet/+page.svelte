@@ -92,13 +92,13 @@ function switchTab(i) {
 	if (i === activeTab) return;
 	characterSheet.switchTo(i);
 	activeTab = i;
-	undoStack = [];
+	undoStack = undoStack.filter(item => item.type === 'delete');
 }
 
 function addCharacter() {
 	characterSheet.addSlot();
 	activeTab = characterSheet.activeIndex;
-	undoStack = [];
+	undoStack = undoStack.filter(item => item.type === 'delete');
 }
 
 function tabName(i) {
@@ -130,9 +130,10 @@ function cancelDelete() {
 }
 
 function doDelete(i) {
+	const { slots, activeIdx } = characterSheet.snapshot;
+	undoStack.push({ type: 'delete', slots, activeIdx });
 	characterSheet.deleteSlot(i);
 	activeTab = characterSheet.activeIndex;
-	undoStack = [];
 }
 
 function onTabPointerDown(e, i) {
@@ -281,16 +282,22 @@ function fmtMod(n) {
 	return n > 0 ? `+${n}` : `${n}`;
 }
 
-// --- Undo stack for programmatic edits (HP/EXP) ---
+// --- Undo stack for programmatic edits (HP/EXP) and slot deletions ---
 let undoStack = [];
 
 function pushUndo() {
-	undoStack.push(cs.value);
+	undoStack.push({ type: 'edit', value: cs.value });
 }
 
 function undo() {
 	if (!undoStack.length) return;
-	cs.value = undoStack.pop();
+	const item = undoStack.pop();
+	if (item.type === 'edit') {
+		cs.value = item.value;
+	} else if (item.type === 'delete') {
+		characterSheet.restoreSlots(item.slots, item.activeIdx);
+		activeTab = characterSheet.activeIndex;
+	}
 }
 
 // --- HP editing ---

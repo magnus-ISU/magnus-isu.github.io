@@ -137,4 +137,25 @@ export const characterSheet = {
 			}
 		}
 	},
+
+	/** Return a full snapshot for undo purposes */
+	get snapshot() {
+		return { slots: [...slots], activeIdx };
+	},
+
+	/** Restore a full slot snapshot (for undo) */
+	restoreSlots(newSlots, newActiveIdx) {
+		slots.length = 0;
+		slots.push(...newSlots);
+		activeIdx = Math.min(newActiveIdx, slots.length - 1);
+		saveActive(activeIdx);
+		saveSlots(slots);
+		if (browser) {
+			try {
+				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
+			} catch {
+				/* ignore */
+			}
+		}
+	},
 };
