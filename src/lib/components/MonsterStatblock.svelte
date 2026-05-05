@@ -378,7 +378,7 @@ function handleCopy(e) {
 								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 									<input
 										class="label-input"
-										style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
+										style="width: {(Math.max(2, labels[idx]?.length || 2) + 1) * 1.4}ch"
 										bind:value={labels[idx]}
 										onclick={(e) => e.stopPropagation()}
 										onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
@@ -407,7 +407,7 @@ function handleCopy(e) {
 						<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 							<input
 								class="label-input"
-								style="width: {Math.max(2, labels[idx]?.length || 2) + 1}ch"
+								style="width: {(Math.max(2, labels[idx]?.length || 2) + 1) * 1.4}ch"
 								bind:value={labels[idx]}
 								onclick={(e) => e.stopPropagation()}
 								onkeydown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
