@@ -30,7 +30,7 @@ When you commune with the spirit of a beast and ask to borrow its form, it will 
 ## Background
 
 ### Initiate of the First Circle
-You belong to a far-flung sect devoted to balance and the natural order. When you **send word to your sect asking for aid**, roll +CHA:
+You belong to a far-flung sect devoted to balance and the natural order. When you **send word to your sect asking for aid**, roll+CHA:
 - on a 10+, they provide it with all due haste
 - on a 7-9, the aid will be delayed or come with strings attached.
 

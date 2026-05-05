@@ -35,7 +35,7 @@ When you **take up a defensive stance or jump in to protect others**, roll+CON: 
 When you **go on the offense, cease to focus on defense, or the threat passes**, lose any Vigilance that you hold.
 
 ### Spout Lore
-When you **recall something you know about the subject at hand**, say how you might have come by such knowledge. If the GM buys it, roll +INT: on a 10+, the GM will tell you a relevant truth, or ask you to establish one; on a 7-9, the GM will say what you recall, but you won't know how true it is until you put it to the test. If the GM doesn't buy how you might have come by such knowledge, it turns out you don't know much about the thing after all.
+When you **recall something you know about the subject at hand**, say how you might have come by such knowledge. If the GM buys it, roll+INT: on a 10+, the GM will tell you a relevant truth, or ask you to establish one; on a 7-9, the GM will say what you recall, but you won't know how true it is until you put it to the test. If the GM doesn't buy how you might have come by such knowledge, it turns out you don't know much about the thing after all.
 
 ### Discern Realities
 When you **closely study a situation or person**, roll+WIS. On a 10+ hold 3 Insight. On a 7-9 hold 1 Insight. Until your study of the situation is interrupted, spend Insight 1-for-1 to ask a question from the list. Take +1 forward when acting on the answers.
@@ -47,14 +47,14 @@ When you **closely study a situation or person**, roll+WIS. On a 10+ hold 3 Insi
 - What here is not what it appears to be?
 
 ### Parley
-When you **press or entice an NPC**, say what you want them to do (or not do). If they have reason to resist, roll +CHA:
+When you **press or entice an NPC**, say what you want them to do (or not do). If they have reason to resist, roll+CHA:
 - on a 10+, they either do as you want or reveal the easiest way to convince them.
 - on a 7-9, they reveal something you can do to convince them, though it’ll likely be costly, tricky, or distasteful.
 
 ## Intelligence Moves
 
 ### Flashback
-When you **propose that you took some previously undeclared action in the past** that can affect the current situation, and the GM agrees, roll +INT. On a 10+, it's as you specified. On a 7-9, it's not quite what you specified; the GM can introduce a complication or a cost. On a miss, things have changed that you're only now learning about.
+When you **propose that you took some previously undeclared action in the past** that can affect the current situation, and the GM agrees, roll+INT. On a 10+, it's as you specified. On a 7-9, it's not quite what you specified; the GM can introduce a complication or a cost. On a miss, things have changed that you're only now learning about.
 
 ### Draw Them Out
 When you **interact carefully and watchfully with someone**, roll+INT. On a 10+, hold 3 Empathy. On a 7-9, hold 1 Empathy. While you trying to figure them out, spend Empathy 1-for-1 to ask:
@@ -76,7 +76,7 @@ When you **put all of your effort into one act**, you may once take a debility o
 
 ### Struggle As One
 
-When the GM calls on you to Defy Danger as a group, they’ll describe the struggle you face. Say how you deal with it and roll +STAT:
+When the GM calls on you to Defy Danger as a group, they’ll describe the struggle you face. Say how you deal with it and roll+STAT:
 - on a 6-, you find yourself in a spot, the GM will describe it;
 - on a 7+, you pull your weight;
 - on a 10+, you can get someone out of a spot (they don't mark XP), if you can tell us how.
@@ -99,7 +99,7 @@ When **you're dying** you catch a glimpse of what lies beyond the Black Gates of
 ## Travel Moves
 
 ### Take Watch
-When you **are on watch and something approaches**, roll +WIS:
+When you **are on watch and something approaches**, roll+WIS:
 - On a 10+ you notice in time to alert everyone and prepare a response; all party members take +1 forward.
 - On a 7-9 you manage to sound the alarm, but no one has time to prepare.
 
@@ -145,7 +145,7 @@ Make a wish for what you'd like to see in a future session.
 ## Settlement Moves
 
 ### Supply
-When you **go looking for something specific and uncommon**, say who you ask about it and roll +CHA: on a 10+, they know where you can find it, and it can be had for a fair trade; on a 7-9, the GM chooses 1 from the list below:
+When you **go looking for something specific and uncommon**, say who you ask about it and roll+CHA: on a 10+, they know where you can find it, and it can be had for a fair trade; on a 7-9, the GM chooses 1 from the list below:
 - It'll cost you more than expected.
 - You find a poor substitute.
 - You can get it, but only if you see a guy who knows a guy.
@@ -168,7 +168,7 @@ When you **return to a civilized place in which you've caused trouble before**, 
 - Someone important to you has been put in a bad spot as a result of your actions.
 
 ### I Know a Guy
-When you **know someone who can help**, name them and roll +CHA: on a 10+, yeah, sure, they can help, though you might need to make it worth their while; on a 7-9, pick 1:
+When you **know someone who can help**, name them and roll+CHA: on a 10+, yeah, sure, they can help, though you might need to make it worth their while; on a 7-9, pick 1:
 - They can help, but they need your help first.
 - They're going to ask for a lot.
 - They're not quite cut out for this.
@@ -193,10 +193,10 @@ On a miss someone influential and ill-suited declares they'd like to come along 
 When a follower is compensated for their efforts by having their Cost met, increase their Loyalty by 1 (up to +3). This move cannot be made again until after the follower and their leader have both Made Camp.
 
 ### Do Their Thing
-When you **have a follower do something chancy within the scope of their tags**, roll +Quality: on a 10+, they do it, as well as one could reasonably hope; on a 7-9, they do it, but there's an unforeseen cost, consequence, or limitation.
+When you **have a follower do something chancy within the scope of their tags**, roll+Quality: on a 10+, they do it, as well as one could reasonably hope; on a 7-9, they do it, but there's an unforeseen cost, consequence, or limitation.
 
 ### Order, Hireling
-When a **follower ends up in a dangerous, degrading, or crazy situation because of your orders**, roll +Loyalty. On a 10+, they hold firm. On a 7-9, they'll do it, but start entertaining serious thoughts about stabbing you in the back.
+When a **follower ends up in a dangerous, degrading, or crazy situation because of your orders**, roll+Loyalty. On a 10+, they hold firm. On a 7-9, they'll do it, but start entertaining serious thoughts about stabbing you in the back.
 
 ### Call For Assistance
 When **a follower helps you make a move and you roll**, take +1, but that follower is exposed to any risks or consequences. If you deal damage, roll your damage die twice and use the higher die.

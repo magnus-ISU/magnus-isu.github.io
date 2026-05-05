@@ -110,7 +110,7 @@ You can see in anything but complete darkness as well as daylight.
 ### Flexible Morals
 When someone tries to detect your alignment you can tell them any alignment you like.
 
-When you **try to mislead someone about your true intentions**, roll +CHA. On a 10+, they believe exactly what you want them to. On a 7-9, choose one:
+When you **try to mislead someone about your true intentions**, roll+CHA. On a 10+, they believe exactly what you want them to. On a 7-9, choose one:
 - They are suspicious of what they learn.
 - They get some fragments of the truth.
 
