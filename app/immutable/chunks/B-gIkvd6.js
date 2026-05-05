@@ -217,7 +217,7 @@ Get one move from another class. Treat your level as one lower, and your casting
 ## Mastery Moves
 
 ### Silver Tongued
-When you **use words to avoid suspicion or trouble**, roll +CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to:
+When you **use words to avoid suspicion or trouble**, roll+CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to:
 - Move about or maneuver unchallenged
 - Stop people from following you around or verifying what you say
 - Direct suspicion or attention where you want it

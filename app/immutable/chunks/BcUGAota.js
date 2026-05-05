@@ -18,7 +18,7 @@ _ knew one of us, but doesn't realize it's me.
 ## Starting Moves
 
 ### Double and in Trouble
-When you **both attack in a flurry of swordplay and magic (describe which element you use, or what effect you want)**, roll +STR. Your wild magic causes trouble for everyone involved, and they may attack you back if they get a chance.
+When you **both attack in a flurry of swordplay and magic (describe which element you use, or what effect you want)**, roll+STR. Your wild magic causes trouble for everyone involved, and they may attack you back if they get a chance.
 - On a 10+, deal your damage +1d6-1
 - On a 7+, deal your damage
 

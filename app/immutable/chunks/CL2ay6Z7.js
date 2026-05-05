@@ -18,7 +18,7 @@ When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, ho
 - Ask a friendly NPC to do one impossible thing and they will attempt it.
 - Roll+CHA rather than +STR to Hack & Slash.
 - Roll+CHA rather than +DEX to Volley.
-- When you **Aid or Interfere** with someone, you can roll +CHA instead of them rolling their stat.
+- When you **Aid or Interfere** with someone, you can roll+CHA instead of them rolling their stat.
 
 ### Gentle Touch
 When you **touch someone and speak words of courage**, roll+CHA. On a hit, they shake off one condition (fear, charm, confusion, despair) and take +1 forward. On a 7-9, you also give yourself or them another debility in the process, their choice which one.
