@@ -1603,7 +1603,7 @@ function expandSection(sectionName) {
 		box-sizing: border-box;
 		width: var(--sidebar-w);
 		flex-shrink: 0;
-		padding: 1rem 0.3rem 0.4rem 0.2rem;
+		padding: 1rem 0.3rem 8rem 0.2rem;
 		overscroll-behavior: contain;
 		display: flex;
 		flex-direction: column;
@@ -1627,19 +1627,17 @@ function expandSection(sectionName) {
 		color: #999;
 		font-size: 0.68rem;
 		font-family: inherit;
-		padding: 0;
+		padding: 0 0.5rem;
 		min-height: 2.6rem;
 		cursor: pointer;
 		text-align: center;
-		line-height: 1.3;
+		line-height: 2.6rem;
 		transition: border-color 0.15s, color 0.15s;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		display: block;
 	}
 
 	.sidebar-section-btn:hover {
