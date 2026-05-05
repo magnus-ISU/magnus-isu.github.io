@@ -111,13 +111,13 @@ On a 7-9 choose one:
 - the visions are lucid and accurate, but they're not pleasant.
 
 ### Cinderella
-You can speak the grunts, chirps, and calls that are the language of small animals just as well as your mother tongue.
+You can understand the grunts, chirps, and calls that are the language of small animals just as well as your mother tongue, and when you speak to them they understand you.
 
 ### Warrior Princess
 Take one non-multiclass move from the Fighter. Your damage die increases to d6.
 
 ### Rebellious Princess
-Take one non-multiclass move from the Thief, the Bard, or the Wizard.
+Take one non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
 
 ### A Dashing Disguise
 When you **disguise yourself as a commoner or a prince**, roll+CHA. On a 10+ you pull it off. On a 7-9 there is a complication, tell the GM what might give you away.
@@ -165,7 +165,7 @@ Take one more non-multiclass move from the Fighter. Your damage increases to d8.
 
 ### Wicked Princess
 *Requires Rebellious Princess*  
-Take one more non-multiclass move from the Thief, the Bard, or the Wizard.
+Take one more non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
 
 *A playbook by June Shores*
 `;export{e as default};
