@@ -10,8 +10,8 @@ When you cast this spell name your recipient, and a small animal, such as a squi
 ## Level 1
 ### Cure Light Wounds
 At your touch wounds scab and bones cease to ache. Heal someone you touch of 1d8 damage.
-### Magic Weapon
-The weapon you hold while casting does +1d4 damage until you let go of it. Concentration
+### Shillelagh
+The wooden weapon you hold while casting does +1d4 damage until you let go of it. Concentration
 ### Breath
 Breathe in, or breathe into another's mouth. You or they don't need to take another breath for an hour or two.
 ### Heat Metal
@@ -97,21 +97,6 @@ Alternatively, reverse this and turn Stone to Flesh.
 You bring the Moon Spirit to your cause. It moves across the sky to where you want, and glows full or vanishes. You can cause an eclipse, bring the tides in or out, use her power to illuminate your foes and force them back to their true forms, or something else. Concentration
 ### Mould Earth
 You reshape the earth itself as you work this magic over several hours, your will extending far beyond what your eye can see. Widen entire rivers or dry them up; move mountains, dig valleys; open great rifts in the land.
-
-## Comparison to Cleric
-### Stolen spells
-level 1: Cure Light Wounds, Magic Weapon  
-level 3: Animate Dead, Hold Person  
-level 5: Contagion, Words of the Unspeaking, Control Weather (was level 7)  
-level 7: Harm, Sever, Cure Critical Wounds (was level 5)  
-level 9: True Seeing (was level 5)
-### Ignored spells
-All the Rotes
-level 1: Bless, Sanctuary, Speak with Dead, Detect Alignment, Cause Fear  
-level 3: Resurrection, Darkness  
-level 5: Revelation, Cure Critical Wounds, Divination, Trap the Soul  
-level 7: Word of Recall, Heal, Mark of Death  
-level 9: Storm of Vengeance, Repair, Divine Presence, Plague
 
 *By Magnus Anderson*
 `;export{e as default};
