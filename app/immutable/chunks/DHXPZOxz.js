@@ -176,7 +176,7 @@ You take a star from the sky and bring it low. It roughly strikes your target an
 ### Simulacrum <span style="float:right" >Illusion 9</span>
 A perfect illusory duplicate of yourself steps into being. Your Simulacrum is a separate person, identical to you at the point of casting, with 1 hit point. It cannot memorize more spells, and when it casts a spell, you roll for it. Otherwise it is controlled by the GM and may acquire different goals over time (in addition to goals you might already have, such as staying alive). If you die nearby, your Simulacrum steals your soul and becomes a real person.
 ### Unmaking <span style="float:right" >Transmutation 9</span>
-Touch a nonliving object or structure. Over the next few moments it reverts to its raw materials — a sword becomes ore and coal, a wall becomes clay and straw, a golem becomes mud and gemstones. Magical objects resist: you must overcome their enchantment, and the GM will tell you what lingers.
+Touch a nonliving object or structure. In an instant it reverts to its raw materials — a sword becomes ore and coal, a wall becomes clay and straw, a golem becomes mud and gemstones. Magical objects resist: you must overcome their enchantment, and the GM will tell you what lingers.
 
 *By Magnus Anderson*
 `;export{e as default};
