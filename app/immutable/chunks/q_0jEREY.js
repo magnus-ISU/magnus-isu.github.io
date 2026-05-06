@@ -194,7 +194,7 @@ When a follower is compensated for their efforts by having their Cost met, incre
 ### Do Their Thing
 When you **have a follower do something chancy within the scope of their tags**, roll+Quality: on a 10+, they do it, as well as one could reasonably hope; on a 7-9, they do it, but there's an unforeseen cost, consequence, or limitation.
 
-### Order, Hireling
+### Order Hireling
 When a **follower ends up in a dangerous, degrading, or crazy situation because of your orders**, roll+Loyalty. On a 10+, they hold firm. On a 7-9, they'll do it, but start entertaining serious thoughts about stabbing you in the back.
 
 ### Call For Assistance
