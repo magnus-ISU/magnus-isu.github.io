@@ -65,7 +65,7 @@ You create an illusory image of yourself. When you are attacked, you're only as 
 ### Mimic <span style="float:right" >Transmutation 3</span>
 You take the form of someone you touch while casting this spell. Your physical characteristics match theirs exactly but your behavior may not. This change persists until you take damage or choose to return to your own form. While this spell is ongoing you lose access to all your wizard moves.
 ### Arcane Lock <span style="float:right">Abjuration 3</span>
-Mark a shape with chalk, ink, or some other marking. Until the markings are disturbed, a plane of force fills the drawn shape with a 1cm gap, strong as iron. Usually used around a door or tunnel.
+Mark a shape with chalk, ink, or some other marking. A plane of force fills the drawn shape, strong as iron, until the markings are disturbed. Usually used around a door or tunnel.
 ### Dimension Door <span style="float:right" >Conjuration 3</span>
 Choose a pair of solid surfaces you can see. A sparking, glowing portal opens between them. It starts big enough to comfortably step through, but slowly closes over time with increasing pressure.
 ### Water Dragon <span style="float:right" >Conjuration 3</span>
@@ -73,7 +73,7 @@ You pull water from an existing body into a large serpentine shape that you can 
 ### Locate <span style="float:right" >Divination 3</span>
 Name a single word, such as "axe" or "dress" or "ruby". While ongoing, this spell will indicate which direction the nearest one is, and where it is exactly if it is within a short walking distance. Concentration
 ### Amnesia <span style="float:right" >Enchantment 3</span>
-One creature which can see you forgets everything you do happening after casting, once you leave and it stops being able to see you.
+One creature which can see you forgets everything you and those with you do after casting this spell, once you leave and it stops being able to see you.
 ### Frostwalk <span style="float:right" >Evocation 3</span>
 The ground and any liquids around you becomes slick with ice, and you can skate along it at rapid speeds if uninterrupted. The ice is robust enough to hold other creatures that don't test it.
 ### Minor Image <span style="float:right" >Illusion 3</span>
@@ -106,12 +106,13 @@ Your touch reshapes a creature entirely, they stay in the form you craft until y
 - The creature’s mind will be altered as well
 - The form has an unintended benefit or weakness
 ### Summon Monster  <span style="float:right" >Conjuration 5</span>
-A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, does 1d4 damage, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
+A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, does 1d4 damage, and has 1 HP. Concentration, and choose 3. Tell the GM what kind of monster you want; the GM will tell you what monster you get.
 - It has +2 instead of +1 to one stat
 - It’s not reckless
 - It does 1d8 damage
 - Its bond to your plane is strong: +2 HP for each level you have
 - It has some useful adaptation
+- It is the specific kind of monster you wanted.
 ### Doubling <span style="float:right" >Conjuration 5</span>
 Summon a perfect nonmagical replica of the item in one hand into the other. All metals in the replica are lead, though it holds up to casual scrutiny.
 ### Falsehood <span style="float:right" >Enchantment 5</span>
@@ -130,23 +131,22 @@ You touch another person, who sprouts wings. They can fly faster than a horse, u
 
 ## Level 7
 ### Shadow Walk <span style="float:right" >Conjuration 7</span>
-The complete darkness you target with this spell becomes a portal for you and your allies. Name a location, describing it with no more words than your level. As long as you're in complete darkness, you and any allies present with you you cast the spell find yourselves at the nearest shadows to the location you described.
+The shadows you target with this spell becomes a portal for you and your allies. Name a location, describing it with no more words than your level. Once you're in complete darkness, you and any allies present with you you cast the spell find yourselves within the nearest shadows to the location you described.
 ### True Seeing <span style="float:right" >Divination 7</span>
-You see all things as they truly are, including the effects of magic. This effect persists until you tell a lie or dismiss the spell. Concentration
+You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie. Concentration
 ### Dominate <span style="float:right" >Enchantment 7</span>
 Your touch pushes your mind into someone else’s. Hold 3 Domination. Spend one Domination to make the target:
 - Speak some words of your choice
 - Give you something they hold
 - Make a concerted attack on a target of your choice
 - Truthfully answer one question
-
 If the target takes damage you lose 1 Domination. If you run out of Domination the spell ends. While the spell is ongoing you cannot cast a spell.
 ### Contingency <span style="float:right" >Evocation 7</span>
 Choose a 6th level or lower spell you know. Describe a trigger condition using no more words than your level. The chosen spell is held until you choose to unleash it or the trigger condition is met, whichever happens first. You don’t have to roll for the held spell, it just takes effect. You may only have a single contingent spell held at a time.
 ### Cloudkill <span style="float:right" >Necromancy 7</span>
 A cloud of fog drifts into this realm from beyond the Black Gates of Death, filling as much of the immediate area as you like, as far as you can see. Any creature that is in the area which is wounded takes 1d6 damage immediately, and periodically until it dies. This spell persists until you cannot see the fog or dismiss it.
 ### Mind Blank <span style="float:right" >Abjuration 7</span>
-Your mind is separated from the rest of the world, and cannot be targeted by any glamour. Others cannot divine your thoughts, enchant you into doing anything, detect your presence through magic, send telepathic messages to you, or alter your state of mind.
+Your mind is separated from the rest of the world, and cannot be targeted by any glamour. Others cannot divine your thoughts, enchant you into doing anything, detect your presence through magic, send telepathic messages to you, or alter your state of mind. This effect lasts until you dismiss it.
 ### Forked Lightning <span style="float:right" >Evocation 7</span>
 Lightning strikes out at your foes. Roll 2d10, then pick one die to be the number of enemy targets to pick, and the other to be the amount of damage each one takes (ignoring armor).
 ### Greater Invisibility <span style="float:right" >Illusion 7</span>
@@ -155,12 +155,14 @@ Reach out and touch someone else or an object smaller than yourself. Poof! They 
 You create a fixed bubble of time around you. Within, time passes extremely quickly or slowly, and the world outside is frozen or very fast. The spell lasts until something leaves or enters the bubble.
 
 ## Level 9
-### Perfect Summons <span style="float:right" >Conjuration 9</span>
+### Gate <span style="float:right" >Conjuration 9</span>
 You teleport a creature to your presence. Name a creature or give a short description of a type of creature. If you named a creature, that creature appears before you. If you described a type of creature, a creature of that type appears before you.
+
+Alternatively, open a portal to a location you describe. It is accurate and stable as long as you can see it.
 ### Alert <span style="float:right" >Divination 9</span>
 Describe an event. The GM will tell you when that event occurs, no matter where you are or how far away the event is. If you choose, you can view the location of the event as though you were there in person. You can only have one Alert active at a time.
-### Antipathy <span style="float:right" >Enchantment 9</span>
-Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or you dismiss the spell. Concentration
+### Antipathy <span style="float:right" >Abjuration 9</span>
+Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or dismiss the spell. Concentration
 ### Trap the Soul <span style="float:right" >Necromancy 9</span>
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but you may never recapture it once freed.
 ### Shelter <span style="float:right" >Conjuration 9</span>
