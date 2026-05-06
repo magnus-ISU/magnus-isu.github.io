@@ -4,7 +4,6 @@
 You conjure a simple invisible construct that can do nothing but carry items. It has load 3 and carries anything you hand to it. It cannot pick up items on its own and can only carry those you give to it. Items carried by an unseen servant appear to float in the air a few paces behind you. An unseen servant that takes damage or leaves your presence is immediately dispelled, dropping any items it carried. Otherwise the unseen servant serves you until you end the spell.
 ### Prestidigitation <span style="float:right"> Illusion 0 </span> 
 You perform minor tricks of true magic. If you touch an item as part of the casting you can make cosmetic changes to it: clean it, soil it, cool it, warm it, flavor it, or change its color. If you cast the spell without touching an item you can instead create minor illusions no bigger than yourself. Prestidigitation illusions are crude and clearly illusions—they won’t fool anyone, but they might entertain them.
----
 ### Light <span style="float:right"> Transmutation 0 </span> 
 An item you touch glows with arcane light, about as bright as a torch. It gives off no heat or sound and requires no fuel, but it is otherwise like a mundane torch. You have complete control of the color of the flame. The spell lasts as long as it is in your presence, or forever cast in a gemstone.
 ### Magic Missiles <span style="float:right"> Evocation 0 </span> 
@@ -23,7 +22,6 @@ The person (not beast or monster) you touch while casting counts you as a friend
 Touch an ally or yourself: nobody can see them. They’re invisible! The spell persists until the target attacks or you dismiss the effect. While the spell is ongoing you can’t cast a spell.
 ### Contact Spirit <span style="float:right" >Necromancy 1</span>
 Name the spirit you wish to contact (or leave it to the GM). You pull that creature through the planes, just close enough to speak to you. It is bound to answer any one question you ask to the best of its ability.
----
 ### Reinforcement <span style="float:right">Abjuration 1</span>
 An object no larger than a wagon - such as a door, beam, shield, or string - is magically strengthened, gaining the tensile strength of steel.
 ### Icecraft <span style="float:right" >Conjuration 1</span>
@@ -66,7 +64,6 @@ You evoke a mighty ball of flame that envelops your target and everyone nearby, 
 You create an illusory image of yourself. When you are attacked, you're only as likely as any of your images to be hit. The image then dissipates and the spell ends.
 ### Mimic <span style="float:right" >Transmutation 3</span>
 You take the form of someone you touch while casting this spell. Your physical characteristics match theirs exactly but your behavior may not. This change persists until you take damage or choose to return to your own form. While this spell is ongoing you lose access to all your wizard moves.
----
 ### Arcane Lock <span style="float:right">Abjuration 3</span>
 Mark a shape with chalk, ink, or some other marking. Until the markings are disturbed, a plane of force fills the drawn shape with a 1cm gap, strong as iron. Usually used around a door or tunnel.
 ### Dimension Door <span style="float:right" >Conjuration 3</span>
@@ -108,7 +105,6 @@ Your touch reshapes a creature entirely, they stay in the form you craft until y
 - The form will be unstable and temporary
 - The creature’s mind will be altered as well
 - The form has an unintended benefit or weakness
----
 ### Summon Monster  <span style="float:right" >Conjuration 5</span>
 A monster appears and aids you as best it can, until it dies or you dismiss it. It has a +1 modifier for all stats, triggers core moves, does 1d4 damage, and has 1 HP. Concentration, and choose 3. The GM will tell you the type of monster summoned based on the traits you select:
 - It has +2 instead of +1 to one stat
@@ -116,7 +112,6 @@ A monster appears and aids you as best it can, until it dies or you dismiss it. 
 - It does 1d8 damage
 - Its bond to your plane is strong: +2 HP for each level you have
 - It has some useful adaptation
----
 ### Doubling <span style="float:right" >Conjuration 5</span>
 Summon a perfect nonmagical replica of the item in one hand into the other. All metals in the replica are lead, though it holds up to casual scrutiny.
 ### Falsehood <span style="float:right" >Enchantment 5</span>
@@ -150,7 +145,6 @@ If the target takes damage you lose 1 Domination. If you run out of Domination t
 Choose a 6th level or lower spell you know. Describe a trigger condition using no more words than your level. The chosen spell is held until you choose to unleash it or the trigger condition is met, whichever happens first. You don’t have to roll for the held spell, it just takes effect. You may only have a single contingent spell held at a time.
 ### Cloudkill <span style="float:right" >Necromancy 7</span>
 A cloud of fog drifts into this realm from beyond the Black Gates of Death, filling as much of the immediate area as you like, as far as you can see. Any creature that is in the area which is wounded takes 1d6 damage immediately, and periodically until it dies. This spell persists until you cannot see the fog or dismiss it.
----
 ### Mind Blank <span style="float:right" >Abjuration 7</span>
 Your mind is separated from the rest of the world, and cannot be targeted by any glamour. Others cannot divine your thoughts, enchant you into doing anything, detect your presence through magic, send telepathic messages to you, or alter your state of mind.
 ### Forked Lightning <span style="float:right" >Evocation 7</span>
@@ -169,10 +163,8 @@ Describe an event. The GM will tell you when that event occurs, no matter where 
 Choose a target and describe a type of creature or an alignment. Creatures of the specified type or alignment cannot come within sight of the target. If a creature of the specified type does find itself within sight of the target, it immediately flees. This effect continues until you leave the target’s presence or you dismiss the spell. Concentration
 ### Trap the Soul <span style="float:right" >Necromancy 9</span>
 You trap the soul of a dying creature within a gem. The trapped creature is aware of its imprisonment but can still be manipulated through spells, parley, and other effects. All moves against the trapped creature are at +1. You can free the soul at any time but you may never recapture it once freed.
----
 ### Shelter <span style="float:right" >Conjuration 9</span>
 You create a structure out of pure magical power. It can be as large as a castle or as small as a hut, made of stone or glowing light, and it is impervious. The structure endures until you leave it or you end the spell.
----
 ### Power Word Kill <span style="float:right" >Enchantment 9</span>
 Speak someone's True Name. They die.
 ### Starfall <span style="float:right" >Evocation 9</span>

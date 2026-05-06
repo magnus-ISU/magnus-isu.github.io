@@ -6,13 +6,12 @@ The air immediately around you is purified, driving away smoke or miasma, coolin
 The pebbles, sand, dirt, or other small objects or powder you choose within arms reach magnetize. You can also create minor magnetic fields which can move 1 Weight, hold them in unlikely shapes and places with surprising force, or arrange them and even animate in patterns. The spell lasts as long as you are nearby.
 ### Wildwords
 When you cast this spell name your recipient, and a small animal, such as a squirrel, songbird, rat, or lizard will approach, if any nearby could deliver your message. Tell them your message, and they will find and deliver the words.
+
 ## Level 1
 ### Cure Light Wounds
 At your touch wounds scab and bones cease to ache. Heal someone you touch of 1d8 damage.
 ### Magic Weapon
-The weapon you hold while casting does +1d4 damage until you dismiss this spell. Concentration
-
----
+The weapon you hold while casting does +1d4 damage until you let go of it. Concentration
 ### Breath
 Breathe in, or breathe into another's mouth. You or they don't need to take another breath for an hour or two.
 ### Heat Metal
@@ -22,14 +21,15 @@ You and the person you touch while casting this spell will be treated as friends
 ### Bendbark
 For a moment, you control a living tree, bending it temporarily or permanently into a shape you desire like a stair or hollow, or wielding it as a weapon with fast-swinging branches. The closer you are to the tree, the more precise control you have. If this spell deals damage, it deals 2d4.
 ### Feather fall
-You and all those you can see acquire a terminal velocity that is merely painful, not deadly, for a few seconds.
+You and all those you can see drift slowly to the ground.
+### Trailsense
+Touch the ground. For the rest of the day, you and your companions cannot become lost in natural terrain — the path reveals itself through bent branches, parting undergrowth, and birdsong.
+
 ## Level 3
 ### Cure Moderate Wounds
 You staunch bleeding and set bones through magic. Heal an ally you touch of 2d8 damage.
 ### Hold Person
 Choose a person you can see. Until you cast a spell or leave their presence they cannot act except to speak. This effect ends immediately if the target takes damage from any source.
-
----
 ### Fog Cloud
 Choose an area you can see: it’s filled with a thick fog which makes it difficult to see into or out of. Concentration
 ### Conjure Animals
@@ -46,8 +46,9 @@ You or an ally you touch is drawn into a seeming death, though they can still fe
 Walk a wide circle as you cast this spell. Those who walk into the circle become confused, losing their memory of the last few hours and what exactly their intents were. Concentration
 ### Weedwrap
 Nearby grasses begin to grow very rapidly, a meter or two in a few seconds. You can give them a two word command, which they will try to follow for a few minutes. Examples: Bind them, Cushion ground, Extinguish fire, Show path, Hide sword. Concentration
-### Wind Ward
-A powerful force emanates from you, creating a blasting wind which prevents most projectiles from passing through, and makes it difficult for others to approach. You cannot breathe until you end the spell; nor can others who reach the innermost vacuum with you.
+### Rootbridge
+Roots and vines weave themselves into a bridge, ladder, raft, or other simple structure you describe. It holds until you dismiss it.
+
 ## Level 5
 ### Contagion
 Choose a creature you can see. Until you end this spell, the target suffers from a disease of your choice. Concentration
@@ -55,8 +56,6 @@ Choose a creature you can see. Until you end this spell, the target suffers from
 With a touch you speak to the spirits within things. The non-living object you touch answers three questions you pose, as best it can.
 ### Control Weather
 Petition for rain — or sun, wind, or snow. Within a day or less, the spirits answer. The weather will change according to your will and last a handful of days.
-
----
 ### Unravel
 Take any plant fibers and unknot them into thin strands which probably blow away. Clothes, nets, ropes, thatching, paper, web, tangled roots or vines, many foods, etc.
 ### Cocoon
@@ -68,18 +67,17 @@ All who stand amidst the flowers can do nothing but listen to you, so long as yo
 ### Vortex of Thales
 You create or destroy water, under the right conditions. If you destroy it, a whirlpool forms which pushes the water into the fountains of the deep. If you create it, a geyser erupts, spilling over everywhere.
 ### Tar Pit
-An explosion erupts from the earth, dealing d8 damage and revealing a burning pit of tar. The pit is sticky, hard to escape, and those who sink into its depths die an agonizing, burning death.
+The earth bubbles and sears, dealing d8 damage in a small area and quickly forming a burning pit of tar. The pit is sticky, hard to escape, and those who fully sink into its depths probably die. Concentration.
+### Awaken Grove
+The trees in a large area become watchful and hostile to those you name. Branches grab, roots trip, paths close. Lasts until the next sunrise.
+
 ## Level 7
 ### Harm
 Touch an enemy and strike them with divine wrath — deal 2d8 damage to them and 1d6 damage to yourself, ignoring armor.
-
----
 ### Cure Critical Wounds
 Heal an ally you touch of 3d8 damage.
 ### Sever
 Choose an appendage on a nearby living target, such as an arm, tentacle, or wing. The appendage is magically severed from their body, causing no damage or pain. The two pieces are magically linked; undisturbed, blood will flow from one side of the severed part to the other, organs will function, and placed together the two halves will fuse (this is why a larger piece, like splitting the whole torso, is usually fruitless). But missing an appendage may, for example, keep a winged creature from flying, or a bull from goring you on its horns.
-
----
 ### Bones of the Earth
 6 rough pillars of stone rise from the ground at locations and directions you choose. If they pinch a foe between them and a solid barrier, they stop and pull back after dealing your damage. Otherwise, they might trap a dragon, form ramps up a castle wall, or leave a person stranded high in the air.
 ### Nature's Will
@@ -88,27 +86,25 @@ You give a piercing shout, and your cry is heard. Every animal within earshot lo
 Touch an artifact. You learn its full nature, and begin to disperse its magic into the earth. Unless interrupted, you will slowly drain away its power. Take -1 ongoing to everything while you channel this energy (ending only if you stop it or fall unconscious), and -1 forward when you end the spell, regardless of whether you succeeded or not.
 ### Just Like Old Times
 You look back through the ages, and see the history of this place. You can describe what you want to see, but it is up to the land itself what it considers most important to reveal to you.
+
 ## Level 9
 ### True Seeing
 You see all things as they truly are, including the effects of magic. This effect persists until you tell a lie or dismiss the spell. Concentration
-
----
 ### Flesh to Stone
 You begin the process of returning to nature one who has defied it. Shout your accusation at another; if accepted by the spirits, first your target increases in density; then they become incredibly drowsy; finally, their arms, chest, and head turn to stone. You cannot cast any other spells while you focus on this process, and your target must remain nearby the entire duration.
 Alternatively, reverse this and turn Stone to Flesh.
-### Moonwalk
-You bring the Moon Spirit to your cause. It sails across the sky to where you want, and glows full or vanishes. You can cause an eclipse or make its pale glow replace it, bring the tides in or out, use her power to illuminate your foes and force them back to their true forms. Concentration
+### Mooncalling
+You bring the Moon Spirit to your cause. It moves across the sky to where you want, and glows full or vanishes. You can cause an eclipse, bring the tides in or out, use her power to illuminate your foes and force them back to their true forms, or something else. Concentration
 ### Mould Earth
 You reshape the earth itself as you work this magic over several hours, your will extending far beyond what your eye can see. Widen entire rivers or dry them up; move mountains, dig valleys; open great rifts in the land.
 
-*By Magnus Anderson*
 ## Comparison to Cleric
 ### Stolen spells
 level 1: Cure Light Wounds, Magic Weapon  
 level 3: Animate Dead, Hold Person  
 level 5: Contagion, Words of the Unspeaking, Control Weather (was level 7)  
 level 7: Harm, Sever, Cure Critical Wounds (was level 5)  
-level 9: Consume Unlife, True Seeing (was level 5)
+level 9: True Seeing (was level 5)
 ### Ignored spells
 All the Rotes
 level 1: Bless, Sanctuary, Speak with Dead, Detect Alignment, Cause Fear  
@@ -116,3 +112,5 @@ level 3: Resurrection, Darkness
 level 5: Revelation, Cure Critical Wounds, Divination, Trap the Soul  
 level 7: Word of Recall, Heal, Mark of Death  
 level 9: Storm of Vengeance, Repair, Divine Presence, Plague
+
+*By Magnus Anderson*
