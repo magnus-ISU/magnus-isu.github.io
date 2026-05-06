@@ -86,18 +86,16 @@ function onDisplayInput() {
 }
 
 // --- Multi-character tabs ---
-let activeTab = $state(characterSheet.activeIndex);
+const activeTab = $derived(characterSheet.activeIndex);
 
 function switchTab(i) {
 	if (i === activeTab) return;
 	characterSheet.switchTo(i);
-	activeTab = i;
 	undoStack = undoStack.filter(item => item.type === 'delete');
 }
 
 function addCharacter() {
 	characterSheet.addSlot();
-	activeTab = characterSheet.activeIndex;
 	undoStack = undoStack.filter(item => item.type === 'delete');
 }
 
@@ -133,7 +131,6 @@ function doDelete(i) {
 	const { slots, activeIdx } = characterSheet.snapshot;
 	undoStack.push({ type: 'delete', slots, activeIdx });
 	characterSheet.deleteSlot(i);
-	activeTab = characterSheet.activeIndex;
 }
 
 function onTabPointerDown(e, i) {
@@ -296,7 +293,6 @@ function undo() {
 		cs.value = item.value;
 	} else if (item.type === 'delete') {
 		characterSheet.restoreSlots(item.slots, item.activeIdx);
-		activeTab = characterSheet.activeIndex;
 	}
 }
 
@@ -664,6 +660,8 @@ function sizeEditor() {
 }
 
 $effect(() => {
+	void activeTab;
+	void displayValue;
 	if (!editorEl || !sheetTopEl) return;
 	requestAnimationFrame(sizeEditor);
 });
