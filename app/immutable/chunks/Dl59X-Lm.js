@@ -184,7 +184,8 @@ When you **put out word that you're looking to hire help**, roll. Take +1 each i
 - +1 if you have a useful reputation around these parts
 - -1 if you're not in a large town or bustling city
 
-On a 10+ you've got your pick of a number of skilled applicants, your choice who you hire, and no penalty for not taking them along. On a 7-9 you'll have to settle for someone close or turn them away. If you turn away applicants you take -1 forward to Recruit.
+On a 10+ you've got your pick of a number of skilled applicants, your choice who you hire, and no penalty for not taking them along.  
+On a 7-9 you'll have to settle for someone close or turn them away. If you turn away applicants you take -1 forward to Recruit.  
 On a miss someone influential and ill-suited declares they'd like to come along (a foolhardy youth, a loose-cannon, or a veiled enemy, for example), bring them or turn them away, either way you'll face the consequences.
 
 ### Pay Up
