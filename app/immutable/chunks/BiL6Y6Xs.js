@@ -198,7 +198,7 @@ When you **have a follower do something chancy within the scope of their tags**,
 When a **follower ends up in a dangerous, degrading, or crazy situation because of your orders**, roll+Loyalty. On a 10+, they hold firm. On a 7-9, they'll do it, but start entertaining serious thoughts about stabbing you in the back.
 
 ### Call For Assistance
-When **a follower helps you make a move and you roll**, take +1, but that follower is exposed to any risks or consequences. If you deal damage, roll your damage die twice and use the higher die.
+When **a follower helps you make a move related to their Skills and you roll**, take +1, but that follower is exposed to any risks or consequences. If you deal damage, roll your damage die twice and use the higher die.
 
 ## Combat Moves
 
