@@ -1,5 +1,15 @@
 export default [
 	{
+		name: 'Husk',
+		tags: 'Horde',
+		hp: 3,
+		armor: 0,
+		attacks: [{ name: 'Slam', damage: 'd4', tags: 'Close' }],
+		description: 'A husk is a corpse animated by dark magic. It is mindless but but hates you, its creator, and all life. Usually the are given only a little magic and will, but in large numbers.',
+		instinct: 'To obey',
+		moves: ['Shamble in the distance', 'Act stupidly', 'Fall to pieces']
+	},
+	{
 		name: 'Abomination',
 		tags: 'Solitary, Large, Construct, Terrifying',
 		hp: 20,
@@ -216,7 +226,7 @@ export default [
 		tags: 'Horde',
 		hp: 11,
 		armor: 1,
-		attacks: [{ name: 'Bite', damage: 'd6', tags: 'Close' }],
+		attacks: [{ name: 'Bite', damage: 'd6', tags: 'Hand' }],
 		description: 'When there’s no more room in Hell…',
 		instinct: 'Braaaaaains',
 		moves: [
