@@ -1,5 +1,4 @@
 # The Cleric
-
 The lands of Dungeon World are a gods-forsaken mess. They're lousy with the walking dead, beasts of all sorts, and the vast unnatural spaces between safe and temple-blessed civilizations. It is a godless world out there. That's why it needs you.
 
 Bringing the glory of your god to the heathens isn't just in your nature — it's your calling. It falls to you to proselytize with sword and mace and spell. To cleave deep into the witless heart of the wilds and plant the seed of divinity there. Some say that it is best to keep god close to your heart. You know that's rubbish. God lives at the edge of a blade.
@@ -29,9 +28,9 @@ When you **petition your deity according to the precept of your religion**, you 
 ### Hallowed Hold
 When you **stand on sanctified, holy ground** for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil.
 
-When you **stand in a place of holy worship or significance**, ask your God what you must do in order to channel power. They will respond with 1 of the following requests:
+When you **stand in a place of holy worship or significance to your deity**, ask your god what you must do in order to channel power. They will respond with 1 of the following requests:
 - You must redeem someone before the holy site
-- You must dedicate something to your God here
+- You must dedicate something to your god here
 - You must repair something which infidels have defaced
 - You must learn something which time has hidden
 
@@ -40,7 +39,7 @@ When you do, hold 3 Miracles.
 ### Work Miracles
 You know all the Miracles of your level and below. When you *hold Miracle and pray for a saint's Miracle*, roll+WIS. On a 10+, it goes off. On a 7-9, choose 1:
 - Spend 1 Miracle as you lose some access to the divine.
-- -1 ongoing to Work Miracles until you prove yourself; listen to your God to learn how.
+- -1 ongoing to Work Miracles until you prove yourself; listen to your god to learn how.
 - The casting takes longer than expected; or you call attention to yourself; or are put in a spot; or your connection is off and the Miracle has unexpected/lesser effects.
 
 You can always work your rotes, and automatically succeed at them.
@@ -69,7 +68,7 @@ Your order trained you to root out corruption. When you **study a person or plac
 You served alongside soldiers. You ignore the *clumsy* tag on armor you wear, and your deity's symbol is etched into your shield or weapon. When you **Defend the favored of your god**, you always hold at least one Vigilance.
 
 ### Convert
-You once followed another path, so you know better than most how outsiders feel about your God and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
+You once followed another path, so you know better than most how outsiders feel about your god and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
 
 ## Gear
 You start with:  
