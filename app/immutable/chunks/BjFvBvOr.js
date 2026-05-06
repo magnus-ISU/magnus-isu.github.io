@@ -56,7 +56,7 @@ Speak a prayer over your camp or surroundings. The first spell or supernatural e
 ### Contagion
 Choose a creature you can see. Until you end this spell, the target suffers from a disease of your choice. Concentration
 ### True Seeing
-You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie or dismiss the spell. Concentration
+You see all things as they truly are, including the effects of magic. You pierce illusions and see things that have been hidden. This effect persists until you tell a lie. Concentration
 ### Divination
 Name a person, place, or thing you want to learn about. Your deity grants you visions of the target, as clear as if you were there.
 ### Revelation
