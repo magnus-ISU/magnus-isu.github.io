@@ -83,15 +83,15 @@ When the GM calls on you to Defy Danger as a group, they’ll describe the strug
 
 ## Rest and Recovery Moves
 
-### Recover
-When you **do nothing but rest in comfort and safety** after a day of rest you recover all your HP. After two days of rest you remove one debility of your choice.
-
 ### Make Camp
 When you **settle in to rest and consume a ration**, when you wake up from at least a few hours of sleep heal half your max HP.
 If you’re somewhere dangerous decide the watch order as well. If you have enough XP you may Level Up.
 
 ### Bandage
 When you **spend a few minutes bandaging someone else's wounds as they eat to restore strength**, consume a ration and a bandage. They heal 4 hit points, and cannot benefit from this move again until they take damage again. If you also apply poultices, that's the first step to recovering from a debility in the field and will temporarily ensure serious wounds do not get worse.
+
+### Recover
+When you **do nothing but rest in comfort and safety** after a day of rest you recover all your HP. After two days of rest you remove one debility of your choice.
 
 ### Last Breath
 When **you're dying** you catch a glimpse of what lies beyond the Black Gates of Death's Kingdom (the GM will describe it). Then roll. On a 10+ you've cheated death — you're in a bad spot but still alive. On a 7-9 Death will offer you a bargain. Take it and return or refuse and pass beyond the Black Gates into whatever fate awaits you. On a miss, your fate is sealed. You're marked as Death's own and you'll cross the threshold soon or be permanently marked and changed according to Death's whim.
