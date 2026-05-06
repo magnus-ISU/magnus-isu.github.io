@@ -103,28 +103,28 @@ When you open a keg of dwarven stout and **let everyone drink freely**, take +1 
 
 ### Poisons
 
-[20 Coin] [0 Weight] **Bloodweed** Dangerous, touch  
+[20 Coin] [0 Weight] **Bloodweed** *Dangerous, touch*  
 Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
 
-[20 Coin] [0 Weight] **Serpent's Tears** Dangerous, touch  
+[20 Coin] [0 Weight] **Serpent's Tears** *Dangerous, touch*  
 Anyone dealing damage against the target has advantage.
 
-[20 Coin] [0 Weight] **Serrulatus' Sting** Dangerous, touch  
+[20 Coin] [0 Weight] **Serrulatus' Sting** *Dangerous, touch*  
 This neurotoxin throws the target into a spastic rage—they become uncontrollably wild and cannot be calmed for several minutes.
 
-[20 Coin] [0 Weight] **Curare** Dangerous, touch  
+[20 Coin] [0 Weight] **Curare** *Dangerous, touch*  
 The limb touched by this rare plant extract becomes numb and useless.
 
-[20 Coin] [0 Weight] **Fiddleback Venom** Dangerous, touch  
+[20 Coin] [0 Weight] **Fiddleback Venom** *Dangerous, touch*  
 The target takes 2d4 damage soon after contact unless they take time to bind, wash, or cauterize the wound.
 
-[20 Coin] [0 Weight] **Oil of Tagit** Dangerous, applied  
+[20 Coin] [0 Weight] **Oil of Tagit** *Dangerous, applied*  
 The target falls into a light sleep.
 
-[20 Coin] [0 Weight] **Goldenroot** Dangerous, applied  
+[20 Coin] [0 Weight] **Goldenroot** *Dangerous, applied*  
 The target treats the next creature they see as a trusted ally, until proved otherwise.
 
-[80 Coin] [0 Weight] **Arsenic Bloom** Dangerous, applied  
+[80 Coin] [0 Weight] **Arsenic Bloom** *Dangerous, applied*  
 After one hour, the target begins to vomit uncontrollably; a few hours later, they die unless treated with antitoxin.
 
 ## The Wider World
