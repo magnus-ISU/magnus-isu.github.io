@@ -56,6 +56,8 @@ Point your hand. A thin wall of liquid darkness leaves your hand and divides you
 Choose a spell or magic effect in your presence: this spell rips it apart. Lesser spells are ended, powerful magic is just reduced or dampened so long as you are nearby.
 ### Visions Through Time <span style="float:right" >Divination 3</span>
 Cast this spell and gaze into a reflective surface to see into the depths of time. The GM will reveal the details of a grim portent to you—a bleak event that will come to pass without your intervention. They’ll tell you something useful about how you can interfere with the grim portent’s dark outcomes. Rare is the portent that claims "You’ll live happily ever after." Sorry.
+### Scry <span style="float:right" >Divination 3</span>
+Gaze into a still surface of water and name someone you have met. You see them as they are now — their surroundings, their company, their condition — but the vision is silent and fades after a few seconds. The larger the still body of water, the more time you have and detail you can glean.
 ### Sleep <span style="float:right" >Enchantment 3</span>
 1d4 enemies you can see of the GM’s choice fall asleep. Only creatures capable of sleeping are affected. They awake as normal: loud noises, jolts, pain.
 ### Fireball <span style="float:right" >Evocation 3</span>
@@ -158,7 +160,7 @@ You create a fixed bubble of time around you. Within, time passes extremely quic
 ### Gate <span style="float:right" >Conjuration 9</span>
 You teleport a creature to your presence. Name a creature or give a short description of a type of creature. If you named a creature, that creature appears before you. If you described a type of creature, a creature of that type appears before you.
 
-Alternatively, open a portal to a location you describe. It is accurate and stable as long as you can see it.
+Alternatively, open a portal to a location you have heard about. It is accurate and stable as long as you can see it.
 ### Alert <span style="float:right" >Divination 9</span>
 Describe an event. The GM will tell you when that event occurs, no matter where you are or how far away the event is. If you choose, you can view the location of the event as though you were there in person. You can only have one Alert active at a time.
 ### Antipathy <span style="float:right" >Abjuration 9</span>
@@ -171,5 +173,9 @@ You create a structure out of pure magical power. It can be as large as a castle
 Speak someone's True Name. They die.
 ### Starfall <span style="float:right" >Evocation 9</span>
 You take a star from the sky and bring it low. It roughly strikes your target and roughly obliterates anything smaller than a small castle. Hopefully you've researched what might have come with it.
+### Simulacrum <span style="float:right" >Illusion 9</span>
+A perfect illusory duplicate of yourself steps into being. Your Simulacrum is a separate person, identical to you at the point of casting, with 1 hit point. It cannot memorize more spells, and when it casts a spell, you roll for it. Otherwise it is controlled by the GM and may acquire different goals over time (in addition to goals you might already have, such as staying alive). If you die nearby, your Simulacrum steals your soul and becomes a real person.
+### Unmaking <span style="float:right" >Transmutation 9</span>
+Touch a nonliving object or structure. Over the next few moments it reverts to its raw materials — a sword becomes ore and coal, a wall becomes clay and straw, a golem becomes mud and gemstones. Magical objects resist: you must overcome their enchantment, and the GM will tell you what lingers.
 
 *By Magnus Anderson*
