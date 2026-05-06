@@ -107,8 +107,7 @@ When you **are on watch and something approaches**, roll+WIS:
 When you **pursue your quarry**, roll+
 - DEX to outrun or outmaneuver them
 - CON to outlast them
-- WIS to track them or seek them out.
-
+- WIS to track them or seek them out
 On a 10+, you corner your prey or catch them in the open; on a 7-9, your prey picks one:
 - You've almost got them, there's just one last obstacle in your way
 - They've gone to ground; you know where they are but they're hard to get at
@@ -131,7 +130,7 @@ When you **carry more than your Load**, you're encumbered (_noisy, slow, hot, qu
 When you **have downtime and Level+7 XP**:
 - Spend Level+7 XP to increase your Level by 1.
 - Choose a new advanced move from your class.
-- At even levels, increase a stat modifier by 1, capped by your Level or 3. If it is CON then increase your current and maximum HP by 3.
+- At even levels, increase a stat modifier by 1; the stat caps at +2 at level 2, or +3 at higher levels. If it is CON then increase your current and maximum HP by 3.
 
 ### End of Session
 When you **reach the end of a session**, describe how your opinion of or relationship with another character (PC or NPC) has changed. If no one objects, mark XP. Then everyone marks XP for each of the following questions:
@@ -139,18 +138,9 @@ When you **reach the end of a session**, describe how your opinion of or relatio
 - Did we overcome a notable challenge?
 - Did we gain a significant treasure or boon?
 
-Award a star to someone for a great moment of gameplay.
-Make a wish for what you'd like to see in a future session.
+Award a star to someone for a great moment of gameplay. Make a wish for what you'd like to see in a future session.
 
 ## Settlement Moves
-
-### Supply
-When you **go looking for something specific and uncommon**, say who you ask about it and roll+CHA: on a 10+, they know where you can find it, and it can be had for a fair trade; on a 7-9, the GM chooses 1 from the list below:
-- It'll cost you more than expected.
-- You find a poor substitute.
-- You can get it, but only if you see a guy who knows a guy.
-- It was on hand until just recently, when someone else acquired it.
-- It's not here, but there's something else that might do the job.
 
 ### Carouse
 When you **return triumphant and throw a big party**, spend 100 coin and roll + extra 100s of coin spent. On a 10+ choose 3. On a 7-9 choose 1. On a miss, you still choose one, but things get really out of hand.
@@ -159,7 +149,15 @@ When you **return triumphant and throw a big party**, spend 100 coin and roll + 
 - You gain useful information
 - You are not entangled, ensorcelled, or tricked.
 
-No matter the roll outcome, everyone marks 1 XP per extra 100 coin spent, up to your next level up.
+No matter the roll outcome, everyone marks 1 XP per extra 100 coin spent if they are not at the highest level in the party.
+
+### Supply
+When you **go looking for something specific and uncommon**, say who you ask about it and roll+CHA: on a 10+, they know where you can find it, and it can be had for a fair trade; on a 7-9, the GM chooses 1 from the list below:
+- It'll cost you more than expected.
+- You find a poor substitute.
+- You can get it, but only if you see a guy who knows a guy.
+- It was on hand until just recently, when someone else acquired it.
+- It's not here, but there's something else that might do the job.
 
 ### Outstanding Warrants
 When you **return to a civilized place in which you've caused trouble before**, the most notorious among you must roll+CHA. On a 7+, word has spread of your group's troublemaking, and everyone recognizes you but no one wants to turn you in. On a 7-9, the GM chooses a complication:
@@ -209,8 +207,28 @@ When you **deal damage** roll your class damage dice plus any bonuses or penalti
 ### Concentration
 While the spell is ongoing, take -1 ongoing to cast a spell. You can dismiss it just by stopping your focus on it.
 
-## GM Moves
+## Game Master
 
+### Agenda
+- Portray a fantastic world
+- Fill the characters’ lives with adventure
+- Play to find out what happens
+
+### Principles
+- Draw maps, leave blanks
+- Address the characters, not the players
+- Embrace the fantastic
+- Make a move that follows
+- Never speak the name of your move
+- Give every monster life
+- Name every person
+- Ask questions and use the answers
+- Be a fan of the characters
+- Think dangerous
+- Begin and end with the fiction
+- Think offscreen, too
+
+### Moves
 - Use a monster, danger, or location move
 - Hurt them
 - Put someone in a spot
