@@ -207,7 +207,7 @@ When you **deal damage** roll your class damage dice plus any bonuses or penalti
 ### Concentration
 While the spell is ongoing, take -1 ongoing to cast a spell. You can dismiss it just by stopping your focus on it.
 
-## GM Moves
+## Game Master
 
 ### Agenda
 - Portray a fantastic world
