@@ -1,10 +1,8 @@
 <script>
 import { onMount } from 'svelte';
-import background from './background.json';
-import connections from './connections.json';
-import paths from './paths.json';
-import defaultStateJson from './risk_state.json';
 
+export let data;
+const { background, connections, paths, defaultStateJson } = data;
 const { colorOrder: defaultColorOrder, ...defaultState } = defaultStateJson;
 
 let territories = [
