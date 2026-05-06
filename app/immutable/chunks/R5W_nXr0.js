@@ -33,8 +33,6 @@ A legendary blade said to have been thrust backwards in time from some grim futu
 ### [2 Weight] Vorpal Sword _close, 3 piercing_
 Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
 
----
-
 ## Armor
 
 ### [1 Weight] [+1 Armor] Lodestone Shield
@@ -42,8 +40,6 @@ Emblazoned with a lion rampant, the Lodestone Shield has the power to pull blade
 
 ### [1 Weight] [1 Armor] Timunn’s Armor
 A stealthy suit of armor, it appears as many things to many people and blends in with appropriate apparel. The wearer always seems the height of fashion to any who gaze upon him.
-
----
 
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
@@ -54,9 +50,7 @@ A slender band of nearly invisible silver. Prince Edrin wore the ring upon his f
 When you would **take Damage**, instead don't. You can use this move again in one hour.
 
 ### [1 Weight] [5 Armor] Adamantium Mail *clumsy*
-Impossibly light and impossibly strong, adamantium can only be found deep in Hell, and mortals have at great cost obtained precious little of it. A single man in adamantium is worth more than an army, and that rule has been tested several times.
-
-It's generally thought that if you have the misfortune of facing someone who has it, you should kill their friends and run, run away. But there is no shortage of kingdoms who hope to get their hands on a suit, either.
+Impossibly light and impossibly strong, adamantium can only be found deep in Hell, and mortals have at great cost obtained precious little of it. A single man in adamantium is worth more than an army, and that rule has been tested. There is no shortage of kingdoms who hope to get their hands on a suit. When anything **would deform the Adamantium Mail**, it instead doesn't.
 
 ### [1 Weight] [2 Armor] Robes of the Evil Archmagi *requires evil*
 When you **kill with an arcane spell**, take +1 forward to work magic.
@@ -159,8 +153,6 @@ lit, none upon whom its light falls is able to tell a lie. They may keep
 silent or dissemble but when asked a question directly, they can speak naught
 but truth.
 
----
-
 ## Consumables
 
 ### [0 Weight] Common Scroll _1 use_
@@ -211,11 +203,11 @@ When you hold The Burning Wheel and speak a god’s name, roll+CON.
 
 Once used, the Burning Wheel ignites and burns with brilliant light. It does not confer any protection from those flames, nor does it provide any bonus to swimming.
 
----
-
 ## Potions
 
-### [1 Weight] Potion of Resistance To
+Potions typically last an hour or so.
+
+### [1 Weight] Potion of Resistance To \\_\\_\\_\\_
 When you **drink**, you take a maximum of 1 damage from whatever is on the label.
 
 ### [1 Weight] Potion of Disgust
@@ -228,7 +220,7 @@ When you **drink**, you're invisible for a minute. When you **pour it on somethi
 When you **drink**, you appear to be a corpse, and mindless undead will not attack you.
 
 ### [1 Weight] Potion of Water Breathing
-When you **drink**, you can breathe water instead of air for an hour or so.
+When you **drink**, you can breathe water instead of air.
 
 ### [1 Weight] Potion of Invincibility
 When you **drink**, you are immune to damage for a short time.
@@ -240,7 +232,7 @@ When you **drink**, you see all things as they truly are, including the effects 
 When you **drink**, you stop appearing in mirrors and cannot be scryed by most magics.
 
 ### [1 Weight] Potion of Polymorph
-When you **drop in a piece of an animal and drink**, you transform into an exact copy of that creature for an hour or so, but mostly keep your mind unaffected.
+When you **drop in a piece of an animal and drink**, you transform into an exact copy of that creature, but mostly keep your mind unaffected.
 
 ### [1 Weight] Potion of Beauty
 When you **drink**, you increase your CHA by 1, permanently.
@@ -258,13 +250,13 @@ Can be poured for about a doorway's length. Demons cannot cross lines of silver.
 When you **drink**, you forget everything that happened since you woke up.
 
 ### [1 Weight] Potion of Frost *dangerous*
-When you **pour it onto a liquid**, an area the size of a small lake freezes and creates a solid surface of ice to walk on for an hour. When you **pour it all out directly on someone**, it expands rapidly and they're completely frozen in ice until it thaws, and might die.
+When you **pour it onto a liquid**, an area the size of a small lake freezes and creates a solid surface of ice to walk on. When you **pour it all out directly on someone**, it expands rapidly and they're completely frozen in ice until it thaws, and might die.
 
 ### [1 Weight] Potion of Flame *dangerous*
 When it **shatters**, everything nearby is consumed in fire and takes 2d6 damage (ignores armor).
 
 ### [1 Weight] Sovereign Glue *dangerous*
-When it **touches anything except glass**, it won't come off, ever. If it's on you, you might be able to slowly get yourself off without permanent harm.
+When it **touches anything except glass**, it won't come off, ever. If it's on you, you might be able to slowly scrape yourself off without permanent harm.
 
 ### [1 Weight] Bottled Slime *dangerous*
 An ooze lives in this bottle, highly compressed.
