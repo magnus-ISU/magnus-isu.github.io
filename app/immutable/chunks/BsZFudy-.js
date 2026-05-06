@@ -1,1 +1,0 @@
-import{v as i,w as c,x as _,b as h,h as r,i as k,j as d,e as u,k as v,U as y}from"./DwgIY9TZ.js";function l(f,n,t){r&&k();var e=f,s=y,a,o=i()?c:_;h(()=>{o(s,s=n())&&(a&&d(a),a=u(()=>t(e)))}),r&&(e=v)}export{l as k};

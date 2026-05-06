@@ -1,1 +1,0 @@
-import{a2 as k,a3 as B,B as T,a4 as c,S as q}from"./DwgIY9TZ.js";function h(i,r){return i===r||(i==null?void 0:i[q])===r}function A(i={},r,S,a){return k(()=>{var s,f;return B(()=>{s=f,f=(a==null?void 0:a())||[],T(()=>{i!==S(...f)&&(r(i,...f),s&&h(S(...s),i)&&r(null,...s))})}),()=>{c(()=>{f&&h(S(...f),i)&&r(null,...f)})}}),i}export{A as b};
