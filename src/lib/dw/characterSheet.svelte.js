@@ -6,7 +6,6 @@ const SLOTS_KEY = 'dw-character-slots';
 const ACTIVE_KEY = 'dw-character-active';
 
 driveSync.registerKey(SLOTS_KEY);
-driveSync.registerKey(ACTIVE_KEY);
 
 function loadSlots() {
 	if (!browser) return [''];
@@ -28,7 +27,7 @@ function loadSlots() {
 function loadActive() {
 	if (!browser) return 0;
 	try {
-		const v = driveSync.load(ACTIVE_KEY);
+		const v = localStorage.getItem(ACTIVE_KEY);
 		return v !== null ? +v : 0;
 	} catch {
 		return 0;
@@ -42,7 +41,7 @@ function saveSlots(slots) {
 
 function saveActive(idx) {
 	if (!browser) return;
-	driveSync.save(ACTIVE_KEY, String(idx));
+	try { localStorage.setItem(ACTIVE_KEY, String(idx)); } catch {}
 }
 
 const slots = $state(loadSlots());
