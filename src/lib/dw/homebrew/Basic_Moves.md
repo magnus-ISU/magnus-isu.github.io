@@ -149,7 +149,7 @@ When you **return triumphant and throw a big party**, spend 100 coin and roll + 
 - You gain useful information
 - You are not entangled, ensorcelled, or tricked.
 
-No matter the roll outcome, everyone marks 1 XP per extra 100 coin spent up to 7+Level, if they do not have the highest Level in the party.
+No matter the roll outcome, everyone marks 1 XP per extra 100 coin spent until they could level up, if they do not have the highest Level in the party.
 
 ### Supply
 When you **go looking for something specific and uncommon**, say who you ask about it and roll+CHA: on a 10+, they know where you can find it, and it can be had for a fair trade; on a 7-9, the GM chooses 1 from the list below:
