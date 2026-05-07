@@ -331,6 +331,125 @@ function commitExpRaw(raw) {
 let hpDcRef = $state();
 let expDcRef = $state();
 
+// --- Fade-out then delete lines whose consumable was clicked to 0 ---
+// Fade is *only* triggered by clicking the last empty icon. Manual edits or
+// undo never start a fade; clicking a fading line cancels it.
+let fadingLineKeys = $state(new Set());
+const fadeTimers = new Map(); // line text -> timer id
+
+const FADE_PART_RE = /\[0\/\d+\s+(uses?|rations?)\]/i;
+
+function removeFadingPart(lineText) {
+	const trailingWs = lineText.match(/\s*$/)[0];
+	const core = lineText.replace(/\s*$/, '');
+	const parts = core.split(' and ');
+	if (parts.length === 1) return null; // signal: drop the whole line
+	const partIdx = parts.findIndex((p) => FADE_PART_RE.test(p));
+	if (partIdx === -1) return lineText;
+	parts.splice(partIdx, 1);
+	return parts.join(' and ') + trailingWs;
+}
+
+function startFade(lineKey) {
+	if (fadingLineKeys.has(lineKey)) return;
+	fadingLineKeys = new Set([...fadingLineKeys, lineKey]);
+	const timerId = setTimeout(() => {
+		const cur = cs.value.split('\n');
+		const idx = cur.indexOf(lineKey);
+		if (idx !== -1) {
+			pushUndo();
+			const newLine = removeFadingPart(cur[idx]);
+			if (newLine === null) {
+				cur.splice(idx, 1);
+			} else {
+				cur[idx] = newLine;
+			}
+			cs.value = cur.join('\n');
+		}
+		cancelFade(lineKey);
+	}, 5000);
+	fadeTimers.set(lineKey, timerId);
+}
+
+function cancelFade(lineKey) {
+	const timerId = fadeTimers.get(lineKey);
+	if (timerId) clearTimeout(timerId);
+	fadeTimers.delete(lineKey);
+	if (fadingLineKeys.has(lineKey)) {
+		const next = new Set(fadingLineKeys);
+		next.delete(lineKey);
+		fadingLineKeys = next;
+	}
+}
+
+// Apply/remove .fading-line class on rendered copy-lines based on state
+$effect(() => {
+	void bodyHtml;
+	const keys = fadingLineKeys;
+	if (!charBodyEl) return;
+	for (const cl of charBodyEl.querySelectorAll('.copy-line')) {
+		if (cl.dataset.src && keys.has(cl.dataset.src)) {
+			cl.classList.add('fading-line');
+		} else {
+			cl.classList.remove('fading-line');
+		}
+	}
+});
+
+// Cancel any fade whose line has been edited away or removed (undo, manual edit)
+$effect(() => {
+	void cs.value;
+	if (fadingLineKeys.size === 0) return;
+	const present = new Set(cs.value.split('\n'));
+	for (const key of [...fadingLineKeys]) {
+		if (!present.has(key)) cancelFade(key);
+	}
+});
+
+// --- Consumable click-to-toggle (uses / rations) ---
+function handleConsumableClick(icon) {
+	const isUses = icon.classList.contains('uses-icon');
+	const kind = isUses ? 'uses' : 'rations';
+	const idx = +(isUses ? icon.dataset.usesIdx : icon.dataset.rationsIdx);
+	const isUsed = icon.dataset.state === 'used';
+	toggleConsumable(kind, idx, isUsed ? +1 : -1);
+}
+
+function toggleConsumable(kind, idx, delta) {
+	const lines = cs.value.split('\n');
+	const re =
+		kind === 'uses'
+			? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi
+			: /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
+	let count = 0;
+	for (let i = 4; i < lines.length; i++) {
+		const matches = [...lines[i].matchAll(re)];
+		for (const m of matches) {
+			if (count === idx) {
+				pushUndo();
+				const oldLineText = lines[i];
+				const max = m[2] ? +m[2] : +m[1];
+				const cur = Math.min(+m[1], max);
+				const newCur = Math.max(0, Math.min(max, cur + delta));
+				const suffix = m[3];
+				const replacement = newCur === max ? `[${max} ${suffix}]` : `[${newCur}/${max} ${suffix}]`;
+				const before = lines[i].slice(0, m.index);
+				const after = lines[i].slice(m.index + m[0].length);
+				lines[i] = before + replacement + after;
+				const newLineText = lines[i];
+				cs.value = lines.join('\n');
+				if (delta < 0 && newCur === 0) {
+					startFade(newLineText);
+				} else if (fadingLineKeys.has(oldLineText)) {
+					cancelFade(oldLineText);
+				}
+				return;
+			}
+			count++;
+		}
+	}
+}
+
 function commitHpRaw(raw) {
 	const result = commitHpFn(raw, parsed.hp ?? 0, maxHp, totalArmor);
 	if (result !== null) updateHpInText(result);
@@ -759,7 +878,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name',
 		)
 	) {
 		suppressRadialClick = true;
@@ -781,7 +900,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name',
 		)
 	)
 		return;
@@ -1159,7 +1278,21 @@ function expandSection(sectionName) {
 			{#if bodyHtml}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="char-body" bind:this={charBodyEl} onclick={(e) => {
+				<div class="char-body" bind:this={charBodyEl} onmousedown={(e) => {
+					if (e.target.closest('.uses-icon, .rations-icon')) e.preventDefault();
+				}} onclick={(e) => {
+					const fading = e.target.closest('.copy-line.fading-line');
+					if (fading && fading.dataset.src) {
+						e.stopPropagation();
+						cancelFade(fading.dataset.src);
+						return;
+					}
+					const icon = e.target.closest('.uses-icon, .rations-icon');
+					if (icon) {
+						e.stopPropagation();
+						handleConsumableClick(icon);
+						return;
+					}
 					const h2 = e.target.closest('h2');
 					if (h2) {
 						const h2Text = h2.textContent.trim();
@@ -2012,6 +2145,64 @@ function expandSection(sectionName) {
 		height: 22px;
 		vertical-align: middle;
 		transform: translateY(2px);
+	}
+
+	:global(.char-body .consumable-group) {
+		display: inline-flex;
+		align-items: center;
+		gap: 2px;
+		vertical-align: middle;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	:global(.char-body .uses-icon),
+	:global(.char-body .rations-icon) {
+		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='black' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 15 26, pointer;
+	}
+
+	:global(.char-body .uses-icon) {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		vertical-align: middle;
+		color: #ddd;
+		transition: transform 0.1s;
+		transform: translateY(-2px);
+		overflow: visible;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	:global(.char-body .rations-icon) {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		vertical-align: middle;
+		transition: transform 0.1s;
+		transform: translateY(-2px);
+		overflow: visible;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	:global(.char-body .uses-icon:hover) {
+		transform: translateY(-2px) scale(1.15);
+	}
+
+	:global(.char-body .rations-icon:hover) {
+		transform: translateY(-2px) scale(1.15);
+	}
+
+	:global(.char-body .copy-line.fading-line) {
+		animation: fade-line-out 5s ease-in-out forwards;
+	}
+
+	@keyframes fade-line-out {
+		0% { opacity: 1; }
+		15% { opacity: 0.5; }
+		85% { opacity: 0.15; }
+		100% { opacity: 0; }
 	}
 
 	.armor-display {

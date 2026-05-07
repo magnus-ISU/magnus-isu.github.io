@@ -396,6 +396,32 @@ function onArticleClick(e) {
 		transform: translateY(-2px);
 	}
 
+	:global(.dw-article .consumable-group) {
+		display: inline-flex;
+		align-items: center;
+		gap: 2px;
+		vertical-align: middle;
+	}
+
+	:global(.dw-article .uses-icon) {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		vertical-align: middle;
+		color: #ddd;
+		transform: translateY(-2px);
+		overflow: visible;
+	}
+
+	:global(.dw-article .rations-icon) {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		vertical-align: middle;
+		transform: translateY(-2px);
+		overflow: visible;
+	}
+
 	:global(.dw-article .code-block) {
 		background: #1a1a1a;
 		border: 1px solid #333;

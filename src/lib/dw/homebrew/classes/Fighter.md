@@ -70,15 +70,15 @@ When you defy danger and **use your small size to your advantage**, take +1.
 ## Gear
 You start with:  
 [0 Weight] Your Signature Weapon  
-[1 Weight] Dungeon Rations (5 rations)  
+[1 Weight] Dungeon Rations [5 rations]  
 Choose one for your defenses:  
-[1 Weight] [1 Armor] Chainmail and [1 Weight] Adventuring Gear (3 uses)  
+[1 Weight] [1 Armor] Chainmail and [1 Weight] Adventuring Gear [3 uses]  
 [3 Weight] [2 Armor] Scale Armor  
 Choose two:  
 [22 Coin]  
-[2 Weight] 2 Healing Potions  
+[2 Weight] Healing Potions [2 uses]  
 [2 Weight] [+1 Armor] Shield  
-[1 Weight] Antitoxin (1 use), [1 Weight] Dungeon Rations, and [1 Weight] Poultices and Herbs (2 uses)
+[1 Weight] Antitoxin [1 use], [1 Weight] Dungeon Rations, and [1 Weight] Poultices and Herbs [2 uses]
 
 ## Stats
 Damage: d10, HP: 10+Constitution, Load: 12+STR

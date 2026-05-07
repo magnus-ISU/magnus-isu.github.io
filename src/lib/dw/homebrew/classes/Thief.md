@@ -59,19 +59,19 @@ You always land on your feet. When you fall from any height, if you're conscious
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 rations)  
+[1 Weight] Dungeon Rations [5 rations]  
 [1 Weight] [1 Armor] Leather Armor  
-[0 Weight] 3 uses of your chosen poison  
+[0 Weight] Your chosen poison [3 uses]  
 [10 Coin]  
 Choose one for your arms:  
 [0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)  
 [1 Weight] Rapier (close, precise)  
 Choose a ranged weapon:  
-[1 Weight] 3 Throwing Daggers (thrown, near)  
+[1 Weight] 3 Throwing Daggers (thrown, near) [3 uses]  
 [2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows (3 ammo)  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses)  
-[1 Weight] Healing Potion
+[1 Weight] Adventuring Gear [3 uses]  
+[1 Weight] Healing Potion [1 use]
 
 ## Stats
 Damage: d8, HP: 6+Constitution, Load: 9+STR

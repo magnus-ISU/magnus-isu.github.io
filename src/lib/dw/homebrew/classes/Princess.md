@@ -51,17 +51,17 @@ Your kingdom's strongholds are spread throughout the country. Whenever you come 
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 rations)  
+[1 Weight] Dungeon Rations [5 rations]  
 Choose your arms:  
 [1 Weight] Rapier (close, precise, one-handed)  
 [1 Weight] Masterwork Short Sword (close, +1 damage)  
 [1 Weight] Ornate Bow (near) and [0 Weight] Quiver of Masterwork Arrows (ammo)  
 Choose your defense:  
 [1 Weight] [1 Armor] Cloth Armor  
-[0 Weight] A Loaf of Bread from Your Kingdom (3 rations) and [1 Weight] Healing Potion  
+[0 Weight] A Loaf of Bread from Your Kingdom [3 rations] and [1 Weight] Healing Potion [1 use]  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses)  
-[1 Weight] Bandages (3 uses) and Silk Robes  
+[1 Weight] Adventuring Gear [3 uses]  
+[1 Weight] Bandages [3 uses] and Silk Robes  
 [0 Weight] Ornate Jewelry (valuable)  
 [0 Weight] Looking Glass
 

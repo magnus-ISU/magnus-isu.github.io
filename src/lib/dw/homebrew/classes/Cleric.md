@@ -72,7 +72,7 @@ You once followed another path, so you know better than most how outsiders feel 
 
 ## Gear
 You start with:  
-[1 Weight] Dungeon Rations (5 rations)  
+[1 Weight] Dungeon Rations [5 rations]  
 [0 Weight] Some Symbol of the Divine, describe it  
 Choose one for your defenses:  
 [1 Weight] [1 Armor] Chainmail  
@@ -80,10 +80,10 @@ Choose one for your defenses:
 Choose one armament:  
 [1 Weight] Warhammer (close)  
 [1 Weight] Mace (close)  
-[1 Weight] Staff (close, two-handed) and [1 Weight] Bandages (3 uses)  
+[1 Weight] Staff (close, two-handed) and [1 Weight] Bandages [3 uses]  
 Choose one:  
-[1 Weight] Adventuring Gear (3 uses) and [1 Weight] Dungeon Rations (5 rations)  
-[1 Weight] Healing Potion
+[1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
+[1 Weight] Healing Potion [1 use]
 
 ## Stats
 Damage: d6, HP: 8+Constitution, Load: 10+STR
