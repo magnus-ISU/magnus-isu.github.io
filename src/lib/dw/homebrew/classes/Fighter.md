@@ -78,7 +78,7 @@ Choose two:
 [22 Coin]  
 [2 Weight] Healing Potions [2 uses]  
 [2 Weight] [+1 Armor] Shield  
-[1 Weight] Antitoxin [1 use], [1 Weight] Dungeon Rations, and [1 Weight] Poultices and Herbs [2 uses]
+[1 Weight] Antitoxin [1 use] and [1 Weight] Dungeon Rations [5 rations] and [1 Weight] Poultices and Herbs [2 uses]
 
 ## Stats
 Damage: d10, HP: 10+Constitution, Load: 12+STR
