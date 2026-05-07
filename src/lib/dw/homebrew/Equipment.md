@@ -11,7 +11,7 @@ Weapons don't kill monsters, people do. That's why weapons in Dungeon World don'
 The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
 
 ### Ranged Weapons
-[10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near*  
+[10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near* [3 uses]  
 [15 Coin] [2 Weight] **Ragged Bow** *near*  
 [60 Coin] [2 Weight] **Fine Bow** *near, far*  
 [100 Coin] [1 Weight] **Hunter's Bow** *near, far*  
