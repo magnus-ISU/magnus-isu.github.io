@@ -2180,7 +2180,7 @@ function expandSection(sectionName) {
 		height: 24px;
 		vertical-align: middle;
 		transition: transform 0.1s;
-		transform: translateY(-2px);
+		transform: translateY(-3px);
 		overflow: visible;
 		margin: 0 -2px;
 		-webkit-user-select: none;
@@ -2192,7 +2192,7 @@ function expandSection(sectionName) {
 	}
 
 	:global(.char-body .rations-icon:hover) {
-		transform: translateY(-2px) scale(1.15);
+		transform: translateY(-3px) scale(1.15);
 	}
 
 	:global(.char-body .copy-line.fading-line) {

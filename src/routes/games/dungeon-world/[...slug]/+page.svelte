@@ -418,7 +418,7 @@ function onArticleClick(e) {
 		width: 24px;
 		height: 24px;
 		vertical-align: middle;
-		transform: translateY(-2px);
+		transform: translateY(-3px);
 		overflow: visible;
 		margin: 0 -2px;
 	}

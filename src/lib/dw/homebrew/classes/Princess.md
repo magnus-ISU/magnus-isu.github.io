@@ -55,11 +55,11 @@ Your kingdom's strongholds are spread throughout the country. Whenever you come 
 ## Gear
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
-Choose your arms:  
-[1 Weight] Rapier (close, precise, one-handed)  
+Choose one for your arms:  
+[1 Weight] Rapier (close, precise)  
 [1 Weight] Masterwork Short Sword (close, +1 damage)  
 [1 Weight] Ornate Bow (near) and [0 Weight] Quiver of Masterwork Arrows (ammo)  
-Choose your defense:  
+Choose one for your defenses:  
 [1 Weight] [1 Armor] Cloth Armor  
 [0 Weight] A Loaf of Bread from Your Kingdom [3 rations] and [1 Weight] Healing Potion [1 use]  
 Choose one:  
@@ -102,7 +102,7 @@ You have a UNICORN. Tell the GM their name, temperament, build, and color.
 
 Temperament: Chatterbox, Vain, Brave, or Savage  
 Build: Towering, Solid, Chubby, or Skeletal  
-- Pastel: No one can look upon it and tell a lie.
+- Pastel: When your unicorn **stares someone down and they look back at you**, they cannot lie.
 - Luminescent: Gentle Touch heals 1d6 health. Add "Cure 1 Debility" to your options.
 - Dark: When you ride it, +2 damage. When you fight in melee, add the *messy* tag.
 

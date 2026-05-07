@@ -8,7 +8,7 @@ Each piece of equipment will have a number of tags. These will tell you somethin
 Weapons don't kill monsters, people do. That's why weapons in Dungeon World don't have a listed damage. A weapon is useful primarily for its tags which describe what the weapon is useful for. A dagger is not useful because it does more or less damage than some other blade. It's useful because it's small and easy to strike with at close distance. A dagger in the hands of the wizard is not nearly so dangerous as one in the hands of a skilled fighter.
 
 ### Quality
-The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features.
+The stats below are for typical items. There are, of course, variations. A dull long sword might be -1 damage instead while a masterwork dagger could be +1 damage. Consider the following to be stats for typical weapons of their type—a specific weapon could have different tags to represent its features. See a list of weapon tags at the bottom of this page.
 
 ### Ranged Weapons
 [10 Coin] [1 Weight] **3 Throwing Daggers** *thrown, near* [3 uses]  
@@ -78,18 +78,6 @@ When you **drink an entire healing potion**, choose: heal 10 damage or remove on
 [30 Coin] [1 Weight] **Antitoxin** [3 uses]  
 When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
-### Variant Rations
-
-[10 Coin] [1 Weight] **Personal Feast** [1 ration]  
-Ostentatious to say the least.
-
-[1 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf* [7 rations]  
-Dwarves say it tastes like home. Everyone else says it tastes like home, if
-home is a hog farm, and on fire.
-
-[100 Coin] [1 Weight] **Elven Bread** [15 rations]  
-Only the greatest of elf-friends are treated to this rare delicacy.
-
 ### Bonus-Granting Items
 
 [10 Coin] [2 Weight] **Bag of Books** [3 uses]  
@@ -100,6 +88,18 @@ When you **share halfling pipeleaf with someone**, expend a use and take +1 forw
 
 [30 Coin] [4 Weight] **Keg of Dwarven Stout**  
 When you open a keg of dwarven stout and **let everyone drink freely**, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.
+
+### Variant Rations
+
+[10 Coin] [1 Weight] **Personal Feast** [1 ration]  
+Ostentatious to say the least.
+
+[1 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf* [7 rations]  
+Dwarves say it tastes like home. Everyone else says it tastes like home, if
+home is a hog farm, and on fire.
+
+[100 Coin] [0 Weight] **Elven Bread** [15 rations]  
+Only the greatest of elf-friends are treated to this rare delicacy.
 
 ### Poisons
 
