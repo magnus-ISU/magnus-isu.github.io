@@ -60,42 +60,42 @@ _Worn_: To use it, you have to be wearing it.
 
 ### Staples
 
-[12 Coin] [1 Weight] **Adventuring Gear** *3 uses*  
+[12 Coin] [1 Weight] **Adventuring Gear** [3 uses]  
 A collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you **rummage through your adventuring gear for some useful mundane item**, you find what you need and mark off a use.
 
-[3 Coin] [1 Weight] **Dungeon Rations** *5 rations*  
+[3 Coin] [1 Weight] **Dungeon Rations** [5 rations]  
 Not tasty, but not bad either.
 
-[5 Coin] [1 Weight] **Bandages** *3 uses, slow*  
+[5 Coin] [1 Weight] **Bandages** *slow* [3 uses]  
 See the Bandage recovery move.
 
-[10 Coin] [1 Weight] **Poultices and Herbs** *2 uses, slow*  
+[10 Coin] [1 Weight] **Poultices and Herbs** *slow* [2 uses]  
 See the Bandage recovery move.
 
-[50 Coin] [1 Weight] **Healing Potion**  
+[50 Coin] [1 Weight] **Healing Potion** [1 use]  
 When you **drink an entire healing potion**, choose: heal 10 damage or remove one debility.
 
-[30 Coin] [1 Weight] **Antitoxin** *3 uses*  
+[30 Coin] [1 Weight] **Antitoxin** [3 uses]  
 When you **sip a use of antitoxin**, you're cured of one poison affecting you.
 
 ### Variant Rations
 
-[10 Coin] [1 Weight] **Personal Feast** *1 ration*  
+[10 Coin] [1 Weight] **Personal Feast** [1 ration]  
 Ostentatious to say the least.
 
-[1 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf, 7 rations*  
+[1 Coin] [1 Weight] **Dwarven Hardtack** *requires Dwarf* [7 rations]  
 Dwarves say it tastes like home. Everyone else says it tastes like home, if
 home is a hog farm, and on fire.
 
-[100 Coin] [1 Weight] **Elven Bread** *15 rations*  
+[100 Coin] [1 Weight] **Elven Bread** [15 rations]  
 Only the greatest of elf-friends are treated to this rare delicacy.
 
 ### Bonus-Granting Items
 
-[10 Coin] [2 Weight] **Bag of Books** *3 uses*  
+[10 Coin] [2 Weight] **Bag of Books** [3 uses]  
 When your bag of books **contains just the right book** for the subject you're about to spout lore about, consult the book, expend a use, and take +1 to your roll.
 
-[25 Coin] [0 Weight] **Halfling Pipeleaf** *3 uses*  
+[25 Coin] [0 Weight] **Halfling Pipeleaf** [3 uses]  
 When you **share halfling pipeleaf with someone**, expend a use and take +1 forward to parley with them.
 
 [30 Coin] [4 Weight] **Keg of Dwarven Stout**  
@@ -103,28 +103,28 @@ When you open a keg of dwarven stout and **let everyone drink freely**, take +1 
 
 ### Poisons
 
-[20 Coin] [0 Weight] **Bloodweed** *dangerous, touch*  
+[20 Coin] [0 Weight] **Bloodweed** *dangerous, touch* [1 use]  
 Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that much damage.
 
-[20 Coin] [0 Weight] **Serpent's Tears** *dangerous, touch*  
+[20 Coin] [0 Weight] **Serpent's Tears** *dangerous, touch* [1 use]  
 Anyone dealing damage against the target has advantage.
 
-[20 Coin] [0 Weight] **Serrulatus' Sting** *dangerous, touch*  
+[20 Coin] [0 Weight] **Serrulatus' Sting** *dangerous, touch* [1 use]  
 This neurotoxin throws the target into a spastic rage—they become uncontrollably wild and cannot be calmed for several minutes.
 
-[20 Coin] [0 Weight] **Curare** *dangerous, touch*  
+[20 Coin] [0 Weight] **Curare** *dangerous, touch* [1 use]  
 The limb touched by this rare plant extract becomes numb and useless.
 
-[20 Coin] [0 Weight] **Fiddleback Venom** *dangerous, touch*  
+[20 Coin] [0 Weight] **Fiddleback Venom** *dangerous, touch* [1 use]  
 The target takes 2d4 damage soon after contact unless they take time to bind, wash, or cauterize the wound.
 
-[20 Coin] [0 Weight] **Oil of Tagit** *dangerous, applied*  
+[20 Coin] [0 Weight] **Oil of Tagit** *dangerous, applied* [1 use]  
 The target falls into a light sleep.
 
-[20 Coin] [0 Weight] **Goldenroot** *dangerous, applied*  
+[20 Coin] [0 Weight] **Goldenroot** *dangerous, applied* [1 use]  
 The target treats the next creature they see as a trusted ally, until proved otherwise.
 
-[80 Coin] [0 Weight] **Arsenic Bloom** *dangerous, applied*  
+[80 Coin] [0 Weight] **Arsenic Bloom** *dangerous, applied* [1 use]  
 After one hour, the target begins to vomit uncontrollably; a few hours later, they die unless treated with antitoxin.
 
 ## The Wider World

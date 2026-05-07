@@ -103,7 +103,7 @@ export function renderMarkdown(src) {
 							.replace(/</g, '&lt;')
 							.replace(/>/g, '&gt;')
 							.replace(/"/g, '&quot;');
-						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.uses-icon,.rations-icon'))return;navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
+						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.uses-icon,.rations-icon'))return;navigator.clipboard.writeText(this.dataset.copy+'  ');this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
 					}
 				}
 
