@@ -21,7 +21,10 @@ When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, ho
 - When you **Aid or Interfere** with someone, you can roll+CHA instead of them rolling their stat.
 
 ### Gentle Touch
-When you **touch someone and speak words of courage**, roll+CHA. On a hit, they shake off one condition (fear, charm, confusion, despair) and take +1 forward. On a 7-9, you also give yourself or them another debility in the process, their choice which one.
+When you **touch someone and speak words of courage against imminent danger**, roll+CHA. On a 10+, choose 2. On a 7-9, choose 1:
+- They shake off fear, confusion, doubt, or magical compulsion or constraint
+- They realize their best course of action; they ask one question on the Discern Realities list, and take +1 forward on the answer.
+- You negate damage they take, the next time you call out a warning to them.
 
 ### See the Best in You
 When you **hold a trusting person's hand and look them in the eye**, roll+CHA. On a 10+, ask them (or the GM, for NPCs) two of the following. On a 7-9, ask one:
@@ -95,11 +98,13 @@ I have seen \\_\\_\\_\\_\\_ in my nightmares.
 ## Advanced Moves
 
 ### Unicorn
-You have a UNICORN. Choose one from each list and tell the GM their name.
+You have a UNICORN. Tell the GM their name, temperament, build, and color.
 
 Temperament: Chatterbox, Vain, Brave, or Savage  
-Build: Towering, Skeletal, Solid, or Chubby  
-Color: Pastel (+1d6 damage), Dark (add the *messy* tag when in melee), or Luminescent (heal 1d6 with Gentle Touch)
+Build: Towering, Solid, Chubby, or Skeletal  
+- Pastel: No one can look upon it and tell a lie.
+- Luminescent: Gentle Touch heals 1d6 health. Add "Cure 1 Debility" to your options.
+- Dark: When you ride it, +2 damage. When you fight in melee, add the *messy* tag.
 
 ### Prophetic Dreams
 When you **lay down to sleep**, roll+WIS. On a 10+ choose one:
@@ -112,12 +117,6 @@ On a 7-9 choose one:
 
 ### Cinderella
 You can understand the grunts, chirps, and calls that are the language of small animals just as well as your mother tongue, and when you speak to them they understand you.
-
-### Warrior Princess
-Take one non-multiclass move from the Fighter. Your damage die increases to d6.
-
-### Rebellious Princess
-Take one non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
 
 ### A Dashing Disguise
 When you **disguise yourself as a commoner or a prince**, roll+CHA. On a 10+ you pull it off. On a 7-9 there is a complication, tell the GM what might give you away.
@@ -135,6 +134,12 @@ When you **meet a new person of high status**, tell the GM how you know of them.
 
 ### Pure Hearted Intuition
 When you Discern Realities you may also choose from the following: *Who here is trustworthy? Who here is untrustworthy? Who here needs help?*
+
+### Warrior Princess
+Take one non-multiclass move from the Fighter. Your damage die increases to d6.
+
+### Rebellious Princess
+Take one non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
 
 ## Mastery Moves
 

@@ -34,9 +34,6 @@ When you **fight with your unarmed attacks** (teeth, claws, etc) they have the *
 ### Chowhound
 Whenever you **Discern Realities or just take time to sniff around**, you always find a ration for you to eat, no matter the outcome. It may or may not be acceptable for human consumption; the GM will tell you.
 
-### Fleet of Foot
-You are blindingly fast on four legs. When you **run at full speed**, nothing on two legs can keep pace, and you can outrun horses in short bursts. If it comes down to who's faster, it's you.
-
 ### Scent Memory
 You never forget a scent. Once you've smelled a creature, person, or substance, you can recognize it again without fail. When you **encounter any scent**, the GM will tell you where and when you last encountered it, or what was most similar.
 
@@ -45,6 +42,12 @@ When you **appear happy and cute**, people's attitudes shift positively, with fr
 
 ### Skittish
 Choose another Irrational Fear.
+
+### Dig
+When you **dig through earth, sand, snow, or loose rubble**, roll+STR. On a 10+, you uncover what's there, open a tunnel through, or burrow to safety. On a 7-9, you do, but choose 1:
+- It takes far longer than you'd hoped
+- You make a mess someone is going to notice
+- You cause something unstable to give way
 
 ## Background
 
@@ -108,7 +111,7 @@ When you **would normally become lost**, you instinctively know the most direct 
 When you **take your Last Breath**, whatever the result, you continue to live and fight normally, until the danger is gone and you can find your way safely back to your allies.
 
 ### Just Whistle
-When you **are separated from your allies**, they simply have to call you and you will appear as if from nowhere. This effect is not supernatural and as long as it is reasonably possible, you are always a call away.
+When you **are separated from your allies**, they simply have to call you and you will appear as if from nowhere. As long as it is reasonably possible, you are always a call away.
 
 ### Chase Down
 When you **pursue a fleeing creature at full sprint**, roll+DEX. On a 10+, you catch them and bring them down before they get far. On a 7-9, you catch them but end up somewhere dangerous or exposed.
@@ -124,6 +127,12 @@ When you **leave to retrieve an unattended object**, you always find something. 
 
 ### Call the Pack
 When you **howl long and loud for help from your canine kin**, roll+CHA. On a 10+ they will come to your aid. On a 7-9 they will come, but will not necessarily only be there to help.
+
+### Bury
+When you **bury an object outdoors**, no one else can find it without your help, and you never forget where you put it. You can always return to the spot.
+
+### Comfort
+When you **stay with an ally while they Make Camp**, curling up against them through the night, they may ignore one of their debilities, fears, or despairs for as long as you stay close to them. If you leave their side, the effect returns.
 
 ## Mastery Moves
 
