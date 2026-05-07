@@ -76,7 +76,7 @@ Choose one for your defenses:
 [3 Weight] [2 Armor] Scale Armor  
 Choose two:  
 [22 Coin]  
-[2 Weight] Healing Potions [2 uses]  
+[2 Weight] 2 Healing Potions [2 uses]  
 [2 Weight] [+1 Armor] Shield  
 [1 Weight] Antitoxin [1 use] and [1 Weight] Dungeon Rations [5 rations] and [1 Weight] Poultices and Herbs [2 uses]
 

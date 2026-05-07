@@ -2182,6 +2182,7 @@ function expandSection(sectionName) {
 		transition: transform 0.1s;
 		transform: translateY(-2px);
 		overflow: visible;
+		margin: 0 -2px;
 		-webkit-user-select: none;
 		user-select: none;
 	}

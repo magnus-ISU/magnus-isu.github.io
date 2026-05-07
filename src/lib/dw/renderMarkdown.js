@@ -175,7 +175,7 @@ export function renderMarkdown(src) {
 				const box =
 					'<path d="M14 16 Q50 11 86 18 Q92 50 86 86 Q50 91 14 84 Q9 50 14 16 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
 				const tick =
-					'<path transform="translate(10 -20)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
+					'<path transform="translate(10 -10)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
 				let out = '<span class="consumable-group">';
 				for (let i = 0; i < max; i++) {
 					const isUsed = i < used;
@@ -199,7 +199,7 @@ export function renderMarkdown(src) {
 					// shine
 					'<ellipse cx="32" cy="46" rx="6" ry="14" fill="#ff9080" opacity="0.6" transform="rotate(-20 32 46)"/>';
 				const checkOverlay =
-					'<path transform="translate(10 -20)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
+					'<path transform="translate(10 -10)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
 				let out = '<span class="consumable-group">';
 				for (let i = 0; i < max; i++) {
 					const isUsed = i < used;

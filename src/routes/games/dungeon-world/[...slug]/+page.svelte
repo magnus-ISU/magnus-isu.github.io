@@ -420,6 +420,7 @@ function onArticleClick(e) {
 		vertical-align: middle;
 		transform: translateY(-2px);
 		overflow: visible;
+		margin: 0 -2px;
 	}
 
 	:global(.dw-article .code-block) {
