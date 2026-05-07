@@ -68,7 +68,7 @@ Choose one for your weapon:
 [1 Weight] Orb of Magical Focus  
 Choose one:  
 [1 Weight] Healing Potion [1 use]  
-[1 Weight] Antitoxin [3 uses]
+[1 Weight] Antitoxin [3 uses]  
 
 ## Stats
 Damage: d4, HP: 4+Constitution, Load: 6+STR

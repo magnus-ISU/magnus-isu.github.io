@@ -44,7 +44,7 @@ Choose your weapon:
 [0 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
 Choose one:  
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] Healing Potion [1 use]
+[1 Weight] Healing Potion [1 use]  
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 8+STR

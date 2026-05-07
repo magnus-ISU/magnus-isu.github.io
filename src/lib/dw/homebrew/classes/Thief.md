@@ -71,7 +71,7 @@ Choose a ranged weapon:
 [2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows (3 ammo)  
 Choose one:  
 [1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Healing Potion [1 use]
+[1 Weight] Healing Potion [1 use]  
 
 ## Stats
 Damage: d8, HP: 6+Constitution, Load: 9+STR

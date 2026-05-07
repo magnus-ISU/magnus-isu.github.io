@@ -63,7 +63,7 @@ Choose one:
 [1 Weight] Adventuring Gear [3 uses]  
 [1 Weight] Bandages [3 uses] and Silk Robes  
 [0 Weight] Ornate Jewelry (valuable)  
-[0 Weight] Looking Glass
+[0 Weight] Looking Glass  
 
 ## Stats
 Damage: d4, HP: 6+Constitution, Load: 5+STR

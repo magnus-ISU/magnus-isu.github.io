@@ -73,7 +73,7 @@ Choose your weapon:
 [1 Weight] Long Sword (close, +1 damage) and [2 Weight] [+1 Armor] Shield  
 Choose one:  
 [1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Dungeon Rations [5 rations] and [1 Weight] Healing Potion [1 use]
+[1 Weight] Dungeon Rations [5 rations] and [1 Weight] Healing Potion [1 use]  
 
 ## Stats
 Damage: d10, HP: 10+Constitution, Load: 12+STR

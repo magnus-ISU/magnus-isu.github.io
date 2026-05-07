@@ -64,7 +64,7 @@ Choose your weapon:
 [2 Weight] Two-Handed Sword (close, +1 damage)  
 Choose one:  
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] [1 Armor] Chainmail
+[1 Weight] [1 Armor] Chainmail  
 
 ## Stats
 Damage: d10, HP: 8+Constitution, Load: 8+STR
