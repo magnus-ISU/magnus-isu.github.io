@@ -83,7 +83,7 @@ Choose one armament:
 [1 Weight] Staff (close, two-handed) and [1 Weight] Bandages [3 uses]  
 Choose one:  
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] Healing Potion [1 use]
+[1 Weight] Healing Potion [1 use]  
 
 ## Stats
 Damage: d6, HP: 8+Constitution, Load: 10+STR

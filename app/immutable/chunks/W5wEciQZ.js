@@ -51,7 +51,7 @@ Choose your backup weapon:
 Choose two:  
 [1 Weight] Adventuring Gear [3 uses] and a map, describe it  
 [1 Weight] Bandages [3 uses] and [9 Coin]  
-A noble steed, describe it
+A noble steed, describe it  
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 7+STR

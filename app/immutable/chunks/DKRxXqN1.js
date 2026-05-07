@@ -75,7 +75,7 @@ Choose your melee weapon:
 [1 Weight] Spear (reach)  
 Choose one:  
 [1 Weight] Bandages [3 uses]  
-[1 Weight] Bundle of Arrows (ammo)
+[1 Weight] Bundle of Arrows (ammo)  
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 11+STR

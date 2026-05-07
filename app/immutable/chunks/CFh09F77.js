@@ -60,7 +60,7 @@ Choose one:
 [1 Weight] Adventuring Gear [3 uses]  
 [1 Weight] Poultices and Herbs [2 uses]  
 [0 Weight] Halfling Pipeleaf [3 uses]  
-[1 Weight] Antitoxin [3 uses]
+[1 Weight] Antitoxin [3 uses]  
 
 ## Stats
 Damage: d6, HP: 6+Constitution, Load: 6+STR

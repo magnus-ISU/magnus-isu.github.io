@@ -50,7 +50,7 @@ You carry no weapons and need no armour but the flames that burn within you. You
 Choose two:  
 [1 Weight] Dungeon Rations [5 rations]  
 [1 Weight] Healing Potion [1 use]  
-[10 Coin]
+[10 Coin]  
 
 ## Stats
 Damage: d8, HP: 4+Constitution, Load: 9+STR
