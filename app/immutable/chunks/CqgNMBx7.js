@@ -1,0 +1,1 @@
+var e=`A Magnus Archive`,t=`Built with the SvelteKit Static Blog Starter`,n=`magnus-isu.github.io`,r=[{title:`Blog`,route:`/blog`},{title:`Games`,route:`/games`}];export{n as i,t as n,e as r,r as t};
