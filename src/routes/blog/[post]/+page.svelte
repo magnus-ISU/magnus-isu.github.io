@@ -1,9 +1,17 @@
 <script>
 let { data } = $props();
 
-const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
-	data.meta;
-const { PostContent } = data;
+const meta = $derived(data.meta);
+const PostContent = $derived(data.PostContent);
+
+const title = $derived(meta.title);
+const excerpt = $derived(meta.excerpt);
+const date = $derived(meta.date);
+const updated = $derived(meta.updated);
+const coverImage = $derived(meta.coverImage);
+const coverWidth = $derived(meta.coverWidth);
+const coverHeight = $derived(meta.coverHeight);
+const categories = $derived(meta.categories);
 </script>
 
 <svelte:head>

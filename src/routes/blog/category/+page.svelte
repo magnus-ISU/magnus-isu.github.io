@@ -1,6 +1,6 @@
 <script>
 let { data } = $props();
-const { uniqueCategories } = data;
+const uniqueCategories = $derived(data.uniqueCategories);
 </script>
 
 

@@ -26,7 +26,7 @@ const config = {
 	},
 
 	preprocess: [
-		vitePreprocess(),
+		vitePreprocess({ script: true }),
 		mdsvex({
 			// The default mdsvex extension is .svx; this overrides that.
 			extensions: ['.md'],

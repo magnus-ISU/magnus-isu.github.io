@@ -5,7 +5,10 @@ import PostsList from '$lib/components/PostsList.svelte';
 
 let { data } = $props();
 
-const { page, posts, category, total } = data;
+const page = $derived(data.page);
+const posts = $derived(data.posts);
+const category = $derived(data.category);
+const total = $derived(data.total);
 </script>
 
 

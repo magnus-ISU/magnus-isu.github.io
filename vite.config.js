@@ -6,7 +6,6 @@ const config = {
 	build: {
 		reportCompressedSize: false,
 	},
-	logLevel: 'warn',
 	server: {
 		fs: {
 			allow: ['.'],

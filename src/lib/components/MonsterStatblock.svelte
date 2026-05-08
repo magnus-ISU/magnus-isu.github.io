@@ -41,6 +41,9 @@ function inlineMd(text) {
 
 const descriptionHtml = $derived(description ? inlineMd(description) : '');
 
+// `expanded` mirrors `open` initially and on prop change, but can also be
+// flipped locally by the globalExpand effect below — so it must be $state, not $derived.
+// svelte-ignore state_referenced_locally
 let expanded = $state(open);
 $effect(() => {
 	expanded = open;
@@ -375,6 +378,7 @@ function handleCopy(e) {
 					<div class="monster-vitals">
 						{#if hp !== null && hpInline}
 							{#each hpIndices as idx}
+								<!-- svelte-ignore a11y_no_static_element_interactions -->
 								<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 									<input
 										class="label-input"
@@ -404,6 +408,7 @@ function handleCopy(e) {
 			{#if hp !== null && !hpInline}
 				<div class="monster-hp-grid">
 					{#each hpIndices as idx}
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
 						<span class="hp-pill hp-draggable" onpointerdown={(e) => { if (!e.target.closest('.label-input')) dcRefs[idx]?.handlePointerDown(e); }}>
 							<input
 								class="label-input"

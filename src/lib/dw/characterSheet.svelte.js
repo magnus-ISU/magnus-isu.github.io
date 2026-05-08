@@ -45,10 +45,7 @@ function saveActive(idx) {
 }
 
 const slots = $state(loadSlots());
-let activeIdx = $state(loadActive());
-
-// Clamp active index
-if (activeIdx >= slots.length) activeIdx = 0;
+let activeIdx = $state(loadActive() >= slots.length ? 0 : loadActive());
 
 export const characterSheet = {
 	get value() {

@@ -1117,7 +1117,7 @@ function expandSection(sectionName) {
 
 {#if pendingDeleteIdx !== null}
 	<div class="modal-backdrop" onclick={cancelDelete} role="presentation">
-		<div class="modal" onpointerdown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+		<div class="modal" onpointerdown={(e) => e.stopPropagation()} role="dialog" aria-modal="true" tabindex="-1">
 			<p>Delete <strong>{tabName(pendingDeleteIdx)}</strong>?</p>
 			<div class="modal-actions">
 				<button class="action-btn primary danger" onclick={confirmDelete}>Delete</button>
@@ -1174,6 +1174,7 @@ function expandSection(sectionName) {
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
 					<div class="header-circles">
 						{#if parsed.exp !== null}
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="circle circle-xs circle-exp circle-draggable" onpointerdown={(e) => expDcRef?.handlePointerDown(e)}>
 								<DraggableCounter bind:this={expDcRef} value={parsed.exp} oncommit={commitExpRaw} inputWidth="1.5rem" class="circle-text" style="font-size: 0.7rem">
 									{#snippet children()}{parsed.exp}{/snippet}
@@ -1230,6 +1231,7 @@ function expandSection(sectionName) {
 						{/if}
 						{#if parsed.hp !== null && maxHp !== null}
 							{@const hpC = hpColor(parsed.hp, maxHp)}
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="circle circle-lg circle-draggable" style="border-color: {hpC}" onpointerdown={(e) => hpDcRef?.handlePointerDown(e)}>
 								<div class="circle-fill" style="height: {hpFillPct}%; background: {hpC}"></div>
 								<DraggableCounter bind:this={hpDcRef} value={parsed.hp} oncommit={commitHpRaw} inputWidth="2.5rem" class="circle-text" style="color: {hpC}">

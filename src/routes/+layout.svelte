@@ -11,7 +11,7 @@ import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
 let { data, children } = $props();
 
 const isDW = (p) => p?.startsWith('/games/dungeon-world');
-let prevPath = $state(data.path);
+let prevPath = $state('');
 $effect(() => {
 	prevPath = data.path;
 });
@@ -24,7 +24,9 @@ const transitionOut = $derived(skipTransition ? { duration: 0 } : { duration: 10
  * Updates the global store with the current path. (Used for highlighting
  * the current page in the nav, but could be useful for other purposes.)
  **/
-currentPage.set(data.path);
+$effect(() => {
+	currentPage.set(data.path);
+});
 
 /**
  * This pre-fetches all top-level routes on the site in the background for faster loading.

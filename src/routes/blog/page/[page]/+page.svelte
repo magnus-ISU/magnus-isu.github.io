@@ -5,7 +5,9 @@ import PostsList from '$lib/components/PostsList.svelte';
 import { postsPerPage, siteDescription } from '$lib/config';
 
 let { data } = $props();
-const { page, totalPosts, posts } = data;
+const page = $derived(data.page);
+const totalPosts = $derived(data.totalPosts);
+const posts = $derived(data.posts);
 
 let lowerBound = $derived(page * postsPerPage - (postsPerPage - 1) || 1);
 let upperBound = $derived(Math.min(page * postsPerPage, totalPosts));
