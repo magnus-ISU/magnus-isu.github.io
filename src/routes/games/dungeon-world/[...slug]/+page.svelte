@@ -214,8 +214,8 @@ function onArticleClick(e) {
 					<MonsterStatblock {...m} />
 				{/each}
 			{/each}
+			<button class="expand-all-btn" onclick={() => globalExpand.toggle()}>{globalExpand.value ? 'Collapse All' : 'Expand All'}</button>
 		{/if}
-		<button class="expand-all-btn" onclick={() => globalExpand.toggle()}>{globalExpand.value ? 'Collapse All' : 'Expand All'}</button>
 	{:else if contentHtml}
 		{@html contentHtml}
 	{:else}
