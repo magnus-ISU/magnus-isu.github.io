@@ -227,8 +227,8 @@ function rollDie(sides) {
 function parseAndRoll(dmg) {
 	if (!dmg || dmg === '??') return null;
 
-	// "3d12 keep lowest 2 +3"
-	const keepLowest = dmg.match(/^(\d+)d(\d+)\s+keep\s+lowest\s+(\d+)\s*([+-]\d+)?/i);
+	// "3d12kl2+3" / "3d12 keep lowest 2 +3"
+	const keepLowest = dmg.match(/^(\d+)d(\d+)\s*(?:kl|keep\s+lowest\s*)(\d+)\s*([+-]\d+)?\s*$/i);
 	if (keepLowest) {
 		const cnt = +keepLowest[1],
 			sides = +keepLowest[2],
@@ -242,8 +242,8 @@ function parseAndRoll(dmg) {
 		return { total, formula, breakdown };
 	}
 
-	// "3d12 keep highest 2 +9"
-	const keepHighest = dmg.match(/^(\d+)d(\d+)\s+keep\s+highest\s+(\d+)\s*([+-]\d+)?/i);
+	// "3d12kh2+9" / "3d12 keep highest 2 +9"
+	const keepHighest = dmg.match(/^(\d+)d(\d+)\s*(?:kh|keep\s+highest\s*)(\d+)\s*([+-]\d+)?\s*$/i);
 	if (keepHighest) {
 		const cnt = +keepHighest[1],
 			sides = +keepHighest[2],
@@ -257,31 +257,37 @@ function parseAndRoll(dmg) {
 		return { total, formula, breakdown };
 	}
 
-	// "NdX+M" / "dX+M" / "dX"
-	const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?/i);
-	if (!m) {
-		// Plain number
-		const n = dmg.match(/^([+-]?\d+)$/);
-		if (!n) return null;
+	// "NdX+M" / "dX+M" / "dX" — anchored so unknown suffixes don't silently truncate
+	const m = dmg.match(/^(\d+)?d(\d+)([+-]\d+)?\s*$/i);
+	if (m) {
+		const cnt = +(m[1] || 1),
+			sides = +m[2],
+			modifier = +(m[3] || 0);
+		const rolls = Array.from({ length: cnt }, () => rollDie(sides));
+		const total = rolls.reduce((a, b) => a + b, 0) + modifier;
+		const formula = `${cnt}d${sides}${modifier ? (modifier > 0 ? ` + ${modifier}` : ` - ${-modifier}`) : ''}`;
+		const breakdown =
+			rolls.join('+') + (modifier ? (modifier > 0 ? `+${modifier}` : `${modifier}`) : '');
+		return { total, formula, breakdown };
+	}
+
+	// Plain number
+	const n = dmg.match(/^\s*([+-]?\d+)\s*$/);
+	if (n) {
 		const total = +n[1];
 		return { total, formula: `${total}`, breakdown: `${total}` };
 	}
-	const cnt = +(m[1] || 1),
-		sides = +m[2],
-		modifier = +(m[3] || 0);
-	const rolls = Array.from({ length: cnt }, () => rollDie(sides));
-	const total = rolls.reduce((a, b) => a + b, 0) + modifier;
-	const formula = `${cnt}d${sides}${modifier ? (modifier > 0 ? ` + ${modifier}` : ` - ${-modifier}`) : ''}`;
-	const breakdown =
-		rolls.join('+') + (modifier ? (modifier > 0 ? `+${modifier}` : `${modifier}`) : '');
-	return { total, formula, breakdown };
+
+	console.warn(`[MonsterStatblock] Unrecognized dice formula: ${JSON.stringify(dmg)}`);
+	return { error: true, total: 'N/A', formula: dmg, breakdown: `unrecognized: ${dmg}` };
 }
 
 function doRoll(dmg, atkIdx) {
 	const result = parseAndRoll(dmg);
 	if (result === null) return;
 	rollKey++;
-	rollResult = { atkIdx, total: result.total };
+	rollResult = { atkIdx, total: result.total, error: result.error };
+	if (result.error) return;
 	diceHistory.add({
 		formula: `${result.formula} ${name}`,
 		breakdown: result.breakdown,
@@ -363,7 +369,7 @@ function handleCopy(e) {
 									<span class="roll-slot">
 										{#key rollKey}
 											{#if rollResult?.atkIdx === i}
-												<span class="roll-inline" onanimationend={() => { rollResult = null; }}>
+												<span class="roll-inline" class:error={rollResult.error} title={rollResult.error ? `Unrecognized dice formula: ${atk.damage}` : ''} onanimationend={() => { rollResult = null; }}>
 													{rollResult.total}
 												</span>
 											{/if}
@@ -684,6 +690,12 @@ function handleCopy(e) {
 		animation: roll-slide-fade 3s ease-out forwards;
 		pointer-events: none;
 		white-space: nowrap;
+	}
+
+	.roll-inline.error {
+		font-style: italic;
+		text-decoration: underline dotted;
+		pointer-events: auto;
 	}
 
 	.attack-damage {

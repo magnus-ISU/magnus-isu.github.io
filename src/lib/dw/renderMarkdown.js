@@ -87,7 +87,8 @@ export function renderMarkdown(src) {
 				const stripped = hasBreak ? l.replace(/ {2,}$/, '') : hasBackslash ? l.slice(0, -1) : l;
 				let rendered = inline(stripped);
 
-				if (/^\[/.test(l.trim())) {
+				const hasConsumable = /\[\d+(?:\/\d+)?\s+(?:uses?|rations?)\]/i.test(l);
+				if (/^\[/.test(l.trim()) || hasConsumable) {
 					const afterCoin = l
 						.trim()
 						.replace(/^\[\d+\s*Coin\]\s*/, '')
