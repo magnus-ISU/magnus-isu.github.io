@@ -21,7 +21,7 @@ You and the person you touch while casting this spell will be treated as friends
 ### Bendbark
 For a moment, you control a living tree, bending it temporarily or permanently into a shape you desire like a stair or hollow, or wielding it as a weapon with fast-swinging branches. The closer you are to the tree, the more precise control you have. If this spell deals damage, it deals 2d4.
 ### Feather fall
-You and all those you can see drift slowly to the ground.
+You and all those you can see drift slowly down, just above the ground. Concentration
 ### Trailsense
 Touch the ground. For the rest of the day, you and your companions cannot become lost in natural terrain — the path reveals itself through bent branches, parting undergrowth, and birdsong.
 
