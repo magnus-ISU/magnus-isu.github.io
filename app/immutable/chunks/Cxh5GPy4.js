@@ -1,1 +1,0 @@
-import{vt as e}from"./Bgl5u5va.js";e();
