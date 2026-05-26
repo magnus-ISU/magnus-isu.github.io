@@ -1,0 +1,1 @@
+import{t as e}from"../chunks/BIf2HLkM.js";import{n as t}from"../chunks/BWyKLRzI.js";import{n}from"../chunks/CHjbGG90.js";var r=e({load:()=>i}),i=()=>{t(307,`/games/dungeon-world/${n}`)};export{r as universal};
