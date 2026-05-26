@@ -23,6 +23,10 @@ let dragContext = $state(null);
 let hoverTarget = $state(null);
 let isSwappingColumns = $state(null);
 let dragPreview = $state(null);
+let armed = $state(null);
+let gesture = null;
+const LONG_PRESS_MS = 350;
+const MOVE_THRESHOLD = 8;
 
 function getUnitConfig(typeUnit) {
 	const unit = versionConfig.unitStats.find((u) => u.name === typeUnit);
@@ -151,76 +155,20 @@ function handleShipUnit(id, team) {
 	);
 }
 
-// Drag and drop
-function handleDragStart(e, team, index) {
-	dragContext = { team, index };
-	e.dataTransfer.effectAllowed = 'move';
-	const target = e.currentTarget;
-	target.classList.add('dragging');
-	const rect = target.getBoundingClientRect();
-	const clickOffsetX = e.clientX - rect.left;
-	const clickOffsetY = e.clientY - rect.top;
-	const ghost = document.createElement('div');
-	ghost.style.width = `${rect.width}px`;
-	ghost.style.height = `${rect.height}px`;
-	ghost.style.opacity = '0';
-	document.body.appendChild(ghost);
-	e.dataTransfer.setDragImage(ghost, clickOffsetX, clickOffsetY);
-	setTimeout(() => document.body.removeChild(ghost), 0);
-	dragPreview = {
-		team,
-		index,
-		clientX: e.clientX,
-		clientY: e.clientY,
-		clickOffsetX,
-		clickOffsetY,
-		width: rect.width,
-		height: rect.height,
-	};
-}
-
-function handleDrag(e) {
-	if (!dragContext || !dragPreview) return;
-	dragPreview = { ...dragPreview, clientX: e.clientX, clientY: e.clientY };
-}
-
-function handleDragOver(e) {
-	e.preventDefault();
-	e.dataTransfer.dropEffect = 'move';
-	if (dragContext && dragPreview) {
-		dragPreview = { ...dragPreview, clientX: e.clientX, clientY: e.clientY };
-	}
-}
-
-function handleDragEnd(e) {
-	e.currentTarget.classList.remove('dragging');
-	isSwappingColumns = null;
-	hoverTarget = null;
-	dragPreview = null;
-	dragContext = null;
-}
-
 function moveWithin(list, fromIdx, toIdx) {
 	const next = [...list];
 	const [moved] = next.splice(fromIdx, 1);
-	next.splice(toIdx, 0, moved);
+	const safeIdx = Math.min(toIdx, next.length);
+	next.splice(safeIdx, 0, moved);
 	return next.map((u, i) => ({ ...u, id: i }));
 }
 
-function handleDrop(e, targetTeam, targetIndex) {
-	e.preventDefault();
-	if (!dragContext) return;
-	const { team: sourceTeam, index: sourceIndex } = dragContext;
-	dragContext = null;
-	hoverTarget = null;
-	dragPreview = null;
-
+function applyDrop(sourceTeam, sourceIndex, targetTeam, targetIndex) {
 	if (sourceTeam === targetTeam) {
 		if (targetTeam === 'Attackers') attackers = moveWithin(attackers, sourceIndex, targetIndex);
 		else defenders = moveWithin(defenders, sourceIndex, targetIndex);
 		return;
 	}
-
 	isSwappingColumns = targetTeam === 'Attackers' ? 'toAttackers' : 'toDefenders';
 	const oldA = attackers;
 	const oldD = defenders;
@@ -229,6 +177,182 @@ function handleDrop(e, targetTeam, targetIndex) {
 		defenders = oldA.map((u, i) => ({ ...u, id: i, team: 'Defenders' }));
 		setTimeout(() => (isSwappingColumns = null), 180);
 	}, 80);
+}
+
+function findDropTargetAt(x, y) {
+	const el = document.elementFromPoint(x, y);
+	const target = el?.closest?.('[data-droptarget]');
+	if (!target) return null;
+	const team = target.dataset.team;
+	const indexAttr = target.dataset.index;
+	const length = team === 'Attackers' ? attackers.length : defenders.length;
+	const index = indexAttr === 'end' ? length : parseInt(indexAttr, 10);
+	return { team, index };
+}
+
+function isInteractive(el) {
+	return el && !!el.closest?.('button, input, select, textarea, label, a, [contenteditable="true"]');
+}
+
+function beginPickup(card, pointerId, team, index, rect, startX, startY, clientX, clientY) {
+	dragContext = { team, index };
+	hoverTarget = { team, index };
+	dragPreview = {
+		team,
+		index,
+		clientX,
+		clientY,
+		clickOffsetX: startX - rect.left,
+		clickOffsetY: startY - rect.top,
+		width: rect.width,
+		height: rect.height,
+	};
+	try {
+		card?.setPointerCapture?.(pointerId);
+	} catch {}
+}
+
+function clearGesture() {
+	if (gesture?.timer) clearTimeout(gesture.timer);
+	gesture = null;
+}
+
+function endDragState() {
+	dragContext = null;
+	hoverTarget = null;
+	dragPreview = null;
+}
+
+function handlePointerDown(e, team, index) {
+	if (e.button !== undefined && e.button !== 0) return;
+	const onInteractive = isInteractive(e.target);
+
+	// Armed state: a previous long-press is waiting. This tap completes the move (or cancels).
+	if (armed) {
+		const src = armed;
+		armed = null;
+		if (src.team === team && src.index === index) return; // tap on same card cancels
+		if (onInteractive) return; // let the child handle its click; just cancel armed
+		applyDrop(src.team, src.index, team, index);
+		return;
+	}
+
+	if (onInteractive) return;
+
+	const card = e.currentTarget;
+	const rect = card.getBoundingClientRect();
+	const pointerId = e.pointerId;
+	const pointerType = e.pointerType;
+	const startX = e.clientX;
+	const startY = e.clientY;
+	clearGesture();
+	const g = {
+		team,
+		index,
+		rect,
+		startX,
+		startY,
+		pointerId,
+		pointerType,
+		card,
+		moved: false,
+		timer: null,
+	};
+	g.timer = setTimeout(() => {
+		if (gesture !== g) return;
+		beginPickup(card, pointerId, team, index, rect, startX, startY, startX, startY);
+	}, LONG_PRESS_MS);
+	gesture = g;
+}
+
+function handlePointerMove(e) {
+	if (!gesture || gesture.pointerId !== e.pointerId) return;
+	const dx = e.clientX - gesture.startX;
+	const dy = e.clientY - gesture.startY;
+	const dist = Math.hypot(dx, dy);
+
+	if (!dragContext) {
+		if (dist > MOVE_THRESHOLD) {
+			if (gesture.pointerType === 'mouse' || gesture.pointerType === 'pen') {
+				clearTimeout(gesture.timer);
+				gesture.timer = null;
+				beginPickup(
+					gesture.card,
+					gesture.pointerId,
+					gesture.team,
+					gesture.index,
+					gesture.rect,
+					gesture.startX,
+					gesture.startY,
+					e.clientX,
+					e.clientY,
+				);
+				gesture.moved = true;
+			} else {
+				// touch with movement = scroll; abandon
+				clearGesture();
+			}
+		}
+		return;
+	}
+
+	// In drag state — update preview and hover target
+	gesture.moved = gesture.moved || dist > MOVE_THRESHOLD;
+	dragPreview = { ...dragPreview, clientX: e.clientX, clientY: e.clientY };
+	hoverTarget = findDropTargetAt(e.clientX, e.clientY);
+	if (e.cancelable) e.preventDefault();
+}
+
+function handlePointerUp(e) {
+	if (!gesture || gesture.pointerId !== e.pointerId) {
+		// stray pointerup (e.g., after a pointer was captured elsewhere)
+		return;
+	}
+	const wasPickedUp = !!dragContext;
+	const moved = gesture.moved;
+	const lastX = e.clientX;
+	const lastY = e.clientY;
+	clearGesture();
+
+	if (!wasPickedUp) {
+		// Just a tap/click — let child handlers do their thing.
+		return;
+	}
+
+	if (moved) {
+		const target = findDropTargetAt(lastX, lastY) ?? hoverTarget;
+		if (target && dragContext) {
+			applyDrop(dragContext.team, dragContext.index, target.team, target.index);
+		}
+		endDragState();
+	} else {
+		// Long-press release without drag → enter armed mode
+		armed = dragContext;
+		endDragState();
+	}
+}
+
+function handlePointerCancel(e) {
+	if (gesture && gesture.pointerId === e.pointerId) clearGesture();
+	endDragState();
+}
+
+function handleBackgroundPointerDown(e) {
+	if (!armed) return;
+	const target = e.target.closest?.('[data-droptarget]');
+	if (!target) {
+		armed = null;
+		return;
+	}
+	// End-zone targets have no card-level pointerdown handler — finish the drop here.
+	if (target.dataset.index === 'end') {
+		const team = target.dataset.team;
+		const length = team === 'Attackers' ? attackers.length : defenders.length;
+		const src = armed;
+		armed = null;
+		applyDrop(src.team, src.index, team, length);
+	}
+	// Real cards have their own onpointerdown that already processed `armed`.
 }
 
 const computed = $derived(simulateAndScore(attackers, defenders, versionConfig));
@@ -284,6 +408,8 @@ $effect(() => {
 	<title>Polytopia Damage Calculator</title>
 </svelte:head>
 
+<svelte:window onpointerdown={handleBackgroundPointerDown} />
+
 <div class="page">
 	<div class="pickers">
 		<UnitPicker
@@ -298,23 +424,23 @@ $effect(() => {
 		<div class="column {isSwappingColumns === 'toDefenders' ? 'swap-out-left' : ''}">
 			{#each attackersAsRender as unit, idx (`attacker-${unit.id}-${unit.typeUnit}`)}
 				<CardWithShadow
-					draggable={true}
-					ondragstart={(e) => handleDragStart(e, 'Attackers', idx)}
-					ondrag={handleDrag}
-					ondragover={(e) => {
-						handleDragOver(e);
-						hoverTarget = { team: 'Attackers', index: idx };
-					}}
-					ondrop={(e) => handleDrop(e, 'Attackers', idx)}
-					ondragend={handleDragEnd}
+					data-droptarget=""
+					data-team="Attackers"
+					data-index={idx}
+					onpointerdown={(e) => handlePointerDown(e, 'Attackers', idx)}
+					onpointermove={handlePointerMove}
+					onpointerup={handlePointerUp}
+					onpointercancel={handlePointerCancel}
 					class={`dnd-card ${
-						hoverTarget && hoverTarget.team === 'Attackers' && hoverTarget.index === idx
+						dragContext && hoverTarget?.team === 'Attackers' && hoverTarget?.index === idx
 							? 'dnd-drop-target'
 							: ''
 					} ${
-						dragContext && dragContext.team === 'Attackers' && dragContext.index === idx
+						dragContext?.team === 'Attackers' && dragContext?.index === idx
 							? 'being-dragged'
 							: ''
+					} ${
+						armed?.team === 'Attackers' && armed?.index === idx ? 'armed' : ''
 					}`}
 				>
 					<SoldierUnitAsRender
@@ -337,9 +463,10 @@ $effect(() => {
 				</CardWithShadow>
 			{/each}
 			<CardWithShadow
-				style="padding:4px; min-height:8px; opacity:0.2;"
-				ondragover={handleDragOver}
-				ondrop={(e) => handleDrop(e, 'Attackers', attackers.length)}
+				style="padding:4px; min-height:24px; opacity:0.4;"
+				data-droptarget=""
+				data-team="Attackers"
+				data-index="end"
 			>
 				<span></span>
 			</CardWithShadow>
@@ -348,23 +475,23 @@ $effect(() => {
 		<div class="column {isSwappingColumns === 'toAttackers' ? 'swap-out-right' : ''}">
 			{#each defendersAsRender as unit, idx (`defender-${unit.id}-${unit.typeUnit}`)}
 				<CardWithShadow
-					draggable={true}
-					ondragstart={(e) => handleDragStart(e, 'Defenders', idx)}
-					ondrag={handleDrag}
-					ondragover={(e) => {
-						handleDragOver(e);
-						hoverTarget = { team: 'Defenders', index: idx };
-					}}
-					ondrop={(e) => handleDrop(e, 'Defenders', idx)}
-					ondragend={handleDragEnd}
+					data-droptarget=""
+					data-team="Defenders"
+					data-index={idx}
+					onpointerdown={(e) => handlePointerDown(e, 'Defenders', idx)}
+					onpointermove={handlePointerMove}
+					onpointerup={handlePointerUp}
+					onpointercancel={handlePointerCancel}
 					class={`dnd-card ${
-						hoverTarget && hoverTarget.team === 'Defenders' && hoverTarget.index === idx
+						dragContext && hoverTarget?.team === 'Defenders' && hoverTarget?.index === idx
 							? 'dnd-drop-target'
 							: ''
 					} ${
-						dragContext && dragContext.team === 'Defenders' && dragContext.index === idx
+						dragContext?.team === 'Defenders' && dragContext?.index === idx
 							? 'being-dragged'
 							: ''
+					} ${
+						armed?.team === 'Defenders' && armed?.index === idx ? 'armed' : ''
 					}`}
 				>
 					<SoldierUnitAsRender
@@ -387,9 +514,10 @@ $effect(() => {
 				</CardWithShadow>
 			{/each}
 			<CardWithShadow
-				style="padding:4px; min-height:8px; opacity:0.2;"
-				ondragover={handleDragOver}
-				ondrop={(e) => handleDrop(e, 'Defenders', defenders.length)}
+				style="padding:4px; min-height:24px; opacity:0.4;"
+				data-droptarget=""
+				data-team="Defenders"
+				data-index="end"
 			>
 				<span></span>
 			</CardWithShadow>
@@ -502,10 +630,11 @@ $effect(() => {
 	z-index: 9999;
 }
 :global(.dnd-card) {
-	transition: transform 180ms ease, box-shadow 180ms ease;
-}
-:global(.dnd-card.dragging) {
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+	transition: transform 180ms ease, box-shadow 180ms ease, outline-color 120ms ease;
+	touch-action: none;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 :global(.dnd-card.dnd-drop-target) {
 	outline: 2px solid #4488ff;
@@ -513,6 +642,15 @@ $effect(() => {
 }
 :global(.dnd-card.being-dragged) {
 	opacity: 0;
+}
+:global(.dnd-card.armed) {
+	outline: 2px dashed #ffb74d;
+	outline-offset: -2px;
+	animation: armed-pulse 1.2s ease-in-out infinite;
+}
+@keyframes armed-pulse {
+	0%, 100% { box-shadow: 0 0 0 0 rgba(255, 183, 77, 0.0); }
+	50%      { box-shadow: 0 0 0 6px rgba(255, 183, 77, 0.25); }
 }
 :global(input[type='text']::-webkit-outer-spin-button),
 :global(input[type='text']::-webkit-inner-spin-button) {

@@ -1,28 +1,8 @@
 <script>
-let {
-	children,
-	style = '',
-	draggable = false,
-	ondragstart,
-	ondrag,
-	ondragover,
-	ondrop,
-	ondragend,
-	class: className = '',
-} = $props();
+let { children, style = '', class: className = '', ...rest } = $props();
 </script>
 
-<div
-	class="card-with-shadow {className}"
-	{style}
-	{draggable}
-	ondragstart={ondragstart}
-	ondrag={ondrag}
-	ondragover={ondragover}
-	ondrop={ondrop}
-	ondragend={ondragend}
-	role="presentation"
->
+<div class="card-with-shadow {className}" {style} role="presentation" {...rest}>
 	{@render children?.()}
 </div>
 
