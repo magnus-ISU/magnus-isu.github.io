@@ -3,6 +3,7 @@ import { displayIcon } from '../unitImages.js';
 
 let {
 	unit,
+	versionConfig,
 	onDelete,
 	onUpdateHitpoints,
 	onIncreaseHitpoints,
@@ -141,7 +142,7 @@ function onKeyDown(e) {
 			>{unit.safeBonus ? 'SAFE' : 'safe'}</button>
 		{/if}
 
-		{#if isAttacker}
+		{#if isAttacker && versionConfig?.shamanBuffScheme === 'BOOST'}
 			<button
 				class="bonus-btn"
 				class:on={unit.boostedBonus}

@@ -100,18 +100,19 @@ function handleDelete(id, team) {
 
 function toggleBonus(id, team, which) {
 	if (team === 'Defenders') {
+		const isOldPoison = versionConfig?.poisonScheme === 'OLD';
 		defenders = defenders.map((u) => {
 			if (u.id !== id) return u;
 			const updated = { ...u, [which]: !u[which] };
 			if (which === 'defenceBonus' && updated.defenceBonus) {
 				updated.wallBonus = false;
-				updated.poisonedBonus = false;
+				if (isOldPoison) updated.poisonedBonus = false;
 			}
 			if (which === 'wallBonus' && updated.wallBonus) {
 				updated.defenceBonus = false;
-				updated.poisonedBonus = false;
+				if (isOldPoison) updated.poisonedBonus = false;
 			}
-			if (which === 'poisonedBonus' && updated.poisonedBonus) {
+			if (which === 'poisonedBonus' && updated.poisonedBonus && isOldPoison) {
 				updated.wallBonus = false;
 				updated.defenceBonus = false;
 			}
@@ -231,7 +232,7 @@ function handleDrop(e, targetTeam, targetIndex) {
 	}, 80);
 }
 
-function healthAfterCalculation(att, def) {
+function healthAfterCalculation(att, def, cfg) {
 	const attList = att.map((u) => ({ ...u, healthAfter: u.healthBefore }));
 	const defList = def.map((u) => ({ ...u, healthAfter: u.healthBefore, becamePoisonedBonus: u.becamePoisonedBonus }));
 
@@ -251,14 +252,14 @@ function healthAfterCalculation(att, def) {
 		const attackerAttack = attacker.config.attack + (attacker.boostedBonus ? 0.5 : 0);
 		const attackForce = calculateAttackForce(attackerAttack, attacker.healthBefore, attacker.healthMax);
 
-		const defenderDefenseBonus =
-			defender.poisonedBonus || defender.becamePoisonedBonus
-				? 0.7
-				: defender.wallBonus
-					? 4
-					: defender.defenceBonus
-						? 1.5
-						: 1;
+		let defenderDefenseBonus = defender.wallBonus ? 4 : defender.defenceBonus ? 1.5 : 1;
+		if (defender.poisonedBonus || defender.becamePoisonedBonus) {
+			if (cfg?.poisonScheme === 'OLD') {
+				defenderDefenseBonus = 0.7;
+			} else {
+				defenderDefenseBonus = defenderDefenseBonus * 0.5;
+			}
+		}
 
 		const defenseForce = calculateDefenceForce(
 			defender.config.defence,
@@ -269,13 +270,16 @@ function healthAfterCalculation(att, def) {
 		const totalDamage = calculateTotalDamage(attackForce, defenseForce);
 
 		let attackResult = 0;
-		if (attacker.explodeDamage || attacker.typeUnit === 'Segment') {
+		const isSplash =
+			attacker.explodeDamage ||
+			attacker.typeUnit === 'Segment' ||
+			(attacker.splashDamage &&
+				(attacker.config.skills.includes('splash') || attacker.config.skills.includes('stomp')));
+		if (isSplash) {
 			attackResult = calculateAttackSplash(attackForce, totalDamage, attackerAttack);
-		} else if (
-			attacker.splashDamage &&
-			(attacker.config.skills.includes('splash') || attacker.config.skills.includes('stomp'))
-		) {
-			attackResult = calculateAttackSplash(attackForce, totalDamage, attackerAttack);
+			if (cfg?.splashScheme === 'FLOOR') {
+				attackResult = Math.floor(attackResult);
+			}
 		} else {
 			attackResult = calculateAttackResult(attackForce, totalDamage, attackerAttack);
 		}
@@ -313,7 +317,7 @@ function healthAfterCalculation(att, def) {
 	return { attList, defList };
 }
 
-const computed = $derived(healthAfterCalculation(attackers, defenders));
+const computed = $derived(healthAfterCalculation(attackers, defenders, versionConfig));
 const attackersAsRender = $derived(computed.attList);
 const defendersAsRender = $derived(computed.defList);
 </script>
@@ -355,6 +359,7 @@ const defendersAsRender = $derived(computed.defList);
 				>
 					<SoldierUnitAsRender
 						{unit}
+						{versionConfig}
 						onDelete={handleDelete}
 						onUpdateHitpoints={handleUpdateHitpoints}
 						onIncreaseHitpoints={handleIncreaseHitpoints}
@@ -404,6 +409,7 @@ const defendersAsRender = $derived(computed.defList);
 				>
 					<SoldierUnitAsRender
 						{unit}
+						{versionConfig}
 						onDelete={handleDelete}
 						onUpdateHitpoints={handleUpdateHitpoints}
 						onIncreaseHitpoints={handleIncreaseHitpoints}
@@ -440,6 +446,7 @@ const defendersAsRender = $derived(computed.defList);
 				<CardWithShadow style={`width:${dragPreview.width}px; height:${dragPreview.height}px;`}>
 					<SoldierUnitAsRender
 						unit={previewUnit}
+						{versionConfig}
 						onDelete={() => {}}
 						onUpdateHitpoints={() => {}}
 						onIncreaseHitpoints={() => {}}

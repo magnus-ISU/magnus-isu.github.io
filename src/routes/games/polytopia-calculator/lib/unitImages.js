@@ -45,6 +45,12 @@ import ScoutAtt from './img/Attackers/Scout.png';
 import RammerAtt from './img/Attackers/Rammer.png';
 import BomberAtt from './img/Attackers/Bomber.png';
 import JuggernautAtt from './img/Attackers/Juggernaut.png';
+import BoomchiAtt from './img/Attackers/Boomchi.png';
+import LivingIslandAtt from './img/Attackers/Living Island.png';
+import InsectEggAtt from './img/Attackers/Insect Egg.png';
+import LarvaAtt from './img/Attackers/Larva.png';
+import MothAtt from './img/Attackers/Moth.png';
+import MantisAtt from './img/Attackers/Mantis.png';
 
 import WarriorDef from './img/Defenders/Warrior.png';
 import ArcherDef from './img/Defenders/Archer.png';
@@ -93,6 +99,12 @@ import ScoutDef from './img/Defenders/Scout.png';
 import RammerDef from './img/Defenders/Rammer.png';
 import BomberDef from './img/Defenders/Bomber.png';
 import JuggernautDef from './img/Defenders/Juggernaut.png';
+import BoomchiDef from './img/Defenders/Boomchi.png';
+import LivingIslandDef from './img/Defenders/Living Island.png';
+import InsectEggDef from './img/Defenders/Insect Egg.png';
+import LarvaDef from './img/Defenders/Larva.png';
+import MothDef from './img/Defenders/Moth.png';
+import MantisDef from './img/Defenders/Mantis.png';
 
 import SmallSwords from './img/Other/SmallSwords.png';
 
@@ -147,6 +159,12 @@ export const unitImages = {
 		Rammer: RammerAtt,
 		Bomber: BomberAtt,
 		Juggernaut: JuggernautAtt,
+		Boomchi: BoomchiAtt,
+		LivingIsland: LivingIslandAtt,
+		InsectEgg: InsectEggAtt,
+		Larva: LarvaAtt,
+		Moth: MothAtt,
+		Mantis: MantisAtt,
 	},
 	Defenders: {
 		Warrior: WarriorDef,
@@ -196,6 +214,12 @@ export const unitImages = {
 		Rammer: RammerDef,
 		Bomber: BomberDef,
 		Juggernaut: JuggernautDef,
+		Boomchi: BoomchiDef,
+		LivingIsland: LivingIslandDef,
+		InsectEgg: InsectEggDef,
+		Larva: LarvaDef,
+		Moth: MothDef,
+		Mantis: MantisDef,
 	},
 };
 
@@ -245,20 +269,20 @@ export const attackerPages = [
 		{ name: 'Kiton' },
 		{ name: 'Phychi' },
 		{ name: 'Raychi' },
-		{ name: 'Shaman' },
-		{ name: 'Exida' },
+		{ name: 'Boomchi' },
+		{ name: 'LivingIsland' },
 	],
 	[
+		{ name: 'Shaman' },
+		{ name: 'Exida' },
 		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Segment' },
-		{ name: 'Segment' },
-		{ name: 'Segment' },
-		{ name: 'Segment' },
 		{ name: 'Centipede' },
+		{ name: 'Segment' },
+		{ name: 'InsectEgg' },
+		{ name: 'Larva' },
+		{ name: 'Moth' },
+		{ name: 'Moth' },
+		{ name: 'Moth' },
 	],
 ];
 
@@ -308,20 +332,20 @@ export const defenderPages = [
 		{ name: 'Kiton' },
 		{ name: 'Phychi' },
 		{ name: 'Raychi' },
-		{ name: 'Shaman' },
-		{ name: 'Exida' },
+		{ name: 'Boomchi' },
+		{ name: 'LivingIsland' },
 	],
 	[
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
-		{ name: 'Doomux' },
+		{ name: 'Shaman' },
+		{ name: 'Exida' },
 		{ name: 'Doomux' },
 		{ name: 'Centipede' },
 		{ name: 'Segment' },
-		{ name: 'Segment' },
-		{ name: 'Segment' },
-		{ name: 'Segment' },
+		{ name: 'InsectEgg' },
+		{ name: 'Larva' },
+		{ name: 'Moth' },
+		{ name: 'Moth' },
+		{ name: 'Moth' },
 	],
 ];
 

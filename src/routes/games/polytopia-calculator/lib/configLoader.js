@@ -10,4 +10,4 @@ export async function loadAllConfigs() {
 	return configs;
 }
 
-export const LATEST_VERSION = '108';
+export const LATEST_VERSION = '116';

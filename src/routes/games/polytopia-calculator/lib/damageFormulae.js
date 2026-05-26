@@ -1,3 +1,7 @@
+function safeRound(value) {
+	return Math.round(value + 1e-10);
+}
+
 export function calculateAttackForce(attack, health, maxHealth) {
 	return attack * (health / maxHealth);
 }
@@ -11,7 +15,7 @@ export function calculateTotalDamage(attackForce, defenseForce) {
 }
 
 export function calculateAttackResult(attackForce, totalDamage, attack) {
-	return Math.round((attackForce / totalDamage) * attack * 4.5);
+	return safeRound((attackForce / totalDamage) * attack * 4.5);
 }
 
 export function calculateAttackSplash(attackForce, totalDamage, attack) {
@@ -19,5 +23,5 @@ export function calculateAttackSplash(attackForce, totalDamage, attack) {
 }
 
 export function calculateDefenseResult(defenseForce, totalDamage, defense) {
-	return Math.round((defenseForce / totalDamage) * defense * 4.5);
+	return safeRound((defenseForce / totalDamage) * defense * 4.5);
 }

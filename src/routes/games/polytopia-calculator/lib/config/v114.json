@@ -1,7 +1,7 @@
 {
-    "version": "105",
-    "buildVersion": "2.10.1",
-    "title": "Aquarion Rework",
+    "version": "114",
+    "buildVersion": "2.14.0",
+    "title": "2025 Balance Pass",
     "poisonScheme": "OLD",
     "shamanBuffScheme": "BOOST",
     "splashScheme": "HALF",
@@ -170,7 +170,7 @@
             "name": "Shark",
             "movementAbility": "water",
             "maxHealth": 10,
-            "attack": 3,
+            "attack": 3.5,
             "defence": 2,
             "skills": ["surprise"]
         },
@@ -195,7 +195,7 @@
             "movementAbility": "amphibious",
             "maxHealth": 40,
             "attack": 4,
-            "defence": 5,
+            "defence": 4,
             "skills": ["static"]
         },
         {
@@ -242,7 +242,7 @@
             "name": "IceArcher",
             "movementAbility": "land",
             "maxHealth": 10,
-            "attack": 0.1,
+            "attack": 1,
             "defence": 1,
             "skills": ["freeze", "fortify", "stiff"]
         },
@@ -260,7 +260,7 @@
             "maxHealth": 20,
             "attack": 4,
             "defence": 3,
-            "skills": []
+            "skills": ["static"]
         },
         {
             "name": "Gaami",
