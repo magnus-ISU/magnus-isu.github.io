@@ -40,7 +40,7 @@ function onKeyDown(e) {
 }
 </script>
 
-<div class="soldier-unit">
+<div class="soldier-unit" class:unused={unit.wasUsed === false}>
 	<div class="row top">
 		<div class="left">
 			<img
@@ -157,6 +157,9 @@ function onKeyDown(e) {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
+}
+.soldier-unit.unused {
+	opacity: 0.5;
 }
 .row {
 	display: flex;

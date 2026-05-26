@@ -1,16 +1,18 @@
 <script>
+import { onMount } from 'svelte';
 import { LATEST_VERSION } from './lib/configLoader.js';
 import UnitPicker from './lib/components/UnitPicker.svelte';
 import SoldierUnitAsRender from './lib/components/SoldierUnitAsRender.svelte';
 import CardWithShadow from './lib/components/CardWithShadow.svelte';
-import {
-	calculateAttackForce,
-	calculateAttackResult,
-	calculateAttackSplash,
-	calculateDefenceForce,
-	calculateDefenseResult,
-	calculateTotalDamage,
-} from './lib/damageFormulae.js';
+import { simulateAndScore, findBestOrder } from './lib/optimize.js';
+import { decodeTeam, encodeStateToParams } from './lib/urlState.js';
+import OptimizeWorker from './lib/optimizeWorker.js?worker';
+
+const PERM_CHEAP_THRESHOLD = 7;
+let mounted = $state(false);
+let optimizing = $state(false);
+let progress = $state(0);
+let worker = null;
 
 let { data } = $props();
 const versionConfigs = $derived(data.versionConfigs);
@@ -232,94 +234,99 @@ function handleDrop(e, targetTeam, targetIndex) {
 	}, 80);
 }
 
-function healthAfterCalculation(att, def, cfg) {
-	const attList = att.map((u) => ({ ...u, healthAfter: u.healthBefore }));
-	const defList = def.map((u) => ({ ...u, healthAfter: u.healthBefore, becamePoisonedBonus: u.becamePoisonedBonus }));
-
-	let idxDefPos = 0;
-	let totalAttackResult = 0;
-	let defenderRepeatedAttack = 0;
-
-	attList.forEach((attacker) => {
-		const defender = defList[idxDefPos];
-		if (!defender) return;
-
-		if (defenderRepeatedAttack === 0) {
-			defender.becamePoisonedBonus = false;
-		}
-		defenderRepeatedAttack++;
-
-		const attackerAttack = attacker.config.attack + (attacker.boostedBonus ? 0.5 : 0);
-		const attackForce = calculateAttackForce(attackerAttack, attacker.healthBefore, attacker.healthMax);
-
-		let defenderDefenseBonus = defender.wallBonus ? 4 : defender.defenceBonus ? 1.5 : 1;
-		if (defender.poisonedBonus || defender.becamePoisonedBonus) {
-			if (cfg?.poisonScheme === 'OLD') {
-				defenderDefenseBonus = 0.7;
-			} else {
-				defenderDefenseBonus = defenderDefenseBonus * 0.5;
-			}
-		}
-
-		const defenseForce = calculateDefenceForce(
-			defender.config.defence,
-			defender.healthAfter,
-			defender.healthMax,
-			defenderDefenseBonus
-		);
-		const totalDamage = calculateTotalDamage(attackForce, defenseForce);
-
-		let attackResult = 0;
-		const isSplash =
-			attacker.explodeDamage ||
-			attacker.typeUnit === 'Segment' ||
-			(attacker.splashDamage &&
-				(attacker.config.skills.includes('splash') || attacker.config.skills.includes('stomp')));
-		if (isSplash) {
-			attackResult = calculateAttackSplash(attackForce, totalDamage, attackerAttack);
-			if (cfg?.splashScheme === 'FLOOR') {
-				attackResult = Math.floor(attackResult);
-			}
-		} else {
-			attackResult = calculateAttackResult(attackForce, totalDamage, attackerAttack);
-		}
-
-		totalAttackResult += attackResult;
-		defender.healthAfter = defender.healthBefore - totalAttackResult;
-
-		if (defender.healthAfter > 0) {
-			const defenceResult = calculateDefenseResult(defenseForce, totalDamage, defender.config.defence);
-
-			if (
-				attacker.config.skills.includes('poison') ||
-				attacker.typeUnit === 'Segment' ||
-				attacker.explodeDamage
-			) {
-				defender.becamePoisonedBonus = true;
-			}
-
-			if (
-				!attacker.config.skills.includes('surprise') &&
-				!defender.config.skills.includes('stiff') &&
-				!attacker.safeBonus
-			) {
-				attacker.healthAfter = attacker.healthBefore - defenceResult;
-			} else if (attacker.explodeDamage || attacker.typeUnit === 'Segment') {
-				attacker.healthAfter = 0;
-			}
-		} else {
-			idxDefPos++;
-			totalAttackResult = 0;
-			defenderRepeatedAttack = 0;
-		}
-	});
-
-	return { attList, defList };
-}
-
-const computed = $derived(healthAfterCalculation(attackers, defenders, versionConfig));
+const computed = $derived(simulateAndScore(attackers, defenders, versionConfig));
 const attackersAsRender = $derived(computed.attList);
 const defendersAsRender = $derived(computed.defList);
+
+const canCheckOptimal = $derived(attackers.length >= 2 && attackers.length <= PERM_CHEAP_THRESHOLD);
+const bestForCurrent = $derived(canCheckOptimal ? findBestOrder(attackers, defenders, versionConfig) : null);
+const isSuboptimal = $derived(canCheckOptimal && bestForCurrent && bestForCurrent.score > computed.score);
+const showOptimizeButton = $derived(
+	attackers.length >= 2 && (isSuboptimal || attackers.length > PERM_CHEAP_THRESHOLD)
+);
+
+function cancelOptimization() {
+	if (worker) {
+		worker.terminate();
+		worker = null;
+	}
+	if (optimizing) {
+		optimizing = false;
+		progress = 0;
+	}
+}
+
+function handleOptimizeOrder() {
+	if (bestForCurrent) {
+		attackers = bestForCurrent.perm.map((u, i) => ({ ...u, id: i }));
+		return;
+	}
+	if (attackers.length < 2) return;
+	cancelOptimization();
+	optimizing = true;
+	progress = 0.1;
+	const payload = $state.snapshot({
+		attackers,
+		defenders,
+		cfg: versionConfig,
+	});
+	const w = new OptimizeWorker();
+	worker = w;
+	w.onmessage = (e) => {
+		if (worker !== w) return;
+		if (e.data.type === 'progress') {
+			progress = 0.1 + 0.9 * e.data.value;
+		} else if (e.data.type === 'done') {
+			const perm = e.data.perm;
+			cancelOptimization();
+			attackers = perm.map((u, i) => ({ ...u, id: i }));
+		}
+	};
+	w.onerror = (err) => {
+		console.error('Optimize worker error:', err);
+		cancelOptimization();
+	};
+	w.postMessage(payload);
+}
+
+function tryGetUnitConfig(version, type) {
+	const cfg = versionConfigs[version];
+	if (!cfg) return null;
+	const unit = cfg.unitStats.find((u) => u.name === type);
+	return unit ?? null;
+}
+
+onMount(() => {
+	const params = new URLSearchParams(window.location.search);
+	const v = params.get('v');
+	if (v && versionConfigs[v]) currentVersion = v;
+	const cfg = versionConfigs[currentVersion];
+	const getCfg = (type) => {
+		const u = cfg.unitStats.find((x) => x.name === type);
+		if (!u) throw new Error('unknown unit ' + type);
+		return u;
+	};
+	const a = params.get('a');
+	const d = params.get('d');
+	if (a) attackers = decodeTeam(a, 'Attackers', getCfg);
+	if (d) defenders = decodeTeam(d, 'Defenders', getCfg);
+	mounted = true;
+});
+
+$effect(() => {
+	if (!mounted) return;
+	const params = encodeStateToParams(attackers, defenders, currentVersion);
+	const search = params.toString();
+	const newUrl = window.location.pathname + (search ? '?' + search : '');
+	if (newUrl !== window.location.pathname + window.location.search) {
+		window.history.replaceState(null, '', newUrl);
+	}
+});
+
+$effect(() => {
+	const _ = [attackers, defenders, currentVersion];
+	cancelOptimization();
+});
 </script>
 
 <svelte:head>
@@ -327,10 +334,14 @@ const defendersAsRender = $derived(computed.defList);
 </svelte:head>
 
 <div class="page">
-	<h1>Polytopia Damage Calculator</h1>
-
 	<div class="pickers">
-		<UnitPicker team="Attackers" onAdd={handleAddAttacker} />
+		<UnitPicker
+			team="Attackers"
+			onAdd={handleAddAttacker}
+			onOptimize={showOptimizeButton ? handleOptimizeOrder : null}
+			{optimizing}
+			{progress}
+		/>
 		<UnitPicker team="Defenders" onAdd={handleAddDefender} />
 	</div>
 
@@ -493,11 +504,6 @@ const defendersAsRender = $derived(computed.defList);
 	gap: 1%;
 	font-family: 'Josefin Sans', Arial, sans-serif;
 	color: #e8e8e8;
-}
-h1 {
-	margin: 0.5em 0 0.25em;
-	color: #fff;
-	font-weight: 400;
 }
 .pickers {
 	display: flex;

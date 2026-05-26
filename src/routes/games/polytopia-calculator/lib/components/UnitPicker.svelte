@@ -2,7 +2,7 @@
 import CardWithShadow from './CardWithShadow.svelte';
 import { unitImages, attackerPages, defenderPages } from '../unitImages.js';
 
-let { team, onAdd, disabled = false } = $props();
+let { team, onAdd, onOptimize = null, optimizing = false, progress = 0, disabled = false } = $props();
 
 const pages = $derived(team === 'Attackers' ? attackerPages : defenderPages);
 const colorClass = $derived(team === 'Attackers' ? 'attacker' : 'defender');
@@ -21,7 +21,16 @@ function next() {
 <CardWithShadow class="picker-card">
 	<div class="picker-header">
 		<button class="nav-btn {colorClass}" onclick={prev} {disabled} aria-label="previous page">&lt;</button>
-		<span class="picker-title">{label}</span>
+		{#if optimizing}
+			<div class="progress-bar {colorClass}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(progress * 100)}>
+				<div class="progress-fill" style="width: {Math.max(0, Math.min(1, progress)) * 100}%"></div>
+				<span class="progress-label">Optimizing… {Math.round(progress * 100)}%</span>
+			</div>
+		{:else if onOptimize}
+			<button class="optimize-btn {colorClass}" onclick={onOptimize}>Optimize order</button>
+		{:else}
+			<span class="picker-title">{label}</span>
+		{/if}
 		<button class="nav-btn {colorClass}" onclick={next} {disabled} aria-label="next page">&gt;</button>
 	</div>
 	{#each [0, 1] as row}
@@ -59,6 +68,66 @@ function next() {
 }
 .picker-title {
 	align-self: center;
+}
+.optimize-btn {
+	flex: 1;
+	margin: 0 8px;
+	padding: 6px 10px;
+	border: 1px solid;
+	border-radius: 4px;
+	background: #1e1e1e;
+	color: #e8e8e8;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 120ms ease, border-color 120ms ease;
+}
+.optimize-btn.attacker {
+	border-color: #4488ff;
+	color: #cfe2ff;
+}
+.optimize-btn.defender {
+	border-color: #e34a4a;
+	color: #ffd2d2;
+}
+.optimize-btn:hover {
+	background: #2a2a2a;
+	filter: brightness(1.1);
+}
+.progress-bar {
+	flex: 1;
+	margin: 0 8px;
+	padding: 0;
+	height: 36px;
+	border: 1px solid;
+	border-radius: 4px;
+	background: #1e1e1e;
+	position: relative;
+	overflow: hidden;
+}
+.progress-bar.attacker {
+	border-color: #4488ff;
+}
+.progress-bar.defender {
+	border-color: #e34a4a;
+}
+.progress-fill {
+	position: absolute;
+	inset: 0 auto 0 0;
+	background: linear-gradient(90deg, #1f3a66, #4488ff);
+	transition: width 60ms linear;
+}
+.progress-label {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 0.95rem;
+	color: #ffffff;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 .picker-row {
 	display: flex;
