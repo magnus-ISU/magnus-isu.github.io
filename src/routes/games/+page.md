@@ -7,3 +7,5 @@
 ## [Obelisk](/games/obelisk)
 
 ## [Risk](/games/risk)
+
+## [Polytopia Damage Calculator](/games/polytopia-calculator)
