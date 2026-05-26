@@ -137,20 +137,11 @@ function heapsPerm(arr, n, cb) {
 	}
 }
 
-function factorial(n) {
-	let f = 1;
-	for (let i = 2; i <= n; i++) f *= i;
-	return f;
-}
-
-export function findBestOrder(att, def, cfg, onProgress) {
+export function findBestOrder(att, def, cfg) {
 	if (att.length < 2) return { perm: att.slice(), score: -Infinity };
 	const work = att.slice();
 	let bestScore = -Infinity;
 	let bestPerm = att.slice();
-	const total = factorial(work.length);
-	const reportEvery = Math.max(1, Math.floor(total / 100));
-	let count = 0;
 	heapsPerm(work, work.length, (perm) => {
 		const { attList, defList } = simulate(perm, def, cfg);
 		const score = scoreOutcome(perm, def, attList, defList);
@@ -158,9 +149,6 @@ export function findBestOrder(att, def, cfg, onProgress) {
 			bestScore = score;
 			bestPerm = perm.slice();
 		}
-		count++;
-		if (onProgress && count % reportEvery === 0) onProgress(count / total);
 	});
-	if (onProgress) onProgress(1);
 	return { perm: bestPerm, score: bestScore };
 }

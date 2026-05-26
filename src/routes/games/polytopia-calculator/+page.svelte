@@ -7,13 +7,9 @@ import SoldierUnitAsRender from './lib/components/SoldierUnitAsRender.svelte';
 import CardWithShadow from './lib/components/CardWithShadow.svelte';
 import { simulateAndScore, findBestOrder } from './lib/optimize.js';
 import { decodeTeam, encodeStateToParams } from './lib/urlState.js';
-import OptimizeWorker from './lib/optimizeWorker.js?worker';
 
 const PERM_CHEAP_THRESHOLD = 7;
 let mounted = $state(false);
-let optimizing = $state(false);
-let progress = $state(0);
-let worker = null;
 
 let { data } = $props();
 const versionConfigs = $derived(data.versionConfigs);
@@ -241,53 +237,11 @@ const defendersAsRender = $derived(computed.defList);
 
 const canCheckOptimal = $derived(attackers.length >= 2 && attackers.length <= PERM_CHEAP_THRESHOLD);
 const bestForCurrent = $derived(canCheckOptimal ? findBestOrder(attackers, defenders, versionConfig) : null);
-const isSuboptimal = $derived(canCheckOptimal && bestForCurrent && bestForCurrent.score > computed.score);
-const showOptimizeButton = $derived(
-	attackers.length >= 2 && (isSuboptimal || attackers.length > PERM_CHEAP_THRESHOLD)
-);
-
-function cancelOptimization() {
-	if (worker) {
-		worker.terminate();
-		worker = null;
-	}
-	if (optimizing) {
-		optimizing = false;
-		progress = 0;
-	}
-}
+const showOptimizeButton = $derived(!!bestForCurrent && bestForCurrent.score > computed.score);
 
 function handleOptimizeOrder() {
-	if (bestForCurrent) {
-		attackers = bestForCurrent.perm.map((u, i) => ({ ...u, id: i }));
-		return;
-	}
-	if (attackers.length < 2) return;
-	cancelOptimization();
-	optimizing = true;
-	progress = 0.1;
-	const payload = $state.snapshot({
-		attackers,
-		defenders,
-		cfg: versionConfig,
-	});
-	const w = new OptimizeWorker();
-	worker = w;
-	w.onmessage = (e) => {
-		if (worker !== w) return;
-		if (e.data.type === 'progress') {
-			progress = 0.1 + 0.9 * e.data.value;
-		} else if (e.data.type === 'done') {
-			const perm = e.data.perm;
-			cancelOptimization();
-			attackers = perm.map((u, i) => ({ ...u, id: i }));
-		}
-	};
-	w.onerror = (err) => {
-		console.error('Optimize worker error:', err);
-		cancelOptimization();
-	};
-	w.postMessage(payload);
+	if (!bestForCurrent) return;
+	attackers = bestForCurrent.perm.map((u, i) => ({ ...u, id: i }));
 }
 
 function tryGetUnitConfig(version, type) {
@@ -324,10 +278,6 @@ $effect(() => {
 	}
 });
 
-$effect(() => {
-	const _ = [attackers, defenders, currentVersion];
-	cancelOptimization();
-});
 </script>
 
 <svelte:head>
@@ -340,8 +290,6 @@ $effect(() => {
 			team="Attackers"
 			onAdd={handleAddAttacker}
 			onOptimize={showOptimizeButton ? handleOptimizeOrder : null}
-			{optimizing}
-			{progress}
 		/>
 		<UnitPicker team="Defenders" onAdd={handleAddDefender} />
 	</div>
