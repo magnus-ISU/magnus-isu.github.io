@@ -127,6 +127,7 @@ function doCopy(section, heading, append) {
 }
 
 function onArticlePointerDown(e) {
+	if (e.target.closest('.dungeon-block')) return;
 	const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 	if (!heading || !data.rawSource) return;
 	longPressHeading = null;
@@ -149,6 +150,7 @@ function onArticleContextMenu(e) {
 
 function onArticleClick(e) {
 	if (!data.rawSource) return;
+	if (e.target.closest('.dungeon-block')) return;
 	if (longPressHeading) {
 		longPressHeading = null;
 		return;

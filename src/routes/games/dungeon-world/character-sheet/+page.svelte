@@ -19,7 +19,10 @@ function stripCollapsed(full) {
 	const out = [];
 	let skipping = false;
 	for (let i = 0; i < lines.length; i++) {
-		if (i < 4) { out.push(lines[i]); continue; }
+		if (i < 4) {
+			out.push(lines[i]);
+			continue;
+		}
 		if (/^##\s/.test(lines[i])) {
 			skipping = /\s*::\s*$/.test(lines[i]);
 			out.push(lines[i]);
@@ -38,8 +41,12 @@ function getCollapsedSections(full) {
 	for (let i = 4; i < lines.length; i++) {
 		if (/^##\s/.test(lines[i])) {
 			if (heading) sections.push({ heading, lines: content });
-			if (/\s*::\s*$/.test(lines[i])) { heading = lines[i]; content = []; }
-			else { heading = null; }
+			if (/\s*::\s*$/.test(lines[i])) {
+				heading = lines[i];
+				content = [];
+			} else {
+				heading = null;
+			}
 			continue;
 		}
 		if (heading) content.push(lines[i]);
@@ -91,12 +98,12 @@ const activeTab = $derived(characterSheet.activeIndex);
 function switchTab(i) {
 	if (i === activeTab) return;
 	characterSheet.switchTo(i);
-	undoStack = undoStack.filter(item => item.type === 'delete');
+	undoStack = undoStack.filter((item) => item.type === 'delete');
 }
 
 function addCharacter() {
 	characterSheet.addSlot();
-	undoStack = undoStack.filter(item => item.type === 'delete');
+	undoStack = undoStack.filter((item) => item.type === 'delete');
 }
 
 function tabName(i) {
@@ -418,9 +425,7 @@ function handleConsumableClick(icon) {
 function toggleConsumable(kind, idx, delta) {
 	const lines = cs.value.split('\n');
 	const re =
-		kind === 'uses'
-			? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi
-			: /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
+		kind === 'uses' ? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi : /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
 	let count = 0;
 	for (let i = 4; i < lines.length; i++) {
 		const matches = [...lines[i].matchAll(re)];
@@ -750,15 +755,17 @@ const damageEntries = $derived.by(() => {
 const bodyHtml = $derived(renderMarkdown(parsed.body));
 
 const allSections = $derived(
-	cs.value.split('\n').slice(4)
-		.filter(l => /^##\s+/.test(l))
-		.map(l => {
+	cs.value
+		.split('\n')
+		.slice(4)
+		.filter((l) => /^##\s+/.test(l))
+		.map((l) => {
 			const collapsed = /\s*::\s*$/.test(l);
 			const name = collapsed
 				? l.match(/^##\s+(.*?)\s*::\s*$/)[1].trim()
 				: l.match(/^##\s+(.*)/)[1].trim();
 			return { name, collapsed };
-		})
+		}),
 );
 
 let charBodyEl = $state();
@@ -787,7 +794,9 @@ $effect(() => {
 
 $effect(() => {
 	if (!sheetTopEl) return;
-	const ro = new ResizeObserver(() => { sheetTopHeight = sheetTopEl.offsetHeight; });
+	const ro = new ResizeObserver(() => {
+		sheetTopHeight = sheetTopEl.offsetHeight;
+	});
 	ro.observe(sheetTopEl);
 	return () => ro.disconnect();
 });
@@ -858,12 +867,19 @@ const RADIAL_DICE = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', '2d6', '1d6+1d8'];
 let radialCursorOk = $state(false);
 
 function checkRadialBounds(x, y) {
-	const radius = 70, btnR = 22;
+	const radius = 70,
+		btnR = 22;
 	for (let i = 0; i < RADIAL_DICE.length; i++) {
 		const angle = (i / RADIAL_DICE.length) * 2 * Math.PI - Math.PI / 2;
 		const bx = x + Math.cos(angle) * radius;
 		const by = y + Math.sin(angle) * radius;
-		if (bx - btnR < 0 || bx + btnR > window.innerWidth || by - btnR < 0 || by + btnR > window.innerHeight) return false;
+		if (
+			bx - btnR < 0 ||
+			bx + btnR > window.innerWidth ||
+			by - btnR < 0 ||
+			by + btnR > window.innerHeight
+		)
+			return false;
 	}
 	return true;
 }
@@ -878,7 +894,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-block',
 		)
 	) {
 		suppressRadialClick = true;
@@ -900,7 +916,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-block',
 		)
 	)
 		return;
@@ -910,7 +926,8 @@ function onArticleClick(e) {
 		closeRadialMenu();
 		return;
 	}
-	const rx = e.clientX, ry = e.clientY;
+	const rx = e.clientX,
+		ry = e.clientY;
 	if (!checkRadialBounds(rx, ry)) return;
 	clearRadialTimer();
 	radialMenu = {
@@ -996,8 +1013,7 @@ function expandAllAndScrollTo(sectionName) {
 	for (let i = 4; i < lines.length; i++) {
 		const m = lines[i].match(/^##\s+(.*)/);
 		if (!m) continue;
-		if (/\s*::\s*$/.test(lines[i]))
-			lines[i] = `## ${m[1].replace(/\s*::\s*$/, '').trim()}`;
+		if (/\s*::\s*$/.test(lines[i])) lines[i] = `## ${m[1].replace(/\s*::\s*$/, '').trim()}`;
 	}
 	cs.value = lines.join('\n');
 	tick().then(() => {
@@ -1038,13 +1054,17 @@ function collapseSection(sectionName) {
 			group.offsetHeight; // force reflow
 			group.style.transition = 'max-height 0.3s ease';
 			group.style.maxHeight = '0';
-			group.addEventListener('transitionend', () => {
-				group.classList.remove('collapsing');
-				group.style.maxHeight = '';
-				group.style.overflow = '';
-				group.style.transition = '';
-				commitCollapse();
-			}, { once: true });
+			group.addEventListener(
+				'transitionend',
+				() => {
+					group.classList.remove('collapsing');
+					group.style.maxHeight = '';
+					group.style.overflow = '';
+					group.style.transition = '';
+					commitCollapse();
+				},
+				{ once: true },
+			);
 		} else {
 			commitCollapse();
 		}
@@ -1092,11 +1112,15 @@ function expandSection(sectionName) {
 				sib.offsetHeight;
 				sib.style.transition = 'max-height 0.3s ease';
 				sib.style.maxHeight = fullH + 'px';
-				sib.addEventListener('transitionend', () => {
-					sib.style.maxHeight = '';
-					sib.style.overflow = '';
-					sib.style.transition = '';
-				}, { once: true });
+				sib.addEventListener(
+					'transitionend',
+					() => {
+						sib.style.maxHeight = '';
+						sib.style.overflow = '';
+						sib.style.transition = '';
+					},
+					{ once: true },
+				);
 			}
 			break;
 		}
@@ -1295,6 +1319,7 @@ function expandSection(sectionName) {
 						handleConsumableClick(icon);
 						return;
 					}
+					if (e.target.closest('.dungeon-block')) return;
 					const h2 = e.target.closest('h2');
 					if (h2) {
 						const h2Text = h2.textContent.trim();

@@ -226,7 +226,7 @@ function onLoreTipOver(e) {
 		if (left + tw > window.innerWidth - 8) left = window.innerWidth - 8 - tw;
 		if (left < 8) left = 8;
 		loreTipEl.style.left = left + 'px';
-		loreTipEl.style.top = (rect.top - loreTipEl.offsetHeight - 6) + 'px';
+		loreTipEl.style.top = rect.top - loreTipEl.offsetHeight - 6 + 'px';
 		loreTipEl.style.visibility = '';
 		loreTipEl.style.opacity = '';
 		loreTipEl.classList.add('visible');
@@ -745,6 +745,71 @@ function onLoreTipOut(e) {
 	:global(.dw-article span[style*="float:right"]) {
 		color: #999;
 		font-size: 0.85em;
+	}
+
+	/* Dungeon Markdown blocks */
+	:global(.dungeon-block) {
+		margin: 1.5rem 0;
+		border: 1px solid #333;
+		border-radius: 6px;
+		padding: 1rem;
+		background: transparent;
+		break-inside: avoid;
+	}
+
+	:global(pre.dungeon-map) {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.85rem;
+		line-height: 1.4;
+		margin: 0 auto 1rem;
+		padding: 0;
+		background: transparent;
+		border: none;
+		overflow-x: auto;
+		white-space: pre;
+		color: #777;
+		width: fit-content;
+		max-width: 100%;
+		display: block;
+	}
+
+	:global(.dungeon-room) {
+		cursor: pointer;
+		color: #ccc;
+		padding: 0;
+		border-radius: 2px;
+		font-family: inherit;
+		transition: background 0.12s, color 0.12s, box-shadow 0.12s;
+	}
+
+	:global(.dungeon-room:hover) {
+		color: #fff;
+		background: #2a2a2a;
+	}
+
+	:global(.dungeon-room.selected) {
+		color: #1e1e1e;
+		background: #d4a847;
+		box-shadow: 0 0 6px #d4a84766;
+	}
+
+	:global(.dungeon-groups) {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	:global(.dungeon-groups > .dungeon-group) {
+		grid-area: 1 / 1;
+		visibility: hidden;
+		min-width: 0;
+	}
+
+	:global(.dungeon-groups > .dungeon-group.selected) {
+		visibility: visible;
+	}
+
+	:global(.dungeon-group > :first-child) {
+		margin-top: 0;
 	}
 
 	/* Link icon styles from blog */

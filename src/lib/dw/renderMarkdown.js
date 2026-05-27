@@ -145,10 +145,12 @@ export function renderMarkdown(src) {
 				}
 				// [text](## "GitHub-flavored tooltip")
 				const ghMatch = href.match(/^##?\s+"(.+)"$/s);
-				if (ghMatch) return `<span class="lore-tip" data-tip="${makeTip(ghMatch[1])}">${text}</span>`;
+				if (ghMatch)
+					return `<span class="lore-tip" data-tip="${makeTip(ghMatch[1])}">${text}</span>`;
 				// [text]("Quoted tooltip")
 				const quotedMatch = href.match(/^"(.+)"$/s);
-				if (quotedMatch) return `<span class="lore-tip" data-tip="${makeTip(quotedMatch[1])}">${text}</span>`;
+				if (quotedMatch)
+					return `<span class="lore-tip" data-tip="${makeTip(quotedMatch[1])}">${text}</span>`;
 				// [text](tooltip with spaces) — contains a space, not a URL
 				if ((/\s/.test(href) || /\x01/.test(href)) && !/^https?:\/\//.test(href)) {
 					return `<span class="lore-tip" data-tip="${makeTip(href)}">${text}</span>`;
@@ -222,6 +224,24 @@ export function renderMarkdown(src) {
 
 	for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
 		const line = lines[lineIdx];
+
+		const mapStart = line.match(/^---\s+Map:\s+(.+?)\s*$/);
+		if (mapStart) {
+			flushPara();
+			flushBlockquote();
+			closePendingList();
+			closeH2Section();
+			const mapName = mapStart[1];
+			const blockLines = [];
+			lineIdx++;
+			while (lineIdx < lines.length && !/^---\s*$/.test(lines[lineIdx].trim())) {
+				blockLines.push(lines[lineIdx]);
+				lineIdx++;
+			}
+			html += renderDungeonBlock(mapName, blockLines, renderMarkdown);
+			continue;
+		}
+
 		const hm = line.match(/^(#{1,6})\s+(.*)/);
 		if (hm) {
 			flushPara();
@@ -300,14 +320,25 @@ export function renderMarkdown(src) {
 		}
 
 		// Markdown pipe tables
-		if (/^\|(.+)\|/.test(line.trim()) && lineIdx + 1 < lines.length && /^\|[\s:-]+\|/.test(lines[lineIdx + 1].trim())) {
+		if (
+			/^\|(.+)\|/.test(line.trim()) &&
+			lineIdx + 1 < lines.length &&
+			/^\|[\s:-]+\|/.test(lines[lineIdx + 1].trim())
+		) {
 			flushPara();
 			closePendingList();
-			const parseCells = (row) => row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+			const parseCells = (row) =>
+				row
+					.trim()
+					.replace(/^\|/, '')
+					.replace(/\|$/, '')
+					.split('|')
+					.map((c) => c.trim());
 			const headers = parseCells(line);
 			const sepCells = parseCells(lines[lineIdx + 1]);
-			const aligns = sepCells.map(c => {
-				const l = c.startsWith(':'), r = c.endsWith(':');
+			const aligns = sepCells.map((c) => {
+				const l = c.startsWith(':'),
+					r = c.endsWith(':');
 				return l && r ? 'center' : r ? 'right' : null;
 			});
 			lineIdx += 2; // skip header + separator
@@ -390,4 +421,69 @@ export function renderMarkdown(src) {
 	closePendingList();
 	closeH2Section();
 	return html;
+}
+
+function renderDungeonBlock(mapName, blockLines, render) {
+	let firstHeading = -1;
+	for (let i = 0; i < blockLines.length; i++) {
+		if (/^#\s/.test(blockLines[i])) {
+			firstHeading = i;
+			break;
+		}
+	}
+	const mapLines = firstHeading === -1 ? blockLines.slice() : blockLines.slice(0, firstHeading);
+	while (mapLines.length && !mapLines[0].trim()) mapLines.shift();
+	while (mapLines.length && !mapLines[mapLines.length - 1].trim()) mapLines.pop();
+
+	const groups = [];
+	if (firstHeading >= 0) {
+		let curName = null,
+			curLines = [];
+		for (let i = firstHeading; i < blockLines.length; i++) {
+			const line = blockLines[i];
+			const m = line.match(/^#\s+(.+?)\s*$/);
+			if (m) {
+				if (curName !== null) groups.push({ name: curName, lines: curLines });
+				curName = m[1];
+				curLines = [];
+			} else {
+				curLines.push(line);
+			}
+		}
+		if (curName !== null) groups.push({ name: curName, lines: curLines });
+	}
+
+	const firstRoom = groups[0]?.name || '';
+
+	const escHtml = (s) =>
+		s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	const escAttr = (s) => escHtml(s);
+	const nameRe = /[A-Za-z][A-Za-z0-9']*(?: [A-Za-z][A-Za-z0-9']*)*/g;
+
+	const onclick =
+		"var b=this.closest('.dungeon-block'),r=this.dataset.room;b.querySelectorAll('.dungeon-room').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)});b.querySelectorAll('.dungeon-group').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)})";
+
+	let mapHtml = '';
+	for (const line of mapLines) {
+		let last = 0;
+		nameRe.lastIndex = 0;
+		let m;
+		while ((m = nameRe.exec(line)) !== null) {
+			mapHtml += escHtml(line.slice(last, m.index));
+			const sel = m[0] === firstRoom ? ' selected' : '';
+			mapHtml += `<span class="dungeon-room${sel}" data-room="${escAttr(m[0])}" onclick="${onclick}">${escHtml(m[0])}</span>`;
+			last = m.index + m[0].length;
+		}
+		mapHtml += escHtml(line.slice(last));
+		mapHtml += '\n';
+	}
+
+	let groupsHtml = '';
+	for (const g of groups) {
+		const sel = g.name === firstRoom ? ' selected' : '';
+		const inner = render(`# ${g.name}\n${g.lines.join('\n')}`);
+		groupsHtml += `<div class="dungeon-group${sel}" data-room="${escAttr(g.name)}">${inner}</div>`;
+	}
+
+	return `<div class="dungeon-block" data-map="${escAttr(mapName)}"><pre class="dungeon-map">${mapHtml}</pre><div class="dungeon-groups">${groupsHtml}</div></div>`;
 }
