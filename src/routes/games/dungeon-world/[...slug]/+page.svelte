@@ -321,12 +321,12 @@ function onArticleClick(e) {
 	}
 
 	:global(.dw-article .h2-section) {
-		overflow: hidden;
 		transition: max-height 0.3s ease, opacity 0.3s ease;
 		opacity: 1;
 	}
 
 	:global(.dw-article .h2-section.collapsed) {
+		overflow: hidden;
 		max-height: 0 !important;
 		opacity: 0;
 	}

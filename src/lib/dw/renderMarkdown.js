@@ -230,7 +230,8 @@ export function renderMarkdown(src) {
 			flushPara();
 			flushBlockquote();
 			closePendingList();
-			closeH2Section();
+			closeMoveBlock();
+			closeColumns();
 			const mapName = mapStart[1];
 			const blockLines = [];
 			lineIdx++;

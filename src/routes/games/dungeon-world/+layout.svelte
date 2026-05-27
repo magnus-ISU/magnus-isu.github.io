@@ -762,24 +762,34 @@ function onLoreTipOut(e) {
 		font-size: 0.85rem;
 		line-height: 1.4;
 		margin: 0 auto 1rem;
-		padding: 0;
-		background: transparent;
-		border: none;
+		padding: 0.5rem 1rem;
+		background: #1e1e1e;
+		border: 3px solid #000;
+		border-radius: 4px;
 		overflow-x: auto;
 		white-space: pre;
 		color: #777;
 		width: fit-content;
 		max-width: 100%;
 		display: block;
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		cursor: default;
+	}
+
+	:global(pre.dungeon-map),
+	:global(pre.dungeon-map *) {
+		cursor: default !important;
 	}
 
 	:global(.dungeon-room) {
-		cursor: pointer;
 		color: #ccc;
 		padding: 0;
 		border-radius: 2px;
 		font-family: inherit;
 		transition: background 0.12s, color 0.12s, box-shadow 0.12s;
+		cursor: pointer !important;
 	}
 
 	:global(.dungeon-room:hover) {

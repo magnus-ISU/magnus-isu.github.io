@@ -894,7 +894,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-block',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map',
 		)
 	) {
 		suppressRadialClick = true;
@@ -916,7 +916,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-block',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map',
 		)
 	)
 		return;
@@ -1862,12 +1862,9 @@ function expandSection(sectionName) {
 		border-color: transparent;
 	}
 
-	.char-body :global(.h2-section) {
-		overflow: hidden;
-	}
-
 	.char-body :global(.h2-section.collapsed) {
 		display: none;
+		overflow: hidden;
 	}
 
 	.char-body :global(h2.collapsed-heading),
