@@ -24,7 +24,7 @@ When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, ho
 When you **touch someone and speak words of courage against imminent danger**, roll+CHA. On a 10+, choose 2. On a 7-9, choose 1:
 - They shake off fear, confusion, doubt, or magical compulsion or constraint
 - They realize their best course of action; they ask one question on the Discern Realities list, and take +1 forward on the answer.
-- You negate damage they take, the next time you call out a warning to them.
+- Hold 1 Prophecy. Spend it to call out a warning and negate damage they take. [1 Charge]
 
 ### See the Best in You
 When you **hold a trusting person's hand and look them in the eye**, roll+CHA. On a 10+, ask them (or the GM, for NPCs) two of the following. On a 7-9, ask one:
@@ -107,13 +107,9 @@ Build: Towering, Solid, Chubby, or Skeletal
 - Dark: When you ride it, +2 damage. When you fight in melee, add the *messy* tag.
 
 ### Prophetic Dreams
-When you **lay down to sleep**, roll+WIS. On a 10+ choose one:
-- the visions are lucid and accurate.
-- the visions show you what you must do, and you take +1 forward to doing it.
-
-On a 7-9 choose one:
-- the visions are confusing and alarming, but they might just be dreams.
-- the visions are lucid and accurate, but they're not pleasant.
+When you **sleep on a problem that weighs on you**, or the GM decides, roll+WIS.
+- On a 10+, you are blessed with a vision that shows you what you face or what you must do; take +1 forward acting on it.
+- On a 7-9, choose whether you want the knowledge, but if you do, it weighs on you; take -1 forward.
 
 ### Cinderella
 You can understand the grunts, chirps, and calls that are the language of small animals just as well as your mother tongue, and when you speak to them they understand you.
