@@ -789,8 +789,12 @@ function onLoreTipOut(e) {
 
 	:global(.dungeon-room) {
 		color: #ccc;
-		padding: 0;
-		border-radius: 2px;
+		/* Extend the highlight ~half a character into the gap on each side without
+		   shifting any glyphs: the negative margin cancels the padding's effect on
+		   layout, so monospace column alignment is preserved. */
+		padding: 0 0.5ch;
+		margin: 0 -0.5ch;
+		border-radius: 3px;
 		font-family: inherit;
 		transition: background 0.12s, color 0.12s, box-shadow 0.12s;
 		cursor: pointer !important;
