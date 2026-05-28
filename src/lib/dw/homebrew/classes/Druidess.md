@@ -8,13 +8,12 @@ Their gods are children, their steel is false protection. You walk the old ways,
 
 ## Starting Moves
 
-### Shapechange
-When you **focus for a few seconds and borrow the form of a natural beast, native to your homeland**, name it and roll+CON:
-- on a 10+, you stay in that form until you spend a few seconds to change back or take on another
-- on a 7-9, you shed your borrowed form the first time you roll a 6- (in addition to whatever the GM says), or earlier if you so desire
-- on a 6-, the form's instincts are particularly strong and you're stuck in that form until you calm yourself and take the time to set the form aside
+### Born of the Soil
+You learned your magic in a place whose spirits are strong and ancient and they’ve marked you as one of their own. No matter where you go, they live within you and allow you to take their shape. Choose your homeland:
 
-While in your borrowed form, you have its innate armor, qualities, tags, and abilities, your damage die increases to d8 if appropriate, but use your own stats (STR/DEX/CON/etc). It is difficult to act contrary to the instincts or nature of your borrowed form (often Defying Danger with WIS).
+*The Great Forests, The Whispering Plains, The Vast Desert, The Stinking Mire, The River Delta, The Depths of the Earth, The Sapphire Islands, The Open Sea, The Towering Mountains, The Frozen North, The Blasted Wasteland*
+
+Chose a tell—a physical attribute that reflects the spirit of your land. It might be antlers, leopard’s spots, hair like leaves, or eyes of glittering crystal. Your tell remains no matter what shape you take.
 
 ### The Secret Tongue
 You can communicate with natural beasts, spirits of the wild, and others who speak the Secret Tongue.
@@ -22,6 +21,14 @@ When you **Parley using the Secret Tongue**, roll with WIS instead of CHA.
 
 ### Spirit-Touched
 You can always ask the GM "What spirits are active here?" and get an honest answer.
+
+### Shapechange
+When you **focus for a few seconds and borrow the form of a natural beast, native to your homeland**, name it and roll+CON:
+- on a 10+, you stay in that form until you spend a few seconds to change back or take on another
+- on a 7-9, you shed your borrowed form the first time you roll a 6- (in addition to whatever the GM says), or earlier if you so desire
+- on a 6-, the form's instincts are particularly strong and you're stuck in that form until you calm yourself and take the time to set the form aside
+
+While in your borrowed form, you have its innate armor, qualities, tags, and abilities, your damage die increases to d8 if appropriate, but use your own stats (STR/DEX/CON/etc). It is difficult to act contrary to the instincts or nature of your borrowed form (often Defying Danger with WIS).
 
 ### Communion
 When you **perform a little ritual and make an offering of something they'd like (whisky, incense, blood, etc.)**, the spirits of a place manifest before you—not always friendly, but at least curious and willing to hear you out.

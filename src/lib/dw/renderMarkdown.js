@@ -109,7 +109,7 @@ export function renderMarkdown(src) {
 							.replace(/</g, '&lt;')
 							.replace(/>/g, '&gt;')
 							.replace(/"/g, '&quot;');
-						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.uses-icon,.rations-icon'))return;navigator.clipboard.writeText(this.dataset.copy+'  ');this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
+						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.uses-icon,.rations-icon'))return;navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
 					}
 				}
 
@@ -168,7 +168,7 @@ export function renderMarkdown(src) {
 				return `<svg class="coin-icon" width="24" height="24" style="display:inline-block;vertical-align:middle;transform:translateY(-1px)" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="url(#${gid})" stroke="#a07020" stroke-width="3"/><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0d060"/><stop offset="100%" stop-color="#c9952a"/></linearGradient></defs><text x="50" y="54" text-anchor="middle" dominant-baseline="central" font-size="${fs}" font-weight="bold" fill="#3d2200" font-family="sans-serif">${val}</text></svg>`;
 			})
 			.replace(
-				/\[([^\]]+) Armor\]/gi,
+				/\[(\+?\d+) Armor\]/gi,
 				'<svg class="armor-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;transform:translateY(-2px)" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
 			)
 			.replace(
