@@ -25,7 +25,7 @@ When you **attack a surprised or defenseless enemy with a melee weapon**, you de
 - Reduce their armor by 1 until they repair it
 
 ### Poisoner
-You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three uses of the poison you choose for free. Note that some poisons are applied, meaning you have to carefully apply it to the target or something they eat or drink. Touch poisons just need to touch the target, they can even be used on the blade of a weapon.
+You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three uses of the poison you choose for free. Applied poisons must be carefully applied to the target or something they eat or drink. Touch poisons just need to touch the target, and can even be used on the blade of a weapon.
 - Bloodweed (touch): The target deals -1d4 damage ongoing until cured
 - Serpent's Tears (touch): Anyone dealing damage to the target has advantage.
 - Serrulatus' Sting (touch): This neurotoxin makes the target fly into a spastic rage, unable to be consoled for a few minutes.
@@ -61,7 +61,7 @@ You always land on your feet. When you fall from any height, if you're conscious
 You start with:
 [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] [1 Armor] Leather Armor
-[0 Weight] Your chosen poison [3 uses]
+[0 Weight] Your chosen poison [3 charges]
 [10 Coin]
 Choose one for your arms:
 [0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)
