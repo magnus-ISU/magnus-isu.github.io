@@ -18,16 +18,24 @@ import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 const cs = characterSheet;
 
+// A real character sheet has a 4-line header (name, vitals, stats, image). A
+// plain document — first line has no comma — has only a 2-line header (title,
+// image). Everything that skips past the header must use this count.
+function headerLineCount(text) {
+	return (text.split('\n')[0] || '').includes(',') ? 4 : 2;
+}
+
 // --- Collapsed-section display layer ---
 // The textarea shows a stripped view where collapsed (::) section bodies are hidden.
 // The store always holds the full text.
 
 function stripCollapsed(full) {
 	const lines = full.split('\n');
+	const hc = headerLineCount(full);
 	const out = [];
 	let skipping = false;
 	for (let i = 0; i < lines.length; i++) {
-		if (i < 4) {
+		if (i < hc) {
 			out.push(lines[i]);
 			continue;
 		}
@@ -46,7 +54,7 @@ function getCollapsedSections(full) {
 	const sections = [];
 	let heading = null;
 	let content = [];
-	for (let i = 4; i < lines.length; i++) {
+	for (let i = headerLineCount(full); i < lines.length; i++) {
 		if (/^##\s/.test(lines[i])) {
 			if (heading) sections.push({ heading, lines: content });
 			if (/\s*::\s*$/.test(lines[i])) {
@@ -277,12 +285,15 @@ const placeholders = $derived.by(() => {
 		];
 	}
 	const lines = displayValue.split('\n');
-	const hints = [
-		'Name, Class Level',
-		'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
-		'STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1',
-		'Character art image URL',
-	];
+	// A plain document (first line has no comma) only has a title + image header.
+	const hints = (lines[0] || '').includes(',')
+		? [
+				'Name, Class Level',
+				'EXP 0, Base HP 15, Armor 0, Damage d6, Base Load 6, HP 18',
+				'STR 2, DEX 1, CON 1, INT 0, WIS 0, CHA -1',
+				'Character art image URL',
+			]
+		: ['Title', 'Character art image URL'];
 	const phs = hints.map((h, i) => (lines[i]?.trim() ? '' : h));
 	const total = Math.max(lines.length + 1, phs.length);
 	while (phs.length < total) phs.push('');
@@ -806,7 +817,7 @@ function rewriteBattleBlock(index, newText) {
 const allSections = $derived(
 	cs.value
 		.split('\n')
-		.slice(4)
+		.slice(headerLineCount(cs.value))
 		.filter((l) => /^##\s+/.test(l))
 		.map((l) => {
 			const collapsed = /\s*::\s*$/.test(l);
@@ -1157,7 +1168,7 @@ function collapseSection(sectionName) {
 		const group = h2.closest('.h2-group');
 		function commitCollapse() {
 			const lines = cs.value.split('\n');
-			for (let i = 4; i < lines.length; i++) {
+			for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 				const m = lines[i].match(/^##\s+(.*)/);
 				if (!m) continue;
 				const raw = m[1].replace(/\s*::\s*$/, '').trim();
@@ -1208,7 +1219,7 @@ function scrollToSection(sectionName) {
 
 function expandSection(sectionName) {
 	const lines = cs.value.split('\n');
-	for (let i = 4; i < lines.length; i++) {
+	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 		const m = lines[i].match(/^##\s+(.*)/);
 		if (!m) continue;
 		const raw = m[1].replace(/\s*::\s*$/, '').trim();
