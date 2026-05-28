@@ -127,7 +127,7 @@ Endanger yourself following the precepts of your church or god.
 
 Harm another to prove the superiority of your church or god.
 
-## Gear
+## Gear  
 
 Your load is 10+Str. You carry dungeon rations \(5 uses, 1 weight\) and some
 symbol of the divine, describe it \(0 weight\). Choose your defenses:

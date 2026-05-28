@@ -55,7 +55,7 @@ Take the mastery move **Warrior of the Mind**.
 ### Sorcerer
 You do not use a spellbook to prepare spells. They are a part of your blood.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Your Spellbook  
 [1 Weight] Dungeon Rations [5 rations]  

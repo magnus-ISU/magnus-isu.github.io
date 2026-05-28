@@ -27,6 +27,7 @@ export function renderMarkdown(src) {
 	let coinId = 0;
 	let usesIdx = 0;
 	let rationsIdx = 0;
+	let chargesIdx = 0;
 	let inList = false;
 	let listTag = '';
 	let paraLines = [];
@@ -37,6 +38,10 @@ export function renderMarkdown(src) {
 	let _h2Collapsed = false;
 	let inBlockquote = false;
 	let bqLines = [];
+	// "Break mode": a heading ending in 2+ spaces makes every following normal
+	// line break, until a heading of equal or greater strength (<= level).
+	let breakMode = false;
+	let breakModeLevel = 0;
 
 	function closeMoveBlock() {
 		if (inMoveBlock) {
@@ -82,7 +87,7 @@ export function renderMarkdown(src) {
 		const content = paraLines
 			.map((l, i) => {
 				const isLast = i === paraLines.length - 1;
-				const hasBreak = !isLast && / {2,}$/.test(l);
+				const hasBreak = !isLast && (breakMode || / {2,}$/.test(l));
 				const hasBackslash = !isLast && /\\$/.test(l);
 				const stripped = hasBreak ? l.replace(/ {2,}$/, '') : hasBackslash ? l.slice(0, -1) : l;
 				let rendered = inline(stripped);
@@ -187,6 +192,22 @@ export function renderMarkdown(src) {
 				out += '</span>';
 				return out;
 			})
+			.replace(/\[(\d+)(?:\/(\d+))?\s+charges?\]/gi, (_, curStr, maxStr) => {
+				const max = maxStr ? +maxStr : +curStr;
+				const cur = Math.min(+curStr, max);
+				const used = max - cur;
+				const groupIdx = chargesIdx++;
+				const ring =
+					'<circle cx="50" cy="50" r="33" fill="none" stroke="currentColor" stroke-width="9"/>';
+				const core = '<circle cx="50" cy="50" r="17" fill="currentColor"/>';
+				let out = '<span class="consumable-group">';
+				for (let i = 0; i < max; i++) {
+					const isUsed = i < used;
+					out += `<svg class="charges-icon" data-charges-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${ring}${isUsed ? '' : core}</svg>`;
+				}
+				out += '</span>';
+				return out;
+			})
 			.replace(/\[(\d+)(?:\/(\d+))?\s+rations?\]/gi, (_, curStr, maxStr) => {
 				const max = maxStr ? +maxStr : +curStr;
 				const cur = Math.min(+curStr, max);
@@ -249,6 +270,13 @@ export function renderMarkdown(src) {
 			flushBlockquote();
 			closePendingList();
 			const level = hm[1].length;
+			const headingHasBreak = / {2,}$/.test(hm[2]);
+			hm[2] = hm[2].replace(/\s+$/, '');
+			if (breakMode && level <= breakModeLevel) breakMode = false;
+			if (headingHasBreak) {
+				breakMode = true;
+				breakModeLevel = level;
+			}
 			if (level <= 2) {
 				closeH2Section();
 				let h2Text = hm[2];

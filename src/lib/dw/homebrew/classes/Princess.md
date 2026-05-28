@@ -14,7 +14,7 @@ Choose two principles which represent your most deeply held beliefs:
 
 You ignore magical persuasion, thunderous distraction, or any other mental effect which would keep you from upholding these.
 
-When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, hold 3 Idealism. On a 7-9, hold 2 Idealism. Spend 1 Idealism to:
+When you **invoke these beliefs in a passionate speech**, roll+CHA. On a 10+, hold 3 Idealism. On a 7-9, hold 2 Idealism. Spend 1 Idealism to: [3 Charges]
 - Ask a friendly NPC to do one impossible thing and they will attempt it.
 - Roll+CHA rather than +STR to Hack & Slash.
 - Roll+CHA rather than +DEX to Volley.
@@ -52,7 +52,7 @@ You have been sent to many cities on diplomatic missions from your country. When
 ### A Warring Kingdom
 Your kingdom's strongholds are spread throughout the country. Whenever you come to them they will provide shelter.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 Choose one for your arms:  

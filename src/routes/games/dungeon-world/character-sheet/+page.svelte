@@ -415,9 +415,25 @@ $effect(() => {
 
 // --- Consumable click-to-toggle (uses / rations) ---
 function handleConsumableClick(icon) {
-	const isUses = icon.classList.contains('uses-icon');
-	const kind = isUses ? 'uses' : 'rations';
-	const idx = +(isUses ? icon.dataset.usesIdx : icon.dataset.rationsIdx);
+	const kind = icon.classList.contains('uses-icon')
+		? 'uses'
+		: icon.classList.contains('charges-icon')
+			? 'charges'
+			: 'rations';
+	let idx;
+	if (kind === 'charges') {
+		// Charges render inside blockquotes (recursive render resets the counter),
+		// so derive the global index from DOM order of charge groups instead.
+		const myGroup = icon.closest('.consumable-group');
+		const groups = [];
+		for (const el of charBodyEl.querySelectorAll('.charges-icon')) {
+			const g = el.closest('.consumable-group');
+			if (!groups.includes(g)) groups.push(g);
+		}
+		idx = groups.indexOf(myGroup);
+	} else {
+		idx = +(kind === 'uses' ? icon.dataset.usesIdx : icon.dataset.rationsIdx);
+	}
 	const isUsed = icon.dataset.state === 'used';
 	toggleConsumable(kind, idx, isUsed ? +1 : -1);
 }
@@ -425,7 +441,11 @@ function handleConsumableClick(icon) {
 function toggleConsumable(kind, idx, delta) {
 	const lines = cs.value.split('\n');
 	const re =
-		kind === 'uses' ? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi : /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
+		kind === 'uses'
+			? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi
+			: kind === 'charges'
+				? /\[(\d+)(?:\/(\d+))?\s+(charges?)\]/gi
+				: /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
 	let count = 0;
 	for (let i = 4; i < lines.length; i++) {
 		const matches = [...lines[i].matchAll(re)];
@@ -443,7 +463,7 @@ function toggleConsumable(kind, idx, delta) {
 				lines[i] = before + replacement + after;
 				const newLineText = lines[i];
 				cs.value = lines.join('\n');
-				if (delta < 0 && newCur === 0) {
+				if (delta < 0 && newCur === 0 && kind !== 'charges') {
 					startFade(newLineText);
 				} else if (fadingLineKeys.has(oldLineText)) {
 					cancelFade(oldLineText);
@@ -894,7 +914,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map',
 		)
 	) {
 		suppressRadialClick = true;
@@ -916,7 +936,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map',
 		)
 	)
 		return;
@@ -1305,7 +1325,7 @@ function expandSection(sectionName) {
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="char-body" bind:this={charBodyEl} onmousedown={(e) => {
-					if (e.target.closest('.uses-icon, .rations-icon')) e.preventDefault();
+					if (e.target.closest('.uses-icon, .rations-icon, .charges-icon')) e.preventDefault();
 				}} onclick={(e) => {
 					const fading = e.target.closest('.copy-line.fading-line');
 					if (fading && fading.dataset.src) {
@@ -1313,7 +1333,7 @@ function expandSection(sectionName) {
 						cancelFade(fading.dataset.src);
 						return;
 					}
-					const icon = e.target.closest('.uses-icon, .rations-icon');
+					const icon = e.target.closest('.uses-icon, .rations-icon, .charges-icon');
 					if (icon) {
 						e.stopPropagation();
 						handleConsumableClick(icon);
@@ -2181,11 +2201,13 @@ function expandSection(sectionName) {
 	}
 
 	:global(.char-body .uses-icon),
+	:global(.char-body .charges-icon),
 	:global(.char-body .rations-icon) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='black' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 15 26, pointer;
 	}
 
-	:global(.char-body .uses-icon) {
+	:global(.char-body .uses-icon),
+	:global(.char-body .charges-icon) {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
@@ -2211,7 +2233,8 @@ function expandSection(sectionName) {
 		user-select: none;
 	}
 
-	:global(.char-body .uses-icon:hover) {
+	:global(.char-body .uses-icon:hover),
+	:global(.char-body .charges-icon:hover) {
 		transform: translateY(-2px) scale(1.15);
 	}
 

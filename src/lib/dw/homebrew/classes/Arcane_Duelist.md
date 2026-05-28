@@ -32,7 +32,7 @@ You descend from an ancient martial tradition. Take +1 to Spout Lore on anything
 ### Human
 Your fighting style is showy and impressive. Take +1 forward to Parley with anyone who has seen you fight.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 Choose one from each:  

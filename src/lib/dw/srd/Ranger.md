@@ -115,7 +115,7 @@ Endanger yourself to combat an unnatural threat.
 
 Help an animal or spirit of the wild.
 
-## Gear
+## Gear  
 
 Your load is 11+Str. You start with dungeon rations \(5 uses, 1 weight\),
 leather armor \(1 armor, 1 weight\), and a bundle of arrows \(3 ammo, 1

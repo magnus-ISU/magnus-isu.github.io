@@ -120,7 +120,7 @@ Avoid a conflict or defuse a tense situation.
 
 Spur others to significant and unplanned decisive action.
 
-## Gear
+## Gear  
 
 Your load is 9+Str. You have dungeon rations \(5 uses, 1 weight\). Choose one
 instrument, all are 0 weight for you:

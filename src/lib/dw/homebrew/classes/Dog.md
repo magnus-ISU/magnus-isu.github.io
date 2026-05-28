@@ -60,7 +60,7 @@ When you **fight like a wild animal**, increase your damage to d10 instead of d6
 ### Stray
 When you **enter a steading or settlement**, you can always find a kind citizen to take you in, providing you with food and shelter. While you **act harmless and meek**, nobody will notice you are present until you make yourself known.
 
-## Gear
+## Gear  
 Choose one:
 A tattered scarf with a familiar scent  
 A collar with your name on it from a previous owner  

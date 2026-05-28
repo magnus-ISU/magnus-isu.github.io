@@ -66,7 +66,7 @@ When you enter an important location (your call) you can ask the GM for one fact
 ### Human
 When you first enter a civilized settlement someone who respects the custom of hospitality to minstrels will take you and your allies in as their guest.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 Choose your instrument or make up your own:  
@@ -195,7 +195,7 @@ When you **Hack & Slash** or use **Cutting Jibes**, gain +1 armor for the exchan
 When you **Hack & Slash and your reputation is on the line** - people are watching, or you've made repeated public promises to defeat someone and they know it - you deal +1d6 damage.
 
 ### Gobsmacked
-When you **reveal a secret of the enemy to their face**, hold 1 Intimidation against them. Spend it at any time to:
+When you **reveal a secret of the enemy to their face**, hold 1 Intimidation against them. Spend it at any time to: [1 Charge]
 - Deal +1d6 damage when you damage them.
 - Defy Danger with CHA instead of another stat when they threaten you.
 
@@ -217,7 +217,7 @@ Get one move from another class. Treat your level as one lower, and your casting
 ## Mastery Moves
 
 ### Silver Tongued
-When you **use words to avoid suspicion or trouble**, roll+CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to:
+When you **use words to avoid suspicion or trouble**, roll+CHA: on a 10+, hold 2 Nerve; on a 7-9, hold 1 Nerve. You may spend Nerve, 1-for-1, to: [2 Charges]
 - Move about or maneuver unchallenged
 - Stop people from following you around or verifying what you say
 - Direct suspicion or attention where you want it

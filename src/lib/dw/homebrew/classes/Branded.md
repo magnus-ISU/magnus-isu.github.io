@@ -42,7 +42,7 @@ Name what branded you — a demon, an elemental lord, a dying star. When you **c
 ### Ash Walker
 You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should; tell the GM about it.
 
-## Gear
+## Gear  
 You carry no weapons and need no armour but the flames that burn within you. You start with:  
 [0 Weight] A Keepsake of Your Sacrifices Past, describe it  
 [1 Weight] Adventuring Gear [3 uses]  
@@ -125,7 +125,7 @@ When you **carouse**, you roll+CHA instead of spending any coin. If there's alre
 ## Mastery Moves
 
 ### Fanning the Flames
-When you **incite a mob into a frenzy**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. Spend your hold, 1-for-1, to make the mob:
+When you **incite a mob into a frenzy**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. Spend your hold, 1-for-1, to make the mob: [3 Charges]
 - Bring someone, or something, to you.
 - Unite and fight on your behalf.
 - Become consumed by a uniform emotion or desire of your choice; fear, lust, anger, regret, or something else.

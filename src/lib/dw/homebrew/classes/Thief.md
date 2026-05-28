@@ -9,7 +9,7 @@ From your castle. Full of gold. You rogue.
 ## Starting Moves
 
 ### Trap Expert
-When you **spend a moment to survey a dangerous area**, roll+DEX. On a 10+, hold 3 Detection. On a 7-9, hold 1 Detection. Spend Detection as you walk through the area to ask these questions:
+When you **spend a moment to survey a dangerous area**, roll+DEX. On a 10+, hold 3 Detection. On a 7-9, hold 1 Detection. Spend Detection as you walk through the area to ask these questions: [3 Charges]
 - Is there a trap here and if so, what activates it?
 - What does the trap do when activated?
 - What else is hidden here?
@@ -57,7 +57,7 @@ When you attack with a ranged weapon, deal +2 damage.
 ### Acrobat
 You always land on your feet. When you fall from any height, if you're conscious you are unharmed.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 [1 Weight] [1 Armor] Leather Armor  

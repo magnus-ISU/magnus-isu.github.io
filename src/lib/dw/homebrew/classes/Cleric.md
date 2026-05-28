@@ -34,7 +34,7 @@ When you **stand in a place of holy worship or significance to your deity**, ask
 - You must repair something which infidels have defaced
 - You must learn something which time has hidden
 
-When you do, hold 3 Miracles.
+When you do, hold 3 Miracles. [3 Charges]
 
 ### Work Miracles
 You know all the Miracles of your level and below. When you *hold Miracle and pray for a saint's Miracle*, roll+WIS. On a 10+, it goes off. On a 7-9, choose 1:
@@ -70,7 +70,7 @@ You served alongside soldiers. You ignore the *clumsy* tag on armor you wear, an
 ### Convert
 You once followed another path, so you know better than most how outsiders feel about your god and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 [0 Weight] Some Symbol of the Divine, describe it  

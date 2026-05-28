@@ -39,7 +39,7 @@ You are especially resourceful. When you **use Plan of Action**, take +1 to any 
 ### Elf
 Your blades dance around your enemies' defenses with ease. When you **deal +1d6 from You Seem a Decent Fellow**, you pierce through all armor.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 [1 Weight] Dueling Rapier (close, precise)  
@@ -143,7 +143,7 @@ When you **take a truly grievous wound**, roll+CON. On a 10+, choose two. On a 7
 
 ### Loyal Fans
 *Requires Famous*  
-When you **speak to a group of your fans**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. On a miss, they give you the paparazzi treatment. Spend your hold 1-for-1 on the following:
+When you **speak to a group of your fans**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. On a miss, they give you the paparazzi treatment. Spend your hold 1-for-1 on the following: [3 Charges]
 - Bring people forward and deliver them to you.
 - Bring forward all their precious things.
 - Unite and fight for you.

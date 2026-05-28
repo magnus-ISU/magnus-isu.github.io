@@ -63,7 +63,7 @@ Choose a creature type, such as dragons, giants, undead, constructs, or elves. Y
 ### Birdcaller
 You can mimic any sound that you've heard a wild animal make, and communicate with your animal companion from one kilometer away.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] [1 Armor] Leather Armor  
 [1 Weight] Hunter's Bow (near, far)  

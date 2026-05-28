@@ -143,7 +143,7 @@ Defeat a worthy opponent.
 
 Kill a defenseless or surrendered enemy.
 
-## Gear
+## Gear  
 
 Your load is 12+Str. You carry your signature weapon and dungeon rations \(5
 uses, 1 weight\). Choose your defenses:

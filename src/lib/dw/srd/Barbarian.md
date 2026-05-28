@@ -98,7 +98,7 @@ You eschew a convention of the civilized world.
 
 Teach someone the ways of your people.
 
-## Gear
+## Gear  
 
 Your Load is 8+Str. You carry dungeon rations \(5 uses, 1 weight\), a dagger
 \(hand, 1 weight\) some token of where you've traveled or where you're from,

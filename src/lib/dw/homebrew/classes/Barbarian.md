@@ -54,7 +54,7 @@ Choose one person or group you have sworn to either protect or utterly destroy. 
 ### Ancestor-Bound
 The spirits of your ancestors still guide you. When you sleep, you can speak with the ancestral spirits to ask their advice.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 [0 Weight] Dagger (hand)  

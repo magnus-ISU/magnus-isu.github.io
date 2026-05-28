@@ -67,7 +67,7 @@ You're weaker than the other races. -1 STR
 
 When you defy danger and **use your small size to your advantage**, take +1.
 
-## Gear
+## Gear  
 You start with:  
 [0 Weight] Your Signature Weapon  
 [1 Weight] Dungeon Rations [5 rations]  

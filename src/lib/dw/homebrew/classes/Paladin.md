@@ -63,7 +63,7 @@ You came to your oaths through suffering or sin. When you **refuse comfort or sa
 ### Dovoted
 Your oaths sustain and revitalize you. When you **spend a night in prayer and meditation**, you recover from one debility as if it never was, but you must spend the night doing nothing else.
 
-## Gear
+## Gear  
 You start with:  
 [1 Weight] Dungeon Rations [5 rations]  
 [3 Weight] [2 Armor] Scale Armor  

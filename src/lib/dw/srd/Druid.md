@@ -137,7 +137,7 @@ Help something or someone grow.
 
 Eliminate an unnatural menace.
 
-## Gear
+## Gear  
 
 Your load is 6+Str. You carry some token of your land, describe it. Choose
 your defenses:

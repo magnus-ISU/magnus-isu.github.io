@@ -121,7 +121,7 @@ Discover something about a magical mystery.
 
 Use magic to cause terror and fear.
 
-## Gear
+## Gear  
 
 Your load is 7+Str. You start with your spellbook \(1 weight\) and dungeon
 rations \(5 uses, 1 weight\). Choose your defenses:

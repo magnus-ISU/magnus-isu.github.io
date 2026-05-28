@@ -114,7 +114,7 @@ Avoid detection or infiltrate a location.
 
 Shift danger or blame from yourself to someone else.
 
-## Gear
+## Gear  
 
 Your load is 9+Str. You start with dungeon rations \(5 uses, 1 weight\),
 leather armor \(1 armor, 1 weight\), 3 uses of your chosen poison, and 10

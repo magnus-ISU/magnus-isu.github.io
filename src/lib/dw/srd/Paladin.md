@@ -107,7 +107,7 @@ Deny mercy to a criminal or unbeliever.
 
 Endanger yourself to protect someone weaker than you.
 
-## Gear
+## Gear  
 
 Your load is 12+Str. You start with dungeon rations \(5 uses, 1 weight\), scale armor \(2 armor, 3 weight\), and some mark of faith, describe it \(0 weight\). Choose your weapon:
 
