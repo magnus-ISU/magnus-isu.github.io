@@ -96,7 +96,7 @@ export function renderMarkdown(src) {
 				if (/^\[/.test(l.trim()) || hasConsumable) {
 					const afterCoin = l
 						.trim()
-						.replace(/^\[\d+\s*Coin\]\s*/, '')
+						.replace(/^\[\d+\s*Coin\]\s*/i, '')
 						.replace(/ {2,}$/, '');
 					if (afterCoin) {
 						const esc = afterCoin
@@ -162,17 +162,17 @@ export function renderMarkdown(src) {
 				}
 				return `<a href="${href}">${text}</a>`;
 			})
-			.replace(/\[([^\]]+) Coin\]/g, (_, val) => {
+			.replace(/\[([^\]]+) Coin\]/gi, (_, val) => {
 				const fs = Math.min(50, Math.floor(130 / val.length));
 				const gid = `cg${coinId++}`;
 				return `<svg class="coin-icon" width="24" height="24" style="display:inline-block;vertical-align:middle;transform:translateY(-1px)" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="url(#${gid})" stroke="#a07020" stroke-width="3"/><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0d060"/><stop offset="100%" stop-color="#c9952a"/></linearGradient></defs><text x="50" y="54" text-anchor="middle" dominant-baseline="central" font-size="${fs}" font-weight="bold" fill="#3d2200" font-family="sans-serif">${val}</text></svg>`;
 			})
 			.replace(
-				/\[([^\]]+) Armor\]/g,
+				/\[([^\]]+) Armor\]/gi,
 				'<svg class="armor-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;transform:translateY(-2px)" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
 			)
 			.replace(
-				/\[([^\]]+) Weight\]/g,
+				/\[([^\]]+) Weight\]/gi,
 				'<svg class="weight-icon" width="24" height="24" style="display:inline-block;vertical-align:middle;color:#444;transform:translateY(-2px)" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,-20)"><path d="M256 46c-45.074 0-82 36.926-82 82 0 25.812 12.123 48.936 30.938 64H128L32 480h448l-96-288h-76.938C325.877 176.936 338 153.812 338 128c0-45.074-36.926-82-82-82zm0 36c25.618 0 46 20.382 46 46s-20.382 46-46 46-46-20.382-46-46 20.382-46 46-46z" fill="currentColor"/></g><text x="256" y="400" text-anchor="middle" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
 			)
 			.replace(/\[(\d+)(?:\/(\d+))?\s+uses?\]/gi, (_, curStr, maxStr) => {
@@ -203,7 +203,7 @@ export function renderMarkdown(src) {
 				let out = '<span class="consumable-group">';
 				for (let i = 0; i < max; i++) {
 					const isUsed = i < used;
-					out += `<svg class="charges-icon" data-charges-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${ring}${isUsed ? '' : core}</svg>`;
+					out += `<svg class="charges-icon" data-charges-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${ring}${isUsed ? core : ''}</svg>`;
 				}
 				out += '</span>';
 				return out;

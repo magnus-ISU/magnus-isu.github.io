@@ -64,16 +64,16 @@ You came to your oaths through suffering or sin. When you **refuse comfort or sa
 Your oaths sustain and revitalize you. When you **spend a night in prayer and meditation**, you recover from one debility as if it never was, but you must spend the night doing nothing else.
 
 ## Gear  
-You start with:  
-[1 Weight] Dungeon Rations [5 rations]  
-[3 Weight] [2 Armor] Scale Armor  
-[0 Weight] Mark of Faith (describe it)  
-Choose your weapon:  
-[2 Weight] Halberd (reach, +1 damage, two-handed)  
-[1 Weight] Long Sword (close, +1 damage) and [2 Weight] [+1 Armor] Shield  
-Choose one:  
-[1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Dungeon Rations [5 rations] and [1 Weight] Healing Potion [1 use]  
+You start with:
+[1 Weight] Dungeon Rations [5 rations]
+[3 Weight] [2 Armor] Scale Armor
+[0 Weight] Mark of Faith (describe it)
+Choose your weapon:
+[2 Weight] Halberd (reach, +1 damage, two-handed)
+[1 Weight] Long Sword (close, +1 damage) and [2 Weight] [+1 Armor] Shield
+Choose one:
+[1 Weight] Adventuring Gear [3 uses]
+[1 Weight] Dungeon Rations [5 rations] and [1 Weight] Healing Potion [1 use]
 
 ## Stats
 Damage: d10, HP: 10+Constitution, Load: 12+STR

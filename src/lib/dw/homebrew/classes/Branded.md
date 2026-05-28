@@ -43,14 +43,14 @@ Name what branded you — a demon, an elemental lord, a dying star. When you **c
 You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should; tell the GM about it.
 
 ## Gear  
-You carry no weapons and need no armour but the flames that burn within you. You start with:  
-[0 Weight] A Keepsake of Your Sacrifices Past, describe it  
-[1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Healing Potion [1 use]  
-Choose two:  
-[1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] Healing Potion [1 use]  
-[10 Coin]  
+You carry no weapons and need no armour but the flames that burn within you. You start with:
+[0 Weight] A Keepsake of Your Sacrifices Past, describe it
+[1 Weight] Adventuring Gear [3 uses]
+[1 Weight] Healing Potion [1 use]
+Choose two:
+[1 Weight] Dungeon Rations [5 rations]
+[1 Weight] Healing Potion [1 use]
+[10 Coin]
 
 ## Stats
 Damage: d8, HP: 4+Constitution, Load: 9+STR

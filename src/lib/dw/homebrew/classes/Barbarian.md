@@ -55,16 +55,16 @@ Choose one person or group you have sworn to either protect or utterly destroy. 
 The spirits of your ancestors still guide you. When you sleep, you can speak with the ancestral spirits to ask their advice.
 
 ## Gear  
-You start with:  
-[1 Weight] Dungeon Rations [5 rations]  
-[0 Weight] Dagger (hand)  
-[0 Weight] Some token of where you've traveled or where you're from  
-Choose your weapon:  
-[1 Weight] Axe (close)  
-[2 Weight] Two-Handed Sword (close, +1 damage)  
-Choose one:  
-[1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] [1 Armor] Chainmail  
+You start with:
+[1 Weight] Dungeon Rations [5 rations]
+[0 Weight] Dagger (hand)
+[0 Weight] Some token of where you've traveled or where you're from
+Choose your weapon:
+[1 Weight] Axe (close)
+[2 Weight] Two-Handed Sword (close, +1 damage)
+Choose one:
+[1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
+[1 Weight] [1 Armor] Chainmail
 
 ## Stats
 Damage: d10, HP: 8+Constitution, Load: 8+STR

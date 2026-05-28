@@ -33,18 +33,18 @@ You descend from an ancient martial tradition. Take +1 to Spout Lore on anything
 Your fighting style is showy and impressive. Take +1 forward to Parley with anyone who has seen you fight.
 
 ## Gear  
-You start with:  
-[1 Weight] Dungeon Rations [5 rations]  
-Choose one from each:  
-[0 Weight] Noble's Silks and [10 Coin]  
-[1 Weight] [1 Armor] Duelist's Leathers (worn)  
-Choose your weapon:  
-[2 Weight] Bastard Sword (+1 damage, two-handed, close)  
-[2 Weight] Rapier (precise, close)  
-[0 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)  
-Choose one:  
-[1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] Healing Potion [1 use]  
+You start with:
+[1 Weight] Dungeon Rations [5 rations]
+Choose one from each:
+[0 Weight] Noble's Silks and [10 Coin]
+[1 Weight] [1 Armor] Duelist's Leathers (worn)
+Choose your weapon:
+[2 Weight] Bastard Sword (+1 damage, two-handed, close)
+[2 Weight] Rapier (precise, close)
+[0 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)
+Choose one:
+[1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
+[1 Weight] Healing Potion [1 use]
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 8+STR

@@ -40,18 +40,18 @@ You are especially resourceful. When you **use Plan of Action**, take +1 to any 
 Your blades dance around your enemies' defenses with ease. When you **deal +1d6 from You Seem a Decent Fellow**, you pierce through all armor.
 
 ## Gear  
-You start with:  
-[1 Weight] Dungeon Rations [5 rations]  
-[1 Weight] Dueling Rapier (close, precise)  
-[1 Weight] [1 Armor] Shining Armor  
-Choose your backup weapon:  
-[1 Weight] Hidden Stiletto (hand), which is never found when you are searched  
+You start with:
+[1 Weight] Dungeon Rations [5 rations]
+[1 Weight] Dueling Rapier (close, precise)
+[1 Weight] [1 Armor] Shining Armor
+Choose your backup weapon:
+[1 Weight] Hidden Stiletto (hand), which is never found when you are searched
 [1 Weight] 3 Throwing Daggers (hand, near, ammo) [3 uses]
-[2 Weight] [+1 Armor] Parrying Gauntlet (hand)  
-Choose two:  
-[1 Weight] Adventuring Gear [3 uses] and a map, describe it  
-[1 Weight] Bandages [3 uses] and [9 Coin]  
-A noble steed, describe it  
+[2 Weight] [+1 Armor] Parrying Gauntlet (hand)
+Choose two:
+[1 Weight] Adventuring Gear [3 uses] and a map, describe it
+[1 Weight] Bandages [3 uses] and [9 Coin]
+A noble steed, describe it
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 7+STR

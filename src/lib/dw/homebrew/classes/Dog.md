@@ -62,11 +62,11 @@ When you **enter a steading or settlement**, you can always find a kind citizen 
 
 ## Gear  
 Choose one:
-A tattered scarf with a familiar scent  
-A collar with your name on it from a previous owner  
-A raggedy toy from your puppyhood  
-A tiny friend that follows you everywhere, what is it? \_\_\_\_\_  
-A sack with 2 coins, tied to your neck  
+A tattered scarf with a familiar scent
+A collar with your name on it from a previous owner
+A raggedy toy from your puppyhood
+A tiny friend that follows you everywhere, what is it? \_\_\_\_\_
+A sack with 2 coins, tied to your neck
 
 ## Stats
 Damage: d6, HP: 8+Constitution, Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.

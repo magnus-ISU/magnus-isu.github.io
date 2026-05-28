@@ -47,20 +47,20 @@ When you **Defy Danger or Parley using flattery or deceit**, you take +1 forward
 When you **use adventurer's gear**, you can produce something strange & magical. Say how you stole/ won it and how it's useful right now, but ask the GM how it's limited and problematic.
 
 ## Gear  
-You start with:  
-[0 Weight] Some Token of Your Land, describe it  
-Choose one for your defenses:  
-[1 Weight] [1 Armor] Hide Armor  
-[1 Weight] [+1 Armor] Wooden Shield  
-Choose your armament:  
-[2 Weight] Shillelagh (close)  
-[1 Weight] Staff (close, two-handed)  
-[1 Weight] Spear (close, thrown, near)  
-Choose one:  
-[1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Poultices and Herbs [2 uses]  
-[0 Weight] Halfling Pipeleaf [3 uses]  
-[1 Weight] Antitoxin [3 uses]  
+You start with:
+[0 Weight] Some Token of Your Land, describe it
+Choose one for your defenses:
+[1 Weight] [1 Armor] Hide Armor
+[1 Weight] [+1 Armor] Wooden Shield
+Choose your armament:
+[2 Weight] Shillelagh (close)
+[1 Weight] Staff (close, two-handed)
+[1 Weight] Spear (close, thrown, near)
+Choose one:
+[1 Weight] Adventuring Gear [3 uses]
+[1 Weight] Poultices and Herbs [2 uses]
+[0 Weight] Halfling Pipeleaf [3 uses]
+[1 Weight] Antitoxin [3 uses]
 
 ## Stats
 Damage: d6, HP: 6+Constitution, Load: 6+STR

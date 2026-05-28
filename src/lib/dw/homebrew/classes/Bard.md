@@ -67,30 +67,30 @@ When you enter an important location (your call) you can ask the GM for one fact
 When you first enter a civilized settlement someone who respects the custom of hospitality to minstrels will take you and your allies in as their guest.
 
 ## Gear  
-You start with:  
-[1 Weight] Dungeon Rations [5 rations]  
-Choose your instrument or make up your own:  
-[0 Weight] Your father’s mandolin, repaired  
-[0 Weight] A fine lute, a gift from a noble  
-[0 Weight] The pipes with which you courted your first love  
-[0 Weight] A stolen horn  
-[0 Weight] A fiddle, never before played  
-[0 Weight] A songbook in a forgotten tongue  
-[40 Weight] A grand piano, on your estate grounds  
-Choose your clothing:  
-[1 Weight] [1 Armor] Leather armor  
-[0 Weight] A thick, worn cloak and [1 Weight] Poultices and Herbs (slow) [2 uses]  
-[0 Weight] Ostentatious clothes  
-Choose one for your armaments:  
-[2 Weight] An elaborately crafted longsword (close, +1 damage, precious)  
-[0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand, thrown)  
-[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows (ammo), and [1 Weight] Short sword (close)  
-[1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)  
-Choose one:  
-[1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Bandages [3 uses]  
-[0 Weight] Halfling pipeleaf [3 uses]  
-[2 Weight] Bag of Books [3 uses]  
+You start with:
+[1 Weight] Dungeon Rations [5 rations]
+Choose your instrument or make up your own:
+[0 Weight] Your father’s mandolin, repaired
+[0 Weight] A fine lute, a gift from a noble
+[0 Weight] The pipes with which you courted your first love
+[0 Weight] A stolen horn
+[0 Weight] A fiddle, never before played
+[0 Weight] A songbook in a forgotten tongue
+[40 Weight] A grand piano, on your estate grounds
+Choose your clothing:
+[1 Weight] [1 Armor] Leather armor
+[0 Weight] A thick, worn cloak and [1 Weight] Poultices and Herbs (slow) [2 uses]
+[0 Weight] Ostentatious clothes
+Choose one for your armaments:
+[2 Weight] An elaborately crafted longsword (close, +1 damage, precious)
+[0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand, thrown)
+[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows (ammo), and [1 Weight] Short sword (close)
+[1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)
+Choose one:
+[1 Weight] Adventuring Gear [3 uses]
+[1 Weight] Bandages [3 uses]
+[0 Weight] Halfling pipeleaf [3 uses]
+[2 Weight] Bag of Books [3 uses]
 
 ## Stats
 Damage: d6, HP: 6+Constitution, Load: 9+STR

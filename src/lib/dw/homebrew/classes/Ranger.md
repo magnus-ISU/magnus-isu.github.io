@@ -64,18 +64,18 @@ Choose a creature type, such as dragons, giants, undead, constructs, or elves. Y
 You can mimic any sound that you've heard a wild animal make, and communicate with your animal companion from one kilometer away.
 
 ## Gear  
-You start with:  
-[1 Weight] [1 Armor] Leather Armor  
-[1 Weight] Hunter's Bow (near, far)  
-[1 Weight] Bundle of Arrows (ammo)  
-[1 Weight] Adventuring Gear [3 uses]  
-[1 Weight] Dungeon Rations [5 rations]  
-Choose your melee weapon:  
-[1 Weight] Short Sword (close)  
-[1 Weight] Spear (reach)  
-Choose one:  
-[1 Weight] Bandages [3 uses]  
-[1 Weight] Bundle of Arrows (ammo)  
+You start with:
+[1 Weight] [1 Armor] Leather Armor
+[1 Weight] Hunter's Bow (near, far)
+[1 Weight] Bundle of Arrows (ammo)
+[1 Weight] Adventuring Gear [3 uses]
+[1 Weight] Dungeon Rations [5 rations]
+Choose your melee weapon:
+[1 Weight] Short Sword (close)
+[1 Weight] Spear (reach)
+Choose one:
+[1 Weight] Bandages [3 uses]
+[1 Weight] Bundle of Arrows (ammo)
 
 ## Stats
 Damage: d8, HP: 8+Constitution, Load: 11+STR
