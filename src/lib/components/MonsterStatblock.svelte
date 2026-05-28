@@ -15,6 +15,7 @@ let {
 	memberHps = [],
 	open = false,
 	locked = false,
+	descOpen = false,
 	onLabelsChange = null,
 	onHpChange = null,
 	onEncounterAdd = null,
@@ -150,7 +151,7 @@ const moveColumns = $derived(
 
 // Description expand toggle — shift/long-press flips this one until next global toggle
 let localFlip = $state(false);
-const descExpanded = $derived(localFlip ? !globalDesc.value : globalDesc.value);
+const descExpanded = $derived(descOpen || (localFlip ? !globalDesc.value : globalDesc.value));
 $effect(() => {
 	globalDesc.value;
 	localFlip = false;

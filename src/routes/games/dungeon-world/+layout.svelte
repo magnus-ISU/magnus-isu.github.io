@@ -13,7 +13,10 @@ let { children } = $props();
 
 const charImage = $derived.by(() => {
 	const lines = characterSheet.value.split('\n');
-	return lines[3]?.trim() || '';
+	// Character sheets (first line "Name, Class Level") keep the image on line 4;
+	// plain documents without a comma keep it on line 2.
+	const hasComma = (lines[0] || '').includes(',');
+	return (hasComma ? lines[3] : lines[1])?.trim() || '';
 });
 
 const isCharSheet = $derived(page.url.pathname.replace(/\/$/, '').endsWith('/character-sheet'));

@@ -233,10 +233,12 @@ const parsed = $derived.by(() => {
 		}
 	}
 
-	// Line 3: character art image URL
-	const image = get(3);
+	// For a real character sheet (first line "Name, Class Level") the header is 4
+	// lines: name, vitals, stats, image. Without a comma it's a plain document, so
+	// the header is just title + image and the body starts right after.
+	const image = commaIdx >= 0 ? get(3) : get(1);
 
-	const body = lines.slice(4).join('\n');
+	const body = lines.slice(commaIdx >= 0 ? 4 : 2).join('\n');
 
 	return { name, clazz, level, exp, baseHp, armor, damage, baseLoad, hp, stats, image, body };
 });
@@ -782,6 +784,11 @@ const damageEntries = $derived.by(() => {
 
 const bodyHtml = $derived(renderMarkdown(parsed.body, { battle: true }));
 
+// The sticky header only makes sense for an actual character sheet, whose first
+// line is "Name, Class Level". Without a comma the document is something else
+// (e.g. an adventure), so skip the header entirely.
+const hasHeaderRow = $derived((cs.value.split('\n')[0] || '').includes(','));
+
 // ```battle blocks: parse the doc-local monster definitions and each block's
 // encounter text, then mount interactive BattleBlock components into the
 // placeholder divs rendered by renderMarkdown.
@@ -972,7 +979,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map, .battle-block',
 		)
 	) {
 		suppressRadialClick = true;
@@ -994,7 +1001,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map, .battle-block',
 		)
 	)
 		return;
@@ -1262,6 +1269,7 @@ function expandSection(sectionName) {
 
 	{#if parsed.name}
 		<div class="sheet-preview">
+			{#if hasHeaderRow}
 			<div class="sheet-top" bind:this={sheetTopEl}>
 			<div class="sheet-header">
 				<div class="header-info">
@@ -1377,6 +1385,7 @@ function expandSection(sectionName) {
 				</div>
 			{/if}
 			</div>
+			{/if}
 
 			<div class="body-with-sidebar" style="--sheet-top-h: {sheetTopHeight}px">
 			{#if bodyHtml}
@@ -1398,6 +1407,7 @@ function expandSection(sectionName) {
 						return;
 					}
 					if (e.target.closest('.dungeon-block')) return;
+					if (e.target.closest('.battle-block')) return;
 					const h2 = e.target.closest('h2');
 					if (h2) {
 						const h2Text = h2.textContent.trim();
@@ -1502,6 +1512,17 @@ function expandSection(sectionName) {
 <style>
 	:global(.cs-article.radial-cursor) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='3' fill='%23222' stroke='%23aaa' stroke-width='1.5'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='7' r='2' fill='%23fff'/%3E%3Ccircle cx='7' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23fff'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
+	}
+
+	/* Copy-lines (incl. inside dungeon descriptions) are click-to-copy, so show a
+	   pointer rather than inheriting the radial dice cursor. */
+	:global(.char-body .copy-line) {
+		cursor: pointer;
+	}
+
+	/* Monster statblocks (```battle blocks) shouldn't inherit the dice cursor. */
+	:global(.char-body .battle-block) {
+		cursor: default;
 	}
 
 	/* Reset layout's negative margins that assume 2.5rem parent padding */
