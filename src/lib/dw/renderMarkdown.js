@@ -1,6 +1,13 @@
 // Simple markdown → HTML (CommonMark-ish) with two-column layout for h2 sections with 2+ h3s
-export function renderMarkdown(src) {
+// opts.battle: when true, ```battle fences become indexed placeholder divs that the
+// character sheet mounts interactive components into. opts.battleCounter is a shared
+// { n } object so indices stay sequential across recursive renders.
+export function renderMarkdown(src, opts = {}) {
 	if (!src.trim()) return '';
+
+	const battle = !!opts.battle;
+	const battleCounter = opts.battleCounter || { n: 0 };
+	const childOpts = { battle, battleCounter };
 
 	// Pre-pass: collapse multiline [text](tooltip) where tooltip contains newlines
 	src = src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
@@ -70,7 +77,7 @@ export function renderMarkdown(src) {
 
 	function flushBlockquote() {
 		if (bqLines.length === 0) return;
-		html += `<blockquote>${renderMarkdown(bqLines.join('\n'))}</blockquote>`;
+		html += `<blockquote>${renderMarkdown(bqLines.join('\n'), childOpts)}</blockquote>`;
 		bqLines = [];
 		inBlockquote = false;
 	}
@@ -260,7 +267,7 @@ export function renderMarkdown(src) {
 				blockLines.push(lines[lineIdx]);
 				lineIdx++;
 			}
-			html += renderDungeonBlock(mapName, blockLines, renderMarkdown);
+			html += renderDungeonBlock(mapName, blockLines, (s) => renderMarkdown(s, childOpts));
 			continue;
 		}
 
@@ -325,11 +332,16 @@ export function renderMarkdown(src) {
 		if (/^```/.test(line.trim())) {
 			flushPara();
 			closePendingList();
+			const info = line.trim().slice(3).trim().toLowerCase();
 			const codeLines = [];
 			lineIdx++;
 			while (lineIdx < lines.length && !/^```/.test(lines[lineIdx].trim())) {
 				codeLines.push(lines[lineIdx]);
 				lineIdx++;
+			}
+			if (info === 'battle' && battle) {
+				html += `<div class="battle-block" data-battle-index="${battleCounter.n++}"></div>`;
+				continue;
 			}
 			const raw = codeLines.join('\n');
 			const escaped = raw

@@ -1,11 +1,19 @@
 <script>
-import { tick } from 'svelte';
+import { mount, tick, unmount, untrack } from 'svelte';
+import BattleBlock from '$lib/components/BattleBlock.svelte';
 import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
+import {
+	extractBattleBlocks,
+	parseDefinitions,
+	replaceBattleBlock,
+} from '$lib/dw/encounterParse.js';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+import { allMonsters } from '$lib/dw/monsters.js';
 import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 const cs = characterSheet;
@@ -772,7 +780,21 @@ const damageEntries = $derived.by(() => {
 		.filter(Boolean);
 });
 
-const bodyHtml = $derived(renderMarkdown(parsed.body));
+const bodyHtml = $derived(renderMarkdown(parsed.body, { battle: true }));
+
+// ```battle blocks: parse the doc-local monster definitions and each block's
+// encounter text, then mount interactive BattleBlock components into the
+// placeholder divs rendered by renderMarkdown.
+const battleBlocks = $derived(extractBattleBlocks(parsed.body));
+const battleKnownMonsters = $derived.by(() => {
+	const docDefs = battleBlocks.flatMap((b) => parseDefinitions(b.text));
+	// Doc-local definitions take precedence (placed last so they win the name map).
+	return [...allMonsters, ...userMonsters.list, ...docDefs];
+});
+
+function rewriteBattleBlock(index, newText) {
+	cs.value = replaceBattleBlock(cs.value, index, newText);
+}
 
 const allSections = $derived(
 	cs.value
@@ -819,6 +841,42 @@ $effect(() => {
 	});
 	ro.observe(sheetTopEl);
 	return () => ro.disconnect();
+});
+
+// Mount BattleBlock components into the placeholder divs. Re-runs only on
+// structural body changes (bodyHtml) or when blocks are added/removed
+// (battleBlocks.length) — battle content edits are read untracked so HP/name
+// ticks don't blow away and remount the statblocks.
+$effect(() => {
+	void bodyHtml;
+	const blockCount = battleBlocks.length;
+	if (!charBodyEl || blockCount === 0) return;
+	const instances = untrack(() => {
+		const blocks = battleBlocks;
+		const known = battleKnownMonsters;
+		const placeholders = charBodyEl.querySelectorAll('.battle-block');
+		const mounted = [];
+		placeholders.forEach((el, idx) => {
+			const block = blocks[idx];
+			if (!block) return;
+			el.innerHTML = '';
+			mounted.push(
+				mount(BattleBlock, {
+					target: el,
+					props: {
+						text: block.text,
+						knownMonsters: known,
+						blockIndex: idx,
+						onEdit: rewriteBattleBlock,
+					},
+				}),
+			);
+		});
+		return mounted;
+	});
+	return () => {
+		for (const inst of instances) unmount(inst);
+	};
 });
 
 $effect(() => {
