@@ -15,9 +15,9 @@ Yeah. We didn't think so.
 ### Prepare Spells
 You carry a spellbook of power. You start out with the cantrips, 2 level 1 spells, and one higher level spell. Ask the GM how you can learn new spells, typically by finding spell scrolls or studying other mages' spellbooks.
 
-When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and a number of spells from your spellbook up to one plus half your level rounded down, forgetting any others. These spells must be of your level or lower.
+When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and up to three spells from your spellbook, forgetting any others. These spells must be of your level or lower.
 
-When you **sleep with spells still memorized**, your rest is subpar (not cantrips). You may forget your spells as part of your bedtime routine.
+When you **sleep with spells still memorized**, your rest is subpar (cantrips are okay). You may release and forget your spells at any time.
 
 ### Cast A Spell
 When you **cast a memorized spell**, roll+INT. On a 7-9, choose one:
@@ -104,7 +104,7 @@ Evil: Use magic to cause fear and terror.
 When you **Cast a Spell**, you get +d4 forward to damage from **Hack & Slash**. When you **Hack & Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
 
 ### Quick Thinking
-When you **spend one minute in contemplation of your spellbook**, you memorize one spell or cantrip from your spellbook, forgetting any others.
+When you **spend one minute in contemplation of your spellbook**, you memorize one spell or cantrip from your spellbook, forgetting all others.
 
 ### Quick Study
 When you **see a spell being cast**, you can ask the GM what it's name is and its effects. Take +1 forward acting on the answers.
@@ -142,24 +142,16 @@ When you attempt to **counter an arcane spell** which you see being cast, stake 
 - You forget the staked spells.
 
 ### Memorius
-When you **Prepare Spells**, prepare two additional spells (3+½ Level).
+When you **Prepare Spells**, prepare up to four spells.
 
 ### Familiar
 Gain the service of a familiar, describe it. It can communicate with you telepathically, knows about its home plane, and you can look through its eyes and ears when you so choose, rather than your own. When you **cast a spell**, the spell can come from you or your familiar. If your familiar dies, you can perform a **Ritual** to bring it back.
-
-### Gigantic Familiar
-*Requires Familiar*  
-When you **are in danger and your foes loom over you**, your familiar gains strength to protect you; roll+CHA. On a 10+, it grows to the size of a grizzly bear and is not going anywhere until you're safe. On a 7-9, choose one:
-- It cannot remain in this form for long
-- Until it shifts back, your familiar is draining magical energy from you at an alarming rate
-
-Your familiar has +2 Strength and 1d10 damage in this form.
 
 ### Know-It-All
 When **another player's character comes to you for advice and you tell them what you think is best**, they get +1 forward when following your advice and you mark experience if they do.
 
 ### Missile Barrage
-When you **cast Magic Missiles**, on a hit, you may immediately recast it with improved Alacrity. Each time you do so, take -1 ongoing to cast it again until you stop.
+When you **cast Magic Missiles**, on a hit, you may immediately recast it with improved Alacrity. Each time you do so, take -1 ongoing to cast it again until you stop. Do not mark experience for these additional rolls.
 
 ## Mastery Moves
 
@@ -179,7 +171,7 @@ When you **Discern Realities**, on a 12+, you can ask any questions you like.
 
 ### As if born to them
 *Requires Quick Thinking*  
-Choose 3 spells which can hardly be forgotten; it takes but a few seconds of thought to re-memorize them, even without your spellbook.
+Choose two spells which can hardly be forgotten; it takes but a few seconds of thought to re-memorize them, even without your spellbook.
 
 ### Enchanter's Soul
 *Requires Enchanter*  

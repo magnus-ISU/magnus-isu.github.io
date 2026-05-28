@@ -127,7 +127,7 @@ When you Work Miracles you ignore the first -1 penalty from ongoing concentratio
 You may work the Miracle of Cure Light Wounds even if you do not hold any Miracles. You cannot choose to spend a Miracle in that case on a 7-9.
 
 ### Divine Intervention
-When you gain Miracle(s) from Hallowed Hold, also hold 1 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage.
+When you gain Miracle(s) from Hallowed Hold, also hold 1 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage. [1 Charge]
 
 ### Penitent
 When you **take 4 or more damage**, take +1 forward to Work Miracles.
@@ -164,7 +164,7 @@ You may work the Miracle of Cure Moderate Wounds even if you do not hold any Mir
 
 ### Divine Invincibility
 *Replaces Divine Intervention*  
-When you gain Miracle(s) from Hallowed Hold, also hold 2 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage.
+When you gain Miracle(s) from Hallowed Hold, also hold 2 Intervention. Spend Intervention when you or an ally takes damage to call on your deity, who intervenes with an appropriate manifestation (a sudden gust of wind, a lucky slip, a burst of light) and negates the damage. [2 Charges]
 
 ### Martyr
 *Replaces Penitent*  
