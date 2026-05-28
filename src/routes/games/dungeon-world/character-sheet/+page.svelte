@@ -886,6 +886,43 @@ $effect(() => {
 	};
 });
 
+// Dungeon map selection persistence. The selected room lives only in the DOM
+// (toggled by the inline onclick), so a body re-render — e.g. collapsing a
+// section, which rewrites cs.value — would reset it to the default room. We
+// remember the selection per dungeon block (by document order) and re-apply it
+// after each render.
+let dungeonSelections = $state({});
+
+function applyDungeonSelection(block, room) {
+	block.querySelectorAll('.dungeon-room').forEach((e) => {
+		e.classList.toggle('selected', e.dataset.room === room);
+	});
+	block.querySelectorAll('.dungeon-group').forEach((e) => {
+		e.classList.toggle('selected', e.dataset.room === room);
+	});
+}
+
+function captureDungeonSelection(block) {
+	if (!charBodyEl) return;
+	const blocks = [...charBodyEl.querySelectorAll('.dungeon-block')];
+	const idx = blocks.indexOf(block);
+	if (idx < 0) return;
+	const sel = block.querySelector('.dungeon-room.selected');
+	dungeonSelections = { ...dungeonSelections, [idx]: sel ? sel.dataset.room : null };
+}
+
+$effect(() => {
+	void bodyHtml;
+	if (!charBodyEl) return;
+	untrack(() => {
+		const blocks = charBodyEl.querySelectorAll('.dungeon-block');
+		blocks.forEach((block, idx) => {
+			const room = dungeonSelections[idx];
+			if (room) applyDungeonSelection(block, room);
+		});
+	});
+});
+
 $effect(() => {
 	void bodyHtml;
 	if (!charBodyEl) return;
@@ -1406,7 +1443,13 @@ function expandSection(sectionName) {
 						handleConsumableClick(icon);
 						return;
 					}
-					if (e.target.closest('.dungeon-block')) return;
+					const dBlock = e.target.closest('.dungeon-block');
+					if (dBlock) {
+						// The inline onclick has already toggled the selection in the DOM;
+						// remember it so a body re-render (collapsing a section) can restore it.
+						captureDungeonSelection(dBlock);
+						return;
+					}
 					if (e.target.closest('.battle-block')) return;
 					const h2 = e.target.closest('h2');
 					if (h2) {
