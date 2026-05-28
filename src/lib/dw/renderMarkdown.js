@@ -461,8 +461,15 @@ function renderDungeonBlock(mapName, blockLines, render) {
 	const escAttr = (s) => escHtml(s);
 	const nameRe = /[A-Za-z][A-Za-z0-9']*(?: [A-Za-z][A-Za-z0-9']*)*/g;
 
-	const onclick =
-		"var b=this.closest('.dungeon-block'),r=this.dataset.room;b.querySelectorAll('.dungeon-room').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)});b.querySelectorAll('.dungeon-group').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)})";
+	const mapOnclick =
+		"var b=this.closest('.dungeon-block'),cx=event.clientX,cy=event.clientY,best=null,bestD=Infinity;" +
+		"this.querySelectorAll('.dungeon-room').forEach(function(e){" +
+		'var c=e.getBoundingClientRect(),dx=Math.max(c.left-cx,0,cx-c.right),dy=Math.max(c.top-cy,0,cy-c.bottom),d=dx*dx+dy*dy;' +
+		'if(d&lt;bestD){bestD=d;best=e;}});' +
+		'if(!best||bestD&gt;6400)return;' +
+		'var r=best.dataset.room;' +
+		"b.querySelectorAll('.dungeon-room').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)});" +
+		"b.querySelectorAll('.dungeon-group').forEach(function(e){e.classList.toggle('selected',e.dataset.room===r)});";
 
 	let mapHtml = '';
 	for (const line of mapLines) {
@@ -472,7 +479,7 @@ function renderDungeonBlock(mapName, blockLines, render) {
 		while ((m = nameRe.exec(line)) !== null) {
 			mapHtml += escHtml(line.slice(last, m.index));
 			const sel = m[0] === firstRoom ? ' selected' : '';
-			mapHtml += `<span class="dungeon-room${sel}" data-room="${escAttr(m[0])}" onclick="${onclick}">${escHtml(m[0])}</span>`;
+			mapHtml += `<span class="dungeon-room${sel}" data-room="${escAttr(m[0])}">${escHtml(m[0])}</span>`;
 			last = m.index + m[0].length;
 		}
 		mapHtml += escHtml(line.slice(last));
@@ -486,5 +493,5 @@ function renderDungeonBlock(mapName, blockLines, render) {
 		groupsHtml += `<div class="dungeon-group${sel}" data-room="${escAttr(g.name)}">${inner}</div>`;
 	}
 
-	return `<div class="dungeon-block" data-map="${escAttr(mapName)}"><pre class="dungeon-map">${mapHtml}</pre><div class="dungeon-groups">${groupsHtml}</div></div>`;
+	return `<div class="dungeon-block" data-map="${escAttr(mapName)}"><pre class="dungeon-map" onclick="${mapOnclick}">${mapHtml}</pre><div class="dungeon-groups">${groupsHtml}</div></div>`;
 }

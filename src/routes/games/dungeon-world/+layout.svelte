@@ -770,7 +770,8 @@ function onLoreTipOut(e) {
 		white-space: pre;
 		color: #777;
 		width: fit-content;
-		max-width: 100%;
+		max-width: calc(100% - 2rem);
+		box-sizing: border-box;
 		display: block;
 		position: sticky;
 		top: 0;
