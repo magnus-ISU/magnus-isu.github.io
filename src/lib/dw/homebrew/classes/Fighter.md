@@ -165,7 +165,7 @@ When you **choose to let your armor take the brunt of damage dealt to you**, the
 
 ### Evil Eye
 *Requires Seeing Red*  
-When you **enter combat**, roll+CHA. On a 10+, hold 2. On a 7-9, hold 1. Spend your hold to make eye contact with an NPC present, who freezes or flinches and can't act until you break it off. On a 6-, your enemies immediately identify you as their biggest threat.
+When you **enter combat**, roll+CHA. On a 10+, hold 2. On a 7-9, hold 1. Spend your hold to make eye contact with an NPC present, who freezes or flinches and can't act until you break it off. On a 6-, your enemies immediately identify you as their biggest threat. [2 Charges]
 
 ### Taste of Blood
 *Replaces Scent of Blood*  

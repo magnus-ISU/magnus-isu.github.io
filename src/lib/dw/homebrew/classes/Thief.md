@@ -49,7 +49,7 @@ You're weaker than the other races. -1 STR
 When you defy danger and **use your small size to your advantage**, take +1.
 
 ### Tabaxi
-You are a cat, and hold 9 Lives. When you are reduced to 0 hit points, mark off a Life and cheat death. Your body remains - you really did die - but you soon reappear, fully refreshed nearby and ready to continue the fight, or back at some safer location. Only when you lose your last Life do you roll your Last Breath.
+You are a cat, and hold 9 Lives. When you are reduced to 0 hit points, mark off a Life and cheat death. Your body remains - you really did die - but you soon reappear, fully refreshed nearby and ready to continue the fight, or back at some safer location. Only when you lose your last Life do you roll your Last Breath. [9 Charges]
 
 ### Sniper
 When you attack with a ranged weapon, deal +2 damage.
@@ -160,7 +160,7 @@ When using a precise or hand weapon, your backstab deals an extra +1d8 damage an
 
 ### Extremely Cautious
 *Replaces Cautious*  
-When you use trap expert you always get +1 hold, even on a 6-. On a 12+ you get 3 hold and the next time you come near a trap the GM will immediately tell you what it does, what triggers it, who set it, and how you can use it to your advantage.
+When you use trap expert on a 7-9 you hold 2 Detection. On a 6- you hold 1 Detection. On a 12+ you get 3 hold and the next time you come near a trap the GM will immediately tell you what it does, what triggers it, who set it, and how you can use it to your advantage.
 
 ### Alchemist
 *Replaces Brewer*  

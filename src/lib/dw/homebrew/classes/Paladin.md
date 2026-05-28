@@ -102,7 +102,7 @@ I respect the beliefs of \_\_\_\_\_ but hope they will someday see the true way.
 ## Advanced Moves
 
 ### Divine Favor
-Dedicate yourself to a deity, and be granted a cleric's spells. When you **stand on sanctified, holy ground** for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil. When you **complete a Quest**, hold 3 Miracles.
+Dedicate yourself to a deity, and be granted a cleric's spells. When you **stand on sanctified, holy ground** for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil. When you **complete a Quest**, hold 3 Miracles. [3 Charges]
 
 Your caster level is your level minus two. You know all the Miracles of your caster level and below. When you *hold Miracle and pray for a saint's Miracle*, roll+WIS. On a 10+, it goes off. On a 7-9, choose 1:
 - Spend 1 Miracle as you lose some access to the divine.

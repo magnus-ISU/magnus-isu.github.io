@@ -136,7 +136,7 @@ When you mark an animal (with mud, dirt, or blood) you can see through that anim
 When you take damage while shapeshifted you may choose to revert to your natural form to negate the damage. This will not further protect you in your natural form (you can resist a spear thrust, but isn't much help for falling onto sharp stakes).
 
 ### Balance
-When you deal damage, hold 1 Balance. When you touch someone and spend a few minutes to channel the spirits of life you may spend Balance. They heal 1d4 HP per Balance spent.
+When you deal damage, hold 1 Balance. When you touch someone and spend a few minutes to channel the spirits of life you may spend Balance. They heal 1d4 HP per Balance spent. [5 Charges]
 
 ### Elemental Mastery
 When you call on the primal spirits of fire, water, earth or air to perform a task for you roll+Wis. On a 10+ choose two. On a 7-9 choose one. On a miss, some catastrophe occurs as a result of your calling.

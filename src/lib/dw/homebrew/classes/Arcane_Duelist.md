@@ -143,8 +143,8 @@ You move with inhuman grace and are capable of leaping distances that would be i
 *Replaces Know Your Enemy*  
 When you **re-encounter somebody that has wronged you**, roll+INT. On a 10+, choose 2. On a 7-9, choose 1:
 - Gain a flash of insight as to what your rival is thinking at this very moment.
-- Take +1 forward against your rival and, if you could already see them, you realize a way to isolate them and yourself from anyone who would interfere with your duel.
-- The nature of their fighting style is laid bare before you; hold 1 to perform a move from it that you have seen.
+- Take +1 forward against your rival and you realize a way to isolate them and yourself from anyone who would interfere with your duel.
+- The nature of their fighting style is laid bare before you; hold 1 Imitation to perform a move from it that you have seen. [1 Charge]
 
 ### Storied Hero
 When you **enter a settlement for the first time**, roll+CHA. On a 10+, you are recognized for your deeds and the common people either welcome you with open arms or acquiesce to your demands with fear as appropriate. On a 7-9, your name gets you a meeting with anyone but no guaranteed favors. On a miss, somebody has a bone to pick with you.
@@ -158,7 +158,7 @@ Get one move from another class. Treat your level as one lower, and your casting
 
 ### Spell Capture
 *Requires Spell Ripper*  
-On a 10+, you can choose to gain the Stunned debility. When you gain the Stunned debility from this move, Hold 1 Spell. Spend your spell to cast the same spell back at whatever target you choose. Lose your Spell when you are cured of the Stunned debility.
+On a 10+, you can choose to gain the Stunned (INT) debility. When you gain the Stunned debility from this move, Hold 1 Spell. Spend your spell to cast the same spell back at whatever target you choose. Lose your Spell when you are cured of the Stunned debility. [1 Charge]
 
 ## Techniques
 
