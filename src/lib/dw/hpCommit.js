@@ -12,7 +12,10 @@ export function commitHp(raw, current, max, armor = 0) {
 	if (raw.startsWith('+')) {
 		const heal = parseInt(raw.slice(1), 10);
 		if (Number.isNaN(heal)) return null;
-		return Math.min(current + heal, max ?? Infinity);
+		const healed = current + heal;
+		// Cap healing at max only when at or below it. If HP was manually set above
+		// max, leave it unclamped so healing/harming work unhindered from there.
+		return max != null && current <= max ? Math.min(healed, max) : healed;
 	}
 	if (raw.startsWith('-')) {
 		const dmg = parseInt(raw.slice(1), 10);
