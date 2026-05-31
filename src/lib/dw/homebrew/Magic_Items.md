@@ -33,6 +33,26 @@ In the hands of a paladin, it strikes true and strong. A paladin wielding it inc
 
 Argo-Thaan, while not intelligent, will forever be drawn to a cause of true Good, like iron to a magnet.
 
+### [1 Weight] Mnemonic Edge _close_
+A slim, silver-chased longsword with a hollow pommel set with a single sliver of moonstone. Scholars and battle-mages prize it for the quiet hum it gives off when spells are near. While you bear the Mnemonic Edge, you may prepare one additional spell beyond your usual limit, as if the blade itself held the extra page of your spellbook. If you let go of the sword, the spell stored within slips your mind until the blade is in your hand again.
+
+### [2 Weight] Frostmourne _close, two-handed, 1 piercing_
+
+### [1 Weight] [+1 Armor] Staff of the Bulwark _close, two-handed_
+A heavy oaken staff bound in iron rings which belonged to a hedge-priest who turned aside a baron's cavalry alone at a ford. When you successfully **Defend** with it, you hold one more Vigilance, and you can go on the offensive without losing your hold.
+
+### [0 Weight] Arrow of Slaying
+A finely-made arrow with fletching of a single, specific color and a head inscribed with a true name—the name of the one it was made to kill. When the named target is struck by the Arrow of Slaying, they die.
+
+### [2 Weight] Sun-Caller's Maul _close, two-handed_
+A great warhammer of brass and gilded oak, its head shaped like a rising sun. When you **smash the head of the maul against stone or hard ground**, undead turn toward you, and they must approach you before doing anything else. Crude, but effective.
+
+### [1 Weight] Dagger of Last Words _hand_
+A thin stiletto with a hilt of polished bone. When you **kill a living creature with the Dagger of Last Words**, you may ask the corpse a single question, and it must answer truthfully with whatever it knew in life.
+
+### [1 Weight] Starlit Bow _near, far_
+A slender pole of moon-pale wood, strung with a single strand of starlight. When you **infuse the starlight into your arrow**, it finds its way, no matter how impossible. Until you stand under new stars again, it is then merely a fine bow.
+
 ## Armor
 
 ### [1 Weight] [+1 Armor] Lodestone Shield
