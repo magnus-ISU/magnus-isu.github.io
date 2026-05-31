@@ -171,7 +171,7 @@ When you **Discern Realities**, on a 12+, you can ask any questions you like.
 
 ### As if born to them
 *Requires Quick Thinking*  
-Choose two spells which can hardly be forgotten; it takes but a few seconds of thought to re-memorize them, even without your spellbook.
+Choose two spells which can hardly be forgotten; it takes but a few seconds of thought to re-memorize them, even without your spellbook. You can do so as long as you are not at your limit of memorized spells.
 
 ### Enchanter's Soul
 *Requires Enchanter*  

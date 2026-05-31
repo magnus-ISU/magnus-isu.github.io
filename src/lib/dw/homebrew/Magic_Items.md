@@ -14,24 +14,24 @@ should provide more interesting bonuses.
 
 ## Arms
 
-### [2 Weight] Argo-Thaan, Holy Avenger _Close_
+### [1 Weight] Axe of the Conqueror-King _close_
+It is crafted of shining steel, glowing with a golden light and imbued with mythical powers of authority. When you bear the axe, you become a beacon of inspiration to all you lead. Any hirelings in your employ have +1 Loyalty, no matter the quality of your leadership.
+
+### [3 Weight] The Carcosan Spire _reach, thrown_
+None know from whence this spear of twisted white coral comes. Those who bear it too long find their minds full of alien dreams and begin to hear the strange thoughts of the Others. None are impervious. Used against any “natural” target (men, goblins, owlbears and the like) the Spire acts as a mere mortal spear. Its true purpose is to do harm to those things whose strange natures protect them against mundane weapons. Used thus, the Spire can wound foes otherwise invulnerable to harm. The wielder will recognize these twisted foes on sight—the Spire knows its own.
+
+### [2 Weight] Violation Glaive _reach_
+A legendary blade said to have been thrust backwards in time from some grim future, the violation glaive is crafted of strange green iron. The blade strikes at the mind of those it wounds, as well as the body. When you hack and slash on a 10+ you have an additional option: you can deal your normal damage, let them counterattack you, and instill the overwhelming emotion of your choice \(maybe fear, reverence, or trust\).
+
+### [2 Weight] Vorpal Sword _close, messy, 3 piercing_
+Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
+
+### [2 Weight] Argo-Thaan, Holy Avenger _close_
 There are many swords in this world, but there is only one Argo-Thaan. It is a blade of gold, silver and light, revered as a holy relic by all orders and religions for whom Good rings true. Its touch is a blessing and to many, the sight of it brings tears of joy.
 
 In the hands of a paladin, it strikes true and strong. A paladin wielding it increases their damage die to d12 and has access to every paladin move. As well, Argo-Thaan can harm any creature of Evil, regardless of any defenses it may have. No Evil creature may touch it without suffering agony. In the hands of any non-paladin, it is merely a sword, heavier and more cumbersome than most—it gains the awkward tag.
 
 Argo-Thaan, while not intelligent, will forever be drawn to a cause of true Good, like iron to a magnet.
-
-### [1 Weight] Axe of the Conqueror-King _Close_
-It is crafted of shining steel, glowing with a golden light and imbued with mythical powers of authority. When you bear the axe, you become a beacon of inspiration to all you lead. Any hirelings in your employ have +1 Loyalty, no matter the quality of your leadership.
-
-### [3 Weight] The Carcosan Spire _Reach, Thrown_
-None know from whence this spear of twisted white coral comes. Those who bear it too long find their minds full of alien dreams and begin to hear the strange thoughts of the Others. None are impervious. Used against any “natural” target \(men, goblins, owlbears and the like\) the Spire acts as a mere mortal spear. Its true purpose is to do harm to those things whose strange natures protect them against mundane weapons. Used thus, the Spire can wound foes otherwise invulnerable to harm. The wielder will recognize these twisted foes on sight—the Spire knows its own.
-
-### [2 Weight] Violation Glaive _reach_
-A legendary blade said to have been thrust backwards in time from some grim future, the violation glaive is crafted of strange green iron. The blade strikes at the mind of those it wounds, as well as the body. When you hack and slash on a 10+ you have an additional option: you can deal your normal damage, let them counterattack you, and instill the overwhelming emotion of your choice \(maybe fear, reverence, or trust\).
-
-### [2 Weight] Vorpal Sword _close, 3 piercing_
-Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
 
 ## Armor
 
@@ -43,6 +43,9 @@ A stealthy suit of armor, it appears as many things to many people and blends in
 
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
+
+### [1 Weight] [+1 Armor] Helm of Opposite Alignment
+Whosoever wears this helm is undone, their mind inverted. All that they loved becomes hated, and all evil seems right and just.
 
 ### [0 Weight] Ring of Protection
 A slender band of nearly invisible silver. Prince Edrin wore the ring upon his finger during his long captivity in the dungeons of the Usurper. Despite the tortures he endured, blades and blow alike seemed to slide away from his flesh, leaving him bruised but unbroken.
