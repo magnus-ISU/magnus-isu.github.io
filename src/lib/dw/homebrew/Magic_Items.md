@@ -26,7 +26,7 @@ A legendary blade said to have been thrust backwards in time from some grim futu
 ### [2 Weight] Vorpal Sword _close, messy, +2 damage, 3 piercing_
 Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
 
-### [2 Weight] Argo-Thaan, Holy Avenger _close_
+### [3 Weight] Argo-Thaan, Holy Avenger _close_
 There are many swords in this world, but there is only one Argo-Thaan. It is a blade of gold, silver and light, revered as a holy relic by all orders and religions for whom Good rings true. Its touch is a blessing and to many, the sight of it brings tears of joy.
 
 In the hands of a paladin, it strikes true and strong. A paladin wielding it increases their damage die to d12 and has access to every paladin move. As well, Argo-Thaan can harm any creature of Evil, regardless of any defenses it may have. No Evil creature may touch it without suffering agony. In the hands of any non-paladin, it is merely a sword, heavier and more cumbersome than most—it gains the awkward tag.
@@ -36,7 +36,7 @@ Argo-Thaan, while not intelligent, will forever be drawn to a cause of true Good
 ### [2 Weight] Frostmourne _close, two-handed, +2 damage_
 A great runeblade of black ice, taken from a frozen throne at the top of the world. Cold mist pours from its fuller and it drinks the warmth from any room it enters. When you **slay a foe with Frostmourne**, its soul is bound into the blade and you take +1 forward.
 
-The more you wield it, the more it whispers. Each time you would **lay the blade down for good**, roll+WIS — on anything but a 12+ you find a reason to keep it. In time, Frostmourne will demand the betrayal of the one you love most. It always gets what it wants; the only question is when.
+The more you wield it, the more it whispers. Each time you would **lay the blade down for good**, roll+WIS — on anything but a 12+ you find a reason to keep it. In time, Frostmourne will cause your betrayal of the one you love most. It always gets what it wants; the only question is when.
 
 ### [1 Weight] Mnemonic Edge _close_
 A slim, silver-chased longsword with a hollow pommel set with a single sliver of moonstone. While you bear the Mnemonic Edge, you may memorize one additional Wizard Spell, even if you are not a mage. If you let go of the sword, the spell slips your mind until the blade is in your hand again.
