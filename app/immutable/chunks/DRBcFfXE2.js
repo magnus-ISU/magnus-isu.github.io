@@ -14,24 +14,59 @@ should provide more interesting bonuses.
 
 ## Arms
 
-### [2 Weight] Argo-Thaan, Holy Avenger _Close_
+### [1 Weight] Axe of the Conqueror-King _close, +1 damage_
+It is crafted of shining steel, glowing with a golden light and imbued with mythical powers of authority. When you bear the axe, you become a beacon of inspiration to all you lead. Any hirelings in your employ have +1 Loyalty, no matter the quality of your leadership.
+
+### [3 Weight] The Carcosan Spire _reach, thrown, +1 damage_
+None know from whence this spear of twisted white coral comes. Those who bear it too long find their minds full of alien dreams and begin to hear the strange thoughts of the Others. None are impervious. Used against any “natural” target (men, goblins, owlbears and the like) the Spire acts as a mere mortal spear. Its true purpose is to do harm to those things whose strange natures protect them against mundane weapons. Used thus, the Spire can wound foes otherwise invulnerable to harm. The wielder will recognize these twisted foes on sight—the Spire knows its own.
+
+### [2 Weight] Violation Glaive _reach, +1 damage_
+A legendary blade said to have been thrust backwards in time from some grim future, the violation glaive is crafted of strange green iron. The blade strikes at the mind of those it wounds, as well as the body. When you Hack & Slash on a 10+ you can deal your normal damage, let them counterattack you, and instill the overwhelming emotion of your choice (maybe fear, reverence, or trust).
+
+### [2 Weight] Vorpal Sword _close, messy, +2 damage, 3 piercing_
+Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
+
+### [3 Weight] Argo-Thaan, Holy Avenger _close_
 There are many swords in this world, but there is only one Argo-Thaan. It is a blade of gold, silver and light, revered as a holy relic by all orders and religions for whom Good rings true. Its touch is a blessing and to many, the sight of it brings tears of joy.
 
 In the hands of a paladin, it strikes true and strong. A paladin wielding it increases their damage die to d12 and has access to every paladin move. As well, Argo-Thaan can harm any creature of Evil, regardless of any defenses it may have. No Evil creature may touch it without suffering agony. In the hands of any non-paladin, it is merely a sword, heavier and more cumbersome than most—it gains the awkward tag.
 
 Argo-Thaan, while not intelligent, will forever be drawn to a cause of true Good, like iron to a magnet.
 
-### [1 Weight] Axe of the Conqueror-King _Close_
-It is crafted of shining steel, glowing with a golden light and imbued with mythical powers of authority. When you bear the axe, you become a beacon of inspiration to all you lead. Any hirelings in your employ have +1 Loyalty, no matter the quality of your leadership.
+### [2 Weight] Frostmourne _close, two-handed, +2 damage_
+A great runeblade of black ice, taken from a frozen throne at the top of the world. Cold mist pours from its fuller and it drinks the warmth from any room it enters. When you **slay a foe with Frostmourne**, its soul is bound into the blade and you take +1 forward.
 
-### [3 Weight] The Carcosan Spire _Reach, Thrown_
-None know from whence this spear of twisted white coral comes. Those who bear it too long find their minds full of alien dreams and begin to hear the strange thoughts of the Others. None are impervious. Used against any “natural” target \\(men, goblins, owlbears and the like\\) the Spire acts as a mere mortal spear. Its true purpose is to do harm to those things whose strange natures protect them against mundane weapons. Used thus, the Spire can wound foes otherwise invulnerable to harm. The wielder will recognize these twisted foes on sight—the Spire knows its own.
+The more you wield it, the more it whispers. Each time you would **lay the blade down for good**, roll+WIS — on anything but a 12+ you find a reason to keep it. In time, Frostmourne will cause your betrayal of the one you love most. It always gets what it wants; the only question is when.
 
-### [2 Weight] Violation Glaive _reach_
-A legendary blade said to have been thrust backwards in time from some grim future, the violation glaive is crafted of strange green iron. The blade strikes at the mind of those it wounds, as well as the body. When you hack and slash on a 10+ you have an additional option: you can deal your normal damage, let them counterattack you, and instill the overwhelming emotion of your choice \\(maybe fear, reverence, or trust\\).
+### [1 Weight] Mnemonic Edge _close_
+A slim, silver-chased longsword with a hollow pommel set with a single sliver of moonstone. While you bear the Mnemonic Edge, you may memorize one additional Wizard Spell, even if you are not a mage. If you let go of the sword, the spell slips your mind until the blade is in your hand again.
 
-### [2 Weight] Vorpal Sword _close, 3 piercing_
-Sharp as anything, this simple-seeming sword means to separate one thing from another—the limb from the body or folk from their lives. When you deal damage with the Vorpal Sword, your enemy must choose something (an item, an advantage, a limb) and lose it, permanently.
+### [1 Weight] Greenwarden's Stave _close, two-handed_
+A living quarterstaff of pale ashwood that never quite stops growing. When you **strike the staff against the earth and call on the wild**, roll+WIS. On a 10+, choose two; on a 7–9, choose one:
+- Roots and vines erupt to bind or trip those nearby
+- The brush thickens into cover or parts into a clear path, your choice
+- You draw forth water, fruit, or fresh herbs enough for your company
+
+### [1 Weight] The Coward's Friend _hand, precise_
+A slender, unremarkable dagger with a mother-of-pearl grip. It is wickedly fond of opportunity. When you **attack a creature that is unaware, helpless, or who trusts you**, deal +1d6 damage and ignore their armor. The blade is happiest pointed at a friend's back, and it lets you know it.
+
+### [3 Weight] Stormcleaver _reach, two-handed, near, +1 damage_
+A great two-handed sword of blued steel, its edge crackling faintly in dry air. When you **hurl a bolt of lightning down the blade** at a distant foe, roll+CON. On a 10+, deal 1d6 damage. On a 7–9, the lightning strikes yourself or others also, your choice.
+
+### [1 Weight] [+1 Armor] Staff of the Bulwark _close, two-handed_
+A heavy oaken staff bound in iron rings which belonged to a hedge-priest who turned aside a baron's cavalry alone at a ford. When you successfully **Defend** with it, you hold one more Vigilance, and you can go on the offensive without losing your hold.
+
+### [2 Weight] Sun-Caller's Maul _close, two-handed, +1 damage_
+A great warhammer of brass and gilded oak, its head shaped like a rising sun. When you **smash the head of the maul against stone or hard ground**, undead turn toward you, and they must approach you before doing anything else.
+
+### [1 Weight] Dagger of Last Words _hand_
+A thin stiletto with a hilt of polished bone. When you **kill a living creature with the Dagger of Last Words**, you may ask the corpse a single question, and it must answer truthfully with whatever it knew in life.
+
+### [1 Weight] Starlit Bow _near, far_
+A slender pole of moon-pale wood, strung with a single strand of starlight. When you **infuse the starlight into your arrow**, it finds its way, no matter how impossible. Until you stand under new stars again, it is then merely a fine bow.
+
+### [0 Weight] Arrow of Slaying
+A finely-made arrow with fletching of a single, specific color and a head inscribed with a true name—the name of the one it was made to kill. When the named target is struck by the Arrow of Slaying, they die.
 
 ## Armor
 
@@ -43,6 +78,9 @@ A stealthy suit of armor, it appears as many things to many people and blends in
 
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
+
+### [1 Weight] [+1 Armor] Helm of Opposite Alignment
+Whosoever wears this helm is undone, their mind inverted. All that they loved becomes hated, and all evil seems right and just.
 
 ### [0 Weight] Ring of Protection
 A slender band of nearly invisible silver. Prince Edrin wore the ring upon his finger during his long captivity in the dungeons of the Usurper. Despite the tortures he endured, blades and blow alike seemed to slide away from his flesh, leaving him bruised but unbroken.
