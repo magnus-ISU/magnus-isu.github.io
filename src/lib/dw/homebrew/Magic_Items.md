@@ -34,7 +34,7 @@ In the hands of a paladin, it strikes true and strong. A paladin wielding it inc
 Argo-Thaan, while not intelligent, will forever be drawn to a cause of true Good, like iron to a magnet.
 
 ### [2 Weight] Frostmourne _close, two-handed, +2 damage_
-A great runeblade of black ice, taken from a frozen throne at the top of the world. Cold mist pours from its fuller and it drinks the warmth from any room it enters. When you **slay a foe with Frostmourne**, their soul is bound into the blade and you take +1 forward.
+A great runeblade of black ice, taken from a frozen throne at the top of the world. Cold mist pours from its fuller and it drinks the warmth from any room it enters. When you **strike at most weapons with Frostmourne**, their weapon turns to ice and shatters. When you **slay a foe with Frostmourne**, their soul is bound into the blade and you take +1 forward.
 
 The more you kill, the more it whispers. Each time you would **lay the blade down for good**, roll+WIS — on anything but a 12+ you find a reason to keep it. In time, Frostmourne will cause your betrayal of the one you love most. It always gets what it wants; the only question is when.
 
