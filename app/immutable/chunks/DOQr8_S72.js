@@ -79,7 +79,7 @@ A stealthy suit of armor, it appears as many things to many people and blends in
 ### [1 Weight] The Eyes of Truth
 The wearer of this helm can see through shadow and falsehood.
 
-### [1 Weight] [+1 Armor] Helm of Opposite Alignment
+### [1 Weight] [+1 Armor] Helm of Opposite Alignment *cursed*
 Whosoever wears this helm is undone, their mind inverted. All that they loved becomes hated, and all evil seems right and just.
 
 ### [0 Weight] Ring of Protection
