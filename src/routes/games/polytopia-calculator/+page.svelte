@@ -1,6 +1,5 @@
 <script>
 import { onMount } from 'svelte';
-import { replaceState } from '$app/navigation';
 import { LATEST_VERSION } from './lib/configLoader.js';
 import UnitPicker from './lib/components/UnitPicker.svelte';
 import SoldierUnitAsRender from './lib/components/SoldierUnitAsRender.svelte';
@@ -398,7 +397,7 @@ $effect(() => {
 	const search = params.toString();
 	const newUrl = window.location.pathname + (search ? '?' + search : '');
 	if (newUrl !== window.location.pathname + window.location.search) {
-		replaceState(newUrl, {});
+		history.replaceState(history.state, '', newUrl);
 	}
 });
 
