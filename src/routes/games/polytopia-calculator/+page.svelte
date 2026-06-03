@@ -591,14 +591,15 @@ $effect(() => {
 .battle {
 	display: flex;
 	justify-content: space-between;
-	flex-flow: wrap;
+	flex-flow: nowrap;
 	gap: 1%;
 }
 .column {
 	display: block;
 	max-width: 425px;
 	width: 48%;
-	min-width: 280px;
+	flex: 1 1 0;
+	min-width: 0;
 	transition: transform 200ms ease, opacity 200ms ease;
 }
 .column.swap-out-left {
