@@ -101,6 +101,23 @@ const driveLabel = $derived.by(() => {
 	>{driveLabel}</button>
 </div>
 
+{#if driveSync.conflictNotice}
+	<div
+		class="conflict-backdrop"
+		role="presentation"
+		onclick={() => driveSync.dismissConflict()}
+	></div>
+	<div class="conflict-modal" role="alertdialog" aria-modal="true" aria-labelledby="conflict-title">
+		<h2 id="conflict-title">Sync conflict</h2>
+		<p>
+			Your Drive file was updated from another device while you had unsynced changes
+			here. The remote version has been loaded, and your unsynced local edits have
+			been discarded.
+		</p>
+		<button class="conflict-ok" onclick={() => driveSync.dismissConflict()}>OK</button>
+	</div>
+{/if}
+
 <style>
 	.storage-toggle {
 		display: flex;
@@ -151,5 +168,59 @@ const driveLabel = $derived.by(() => {
 	.toggle-half.active.error {
 		background: #a04040;
 		color: #fff;
+	}
+
+	.conflict-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 1000;
+	}
+
+	.conflict-modal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1001;
+		max-width: 28rem;
+		width: calc(100vw - 2rem);
+		padding: 1rem 1.25rem 1.25rem;
+		background: #1e1e1e;
+		color: #e0e0e0;
+		border: 1px solid #a04040;
+		border-radius: 6px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+		font-family: inherit;
+		font-size: 0.85rem;
+		line-height: 1.4;
+	}
+
+	.conflict-modal h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
+		color: #d4a847;
+	}
+
+	.conflict-modal p {
+		margin: 0 0 1rem;
+	}
+
+	.conflict-ok {
+		display: block;
+		margin-left: auto;
+		padding: 0.35rem 1rem;
+		background: #d4a847;
+		color: #1e1e1e;
+		border: none;
+		border-radius: 4px;
+		font-family: inherit;
+		font-size: 0.8rem;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.conflict-ok:hover {
+		background: #e0b658;
 	}
 </style>
