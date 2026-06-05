@@ -23,6 +23,13 @@ const transitionOut = { duration: 100 };
 		padding: 0 1rem;
 	}
 
+	.blog-layout :global(a) {
+		color: #8ab4f8;
+	}
+	.blog-layout :global(a:visited) {
+		color: #c58af9;
+	}
+
 	/* Blog-specific styles */
 	:global(.post) {
 		max-width: 80rem;
