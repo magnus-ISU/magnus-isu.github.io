@@ -29,7 +29,8 @@ export function decodeTeam(str, team, getUnitConfig) {
 	return str
 		.split('~')
 		.map((spec, id) => decodeUnit(spec, team, id, getUnitConfig))
-		.filter((u) => u !== null);
+		.filter((u) => u !== null)
+		.map((u, id) => ({ ...u, id }));
 }
 
 function decodeUnit(spec, team, id, getUnitConfig) {
@@ -56,7 +57,8 @@ function decodeUnit(spec, team, id, getUnitConfig) {
 		veteran,
 		defenceBonus: flagsStr.includes('d'),
 		wallBonus: flagsStr.includes('w'),
-		safeBonus: flagsStr.includes('s') || (team === 'Attackers' && config.skills.includes('surprise')),
+		safeBonus:
+			flagsStr.includes('s') || (team === 'Attackers' && config.skills.includes('surprise')),
 		poisonedBonus: flagsStr.includes('p'),
 		becamePoisonedBonus: false,
 		boostedBonus: flagsStr.includes('b'),

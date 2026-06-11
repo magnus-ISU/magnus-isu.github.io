@@ -1,23 +1,7 @@
 <script>
 import { displayIcon } from '../unitImages.js';
 
-let {
-	unit,
-	versionConfig,
-	onDelete,
-	onUpdateHitpoints,
-	onIncreaseHitpoints,
-	onDecreaseHitpoints,
-	onVeteranBonus,
-	onDefenceBonus,
-	onWallBonus,
-	onSafeBonus,
-	onPoisonedBonus,
-	onBoostedBonus,
-	onShipUnit,
-	onSplashDamage,
-	onExplodeDamage,
-} = $props();
+let { unit, versionConfig, onAction = () => {} } = $props();
 
 let healthInputField = $state('');
 
@@ -32,7 +16,7 @@ function commitHealth(value) {
 	const normalized = String(value).replace(',', '.');
 	const numeric = parseFloat(normalized) || 0;
 	healthInputField = String(numeric);
-	onUpdateHitpoints(unit.id, unit.team, numeric);
+	onAction('setHealth', numeric);
 }
 
 function onKeyDown(e) {
@@ -66,34 +50,31 @@ function onKeyDown(e) {
 				{unit.healthAfter}
 			</span>
 		</div>
-		<button class="delete-btn" onclick={() => onDelete(unit.id, unit.team)} aria-label="delete unit">
+		<button class="delete-btn" onclick={() => onAction('delete')} aria-label="delete unit">
 			✕
 		</button>
 	</div>
 
 	<div class="row buttons">
-		<button class="hp-btn plus" onclick={() => onIncreaseHitpoints(unit.id, unit.team)} aria-label="increase hp">+</button>
+		<button class="hp-btn plus" onclick={() => onAction('adjustHealth', 1)} aria-label="increase hp">+</button>
 
 		{#if !unit.config.skills.includes('static')}
 			<button
 				class="bonus-btn"
 				class:on={unit.veteran}
-				onclick={() => onVeteranBonus(unit.id, unit.team, unit.typeUnit)}
+				onclick={() => onAction('veteran')}
 			>{unit.veteran ? 'VET' : 'vet'}</button>
 		{/if}
 
 		{#if unit.shipUnit}
-			<button
-				class="bonus-btn"
-				onclick={() => onShipUnit(unit.id, unit.team, unit.typeUnit, unit.shipUnit)}
-			>mx{unit.healthMax}</button>
+			<button class="bonus-btn" onclick={() => onAction('shipMax')}>mx{unit.healthMax}</button>
 		{/if}
 
 		{#if isAttacker && (unit.config.skills.includes('splash') || unit.config.skills.includes('stomp'))}
 			<button
 				class="bonus-btn"
 				class:on={unit.splashDamage}
-				onclick={() => onSplashDamage(unit.id, unit.team, unit.typeUnit, unit.splashDamage)}
+				onclick={() => onAction('splashDamage')}
 			>{unit.splashDamage ? 'SPLSH' : 'splsh'}</button>
 		{/if}
 
@@ -101,7 +82,7 @@ function onKeyDown(e) {
 			<button
 				class="bonus-btn"
 				class:on={unit.explodeDamage}
-				onclick={() => onExplodeDamage(unit.id, unit.team, unit.typeUnit, unit.explodeDamage)}
+				onclick={() => onAction('explodeDamage')}
 			>{unit.explodeDamage ? 'XPLD' : 'xpld'}</button>
 		{/if}
 
@@ -109,19 +90,19 @@ function onKeyDown(e) {
 			<button
 				class="bonus-btn"
 				class:on={unit.defenceBonus}
-				onclick={() => onDefenceBonus(unit.id, unit.team, unit.typeUnit, unit.defenceBonus)}
+				onclick={() => onAction('defenceBonus')}
 			>{unit.defenceBonus ? 'DEF' : 'def'}</button>
 		{/if}
 	</div>
 
 	<div class="row buttons">
-		<button class="hp-btn minus" onclick={() => onDecreaseHitpoints(unit.id, unit.team)} aria-label="decrease hp">−</button>
+		<button class="hp-btn minus" onclick={() => onAction('adjustHealth', -1)} aria-label="decrease hp">−</button>
 
 		{#if isDefender && unit.config.skills.includes('fortify')}
 			<button
 				class="bonus-btn"
 				class:on={unit.wallBonus}
-				onclick={() => onWallBonus(unit.id, unit.team, unit.typeUnit, unit.wallBonus)}
+				onclick={() => onAction('wallBonus')}
 			>{unit.wallBonus ? 'WALL' : 'wall'}</button>
 		{/if}
 
@@ -130,7 +111,7 @@ function onKeyDown(e) {
 				class="bonus-btn"
 				class:on={unit.poisonedBonus}
 				class:became-poisoned={!unit.poisonedBonus && unit.becamePoisonedBonus}
-				onclick={() => onPoisonedBonus(unit.id, unit.team, unit.typeUnit, unit.poisonedBonus)}
+				onclick={() => onAction('poisonedBonus')}
 			>{unit.poisonedBonus ? 'POIS' : 'pois'}</button>
 		{/if}
 
@@ -138,7 +119,7 @@ function onKeyDown(e) {
 			<button
 				class="bonus-btn"
 				class:on={unit.safeBonus}
-				onclick={() => onSafeBonus(unit.id, unit.team, unit.typeUnit, unit.safeBonus)}
+				onclick={() => onAction('safeBonus')}
 			>{unit.safeBonus ? 'SAFE' : 'safe'}</button>
 		{/if}
 
@@ -146,7 +127,7 @@ function onKeyDown(e) {
 			<button
 				class="bonus-btn"
 				class:on={unit.boostedBonus}
-				onclick={() => onBoostedBonus(unit.id, unit.team, unit.typeUnit, unit.boostedBonus)}
+				onclick={() => onAction('boostedBonus')}
 			>{unit.boostedBonus ? 'BST' : 'bst'}</button>
 		{/if}
 	</div>

@@ -31,7 +31,11 @@ export function simulate(att, def, cfg) {
 		defenderRepeatedAttack++;
 
 		const attackerAttack = attacker.config.attack + (attacker.boostedBonus ? 0.5 : 0);
-		const attackForce = calculateAttackForce(attackerAttack, attacker.healthBefore, attacker.healthMax);
+		const attackForce = calculateAttackForce(
+			attackerAttack,
+			attacker.healthBefore,
+			attacker.healthMax,
+		);
 
 		let defenderDefenseBonus = defender.wallBonus ? 4 : defender.defenceBonus ? 1.5 : 1;
 		if (defender.poisonedBonus || defender.becamePoisonedBonus) {
@@ -67,7 +71,11 @@ export function simulate(att, def, cfg) {
 		defender.healthAfter = defender.healthBefore - totalAttackResult;
 
 		if (defender.healthAfter > 0) {
-			const defenceResult = calculateDefenseResult(defenseForce, totalDamage, defender.config.defence);
+			const defenceResult = calculateDefenseResult(
+				defenseForce,
+				totalDamage,
+				defender.config.defence,
+			);
 			if (
 				attacker.config.skills.includes('poison') ||
 				attacker.typeUnit === 'Segment' ||

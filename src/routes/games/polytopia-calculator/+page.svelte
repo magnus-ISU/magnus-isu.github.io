@@ -1,10 +1,9 @@
 <script>
 import { onMount } from 'svelte';
-import { LATEST_VERSION } from './lib/configLoader.js';
-import UnitPicker from './lib/components/UnitPicker.svelte';
-import SoldierUnitAsRender from './lib/components/SoldierUnitAsRender.svelte';
 import CardWithShadow from './lib/components/CardWithShadow.svelte';
-import { simulateAndScore, findBestOrder } from './lib/optimize.js';
+import SoldierUnitAsRender from './lib/components/SoldierUnitAsRender.svelte';
+import UnitPicker from './lib/components/UnitPicker.svelte';
+import { findBestOrder, simulateAndScore } from './lib/optimize.js';
 import { decodeTeam, encodeStateToParams } from './lib/urlState.js';
 
 const PERM_CHEAP_THRESHOLD = 7;
@@ -12,8 +11,12 @@ let mounted = $state(false);
 
 let { data } = $props();
 const versionConfigs = $derived(data.versionConfigs);
-let currentVersion = $state(LATEST_VERSION);
-const versionConfig = $derived(versionConfigs[currentVersion] ?? versionConfigs[Object.keys(versionConfigs).sort().pop()]);
+let currentVersion = $state(
+	Object.keys(data.versionConfigs)
+		.sort((a, b) => Number(a) - Number(b))
+		.pop(),
+);
+const versionConfig = $derived(versionConfigs[currentVersion]);
 
 let attackers = $state([]);
 let defenders = $state([]);
@@ -29,7 +32,7 @@ const MOVE_THRESHOLD = 8;
 
 function getUnitConfig(typeUnit) {
 	const unit = versionConfig.unitStats.find((u) => u.name === typeUnit);
-	if (!unit) throw new Error('Unit type not found: ' + typeUnit);
+	if (!unit) throw new Error(`Unit type not found: ${typeUnit}`);
 	return unit;
 }
 
@@ -56,20 +59,8 @@ function makeUnit(typeUnit, team, id) {
 	};
 }
 
-function handleAddAttacker(typeUnit) {
-	try {
-		attackers = [...attackers, makeUnit(typeUnit, 'Attackers', attackers.length)];
-	} catch {
-		alert('Error: failed to add attacker.');
-	}
-}
-
-function handleAddDefender(typeUnit) {
-	try {
-		defenders = [...defenders, makeUnit(typeUnit, 'Defenders', defenders.length)];
-	} catch {
-		alert('Error: failed to add defender.');
-	}
+function handleAdd(team, typeUnit) {
+	setList(team, (list) => [...list, makeUnit(typeUnit, team, list.length)]);
 }
 
 function handleVersionChange(e) {
@@ -83,75 +74,58 @@ function setList(team, updater) {
 	else defenders = updater(defenders);
 }
 
-function handleUpdateHitpoints(id, team, value) {
-	const numeric = parseFloat(String(value)) || 0;
-	setList(team, (list) => list.map((u) => (u.id === id ? { ...u, healthBefore: numeric } : u)));
-}
-
-function handleIncreaseHitpoints(id, team) {
-	setList(team, (list) => list.map((u) => (u.id === id ? { ...u, healthBefore: u.healthBefore + 1 } : u)));
-}
-
-function handleDecreaseHitpoints(id, team) {
-	setList(team, (list) => list.map((u) => (u.id === id ? { ...u, healthBefore: u.healthBefore - 1 } : u)));
-}
-
-function handleDelete(id, team) {
-	setList(team, (list) => list.filter((u) => u.id !== id).map((u, i) => ({ ...u, id: i })));
+function updateUnit(id, team, fn) {
+	setList(team, (list) => list.map((u) => (u.id === id ? fn(u) : u)));
 }
 
 function toggleBonus(id, team, which) {
-	if (team === 'Defenders') {
-		const isOldPoison = versionConfig?.poisonScheme === 'OLD';
-		defenders = defenders.map((u) => {
-			if (u.id !== id) return u;
-			const updated = { ...u, [which]: !u[which] };
-			if (which === 'defenceBonus' && updated.defenceBonus) {
+	const isOldPoison = versionConfig?.poisonScheme === 'OLD';
+	updateUnit(id, team, (u) => {
+		const updated = { ...u, [which]: !u[which] };
+		if (team === 'Defenders' && updated[which]) {
+			// defence and wall are mutually exclusive; under the old poison scheme, poison excludes both
+			if (which === 'defenceBonus') {
 				updated.wallBonus = false;
 				if (isOldPoison) updated.poisonedBonus = false;
-			}
-			if (which === 'wallBonus' && updated.wallBonus) {
+			} else if (which === 'wallBonus') {
 				updated.defenceBonus = false;
 				if (isOldPoison) updated.poisonedBonus = false;
-			}
-			if (which === 'poisonedBonus' && updated.poisonedBonus && isOldPoison) {
+			} else if (which === 'poisonedBonus' && isOldPoison) {
 				updated.wallBonus = false;
 				updated.defenceBonus = false;
 			}
-			return updated;
-		});
-	} else {
-		attackers = attackers.map((u) => (u.id === id ? { ...u, [which]: !u[which] } : u));
+		}
+		return updated;
+	});
+}
+
+function handleUnitAction(unit, type, value) {
+	const { id, team } = unit;
+	switch (type) {
+		case 'delete':
+			setList(team, (list) => list.filter((u) => u.id !== id).map((u, i) => ({ ...u, id: i })));
+			break;
+		case 'setHealth':
+			updateUnit(id, team, (u) => ({ ...u, healthBefore: value }));
+			break;
+		case 'adjustHealth':
+			updateUnit(id, team, (u) => ({ ...u, healthBefore: u.healthBefore + value }));
+			break;
+		case 'veteran':
+			updateUnit(id, team, (u) => {
+				const healthMax = u.veteran ? u.config.maxHealth : u.config.maxHealth + 5;
+				return { ...u, veteran: !u.veteran, healthMax, healthBefore: healthMax };
+			});
+			break;
+		case 'shipMax':
+			updateUnit(id, team, (u) => {
+				const healthMax = u.healthMax + 5 > 35 ? 10 : u.healthMax + 5;
+				return { ...u, healthMax, healthBefore: healthMax };
+			});
+			break;
+		default:
+			toggleBonus(id, team, type);
 	}
-}
-
-const handleDefenceBonus = (id, team) => toggleBonus(id, team, 'defenceBonus');
-const handleWallBonus = (id, team) => toggleBonus(id, team, 'wallBonus');
-const handlePoisonedBonus = (id, team) => toggleBonus(id, team, 'poisonedBonus');
-const handleSafeBonus = (id, team) => toggleBonus(id, team, 'safeBonus');
-const handleBoostedBonus = (id, team) => toggleBonus(id, team, 'boostedBonus');
-const handleSplashDamage = (id, team) => toggleBonus(id, team, 'splashDamage');
-const handleExplodeDamage = (id, team) => toggleBonus(id, team, 'explodeDamage');
-
-function handleVeteranBonus(id, team) {
-	setList(team, (list) =>
-		list.map((u) => {
-			if (u.id !== id) return u;
-			const wasVet = u.veteran;
-			const newMax = wasVet ? u.config.maxHealth : u.config.maxHealth + 5;
-			return { ...u, veteran: !wasVet, healthMax: newMax, healthBefore: newMax };
-		})
-	);
-}
-
-function handleShipUnit(id, team) {
-	setList(team, (list) =>
-		list.map((u) => {
-			if (u.id !== id) return u;
-			const maxHealth = u.healthMax + 5 > 35 ? 10 : u.healthMax + 5;
-			return { ...u, healthMax: maxHealth, healthBefore: maxHealth };
-		})
-	);
 }
 
 function moveWithin(list, fromIdx, toIdx) {
@@ -190,7 +164,9 @@ function findDropTargetAt(x, y) {
 }
 
 function isInteractive(el) {
-	return el && !!el.closest?.('button, input, select, textarea, label, a, [contenteditable="true"]');
+	return (
+		el && !!el.closest?.('button, input, select, textarea, label, a, [contenteditable="true"]')
+	);
 }
 
 function beginPickup(card, pointerId, team, index, rect, startX, startY, clientX, clientY) {
@@ -359,7 +335,9 @@ const attackersAsRender = $derived(computed.attList);
 const defendersAsRender = $derived(computed.defList);
 
 const canCheckOptimal = $derived(attackers.length >= 2 && attackers.length <= PERM_CHEAP_THRESHOLD);
-const bestForCurrent = $derived(canCheckOptimal ? findBestOrder(attackers, defenders, versionConfig) : null);
+const bestForCurrent = $derived(
+	canCheckOptimal ? findBestOrder(attackers, defenders, versionConfig) : null,
+);
 const showOptimizeButton = $derived(!!bestForCurrent && bestForCurrent.score > computed.score);
 
 function handleOptimizeOrder() {
@@ -367,27 +345,14 @@ function handleOptimizeOrder() {
 	attackers = bestForCurrent.perm.map((u, i) => ({ ...u, id: i }));
 }
 
-function tryGetUnitConfig(version, type) {
-	const cfg = versionConfigs[version];
-	if (!cfg) return null;
-	const unit = cfg.unitStats.find((u) => u.name === type);
-	return unit ?? null;
-}
-
 onMount(() => {
 	const params = new URLSearchParams(window.location.search);
 	const v = params.get('v');
 	if (v && versionConfigs[v]) currentVersion = v;
-	const cfg = versionConfigs[currentVersion];
-	const getCfg = (type) => {
-		const u = cfg.unitStats.find((x) => x.name === type);
-		if (!u) throw new Error('unknown unit ' + type);
-		return u;
-	};
 	const a = params.get('a');
 	const d = params.get('d');
-	if (a) attackers = decodeTeam(a, 'Attackers', getCfg);
-	if (d) defenders = decodeTeam(d, 'Defenders', getCfg);
+	if (a) attackers = decodeTeam(a, 'Attackers', getUnitConfig);
+	if (d) defenders = decodeTeam(d, 'Defenders', getUnitConfig);
 	mounted = true;
 });
 
@@ -395,12 +360,11 @@ $effect(() => {
 	if (!mounted) return;
 	const params = encodeStateToParams(attackers, defenders, currentVersion);
 	const search = params.toString();
-	const newUrl = window.location.pathname + (search ? '?' + search : '');
+	const newUrl = window.location.pathname + (search ? `?${search}` : '');
 	if (newUrl !== window.location.pathname + window.location.search) {
 		history.replaceState(history.state, '', newUrl);
 	}
 });
-
 </script>
 
 <svelte:head>
@@ -413,114 +377,55 @@ $effect(() => {
 	<div class="pickers">
 		<UnitPicker
 			team="Attackers"
-			onAdd={handleAddAttacker}
+			{versionConfig}
+			onAdd={(typeUnit) => handleAdd('Attackers', typeUnit)}
 			onOptimize={showOptimizeButton ? handleOptimizeOrder : null}
 		/>
-		<UnitPicker team="Defenders" onAdd={handleAddDefender} />
+		<UnitPicker team="Defenders" {versionConfig} onAdd={(typeUnit) => handleAdd('Defenders', typeUnit)} />
 	</div>
 
 	<div class="battle">
-		<div class="column {isSwappingColumns === 'toDefenders' ? 'swap-out-left' : ''}">
-			{#each attackersAsRender as unit, idx (`attacker-${unit.id}-${unit.typeUnit}`)}
-				<CardWithShadow
-					data-droptarget=""
-					data-team="Attackers"
-					data-index={idx}
-					onpointerdown={(e) => handlePointerDown(e, 'Attackers', idx)}
-					onpointermove={handlePointerMove}
-					onpointerup={handlePointerUp}
-					onpointercancel={handlePointerCancel}
-					class={`dnd-card ${
-						dragContext && hoverTarget?.team === 'Attackers' && hoverTarget?.index === idx
-							? 'dnd-drop-target'
-							: ''
-					} ${
-						dragContext?.team === 'Attackers' && dragContext?.index === idx
-							? 'being-dragged'
-							: ''
-					} ${
-						armed?.team === 'Attackers' && armed?.index === idx ? 'armed' : ''
-					}`}
-				>
-					<SoldierUnitAsRender
-						{unit}
-						{versionConfig}
-						onDelete={handleDelete}
-						onUpdateHitpoints={handleUpdateHitpoints}
-						onIncreaseHitpoints={handleIncreaseHitpoints}
-						onDecreaseHitpoints={handleDecreaseHitpoints}
-						onVeteranBonus={handleVeteranBonus}
-						onDefenceBonus={handleDefenceBonus}
-						onWallBonus={handleWallBonus}
-						onSafeBonus={handleSafeBonus}
-						onPoisonedBonus={handlePoisonedBonus}
-						onBoostedBonus={handleBoostedBonus}
-						onShipUnit={handleShipUnit}
-						onSplashDamage={handleSplashDamage}
-						onExplodeDamage={handleExplodeDamage}
-					/>
-				</CardWithShadow>
-			{/each}
-			<CardWithShadow
-				style="padding:4px; min-height:24px; opacity:0.4;"
-				data-droptarget=""
-				data-team="Attackers"
-				data-index="end"
+		{#each ['Attackers', 'Defenders'] as team (team)}
+			{@const units = team === 'Attackers' ? attackersAsRender : defendersAsRender}
+			<div
+				class="column"
+				class:swap-out-left={team === 'Attackers' && isSwappingColumns === 'toDefenders'}
+				class:swap-out-right={team === 'Defenders' && isSwappingColumns === 'toAttackers'}
 			>
-				<span></span>
-			</CardWithShadow>
-		</div>
-
-		<div class="column {isSwappingColumns === 'toAttackers' ? 'swap-out-right' : ''}">
-			{#each defendersAsRender as unit, idx (`defender-${unit.id}-${unit.typeUnit}`)}
+				{#each units as unit, idx (`${team}-${unit.id}-${unit.typeUnit}`)}
+					<CardWithShadow
+						data-droptarget=""
+						data-team={team}
+						data-index={idx}
+						onpointerdown={(e) => handlePointerDown(e, team, idx)}
+						onpointermove={handlePointerMove}
+						onpointerup={handlePointerUp}
+						onpointercancel={handlePointerCancel}
+						class={`dnd-card ${
+							dragContext && hoverTarget?.team === team && hoverTarget?.index === idx
+								? 'dnd-drop-target'
+								: ''
+						} ${
+							dragContext?.team === team && dragContext?.index === idx ? 'being-dragged' : ''
+						} ${armed?.team === team && armed?.index === idx ? 'armed' : ''}`}
+					>
+						<SoldierUnitAsRender
+							{unit}
+							{versionConfig}
+							onAction={(type, value) => handleUnitAction(unit, type, value)}
+						/>
+					</CardWithShadow>
+				{/each}
 				<CardWithShadow
+					style="padding:4px; min-height:24px; opacity:0.4;"
 					data-droptarget=""
-					data-team="Defenders"
-					data-index={idx}
-					onpointerdown={(e) => handlePointerDown(e, 'Defenders', idx)}
-					onpointermove={handlePointerMove}
-					onpointerup={handlePointerUp}
-					onpointercancel={handlePointerCancel}
-					class={`dnd-card ${
-						dragContext && hoverTarget?.team === 'Defenders' && hoverTarget?.index === idx
-							? 'dnd-drop-target'
-							: ''
-					} ${
-						dragContext?.team === 'Defenders' && dragContext?.index === idx
-							? 'being-dragged'
-							: ''
-					} ${
-						armed?.team === 'Defenders' && armed?.index === idx ? 'armed' : ''
-					}`}
+					data-team={team}
+					data-index="end"
 				>
-					<SoldierUnitAsRender
-						{unit}
-						{versionConfig}
-						onDelete={handleDelete}
-						onUpdateHitpoints={handleUpdateHitpoints}
-						onIncreaseHitpoints={handleIncreaseHitpoints}
-						onDecreaseHitpoints={handleDecreaseHitpoints}
-						onVeteranBonus={handleVeteranBonus}
-						onDefenceBonus={handleDefenceBonus}
-						onWallBonus={handleWallBonus}
-						onSafeBonus={handleSafeBonus}
-						onPoisonedBonus={handlePoisonedBonus}
-						onBoostedBonus={handleBoostedBonus}
-						onShipUnit={handleShipUnit}
-						onSplashDamage={handleSplashDamage}
-						onExplodeDamage={handleExplodeDamage}
-					/>
+					<span></span>
 				</CardWithShadow>
-			{/each}
-			<CardWithShadow
-				style="padding:4px; min-height:24px; opacity:0.4;"
-				data-droptarget=""
-				data-team="Defenders"
-				data-index="end"
-			>
-				<span></span>
-			</CardWithShadow>
-		</div>
+			</div>
+		{/each}
 	</div>
 
 	{#if dragPreview}
@@ -531,23 +436,7 @@ $effect(() => {
 				style={`left:${dragPreview.clientX - dragPreview.clickOffsetX}px; top:${dragPreview.clientY - dragPreview.clickOffsetY}px; width:${dragPreview.width}px; height:${dragPreview.height}px;`}
 			>
 				<CardWithShadow style={`width:${dragPreview.width}px; height:${dragPreview.height}px;`}>
-					<SoldierUnitAsRender
-						unit={previewUnit}
-						{versionConfig}
-						onDelete={() => {}}
-						onUpdateHitpoints={() => {}}
-						onIncreaseHitpoints={() => {}}
-						onDecreaseHitpoints={() => {}}
-						onVeteranBonus={() => {}}
-						onDefenceBonus={() => {}}
-						onWallBonus={() => {}}
-						onSafeBonus={() => {}}
-						onPoisonedBonus={() => {}}
-						onBoostedBonus={() => {}}
-						onShipUnit={() => {}}
-						onSplashDamage={() => {}}
-						onExplodeDamage={() => {}}
-					/>
+					<SoldierUnitAsRender unit={previewUnit} {versionConfig} />
 				</CardWithShadow>
 			</div>
 		{/if}

@@ -1,51 +1,52 @@
 <script>
+import { unitImages } from '../unitImages.js';
 import CardWithShadow from './CardWithShadow.svelte';
-import { unitImages, attackerPages, defenderPages } from '../unitImages.js';
 
-let { team, onAdd, onOptimize = null, disabled = false } = $props();
+let { team, versionConfig, onAdd, onOptimize = null } = $props();
 
-const pages = $derived(team === 'Attackers' ? attackerPages : defenderPages);
+const UNITS_PER_PAGE = 10;
 const colorClass = $derived(team === 'Attackers' ? 'attacker' : 'defender');
-const label = $derived(team === 'Attackers' ? 'Attackers selection' : 'Defenders selection');
+
+const pages = $derived.by(() => {
+	const names = versionConfig.unitStats.map((u) => u.name);
+	const chunks = [];
+	for (let i = 0; i < names.length; i += UNITS_PER_PAGE)
+		chunks.push(names.slice(i, i + UNITS_PER_PAGE));
+	return chunks;
+});
 
 let currentPage = $state(0);
+const page = $derived(Math.min(currentPage, pages.length - 1));
 
 function prev() {
-	currentPage = currentPage === 0 ? pages.length - 1 : currentPage - 1;
+	currentPage = (page + pages.length - 1) % pages.length;
 }
 function next() {
-	currentPage = currentPage === pages.length - 1 ? 0 : currentPage + 1;
+	currentPage = (page + 1) % pages.length;
 }
 </script>
 
 <CardWithShadow class="picker-card">
 	<div class="picker-header">
-		<button class="nav-btn {colorClass}" onclick={prev} {disabled} aria-label="previous page">&lt;</button>
+		<button class="nav-btn {colorClass}" onclick={prev} aria-label="previous page">&lt;</button>
 		{#if onOptimize}
 			<button class="optimize-btn {colorClass}" onclick={onOptimize}>Optimize order</button>
 		{:else}
-			<span class="picker-title">{label}</span>
+			<span class="picker-title">{team} selection</span>
 		{/if}
-		<button class="nav-btn {colorClass}" onclick={next} {disabled} aria-label="next page">&gt;</button>
+		<button class="nav-btn {colorClass}" onclick={next} aria-label="next page">&gt;</button>
 	</div>
-	{#each [0, 1] as row}
-		<div class="picker-row">
-			{#each pages[currentPage].slice(row * 5, row * 5 + 5) as unit, i (`${unit.name}-${row}-${i}`)}
-				<button
-					class="unit-btn {colorClass}"
-					onclick={() => onAdd(unit.name)}
-					{disabled}
-					data-testid={`${team.toLowerCase().replace(/s$/, '')}-${unit.name.toLowerCase()}`}
-				>
-					<img
-						src={unitImages[team][unit.name]}
-						alt={unit.name}
-						class:flip={team === 'Defenders'}
-					/>
-				</button>
-			{/each}
-		</div>
-	{/each}
+	<div class="picker-grid">
+		{#each pages[page] as name (name)}
+			<button
+				class="unit-btn {colorClass}"
+				onclick={() => onAdd(name)}
+				data-testid={`${team.toLowerCase().replace(/s$/, '')}-${name.toLowerCase()}`}
+			>
+				<img src={unitImages[team][name]} alt={name} class:flip={team === 'Defenders'} />
+			</button>
+		{/each}
+	</div>
 </CardWithShadow>
 
 <style>
@@ -90,9 +91,10 @@ function next() {
 	background: #2a2a2a;
 	filter: brightness(1.1);
 }
-.picker-row {
-	display: flex;
-	justify-content: space-between;
+.picker-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-items: center;
 }
 .nav-btn {
 	margin: 8px;
@@ -111,12 +113,8 @@ function next() {
 .nav-btn.defender {
 	background: #e34a4a;
 }
-.nav-btn:hover:not(:disabled) {
+.nav-btn:hover {
 	filter: brightness(1.15);
-}
-.nav-btn:disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
 }
 .unit-btn {
 	margin: 8px;
@@ -134,12 +132,8 @@ function next() {
 .unit-btn.defender {
 	border-color: #e34a4a;
 }
-.unit-btn:hover:not(:disabled) {
+.unit-btn:hover {
 	background: #2a2a2a;
-}
-.unit-btn:disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
 }
 .unit-btn img {
 	height: 40px;
