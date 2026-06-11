@@ -1,13 +1,14 @@
 import { browser } from '$app/environment';
 import { googleAuth } from './auth.svelte.js';
 import {
-	findOrCreateFolder,
-	findFile,
 	createFile,
+	findFile,
+	findOrCreateFolder,
+	getFileModifiedTime,
 	readFile,
 	updateFile,
-	getFileModifiedTime,
 } from './drive.js';
+import { firstDifference } from './syncDiff.js';
 
 const FOLDER_NAME = 'eldritch-arts';
 const FILE_NAME = 'dungeon-world-data.json';
@@ -32,7 +33,7 @@ let lastSynced = $state(null);
 let saveTimeout = null;
 let waiting = $state(false);
 let listeners = [];
-let mode = $state(browser ? (localStorage.getItem(MODE_KEY) || 'local') : 'local');
+let mode = $state(browser ? localStorage.getItem(MODE_KEY) || 'local' : 'local');
 let storageDebounce = null;
 let storageListener = null;
 let dirty = browser ? localStorage.getItem(DIRTY_KEY) === '1' : false;
@@ -41,19 +42,41 @@ let reauthInFlight = null;
 let lastReauthPromptAt = 0;
 let conflictNotice = $state(null);
 
-function notifyConflict({ base, server }) {
-	conflictNotice = { base, server, at: new Date() };
+// A conflict (both sides changed since the last sync) is not auto-resolved:
+// we surface a modal showing the first difference and wait for the user to
+// pick a side. Local data stays dirty and untouched until they decide.
+async function raiseConflict(id, serverModified) {
+	let diff = null;
+	let diffFailed = false;
+	try {
+		const serverData = await withRetry(() => readFile(googleAuth.token, id));
+		diff = firstDifference(collectLocalData(), serverData);
+	} catch {
+		// Modal still shows; it just can't display details.
+		diffFailed = true;
+	}
+	conflictNotice = {
+		base: baseModifiedTime,
+		server: serverModified,
+		diff,
+		diffFailed,
+		at: new Date(),
+	};
 }
 
 function dropDirty() {
 	dirty = false;
-	try { localStorage.removeItem(DIRTY_KEY); } catch {}
+	try {
+		localStorage.removeItem(DIRTY_KEY);
+	} catch {}
 }
 
 function markDirty() {
 	if (dirty) return;
 	dirty = true;
-	try { localStorage.setItem(DIRTY_KEY, '1'); } catch {}
+	try {
+		localStorage.setItem(DIRTY_KEY, '1');
+	} catch {}
 }
 
 function markClean(modifiedTime) {
@@ -129,7 +152,9 @@ async function ensureFile(seedData) {
 		// our reference. `dirty` is preserved — any prior local edits are still
 		// edits relative to this newly-discovered base.
 		baseModifiedTime = existing.modifiedTime;
-		try { localStorage.setItem(BASE_MOD_KEY, baseModifiedTime); } catch {}
+		try {
+			localStorage.setItem(BASE_MOD_KEY, baseModifiedTime);
+		} catch {}
 	} else {
 		const initial = seedData || {};
 		const result = await withRetry(() => createFile(token, FILE_NAME, folderId, initial));
@@ -138,7 +163,9 @@ async function ensureFile(seedData) {
 		markClean(result.modifiedTime);
 	}
 
-	try { localStorage.setItem(FILE_ID_KEY, fileId); } catch {}
+	try {
+		localStorage.setItem(FILE_ID_KEY, fileId);
+	} catch {}
 	return fileId;
 }
 
@@ -172,7 +199,9 @@ function restoreLocal() {
 
 function notifyListeners(changedKeys) {
 	for (const fn of listeners) {
-		try { fn(changedKeys); } catch {}
+		try {
+			fn(changedKeys);
+		} catch {}
 	}
 }
 
@@ -188,12 +217,53 @@ function collectLocalData() {
 }
 
 export const driveSync = {
-	get status() { return waiting ? 'waiting' : syncStatus; },
-	get lastSynced() { return lastSynced; },
-	get mode() { return mode; },
-	get isDrive() { return mode === 'drive'; },
-	get conflictNotice() { return conflictNotice; },
-	dismissConflict() { conflictNotice = null; },
+	get status() {
+		return waiting ? 'waiting' : syncStatus;
+	},
+	get lastSynced() {
+		return lastSynced;
+	},
+	get mode() {
+		return mode;
+	},
+	get isDrive() {
+		return mode === 'drive';
+	},
+	get conflictNotice() {
+		return conflictNotice;
+	},
+	// "Decide later": keep the modal away but leave local edits dirty and the
+	// server untouched. The next sync event re-detects the conflict.
+	dismissConflict() {
+		conflictNotice = null;
+	},
+
+	// Resolve a pending conflict: 'local' force-pushes the current local data
+	// over the server file; 'server' discards local edits and pulls.
+	async resolveConflict(choice) {
+		if (!conflictNotice) return;
+		conflictNotice = null;
+		if (choice === 'server') {
+			dropDirty();
+			await this.pullFromDrive();
+			return;
+		}
+		syncStatus = 'syncing';
+		try {
+			const id = await ensureFile();
+			if (!id) {
+				syncStatus = 'error';
+				return;
+			}
+			const result = await withRetry(() => updateFile(googleAuth.token, id, collectLocalData()));
+			markClean(result.modifiedTime);
+			lastSynced = new Date();
+			syncStatus = 'idle';
+		} catch (err) {
+			console.error('Drive conflict resolution failed:', err);
+			syncStatus = 'error';
+		}
+	},
 
 	registerKey(key) {
 		if (!registeredKeys.includes(key)) registeredKeys.push(key);
@@ -201,14 +271,20 @@ export const driveSync = {
 
 	onKeysChanged(fn) {
 		listeners.push(fn);
-		return () => { listeners = listeners.filter((f) => f !== fn); };
+		return () => {
+			listeners = listeners.filter((f) => f !== fn);
+		};
 	},
 
 	save(key, value) {
 		if (!browser) return;
 		let prev = null;
-		try { prev = localStorage.getItem(key); } catch {}
-		try { localStorage.setItem(key, value); } catch {}
+		try {
+			prev = localStorage.getItem(key);
+		} catch {}
+		try {
+			localStorage.setItem(key, value);
+		} catch {}
 		if (prev !== value) markDirty();
 		if (mode !== 'drive') return;
 		if (googleAuth.isSignedIn) {
@@ -224,14 +300,22 @@ export const driveSync = {
 
 	load(key) {
 		if (!browser) return null;
-		try { return localStorage.getItem(key); } catch { return null; }
+		try {
+			return localStorage.getItem(key);
+		} catch {
+			return null;
+		}
 	},
 
 	schedulePush() {
 		if (!googleAuth.isSignedIn || mode !== 'drive') return;
+		// Only probe the server when a new burst of edits starts — every save in
+		// a burst lands here, and a modifiedTime fetch per keystroke is a network
+		// request per keystroke.
+		const newBurst = !saveTimeout;
 		if (saveTimeout) clearTimeout(saveTimeout);
 		waiting = true;
-		this.checkRemoteUpdates();
+		if (newBurst) this.checkRemoteUpdates();
 		saveTimeout = setTimeout(() => {
 			saveTimeout = null;
 			waiting = false;
@@ -240,8 +324,8 @@ export const driveSync = {
 	},
 
 	// Cheap fetch of just the server's modifiedTime. If the server is unchanged,
-	// nothing to do. If it moved, pull — conflict (dirty + server moved) is
-	// resolved server-wins, with a modal notification.
+	// nothing to do. If it moved, pull — a conflict (dirty + server moved) puts
+	// up the resolution modal instead of applying anything.
 	async checkRemoteUpdates() {
 		if (!googleAuth.isSignedIn || !fileId) return;
 		try {
@@ -269,17 +353,15 @@ export const driveSync = {
 
 			const serverModified = await withRetry(() => getFileModifiedTime(googleAuth.token, id));
 			if (baseModifiedTime && serverModified !== baseModifiedTime) {
-				// Server moved since our last sync and we have local edits.
-				// Policy: server wins. Drop local edits and pull, surfacing a
-				// modal so the user knows their unpushed changes were discarded.
+				// Server moved since our last sync and we have local edits — a real
+				// conflict. Don't push and don't drop anything: show the modal and
+				// let the user pick a side via resolveConflict().
 				console.warn(
 					'[driveSync] Conflict on push: remote changed since last sync ' +
-					`(base=${baseModifiedTime}, server=${serverModified}). Server wins.`,
+						`(base=${baseModifiedTime}, server=${serverModified}). Asking the user.`,
 				);
-				notifyConflict({ base: baseModifiedTime, server: serverModified });
-				dropDirty();
+				await raiseConflict(id, serverModified);
 				syncStatus = 'idle';
-				await this.pullFromDrive();
 				return;
 			}
 
@@ -292,8 +374,12 @@ export const driveSync = {
 				fileId = null;
 				folderId = null;
 				baseModifiedTime = null;
-				try { localStorage.removeItem(FILE_ID_KEY); } catch {}
-				try { localStorage.removeItem(BASE_MOD_KEY); } catch {}
+				try {
+					localStorage.removeItem(FILE_ID_KEY);
+				} catch {}
+				try {
+					localStorage.removeItem(BASE_MOD_KEY);
+				} catch {}
 				await this.pushToDrive();
 				return;
 			}
@@ -324,17 +410,18 @@ export const driveSync = {
 			}
 
 			// Server has moved past our base. If we also have local edits, that's
-			// a real conflict — both sides changed since last sync. Policy:
-			// server wins. Drop dirty so the pull below applies cleanly, and
-			// surface a modal so the user can see their work was overwritten.
+			// a real conflict — both sides changed since last sync. Don't apply
+			// anything: show the modal and let the user pick a side via
+			// resolveConflict().
 			if (dirty) {
 				console.warn(
 					'[driveSync] Conflict on pull: both remote and local changed ' +
-					`since last sync (base=${baseModifiedTime}, server=${modified}). ` +
-					'Server wins.',
+						`since last sync (base=${baseModifiedTime}, server=${modified}). ` +
+						'Asking the user.',
 				);
-				notifyConflict({ base: baseModifiedTime, server: modified });
-				dropDirty();
+				await raiseConflict(id, modified);
+				syncStatus = 'idle';
+				return;
 			}
 
 			// Clean pull.
@@ -358,8 +445,12 @@ export const driveSync = {
 				fileId = null;
 				folderId = null;
 				baseModifiedTime = null;
-				try { localStorage.removeItem(FILE_ID_KEY); } catch {}
-				try { localStorage.removeItem(BASE_MOD_KEY); } catch {}
+				try {
+					localStorage.removeItem(FILE_ID_KEY);
+				} catch {}
+				try {
+					localStorage.removeItem(BASE_MOD_KEY);
+				} catch {}
 				syncStatus = 'idle';
 				return;
 			}
@@ -382,13 +473,17 @@ export const driveSync = {
 		fileId = null;
 		folderId = null;
 		resetSyncState();
-		try { localStorage.removeItem(FILE_ID_KEY); } catch {}
+		try {
+			localStorage.removeItem(FILE_ID_KEY);
+		} catch {}
 
 		snapshotLocal();
 		const seed = collectLocalData();
 
 		mode = 'drive';
-		try { localStorage.setItem(MODE_KEY, 'drive'); } catch {}
+		try {
+			localStorage.setItem(MODE_KEY, 'drive');
+		} catch {}
 
 		await ensureFile(seed);
 		await this.pullFromDrive();
@@ -409,7 +504,9 @@ export const driveSync = {
 		waiting = false;
 		lastSynced = null;
 		resetSyncState();
-		try { localStorage.setItem(MODE_KEY, 'local'); } catch {}
+		try {
+			localStorage.setItem(MODE_KEY, 'local');
+		} catch {}
 		const changed = restoreLocal();
 		if (changed.length > 0) notifyListeners(changed);
 	},

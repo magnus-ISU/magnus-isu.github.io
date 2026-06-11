@@ -47,8 +47,10 @@ export function renderMarkdown(src, opts = {}) {
 	let bqLines = [];
 	// "Break mode": a heading ending in 2+ spaces makes every following normal
 	// line break, until a heading of equal or greater strength (<= level).
-	let breakMode = false;
-	let breakModeLevel = 0;
+	// Initial values can be passed in when rendering a chunk of a larger
+	// document (see splitMarkdownChunks).
+	let breakMode = !!opts.breakMode;
+	let breakModeLevel = opts.breakModeLevel || 0;
 
 	function closeMoveBlock() {
 		if (inMoveBlock) {
@@ -462,6 +464,93 @@ export function renderMarkdown(src, opts = {}) {
 	closePendingList();
 	closeH2Section();
 	return html;
+}
+
+// Split a document into independently renderable chunks so an edit only
+// re-renders (and only rebuilds the DOM of) the chunk it touched. Safe split
+// points are top-level h1/h2 headings — renderMarkdown closes every open
+// structure (paragraph, list, blockquote, columns, h2 section) at those — and
+// standalone `--- Map:` blocks outside any h2 section. Lines inside ``` fences
+// and map blocks are never split on, even if they look like headings.
+//
+// Each chunk records the break-mode state it starts in (a heading ending in
+// 2+ spaces turns it on for following content), since that's the only renderer
+// state that can legitimately cross an h1/h2 boundary (from an h1).
+export function splitMarkdownChunks(src) {
+	// Same pre-pass as renderMarkdown so multiline tooltips never straddle a
+	// chunk boundary. renderMarkdown's own pre-pass then no-ops on each chunk.
+	src = src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
+		return `[${text}](${body.replace(/\n/g, '\x01')})`;
+	});
+
+	const lines = src.split('\n');
+	const chunks = [];
+	let cur = [];
+	let breakMode = false;
+	let breakModeLevel = 0;
+	let curBreakMode = false;
+	let curBreakModeLevel = 0;
+	let inCode = false;
+	let inMap = false;
+	let mapStandalone = false;
+	let inSection = false; // inside an open h2 section
+
+	function push() {
+		if (cur.length) {
+			chunks.push({
+				text: cur.join('\n'),
+				breakMode: curBreakMode,
+				breakModeLevel: curBreakModeLevel,
+			});
+			cur = [];
+		}
+		curBreakMode = breakMode;
+		curBreakModeLevel = breakModeLevel;
+	}
+
+	for (const line of lines) {
+		if (inCode) {
+			cur.push(line);
+			if (/^```/.test(line.trim())) inCode = false;
+			continue;
+		}
+		if (inMap) {
+			cur.push(line);
+			if (/^---\s*$/.test(line.trim())) {
+				inMap = false;
+				if (mapStandalone) push();
+			}
+			continue;
+		}
+		if (/^```/.test(line.trim())) {
+			inCode = true;
+			cur.push(line);
+			continue;
+		}
+		if (/^---\s+Map:\s+(.+?)\s*$/.test(line)) {
+			mapStandalone = !inSection;
+			if (mapStandalone) push();
+			inMap = true;
+			cur.push(line);
+			continue;
+		}
+		const hm = line.match(/^(#{1,6})\s+(.*)/);
+		if (hm) {
+			const level = hm[1].length;
+			if (level <= 2) {
+				push();
+				inSection = level === 2;
+			}
+			if (breakMode && level <= breakModeLevel) breakMode = false;
+			if (/ {2,}$/.test(hm[2])) {
+				breakMode = true;
+				breakModeLevel = level;
+			}
+		}
+		cur.push(line);
+	}
+	push();
+	return chunks;
 }
 
 function renderDungeonBlock(mapName, blockLines, render) {

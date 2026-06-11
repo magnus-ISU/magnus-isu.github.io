@@ -41,11 +41,44 @@ function saveSlots(slots) {
 
 function saveActive(idx) {
 	if (!browser) return;
-	try { localStorage.setItem(ACTIVE_KEY, String(idx)); } catch {}
+	try {
+		localStorage.setItem(ACTIVE_KEY, String(idx));
+	} catch {}
 }
 
 const slots = $state(loadSlots());
 let activeIdx = $state(loadActive() >= slots.length ? 0 : loadActive());
+
+// Typing rewrites the active slot on every keystroke; serializing every slot
+// and writing localStorage synchronously each time is measurable on large
+// documents. Coalesce the writes and flush when the page is hidden/closed so
+// nothing is lost.
+let persistTimer = null;
+
+function flushPersist() {
+	if (persistTimer === null) return;
+	clearTimeout(persistTimer);
+	persistTimer = null;
+	saveSlots(slots);
+	// Also keep legacy key in sync for the layout's charImage
+	try {
+		localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
+	} catch {
+		/* ignore */
+	}
+}
+
+function schedulePersist() {
+	if (!browser || persistTimer !== null) return;
+	persistTimer = setTimeout(flushPersist, 400);
+}
+
+if (browser) {
+	window.addEventListener('pagehide', flushPersist);
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) flushPersist();
+	});
+}
 
 export const characterSheet = {
 	get value() {
@@ -53,15 +86,7 @@ export const characterSheet = {
 	},
 	set value(v) {
 		slots[activeIdx] = v;
-		saveSlots(slots);
-		// Also keep legacy key in sync for the layout's charImage
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, v);
-			} catch {
-				/* ignore */
-			}
-		}
+		schedulePersist();
 	},
 	get isEmpty() {
 		return !(slots[activeIdx] ?? '').trim();
@@ -141,7 +166,9 @@ export const characterSheet = {
 		slots.push(...newSlots);
 		activeIdx = Math.min(newActive, slots.length - 1);
 		if (browser) {
-			try { localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? ''); } catch {}
+			try {
+				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
+			} catch {}
 		}
 	},
 

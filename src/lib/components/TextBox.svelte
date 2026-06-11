@@ -1,5 +1,5 @@
 <script>
-import { onMount } from 'svelte';
+import { onMount, untrack } from 'svelte';
 
 let {
 	value = $bindable(''),
@@ -20,11 +20,25 @@ export function focus() {
 }
 
 const lines = $derived(value.split('\n'));
-const phCount = $derived(Math.max(lines.length + 1, placeholders.length, rows));
+// The overlay only needs lines up to the last non-empty placeholder. Each
+// measured line forces a synchronous layout, so covering the whole document
+// (rather than just the lines that can show a placeholder) makes typing in
+// large documents crawl.
+const phCount = $derived.by(() => {
+	let last = -1;
+	for (let i = 0; i < placeholders.length; i++) {
+		if (placeholders[i]) last = i;
+	}
+	return last + 1;
+});
 
 // Measure the rendered height of each line using a mirror div
 function measureLines() {
 	if (!mirror || !textarea) return;
+	if (phCount === 0) {
+		if (lineHeights.length) lineHeights = [];
+		return;
+	}
 	mirror.style.width = `${textarea.clientWidth}px`;
 	const heights = [];
 	for (let i = 0; i < phCount; i++) {
@@ -42,11 +56,17 @@ function measureLines() {
 	lineHeights = heights;
 }
 
+// Re-measure only when something the overlay depends on changes \u2014 edits past
+// the placeholder region shouldn't trigger layout work.
+const measureKey = $derived(
+	`${phCount}\x00${lines.slice(0, phCount).join('\n')}\x00${placeholders
+		.slice(0, phCount)
+		.join('\x00')}`,
+);
+
 $effect(() => {
-	// Re-measure when value or phCount changes
-	void lines;
-	void phCount;
-	measureLines();
+	void measureKey;
+	untrack(measureLines);
 });
 
 onMount(() => {

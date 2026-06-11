@@ -12,7 +12,7 @@ import {
 } from '$lib/dw/encounterParse.js';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 import { allMonsters } from '$lib/dw/monsters.js';
-import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
+import { renderMarkdown, splitMarkdownChunks } from '$lib/dw/renderMarkdown.js';
 import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -294,10 +294,9 @@ const placeholders = $derived.by(() => {
 				'Character art image URL',
 			]
 		: ['Title', 'Character art image URL'];
-	const phs = hints.map((h, i) => (lines[i]?.trim() ? '' : h));
-	const total = Math.max(lines.length + 1, phs.length);
-	while (phs.length < total) phs.push('');
-	return phs;
+	// Only the header lines have hints — don't pad to document length, or the
+	// editor overlay would render and measure a line per document line.
+	return hints.map((h, i) => (lines[i]?.trim() ? '' : h));
 });
 
 const charSheetDefault =
@@ -412,9 +411,11 @@ function cancelFade(lineKey) {
 
 // Apply/remove .fading-line class on rendered copy-lines based on state
 $effect(() => {
-	void bodyHtml;
+	void bodyChunks;
 	const keys = fadingLineKeys;
 	if (!charBodyEl) return;
+	// Nothing fading and nothing marked: skip the full-document scan.
+	if (keys.size === 0 && !charBodyEl.querySelector('.copy-line.fading-line')) return;
 	for (const cl of charBodyEl.querySelectorAll('.copy-line')) {
 		if (cl.dataset.src && keys.has(cl.dataset.src)) {
 			cl.classList.add('fading-line');
@@ -441,20 +442,17 @@ function handleConsumableClick(icon) {
 		: icon.classList.contains('charges-icon')
 			? 'charges'
 			: 'rations';
-	let idx;
-	if (kind === 'charges') {
-		// Charges render inside blockquotes (recursive render resets the counter),
-		// so derive the global index from DOM order of charge groups instead.
-		const myGroup = icon.closest('.consumable-group');
-		const groups = [];
-		for (const el of charBodyEl.querySelectorAll('.charges-icon')) {
-			const g = el.closest('.consumable-group');
-			if (!groups.includes(g)) groups.push(g);
-		}
-		idx = groups.indexOf(myGroup);
-	} else {
-		idx = +(kind === 'uses' ? icon.dataset.usesIdx : icon.dataset.rationsIdx);
+	// Per-render counters reset in every chunk and in recursive renders
+	// (blockquotes), so data-*-idx attributes aren't document-global. Derive
+	// the index from DOM order of this kind's groups instead, which matches
+	// the top-to-bottom text order toggleConsumable scans in.
+	const myGroup = icon.closest('.consumable-group');
+	const groups = [];
+	for (const el of charBodyEl.querySelectorAll(`.${kind}-icon`)) {
+		const g = el.closest('.consumable-group');
+		if (!groups.includes(g)) groups.push(g);
 	}
+	const idx = groups.indexOf(myGroup);
 	const isUsed = icon.dataset.state === 'used';
 	toggleConsumable(kind, idx, isUsed ? +1 : -1);
 }
@@ -468,7 +466,7 @@ function toggleConsumable(kind, idx, delta) {
 				? /\[(\d+)(?:\/(\d+))?\s+(charges?)\]/gi
 				: /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
 	let count = 0;
-	for (let i = 4; i < lines.length; i++) {
+	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 		const matches = [...lines[i].matchAll(re)];
 		for (const m of matches) {
 			if (count === idx) {
@@ -793,7 +791,32 @@ const damageEntries = $derived.by(() => {
 		.filter(Boolean);
 });
 
-const bodyHtml = $derived(renderMarkdown(parsed.body, { battle: true }));
+// The body renders as independent chunks (split at top-level headings and
+// standalone map blocks) so a keystroke only re-renders — and only rebuilds
+// the DOM of — the chunk it touched. Unchanged chunks hit the cache and keep
+// their `{@html}` string identical, so Svelte leaves their DOM alone. This is
+// what keeps typing responsive on large documents with many maps.
+let chunkCache = new Map();
+const bodyChunks = $derived.by(() => {
+	const chunks = splitMarkdownChunks(parsed.body);
+	const next = new Map();
+	const out = chunks.map((c) => {
+		const key = `${c.breakMode ? 1 : 0}:${c.breakModeLevel}:${c.text}`;
+		let html = chunkCache.get(key) ?? next.get(key);
+		if (html === undefined) {
+			html = renderMarkdown(c.text, {
+				battle: true,
+				breakMode: c.breakMode,
+				breakModeLevel: c.breakModeLevel,
+			});
+		}
+		next.set(key, html);
+		return html;
+	});
+	chunkCache = next;
+	return out;
+});
+const hasBody = $derived(bodyChunks.some((c) => c));
 
 // The sticky header only makes sense for an actual character sheet, whose first
 // line is "Name, Class Level". Without a comma the document is something else
@@ -862,11 +885,11 @@ $effect(() => {
 });
 
 // Mount BattleBlock components into the placeholder divs. Re-runs only on
-// structural body changes (bodyHtml) or when blocks are added/removed
+// structural body changes (bodyChunks) or when blocks are added/removed
 // (battleBlocks.length) — battle content edits are read untracked so HP/name
 // ticks don't blow away and remount the statblocks.
 $effect(() => {
-	void bodyHtml;
+	void bodyChunks;
 	const blockCount = battleBlocks.length;
 	if (!charBodyEl || blockCount === 0) return;
 	const instances = untrack(() => {
@@ -923,7 +946,7 @@ function captureDungeonSelection(block) {
 }
 
 $effect(() => {
-	void bodyHtml;
+	void bodyChunks;
 	if (!charBodyEl) return;
 	untrack(() => {
 		const blocks = charBodyEl.querySelectorAll('.dungeon-block');
@@ -935,14 +958,17 @@ $effect(() => {
 });
 
 $effect(() => {
-	void bodyHtml;
+	void bodyChunks;
 	if (!charBodyEl) return;
 	const idx = animatingH3;
-	// Apply glow instantly to all except the one being animated
-	charBodyEl.querySelectorAll('h3[data-glow]').forEach((h3) => {
-		const allH3s = [...charBodyEl.querySelectorAll('h3')];
-		const thisIdx = allH3s.indexOf(h3);
-		if (thisIdx !== idx) {
+	// Apply glow instantly to all except the one being animated. Query the h3
+	// list once (it was previously rebuilt per glowing heading) and skip
+	// headings that already carry the class — re-rendered chunks lose it,
+	// untouched chunks keep it — so this forces no reflow in the common case.
+	const allH3s = [...charBodyEl.querySelectorAll('h3')];
+	allH3s.forEach((h3, thisIdx) => {
+		if (!h3.hasAttribute('data-glow')) return;
+		if (thisIdx !== idx && !h3.classList.contains('glow')) {
 			h3.style.transition = 'none';
 			h3.classList.add('glow');
 			h3.offsetHeight; // force reflow
@@ -962,8 +988,7 @@ $effect(() => {
 function toggleH3Glow(h3Index) {
 	const lines = cs.value.split('\n');
 	let count = 0;
-	// Body starts at line 4
-	for (let i = 4; i < lines.length; i++) {
+	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 		if (/^###\s/.test(lines[i])) {
 			if (count === h3Index) {
 				const isGlowing = /\s*###\s*$/.test(lines[i]);
@@ -1143,7 +1168,7 @@ function rollRadialDie(formula, e) {
 
 function expandAllAndScrollTo(sectionName) {
 	const lines = cs.value.split('\n');
-	for (let i = 4; i < lines.length; i++) {
+	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 		const m = lines[i].match(/^##\s+(.*)/);
 		if (!m) continue;
 		if (/\s*::\s*$/.test(lines[i])) lines[i] = `## ${m[1].replace(/\s*::\s*$/, '').trim()}`;
@@ -1436,7 +1461,7 @@ function expandSection(sectionName) {
 			{/if}
 
 			<div class="body-with-sidebar" style="--sheet-top-h: {sheetTopHeight}px">
-			{#if bodyHtml}
+			{#if hasBody}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="char-body" bind:this={charBodyEl} onmousedown={(e) => {
@@ -1481,7 +1506,7 @@ function expandSection(sectionName) {
 					if (h3Index < 0) return;
 					toggleH3Glow(h3Index);
 				}}>
-					{@html bodyHtml}
+					{#each bodyChunks as chunk}{@html chunk}{/each}
 				</div>
 			{/if}
 			<div class="collapsed-sidebar">

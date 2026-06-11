@@ -1,10 +1,10 @@
 <script>
 import { onMount } from 'svelte';
+import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { encounterText } from '$lib/dw/encounterText.svelte.js';
+import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 import { googleAuth } from '$lib/google/auth.svelte.js';
 import { driveSync } from '$lib/google/sync.svelte.js';
-import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
-import { encounterText } from '$lib/dw/encounterText.svelte.js';
 
 let longPressTimer = null;
 
@@ -67,6 +67,19 @@ async function selectLocal() {
 	await driveSync.switchToLocal();
 }
 
+// The conflict modal must escape the sidebar: .dw-sidebar is a sticky/fixed
+// scroll container, which creates a stacking context, so a position:fixed
+// modal inside it is painted and hit-tested behind the page content (clicks
+// fall through to whatever is underneath). Reparent it to <body>.
+function portal(node) {
+	document.body.appendChild(node);
+	return {
+		destroy() {
+			node.remove();
+		},
+	};
+}
+
 const driveLabel = $derived.by(() => {
 	let emailStr = '';
 	if (driveSync.status === 'waiting') return 'Waiting…';
@@ -102,6 +115,8 @@ const driveLabel = $derived.by(() => {
 </div>
 
 {#if driveSync.conflictNotice}
+	{@const diff = driveSync.conflictNotice.diff}
+	<div use:portal>
 	<div
 		class="conflict-backdrop"
 		role="presentation"
@@ -111,10 +126,32 @@ const driveLabel = $derived.by(() => {
 		<h2 id="conflict-title">Sync conflict</h2>
 		<p>
 			Your Drive file was updated from another device while you had unsynced changes
-			here. The remote version has been loaded, and your unsynced local edits have
-			been discarded.
+			here. Choose which version to keep.
 		</p>
-		<button class="conflict-ok" onclick={() => driveSync.dismissConflict()}>OK</button>
+		{#if diff}
+			<p class="conflict-summary">{diff.summary}</p>
+			<div class="conflict-diff">
+				<div class="conflict-side">
+					<span class="conflict-side-label">Local</span>
+					<pre>{diff.local || '(empty)'}</pre>
+				</div>
+				<div class="conflict-side">
+					<span class="conflict-side-label">Server</span>
+					<pre>{diff.server || '(empty)'}</pre>
+				</div>
+			</div>
+		{:else if driveSync.conflictNotice.diffFailed}
+			<p class="conflict-summary">The server file could not be read to show what differs.</p>
+		{:else}
+			<p class="conflict-summary">No content difference was found — only the file's timestamp changed.</p>
+		{/if}
+		<!-- Each "keep" button sits on the same side as its diff column. -->
+		<div class="conflict-actions">
+			<button class="conflict-keep" onclick={() => driveSync.resolveConflict('local')}>Keep local</button>
+			<button class="conflict-later" onclick={() => driveSync.dismissConflict()}>Decide later</button>
+			<button class="conflict-keep" onclick={() => driveSync.resolveConflict('server')}>Keep server</button>
+		</div>
+	</div>
 	</div>
 {/if}
 
@@ -170,11 +207,12 @@ const driveLabel = $derived.by(() => {
 		color: #fff;
 	}
 
+	/* Above everything else in the app (delete modal is 2000, roll bubble 200). */
 	.conflict-backdrop {
 		position: fixed;
 		inset: 0;
 		background: rgba(0, 0, 0, 0.6);
-		z-index: 1000;
+		z-index: 5000;
 	}
 
 	.conflict-modal {
@@ -182,8 +220,8 @@ const driveLabel = $derived.by(() => {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		z-index: 1001;
-		max-width: 28rem;
+		z-index: 5001;
+		max-width: 32rem;
 		width: calc(100vw - 2rem);
 		padding: 1rem 1.25rem 1.25rem;
 		background: #1e1e1e;
@@ -206,9 +244,58 @@ const driveLabel = $derived.by(() => {
 		margin: 0 0 1rem;
 	}
 
-	.conflict-ok {
+	.conflict-summary {
+		font-weight: bold;
+		color: #fff;
+	}
+
+	.conflict-diff {
+		display: flex;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.conflict-side {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.conflict-side-label {
 		display: block;
-		margin-left: auto;
+		font-size: 0.7rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: #999;
+		margin-bottom: 0.25rem;
+	}
+
+	/* Mirror the layout: server column is on the right. */
+	.conflict-side:last-child .conflict-side-label {
+		text-align: right;
+	}
+
+	.conflict-side pre {
+		margin: 0;
+		padding: 0.4rem 0.5rem;
+		background: #141414;
+		border: 1px solid #333;
+		border-radius: 4px;
+		font-size: 0.75rem;
+		white-space: pre-wrap;
+		word-break: break-word;
+		max-height: 8rem;
+		overflow-y: auto;
+	}
+
+	.conflict-actions {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.conflict-keep {
 		padding: 0.35rem 1rem;
 		background: #d4a847;
 		color: #1e1e1e;
@@ -220,7 +307,23 @@ const driveLabel = $derived.by(() => {
 		cursor: pointer;
 	}
 
-	.conflict-ok:hover {
+	.conflict-keep:hover {
 		background: #e0b658;
+	}
+
+	.conflict-later {
+		padding: 0.35rem 0.75rem;
+		background: transparent;
+		color: #999;
+		border: 1px solid #444;
+		border-radius: 4px;
+		font-family: inherit;
+		font-size: 0.8rem;
+		cursor: pointer;
+	}
+
+	.conflict-later:hover {
+		color: #ddd;
+		border-color: #666;
 	}
 </style>
