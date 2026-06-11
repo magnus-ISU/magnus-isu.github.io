@@ -30,6 +30,21 @@ let gesture = null;
 const LONG_PRESS_MS = 350;
 const MOVE_THRESHOLD = 8;
 
+// Ranged attackers take no retaliation, so they start with the safe bonus on.
+const RANGED_UNITS = new Set([
+	'Archer',
+	'Catapult',
+	'Scout',
+	'Bomber',
+	'FireDragon',
+	'Phychi',
+	'Exida',
+	'Tridention',
+	'Puffer',
+	'IceArcher',
+	'IceFortress',
+]);
+
 function getUnitConfig(typeUnit) {
 	const unit = versionConfig.unitStats.find((u) => u.name === typeUnit);
 	if (!unit) throw new Error(`Unit type not found: ${typeUnit}`);
@@ -49,7 +64,8 @@ function makeUnit(typeUnit, team, id) {
 		veteran: false,
 		defenceBonus: false,
 		wallBonus: false,
-		safeBonus: team === 'Attackers' && config.skills.includes('surprise'),
+		safeBonus:
+			team === 'Attackers' && (config.skills.includes('surprise') || RANGED_UNITS.has(typeUnit)),
 		poisonedBonus: false,
 		becamePoisonedBonus: false,
 		boostedBonus: false,
@@ -95,6 +111,8 @@ function toggleBonus(id, team, which) {
 				updated.defenceBonus = false;
 			}
 		}
+		// splash attacks land at range, so the attacker also becomes safe from retaliation
+		if (which === 'splashDamage' && updated.splashDamage) updated.safeBonus = true;
 		return updated;
 	});
 }
@@ -443,7 +461,7 @@ $effect(() => {
 	{/if}
 
 	{#if versionConfig}
-		<CardWithShadow style="padding:3px 2%; width:100%;">
+		<CardWithShadow style="padding:3px 2%;">
 			<div class="version-info">
 				<label>
 					Game version

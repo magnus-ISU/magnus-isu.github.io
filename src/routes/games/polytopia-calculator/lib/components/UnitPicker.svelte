@@ -1,43 +1,34 @@
 <script>
 import { unitImages } from '../unitImages.js';
+import { buildUnitTabs } from '../unitTabs.js';
 import CardWithShadow from './CardWithShadow.svelte';
 
 let { team, versionConfig, onAdd, onOptimize = null } = $props();
 
-const UNITS_PER_PAGE = 10;
 const colorClass = $derived(team === 'Attackers' ? 'attacker' : 'defender');
+const tabs = $derived(buildUnitTabs(versionConfig.unitStats));
 
-const pages = $derived.by(() => {
-	const names = versionConfig.unitStats.map((u) => u.name);
-	const chunks = [];
-	for (let i = 0; i < names.length; i += UNITS_PER_PAGE)
-		chunks.push(names.slice(i, i + UNITS_PER_PAGE));
-	return chunks;
-});
-
-let currentPage = $state(0);
-const page = $derived(Math.min(currentPage, pages.length - 1));
-
-function prev() {
-	currentPage = (page + pages.length - 1) % pages.length;
-}
-function next() {
-	currentPage = (page + 1) % pages.length;
-}
+let currentTab = $state(0);
+const tab = $derived(tabs[Math.min(currentTab, tabs.length - 1)]);
 </script>
 
 <CardWithShadow class="picker-card">
 	<div class="picker-header">
-		<button class="nav-btn {colorClass}" onclick={prev} aria-label="previous page">&lt;</button>
 		{#if onOptimize}
 			<button class="optimize-btn {colorClass}" onclick={onOptimize}>Optimize order</button>
 		{:else}
 			<span class="picker-title">{team} selection</span>
 		{/if}
-		<button class="nav-btn {colorClass}" onclick={next} aria-label="next page">&gt;</button>
 	</div>
-	<div class="picker-grid">
-		{#each pages[page] as name (name)}
+	<div class="tabs">
+		{#each tabs as t, i (t.label)}
+			<button class="tab-btn {colorClass}" class:active={t === tab} onclick={() => (currentTab = i)}>
+				{t.label}
+			</button>
+		{/each}
+	</div>
+	<div class="picker-grid" style={`grid-template-columns: repeat(${tab.columns}, 1fr);`}>
+		{#each tab.units as name (name)}
 			<button
 				class="unit-btn {colorClass}"
 				onclick={() => onAdd(name)}
@@ -57,10 +48,11 @@ function next() {
 }
 .picker-header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	font-size: 1.15rem;
 	font-weight: 500;
+	min-height: 2.2em;
 }
 .picker-title {
 	align-self: center;
@@ -68,7 +60,7 @@ function next() {
 .optimize-btn {
 	flex: 1;
 	margin: 0 8px;
-	padding: 6px 10px;
+	padding: 4px 10px;
 	border: 1px solid;
 	border-radius: 4px;
 	background: #1e1e1e;
@@ -91,36 +83,51 @@ function next() {
 	background: #2a2a2a;
 	filter: brightness(1.1);
 }
+.tabs {
+	display: flex;
+	gap: 2px;
+}
+.tab-btn {
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: 4px 1px;
+	background: transparent;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	color: #888;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 0.72rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.tab-btn:hover {
+	color: #ccc;
+}
+.tab-btn.active {
+	color: #e8e8e8;
+	font-weight: 600;
+}
+.tab-btn.attacker.active {
+	border-bottom-color: #4488ff;
+}
+.tab-btn.defender.active {
+	border-bottom-color: #e34a4a;
+}
 .picker-grid {
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	gap: 4px;
+	padding: 6px 2px 2px;
 	justify-items: center;
-}
-.nav-btn {
-	margin: 8px;
-	max-width: 4em;
-	min-width: 4em;
-	padding: 4px 6px;
-	border: 0;
-	border-radius: 4px;
-	color: white;
-	cursor: pointer;
-	font-weight: bold;
-}
-.nav-btn.attacker {
-	background: #4488ff;
-}
-.nav-btn.defender {
-	background: #e34a4a;
-}
-.nav-btn:hover {
-	filter: brightness(1.15);
+	align-content: start;
+	/* always reserve two rows of unit buttons so switching tabs never reflows */
+	min-height: 100px;
 }
 .unit-btn {
-	margin: 8px;
+	width: 100%;
 	max-width: 4em;
-	min-width: 4em;
-	padding: 4px;
+	padding: 3px;
 	background: #1e1e1e;
 	cursor: pointer;
 	border-radius: 4px;
@@ -136,8 +143,8 @@ function next() {
 	background: #2a2a2a;
 }
 .unit-btn img {
-	height: 40px;
-	width: 30px;
+	height: 36px;
+	width: 27px;
 	object-fit: contain;
 	-webkit-appearance: none;
 }
