@@ -11,8 +11,10 @@ let mounted = $state(false);
 
 let { data } = $props();
 const versionConfigs = $derived(data.versionConfigs);
-let currentVersion = $state(
-	Object.keys(data.versionConfigs)
+// Writable derived: defaults to the newest version, user selection overrides
+// it, and it re-defaults if `data` is ever reloaded.
+let currentVersion = $derived(
+	Object.keys(versionConfigs)
 		.sort((a, b) => Number(a) - Number(b))
 		.pop(),
 );
