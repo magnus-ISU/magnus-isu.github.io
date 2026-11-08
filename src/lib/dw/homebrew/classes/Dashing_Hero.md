@@ -86,7 +86,7 @@ Chaotic: Dethrone or destabilize a person in power.
 You are a quick student, and a bit of a showboat. When you **Make Camp**, choose one move another player knows and hold Showoff equal to the number of bonds you have with that player. You can spend 1 Showoff to use that move. When you **Make Camp**, lose any remaining Showoff. [3 Charges]
 
 ### Draw Your Blade
-When your **honor is insulted and you demand a duel**, your opponent cannot decline. They may propose conditions and ask to use a substitute, but they cannot decline.
+When your **honor is insulted and you demand a duel**, your opponent cannot decline. They may propose conditions and put forth a champion, but you will get the chance to defend your honor.
 
 ### Famous
 All but the most under-a-rock hermit have heard of you and your deeds. When **dealing with an NPC who respects you**, you can offer your autograph as leverage for Parley. When you **also give them something valuable from your adventures** (a weapon you've used, a noteworthy treasure you've found, or a memento of a past love or victory), they will do anything you ask of them without question or needing to roll Parley.
