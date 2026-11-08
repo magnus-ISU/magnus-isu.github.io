@@ -136,10 +136,10 @@ When you **shunt the energy from a single spell to protect you**, end an ongoing
 When you **shunt the energy from spells to protect you**, end any number of ongoing non-cantrip spells and forget any number of spells (and cantrips) and reduce the damage you take from an effect by 3 times the number of effects and spells ended.
 
 ### Counterspell
-When you attempt to **counter an arcane spell** which you see being cast, stake up to your INT prepared spells (including cantrips) and roll+Staked. On a 10+, choose 2. On a 7-9, choose 1:
+When you attempt to **counter an arcane spell** which you see being cast, stake up to your INT prepared spells or cantrips (at least 1) and roll+Staked. No matter your roll, the spell's effects are lessened against you. On a 10+, choose 2. On a 7-9, choose 1:
 - The spell is completely negated where your protection extends.
 - You can protect others, not just yourself.
-- You forget the staked spells.
+- You don't forget the staked spells.
 
 ### Memorius
 When you **Prepare Spells**, prepare up to four spells.
