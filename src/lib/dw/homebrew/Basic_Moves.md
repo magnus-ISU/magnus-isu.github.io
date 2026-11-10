@@ -14,7 +14,7 @@ When **danger looms, the stakes are high, and you act anyway**, if no other move
 On a 10+, you pull it off as well as one could hope; on a 7-9, you can do it, but the GM will present a lesser success, a cost, or a consequence (and maybe a choice between them, or a chance to back down).
 
 ### Hack & Slash
-When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, Deal Damage to every target, and pick 1:
+When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, Deal Damage (distributed how you want between targets), and pick 1:
 - Evade, prevent, or counter the enemy's attack
 - Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
 

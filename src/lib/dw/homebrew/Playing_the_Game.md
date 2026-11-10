@@ -12,7 +12,7 @@ Your character has six stats: **Strength (STR), Dexterity (DEX), Constitution (C
 
 The most basic unit of rules in Dungeon World is the move. A move looks like this:
 
-> When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, divide your damage between the targets, and pick 1:
+> When you **fight in melee or close quarters**, roll+STR: on a 10+, your maneuver works as expected, Deal Damage (distributed how you want between targets), and pick 1:
 > - Evade, prevent, or counter the enemy's attack
 > - Strike hard and fast, for 1d6 extra damage, but suffer the enemy's attack.
 > 
