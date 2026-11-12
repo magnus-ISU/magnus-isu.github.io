@@ -40,6 +40,14 @@ On a heading, the headings beneath it are the options. With an arrow, a picked o
 ## Advanced Moves (?>Starting Moves)
 \`\`\`
 
+With a second arrow, the options you did not take move on too, once you have made your picks. Here two go to Starting Moves, and the others then wait among the Advanced Moves:
+
+\`\`\`
+## Starting Choices (?2>Starting Moves>Advanced Moves)
+\`\`\`
+
+A line of three dashes among a section's moves or spells ends their columns and starts new ones below, which keeps one level's spells apart from the next.
+
 A backslash before the parenthesis, \\\\(?), writes one out plainly.
 
 ## Pen and Paper

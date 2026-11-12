@@ -21,7 +21,7 @@ When you **take time to sniff around, or perk your ears up to listen carefully**
 - What can I smell that nobody else does?
 - Are or were there other dogs nearby?
 
-## Starting Moves (?2)
+## Starting Choices (?2>Starting Moves>Advanced Moves)
 
 You can later choose these moves as Advanced Moves as well.
 
