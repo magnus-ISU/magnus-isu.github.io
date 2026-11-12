@@ -88,7 +88,8 @@ function insertBlock(lines, at, block) {
 // has — becomes "## Spells", and all the others become one collapsed
 // "## Spell Options" from which a spell is picked into "## Spells". Since the
 // groups are flattened, each spell's heading says which one it came from,
-// unless it already does.
+// unless it already does, and a rule between the groups keeps each level's
+// spells in columns of their own.
 //
 // `heading` renames "Spells" ("Miracles", "Bindings"). With `emptyNote` the
 // class knows no spells to begin with: its section holds just that note, and
@@ -144,7 +145,9 @@ function spellSections({ raw, heading = 'Spells', emptyNote = '', collapsed = fa
 			}),
 			...(credit ? [credit] : []),
 			'',
-			...blocks(rest.flatMap((g) => g.spells)),
+			...rest
+				.filter((g) => g.spells.length)
+				.flatMap((g, i) => [...(i ? ['---', ''] : []), ...blocks(g.spells)]),
 		],
 	};
 }

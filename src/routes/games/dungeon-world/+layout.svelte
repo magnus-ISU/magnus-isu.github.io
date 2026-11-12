@@ -747,6 +747,12 @@ function onLoreTipOut(e) {
 		margin: 2rem 0;
 	}
 
+	/* Between two sets of columns in one section */
+	:global(.dw-article hr.column-break) {
+		border-top-color: #444;
+		margin: 1.5rem 0;
+	}
+
 	:global(.dw-article blockquote) {
 		border-left: 3px solid #d4a847;
 		margin: 1rem 0;

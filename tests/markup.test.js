@@ -372,3 +372,179 @@ test('a pick from one of several lists in a row lands above them all', () => {
 	const apart = ['Choose: (?)', 'a', 'b', '', 'Pick: (?)', 'c', 'd'];
 	assert.deepEqual(pickChoice(apart, 4, 1), ['Choose: (?)', 'a', 'b', '', 'd']);
 });
+
+// --- (?N>Dest>Rest): the options not taken move on ---
+
+test('a second arrow round-trips and parses as count, destination, rest', () => {
+	const line = '## Starting Choices (?2>Starting Moves>Advanced Moves)  ::';
+	const h = parseHeading(line);
+	assert.equal(h.text, 'Starting Choices');
+	assert.deepEqual(h.choice, { count: 2, dest: 'Starting Moves', rest: 'Advanced Moves' });
+	assert.equal(formatHeading(h), line);
+	for (const l of ['## A (?>B>C)', '## A (?1>B>C)', '## A (?2>>C)', '## A (?*>>C)']) {
+		assert.equal(formatHeading(parseHeading(l)), l);
+	}
+	assert.deepEqual(parseHeading('## A (?2>>C)').choice, { count: 2, dest: null, rest: 'C' });
+	assert.deepEqual(parseHeading('## A (?2 > B > C)').choice, { count: 2, dest: 'B', rest: 'C' });
+});
+
+test('once the picks are made, the options left over move to the rest section', () => {
+	const src = [
+		'## Moves',
+		'',
+		'### Always',
+		'x',
+		'',
+		'## Choices (?2>Moves>Later)',
+		'',
+		'Take two now; the others can be had later.',
+		'',
+		'### A',
+		'a',
+		'',
+		'### B',
+		'b',
+		'',
+		'### C',
+		'c',
+		'',
+		'### D',
+		'd',
+		'',
+		'## Gear',
+		'rope',
+		'',
+		'## Later (?>Moves) ::',
+		'',
+		'### Z',
+		'z',
+		'',
+	].join('\n');
+	const one = pick(src, '5', 2);
+	assert.match(one, /^## Choices \(\?1>Moves>Later\)$/m);
+	assert.match(one, /### Always\nx\n\n### C\nc\n\n## Choices/);
+	assert.match(one, /### Z\nz\n$/, 'nothing has moved on yet');
+	const two = pick(one, String(one.split('\n').indexOf('## Choices (?1>Moves>Later)')), 0);
+	assert.equal(
+		two,
+		[
+			'## Moves',
+			'',
+			'### Always',
+			'x',
+			'',
+			'### C',
+			'c',
+			'',
+			'### A',
+			'a',
+			'',
+			'## Gear',
+			'rope',
+			'',
+			'## Later (?>Moves) ::',
+			'',
+			'### Z',
+			'z',
+			'',
+			'### B',
+			'b',
+			'',
+			'### D',
+			'd',
+		].join('\n'),
+	);
+});
+
+test('rest works for lists and inline choices, and makes its section if need be', () => {
+	const list = 'Choose one: (?>>Stash)\n- a\n- b\n- c\n\n## Stash\ns';
+	assert.equal(pick(list, '0', 1), 'b\n\n## Stash\ns\n- a\n- c');
+	assert.equal(pick('[a | b | c](?>>Spare)', '0:0', 0), 'a\n\n## Spare\nb\nc\n');
+	// Not until the last pick.
+	assert.equal(pick('[a | b | c](?2>>Spare)', '0:0', 0), 'a, [b | c](?1>>Spare)');
+});
+
+test('the dog takes two starting choices; the others become advanced moves', async () => {
+	const { buildCharacterSheet } = await import('../src/lib/dw/sheetBuilder.js');
+	let body = buildCharacterSheet(readClass('Dog.md'), '').split('\n').slice(4);
+	const headings = () => body.filter((l) => l.startsWith('## ')).map((l) => parseHeading(l).text);
+	assert.equal(headings().filter((t) => t === 'Starting Moves').length, 1);
+	const names = (section) => {
+		const from = body.findIndex(
+			(l) => parseHeading(l)?.level === 2 && parseHeading(l).text === section,
+		);
+		const out = [];
+		for (let i = from + 1; i < body.length && !body[i].startsWith('## '); i++) {
+			if (body[i].startsWith('### ')) out.push(body[i].slice(4));
+		}
+		return out;
+	};
+	const advancedBefore = names('Advanced Moves');
+	const take = (name) => {
+		const g = [...parseChoices(body).groups.values()].find((x) => x.choice.rest);
+		body = pickChoice(
+			body,
+			g.id,
+			g.options.findIndex((o) => body[o.start] === `### ${name}`),
+		);
+	};
+	take('Dig');
+	take('Underdog');
+	assert.deepEqual(names('Starting Moves'), ["A Dog's Life", 'Canine Senses', 'Dig', 'Underdog']);
+	assert.ok(!headings().includes('Starting Choices'));
+	assert.ok(!body.some((l) => l.includes('You can later choose these moves')));
+	assert.deepEqual(names('Advanced Moves'), [
+		...advancedBefore,
+		'Tough Pelt',
+		'Chowhound',
+		'Scent Memory',
+		'Puppy Eyes',
+		'Skittish',
+	]);
+	// And from there they can still be taken.
+	const adv = [...parseChoices(body).groups.values()].find(
+		(x) => x.heading && parseHeading(body[x.prompt]).text === 'Advanced Moves',
+	);
+	body = pickChoice(
+		body,
+		adv.id,
+		adv.options.findIndex((o) => body[o.start] === '### Skittish'),
+	);
+	assert.equal(names('Starting Moves').at(-1), 'Skittish');
+});
+
+// --- "---" among an h2's moves: a new set of columns ---
+
+test('a rule among moves ends their columns and starts new ones', () => {
+	const html = renderMarkdown('## Spells\n### A\na\n### B\nb\n\n---\n\n### C\nc\n### D\nd');
+	assert.equal(html.match(/<div class="h2-columns">/g).length, 2);
+	assert.match(
+		html,
+		/<div class="h2-columns">.*>A<.*>B<.*<\/div><\/div><hr class="column-break"><div class="h2-columns">.*>C<.*>D</s,
+	);
+	// Elsewhere it is the rule it always was.
+	assert.match(renderMarkdown('a\n\n---\n\nb'), /<p>a<\/p><hr><p>b<\/p>/);
+});
+
+test('a rule between options belongs to neither, and goes when a side empties', () => {
+	const src =
+		'## Mine\n\n## Options (?>Mine)\n\n### A\na\n\n### B\nb\n\n---\n\n### C\nc\n\n---\n\n### D\nd\n';
+	// B, the last before a rule, moves without it.
+	const b = pick(src, '2', 1);
+	assert.equal(
+		b,
+		'## Mine\n\n### B\nb\n\n## Options (?>Mine)\n\n### A\na\n\n---\n\n### C\nc\n\n---\n\n### D\nd\n',
+	);
+	// C was alone between two rules: one of them goes with it.
+	const c = pick(b, String(b.split('\n').indexOf('## Options (?>Mine)')), 1);
+	assert.equal(
+		c,
+		'## Mine\n\n### B\nb\n\n### C\nc\n\n## Options (?>Mine)\n\n### A\na\n\n---\n\n### D\nd\n',
+	);
+	// D was the last after a rule: no rule is left trailing.
+	const d = pick(c, String(c.split('\n').indexOf('## Options (?>Mine)')), 1);
+	assert.equal(
+		d,
+		'## Mine\n\n### B\nb\n\n### C\nc\n\n### D\nd\n\n## Options (?>Mine)\n\n### A\na\n',
+	);
+});

@@ -8,6 +8,10 @@
 //   You start with: (?*)           every option is yours: each click takes one
 //   ## Advanced Moves (?>Starting Moves)
 //                                  a picked option moves to that section
+//   ## Starting Choices (?2>Starting Moves>Advanced Moves)
+//                                  two picks move to Starting Moves; the
+//                                  options left over then move to Advanced
+//                                  Moves, and the emptied section goes
 //
 // Picking keeps the option and deletes the markup and the options not taken.
 // Picked from a list, it moves up above the list — above the first of them,
@@ -69,13 +73,16 @@ export function findInlineChoices(line) {
 			start: m.index,
 			end: m.index + m[0].length,
 			options,
-			choice: makeChoice(m[2], m[3]),
+			choice: makeChoice(m[2], m[3], m[4]),
 		});
 	}
 	return found;
 }
 
 const isBlank = (l) => !l.trim();
+// "---": a rule. Among an h2's moves it ends one set of columns and starts the
+// next (see renderMarkdown), so it stands between options, part of none.
+const RULE_RE = /^---+$/;
 
 // Classify lines the way renderMarkdown consumes them, so that a marker inside
 // a code fence, map block, blockquote or table is never treated as markup.
@@ -103,8 +110,9 @@ function classify(lines) {
 			kind[i] = 'heading';
 		} else if (!t) {
 			kind[i] = 'blank';
+		} else if (RULE_RE.test(t)) {
+			kind[i] = 'rule';
 		} else if (
-			/^---+$/.test(t) ||
 			line.startsWith('>') ||
 			t.startsWith('|') ||
 			/^\s*<\/?(?:ul|ol|li|div|table|tr|td|th)[\s>]/i.test(line)
@@ -165,7 +173,11 @@ export function parseChoices(lines) {
 			// rendered as separate chunks and can't see their parent's marker.
 			const blocks = h.level >= 2 && children.length > 0;
 			const options = blocks
-				? children.map((s, k) => ({ start: s, end: children[k + 1] ?? end }))
+				? children.map((s, k) => {
+						let stop = children[k + 1] ?? end;
+						for (let j = s + 1; j < stop; j++) if (kind[j] === 'rule') stop = j;
+						return { start: s, end: stop };
+					})
 				: [];
 			// Without sub-headings the options are the heading's own lines, up
 			// to the next heading of any level.
@@ -241,8 +253,21 @@ function appendBlock(head, block) {
 	return out;
 }
 
+// Rules left with nothing between them, or at either end, have no columns to
+// separate any more.
+function dropIdleRules(span) {
+	if (!span.some((l) => RULE_RE.test(l.trim()))) return span;
+	const parts = [[]];
+	for (const l of span) {
+		if (RULE_RE.test(l.trim())) parts.push([]);
+		else parts[parts.length - 1].push(l);
+	}
+	return parts.filter((p) => p.some((l) => !isBlank(l))).flatMap((p, i) => (i ? ['---', ...p] : p));
+}
+
 // Move `block` to the end of the section headed `dest`. If there is no such
-// section, one is created just before the h2 section containing line `near`.
+// section, one is created just before the h2 section containing line `near`,
+// or at the end of the document when `near` is null.
 function insertIntoSection(lines, dest, block, near) {
 	const { kind, heads } = classify(lines);
 	const want = dest.toLowerCase();
@@ -254,7 +279,12 @@ function insertIntoSection(lines, dest, block, near) {
 		}
 	}
 	if (d === -1) {
-		let at = Math.min(near, lines.length);
+		let at = Math.min(near ?? lines.length, lines.length);
+		if (near === null) {
+			const head = lines.slice();
+			while (head.length && isBlank(head[head.length - 1])) head.pop();
+			return appendBlock([...head, ...(head.length ? [''] : []), `## ${dest}`], block);
+		}
 		for (let i = at; i >= 0; i--) {
 			if (kind[i] === 'heading' && heads[i].level <= 2) {
 				at = i;
@@ -295,7 +325,7 @@ function applyInline(lines, g, opt, parsed, header) {
 	const remaining = count - 1;
 	const more = remaining > 0 && rest.length > 0;
 	const restMarkup = more
-		? `[${rest.join(' | ')}]${formatChoiceMarker({ count: remaining, dest })}`
+		? `[${rest.join(' | ')}]${formatChoiceMarker({ count: remaining, dest, rest: g.choice.rest })}`
 		: '';
 	const replacement = dest ? restMarkup : more ? `${chosen}, ${restMarkup}` : chosen;
 	const out = lines.slice();
@@ -306,13 +336,31 @@ function applyInline(lines, g, opt, parsed, header) {
 		const others = (l, i) => i > hIdx && i < end && i !== g.line && parsed.groups.has(`${i}:0`);
 		return out.filter((l, i) => !others(l, i));
 	}
-	return dest ? insertIntoSection(out, dest, [chosen], g.line) : out;
+	const placed = dest ? insertIntoSection(out, dest, [chosen], g.line) : out;
+	// The choice is made: what was not taken moves on, if it has somewhere to go.
+	return g.choice.rest && !more && rest.length
+		? insertIntoSection(placed, g.choice.rest, rest, null)
+		: placed;
 }
 
 function applyGroup(lines, g, opt, parsed) {
+	const out = pickFromGroup(lines, g, opt, parsed);
+	const { count, rest } = g.choice;
+	const done = !(count - 1 > 0) || g.options.length <= 1;
+	if (!out || !rest || !done) return out;
+	// The choice is made: the options not taken move on instead of going away.
+	const left = g.options
+		.filter((_, k) => k !== opt)
+		.map((x) => trimBlank(lines.slice(x.start, x.end)));
+	if (!left.length) return out;
+	const block = g.kind === 'blocks' ? left.flatMap((b, i) => (i ? ['', ...b] : b)) : left.flat();
+	return insertIntoSection(out, rest, block, null);
+}
+
+function pickFromGroup(lines, g, opt, parsed) {
 	const o = g.options[opt];
 	if (!o) return null;
-	const { count, dest } = g.choice;
+	const { count, dest, rest } = g.choice;
 	const remaining = count - 1;
 	// `done`: this pick uses up the choice, so the options not taken go away.
 	const done = !(remaining > 0) || g.options.length <= 1;
@@ -330,7 +378,7 @@ function applyGroup(lines, g, opt, parsed) {
 	const inChosen = (j) => j >= o.start && j < o.end;
 
 	const h = g.heading ? parsed.heads[g.prompt] : null;
-	const nextChoice = { count: remaining, dest };
+	const nextChoice = { count: remaining, dest, rest };
 	let promptLine = null;
 	if (h) {
 		promptLine = formatHeading({ ...h, choice: done ? null : nextChoice });
@@ -348,7 +396,7 @@ function applyGroup(lines, g, opt, parsed) {
 	}
 	const withPrompt = (body) => (promptLine === null ? body : [promptLine, ...body]);
 	const seam = (span) => {
-		const s = squeeze(span);
+		const s = squeeze(g.kind === 'blocks' ? dropIdleRules(span) : span);
 		// Keep a blank line between a block and the heading that now follows it.
 		if (s.length && !isBlank(s[s.length - 1]) && after.length && parseHeading(after[0])) {
 			if (g.kind === 'blocks') s.push('');
@@ -357,6 +405,19 @@ function applyGroup(lines, g, opt, parsed) {
 	};
 
 	if (dest) {
+		if (h && done && Number.isFinite(count)) {
+			// A section that was there to pick a few things out of has done its
+			// job: it goes, heading, introduction and all. A stand-in keeps
+			// its place while the pick is put where it belongs.
+			const gone = `${'#'.repeat(h.level)} \x00`;
+			const out = insertIntoSection([...before, gone, ...after], dest, chosen, g.prompt);
+			const at = out.indexOf(gone);
+			out.splice(at, 1);
+			if (at > 0 && isBlank(out[at - 1]) && (at === out.length || isBlank(out[at]))) {
+				out.splice(at - 1, 1);
+			}
+			return out;
+		}
 		const out = [...before, ...seam(withPrompt(leftover)), ...after];
 		return insertIntoSection(out, dest, chosen, g.prompt);
 	}

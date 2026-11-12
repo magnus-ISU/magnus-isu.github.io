@@ -1,6 +1,6 @@
 // Heading lines carry a few trailing markers. In canonical order:
 //
-//   ## Text (?2>Dest)  ::
+//   ## Text (?2>Dest>Rest)  ::
 //
 //   (?…)   choice marker — the items below are options (see choices.js)
 //   "  "   two or more trailing spaces — break mode: every newline in the
@@ -11,20 +11,24 @@
 // Everything that reads or rewrites a heading line goes through parseHeading /
 // formatHeading, so toggling one marker can never drop another.
 
-// --- Choice marker: (?)  (?2)  (?*)  (?>Dest)  (?2>Dest) ---
+// --- Choice marker: (?)  (?2)  (?*)  (?>Dest)  (?2>Dest)  (?2>Dest>Rest) ---
 // A count means "choose that many"; "*" means "as many as you like", which
 // with no destination amounts to taking every option one click at a time.
 // ">Dest" means "a picked item moves to the end of the section called Dest".
 // With a destination and no count the choice is open-ended too. An open-ended
 // choice never deletes an option; its marker goes when the last one is taken.
-export const CHOICE_MARKER_SRC = String.raw`\(\?(\d+|\*)?(?:\s*>\s*([^()]*?))?\s*\)`;
+// A second ">Rest" means "once the choice is made, the options not taken move
+// to the end of the section called Rest" instead of being deleted.
+// Captures: count, Dest, Rest.
+export const CHOICE_MARKER_SRC = String.raw`\(\?(\d+|\*)?(?:\s*>\s*([^()>]*?))?(?:\s*>\s*([^()>]*?))?\s*\)`;
 const CHOICE_SUFFIX_RE = new RegExp(String.raw`(?:^|\s)${CHOICE_MARKER_SRC}$`);
 
-export function makeChoice(countStr, dest) {
+export function makeChoice(countStr, dest, rest) {
 	dest = dest?.trim() || null;
+	rest = rest?.trim() || null;
 	const open = countStr === '*' || (!countStr && dest);
 	const count = open ? Infinity : countStr ? Math.max(1, +countStr) : 1;
-	return { count, dest };
+	return rest ? { count, dest, rest } : { count, dest };
 }
 
 // Split a trailing choice marker off a line or heading text. The marker must
@@ -33,11 +37,12 @@ export function makeChoice(countStr, dest) {
 export function splitChoiceMarker(text) {
 	const m = text.match(CHOICE_SUFFIX_RE);
 	if (!m) return { text, choice: null };
-	return { text: text.slice(0, m.index).trimEnd(), choice: makeChoice(m[1], m[2]) };
+	return { text: text.slice(0, m.index).trimEnd(), choice: makeChoice(m[1], m[2], m[3]) };
 }
 
-export function formatChoiceMarker({ count, dest }) {
+export function formatChoiceMarker({ count, dest, rest }) {
 	const finite = Number.isFinite(count);
+	if (rest) return `(?${finite ? count : dest ? '' : '*'}>${dest ?? ''}>${rest})`;
 	if (dest) return `(?${finite ? count : ''}>${dest})`;
 	if (!finite) return '(?*)';
 	return `(?${count > 1 ? count : ''})`;

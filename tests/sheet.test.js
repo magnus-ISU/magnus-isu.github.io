@@ -217,6 +217,23 @@ test('the arcane duelist learns techniques into Student of the Blade', () => {
 	assert.ok(!rest.some((l) => /Freezing|Burning|playbook by/.test(l)));
 });
 
+test('spell options are set out level by level', () => {
+	const text = sheet('homebrew/classes/Living_Magus.md', 'homebrew/spells/Wizard_Spells.md');
+	const options = sections(text).get('Spell Options');
+	const levels = [[]];
+	for (const l of options.slice(1)) {
+		if (l === '---') levels.push([]);
+		else if (l.startsWith('### ')) levels.at(-1).push(l.match(/(\d+)<\/span>$/)?.[1]);
+	}
+	assert.ok(levels.length > 3);
+	for (const level of levels) {
+		assert.ok(level.length > 0);
+		assert.equal(new Set(level).size, 1, `one level per group: ${level}`);
+	}
+	// The spells known to begin with are one group and need no rule.
+	assert.ok(!sections(text).get('Spells').includes('---'));
+});
+
 test('an SRD caster works too', () => {
 	const text = sheet('srd/Wizard.md', 'srd/Wizard_Spells.md', { hardWrapped: true });
 	const s = sections(text);

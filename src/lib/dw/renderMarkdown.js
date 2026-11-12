@@ -461,7 +461,16 @@ export function renderMarkdown(src, opts = {}) {
 		if (/^---+$/.test(line.trim())) {
 			flushPara();
 			closePendingList();
-			html += '<hr>';
+			// Among an h2's moves a rule ends the columns they are laid out in;
+			// the moves after it start a new set.
+			if (inColumns) {
+				closeMoveBlock();
+				closeColumns();
+				pendingColumns = true;
+				html += '<hr class="column-break">';
+			} else {
+				html += '<hr>';
+			}
 			continue;
 		}
 
