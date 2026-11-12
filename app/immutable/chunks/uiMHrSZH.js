@@ -50,7 +50,7 @@ When you **prove your worth to a group of naysayers**, many will become your mos
 You have been sent to many cities on diplomatic missions from your country. When you **enter a new city**, tell the GM one unique cultural fact about it.
 
 ### A Warring Kingdom
-Your kingdom's strongholds are spread throughout the country. Whenever you come to them they will provide shelter.
+Your kingdom's strongholds and agents are spread throughout the lands. Whenever you come to them they will provide shelter. Additionally, increase your damage die.
 
 ## Gear
 You start with: (?*)
@@ -130,7 +130,7 @@ When you **meet a new person of high status**, tell the GM how you know of them.
 When you Discern Realities you may also choose from the following: *Who here is trustworthy? Who here is untrustworthy? Who here needs help?*
 
 ### Warrior Princess
-Take one non-multiclass move from the Fighter. Your damage die increases to d6.
+Take one non-multiclass move from the Fighter. Your damage die increases.
 
 ### Rebellious Princess
 Take one non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
@@ -160,7 +160,7 @@ While you **fight for the honor or safety of your True Love**, take +1 ongoing u
 
 ### Battle Princess
 *Requires Warrior Princess*  
-Take one more non-multiclass move from the Fighter. Your damage increases to d8.
+Take one more non-multiclass move from the Fighter. Your damage increases.
 
 ### Wicked Princess
 *Requires Rebellious Princess*  
