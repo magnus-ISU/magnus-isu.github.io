@@ -3,7 +3,7 @@ Damage: d4
 HP: 7 + Constitution
 Load: 7+STR
 
-## Alignments
+## Alignments (?)
 Good: Share your research for the good of all
 Lawful: Organize others in order to further your research
 Neutral: Prove another wrong about the impossible
@@ -16,7 +16,7 @@ Evil: Stretch science beyond what the Gods allow
 \_ won't tell me a secret I must learn
 Which of you needs something I can make?
 
-## Background
+## Background (?)
 
 ### Construct
 You are not a man, but a creation of Alchemy. You have a Seal on you somewhere; if it is destroyed, you will forget who you are until a new Seal can be made.
@@ -54,7 +54,7 @@ You must use reagents to work your alchemy. They weigh 1 load, and they are not 
 ### Information War
 When you meet peacefully with another alchemist, tell them secrets you've learned, and optionally ask them a question. Then they'll tell you something they've learned, related to your question if they know anything.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Tinkerer
 When you try to alter or inspect a magical device, roll+INT. On a 7+, you know how it works. Additionally, choose 2/1:

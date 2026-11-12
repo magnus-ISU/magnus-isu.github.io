@@ -21,7 +21,8 @@ When you **shoot a defenseless or surprised enemy**, name your target and roll+D
 - **Legs** 10+: Deal Damage. 7+: They're hobbled and slow moving.
 
 ### Animal Companion
-You have a supernatural connection with a loyal animal. It may not speak back to you but it always acts as you wish it to. Name your animal companion and choose a species and stats: *Wolf, cougar, bear, eagle, dog, hawk, cat, owl, pigeon, rat, mule, horse, other*
+You have a supernatural connection with a loyal animal. It may not speak back to you but it always acts as you wish it to. Name your animal companion and choose a species: [Wolf | cougar | bear | eagle | dog | hawk | cat | owl | pigeon | rat | mule | horse | other](?)  
+Choose its stats: (?)
 - Ferocity +3, Cunning +1, 1 Armor, 2 Weaknesses
 - Ferocity +2, Cunning +1, 1 Armor, 1 Weakness
 - Ferocity +2, Cunning +2, 0 Armor, 1 Weakness
@@ -39,7 +40,7 @@ When you work with your animal companion on something it's trained in...
 - …and you **take damage**, add its Armor to your armor
 - …and you **Discern Realities, Parley, or track**, add its Cunning to your roll
 
-## Background
+## Background (?)
 
 ### Elf
 When you **Undertake a Perilous Journey through wilderness**, roll+WIS. Choose 4/3/2:
@@ -63,17 +64,17 @@ Choose a creature type, such as dragons, giants, undead, constructs, or elves. Y
 ### Birdcaller
 You can mimic any sound that you've heard a wild animal make, and communicate with your animal companion from one kilometer away.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] [1 Armor] Leather Armor
 [1 Weight] Hunter's Bow (near, far)
 [1 Weight] Bundle of Arrows (ammo)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Dungeon Rations [5 rations]
-Choose your melee weapon:
+Choose your melee weapon: (?)
 [1 Weight] Short Sword (close)
 [1 Weight] Spear (reach)
-Choose one:
+Choose one: (?)
 [1 Weight] Bandages [3 uses]
 [1 Weight] Bundle of Arrows (ammo)
 
@@ -81,29 +82,27 @@ Choose one:
 Damage: d8, HP: 8+Constitution, Load: 11+STR
 
 ### Look
-Choose one for each:
-
-Wild Eyes, Sharp Eyes, or Animal Eyes  
-Hooded Head, Wild Hair, or Bald  
-Cape, Camouflage, or Traveling Clothes  
-Lithe Body, Wild Body, or Sharp Body
+[Wild Eyes | Sharp Eyes | Animal Eyes](?)  
+[Hooded Head | Wild Hair | Bald](?)  
+[Cape | Camouflage | Traveling Clothes](?)  
+[Lithe Body | Wild Body | Sharp Body](?)
 
 ### Names
-*Elf*: Throndir, Elrosine, Aranwe, Celion, Dambrath, Lanethe  
-*Human*: Jonah, Halek, Brandon, Emory, Shrike, Nora, Diana
+*Elf*: [Throndir | Elrosine | Aranwe | Celion | Dambrath | Lanethe](?)  
+*Human*: [Jonah | Halek | Brandon | Emory | Shrike | Nora | Diana](?)
 
-### Alignment
-Chaotic: Free someone from literal or figurative bonds.  
-Good: Endanger yourself to combat an unnatural threat.  
+### Alignment (?)
+Chaotic: Free someone from literal or figurative bonds.
+Good: Endanger yourself to combat an unnatural threat.
 Neutral: Help an animal or spirit of the wild.
 
 ### Bonds
-I have guided \_\_\_\_\_ before and they owe me for it.  
-\_\_\_\_\_ is a friend of nature, so I will be their friend as well.  
-\_\_\_\_\_ has no respect for nature, so I have no respect for them.  
+I have guided \_\_\_\_\_ before and they owe me for it.
+\_\_\_\_\_ is a friend of nature, so I will be their friend as well.
+\_\_\_\_\_ has no respect for nature, so I have no respect for them.
 \_\_\_\_\_ does not understand life in the wild, so I will teach them.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Half-Elven
 Somewhere in your lineage lies mixed blood and it begins to show its presence. You gain the elf or human starting move.
@@ -157,7 +156,7 @@ Whether through your craftsmanship, its own resilience, or special training, you
 ### A Safe Place
 When you **set the watch for the night**, everyone takes +1 to take watch.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Trap Mastery
 *Requires Trapper*  
@@ -195,4 +194,4 @@ Choose a move from another class. So long as you are working with your animal co
 ### Unnatural Ally
 Your animal companion is a monster; or it has grown in skill alongside you. Describe it and why and how it changed. Give it +2 ferocity, plus a new training.
 
-*A playbook by Magnus Anderson, Peter Johansen, Sage LaTorra, and Adam Koebel*
+*A playbook by Sage LaTorra, Adam Koebel, Peter Johansen, and Magnus Anderson*

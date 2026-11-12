@@ -8,15 +8,17 @@ Show the world who is lord.
 ## Starting Moves
 
 ### Deity
-You serve and worship some deity or power which grants you Miracles. Give your god a name (maybe Helferth, Sucellus, Zorica or Krugon the Bleak) and choose your deity's domain:
-- Healing and Restoration
-- Bloody Conquest
-- Civilization
-- Knowledge and Hidden Things
-- The Downtrodden and Forgotten
-- What Lies Beneath
+You serve and worship some deity or power which grants you Miracles. Give your god a name (maybe Helferth, Sucellus, Zorica or Krugon the Bleak).
 
-Choose one precept of your religion:
+Choose your deity's Domain: (?)
+- Domain: Healing and Restoration
+- Domain: Bloody Conquest
+- Domain: Civilization
+- Domain: Knowledge and Hidden Things
+- Domain: The Downtrodden and Forgotten
+- Domain: What Lies Beneath
+
+Choose one precept of your religion: (?)
 - Your religion preaches the sanctity of suffering, add Petition: Suffering
 - Your religion is cultish and insular, add Petition: Gaining Secrets
 - Your religion has important sacrificial rites, add Petition: Offering
@@ -47,7 +49,7 @@ You can always work your rotes, and automatically succeed at them.
 ### Turn Undead
 When you **hold your holy symbol aloft and call on your deity for protection**, roll+WIS. On a 7+, so long as you continue to pray and brandish your holy symbol, no undead may come within reach of you. On a 10+, you also momentarily daze intelligent undead and cause mindless undead to flee. Aggression breaks the effects and they are able to act as normal. Intelligent undead may still find ways to harry you from afar. They're clever like that.
 
-## Background
+## Background (?)
 
 ### Dwarf
 You are one with stone. You know a special version of Words of the Unspeaking which only works on stone. It is a rote for you.
@@ -70,18 +72,18 @@ You served alongside soldiers. You ignore the *clumsy* tag on armor you wear, an
 ### Convert
 You once followed another path, so you know better than most how outsiders feel about your god and path. When you **Parley with someone by appealing to doubts or beliefs you once shared**, your sincerity is leverage enough.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
 [0 Weight] Some Symbol of the Divine, describe it
-Choose one for your defenses:
+Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Chainmail
 [2 Weight] [+1 Armor] Shield
-Choose one armament:
+Choose one armament: (?)
 [1 Weight] Warhammer (close)
 [1 Weight] Mace (close)
 [1 Weight] Staff (close, two-handed) and [1 Weight] Bandages [3 uses]
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] Healing Potion [1 use]
 
@@ -89,30 +91,28 @@ Choose one:
 Damage: d6, HP: 8+Constitution, Load: 10+STR
 
 ### Look
-Choose one for each:
-
-Kind Eyes, Sharp Eyes, or Sad Eyes  
-Tonsure, Strange Hair, or Bald  
-Flowing Robes, Habit, or Common Garb  
-Thin Body, Knobby Body, or Flabby Body
+[Kind Eyes | Sharp Eyes | Sad Eyes](?)  
+[Tonsure | Strange Hair | Bald](?)  
+[Flowing Robes | Habit | Common Garb](?)  
+[Thin Body | Knobby Body | Flabby Body](?)
 
 ### Names
-*Dwarf*: Durga, Aelfar, Gerda, Rurgosh, Bjorn, Drummond, Helga, Siggrun, Freya  
-*Human*: Wesley, Brinton, Jon, Sara, Hawthorn, Elise, Clarke, Lenore, Piotr, Dahlia, Carmine
+*Dwarf*: [Durga | Aelfar | Gerda | Rurgosh | Bjorn | Drummond | Helga | Siggrun | Freya](?)  
+*Human*: [Wesley | Brinton | Jon | Sara | Hawthorn | Elise | Clarke | Lenore | Piotr | Dahlia | Carmine](?)
 
-### Alignment
+### Alignment (?)
 
-Good: Endanger yourself to heal another.  
-Lawful: Endanger yourself following the precepts of your church or god.  
+Good: Endanger yourself to heal another.
+Lawful: Endanger yourself following the precepts of your church or god.
 Evil: Harm another to prove the superiority of your church or god.
 
 ### Bonds
-\_\_\_\_\_ has insulted my deity; I do not trust them.  
-\_\_\_\_\_ is a good and faithful person; I trust them implicitly.  
-\_\_\_\_\_ is in constant danger, I will keep them safe.  
+\_\_\_\_\_ has insulted my deity; I do not trust them.
+\_\_\_\_\_ is a good and faithful person; I trust them implicitly.
+\_\_\_\_\_ is in constant danger, I will keep them safe.
 I am working on converting \_\_\_\_\_ to my faith.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Invigorate
 When you **heal someone** they take +2 forward to their damage.
@@ -146,7 +146,7 @@ When you or your allies stand on sanctified, holy ground, they have +1 armor.
 ### Devoted Healer
 When you heal someone else of damage, add your level to the amount of damage healed.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Apotheosis
 The first time you **spend time in prayer as appropriate to your god** after taking this move, choose a feature associated with your deity (rending claws, wings of sapphire feathers, an all-seeing third eye, etc.). When you emerge from prayer, you permanently gain that physical feature.
@@ -183,4 +183,4 @@ When you Work Miracles, on a 10-11 you have the option of choosing from the 7-9 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
-*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*
+*A playbook by Sage LaTorra, Adam Koebel, and Magnus Anderson*

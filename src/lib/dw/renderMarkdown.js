@@ -1,20 +1,52 @@
+import { findInlineChoices, parseChoices } from './choices.js';
+import { headingBreaks, parseHeading, splitChoiceMarker } from './headings.js';
+
+// Pre-pass shared by everything that splits a document into lines: a
+// [text](tooltip) whose tooltip spans several lines is folded onto one line
+// (newlines become \x01), so line-based parsing never cuts through it.
+export function collapseTooltips(src) {
+	return src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
+		return `[${text}](${body.replace(/\n/g, '\x01')})`;
+	});
+}
+
+// Options that are taken or moved one by one (shown with a "+") rather than
+// chosen between (shown with a circle).
+function isOpenChoice(choice) {
+	return !!choice.dest || !Number.isFinite(choice.count);
+}
+
+function chooseLabel(choice) {
+	if (!Number.isFinite(choice.count)) return '';
+	return `choose ${choice.count === 1 ? 'one' : choice.count}`;
+}
+
 // Simple markdown → HTML (CommonMark-ish) with two-column layout for h2 sections with 2+ h3s
 // opts.battle: when true, ```battle fences become indexed placeholder divs that the
 // character sheet mounts interactive components into. opts.battleCounter is a shared
 // { n } object so indices stay sequential across recursive renders.
+//
+// opts.autoBreak (default true): sections called Gear / Items / Inventory /
+// Bonds break on every newline. Turn it off for hard-wrapped sources.
+//
+// opts.choiceScope: when set, choice options (see choices.js) are rendered
+// clickable and tagged data-cs=<scope> data-cg=<group id> data-co=<option>, the
+// group id being relative to the lines of `src`. Without it the options are
+// shown but inert.
 export function renderMarkdown(src, opts = {}) {
 	if (!src.trim()) return '';
 
 	const battle = !!opts.battle;
 	const battleCounter = opts.battleCounter || { n: 0 };
-	const childOpts = { battle, battleCounter };
+	const autoBreak = opts.autoBreak !== false;
+	const choiceScope = opts.choiceScope || '';
+	const childOpts = { battle, battleCounter, autoBreak };
 
-	// Pre-pass: collapse multiline [text](tooltip) where tooltip contains newlines
-	src = src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
-		return `[${text}](${body.replace(/\n/g, '\x01')})`;
-	});
+	src = collapseTooltips(src);
 
 	const lines = src.split('\n');
+	const choiceRoles = parseChoices(lines).roles;
+	const optAttrs = (id, index) => ` data-cs="${choiceScope}" data-cg="${id}" data-co="${index}"`;
 
 	// Pre-scan: count h3s under each h2 (by line index)
 	const h2H3Counts = new Map();
@@ -84,6 +116,20 @@ export function renderMarkdown(src, opts = {}) {
 		inBlockquote = false;
 	}
 
+	function listItem(text, idx) {
+		const role = choiceRoles.get(idx);
+		if (role?.prompt) {
+			const label = chooseLabel(role.prompt.choice);
+			const shown = splitChoiceMarker(text.trimEnd()).text;
+			return `<li><span class="choice-prompt">${inline(shown, idx) || label}</span></li>`;
+		}
+		if (role?.option && choiceScope) {
+			const move = isOpenChoice(role.option.group.choice) ? ' choice-move' : '';
+			return `<li class="choice-opt${move}"${optAttrs(role.option.group.id, role.option.index)}>${inline(text, idx)}</li>`;
+		}
+		return `<li>${inline(text, idx)}</li>`;
+	}
+
 	function closePendingList() {
 		if (inList) {
 			html += `</${listTag}>`;
@@ -93,16 +139,39 @@ export function renderMarkdown(src, opts = {}) {
 
 	function flushPara() {
 		if (paraLines.length === 0) return;
+		// A choice prompt and each of its options sit on their own line whatever
+		// the break mode.
+		const roleOf = (p) => (p ? choiceRoles.get(p.idx) : undefined);
+		const ownLine = (r) => !!(r && (r.prompt || r.option));
 		const content = paraLines
-			.map((l, i) => {
+			.map((p, i) => {
 				const isLast = i === paraLines.length - 1;
-				const hasBreak = !isLast && (breakMode || / {2,}$/.test(l));
-				const hasBackslash = !isLast && /\\$/.test(l);
-				const stripped = hasBreak ? l.replace(/ {2,}$/, '') : hasBackslash ? l.slice(0, -1) : l;
-				let rendered = inline(stripped);
+				const role = roleOf(p);
+				const isPrompt = !!role?.prompt;
+				const option = !isPrompt && role?.option;
+				let l = p.line;
+				const hasBreak =
+					!isLast &&
+					(breakMode || / {2,}$/.test(l) || ownLine(role) || ownLine(roleOf(paraLines[i + 1])));
+				const hasBackslash = !isLast && !hasBreak && /\\$/.test(l);
+				if (isPrompt) l = splitChoiceMarker(l.trimEnd()).text;
+				const stripped = hasBackslash ? l.slice(0, -1) : l.replace(/ {2,}$/, '');
+				let rendered = inline(stripped, p.idx);
+
+				if (isPrompt) {
+					const label = chooseLabel(role.prompt.choice);
+					const text = rendered || (label ? `${label[0].toUpperCase()}${label.slice(1)}:` : '');
+					rendered = `<span class="choice-prompt">${text}</span>`;
+				} else if (option && choiceScope) {
+					// Not yet the character's own, so no click-to-copy: a click picks it.
+					const move = isOpenChoice(option.group.choice) ? ' choice-move' : '';
+					rendered = `<span class="choice-opt choice-line${move}"${optAttrs(option.group.id, option.index)}>${rendered}</span>`;
+					return hasBreak ? `${rendered}<br>` : rendered;
+				}
 
 				const hasConsumable = /\[\d+(?:\/\d+)?\s+(?:uses?|rations?)\]/i.test(l);
-				if (/^\[/.test(l.trim()) || hasConsumable) {
+				const hasChoice = l.includes('](?') && findInlineChoices(l).length > 0;
+				if (!isPrompt && !hasChoice && (/^\[/.test(l.trim()) || hasConsumable)) {
 					const afterCoin = l
 						.trim()
 						.replace(/^\[\d+\s*Coin\]\s*/i, '')
@@ -129,7 +198,31 @@ export function renderMarkdown(src, opts = {}) {
 		paraLines = [];
 	}
 
-	function inline(t) {
+	// lineIdx: the source line `t` comes from, so inline choices can be
+	// addressed; -1 renders them inert.
+	function inline(t, lineIdx = -1) {
+		// Inline choices come out first and go back in last, so their rendered
+		// HTML passes through the replacements below untouched.
+		const choiceHtml = [];
+		if (t.includes('](?')) {
+			const found = findInlineChoices(t);
+			for (let k = found.length - 1; k >= 0; k--) {
+				const c = found[k];
+				const live = choiceScope && lineIdx >= 0;
+				const move = isOpenChoice(c.choice) ? ' choice-move' : '';
+				const parts = c.options.map((o, oi) =>
+					live
+						? `<span class="choice-opt${move}"${optAttrs(`${lineIdx}:${k}`, oi)}>${inline(o)}</span>`
+						: inline(o),
+				);
+				const n = Number.isFinite(c.choice.count) && c.choice.count > 1 ? c.choice.count : 0;
+				choiceHtml[k] =
+					`<span class="choice-inline"${n ? ` data-choose="choose ${n}"` : ''}>` +
+					`${parts.join('<span class="choice-sep"> / </span>')}</span>`;
+				t = `${t.slice(0, c.start)}\x00CH${k}\x00${t.slice(c.end)}`;
+			}
+		}
+
 		const escapes = [];
 		t = t.replace(/\\([\\`*_[\]{}()#+\-.!|~])/g, (_, ch) => {
 			escapes.push(ch);
@@ -248,6 +341,8 @@ export function renderMarkdown(src, opts = {}) {
 		t = t.replace(/\x00ESC(\d+)\x00/g, (_, i) =>
 			escapes[+i].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'),
 		);
+		// eslint-disable-next-line no-control-regex
+		if (choiceHtml.length) t = t.replace(/\x00CH(\d+)\x00/g, (_, i) => choiceHtml[+i]);
 
 		return t;
 	}
@@ -273,32 +368,44 @@ export function renderMarkdown(src, opts = {}) {
 			continue;
 		}
 
-		const hm = line.match(/^(#{1,6})\s+(.*)/);
-		if (hm) {
+		const hd = parseHeading(line);
+		if (hd) {
 			flushPara();
 			flushBlockquote();
 			closePendingList();
-			const level = hm[1].length;
-			const headingHasBreak = / {2,}$/.test(hm[2]);
-			hm[2] = hm[2].replace(/\s+$/, '');
+			const level = hd.level;
 			if (breakMode && level <= breakModeLevel) breakMode = false;
-			if (headingHasBreak) {
+			if (headingBreaks(hd, autoBreak)) {
 				breakMode = true;
 				breakModeLevel = level;
 			}
+			// A heading can prompt a choice ("## Background (?)") and be an
+			// option of its parent's choice at the same time.
+			const role = choiceRoles.get(lineIdx);
+			const classes = [];
+			let attrs = '';
+			if (role?.prompt) {
+				classes.push('choice-prompt');
+				const label = chooseLabel(role.prompt.choice);
+				if (label) attrs += ` data-choose="${label}"`;
+			}
+			if (role?.option && choiceScope) {
+				classes.push('choice-opt');
+				if (isOpenChoice(role.option.group.choice)) classes.push('choice-move');
+				attrs += optAttrs(role.option.group.id, role.option.index);
+			}
+			const headingHtml = (extraClasses = [], extraAttrs = '') => {
+				const cls = [...extraClasses, ...classes];
+				const clsAttr = cls.length ? ` class="${cls.join(' ')}"` : '';
+				return `<h${level}${clsAttr}${extraAttrs}${attrs}>${inline(hd.text, lineIdx)}</h${level}>`;
+			};
 			if (level <= 2) {
 				closeH2Section();
-				let h2Text = hm[2];
-				let collapsed = false;
-				if (level === 2 && /\s*::\s*$/.test(h2Text)) {
-					h2Text = h2Text.replace(/\s*::\s*$/, '');
-					collapsed = true;
-				}
-				const h2Cls = collapsed ? ' class="collapsed-heading collapsed-inline"' : '';
+				const collapsed = hd.collapsed;
 				if (level === 2) {
 					html += '<div class="h2-group">';
 				}
-				html += `<h${level}${h2Cls}>${inline(h2Text)}</h${level}>`;
+				html += headingHtml(collapsed ? ['collapsed-heading', 'collapsed-inline'] : []);
 				if (level === 2) {
 					_h2Collapsed = collapsed;
 					const cols = (h2H3Counts.get(lineIdx) || 0) >= 2;
@@ -318,15 +425,9 @@ export function renderMarkdown(src, opts = {}) {
 				}
 				html += '<div class="move-block">';
 				inMoveBlock = true;
-				let h3Text = hm[2];
-				let h3Attr = '';
-				if (/\s*###\s*$/.test(h3Text)) {
-					h3Text = h3Text.replace(/\s*###\s*$/, '');
-					h3Attr = ' data-glow';
-				}
-				html += `<h${level}${h3Attr}>${inline(h3Text)}</h${level}>`;
+				html += headingHtml([], hd.glow ? ' data-glow' : '');
 			} else {
-				html += `<h${level}>${inline(hm[2])}</h${level}>`;
+				html += headingHtml();
 			}
 			continue;
 		}
@@ -426,7 +527,7 @@ export function renderMarkdown(src, opts = {}) {
 				inList = true;
 				listTag = 'ul';
 			}
-			html += `<li>${inline(ul[1])}</li>`;
+			html += listItem(ul[1], lineIdx);
 			continue;
 		}
 
@@ -439,7 +540,7 @@ export function renderMarkdown(src, opts = {}) {
 				inList = true;
 				listTag = 'ol';
 			}
-			html += `<li>${inline(ol[1])}</li>`;
+			html += listItem(ol[1], lineIdx);
 			continue;
 		}
 
@@ -457,7 +558,7 @@ export function renderMarkdown(src, opts = {}) {
 		}
 
 		closePendingList();
-		paraLines.push(line);
+		paraLines.push({ line, idx: lineIdx });
 	}
 	flushPara();
 	flushBlockquote();
@@ -476,12 +577,11 @@ export function renderMarkdown(src, opts = {}) {
 // Each chunk records the break-mode state it starts in (a heading ending in
 // 2+ spaces turns it on for following content), since that's the only renderer
 // state that can legitimately cross an h1/h2 boundary (from an h1).
-export function splitMarkdownChunks(src) {
+export function splitMarkdownChunks(src, opts = {}) {
+	const autoBreak = opts.autoBreak !== false;
 	// Same pre-pass as renderMarkdown so multiline tooltips never straddle a
 	// chunk boundary. renderMarkdown's own pre-pass then no-ops on each chunk.
-	src = src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
-		return `[${text}](${body.replace(/\n/g, '\x01')})`;
-	});
+	src = collapseTooltips(src);
 
 	const lines = src.split('\n');
 	const chunks = [];
@@ -534,15 +634,15 @@ export function splitMarkdownChunks(src) {
 			cur.push(line);
 			continue;
 		}
-		const hm = line.match(/^(#{1,6})\s+(.*)/);
-		if (hm) {
-			const level = hm[1].length;
+		const hd = parseHeading(line);
+		if (hd) {
+			const level = hd.level;
 			if (level <= 2) {
 				push();
 				inSection = level === 2;
 			}
 			if (breakMode && level <= breakModeLevel) breakMode = false;
-			if (/ {2,}$/.test(hm[2])) {
+			if (headingBreaks(hd, autoBreak)) {
 				breakMode = true;
 				breakModeLevel = level;
 			}

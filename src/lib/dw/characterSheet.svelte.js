@@ -1,190 +1,105 @@
+// The character sheets, one document each (see sync/docStore.js), and which
+// one is open in this tab.
 import { browser } from '$app/environment';
-import { driveSync } from '$lib/google/sync.svelte.js';
+import { characterName } from '$lib/sync/kinds.js';
+import { docStore, docs } from './docs.svelte.js';
 
-const STORAGE_KEY = 'dw-character-sheet';
-const SLOTS_KEY = 'dw-character-slots';
-const ACTIVE_KEY = 'dw-character-active';
-
-driveSync.registerKey(SLOTS_KEY);
-
-function loadSlots() {
-	if (!browser) return [''];
-	try {
-		const raw = driveSync.load(SLOTS_KEY);
-		if (raw) {
-			const arr = JSON.parse(raw);
-			if (Array.isArray(arr) && arr.length > 0) return arr;
-		}
-		const legacy = driveSync.load(STORAGE_KEY) ?? '';
-		const slots = [legacy];
-		driveSync.save(SLOTS_KEY, JSON.stringify(slots));
-		return slots;
-	} catch {
-		return [''];
-	}
-}
+const ACTIVE_KEY = 'dw-character-active-id';
 
 function loadActive() {
-	if (!browser) return 0;
+	if (!browser) return '';
 	try {
-		const v = localStorage.getItem(ACTIVE_KEY);
-		return v !== null ? +v : 0;
+		return localStorage.getItem(ACTIVE_KEY) || '';
 	} catch {
-		return 0;
+		return '';
 	}
 }
 
-function saveSlots(slots) {
-	if (!browser) return;
-	driveSync.save(SLOTS_KEY, JSON.stringify(slots));
-}
+let activeId = $state(loadActive());
 
-function saveActive(idx) {
+function setActive(id) {
+	activeId = id;
 	if (!browser) return;
 	try {
-		localStorage.setItem(ACTIVE_KEY, String(idx));
-	} catch {}
-}
-
-const slots = $state(loadSlots());
-let activeIdx = $state(loadActive() >= slots.length ? 0 : loadActive());
-
-// Typing rewrites the active slot on every keystroke; serializing every slot
-// and writing localStorage synchronously each time is measurable on large
-// documents. Coalesce the writes and flush when the page is hidden/closed so
-// nothing is lost.
-let persistTimer = null;
-
-function flushPersist() {
-	if (persistTimer === null) return;
-	clearTimeout(persistTimer);
-	persistTimer = null;
-	saveSlots(slots);
-	// Also keep legacy key in sync for the layout's charImage
-	try {
-		localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
+		localStorage.setItem(ACTIVE_KEY, id);
 	} catch {
 		/* ignore */
 	}
 }
 
-function schedulePersist() {
-	if (!browser || persistTimer !== null) return;
-	persistTimer = setTimeout(flushPersist, 400);
+const sheets = () => docs().byKind('character');
+
+// The open sheet. If it was deleted (here or on another device) the first one
+// takes its place.
+function active() {
+	const list = sheets();
+	return list.find((d) => d.id === activeId) || list[0] || null;
 }
 
-if (browser) {
-	window.addEventListener('pagehide', flushPersist);
-	document.addEventListener('visibilitychange', () => {
-		if (document.hidden) flushPersist();
-	});
-}
+// There is always a sheet to type into.
+if (browser && !docStore.byKind('character').length) docStore.create('character', '');
 
 export const characterSheet = {
 	get value() {
-		return slots[activeIdx] ?? '';
+		return active()?.text ?? '';
 	},
 	set value(v) {
-		slots[activeIdx] = v;
-		schedulePersist();
+		const doc = active();
+		if (doc) docStore.edit(doc.id, v);
+		else if (v) setActive(docStore.create('character', v).id);
 	},
 	get isEmpty() {
-		return !(slots[activeIdx] ?? '').trim();
+		return !this.value.trim();
 	},
 
 	get activeIndex() {
-		return activeIdx;
+		const doc = active();
+		return doc ? sheets().indexOf(doc) : 0;
 	},
 	get slotCount() {
-		return slots.length;
+		return sheets().length;
 	},
 
 	/** Get the name from a slot's first line */
 	slotName(i) {
-		const line0 = (slots[i] ?? '').split('\n')[0]?.trim() || '';
-		const comma = line0.indexOf(',');
-		return (comma >= 0 ? line0.slice(0, comma).trim() : line0) || '';
+		return characterName(sheets()[i]?.text ?? '');
+	},
+
+	/** The slot is one half of a sync conflict: its label, or '' */
+	slotConflict(i) {
+		return sheets()[i]?.conflict || '';
 	},
 
 	/** Switch to a different slot */
 	switchTo(i) {
-		if (i < 0 || i >= slots.length) return;
-		activeIdx = i;
-		saveActive(i);
-		// Sync legacy key
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, slots[i] ?? '');
-			} catch {
-				/* ignore */
-			}
-		}
+		const doc = sheets()[i];
+		if (doc) setActive(doc.id);
 	},
 
 	/** Add a new empty slot and switch to it */
 	addSlot() {
-		slots.push('');
-		const newIdx = slots.length - 1;
-		activeIdx = newIdx;
-		saveActive(newIdx);
-		saveSlots(slots);
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, '');
-			} catch {
-				/* ignore */
-			}
-		}
+		setActive(docStore.create('character', '').id);
 	},
 
-	/** Delete a slot (cannot delete last one) */
+	/**
+	 * Delete a slot (cannot delete the last one). Returns what restoreSlot()
+	 * needs to undo it.
+	 */
 	deleteSlot(i) {
-		if (slots.length <= 1) return;
-		slots.splice(i, 1);
-		if (activeIdx >= slots.length) activeIdx = slots.length - 1;
-		else if (activeIdx > i) activeIdx--;
-		saveActive(activeIdx);
-		saveSlots(slots);
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
-			} catch {
-				/* ignore */
-			}
-		}
+		const list = sheets();
+		const doc = list[i];
+		if (!doc || list.length <= 1) return null;
+		const wasActive = active() === doc;
+		const neighbour = list[i + 1] || list[i - 1];
+		const removed = docStore.remove(doc.id);
+		if (wasActive) setActive(neighbour.id);
+		return { doc: removed, index: i, wasActive };
 	},
 
-	/** Return a full snapshot for undo purposes */
-	get snapshot() {
-		return { slots: [...slots], activeIdx };
-	},
-
-	refresh() {
-		const newSlots = loadSlots();
-		const newActive = loadActive();
-		slots.length = 0;
-		slots.push(...newSlots);
-		activeIdx = Math.min(newActive, slots.length - 1);
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
-			} catch {}
-		}
-	},
-
-	/** Restore a full slot snapshot (for undo) */
-	restoreSlots(newSlots, newActiveIdx) {
-		slots.length = 0;
-		slots.push(...newSlots);
-		activeIdx = Math.min(newActiveIdx, slots.length - 1);
-		saveActive(activeIdx);
-		saveSlots(slots);
-		if (browser) {
-			try {
-				localStorage.setItem(STORAGE_KEY, slots[activeIdx] ?? '');
-			} catch {
-				/* ignore */
-			}
-		}
+	/** Undo a deleteSlot() */
+	restoreSlot(snapshot) {
+		if (!snapshot) return;
+		const doc = docStore.restore(snapshot.doc, snapshot.index);
+		if (snapshot.wasActive) setActive(doc.id);
 	},
 };

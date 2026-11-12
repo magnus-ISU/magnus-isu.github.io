@@ -3,13 +3,19 @@ import { goto } from '$app/navigation';
 import MonsterSearch from '$lib/components/MonsterSearch.svelte';
 import MonsterStatblock from '$lib/components/MonsterStatblock.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-import { buildCharacterSheet } from '$lib/dw/classLoader.js';
+import { loadClassSheet } from '$lib/dw/classLoader.js';
 import { globalExpand } from '$lib/dw/descExpanded.svelte.js';
+import { parseHeading } from '$lib/dw/headings.js';
+import { contentIndex } from '$lib/dw/navigation.js';
 import { renderMarkdown } from '$lib/dw/renderMarkdown.js';
 import { toggleSource } from '$lib/dw/sourcePreference.svelte.js';
 
 let { data } = $props();
-const contentHtml = $derived(data.rawSource ? renderMarkdown(data.rawSource) : null);
+// SRD text is hard-wrapped, so its Gear and Bonds sections can't break on
+// every newline the way the homebrew ones do.
+const contentHtml = $derived(
+	data.rawSource ? renderMarkdown(data.rawSource, { autoBreak: !data.hardWrapped }) : null,
+);
 let longPressTimer;
 let isLongPress = false;
 let imgLoaded = $state(false);
@@ -88,10 +94,11 @@ function extractSection(headingText) {
 	let startIdx = -1;
 	let level = 0;
 	for (let i = 0; i < lines.length; i++) {
-		const m = lines[i].match(/^(#{1,6})\s+(.+)/);
-		if (m && stripToText(m[2]) === needle) {
+		// The rendered heading has no trailing markers (choice, collapse…).
+		const h = parseHeading(lines[i]);
+		if (h && stripToText(h.text) === needle) {
 			startIdx = i;
-			level = m[1].length;
+			level = h.level;
 			break;
 		}
 	}
@@ -158,7 +165,12 @@ function onArticleClick(e) {
 	const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
 	if (!heading) return;
 	if (heading.tagName === 'H1' && characterSheet.isEmpty) {
-		characterSheet.value = buildCharacterSheet(data.rawSource, data.art);
+		const entry = contentIndex[data.slug];
+		if (entry?.file) {
+			loadClassSheet(entry, data.art).then((sheet) => {
+				if (sheet && characterSheet.isEmpty) characterSheet.value = sheet;
+			});
+		}
 		heading.classList.add('copied');
 		setTimeout(() => heading.classList.remove('copied'), 1000);
 		return;

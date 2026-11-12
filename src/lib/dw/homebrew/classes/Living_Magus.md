@@ -35,7 +35,7 @@ When you **draw on a place of power to create a magical effect**, tell the GM wh
 - You and your allies will risk danger from \_
 - You'll have to disenchant \_ to do it
 
-## Background
+## Background (?)
 
 ### Acolyte
 Add a Cleric Miracle to your spellbook. When you reach level 6, add another.
@@ -55,18 +55,18 @@ Take the mastery move **Warrior of the Mind**.
 ### Sorcerer
 You do not use a spellbook to prepare spells. They are a part of your blood.
 
-## Gear  
-You start with:
-[1 Weight] Your Spellbook
+## Gear
+You start with: (?*)
+[0 Weight] Your Spellbook
 [1 Weight] Dungeon Rations [5 rations]
-Choose one for your defenses:
+Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Leather Armor
 [2 Weight] Bag of Books [3 uses] and [0 Weight] 3 Weightless Healing Potions [3 uses]
-Choose one for your weapon:
+Choose one for your weapon: (?)
 [0 Weight] Dagger (hand)
 [1 Weight] Staff (close, two-handed)
 [1 Weight] Orb of Magical Focus
-Choose one:
+Choose one: (?)
 [1 Weight] Healing Potion [1 use]
 [1 Weight] Antitoxin [3 uses]
 
@@ -74,31 +74,29 @@ Choose one:
 Damage: d4, HP: 4+Constitution, Load: 6+STR
 
 ### Look
-Choose one for each:
-
-Haunted Eyes, Sharp Eyes, or Crazy Eyes  
-Styled Hair, Wild Hair, or Pointed Hat  
-Worn Robes, Stylish Robes, or Strange Robes  
-Pudgy Body, Creepy Body, or Thin Body
+[Haunted Eyes | Sharp Eyes | Crazy Eyes](?)  
+[Styled Hair | Wild Hair | Pointed Hat](?)  
+[Worn Robes | Stylish Robes | Strange Robes](?)  
+[Pudgy Body | Creepy Body | Thin Body](?)
 
 ### Names
-*Elf*: Galadiir, Fenfaril, Lilliastre, Phirosalle, Enkirash, Halwyr  
-*Human*: Avon, Morgan, Rath, Ysolde, Ovid, Vitus, Aldara, Xeno, Uri
+*Elf*: [Galadiir | Fenfaril | Lilliastre | Phirosalle | Enkirash | Halwyr](?)  
+*Human*: [Avon | Morgan | Rath | Ysolde | Ovid | Vitus | Aldara | Xeno | Uri](?)
 
-### Alignment
-Good: Use magic to permanently improve someone's life.  
-Neutral: Discover something about a magical mystery.  
+### Alignment (?)
+Good: Use magic to permanently improve someone's life.
+Neutral: Discover something about a magical mystery.
 Evil: Use magic to cause fear and terror.
 
 ### Bonds
-\_ will play an important role in the events to come. I have foreseen it!  
-\_ is keeping an important secret from me.  
-\_ is woefully misinformed about the world; I will teach them all that I can.  
-\_ must help me unlock my full magical power.  
-\_ has seen the terrible power of magic, but I want to show them a better way.  
+\_ will play an important role in the events to come. I have foreseen it!
+\_ is keeping an important secret from me.
+\_ is woefully misinformed about the world; I will teach them all that I can.
+\_ must help me unlock my full magical power.
+\_ has seen the terrible power of magic, but I want to show them a better way.
 \_ wants me to use magic I'm not willing to.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Spellblade
 When you **Cast a Spell**, you get +d4 forward to damage from **Hack & Slash**. When you **Hack & Slash** someone, you get +1 forward to **Cast a Spell** targeting them.
@@ -153,7 +151,7 @@ When **another player's character comes to you for advice and you tell them what
 ### Missile Barrage
 When you **cast Magic Missiles**, on a hit, you may immediately recast it with improved Alacrity. Each time you do so, take -1 ongoing to cast it again until you stop. Do not mark experience for these additional rolls.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Self-Powered
 When you have time, expensive arcane materials, and a safe space, you can create your own place of power. Describe to the GM what kind of power it is and how you're binding it to this place, the GM will tell you someone or something that will have an interest in your workings.
@@ -180,4 +178,4 @@ When you have time and safety with a magic item in a place of power you can empo
 ### Warrior of the Mind
 When you **already know another's fighting style**, then you can **Hack & Slash** them rolling INT. If you don't know someone's style, you can use a **Discern Realities** question to find out.
 
-*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*
+*A playbook by Sage LaTorra, Adam Koebel, and Magnus Anderson*

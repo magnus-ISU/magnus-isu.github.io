@@ -31,7 +31,7 @@ When you **gaze intensely into someone's eyes**, you may ask their player: "What
 ### Zuko Style
 When you **bend an existing flame to your will**, roll+WIS. On a 10+ it does as you command, taking the shape and movement that you desire for as long as it has fuel on which to burn. On a 7-9, the effect is short-lived, lasting only for a moment. On a miss, it rages out of control with a mind of its own.
 
-## Background
+## Background (?)
 
 ### Touched by Flame
 You may be elf, dwarf, halfling, or human, but your soul has been suffused by fire. Tell the GM what you sacrificed to the flames; in return, magical and mundane heat and fire no longer harm you.
@@ -42,12 +42,13 @@ Name what branded you — a demon, an elemental lord, a dying star. When you **c
 ### Ash Walker
 You walked into a fire and walked out the other side, into a place you shouldn't have been. When you **stare into a fire**, you can see the Burning Planes flickering behind it. You know things about the other side that no one should; tell the GM about it.
 
-## Gear  
-You carry no weapons and need no armour but the flames that burn within you. You start with:
+## Gear
+You carry no weapons and need no armour but the flames that burn within you.
+You start with: (?*)
 [0 Weight] A Keepsake of Your Sacrifices Past, describe it
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Healing Potion [1 use]
-Choose two:
+Choose two: (?2)
 [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] Healing Potion [1 use]
 [10 Coin]
@@ -56,34 +57,32 @@ Choose two:
 Damage: d8, HP: 4+Constitution, Load: 9+STR
 
 ### Look
-Choose one for each:
-
-Strange Brands, Ritual Scars, or Perfect Skin  
-Smouldering Eyes, Warm Eyes, or Searing Eyes  
-Crackling Voice, Whispering Voice, or Roaring Voice  
-Imperious Demeanor, Manic Demeanor, or Barely-Hidden Rage
+[Strange Brands | Ritual Scars | Perfect Skin](?)  
+[Smouldering Eyes | Warm Eyes | Searing Eyes](?)  
+[Crackling Voice | Whispering Voice | Roaring Voice](?)  
+[Imperious Demeanor | Manic Demeanor | Barely-Hidden Rage](?)
 
 ### Names
-*Human*: Solomon, Fatia, Kalil, Omen, Hiko, Agasha, Elizabeth, Adur, Ignis, Yajna, Umilio  
-*Dwarf*: Higar, Egdorn, Faldin, Breski, Niona, Odenil, Agar, Kilkarn, Gremma  
-*Halfling*: Leoric, Barlow, Finley, Hart, Weasley, Mallory, Kellen, Clement, Prynne  
-*Elf*: Beldarii, Elsenwyn, Kithduin, Isilmwe, Haeralos, Ostranor, Gemenalle, Sorosthrine, Pelenash
+*Human*: [Solomon | Fatia | Kalil | Omen | Hiko | Agasha | Elizabeth | Adur | Ignis | Yajna | Umilio](?)  
+*Dwarf*: [Higar | Egdorn | Faldin | Breski | Niona | Odenil | Agar | Kilkarn | Gremma](?)  
+*Halfling*: [Leoric | Barlow | Finley | Hart | Weasley | Mallory | Kellen | Clement | Prynne](?)  
+*Elf*: [Beldarii | Elsenwyn | Kithduin | Isilmwe | Haeralos | Ostranor | Gemenalle | Sorosthrine | Pelenash](?)
 
-### Alignment
+### Alignment (?)
 
-Evil: Sacrifice an innocent victim to the flames.  
-Chaotic: Spread a dangerous new idea.  
-Neutral: Throw caution to the wind for your own personal gain.  
-Lawful: Exchange a sacrifice, freely given, for a service rendered.  
+Evil: Sacrifice an innocent victim to the flames.
+Chaotic: Spread a dangerous new idea.
+Neutral: Throw caution to the wind for your own personal gain.
+Lawful: Exchange a sacrifice, freely given, for a service rendered.
 Good: Make a sacrifice or take a risk to help someone in need.
 
 ### Bonds
-\_\_\_\_\_ has felt the hellish touch of my fire; now they know my strength.  
-I will teach \_\_\_\_\_ the true meaning of sacrifice. They don't understand.  
-I once cast something into the fire for \_\_\_\_\_, and I will collect my due.  
+\_\_\_\_\_ has felt the hellish touch of my fire; now they know my strength.
+I will teach \_\_\_\_\_ the true meaning of sacrifice. They don't understand.
+I once cast something into the fire for \_\_\_\_\_, and I will collect my due.
 \_\_\_\_\_ is such a stick in the mud; it's up to me to show them how to have fun.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Burning Bridges
 You take +1 ongoing to Last Breath rolls. When you would **take your Last Breath**, you can offer to sacrifice something to Death which is inherent and valuable to you instead of your eternal soul. If Death accepts, he will return you to life. If not, roll your Last Breath.
@@ -122,7 +121,7 @@ When you **channel the flames of fate**, you may treat one of your missed rolls 
 ### Burn Down the House
 When you **carouse**, you roll+CHA instead of spending any coin. If there's already a gathering happening, you may Carouse without having returned triumphant.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Fanning the Flames
 When you **incite a mob into a frenzy**, roll+CHA. On a 10+, hold 3. On a 7-9, hold 1. Spend your hold, 1-for-1, to make the mob: [3 Charges]

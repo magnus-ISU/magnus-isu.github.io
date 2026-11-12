@@ -1,49 +1,37 @@
-import { browser } from '$app/environment';
-import { driveSync } from '$lib/google/sync.svelte.js';
+// Monsters the user has made: one document holding a JSON array (see
+// sync/kinds.js for how two devices' lists are merged).
+import { formatMonsters, parseMonsters } from '$lib/sync/kinds.js';
+import { docStore, docs } from './docs.svelte.js';
 
-const STORAGE_KEY = 'dw-user-monsters';
+const doc = () => docs().byKind('monsters')[0] || null;
 
-driveSync.registerKey(STORAGE_KEY);
+// Parsed once per change of the stored text, not once per change of any document.
+const text = $derived(doc()?.text ?? '');
+const monsters = $derived(parseMonsters(text));
 
-function load() {
-	if (!browser) return [];
-	try {
-		return JSON.parse(driveSync.load(STORAGE_KEY) ?? '[]');
-	} catch {
-		return [];
-	}
+function save(list) {
+	const d = doc();
+	const text = formatMonsters(list);
+	if (d) docStore.edit(d.id, text);
+	else if (list.length) docStore.create('monsters', text);
 }
-
-function save(arr) {
-	if (browser) driveSync.save(STORAGE_KEY, JSON.stringify(arr));
-}
-
-let monsters = $state(load());
 
 export const userMonsters = {
 	get list() {
 		return monsters;
 	},
 	add(m) {
-		monsters = [...monsters, m];
-		save(monsters);
+		save([...monsters, m]);
 	},
 	remove(name) {
-		monsters = monsters.filter((m) => m.name !== name);
-		save(monsters);
+		save(monsters.filter((m) => m.name !== name));
 	},
 	import(incoming) {
 		const existing = new Set(monsters.map((m) => m.name.toLowerCase()));
 		const toAdd = incoming.filter((m) => !existing.has(m.name.toLowerCase()));
-		if (toAdd.length) {
-			monsters = [...monsters, ...toAdd];
-			save(monsters);
-		}
+		if (toAdd.length) save([...monsters, ...toAdd]);
 	},
 	hasName(name) {
 		return monsters.some((m) => m.name.toLowerCase() === name.toLowerCase());
-	},
-	refresh() {
-		monsters = load();
 	},
 };

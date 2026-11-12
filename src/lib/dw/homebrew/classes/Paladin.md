@@ -49,7 +49,7 @@ The GM will then tell you what vow or vows is required of you to maintain your b
 - Truth (forbidden: lies)
 - Hospitality (required: comfort to those in need, no matter who they are)
 
-## Background
+## Background (?)
 
 ### Ward of the Temple
 You were raised from childhood within a sacred temple, trained in discipline and divine service. When you **seek guidance from the temple's archives or senior clergy,** roll+WIS. On a 10+, you gain clear insight and +1 forward on acting on that knowledge. On a 7-9, the answer is cryptic or requires a favor in return.
@@ -63,15 +63,15 @@ You came to your oaths through suffering or sin. When you **refuse comfort or sa
 ### Dovoted
 Your oaths sustain and revitalize you. When you **spend a night in prayer and meditation**, you recover from one debility as if it never was, but you must spend the night doing nothing else.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
 [3 Weight] [2 Armor] Scale Armor
 [0 Weight] Mark of Faith (describe it)
-Choose your weapon:
+Choose your weapon: (?)
 [2 Weight] Halberd (reach, +1 damage, two-handed)
 [1 Weight] Long Sword (close, +1 damage) and [2 Weight] [+1 Armor] Shield
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Dungeon Rations [5 rations] and [1 Weight] Healing Potion [1 use]
 
@@ -79,27 +79,25 @@ Choose one:
 Damage: d10, HP: 10+Constitution, Load: 12+STR
 
 ### Look
-Choose one for each:
-
-Kind Eyes, Fiery Eyes, or Glowing Eyes  
-Helmet, Styled Hair, or Bald  
-Worn Holy Symbol or Fancy Holy Symbol  
-Fit Body, Bulky Body, or Thin Body
+[Kind Eyes | Fiery Eyes | Glowing Eyes](?)  
+[Helmet | Styled Hair | Bald](?)  
+[Worn Holy Symbol | Fancy Holy Symbol](?)  
+[Fit Body | Bulky Body | Thin Body](?)
 
 ### Names
-Thaddeus, Augustine, Lux, Cassius, Hadrian, Lucia, Octavia, Regulus, Valeria, Sanguinus, Titanius
+[Thaddeus | Augustine | Lux | Cassius | Hadrian | Lucia | Octavia | Regulus | Valeria | Sanguinus | Titanius](?)
 
-### Alignment
-Lawful: Deny mercy to a criminal or unbeliever.  
+### Alignment (?)
+Lawful: Deny mercy to a criminal or unbeliever.
 Good: Endanger yourself to protect someone weaker than you.
 
 ### Bonds
-\_\_\_\_\_'s misguided behavior endangers their very soul!  
-\_\_\_\_\_ has stood by me in battle and can be trusted completely.  
-I respect the beliefs of \_\_\_\_\_ but hope they will someday see the true way.  
+\_\_\_\_\_'s misguided behavior endangers their very soul!
+\_\_\_\_\_ has stood by me in battle and can be trusted completely.
+I respect the beliefs of \_\_\_\_\_ but hope they will someday see the true way.
 \_\_\_\_\_ is a brave soul, I have much to learn from them.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Divine Favor
 Dedicate yourself to a deity, and be granted a cleric's spells. When you **stand on sanctified, holy ground** for a short time, hold 1 Miracle. You may spend one hour and inexpensive materials (Adventuring Gear) to temporarily sanctify a small campsite until it is disturbed by evil. When you **complete a Quest**, hold 3 Miracles. [3 Charges]
@@ -138,7 +136,7 @@ Take +1 to order hirelings.
 ### Hospitaller
 When you heal an ally, you heal +1d8 damage.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Evidence of Faith
 *Requires Divine Favor*  

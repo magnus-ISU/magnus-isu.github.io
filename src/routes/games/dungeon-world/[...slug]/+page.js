@@ -80,6 +80,8 @@ export const load = async ({ params }) => {
 		rawSource,
 		title: entry.title,
 		isHomebrew: !!entry.homebrew,
+		// SRD text is wrapped at 80 columns; homebrew text is one line per paragraph.
+		hardWrapped: entry.source === 'srd',
 		slug,
 		...resolveArt(slug, slug.replace('-srd', '')),
 		srdSlug: entry.srdSlug || null,

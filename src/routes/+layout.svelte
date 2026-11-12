@@ -61,8 +61,10 @@ onMount(() => {
 </div>
 
 <style>
+	/* 100%, not 100vw: vw includes the vertical scrollbar, so 100vw is wider
+	   than the page whenever one is showing and adds a horizontal scrollbar. */
 	main {
-		width: 100vw;
+		width: 100%;
 		min-height: 100vh;
 	}
 </style>

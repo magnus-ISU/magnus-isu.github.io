@@ -11,7 +11,7 @@ Their gods are children, their steel is false protection. You walk the old ways,
 ### Born of the Soil
 You learned your magic in a place whose spirits are strong and ancient and they’ve marked you as one of their own. No matter where you go, they live within you and allow you to take their shape. Choose your homeland:
 
-*The Great Forests, The Whispering Plains, The Vast Desert, The Stinking Mire, The River Delta, The Depths of the Earth, The Sapphire Islands, The Open Sea, The Towering Mountains, The Frozen North, The Blasted Wasteland*
+[The Great Forests | The Whispering Plains | The Vast Desert | The Stinking Mire | The River Delta | The Depths of the Earth | The Sapphire Islands | The Open Sea | The Towering Mountains | The Frozen North | The Blasted Wasteland](?)
 
 Chose a tell—a physical attribute that reflects the spirit of your land. It might be antlers, leopard’s spots, hair like leaves, or eyes of glittering crystal. Your tell remains no matter what shape you take.
 
@@ -34,7 +34,7 @@ While in your borrowed form, you have its innate armor, qualities, tags, and abi
 When you **perform a little ritual and make an offering of something they'd like (whisky, incense, blood, etc.)**, the spirits of a place manifest before you—not always friendly, but at least curious and willing to hear you out.
 When you commune with the spirit of a beast and ask to borrow its form, it will ask something of you. Meet its request, and henceforth you can shapechange into that beast, as though it were native to your homeland.
 
-## Background
+## Background (?)
 
 ### Initiate of the First Circle
 You belong to a far-flung sect devoted to balance and the natural order. When you **send word to your sect asking for aid**, roll+CHA:
@@ -53,17 +53,17 @@ When you **use adventurer's gear to craft an effigy of your totem**, set it to w
 When you **Defy Danger or Parley using flattery or deceit**, you take +1 forward.
 When you **use adventurer's gear**, you can produce something strange & magical. Say how you stole/ won it and how it's useful right now, but ask the GM how it's limited and problematic.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [0 Weight] Some Token of Your Land, describe it
-Choose one for your defenses:
+Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Hide Armor
 [1 Weight] [+1 Armor] Wooden Shield
-Choose your armament:
+Choose your armament: (?)
 [2 Weight] Shillelagh (close)
 [1 Weight] Staff (close, two-handed)
 [1 Weight] Spear (close, thrown, near)
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Poultices and Herbs [2 uses]
 [0 Weight] Halfling Pipeleaf [3 uses]
@@ -73,44 +73,42 @@ Choose one:
 Damage: d6, HP: 6+Constitution, Load: 6+STR
 
 ### Look
-Choose one for each:
-
-Wise Eyes, Wild Eyes, or Haunting Eyes  
-Furry Hood, Messy Hair, or Braided Hair  
-Ceremonial Garb, Practical Leathers, or Weathered Hides
+[Wise Eyes | Wild Eyes | Haunting Eyes](?)  
+[Furry Hood | Messy Hair | Braided Hair](?)  
+[Ceremonial Garb | Practical Leathers | Weathered Hides](?)
 
 ### Names
-*Elf*: Hycorax, Ethanwe, Sinathel, Demanor, Menoliir, Mithralan, Taeros, Aegor  
-*Halfling*: Tanner, Dunstan, Rose, Ivy, Robard, Mab, Thistle, Puck, Anne, Serah  
-*Human*: Elana, Obelis, Herran, Syla, Andanna, Siobhan, Aziz, Pelin, Sibel, Nils, Wei  
+*Elf*: [Hycorax | Ethanwe | Sinathel | Demanor | Menoliir | Mithralan | Taeros | Aegor](?)  
+*Halfling*: [Tanner | Dunstan | Rose | Ivy | Robard | Mab | Thistle | Puck | Anne | Serah](?)  
+*Human*: [Elana | Obelis | Herran | Syla | Andanna | Siobhan | Aziz | Pelin | Sibel | Nils | Wei](?)  
 
-### Alignment
-Good: Help someone or something grow.  
-Neutral: Eliminate an unnatural menace.  
+### Alignment (?)
+Good: Help someone or something grow.
+Neutral: Eliminate an unnatural menace.
 Chaotic: Destroy a symbol of civilization.
 
 ### Bonds
-\_ smells more like prey than a hunter.  
-The spirits told me of a great danger following \_  
-I have shown \_ a secret rite of the Land  
-\_ has tasted my blood and I theirs. We are bound by it.  
-Which of you also reveres the old gods?  
-Which of you dismisses me as a primitive?  
-Which of you disregards the natural order?  
-Which of you requires my guidance?  
-Which of you is also a follower of my sect?  
-Which of you am I commanded to protect?  
-Which of you is being watched by my sect?  
-Which of you has reason to distrust my sect?  
-About which of you do the spirits whisper?  
-Which of you is followed by a dark presence?  
-Which of you thinks thinks me a mummer?  
-Which of you has also seen the spirit realm?  
-Which of you has shared in my adventures?  
-Which of you is often the butt of my jokes?  
+\_ smells more like prey than a hunter.
+The spirits told me of a great danger following \_
+I have shown \_ a secret rite of the Land
+\_ has tasted my blood and I theirs. We are bound by it.
+Which of you also reveres the old gods?
+Which of you dismisses me as a primitive?
+Which of you disregards the natural order?
+Which of you requires my guidance?
+Which of you is also a follower of my sect?
+Which of you am I commanded to protect?
+Which of you is being watched by my sect?
+Which of you has reason to distrust my sect?
+About which of you do the spirits whisper?
+Which of you is followed by a dark presence?
+Which of you thinks thinks me a mummer?
+Which of you has also seen the spirit realm?
+Which of you has shared in my adventures?
+Which of you is often the butt of my jokes?
 Which of you most enjoys my tales?
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### God Amidst The Wastes
 You can cast Bindings; it's up to you whether you serve one God or many or none, and if the powers you serve have been forgotten or how they are practiced by others.
@@ -158,7 +156,7 @@ Additionally, when you Parley, those who look on nature with awe and without kno
 ### Flesh of my Flesh
 When you **borrow a form**, you may spend a minute to grant the form to your companions as well. They may change back at will but after each time they roll (except damage) they take -1 ongoing while shapechanged until they revert to their natural form.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Doppelganger's Dance
 When you **Shapechange**, you can take -1 to the roll in order to take on the form of a specific individual or creature you have seen. Even if you succeed, take -1 ongoing until you release the form.

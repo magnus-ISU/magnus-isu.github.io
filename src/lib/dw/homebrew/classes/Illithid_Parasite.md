@@ -16,14 +16,14 @@ Who here knows exactly what I am?
 Who seeks here to gain illithid powers for their own?
 Who is protecting me from the influence of the parasites, and how do you do it?
 
-## Alignments
+## Alignments (?)
 Good: Keep others blissfully unaware of the Outer Chaos' influence
 Lawful: Use your psionic ability to interact with the Illithid
 Neutral: Mask the true source of your power
 Chaotic: Reject the impulses the parasite brings
 Evil: Spread the power of the Elder Brain
 
-## Background
+## Background (?)
 
 ### Servant of the Deep
 You are a parasite, burrowing deep within your hosts brain. No matter who they were, it is unimportant. You serve the Brain.

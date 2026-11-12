@@ -32,7 +32,7 @@ When you **cry out a challenge to your enemies**, roll+CON. On a 10+ they treat 
 ### Outsider
 You may be elf, dwarf, halfling, or human, but you and your people are not from around here. At the beginning of each session, the tell the GM something about your homeland, why you left, or what you left behind. The GM may ask you a question as well.
 
-## Starting Moves - Choose one
+## Starting Moves (?)
 
 ### Full Plate and Packing Steel
 You ignore the *clumsy* tag on armor you wear.
@@ -40,7 +40,7 @@ You ignore the *clumsy* tag on armor you wear.
 ### Unencumbered, Unharmed
 So long as you are below your Load and neither wear armor nor carry a shield, take +2 armor.
 
-## Background
+## Background (?)
 
 ### Frozen North
 You hail from merciless icy wastes. You are unaffected by mundane cold and can always find enough food to survive in frozen or barren lands. When you defy danger from cold, exhaustion, or harsh weather, take +1.
@@ -54,15 +54,15 @@ Choose one person or group you have sworn to either protect or utterly destroy. 
 ### Ancestor-Bound
 The spirits of your ancestors still guide you. When you sleep, you can speak with the ancestral spirits to ask their advice.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
 [0 Weight] Dagger (hand)
 [0 Weight] Some token of where you've traveled or where you're from
-Choose your weapon:
+Choose your weapon: (?)
 [1 Weight] Axe (close)
 [2 Weight] Two-Handed Sword (close, +1 damage)
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] [1 Armor] Chainmail
 
@@ -70,29 +70,27 @@ Choose one:
 Damage: d10, HP: 8+Constitution, Load: 8+STR
 
 ### Look
-Choose one for each:
-
-Tormented Eyes, Haunted Eyes, Wild Eyes, or Shrouded Eyes  
-Mighty Thews, Long Shanks, Scrawny Body, or Supple Body  
-Strange Tattoos, Unusual Jewelry, or Unmarred by Decoration  
-Scraps, Silks, Scavenger's Outfit, or Weather Inappropriate Clothes
+[Tormented Eyes | Haunted Eyes | Wild Eyes | Shrouded Eyes](?)  
+[Mighty Thews | Long Shanks | Scrawny Body | Supple Body](?)  
+[Strange Tattoos | Unusual Jewelry | Unmarred by Decoration](?)  
+[Scraps | Silks | Scavenger's Outfit | Weather Inappropriate Clothes](?)
 
 ### Names
-Gorm, Si-Yi, Priscilla, Sen, Xia, Anneira, Haepha, Lur, Shar, Korrin, Nkosi, Fafnir, Qua, Sacer, Vercin'geto, Barbozar, Clovis, Frael, Thra raxes, Sillius, Sha Sheena, Khamisi
+[Gorm | Si-Yi | Priscilla | Sen | Xia | Anneira | Haepha | Lur | Shar | Korrin | Nkosi | Fafnir | Qua | Sacer | Vercin'geto | Barbozar | Clovis | Frael | Thra raxes | Sillius | Sha Sheena | Khamisi](?)
 
 *Titles*: the Glorious, the Hungry, the Irascible, the Undefeated, the Gluttonous, Foesmasher, Bonebreaker, the Mirthful, the Melancholic, All Mighty, the Giant, the Triumphant
 
-### Alignment
-Chaotic: Eschew a convention of the civilized world.  
+### Alignment (?)
+Chaotic: Eschew a convention of the civilized world.
 Neutral: Teach someone the ways of your people.
 
 ### Bonds
-\_\_\_\_\_ is puny and foolish, but amusing to me.  
-\_\_\_\_\_'s ways are strange and confusing.  
-\_\_\_\_\_ is always getting into trouble — I must protect them from themselves.  
+\_\_\_\_\_ is puny and foolish, but amusing to me.
+\_\_\_\_\_'s ways are strange and confusing.
+\_\_\_\_\_ is always getting into trouble — I must protect them from themselves.
 \_\_\_\_\_ shares my hunger for glory; the earth will tremble at our passing!
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Still Hungry
 Choose an additional appetite.
@@ -133,7 +131,7 @@ When you **defy a danger caused by movement** (maybe falling off a narrow bridge
 ### A Good Day to Die
 As long as you have 4 or less health take +1 ongoing.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Kill 'em All
 *Requires Appetite for Destruction*  

@@ -10,7 +10,7 @@ They will underestimate you. Let them.
 
 ### The World is Made of...!
 Choose two principles which represent your most deeply held beliefs:
-*Love, Sacrifice, Honor, Peace, Duty, Glory, Possibility, Fear, Hope, Entropy, Power*
+[Love | Sacrifice | Honor | Peace | Duty | Glory | Possibility | Fear | Hope | Entropy | Power](?2)
 
 You ignore magical persuasion, thunderous distraction, or any other mental effect which would keep you from upholding these.
 
@@ -41,7 +41,7 @@ Your voice is particularly arresting. You have no trouble speaking over chatter,
 Your princess has a nemesis. A villain who pursues her and would kill for something she has. What is that thing? A Birthright? A Destiny? An item of power? A power within herself? A love? A slight committed? Choose two tags to describe your nemesis. The GM will choose one additional tag.
 *Cold, Witch, Queen, Dark, Bright, Beautiful, Relative, Ugly, Old, Young, Royal, Wrathful, Chancellor, Faery*
 
-## Background
+## Background (?)
 
 ### A Poor Kingdom
 When you **prove your worth to a group of naysayers**, many will become your most ardent supporters.
@@ -52,17 +52,17 @@ You have been sent to many cities on diplomatic missions from your country. When
 ### A Warring Kingdom
 Your kingdom's strongholds are spread throughout the country. Whenever you come to them they will provide shelter.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
-Choose one for your arms:
+Choose one for your arms: (?)
 [1 Weight] Rapier (close, precise)
 [1 Weight] Masterwork Short Sword (close, +1 damage)
 [1 Weight] Ornate Bow (near) and [0 Weight] Quiver of Masterwork Arrows (ammo)
-Choose one for your defenses:
+Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Cloth Armor
 [0 Weight] A Loaf of Bread from Your Kingdom [3 rations] and [1 Weight] Healing Potion [1 use]
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Bandages [3 uses] and Silk Robes
 [0 Weight] Ornate Jewelry (valuable)
@@ -72,30 +72,28 @@ Choose one:
 Damage: d4, HP: 6+Constitution, Load: 5+STR
 
 ### Look
-Choose one for each:
-
-Soft Eyes, Sparkling Eyes, or Sharp Eyes  
-Hooded Head, Long Hair, or Bobbed Hair  
-Ornate Clothes, Regal Clothes, or Common Clothes  
-Chubby Body, Willowy Body, or Angular Body
+[Soft Eyes | Sparkling Eyes | Sharp Eyes](?)  
+[Hooded Head | Long Hair | Bobbed Hair](?)  
+[Ornate Clothes | Regal Clothes | Common Clothes](?)  
+[Chubby Body | Willowy Body | Angular Body](?)
 
 ### Names
-Ariel, Odette, Ran, Toph, Dorothy, Belle, Terra, Kory, Rose, Jade, Serenity, River, Calliope, Gabrielle, Mai, Nia, Yoko, a natural name, a foreign name, a musical name, an old name.
+[Ariel | Odette | Ran | Toph | Dorothy | Belle | Terra | Kory | Rose | Jade | Serenity | River | Calliope | Gabrielle | Mai | Nia | Yoko](?), a natural name, a foreign name, a musical name, an old name.
 
-### Alignment
-Good, Righting a Wrong: Help somebody weak to surpass their own limits.  
-Lawful, Finding Your Way Home: Help somebody to find their place.  
+### Alignment (?)
+Good, Righting a Wrong: Help somebody weak to surpass their own limits.
+Lawful, Finding Your Way Home: Help somebody to find their place.
 Chaotic, Banished Heir: Pass up a chance to redeem yourself or to go home.
 
 ### Bonds
-\_\_\_\_\_ is a former subject of my kingdom.  
-\_\_\_\_\_ does not believe in themself. I hope to change that.  
-I have seen \_\_\_\_\_ in my dreams.  
-I have seen \_\_\_\_\_ in my nightmares.  
-\_\_\_\_\_ is my trusted confidant.  
+\_\_\_\_\_ is a former subject of my kingdom.
+\_\_\_\_\_ does not believe in themself. I hope to change that.
+I have seen \_\_\_\_\_ in my dreams.
+I have seen \_\_\_\_\_ in my nightmares.
+\_\_\_\_\_ is my trusted confidant.
 \_\_\_\_\_ trusts my word completely.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Unicorn
 You have a UNICORN. Tell the GM their name, temperament, build, and color.
@@ -137,7 +135,7 @@ Take one non-multiclass move from the Fighter. Your damage die increases to d6.
 ### Rebellious Princess
 Take one non-multiclass move from the Thief, the Bard, or the Wizard. Treat your level as one lower, and your casting level as three lower.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Princess's Promise
 When you **meet somebody new** and they express a need for something immaterial, give them reason to believe that you can help them attain it and they will follow your word as long as they have reason to believe you.

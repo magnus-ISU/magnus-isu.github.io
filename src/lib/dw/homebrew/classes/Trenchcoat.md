@@ -3,7 +3,7 @@ Damage: d6
 HP: 9+Constitution
 Load: 5+STR
 
-## Alignments
+## Alignments (?)
 Good: Defend those weaker than you
 Neutral: Defeat a worthy opponent
 Evil: Kill a defenseless or surrendered enemy
@@ -43,7 +43,7 @@ On a 7-9, choose one:
 ### Hey, I've Got One
 When you **produce something inconceivable from the folds of your trenchcoat**, the specific details of when you got it or from what you conjured it will become clearer over time.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Spellcaster
 Gain the Wizard's Cast a Spell and Prepare Spells moves. You can prepare half your level + 1 spells.

@@ -31,7 +31,7 @@ There is always a chandelier, rope, window, cart, easily-spooked herd of livesto
 ### True Love and High Adventure
 When you **attempt to enact a daring plan or defend the honor of a friend or lover**, hold 3 Daring. You can spend 1 Daring to take +1 to any You Seem a Decent Fellow, Defy Danger, or Daring Devil roll made to advance your daring plan or defend their honor. You lose all Daring after successfully defending their honor or finishing your plan. [3 Charges]
 
-## Background
+## Background (?)
 
 ### Human
 You are especially resourceful. When you **use Plan of Action**, take +1 to any roll made to make use of hazards created by the move.
@@ -39,16 +39,16 @@ You are especially resourceful. When you **use Plan of Action**, take +1 to any 
 ### Elf
 Your blades dance around your enemies' defenses with ease. When you **deal +1d6 from You Seem a Decent Fellow**, you pierce through all armor.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] Dueling Rapier (close, precise)
 [1 Weight] [1 Armor] Shining Armor
-Choose your backup weapon:
+Choose your backup weapon: (?)
 [1 Weight] Hidden Stiletto (hand), which is never found when you are searched
 [1 Weight] 3 Throwing Daggers (hand, near, ammo) [3 uses]
 [2 Weight] [+1 Armor] Parrying Gauntlet (hand)
-Choose two:
+Choose two: (?2)
 [1 Weight] Adventuring Gear [3 uses] and a map, describe it
 [1 Weight] Bandages [3 uses] and [9 Coin]
 A noble steed, describe it
@@ -57,30 +57,28 @@ A noble steed, describe it
 Damage: d8, HP: 8+Constitution, Load: 7+STR
 
 ### Look
-Choose one for each:
-
-Confident Eyes, Bright Eyes, or Always Closed Eyes  
-Fashionable Hat, Flowing Hair, or Magnificent Beard  
-Ornate Clothes, Functional Clothes, or Flowing Clothes  
-Muscled Body, Stoic Body, or Toned Body
+[Confident Eyes | Bright Eyes | Always Closed Eyes](?)  
+[Fashionable Hat | Flowing Hair | Magnificent Beard](?)  
+[Ornate Clothes | Functional Clothes | Flowing Clothes](?)  
+[Muscled Body | Stoic Body | Toned Body](?)
 
 ### Names
-*Human*: Arthur, Blacwick, Gilder, Gwenivere, Lynndis, Meryl, Troy, Vyse, Z  
-*Elf*: Celeste, Garinith, Gilderoy, Nyhopyri, Tahnea, Tetra, Tome, Valens
+*Human*: [Arthur | Blacwick | Gilder | Gwenivere | Lynndis | Meryl | Troy | Vyse | Z](?)  
+*Elf*: [Celeste | Garinith | Gilderoy | Nyhopyri | Tahnea | Tetra | Tome | Valens](?)
 
-### Alignment
+### Alignment (?)
 
-Good: Put yourself at risk for the sake of a friend or lover.  
-Neutral: Go out of your way to show off your skills.  
+Good: Put yourself at risk for the sake of a friend or lover.
+Neutral: Go out of your way to show off your skills.
 Chaotic: Dethrone or destabilize a person in power.
 
 ### Bonds
-\_\_\_\_\_ realizes just how great I am.  
-\_\_\_\_\_ is someone I can rely on to make me look good.  
-\_\_\_\_\_ needs to work on their appearance.  
+\_\_\_\_\_ realizes just how great I am.
+\_\_\_\_\_ is someone I can rely on to make me look good.
+\_\_\_\_\_ needs to work on their appearance.
 \_\_\_\_\_ needs education on this heroing business, and I will provide it whether they want it or not.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Anything You Can Do...
 You are a quick student, and a bit of a showboat. When you **Make Camp**, choose one move another player knows and hold Showoff equal to the number of bonds you have with that player. You can spend 1 Showoff to use that move. When you **Make Camp**, lose any remaining Showoff. [3 Charges]
@@ -120,7 +118,7 @@ Gain one move from another class. Treat your level as one lower, and your castin
 ### The Best Defense
 When you **hold your blade and see a projectile** loosed at you, you can parry it, causing it to miss you. Explosives, boulders, or magical attacks might still harm you.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### A Knight in Shining Armor Appears
 When you **dramatically appear in the middle of a tense situation**, deliver a quick speech and roll+CHA. On a 10+, all three. On a 7-9, choose two:

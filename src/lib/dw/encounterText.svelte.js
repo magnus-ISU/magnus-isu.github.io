@@ -1,15 +1,13 @@
+// The encounter scratchpad. Kept in this browser only; it is not synced.
 import { browser } from '$app/environment';
-import { driveSync } from '$lib/google/sync.svelte.js';
 
 const STORAGE_KEY = 'dw-encounter-text';
 const MAX_SIZE = 1024;
 
-driveSync.registerKey(STORAGE_KEY);
-
 function load() {
 	if (!browser) return '';
 	try {
-		return driveSync.load(STORAGE_KEY) ?? '';
+		return localStorage.getItem(STORAGE_KEY) ?? '';
 	} catch {
 		return '';
 	}
@@ -18,7 +16,7 @@ function load() {
 function save(val) {
 	if (!browser) return;
 	try {
-		if (val.length <= MAX_SIZE) driveSync.save(STORAGE_KEY, val);
+		if (val.length <= MAX_SIZE) localStorage.setItem(STORAGE_KEY, val);
 		else localStorage.removeItem(STORAGE_KEY);
 	} catch {
 		/* ignore */
@@ -74,8 +72,5 @@ export const encounterText = {
 
 		text = clean.filter((l) => l.trim()).join('\n');
 		save(text);
-	},
-	refresh() {
-		text = load();
 	},
 };

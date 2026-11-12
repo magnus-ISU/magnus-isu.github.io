@@ -2,13 +2,43 @@
 
 ## Using This Website
 
-Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Go through the sheet and delete the moves / gear / options that you don't take.
+Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Then go through the sheet and click what you take: wherever the class gives you a choice — background, gear, look, name, alignment — the options are marked with a circle or a dashed underline. Clicking one keeps it and removes the ones you didn't take. Ctrl+Z undoes a click.
 
-You can open a spell list and click on a heading (click cantrips) to copy everything under the heading to paste into your character sheet. Long click more to append to the clipboard. Click on spell names to indicate they are memorized and ready to cast.
+When you level up, open Advanced Moves and click a move's name to add it to your Starting Moves. The Wizard, Cleric and Druid also get their spell list: the ones they start with are under Spells (Miracles for the Cleric; Bindings for the Druid, who starts with none), and clicking a spell's name under Spell Options adds it there.
+
+You can open a spell list and click on a heading (click cantrips) to copy everything under the heading to paste into your character sheet. Long click more to append to the clipboard.
 
 Modify your damage dice on the second line. Add more damage dice options by using semicolons: Damage d4;2d4;2d6
 
-This website will allow you to create any number of characters and store them in the browser.
+This website will allow you to create any number of characters and store them in the browser. Press Sync with Google Drive at the bottom of the sidebar to also keep each character as a file in your Drive, shared between your devices. If the same character is changed on two devices at once, both versions are kept as separate sheets for you to sort out.
+
+### Writing Your Own Choices
+
+The sheet is plain text, and you can mark choices in anything you write. Put the options in brackets, separated by bars, followed by a question mark in parentheses:
+
+```
+Range: [Hand | Close | Reach](?)
+```
+
+Or end a line with the question mark, and the lines or list items below it, up to the next blank line or the next such line, are the options. A number chooses that many, and a star means they are all yours, taken one click at a time:
+
+```
+You start with: (?*)
+[1 Weight] Dungeon Rations [5 rations]
+Choose two: (?2)
+[2 Weight] Shield
+[1 Weight] Rope
+[1 Weight] Torches
+```
+
+On a heading, the headings beneath it are the options. With an arrow, a picked option moves to the named section instead, and the rest stay for later:
+
+```
+## Background (?)
+## Advanced Moves (?>Starting Moves)
+```
+
+A backslash before the parenthesis, \\(?), writes one out plainly.
 
 ## Pen and Paper
 

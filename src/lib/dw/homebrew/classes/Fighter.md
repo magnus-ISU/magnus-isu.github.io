@@ -22,8 +22,8 @@ You ignore the *clumsy* tag on armor you wear.
 
 ### Signature Weapon
 You carry a unique weapon, describe it and give it a name/title. It might be weightless, or you're just used to carrying it around; for you, it is 0 Load.  
-Choose it's range: Hand, Close, Reach  
-Choose one enhancement or another range:
+Range: [Hand | Close | Reach](?)  
+Choose one enhancement or another range: (?)
 - messy
 - forceful
 - precise
@@ -32,7 +32,7 @@ Choose one enhancement or another range:
 - +1 damage
 - +1 armor
 
-Choose its unique power:
+Choose its unique power: (?)
 - It keeps you alive: when it kills a mortal foe, recover 1d4hp
 - It always returns to your hand when you will it
 - It cuts through wood like clay, stone like wood, metal like stone
@@ -46,7 +46,7 @@ Choose its unique power:
 - It is simply an instrument of death, choose two more enhancements or ranges (including range *far*)
 - Your choice, ask your GM...
 
-## Background
+## Background (?)
 
 ### Human
 Once per battle you may reroll a single damage roll (yours or someone else's) and choose either result.
@@ -67,14 +67,14 @@ You're weaker than the other races. -1 STR
 
 When you defy danger and **use your small size to your advantage**, take +1.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [0 Weight] Your Signature Weapon
 [1 Weight] Dungeon Rations [5 rations]
-Choose one for your defenses:
+Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Chainmail and [1 Weight] Adventuring Gear [3 uses]
 [3 Weight] [2 Armor] Scale Armor
-Choose two:
+Choose two: (?2)
 [22 Coin]
 [2 Weight] 2 Healing Potions [2 uses]
 [2 Weight] [+1 Armor] Shield
@@ -84,31 +84,29 @@ Choose two:
 Damage: d10, HP: 10+Constitution, Load: 12+STR
 
 ### Look
-Choose one for each:
-
-Hard Eyes, Dead Eyes, or Eager Eyes  
-Wild Hair, Shorn Hair, or Battered Helm  
-Calloused Skin, Tanned Skin, or Scarred Skin  
-Built Body, Lithe Body, or Ravaged Body
+[Hard Eyes | Dead Eyes | Eager Eyes](?)  
+[Wild Hair | Shorn Hair | Battered Helm](?)  
+[Calloused Skin | Tanned Skin | Scarred Skin](?)  
+[Built Body | Lithe Body | Ravaged Body](?)
 
 ### Names
-*Dwarf*: Ozruk, Surtur, Brunhilda, Annika, Janos, Greta, Dim, Rundrig, Jarl, Xotoq  
-*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
-*Halfling*: Finnegan, Olive, Randolph, Bartleby, Aubrey, Baldwin, Becca  
-*Human*: Hawke, Rudiger, Gregor, Brianne, Walton, Castor, Shanna, Ajax, Hob
+*Dwarf*: [Ozruk | Surtur | Brunhilda | Annika | Janos | Greta | Dim | Rundrig | Jarl | Xotoq](?)  
+*Elf*: [Elohiir | Sharaseth | Hasrith | Shevaral | Cadeus | Eldar | Kithracet | Thelian](?)  
+*Halfling*: [Finnegan | Olive | Randolph | Bartleby | Aubrey | Baldwin | Becca](?)  
+*Human*: [Hawke | Rudiger | Gregor | Brianne | Walton | Castor | Shanna | Ajax | Hob](?)
 
-### Alignment
-Good: Defend those weaker than you.  
-Neutral: Defeat a worthy opponent.  
+### Alignment (?)
+Good: Defend those weaker than you.
+Neutral: Defeat a worthy opponent.
 Evil: Kill a defenseless or surrendered enemy.
 
 ### Bonds
-\_\_\_\_\_ owes me their life, whether they admit it or not.  
-I have sworn to protect \_\_\_\_\_.  
-I worry about the ability of \_\_\_\_\_ to survive in the dungeon.  
+\_\_\_\_\_ owes me their life, whether they admit it or not.
+I have sworn to protect \_\_\_\_\_.
+I worry about the ability of \_\_\_\_\_ to survive in the dungeon.
 \_\_\_\_\_ is soft, but I will make them hard like me.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Merciless
 When you deal damage, deal +1d4 damage.
@@ -153,7 +151,7 @@ You know the lore of the ancients. When you **examine how armies move**, you can
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Bloodthirsty
 *Replaces Merciless*  
@@ -188,4 +186,4 @@ When you look over an enemy's weaponry, ask the GM how much damage they do.
 ### Superior Warrior
 When you hack and slash on a 12+ you deal your damage, avoid their attack, and impress, dismay, or frighten your enemy.
 
-*A playbook by Magnus Anderson, Sage LaTorra and Adam Koebel*
+*A playbook by Sage LaTorra, Adam Koebel, Jeremy Strandberg, and Magnus Anderson*

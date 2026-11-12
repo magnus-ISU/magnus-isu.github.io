@@ -5,6 +5,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
+		"test": "node --test tests/",
 		"lint": "biome check . && eslint --ignore-path .gitignore .",
 		"format": "biome check --write .",
 		"deploy": "bun gh-pages -d build"

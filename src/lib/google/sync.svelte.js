@@ -1,560 +1,269 @@
+// Decides when to sync with Drive and reports how it is going. What a sync
+// does is in sync/engine.js; where the documents live is sync/docStore.js.
+//
+// The browser's copy is always the working copy. Connecting Drive adds a sync
+// loop on top of it; disconnecting just stops the loop.
 import { browser } from '$app/environment';
+import { docStore, docs } from '$lib/dw/docs.svelte.js';
+import { createSyncEngine } from '$lib/sync/engine.js';
+import { KINDS } from '$lib/sync/kinds.js';
 import { googleAuth } from './auth.svelte.js';
-import {
-	createFile,
-	findFile,
-	findOrCreateFolder,
-	getFileModifiedTime,
-	readFile,
-	updateFile,
-} from './drive.js';
-import { firstDifference } from './syncDiff.js';
+import { createDrive } from './drive.js';
 
-const FOLDER_NAME = 'eldritch-arts';
-const FILE_NAME = 'dungeon-world-data.json';
-const FILE_ID_KEY = 'google-drive-file-id';
-const MODE_KEY = 'storage-mode';
-const LOCAL_PREFIX = 'local-backup-';
-// Causal sync state: `dirty` says we have local edits not yet pushed since
-// `baseModifiedTime`, which is the server modifiedTime we last fully synced to.
-// Comparing server.modifiedTime to baseModifiedTime gives an unambiguous answer
-// ("did the server move past where I left off?") that does not depend on a
-// wall-clock comparison between client and server.
-const DIRTY_KEY = 'drive-dirty';
-const BASE_MOD_KEY = 'drive-base-modified';
-// Minimum gap between escalated sign-in popups so we don't spam the user.
-const REAUTH_PROMPT_INTERVAL_MS = 30_000;
+const EDIT_DEBOUNCE_MS = 2000; // quiet time after typing before uploading
+const EDIT_MAX_WAIT_MS = 15_000; // …but never hold edits back longer than this
+const POLL_MS = 30_000; // how often to look for other devices' changes
+const RENEW_BEFORE_MS = 5 * 60_000; // renew the sign-in this long before it lapses
+const RETRY_MIN_MS = 5000;
+const RETRY_MAX_MS = 5 * 60_000;
+const LOCK_NAME = 'dw-drive-sync';
 
-let registeredKeys = [];
-let fileId = $state(browser ? localStorage.getItem(FILE_ID_KEY) : null);
-let folderId = null;
-let syncStatus = $state('idle');
+// Names this device in conflict copies ("conflict 2026-11-11 14.02 Firefox Linux").
+function deviceName() {
+	if (!browser) return '';
+	const ua = navigator.userAgent;
+	const app = /Edg\//.test(ua)
+		? 'Edge'
+		: /Firefox\//.test(ua)
+			? 'Firefox'
+			: /Chrome\//.test(ua)
+				? 'Chrome'
+				: /Safari\//.test(ua)
+					? 'Safari'
+					: 'Browser';
+	const os = /Android/.test(ua)
+		? 'Android'
+		: /iPhone|iPad/.test(ua)
+			? 'iOS'
+			: /Windows/.test(ua)
+				? 'Windows'
+				: /Mac OS X/.test(ua)
+					? 'Mac'
+					: /Linux/.test(ua)
+						? 'Linux'
+						: '';
+	return os ? `${app} ${os}` : app;
+}
+
+const engine = createSyncEngine({
+	drive: createDrive(() => googleAuth.token),
+	store: docStore,
+	kinds: KINDS,
+	device: deviceName(),
+});
+
+let syncing = $state(false);
+// What is stopping us, if anything: '' | 'auth' | 'offline' | 'error'
+let problem = $state('');
+let problemDetail = $state('');
 let lastSynced = $state(null);
-let saveTimeout = null;
-let waiting = $state(false);
-let listeners = [];
-let mode = $state(browser ? localStorage.getItem(MODE_KEY) || 'local' : 'local');
-let storageDebounce = null;
-let storageListener = null;
-let dirty = browser ? localStorage.getItem(DIRTY_KEY) === '1' : false;
-let baseModifiedTime = browser ? localStorage.getItem(BASE_MOD_KEY) : null;
-let reauthInFlight = null;
-let lastReauthPromptAt = 0;
-let conflictNotice = $state(null);
 
-// A conflict (both sides changed since the last sync) is not auto-resolved:
-// we surface a modal showing the first difference and wait for the user to
-// pick a side. Local data stays dirty and untouched until they decide.
-async function raiseConflict(id, serverModified) {
-	let diff = null;
-	let diffFailed = false;
-	try {
-		const serverData = await withRetry(() => readFile(googleAuth.token, id));
-		diff = firstDifference(collectLocalData(), serverData);
-	} catch {
-		// Modal still shows; it just can't display details.
-		diffFailed = true;
+let running = false;
+let rerun = false;
+let timer = null;
+let firstEditAt = 0;
+let retryMs = 0;
+let started = false;
+let renewArmed = false;
+// A renewal popup failed (blocked or closed). Don't keep opening popups at
+// the user; wait until they click the Drive button themselves.
+let renewGaveUp = false;
+let lastRunAt = 0;
+
+const enabled = () => docs().drive().enabled;
+
+function schedule(ms) {
+	clearTimeout(timer);
+	timer = setTimeout(() => {
+		timer = null;
+		run();
+	}, ms);
+}
+
+// Only one tab talks to Drive at a time; the others wait their turn and then
+// start from whatever the previous one stored.
+function withLock(fn) {
+	return navigator.locks ? navigator.locks.request(LOCK_NAME, fn) : fn();
+}
+
+function isTransient(err) {
+	if (!err || typeof err.status !== 'number') return true; // fetch itself failed
+	if (err.status === 429 || err.status >= 500) return true;
+	return err.status === 403 && /rateLimit/i.test(err.reason || '');
+}
+
+async function run() {
+	if (!browser || !docStore.drive().enabled) return;
+	if (running) {
+		rerun = true;
+		return;
 	}
-	conflictNotice = {
-		base: baseModifiedTime,
-		server: serverModified,
-		diff,
-		diffFailed,
-		at: new Date(),
-	};
-}
-
-function dropDirty() {
-	dirty = false;
-	try {
-		localStorage.removeItem(DIRTY_KEY);
-	} catch {}
-}
-
-function markDirty() {
-	if (dirty) return;
-	dirty = true;
-	try {
-		localStorage.setItem(DIRTY_KEY, '1');
-	} catch {}
-}
-
-function markClean(modifiedTime) {
-	dirty = false;
-	if (modifiedTime) baseModifiedTime = modifiedTime;
-	try {
-		localStorage.removeItem(DIRTY_KEY);
-		if (baseModifiedTime) localStorage.setItem(BASE_MOD_KEY, baseModifiedTime);
-	} catch {}
-}
-
-function resetSyncState() {
-	dirty = false;
-	baseModifiedTime = null;
-	try {
-		localStorage.removeItem(DIRTY_KEY);
-		localStorage.removeItem(BASE_MOD_KEY);
-	} catch {}
-}
-
-async function tryReauth({ promptUser }) {
-	if (reauthInFlight) return reauthInFlight;
-	reauthInFlight = (async () => {
-		if (googleAuth.isSignedIn) return true;
-		try {
-			if (googleAuth.wasConnected) {
-				const ok = await googleAuth.refreshToken();
-				if (ok) return true;
-			}
-		} catch {}
-		if (!promptUser) return false;
-		const now = Date.now();
-		if (now - lastReauthPromptAt < REAUTH_PROMPT_INTERVAL_MS) return false;
-		lastReauthPromptAt = now;
-		try {
-			await googleAuth.signIn();
-		} catch {}
-		return googleAuth.isSignedIn;
-	})();
-	try {
-		return await reauthInFlight;
-	} finally {
-		reauthInFlight = null;
+	if (!googleAuth.token) {
+		problem = 'auth';
+		armRenewal();
+		return;
 	}
-}
-
-async function withRetry(fn) {
+	running = true;
+	syncing = true;
+	firstEditAt = 0;
+	lastRunAt = Date.now();
+	let next = null;
 	try {
-		return await fn();
+		const result = await withLock(() => engine.syncOnce());
+		problem = '';
+		problemDetail = '';
+		retryMs = 0;
+		lastSynced = new Date();
+		// Something was typed while we were busy.
+		if (result.unsynced) next = EDIT_DEBOUNCE_MS;
 	} catch (err) {
-		if (err.status === 401 || err.status === 403) {
-			const ok = await tryReauth({ promptUser: true });
-			if (ok) return fn();
+		if (err?.status === 401) {
+			googleAuth.expire();
+			problem = 'auth';
+			armRenewal();
+		} else {
+			problem = isTransient(err) ? 'offline' : 'error';
+			problemDetail = err?.message || String(err);
+			if (problem === 'error') console.error('[drive sync]', err);
+			retryMs = Math.min(RETRY_MAX_MS, Math.max(RETRY_MIN_MS, retryMs * 2));
+			next = retryMs;
 		}
-		throw err;
+	} finally {
+		running = false;
+		syncing = false;
 	}
+	if (rerun) {
+		rerun = false;
+		next = 0;
+	}
+	if (next !== null && !timer) schedule(next);
 }
 
-async function ensureFile(seedData) {
-	const token = googleAuth.token;
-	if (!token) return null;
+// Renewing the sign-in needs a popup, and a popup needs a click. So the next
+// click anywhere on the page renews it — typing never does.
+function armRenewal() {
+	if (renewArmed || renewGaveUp || !browser) return;
+	renewArmed = true;
+	document.addEventListener('click', onClickRenew, { capture: true, once: true });
+}
 
-	if (fileId) return fileId;
-
-	if (!folderId) {
-		folderId = await withRetry(() => findOrCreateFolder(token, FOLDER_NAME));
-	}
-
-	const existing = await withRetry(() => findFile(token, FILE_NAME, folderId));
-	if (existing) {
-		fileId = existing.id;
-		// Attaching to an existing remote file: its current modifiedTime becomes
-		// our reference. `dirty` is preserved — any prior local edits are still
-		// edits relative to this newly-discovered base.
-		baseModifiedTime = existing.modifiedTime;
-		try {
-			localStorage.setItem(BASE_MOD_KEY, baseModifiedTime);
-		} catch {}
+async function onClickRenew() {
+	renewArmed = false;
+	if (!docStore.drive().enabled || googleAuth.expiresIn > RENEW_BEFORE_MS) return;
+	if (await googleAuth.signIn()) {
+		problem = '';
+		run();
 	} else {
-		const initial = seedData || {};
-		const result = await withRetry(() => createFile(token, FILE_NAME, folderId, initial));
-		fileId = result.id;
-		// We just wrote the seed; the server and local are in sync.
-		markClean(result.modifiedTime);
-	}
-
-	try {
-		localStorage.setItem(FILE_ID_KEY, fileId);
-	} catch {}
-	return fileId;
-}
-
-function snapshotLocal() {
-	for (const key of registeredKeys) {
-		try {
-			const val = localStorage.getItem(key);
-			if (val !== null) localStorage.setItem(LOCAL_PREFIX + key, val);
-			else localStorage.removeItem(LOCAL_PREFIX + key);
-		} catch {}
+		renewGaveUp = true;
+		if (!googleAuth.token) problem = 'auth';
 	}
 }
 
-function restoreLocal() {
-	const changed = [];
-	for (const key of registeredKeys) {
-		try {
-			const backup = localStorage.getItem(LOCAL_PREFIX + key);
-			const current = localStorage.getItem(key);
-			if (backup !== null) {
-				localStorage.setItem(key, backup);
-				if (current !== backup) changed.push(key);
-			} else {
-				localStorage.removeItem(key);
-				if (current !== null) changed.push(key);
-			}
-		} catch {}
-	}
-	return changed;
+function tick() {
+	if (!docStore.drive().enabled) return;
+	if (googleAuth.expiresIn < RENEW_BEFORE_MS) armRenewal();
+	if (!document.hidden) run();
 }
 
-function notifyListeners(changedKeys) {
-	for (const fn of listeners) {
-		try {
-			fn(changedKeys);
-		} catch {}
-	}
+// The page came back into view: look for changes now rather than at the next
+// poll — unless we only just did (focus and visibility often fire together).
+function wake() {
+	if (Date.now() - lastRunAt > 3000) run();
 }
 
-function collectLocalData() {
-	const data = {};
-	for (const key of registeredKeys) {
-		try {
-			const val = localStorage.getItem(key);
-			if (val !== null) data[key] = val;
-		} catch {}
-	}
-	return data;
-}
+docStore.onLocalEdit = () => {
+	if (!browser || !docStore.drive().enabled) return;
+	const now = Date.now();
+	firstEditAt ||= now;
+	schedule(Math.max(0, Math.min(EDIT_DEBOUNCE_MS, firstEditAt + EDIT_MAX_WAIT_MS - now)));
+};
 
 export const driveSync = {
+	get enabled() {
+		return enabled();
+	},
+	// 'off' | 'auth' | 'syncing' | 'offline' | 'error' | 'saving' | 'synced'
 	get status() {
-		return waiting ? 'waiting' : syncStatus;
+		if (!enabled()) return 'off';
+		if (problem === 'auth') return 'auth';
+		if (syncing) return 'syncing';
+		if (problem) return problem;
+		return docs().hasUnsynced(KINDS) ? 'saving' : 'synced';
+	},
+	get detail() {
+		return problemDetail;
 	},
 	get lastSynced() {
 		return lastSynced;
 	},
-	get mode() {
-		return mode;
-	},
-	get isDrive() {
-		return mode === 'drive';
-	},
-	get conflictNotice() {
-		return conflictNotice;
-	},
-	// "Decide later": keep the modal away but leave local edits dirty and the
-	// server untouched. The next sync event re-detects the conflict.
-	dismissConflict() {
-		conflictNotice = null;
+	get notices() {
+		return docs().drive().notices;
 	},
 
-	// Resolve a pending conflict: 'local' force-pushes the current local data
-	// over the server file; 'server' discards local edits and pulls.
-	async resolveConflict(choice) {
-		if (!conflictNotice) return;
-		conflictNotice = null;
-		if (choice === 'server') {
-			dropDirty();
-			await this.pullFromDrive();
-			return;
-		}
-		syncStatus = 'syncing';
-		try {
-			const id = await ensureFile();
-			if (!id) {
-				syncStatus = 'error';
-				return;
-			}
-			const result = await withRetry(() => updateFile(googleAuth.token, id, collectLocalData()));
-			markClean(result.modifiedTime);
-			lastSynced = new Date();
-			syncStatus = 'idle';
-		} catch (err) {
-			console.error('Drive conflict resolution failed:', err);
-			syncStatus = 'error';
+	// Call once the page is up: starts the background loop.
+	start() {
+		if (!browser || started) return;
+		started = true;
+		setInterval(tick, POLL_MS);
+		document.addEventListener('visibilitychange', () => {
+			if (!document.hidden) wake();
+		});
+		window.addEventListener('focus', wake);
+		window.addEventListener('online', () => run());
+		if (docStore.drive().enabled) {
+			googleAuth.prepare();
+			run();
 		}
 	},
 
-	registerKey(key) {
-		if (!registeredKeys.includes(key)) registeredKeys.push(key);
-	},
-
-	onKeysChanged(fn) {
-		listeners.push(fn);
-		return () => {
-			listeners = listeners.filter((f) => f !== fn);
-		};
-	},
-
-	save(key, value) {
-		if (!browser) return;
-		let prev = null;
-		try {
-			prev = localStorage.getItem(key);
-		} catch {}
-		try {
-			localStorage.setItem(key, value);
-		} catch {}
-		if (prev !== value) markDirty();
-		if (mode !== 'drive') return;
-		if (googleAuth.isSignedIn) {
-			this.schedulePush();
-		} else {
-			// Verify the session by trying a silent refresh; escalate to a popup
-			// if that fails. Throttled inside tryReauth so we don't spam dialogs.
-			tryReauth({ promptUser: true }).then((ok) => {
-				if (ok) this.schedulePush();
-			});
+	// Sign in and start syncing. Must be called from a click.
+	async connect() {
+		renewGaveUp = false;
+		if (!googleAuth.token && !(await googleAuth.signIn())) {
+			if (docStore.drive().enabled) problem = 'auth';
+			return false;
 		}
+		// A different account than last time: nothing here belongs to a file
+		// there, so everything is uploaded to it as new.
+		const account = googleAuth.email;
+		const previous = docStore.drive().account;
+		if (account && previous && account !== previous) docStore.unlinkAll();
+		docStore.setDrive({ enabled: true, ...(account ? { account } : {}) });
+		problem = '';
+		run();
+		return true;
 	},
 
-	load(key) {
-		if (!browser) return null;
-		try {
-			return localStorage.getItem(key);
-		} catch {
-			return null;
-		}
+	// Stop syncing. Everything stays in this browser, and stays on Drive.
+	disconnect() {
+		clearTimeout(timer);
+		timer = null;
+		docStore.setDrive({ enabled: false });
+		googleAuth.signOut();
+		problem = '';
+		problemDetail = '';
 	},
 
-	schedulePush() {
-		if (!googleAuth.isSignedIn || mode !== 'drive') return;
-		// Only probe the server when a new burst of edits starts — every save in
-		// a burst lands here, and a modifiedTime fetch per keystroke is a network
-		// request per keystroke.
-		const newBurst = !saveTimeout;
-		if (saveTimeout) clearTimeout(saveTimeout);
-		waiting = true;
-		if (newBurst) this.checkRemoteUpdates();
-		saveTimeout = setTimeout(() => {
-			saveTimeout = null;
-			waiting = false;
-			this.pushToDrive();
-		}, 10000);
+	// The Drive button: sync now, or sign in again if that is what it needs.
+	syncNow() {
+		if (!docStore.drive().enabled) return;
+		if (!googleAuth.token) return this.connect();
+		retryMs = 0;
+		return run();
 	},
 
-	// Cheap fetch of just the server's modifiedTime. If the server is unchanged,
-	// nothing to do. If it moved, pull — a conflict (dirty + server moved) puts
-	// up the resolution modal instead of applying anything.
-	async checkRemoteUpdates() {
-		if (!googleAuth.isSignedIn || !fileId) return;
-		try {
-			const modified = await withRetry(() => getFileModifiedTime(googleAuth.token, fileId));
-			if (modified === baseModifiedTime) return;
-			if (saveTimeout) {
-				clearTimeout(saveTimeout);
-				saveTimeout = null;
-				waiting = false;
-			}
-			await this.pullFromDrive();
-		} catch {}
+	dismissNotice(id) {
+		docStore.dismissNotice(id);
 	},
 
-	async pushToDrive() {
-		if (!googleAuth.isSignedIn || mode !== 'drive') return;
-		if (!dirty) {
-			syncStatus = 'idle';
-			return;
+	// "This conflict is dealt with": drop the label from the copy, which
+	// renames its file back to the plain character name.
+	resolveConflict(notice) {
+		const doc = docStore.get(notice.docId);
+		if (doc?.conflict) {
+			docStore.patch(doc.id, { conflict: '', metaDirty: true });
+			docStore.onLocalEdit();
 		}
-		syncStatus = 'syncing';
-		try {
-			const id = await ensureFile();
-			if (!id) return;
-
-			const serverModified = await withRetry(() => getFileModifiedTime(googleAuth.token, id));
-			if (baseModifiedTime && serverModified !== baseModifiedTime) {
-				// Server moved since our last sync and we have local edits — a real
-				// conflict. Don't push and don't drop anything: show the modal and
-				// let the user pick a side via resolveConflict().
-				console.warn(
-					'[driveSync] Conflict on push: remote changed since last sync ' +
-						`(base=${baseModifiedTime}, server=${serverModified}). Asking the user.`,
-				);
-				await raiseConflict(id, serverModified);
-				syncStatus = 'idle';
-				return;
-			}
-
-			const result = await withRetry(() => updateFile(googleAuth.token, id, collectLocalData()));
-			markClean(result.modifiedTime);
-			lastSynced = new Date();
-			syncStatus = 'idle';
-		} catch (err) {
-			if (err.status === 404) {
-				fileId = null;
-				folderId = null;
-				baseModifiedTime = null;
-				try {
-					localStorage.removeItem(FILE_ID_KEY);
-				} catch {}
-				try {
-					localStorage.removeItem(BASE_MOD_KEY);
-				} catch {}
-				await this.pushToDrive();
-				return;
-			}
-			console.error('Drive push failed:', err);
-			syncStatus = 'error';
-		}
-	},
-
-	async pullFromDrive() {
-		if (!googleAuth.isSignedIn || mode !== 'drive') return;
-		syncStatus = 'syncing';
-		try {
-			const id = await ensureFile();
-			if (!id) return;
-
-			const modified = await withRetry(() => getFileModifiedTime(googleAuth.token, id));
-
-			// Server unchanged since our last sync.
-			if (modified === baseModifiedTime) {
-				if (dirty) {
-					// Local has edits, server has nothing new — push.
-					syncStatus = 'idle';
-					await this.pushToDrive();
-					return;
-				}
-				syncStatus = 'idle';
-				return;
-			}
-
-			// Server has moved past our base. If we also have local edits, that's
-			// a real conflict — both sides changed since last sync. Don't apply
-			// anything: show the modal and let the user pick a side via
-			// resolveConflict().
-			if (dirty) {
-				console.warn(
-					'[driveSync] Conflict on pull: both remote and local changed ' +
-						`since last sync (base=${baseModifiedTime}, server=${modified}). ` +
-						'Asking the user.',
-				);
-				await raiseConflict(id, modified);
-				syncStatus = 'idle';
-				return;
-			}
-
-			// Clean pull.
-			const data = await withRetry(() => readFile(googleAuth.token, id));
-			const changedKeys = [];
-			for (const key of registeredKeys) {
-				if (key in data) {
-					const current = localStorage.getItem(key);
-					if (current !== data[key]) {
-						localStorage.setItem(key, data[key]);
-						changedKeys.push(key);
-					}
-				}
-			}
-			markClean(modified);
-			lastSynced = new Date();
-			syncStatus = 'idle';
-			if (changedKeys.length > 0) notifyListeners(changedKeys);
-		} catch (err) {
-			if (err.status === 404) {
-				fileId = null;
-				folderId = null;
-				baseModifiedTime = null;
-				try {
-					localStorage.removeItem(FILE_ID_KEY);
-				} catch {}
-				try {
-					localStorage.removeItem(BASE_MOD_KEY);
-				} catch {}
-				syncStatus = 'idle';
-				return;
-			}
-			console.error('Drive pull failed:', err);
-			syncStatus = 'error';
-		}
-	},
-
-	async switchToDrive() {
-		if (mode === 'drive' && googleAuth.isSignedIn) return;
-		const wasSignedIn = googleAuth.isSignedIn;
-		if (!wasSignedIn) {
-			await googleAuth.signIn();
-			if (!googleAuth.isSignedIn) return;
-		}
-
-		// Switching modes resets the sync relationship. ensureFile() below will
-		// re-establish a base by either attaching to an existing file or creating
-		// a fresh one from the seed.
-		fileId = null;
-		folderId = null;
-		resetSyncState();
-		try {
-			localStorage.removeItem(FILE_ID_KEY);
-		} catch {}
-
-		snapshotLocal();
-		const seed = collectLocalData();
-
-		mode = 'drive';
-		try {
-			localStorage.setItem(MODE_KEY, 'drive');
-		} catch {}
-
-		await ensureFile(seed);
-		await this.pullFromDrive();
-	},
-
-	async switchToLocal() {
-		const hadPendingWrite = saveTimeout !== null;
-		if (saveTimeout) {
-			clearTimeout(saveTimeout);
-			saveTimeout = null;
-			waiting = false;
-		}
-		if (hadPendingWrite && googleAuth.isSignedIn && mode === 'drive' && dirty) {
-			await this.pushToDrive();
-		}
-		mode = 'local';
-		syncStatus = 'idle';
-		waiting = false;
-		lastSynced = null;
-		resetSyncState();
-		try {
-			localStorage.setItem(MODE_KEY, 'local');
-		} catch {}
-		const changed = restoreLocal();
-		if (changed.length > 0) notifyListeners(changed);
-	},
-
-	async autoReconnect() {
-		if (!browser || mode !== 'drive') return;
-		if (googleAuth.isSignedIn) {
-			await this.pullFromDrive();
-			return;
-		}
-		// Try silent refresh first; if it fails, escalate to a sign-in popup
-		// immediately so the user isn't left silently signed out.
-		const ok = await tryReauth({ promptUser: true });
-		if (ok) {
-			await this.pullFromDrive();
-		} else {
-			syncStatus = 'error';
-		}
-	},
-
-	handleVisibilityChange() {
-		if (!browser) return;
-		if (!document.hidden && googleAuth.isSignedIn && mode === 'drive') {
-			this.pullFromDrive();
-		}
-	},
-
-	startStorageListener() {
-		if (storageListener) return;
-		storageListener = (e) => {
-			if (!e.key || !registeredKeys.includes(e.key)) return;
-			if (e.oldValue === e.newValue) return;
-			if (storageDebounce) clearTimeout(storageDebounce);
-			storageDebounce = setTimeout(() => {
-				storageDebounce = null;
-				notifyListeners([e.key]);
-			}, 500);
-		};
-		window.addEventListener('storage', storageListener);
-	},
-
-	stopStorageListener() {
-		if (!storageListener) return;
-		window.removeEventListener('storage', storageListener);
-		storageListener = null;
-		if (storageDebounce) {
-			clearTimeout(storageDebounce);
-			storageDebounce = null;
-		}
+		docStore.dismissNotice(notice.id);
 	},
 };

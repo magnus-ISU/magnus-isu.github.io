@@ -26,6 +26,8 @@ When you **attack a surprised or defenseless enemy with a melee weapon**, you de
 
 ### Poisoner
 You've mastered the care and use of a poison. Choose a poison from the list below; that poison is no longer dangerous for you to use. Whenever you have time to gather materials and a safe place to brew you can make and have up to three uses of the poison you choose for free. Applied poisons must be carefully applied to the target or something they eat or drink. Touch poisons just need to touch the target, and can even be used on the blade of a weapon.
+
+Choose your poison: (?)
 - Bloodweed (touch): The target deals -1d4 damage ongoing until cured
 - Serpent's Tears (touch): Anyone dealing damage to the target has advantage.
 - Serrulatus' Sting (touch): This neurotoxin makes the target fly into a spastic rage, unable to be consoled for a few minutes.
@@ -35,7 +37,7 @@ You've mastered the care and use of a poison. Choose a poison from the list belo
 - Goldenroot (applied): The target treats the next creature they see as a trusted ally, until proved otherwise
 - Arsenic Bloom (applied): After an hour, the target begins vomiting; a few hours later they die unless treated with antitoxin.
 
-## Background
+## Background (?)
 
 ### Human
 You are a professional. When you spout lore or discern realities about criminal activities, take +1.
@@ -57,19 +59,19 @@ When you attack with a ranged weapon, deal +2 damage.
 ### Acrobat
 You always land on your feet. When you fall from any height, if you're conscious you are unharmed.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] [1 Armor] Leather Armor
 [0 Weight] Your chosen poison [3 charges]
 [10 Coin]
-Choose one for your arms:
+Choose one for your arms: (?)
 [0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)
 [1 Weight] Rapier (close, precise)
-Choose a ranged weapon:
+Choose a ranged weapon: (?)
 [1 Weight] 3 Throwing Daggers (thrown, near) [3 uses]
 [2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows (ammo)
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Healing Potion [1 use]
 
@@ -77,29 +79,27 @@ Choose one:
 Damage: d8, HP: 6+Constitution, Load: 9+STR
 
 ### Look
-Choose one for each:
-
-Shifty Eyes or Criminal Eyes  
-Hooded Head, Messy Hair, or Cropped Hair  
-Dark Clothes, Fancy Clothes, or Common Clothes  
-Lithe Body, Knobby Body, or Flabby Body
+[Shifty Eyes | Criminal Eyes](?)  
+[Hooded Head | Messy Hair | Cropped Hair](?)  
+[Dark Clothes | Fancy Clothes | Common Clothes](?)  
+[Lithe Body | Knobby Body | Flabby Body](?)
 
 ### Names
-*Halfling*: Felix, Rook, Mouse, Sketch, Trixie, Robin, Omar, Brynn, Bug  
-*Human*: Sparrow, Shank, Jack, Marlow, Dodge, Rat, Pox, Humble, Farley
+*Halfling*: [Felix | Rook | Mouse | Sketch | Trixie | Robin | Omar | Brynn | Bug](?)  
+*Human*: [Sparrow | Shank | Jack | Marlow | Dodge | Rat | Pox | Humble | Farley](?)
 
-### Alignment
-Chaotic: Leap into danger without a plan.  
-Neutral: Avoid detection or infiltrate a location.  
+### Alignment (?)
+Chaotic: Leap into danger without a plan.
+Neutral: Avoid detection or infiltrate a location.
 Evil: Shift danger or blame from yourself to someone else.
 
 ### Bonds
-I stole something from \_\_\_\_\_.  
-\_\_\_\_\_ has my back when things go wrong.  
-\_\_\_\_\_ knows incriminating details about me.  
+I stole something from \_\_\_\_\_.
+\_\_\_\_\_ has my back when things go wrong.
+\_\_\_\_\_ knows incriminating details about me.
 \_\_\_\_\_ and I have a con running.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Hide In Shadows
 When you keep still in shadows or darkness, enemies never spot you until you make a movement.
@@ -148,7 +148,7 @@ When you **tell someone something they're inclined to be skeptical of**, roll+CH
 - They'll want some additional proof before they allow you to do anything that could get them in trouble.
 - They'll decide within a few minutes that they were right to be skeptical of you.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Walk Through Shadows
 *Requires Hide In Shadows*  
@@ -193,4 +193,4 @@ When you take time to make a plan to steal something, name the thing you want to
 - Who will come after it?
 - Who else wants it?
 
-*A playbook by Magnus, [waxfire@gmail.com](https://docs.google.com/file/d/0BxI2vfsw1haqQUhsdXZQZUVmZnM/edit?resourcekey=0-o-0MUc9e8a-niWPtvaFXsg), Sage LaTorra and Adam Koebel*
+*A playbook by Sage LaTorra, Adam Koebel, [waxfire@gmail.com](https://docs.google.com/file/d/0BxI2vfsw1haqQUhsdXZQZUVmZnM/edit?resourcekey=0-o-0MUc9e8a-niWPtvaFXsg), and Magnus*

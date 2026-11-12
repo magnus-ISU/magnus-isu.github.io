@@ -24,7 +24,7 @@ When you **cross swords with a humanoid opponent**, gain +1 forward to discern r
 - What emotion drives this person?
 - What is this person trying to hide?
 
-## Background
+## Background (?)
 
 ### Elf
 You descend from an ancient martial tradition. Take +1 to Spout Lore on anything related to warfare.
@@ -32,17 +32,17 @@ You descend from an ancient martial tradition. Take +1 to Spout Lore on anything
 ### Human
 Your fighting style is showy and impressive. Take +1 forward to Parley with anyone who has seen you fight.
 
-## Gear  
-You start with:
+## Gear
+You start with: (?*)
 [1 Weight] Dungeon Rations [5 rations]
-Choose one from each:
+Choose your attire: (?)
 [0 Weight] Noble's Silks and [10 Coin]
 [1 Weight] [1 Armor] Duelist's Leathers (worn)
-Choose your weapon:
+Choose your weapon: (?)
 [2 Weight] Bastard Sword (+1 damage, two-handed, close)
 [2 Weight] Rapier (precise, close)
 [0 Weight] Dagger (hand) and [1 Weight] [+1 Armor] Parrying Dagger (hand)
-Choose one:
+Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] Healing Potion [1 use]
 
@@ -50,30 +50,28 @@ Choose one:
 Damage: d8, HP: 8+Constitution, Load: 8+STR
 
 ### Look
-Choose one for each:
-
-Fiery Eyes, Cold Eyes, or Weary Eyes  
-Cropped Hair, Flowing Hair, or Hooded Head  
-Aristocratic Clothes, Threadbare Clothes, or Training Clothes  
-Muscular Body, Lithe Body, or Scarred Body
+[Fiery Eyes | Cold Eyes | Weary Eyes](?)  
+[Cropped Hair | Flowing Hair | Hooded Head](?)  
+[Aristocratic Clothes | Threadbare Clothes | Training Clothes](?)  
+[Muscular Body | Lithe Body | Scarred Body](?)
 
 ### Names
-*Elf*: Elohiir, Sharaseth, Hasrith, Shevaral, Cadeus, Eldar, Kithracet, Thelian  
-*Human*: Yang, Garm, Caleb, Maximillian, Alexander, La Croix, Rodriguez, Scyld
+*Elf*: [Elohiir | Sharaseth | Hasrith | Shevaral | Cadeus | Eldar | Kithracet | Thelian](?)  
+*Human*: [Yang | Garm | Caleb | Maximillian | Alexander | La Croix | Rodriguez | Scyld](?)
 
-### Alignment
+### Alignment (?)
 
-Good: Defend someone weaker than you in a fight.  
-Neutral: Defeat a worthy opponent in a fair duel.  
+Good: Defend someone weaker than you in a fight.
+Neutral: Defeat a worthy opponent in a fair duel.
 Evil: Kill a defenseless or surrendered enemy to prove your superiority.
 
 ### Bonds
-\_\_\_\_\_ broke up a fight I was involved in. I was probably going to lose, but they don't need to know that part.  
-\_\_\_\_\_ and I are regular training partners.  
-I may have killed a relative of \_\_\_\_\_ at some point in the past.  
+\_\_\_\_\_ broke up a fight I was involved in. I was probably going to lose, but they don't need to know that part.
+\_\_\_\_\_ and I are regular training partners.
+I may have killed a relative of \_\_\_\_\_ at some point in the past.
 \_\_\_\_\_ seems like they would fold at the first sign of trouble. I don't trust them.
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### Armored
 Ignore the *clumsy* tag on any armor you wear.
@@ -117,7 +115,7 @@ When you **attempt to wow an audience with a display of your power**, roll+INT. 
 ### Multiclass Dabbler
 Get one move from another class. Treat your level as one lower, and your casting level as three lower.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Blade Savant
 Learn many techniques; you know a total of Level + 2 \* INT techniques.

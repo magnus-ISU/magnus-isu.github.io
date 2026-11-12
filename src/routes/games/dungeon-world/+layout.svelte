@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import DriveSync from '$lib/components/DriveSync.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
-import { buildCharacterSheet, loadClassRaw } from '$lib/dw/classLoader.js';
+import { loadClassSheet } from '$lib/dw/classLoader.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import { monsterSections } from '$lib/dw/monsters.js';
 import { contentIndex, navigation, pageArt } from '$lib/dw/navigation.js';
@@ -129,6 +129,13 @@ function resolveClassItem(item) {
 	return item;
 }
 
+// Start the (empty) open character sheet from a class in the sidebar.
+async function startSheet(item) {
+	const resolved = resolveClassItem(item);
+	const sheet = await loadClassSheet(resolved, getArtUrl(resolved.slug || item.slug));
+	if (sheet && characterSheet.isEmpty) characterSheet.value = sheet;
+}
+
 function onPointerDown(e, item, category, toggleTarget) {
 	if (e.shiftKey && !toggleTarget) {
 		e.preventDefault();
@@ -138,11 +145,7 @@ function onPointerDown(e, item, category, toggleTarget) {
 			currentSlug === 'character-sheet' &&
 			characterSheet.isEmpty
 		) {
-			const resolved = resolveClassItem(item);
-			const art = getArtUrl(resolved.slug || item.slug);
-			loadClassRaw(resolved).then((raw) => {
-				if (raw) characterSheet.value = buildCharacterSheet(raw, art);
-			});
+			startSheet(item);
 		}
 		sidebarOpen = false;
 		return;
@@ -164,10 +167,7 @@ function onPointerDown(e, item, category, toggleTarget) {
 			currentSlug === 'character-sheet' &&
 			characterSheet.isEmpty
 		) {
-			const resolved = resolveClassItem(item);
-			const raw = await loadClassRaw(resolved);
-			if (raw)
-				characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
+			await startSheet(item);
 			sidebarOpen = false;
 		}
 	}, 500);
@@ -193,10 +193,7 @@ async function handleNavClick(e, item, category) {
 			currentSlug === 'character-sheet' &&
 			characterSheet.isEmpty
 		) {
-			const resolved = resolveClassItem(item);
-			const raw = await loadClassRaw(resolved);
-			if (raw)
-				characterSheet.value = buildCharacterSheet(raw, getArtUrl(resolved.slug || item.slug));
+			await startSheet(item);
 		}
 		sidebarOpen = false;
 		return;
@@ -634,6 +631,73 @@ function onLoreTipOut(e) {
 	:global(.dw-article li) {
 		margin-bottom: 0;
 		line-height: 1.5;
+	}
+
+	/* Choice markup (see choices.js). Options carry data-cs only where they
+	   can be picked (the character sheet); elsewhere they are plain text. */
+	:global(.dw-article .choice-sep) {
+		color: #777;
+	}
+
+	:global(.dw-article .choice-prompt:not(h1, h2, h3, h4, h5, h6)) {
+		color: #d4a847;
+	}
+
+	:global(.dw-article [data-choose]::after),
+	:global(.dw-article .choice-inline[data-choose]::before) {
+		content: attr(data-choose);
+		font-size: 0.7rem;
+		font-weight: normal;
+		letter-spacing: 0;
+		text-transform: none;
+		color: #d4a847;
+		border: 1px solid #806a2f;
+		border-radius: 3px;
+		padding: 0 0.35em;
+		vertical-align: middle;
+	}
+
+	:global(.dw-article [data-choose]::after) {
+		margin-left: 0.6em;
+	}
+
+	:global(.dw-article .choice-inline[data-choose]::before) {
+		margin-right: 0.4em;
+	}
+
+	:global(.dw-article .choice-opt[data-cs]) {
+		cursor: pointer;
+		border-radius: 3px;
+		transition: background 0.12s, color 0.12s;
+	}
+
+	:global(.dw-article span.choice-opt[data-cs]:not(.choice-line)) {
+		border-bottom: 1px dashed #806a2f;
+	}
+
+	:global(.dw-article .choice-line[data-cs]::before),
+	:global(.dw-article :is(h3, h4, h5, h6).choice-opt[data-cs]::before) {
+		content: '○ ';
+		color: #d4a847;
+		font-weight: normal;
+	}
+
+	:global(.dw-article .choice-line.choice-move[data-cs]::before),
+	:global(.dw-article :is(h3, h4, h5, h6).choice-move[data-cs]::before) {
+		content: '+ ';
+	}
+
+	:global(.dw-article li.choice-opt[data-cs]) {
+		list-style-type: circle;
+	}
+
+	:global(.dw-article li.choice-opt[data-cs]::marker) {
+		color: #d4a847;
+	}
+
+	:global(.dw-article .choice-opt[data-cs]:hover) {
+		background: rgba(212, 168, 71, 0.18);
+		color: #f0d890;
 	}
 
 	:global(.dw-article .lore-tip) {

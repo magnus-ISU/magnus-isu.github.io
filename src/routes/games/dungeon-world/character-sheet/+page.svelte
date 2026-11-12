@@ -4,15 +4,17 @@ import BattleBlock from '$lib/components/BattleBlock.svelte';
 import DraggableCounter from '$lib/components/DraggableCounter.svelte';
 import TextBox from '$lib/components/TextBox.svelte';
 import { characterSheet } from '$lib/dw/characterSheet.svelte.js';
+import { pickChoice } from '$lib/dw/choices.js';
 import { diceHistory } from '$lib/dw/diceHistory.svelte.js';
 import {
 	extractBattleBlocks,
 	parseDefinitions,
 	replaceBattleBlock,
 } from '$lib/dw/encounterParse.js';
+import { formatHeading, parseHeading } from '$lib/dw/headings.js';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
 import { allMonsters } from '$lib/dw/monsters.js';
-import { renderMarkdown, splitMarkdownChunks } from '$lib/dw/renderMarkdown.js';
+import { collapseTooltips, renderMarkdown, splitMarkdownChunks } from '$lib/dw/renderMarkdown.js';
 import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
 
 const STAT_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -29,6 +31,28 @@ function headerLineCount(text) {
 // The textarea shows a stripped view where collapsed (::) section bodies are hidden.
 // The store always holds the full text.
 
+// An h2 heading line, parsed (see headings.js), or null for any other line.
+function parseH2(line) {
+	if (!line.startsWith('## ')) return null;
+	const h = parseHeading(line);
+	return h?.level === 2 ? h : null;
+}
+
+// Rewrite the `##` heading of the section called `sectionName` with `change`
+// applied to its parsed form. Every other marker on the line (break mode,
+// choice) is preserved. Returns the new document, or null if there is no such
+// section.
+function rewriteSectionHeading(text, sectionName, change) {
+	const lines = text.split('\n');
+	for (let i = headerLineCount(text); i < lines.length; i++) {
+		const h = parseH2(lines[i]);
+		if (!h || h.text !== sectionName) continue;
+		lines[i] = formatHeading({ ...h, ...change });
+		return lines.join('\n');
+	}
+	return null;
+}
+
 function stripCollapsed(full) {
 	const lines = full.split('\n');
 	const hc = headerLineCount(full);
@@ -39,8 +63,9 @@ function stripCollapsed(full) {
 			out.push(lines[i]);
 			continue;
 		}
-		if (/^##\s/.test(lines[i])) {
-			skipping = /\s*::\s*$/.test(lines[i]);
+		const h = parseH2(lines[i]);
+		if (h) {
+			skipping = h.collapsed;
 			out.push(lines[i]);
 			continue;
 		}
@@ -55,9 +80,10 @@ function getCollapsedSections(full) {
 	let heading = null;
 	let content = [];
 	for (let i = headerLineCount(full); i < lines.length; i++) {
-		if (/^##\s/.test(lines[i])) {
+		const h = parseH2(lines[i]);
+		if (h) {
 			if (heading) sections.push({ heading, lines: content });
-			if (/\s*::\s*$/.test(lines[i])) {
+			if (h.collapsed) {
 				heading = lines[i];
 				content = [];
 			} else {
@@ -81,7 +107,7 @@ function reconstruct(displayText, sections) {
 	const out = [];
 	for (const line of lines) {
 		out.push(line);
-		if (/^##\s/.test(line) && /\s*::\s*$/.test(line)) {
+		if (parseH2(line)?.collapsed) {
 			const q = queue.get(line);
 			if (q?.length) out.push(...q.shift());
 		}
@@ -90,7 +116,7 @@ function reconstruct(displayText, sections) {
 	for (const [heading, remaining] of queue) {
 		for (const lines of remaining) {
 			if (!lines.length) continue;
-			out.push(heading.replace(/\s*::\s*$/, ''));
+			out.push(formatHeading({ ...parseH2(heading), collapsed: false }));
 			out.push(...lines);
 		}
 	}
@@ -151,9 +177,8 @@ function cancelDelete() {
 }
 
 function doDelete(i) {
-	const { slots, activeIdx } = characterSheet.snapshot;
-	undoStack.push({ type: 'delete', slots, activeIdx });
-	characterSheet.deleteSlot(i);
+	const removed = characterSheet.deleteSlot(i);
+	if (removed) undoStack.push({ type: 'delete', removed });
 }
 
 function onTabPointerDown(e, i) {
@@ -319,7 +344,7 @@ function undo() {
 	if (item.type === 'edit') {
 		cs.value = item.value;
 	} else if (item.type === 'delete') {
-		characterSheet.restoreSlots(item.slots, item.activeIdx);
+		characterSheet.restoreSlot(item.removed);
 	}
 }
 
@@ -796,26 +821,69 @@ const damageEntries = $derived.by(() => {
 // the DOM of — the chunk it touched. Unchanged chunks hit the cache and keep
 // their `{@html}` string identical, so Svelte leaves their DOM alone. This is
 // what keeps typing responsive on large documents with many maps.
+//
+// Each rendered chunk gets a scope id, stamped on its choice options (see
+// choices.js) so a click can be traced back to the chunk and from there to a
+// line of the body. Identical chunks get distinct scopes (the key counts
+// occurrences), otherwise a click in the second would edit the first.
 let chunkCache = new Map();
+let chunkScopeSeq = 0;
+let chunkStartLines = new Map(); // scope -> first line of the chunk in the body
 const bodyChunks = $derived.by(() => {
 	const chunks = splitMarkdownChunks(parsed.body);
 	const next = new Map();
+	const starts = new Map();
+	const seen = new Map();
+	let line = 0;
 	const out = chunks.map((c) => {
-		const key = `${c.breakMode ? 1 : 0}:${c.breakModeLevel}:${c.text}`;
-		let html = chunkCache.get(key) ?? next.get(key);
-		if (html === undefined) {
-			html = renderMarkdown(c.text, {
-				battle: true,
-				breakMode: c.breakMode,
-				breakModeLevel: c.breakModeLevel,
-			});
+		const base = `${c.breakMode ? 1 : 0}:${c.breakModeLevel}:${c.text}`;
+		const nth = seen.get(base) || 0;
+		seen.set(base, nth + 1);
+		const key = `${nth}:${base}`;
+		let entry = chunkCache.get(key);
+		if (entry === undefined) {
+			const scope = `c${chunkScopeSeq++}`;
+			entry = {
+				scope,
+				html: renderMarkdown(c.text, {
+					battle: true,
+					breakMode: c.breakMode,
+					breakModeLevel: c.breakModeLevel,
+					choiceScope: scope,
+				}),
+			};
 		}
-		next.set(key, html);
-		return html;
+		next.set(key, entry);
+		starts.set(entry.scope, line);
+		line += c.text.split('\n').length;
+		return entry.html;
 	});
 	chunkCache = next;
+	chunkStartLines = starts;
 	return out;
 });
+
+// A click on a choice option: keep it, drop the markup and the options not
+// taken. The option's group id is relative to its chunk; the chunk's scope
+// gives the offset into the body.
+function pickOption(el) {
+	const start = chunkStartLines.get(el.dataset.cs);
+	if (start === undefined) return;
+	const [lineStr, nth] = el.dataset.cg.split(':');
+	const id = nth === undefined ? `${+lineStr + start}` : `${+lineStr + start}:${nth}`;
+	const hc = headerLineCount(cs.value);
+	const all = cs.value.split('\n');
+	const header = all.slice(0, hc);
+	// Same line numbering as the renderer: multi-line tooltips are one line.
+	const body = collapseTooltips(all.slice(hc).join('\n')).split('\n');
+	const picked = pickChoice(body, id, +el.dataset.co, {
+		setName: hc === 4 ? (name) => (header[0] = header[0].replace(/^[^,]*/, () => name)) : null,
+	});
+	if (!picked) return;
+	pushUndo();
+	// eslint-disable-next-line no-control-regex
+	cs.value = [...header, ...picked].join('\n').replace(/\x01/g, '\n');
+}
 const hasBody = $derived(bodyChunks.some((c) => c));
 
 // The sticky header only makes sense for an actual character sheet, whose first
@@ -841,21 +909,15 @@ const allSections = $derived(
 	cs.value
 		.split('\n')
 		.slice(headerLineCount(cs.value))
-		.filter((l) => /^##\s+/.test(l))
-		.map((l) => {
-			const collapsed = /\s*::\s*$/.test(l);
-			const name = collapsed
-				? l.match(/^##\s+(.*?)\s*::\s*$/)[1].trim()
-				: l.match(/^##\s+(.*)/)[1].trim();
-			return { name, collapsed };
-		}),
+		.map(parseH2)
+		.filter(Boolean)
+		.map((h) => ({ name: h.text, collapsed: h.collapsed })),
 );
 
 let charBodyEl = $state();
 let editorEl = $state();
 let sheetTopEl = $state();
 let sheetTopHeight = $state(0);
-let animatingH3 = -1;
 
 function sizeEditor() {
 	if (!editorEl || !sheetTopEl) return;
@@ -875,13 +937,48 @@ $effect(() => {
 	requestAnimationFrame(sizeEditor);
 });
 
+// The stat pills sit in the header row, centred between the character's name
+// and the circles, whenever that gap is wide enough for them; otherwise they
+// get a row of their own underneath. The gap is the same in both layouts, so
+// measuring it cannot make the layout flip back and forth.
+let statsInline = $state(false);
+let headerInfoEl = $state();
+let headerCirclesEl = $state();
+let statsEl = $state();
+
+function placeStats() {
+	if (!sheetTopEl || !headerInfoEl || !statsEl || window.innerWidth <= 768) {
+		statsInline = false;
+		return;
+	}
+	const pills = [...statsEl.querySelectorAll('.stat-pill')];
+	const gap = parseFloat(getComputedStyle(statsEl).columnGap) || 0;
+	const need =
+		pills.reduce((w, pill) => w + pill.getBoundingClientRect().width, 0) +
+		gap * Math.max(0, pills.length - 1);
+	const left = headerInfoEl.getBoundingClientRect().right;
+	const right = (headerCirclesEl ?? sheetTopEl).getBoundingClientRect()[
+		headerCirclesEl ? 'left' : 'right'
+	];
+	// Leave some air on either side.
+	statsInline = right - left >= need + 64;
+}
+
 $effect(() => {
 	if (!sheetTopEl) return;
 	const ro = new ResizeObserver(() => {
 		sheetTopHeight = sheetTopEl.offsetHeight;
+		placeStats();
 	});
 	ro.observe(sheetTopEl);
 	return () => ro.disconnect();
+});
+
+// The header's contents changed (a longer name, another damage circle…).
+$effect(() => {
+	void parsed;
+	void damageEntries;
+	tick().then(placeStats);
 });
 
 // Mount BattleBlock components into the placeholder divs. Re-runs only on
@@ -957,65 +1054,16 @@ $effect(() => {
 	});
 });
 
+// Headings marked `### Name ###` in the text are shown glowing. The class is
+// applied here rather than in the rendered HTML; re-rendered chunks lose it and
+// untouched chunks keep it, so only headings without it need touching.
 $effect(() => {
 	void bodyChunks;
 	if (!charBodyEl) return;
-	const idx = animatingH3;
-	// Apply glow instantly to all except the one being animated. Query the h3
-	// list once (it was previously rebuilt per glowing heading) and skip
-	// headings that already carry the class — re-rendered chunks lose it,
-	// untouched chunks keep it — so this forces no reflow in the common case.
-	const allH3s = [...charBodyEl.querySelectorAll('h3')];
-	allH3s.forEach((h3, thisIdx) => {
-		if (!h3.hasAttribute('data-glow')) return;
-		if (thisIdx !== idx && !h3.classList.contains('glow')) {
-			h3.style.transition = 'none';
-			h3.classList.add('glow');
-			h3.offsetHeight; // force reflow
-			h3.style.transition = '';
-		}
-	});
-	// Animate only the toggled one
-	if (idx >= 0) {
-		requestAnimationFrame(() => {
-			const h3 = charBodyEl?.querySelectorAll('h3')?.[idx];
-			if (h3?.hasAttribute('data-glow')) h3.classList.add('glow');
-			animatingH3 = -1;
-		});
+	for (const h3 of charBodyEl.querySelectorAll('h3[data-glow]:not(.glow)')) {
+		h3.classList.add('glow');
 	}
 });
-
-function toggleH3Glow(h3Index) {
-	const lines = cs.value.split('\n');
-	let count = 0;
-	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
-		if (/^###\s/.test(lines[i])) {
-			if (count === h3Index) {
-				const isGlowing = /\s*###\s*$/.test(lines[i]);
-				if (isGlowing) {
-					// Animate out: remove class first, then update text after transition
-					const h3El = charBodyEl?.querySelectorAll('h3')[h3Index];
-					if (h3El) {
-						h3El.classList.remove('glow');
-						setTimeout(() => {
-							pushUndo();
-							const l = cs.value.split('\n');
-							l[i] = l[i].replace(/\s*###\s*$/, '');
-							cs.value = l.join('\n');
-						}, 200);
-					}
-				} else {
-					animatingH3 = h3Index;
-					pushUndo();
-					lines[i] = `${lines[i]} ###`;
-					cs.value = lines.join('\n');
-				}
-				return;
-			}
-			count++;
-		}
-	}
-}
 
 // --- Radial dice menu ---
 let radialMenu = $state(null); // { x, y, timer, closing }
@@ -1052,7 +1100,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map, .battle-block',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .choice-opt, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map, .battle-block',
 		)
 	) {
 		suppressRadialClick = true;
@@ -1074,11 +1122,11 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map, .battle-block',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .choice-opt, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map, .battle-block',
 		)
 	)
 		return;
-	if (target.closest('.char-body') && target.closest('h2, h3')) return;
+	if (target.closest('.char-body') && target.closest('h2')) return;
 	e.preventDefault();
 	if (radialMenu && !radialMenu.closing) {
 		closeRadialMenu();
@@ -1169,9 +1217,8 @@ function rollRadialDie(formula, e) {
 function expandAllAndScrollTo(sectionName) {
 	const lines = cs.value.split('\n');
 	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
-		const m = lines[i].match(/^##\s+(.*)/);
-		if (!m) continue;
-		if (/\s*::\s*$/.test(lines[i])) lines[i] = `## ${m[1].replace(/\s*::\s*$/, '').trim()}`;
+		const h = parseH2(lines[i]);
+		if (h?.collapsed) lines[i] = formatHeading({ ...h, collapsed: false });
 	}
 	cs.value = lines.join('\n');
 	tick().then(() => {
@@ -1192,17 +1239,8 @@ function collapseSection(sectionName) {
 		if (h2.textContent.trim() !== sectionName) continue;
 		const group = h2.closest('.h2-group');
 		function commitCollapse() {
-			const lines = cs.value.split('\n');
-			for (let i = headerLineCount(cs.value); i < lines.length; i++) {
-				const m = lines[i].match(/^##\s+(.*)/);
-				if (!m) continue;
-				const raw = m[1].replace(/\s*::\s*$/, '').trim();
-				if (raw === sectionName) {
-					lines[i] = `## ${raw} ::`;
-					cs.value = lines.join('\n');
-					break;
-				}
-			}
+			const next = rewriteSectionHeading(cs.value, sectionName, { collapsed: true });
+			if (next !== null) cs.value = next;
 		}
 		if (group) {
 			const fullH = group.scrollHeight;
@@ -1243,17 +1281,8 @@ function scrollToSection(sectionName) {
 }
 
 function expandSection(sectionName) {
-	const lines = cs.value.split('\n');
-	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
-		const m = lines[i].match(/^##\s+(.*)/);
-		if (!m) continue;
-		const raw = m[1].replace(/\s*::\s*$/, '').trim();
-		if (raw === sectionName) {
-			lines[i] = `## ${raw}`;
-			cs.value = lines.join('\n');
-			break;
-		}
-	}
+	const next = rewriteSectionHeading(cs.value, sectionName, { collapsed: false });
+	if (next !== null) cs.value = next;
 	tick().then(() => {
 		if (!charBodyEl) return;
 		for (const newH2 of charBodyEl.querySelectorAll('h2')) {
@@ -1319,12 +1348,16 @@ function expandSection(sectionName) {
 			<button
 				class="char-tab"
 				class:active={i === activeTab}
+				class:conflict={!!characterSheet.slotConflict(i)}
+				title={characterSheet.slotConflict(i)
+					? `Kept from a sync ${characterSheet.slotConflict(i)}. Compare it with the other sheet of the same name, keep what you want, then delete one.`
+					: undefined}
 				onclick={(e) => { if (e.shiftKey) { requestDelete(i); } else { switchTab(i); } }}
 				ondblclick={() => requestDelete(i)}
 				onpointerdown={(e) => onTabPointerDown(e, i)}
 				onpointerup={onTabPointerUp}
 				onpointercancel={onTabPointerUp}
-			>{tabName(i)}</button>
+			>{characterSheet.slotConflict(i) ? '⚠ ' : ''}{tabName(i)}</button>
 		{/each}
 		{#if showNewButton}
 			<button class="char-tab char-tab-new" onclick={addCharacter}>+ New Character</button>
@@ -1343,9 +1376,9 @@ function expandSection(sectionName) {
 	{#if parsed.name}
 		<div class="sheet-preview">
 			{#if hasHeaderRow}
-			<div class="sheet-top" bind:this={sheetTopEl}>
+			<div class="sheet-top" class:stats-inline={statsInline} bind:this={sheetTopEl}>
 			<div class="sheet-header">
-				<div class="header-info">
+				<div class="header-info" bind:this={headerInfoEl}>
 					<h2 class="char-name" onclick={(e) => { navigator.clipboard.writeText(cs.value); const el = e.currentTarget; el.classList.add('copied'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('copied'), 1200); }}>{parsed.name}</h2>
 					{#if parsed.clazz || parsed.level}
 						<p class="char-subtitle">
@@ -1355,7 +1388,7 @@ function expandSection(sectionName) {
 					{/if}
 				</div>
 				{#if parsed.hp !== null || parsed.armor !== null || damageEntries.length > 0 || maxLoad !== null}
-					<div class="header-circles">
+					<div class="header-circles" bind:this={headerCirclesEl}>
 						{#if parsed.exp !== null}
 							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div class="circle circle-xs circle-exp circle-draggable" onpointerdown={(e) => expDcRef?.handlePointerDown(e)}>
@@ -1434,7 +1467,7 @@ function expandSection(sectionName) {
 			</div>
 
 			{#if Object.keys(parsed.stats).length > 0}
-				<div class="char-stats">
+				<div class="char-stats" bind:this={statsEl}>
 					{#each Object.entries(parsed.stats) as [ab, mod]}
 						<button
 							class="stat-pill"
@@ -1473,6 +1506,14 @@ function expandSection(sectionName) {
 						cancelFade(fading.dataset.src);
 						return;
 					}
+					// An unresolved choice: clicking anywhere on an option picks it,
+					// ahead of whatever the option's content would do once it is yours.
+					const option = e.target.closest('.choice-opt');
+					if (option?.dataset.cs) {
+						e.stopPropagation();
+						pickOption(option);
+						return;
+					}
 					const icon = e.target.closest('.uses-icon, .rations-icon, .charges-icon');
 					if (icon) {
 						e.stopPropagation();
@@ -1498,13 +1539,6 @@ function expandSection(sectionName) {
 						}
 						return;
 					}
-					const h3 = e.target.closest('h3');
-					if (!h3) return;
-					const container = h3.closest('.char-body');
-					const allH3s = [...container.querySelectorAll('h3')];
-					const h3Index = allH3s.indexOf(h3);
-					if (h3Index < 0) return;
-					toggleH3Glow(h3Index);
 				}}>
 					{#each bodyChunks as chunk}{@html chunk}{/each}
 				</div>
@@ -1615,6 +1649,13 @@ function expandSection(sectionName) {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 		padding-bottom: 0 !important;
+		/* The sheet uses the whole screen: its header runs edge to edge, and
+		   the editor and body centre themselves within it (--sheet-max). */
+		max-width: none !important;
+	}
+
+	.cs-article {
+		--sheet-max: 2000px;
 	}
 
 	:global(.dw-content:has(> .cs-article) .content-spacer) {
@@ -1633,7 +1674,8 @@ function expandSection(sectionName) {
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		padding-bottom: 0.25rem;
-		margin-bottom: 0.25rem;
+		max-width: var(--sheet-max);
+		margin: 0 auto 0.25rem;
 		position: relative;
 		z-index: 2;
 	}
@@ -1670,6 +1712,17 @@ function expandSection(sectionName) {
 		color: #fff;
 	}
 
+	/* One half of a sync conflict: both copies were kept, and need merging. */
+	.char-tab.conflict {
+		border-color: #a04040;
+		color: #e0a0a0;
+	}
+
+	.char-tab.conflict.active {
+		border-bottom-color: transparent;
+		color: #ffd0d0;
+	}
+
 	.char-tab-new {
 		color: #666;
 		border-style: dashed;
@@ -1685,8 +1738,8 @@ function expandSection(sectionName) {
 	}
 
 	.sheet-editor {
-		margin-top: -8px;
-		margin-bottom: 1.5rem;
+		max-width: var(--sheet-max);
+		margin: -8px auto 1.5rem;
 		border-radius: 6px;
 	}
 	.sheet-editor :global(textarea) {
@@ -1697,7 +1750,37 @@ function expandSection(sectionName) {
 		position: sticky;
 		top: 0;
 		z-index: 9;
+	}
 
+	/* Room for the stats between the name and the circles: one row. */
+	.sheet-top.stats-inline {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		background: #252525;
+		border-bottom: 1px solid #333;
+	}
+
+	.sheet-top.stats-inline .sheet-header {
+		display: contents;
+	}
+
+	.sheet-top.stats-inline .header-info {
+		grid-area: 1 / 1;
+		padding: 0.75rem 0 0.75rem 1rem;
+	}
+
+	.sheet-top.stats-inline .header-circles {
+		grid-area: 1 / 3;
+		padding: 0.75rem 1rem 0.75rem 0;
+	}
+
+	.sheet-top.stats-inline .char-stats {
+		grid-area: 1 / 2;
+		flex-wrap: nowrap;
+		padding: 0;
+		background: none;
+		border-bottom: none;
 	}
 
 	/* --- Header with circles --- */
@@ -1920,15 +2003,21 @@ function expandSection(sectionName) {
 	}
 
 	/* --- Body + sidebar layout --- */
+	/* The body is centred on the screen at up to --sheet-max wide; the section
+	   buttons stay at the right edge. On a narrow screen the side columns
+	   shrink to nothing and to the buttons' width. */
 	.body-with-sidebar {
 		--sidebar-w: 100px;
-		display: flex;
-		align-items: flex-start;
+		display: grid;
+		grid-template-columns:
+			minmax(0, 1fr) minmax(0, var(--sheet-max))
+			minmax(var(--sidebar-w), 1fr);
+		align-items: start;
 	}
 
 	/* --- Body --- */
 	.char-body {
-		flex: 1;
+		grid-column: 2;
 		min-width: 0;
 		padding: 0.75rem 1.25rem;
 		white-space: normal;
@@ -1936,6 +2025,8 @@ function expandSection(sectionName) {
 	}
 
 	.collapsed-sidebar {
+		grid-column: 3;
+		justify-self: end;
 		box-sizing: border-box;
 		width: var(--sidebar-w);
 		flex-shrink: 0;
@@ -2052,9 +2143,6 @@ function expandSection(sectionName) {
 
 	.char-body :global(h3) {
 		margin-top: 0;
-		cursor: pointer;
-		transition: box-shadow 0.2s, border-color 0.2s;
-
 	}
 
 	.char-body :global(h3.glow) {

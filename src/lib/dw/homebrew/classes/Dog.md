@@ -21,7 +21,7 @@ When you **take time to sniff around, or perk your ears up to listen carefully**
 - What can I smell that nobody else does?
 - Are or were there other dogs nearby?
 
-## Starting Moves - Choose 2
+## Starting Moves (?2)
 
 You can later choose these moves as Advanced Moves as well.
 
@@ -49,7 +49,7 @@ When you **dig through earth, sand, snow, or loose rubble**, roll+STR. On a 10+,
 - You make a mess someone is going to notice
 - You cause something unstable to give way
 
-## Background
+## Background (?)
 
 ### Domesticated
 When you **try to communicate with people**, you take +1, and even on a miss they probably understand. When you **meet other domesticated animals**, even those not of your species, you can speak and Parley with them freely.
@@ -60,8 +60,8 @@ When you **fight like a wild animal**, increase your damage to d10 instead of d6
 ### Stray
 When you **enter a steading or settlement**, you can always find a kind citizen to take you in, providing you with food and shelter. While you **act harmless and meek**, nobody will notice you are present until you make yourself known.
 
-## Gear  
-Choose one:
+## Gear
+Choose one: (?)
 A tattered scarf with a familiar scent
 A collar with your name on it from a previous owner
 A raggedy toy from your puppyhood
@@ -72,34 +72,32 @@ A sack with 2 coins, tied to your neck
 Damage: d6, HP: 8+Constitution, Load: 0 + STR. You don't carry items like people do, and can only carry a couple of items at a time in your mouth.
 
 ### Look
-Choose one for each:
+[Pup | Adult | Grayfur](?)  
+[Growly Bark | Playful Bark | Yappy Bark | Mournful Bark](?)  
+[Small | Lanky | Huge | Stout](?)  
+[Sleek Coat | Curly Coat | Shaggy Coat | Wirey Coat](?)
 
-Pup, Adult, or Grayfur  
-Growly Bark, Playful Bark, Yappy Bark, or Mournful Bark  
-Small, Lanky, Huge, or Stout  
-Sleek Coat, Curly Coat, Shaggy Coat, or Wirey Coat
-
-### Alignment
-Good, Companionship: Offer comfort to a friend or stranger in need.  
-Lawful, Loyalty: Help someone when the odds are against you.  
-Neutral, Playfulness: Cause trouble by being excitable or mischievous.  
-Chaotic, Instability: Act frightened or vicious without any warning.  
+### Alignment (?)
+Good, Companionship: Offer comfort to a friend or stranger in need.
+Lawful, Loyalty: Help someone when the odds are against you.
+Neutral, Playfulness: Cause trouble by being excitable or mischievous.
+Chaotic, Instability: Act frightened or vicious without any warning.
 Evil, Appetite: Seek out food at any cost.
 
 ### Name
 
-*Buddy, Max, Bella, Daisy, Rocky, Luna, Sadie, Bailey, Cooper, Molly, Duke, Lucy, Charlie, Rex, Lucky, Bandit, Shadow, Scout, Rosie, Bear, Ginger, Toby, Marley, Sasha, Jasper, Roxy, Finn, Penny, Hunter, Zoey*
+[Buddy | Max | Bella | Daisy | Rocky | Luna | Sadie | Bailey | Cooper | Molly | Duke | Lucy | Charlie | Rex | Lucky | Bandit | Shadow | Scout | Rosie | Bear | Ginger | Toby | Marley | Sasha | Jasper | Roxy | Finn | Penny | Hunter | Zoey](?)
 
 
 ### Bonds
-Which of you is not a dog person? \_\_\_\_\_  
-Which of you gives the best treats? \_\_\_\_\_  
-Which of you gives the best head scratches? \_\_\_\_\_  
-Which of you knew my previous owner? \_\_\_\_\_  
-Which of you had a dog like me when you were young? \_\_\_\_\_  
+Which of you is not a dog person? \_\_\_\_\_
+Which of you gives the best treats? \_\_\_\_\_
+Which of you gives the best head scratches? \_\_\_\_\_
+Which of you knew my previous owner? \_\_\_\_\_
+Which of you had a dog like me when you were young? \_\_\_\_\_
 Which of you truly understands me? \_\_\_\_\_
 
-## Advanced Moves
+## Advanced Moves (?>Starting Moves)
 
 ### The Dog Did It
 When an **ally untruthfully blames you for something and you look guilty and play along**, roll+CHA. On a 10+ the lie is believed, and you suffer the blame instead. On a 7-9 the lie is believed, but you take the blame to heart and suffer a debility.
@@ -134,7 +132,7 @@ When you **bury an object outdoors**, no one else can find it without your help,
 ### Comfort
 When you **stay with an ally while they Make Camp**, curling up against them through the night, they may ignore one of their debilities, fears, or despairs for as long as you stay close to them. If you leave their side, the effect returns.
 
-## Mastery Moves
+## Mastery Moves (?>Starting Moves)
 
 ### Phantom Finder
 *Requires Ruh-Roh!*  
