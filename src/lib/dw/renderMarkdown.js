@@ -387,8 +387,9 @@ export function renderMarkdown(src, opts = {}) {
 			let attrs = '';
 			if (role?.prompt) {
 				classes.push('choice-prompt');
-				const label = chooseLabel(role.prompt.choice);
-				if (label) attrs += ` data-choose="${label}"`;
+				// "Choose one" goes without saying; only a larger count is shown.
+				const { count } = role.prompt.choice;
+				if (Number.isFinite(count) && count > 1) attrs += ` data-choose="choose ${count}"`;
 			}
 			if (role?.option && choiceScope) {
 				classes.push('choice-opt');
