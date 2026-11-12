@@ -920,11 +920,16 @@ $effect(() => {
 	requestAnimationFrame(sizeEditor);
 });
 
-// The stat pills sit in the header row, centred between the character's name
-// and the circles, whenever that gap is wide enough for them; otherwise they
-// get a row of their own underneath. The gap is the same in both layouts, so
-// measuring it cannot make the layout flip back and forth.
+// The stat pills sit in the header row, between the character's name and the
+// circles, whenever that gap is wide enough for them; otherwise they get a row
+// of their own underneath. The gap is the same in both layouts, so measuring
+// it cannot make the layout flip back and forth.
+//
+// In the row they are centred on the header itself — over the middle of the
+// sheet — if that spot is clear of the name and the circles, and failing that
+// in the middle of the gap. statsShift is how far the first is from the second.
 let statsInline = $state(false);
+let statsShift = $state(0);
 let headerInfoEl = $state();
 let headerCirclesEl = $state();
 let statsEl = $state();
@@ -932,6 +937,7 @@ let statsEl = $state();
 function placeStats() {
 	if (!sheetTopEl || !headerInfoEl || !statsEl || window.innerWidth <= 768) {
 		statsInline = false;
+		statsShift = 0;
 		return;
 	}
 	const pills = [...statsEl.querySelectorAll('.stat-pill')];
@@ -945,6 +951,10 @@ function placeStats() {
 	];
 	// Leave some air on either side.
 	statsInline = right - left >= need + 64;
+	const top = sheetTopEl.getBoundingClientRect();
+	const shift = Math.round(top.left + top.width / 2 - (left + right) / 2);
+	const room = (right - left - need) / 2 - 24;
+	statsShift = statsInline && Math.abs(shift) <= room ? shift : 0;
 }
 
 $effect(() => {
@@ -1450,7 +1460,7 @@ function expandSection(sectionName) {
 			</div>
 
 			{#if Object.keys(parsed.stats).length > 0}
-				<div class="char-stats" bind:this={statsEl}>
+				<div class="char-stats" bind:this={statsEl} style:transform={statsShift ? `translateX(${statsShift}px)` : null}>
 					{#each Object.entries(parsed.stats) as [ab, mod]}
 						<button
 							class="stat-pill"

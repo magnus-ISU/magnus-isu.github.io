@@ -13,7 +13,7 @@ Yeah. We didn't think so.
 ## Starting Moves
 
 ### Prepare Spells
-You carry a spellbook of power. You start out with the cantrips, 2 level 1 spells, and one higher level spell. Ask the GM how you can learn new spells, typically by finding spell scrolls or studying other mages' spellbooks.
+You carry a spellbook of power. You start out with the cantrips, 2 level 1 spells, and one higher level spell. Talk with the GM about how you can learn new spells, such as by finding spell scrolls or studying other mages' spellbooks.
 
 When you **spend an hour or so in contemplation of your spellbook**, you memorize all your cantrips and up to three spells from your spellbook, forgetting any others. These spells must be of your level or lower.
 
