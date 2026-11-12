@@ -169,6 +169,28 @@ test('the druid has Bindings: none to start with, whispers among the options', (
 	);
 });
 
+test('the paladin has a collapsed, empty list of Miracles', () => {
+	const note = 'Take the advanced move **Divine Favor** to work Miracles.';
+	const text = sheet('homebrew/classes/Paladin.md', 'homebrew/spells/Cleric_Miracles.md', {
+		spells: { heading: 'Miracles', emptyNote: note, collapsed: true },
+	});
+	const paladin = sections(text);
+	assert.deepEqual(
+		paladin.get('Miracles').filter((l) => l.trim()),
+		['## Miracles ::', note],
+	);
+	const options = paladin.get('Spell Options');
+	assert.equal(options[0], '## Spell Options (?>Miracles) ::');
+	assert.deepEqual(spellNames(options).slice(0, 4), ['Light', 'Sanctify', 'Guidance', 'Bless']);
+	assert.ok(paladin.get('Advanced Moves').includes('### Divine Favor'));
+	// A pick still finds the collapsed section.
+	const body = text.split('\n').slice(4);
+	const group = [...parseChoices(body).groups.values()].find((g) => g.choice.dest === 'Miracles');
+	const after = sections(['', '', '', '', ...pickChoice(body, group.id, 0)].join('\n'));
+	assert.deepEqual(spellNames(after.get('Miracles')), ['Light']);
+	assert.equal(after.get('Miracles')[0], '## Miracles ::');
+});
+
 test('an SRD caster works too', () => {
 	const text = sheet('srd/Wizard.md', 'srd/Wizard_Spells.md', { hardWrapped: true });
 	const s = sections(text);

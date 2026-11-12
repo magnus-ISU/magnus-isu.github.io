@@ -251,6 +251,14 @@ export const navigation = [
 				stats: 'STR 2, DEX 0, CON 1, INT -1, WIS 0, CHA 1',
 				homebrew: true,
 				srdSlug: 'paladin-srd',
+				// Like the Druid, no Miracles until the move for them is taken;
+				// the empty list is kept out of the way until then.
+				spells: {
+					page: 'cleric-miracles',
+					heading: 'Miracles',
+					emptyNote: 'Take the advanced move **Divine Favor** to work Miracles.',
+					collapsed: true,
+				},
 			},
 			{
 				title: 'The Paladin',
@@ -405,7 +413,7 @@ export const navigation = [
 				slug: 'arcane-duelist',
 				source: 'homebrew',
 				file: 'classes/Arcane_Duelist',
-				stats: 'STR 0, DEX 1, CON 0, INT 2, WIS -1, CHA 1',
+				stats: 'STR 0, DEX 2, CON 0, INT 1, WIS -1, CHA 1',
 				homebrew: true,
 			},
 		],

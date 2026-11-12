@@ -28,7 +28,8 @@ export async function loadClassRaw(entry) {
 export async function loadClassSheet(entry, artUrl) {
 	const raw = await loadClassRaw(entry);
 	if (!raw) return null;
-	// `spells` names the spell list's page, or says more: { page, heading, emptyNote }.
+	// `spells` names the spell list's page, or says more:
+	// { page, heading, emptyNote, collapsed }.
 	const spells = typeof entry.spells === 'string' ? { page: entry.spells } : entry.spells;
 	const spellsEntry = spells ? contentIndex[spells.page] : null;
 	return buildCharacterSheet(raw, artUrl, {

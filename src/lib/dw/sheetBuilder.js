@@ -92,8 +92,9 @@ function insertBlock(lines, at, block) {
 //
 // `heading` renames "Spells" ("Miracles", "Bindings"). With `emptyNote` the
 // class knows no spells to begin with: its section holds just that note, and
-// the first group is offered with the rest.
-function spellSections({ raw, heading = 'Spells', emptyNote = '' }) {
+// the first group is offered with the rest. `collapsed` starts that section
+// collapsed.
+function spellSections({ raw, heading = 'Spells', emptyNote = '', collapsed = false }) {
 	const lines = raw.split('\n');
 	const credit = takeCredit(lines);
 	const groups = [];
@@ -128,7 +129,12 @@ function spellSections({ raw, heading = 'Spells', emptyNote = '' }) {
 		(l, i, a) => !(isBlank(l) && (i === 0 || isBlank(a[i - 1]))),
 	);
 	return {
-		spells: [`## ${heading}`, ...intro, '', ...blocks(known.spells)],
+		spells: [
+			formatHeading({ level: 2, text: heading, collapsed }),
+			...intro,
+			'',
+			...blocks(known.spells),
+		],
 		options: [
 			formatHeading({
 				level: 2,
@@ -192,7 +198,8 @@ function transformClassForSheet(raw, { hardWrapped = false, spells: spellList = 
 }
 
 // opts.hardWrapped: the source wraps paragraphs at a fixed width (the SRD).
-// opts.spells: the class's spell list, if it has one: { raw, heading, emptyNote }
+// opts.spells: the class's spell list, if it has one:
+//   { raw, heading, emptyNote, collapsed }
 //   (see spellSections).
 // opts.extraDamage: a second damage formula for the header ("2d4").
 // opts.stats: the class's suggested stat line ("STR 2, DEX 1, …").
