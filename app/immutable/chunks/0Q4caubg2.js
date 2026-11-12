@@ -4,7 +4,7 @@ var e=`# Character Creation
 
 Open the Character Sheet panel and long-press the class name you want to play in the sidebar. Then go through the sheet and click what you take: wherever the class gives you a choice — background, gear, look, name, alignment — the options are marked with a circle or a dashed underline. Clicking one keeps it and removes the ones you didn't take. Ctrl+Z undoes a click.
 
-When you level up, open Advanced Moves and click a move's name to add it to your Starting Moves. The Wizard, Cleric and Druid also get their spell list: the ones they start with are under Spells (Miracles for the Cleric; Bindings for the Druid, who starts with none), and clicking a spell's name under Spell Options adds it there.
+When you level up, open Advanced Moves and click a move's name to add it to your Starting Moves. The Wizard, Cleric, Druid and Paladin also get their spell list: the ones they start with are under Spells (Miracles for the Cleric and Paladin, Bindings for the Druid; the Druid and Paladin start with none), and clicking a spell's name under Spell Options adds it there.
 
 You can open a spell list and click on a heading (click cantrips) to copy everything under the heading to paste into your character sheet. Long click more to append to the clipboard.
 
