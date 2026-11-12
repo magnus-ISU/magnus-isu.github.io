@@ -6,7 +6,7 @@ Choose one for your defenses: (?)
 Choose one armament: (?)
 [1 Weight] Warhammer (close)
 [1 Weight] Mace (close)
-[1 Weight] Staff (close, two-handed) and [1 Weight] Bandages [3 uses]
+[1 Weight] Staff (close, two-handed) and [1 Weight] Bandages [3 uses][0 Weight] Sling (near) and [3 Weight] Bag of Bullets [1 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations][1 Weight] Healing Potion [1 use]</p> <h2 id="stats"><a aria-hidden="true" tabindex="-1" href="#stats"><span class="icon icon-link"></span></a>Stats</h2> <p>Damage: d6, HP: 8+Constitution, Load: 10+STR</p> <h3 id="look"><a aria-hidden="true" tabindex="-1" href="#look"><span class="icon icon-link"></span></a>Look</h3> <p><a href="?">Kind Eyes | Sharp Eyes | Sad Eyes</a><br/> <a href="?">Tonsure | Strange Hair | Bald</a><br/> <a href="?">Flowing Robes | Habit | Common Garb</a><br/> <a href="?">Thin Body | Knobby Body | Flabby Body</a></p> <h3 id="names"><a aria-hidden="true" tabindex="-1" href="#names"><span class="icon icon-link"></span></a>Names</h3> <p><em>Dwarf</em>: <a href="?">Durga | Aelfar | Gerda | Rurgosh | Bjorn | Drummond | Helga | Siggrun | Freya</a><br/> <em>Human</em>: <a href="?">Wesley | Brinton | Jon | Sara | Hawthorn | Elise | Clarke | Lenore | Piotr | Dahlia | Carmine</a></p> <h3 id="alignment-"><a aria-hidden="true" tabindex="-1" href="#alignment-"><span class="icon icon-link"></span></a>Alignment (?)</h3> <p>Good: Endanger yourself to heal another.
 Lawful: Endanger yourself following the precepts of your church or god.

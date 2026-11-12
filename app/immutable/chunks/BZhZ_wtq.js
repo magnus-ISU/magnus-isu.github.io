@@ -63,6 +63,7 @@ Choose your armament: (?)
 [2 Weight] Shillelagh (close)
 [1 Weight] Staff (close, two-handed)
 [1 Weight] Spear (close, thrown, near)
+[0 Weight] Sling (near) and [3 Weight] Bag of Bullets [1 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Poultices and Herbs [2 uses]

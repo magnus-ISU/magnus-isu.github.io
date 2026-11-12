@@ -14,7 +14,7 @@ Choose your clothing: (?)
 Choose one for your armaments: (?)
 [2 Weight] An elaborately crafted longsword (close, +1 damage, precious)
 [0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand, thrown)
-[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows [3 ammo], and [1 Weight] Short sword (close)
+[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows [1 ammo], and [1 Weight] Short sword (close)
 [1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses][1 Weight] Bandages [3 uses][0 Weight] Halfling pipeleaf [3 uses][2 Weight] Bag of Books [3 uses]</p> <h2 id="stats"><a aria-hidden="true" tabindex="-1" href="#stats"><span class="icon icon-link"></span></a>Stats</h2> <p>Damage: d6, HP: 6+Constitution, Load: 9+STR</p> <h3 id="look"><a aria-hidden="true" tabindex="-1" href="#look"><span class="icon icon-link"></span></a>Look</h3> <p><a href="?">Knowing Eyes | Fiery Eyes | Joyous Eyes</a><br/> <a href="?">Fancy Hair | Wild Hair | Stylish Cap</a><br/> <a href="?">Finery | Traveling Clothes | Poor Clothes</a><br/> <a href="?">Fit Body | Well-fed Body | Thin Body</a></p> <h3 id="names"><a aria-hidden="true" tabindex="-1" href="#names"><span class="icon icon-link"></span></a>Names</h3> <p><em>Elf</em>: <a href="?">Astrafel | Daelwyn | Feliana | Damarra | Sistranalle | Pendrell | Melliandre | Dagoliir</a><br/> <em>Human</em>: <a href="?">Baldric | Leena | Dunwick | Willem | Edwyn | Florian | Seraphine | Quorra | Charlotte | Lily | Ramonde | Cassandra</a></p> <h3 id="alignment-"><a aria-hidden="true" tabindex="-1" href="#alignment-"><span class="icon icon-link"></span></a>Alignment (?)</h3> <p>Good, Heroism: Perform your art to aid someone else.

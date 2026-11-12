@@ -5,7 +5,7 @@ Choose one for your arms: (?)
 [0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)
 [1 Weight] Rapier (close, precise)
 Choose a ranged weapon: (?)
-[1 Weight] 3 Throwing Daggers (thrown, near) [3 charges][2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows [3 ammo]
+[1 Weight] 3 Throwing Daggers (thrown, near) [3 charges][2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows [1 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses][1 Weight] Healing Potion [1 use]</p> <h2 id="stats"><a aria-hidden="true" tabindex="-1" href="#stats"><span class="icon icon-link"></span></a>Stats</h2> <p>Damage: d8, HP: 6+Constitution, Load: 9+STR</p> <h3 id="look"><a aria-hidden="true" tabindex="-1" href="#look"><span class="icon icon-link"></span></a>Look</h3> <p><a href="?">Shifty Eyes | Criminal Eyes</a><br/> <a href="?">Hooded Head | Messy Hair | Cropped Hair</a><br/> <a href="?">Dark Clothes | Fancy Clothes | Common Clothes</a><br/> <a href="?">Lithe Body | Knobby Body | Flabby Body</a></p> <h3 id="names"><a aria-hidden="true" tabindex="-1" href="#names"><span class="icon icon-link"></span></a>Names</h3> <p><em>Halfling</em>: <a href="?">Felix | Rook | Mouse | Sketch | Trixie | Robin | Omar | Brynn | Bug</a><br/> <em>Human</em>: <a href="?">Sparrow | Shank | Jack | Marlow | Dodge | Rat | Pox | Humble | Farley</a></p> <h3 id="alignment-"><a aria-hidden="true" tabindex="-1" href="#alignment-"><span class="icon icon-link"></span></a>Alignment (?)</h3> <p>Chaotic: Leap into danger without a plan.
 Neutral: Avoid detection or infiltrate a location.

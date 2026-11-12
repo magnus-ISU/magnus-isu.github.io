@@ -62,6 +62,7 @@ You start with: (?*)
 Choose your weapon: (?)
 [1 Weight] Axe (close)
 [2 Weight] Two-Handed Sword (close, +1 damage)
+[0 Weight] Sling (near) and [3 Weight] Bag of Bullets [1 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses] and [1 Weight] Dungeon Rations [5 rations]
 [1 Weight] [1 Armor] Chainmail

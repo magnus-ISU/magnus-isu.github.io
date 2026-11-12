@@ -11,6 +11,7 @@ Choose your armament: (?)
 [2 Weight] Shillelagh (close)
 [1 Weight] Staff (close, two-handed)
 [1 Weight] Spear (close, thrown, near)
+[0 Weight] Sling (near) and [3 Weight] Bag of Bullets [1 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses][1 Weight] Poultices and Herbs [2 uses][0 Weight] Halfling Pipeleaf [3 uses][1 Weight] Antitoxin [3 uses]</p> <h2 id="stats"><a aria-hidden="true" tabindex="-1" href="#stats"><span class="icon icon-link"></span></a>Stats</h2> <p>Damage: d6, HP: 6+Constitution, Load: 6+STR</p> <h3 id="look"><a aria-hidden="true" tabindex="-1" href="#look"><span class="icon icon-link"></span></a>Look</h3> <p><a href="?">Wise Eyes | Wild Eyes | Haunting Eyes</a><br/> <a href="?">Furry Hood | Messy Hair | Braided Hair</a><br/> <a href="?">Ceremonial Garb | Practical Leathers | Weathered Hides</a></p> <h3 id="names"><a aria-hidden="true" tabindex="-1" href="#names"><span class="icon icon-link"></span></a>Names</h3> <p><em>Elf</em>: <a href="?">Hycorax | Ethanwe | Sinathel | Demanor | Menoliir | Mithralan | Taeros | Aegor</a><br/> <em>Halfling</em>: <a href="?">Tanner | Dunstan | Rose | Ivy | Robard | Mab | Thistle | Puck | Anne | Serah</a><br/> <em>Human</em>: <a href="?">Elana | Obelis | Herran | Syla | Andanna | Siobhan | Aziz | Pelin | Sibel | Nils | Wei</a></p> <h3 id="alignment-"><a aria-hidden="true" tabindex="-1" href="#alignment-"><span class="icon icon-link"></span></a>Alignment (?)</h3> <p>Good: Help someone or something grow.
 Neutral: Eliminate an unnatural menace.
