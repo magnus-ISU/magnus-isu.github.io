@@ -10,8 +10,6 @@ You can open a spell list and click on a heading (click cantrips) to copy everyt
 
 Modify your damage dice on the second line. Add more damage dice options by using semicolons: Damage d4;2d4;2d6
 
-Gear keeps count of itself. Click a box, apple, ring or quiver to mark off a use, ration, charge or ammo, and click it again to have it back; in the text these are written \[3 uses\], \[5 rations\], \[3 charges\] and \[3 ammo\]. Something used up or eaten is gone, but an empty quiver or a wand without charges stays on your sheet, weighing nothing until it is refilled. Gear you have not chosen yet does not count towards your load either.
-
 This website will allow you to create any number of characters and store them in the browser. Press Sync with Google Drive at the bottom of the sidebar to also keep each character as a file in your Drive, shared between your devices. If the same character is changed on two devices at once, both versions are kept as separate sheets for you to sort out.
 
 ## Pen and Paper
