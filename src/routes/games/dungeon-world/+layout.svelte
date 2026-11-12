@@ -643,28 +643,6 @@ function onLoreTipOut(e) {
 		color: #d4a847;
 	}
 
-	:global(.dw-article [data-choose]::after),
-	:global(.dw-article .choice-inline[data-choose]::before) {
-		content: attr(data-choose);
-		font-size: 0.7rem;
-		font-weight: normal;
-		letter-spacing: 0;
-		text-transform: none;
-		color: #d4a847;
-		border: 1px solid #806a2f;
-		border-radius: 3px;
-		padding: 0 0.35em;
-		vertical-align: middle;
-	}
-
-	:global(.dw-article [data-choose]::after) {
-		margin-left: 0.6em;
-	}
-
-	:global(.dw-article .choice-inline[data-choose]::before) {
-		margin-right: 0.4em;
-	}
-
 	:global(.dw-article .choice-opt[data-cs]) {
 		cursor: pointer;
 		border-radius: 3px;

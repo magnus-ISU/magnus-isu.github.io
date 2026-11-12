@@ -268,10 +268,8 @@ export function renderMarkdown(src, opts = {}) {
 						? `<span class="choice-opt${move}"${optAttrs(`${lineIdx}:${k}`, oi)}>${inline(o)}</span>`
 						: inline(o),
 				);
-				const n = Number.isFinite(c.choice.count) && c.choice.count > 1 ? c.choice.count : 0;
 				choiceHtml[k] =
-					`<span class="choice-inline"${n ? ` data-choose="choose ${n}"` : ''}>` +
-					`${parts.join('<span class="choice-sep"> / </span>')}</span>`;
+					`<span class="choice-inline">${parts.join('<span class="choice-sep"> / </span>')}</span>`;
 				t = `${t.slice(0, c.start)}\x00CH${k}\x00${t.slice(c.end)}`;
 			}
 		}
@@ -385,12 +383,7 @@ export function renderMarkdown(src, opts = {}) {
 			const role = choiceRoles.get(lineIdx);
 			const classes = [];
 			let attrs = '';
-			if (role?.prompt) {
-				classes.push('choice-prompt');
-				// "Choose one" goes without saying; only a larger count is shown.
-				const { count } = role.prompt.choice;
-				if (Number.isFinite(count) && count > 1) attrs += ` data-choose="choose ${count}"`;
-			}
+			if (role?.prompt) classes.push('choice-prompt');
 			if (role?.option && choiceScope) {
 				classes.push('choice-opt');
 				if (isOpenChoice(role.option.group.choice)) classes.push('choice-move');

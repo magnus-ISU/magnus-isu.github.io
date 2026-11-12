@@ -230,10 +230,12 @@ test('rendering: prompts and options, clickable only with a scope', () => {
 	const src = '## Background (?)\n### Human\nh\n### Elf\ne\n## Gear\nChoose two: (?2)\na\nb\nc';
 	const live = renderMarkdown(src, { choiceScope: 's1' });
 	assert.match(live, /<h2 class="choice-prompt">Background<\/h2>/);
+	// However many are to be chosen, a heading or inline choice carries no label.
 	assert.match(
 		renderMarkdown('## Moves (?2)\n### A\nx\n### B\ny\n### C\nz'),
-		/<h2 class="choice-prompt" data-choose="choose 2">Moves<\/h2>/,
+		/<h2 class="choice-prompt">Moves<\/h2>/,
 	);
+	assert.match(renderMarkdown('[a | b | c](?2)'), /<span class="choice-inline">a</);
 	assert.match(live, /<h3 class="choice-opt" data-cs="s1" data-cg="0" data-co="1">Elf<\/h3>/);
 	assert.match(live, /<span class="choice-prompt">Choose two:<\/span>/);
 	assert.match(live, /data-cg="6" data-co="2">c<\/span>/);
