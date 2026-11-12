@@ -925,9 +925,11 @@ $effect(() => {
 // of their own underneath. The gap is the same in both layouts, so measuring
 // it cannot make the layout flip back and forth.
 //
-// In the row they are centred on the header itself — over the middle of the
-// sheet — if that spot is clear of the name and the circles, and failing that
-// in the middle of the gap. statsShift is how far the first is from the second.
+// Either way they are centred where the sheet's section headings are — the
+// middle of the body column — if there is room for them there: in the header
+// row, if that spot is clear of the name and the circles. Failing that they
+// stay in the middle of the gap, or of their own row. statsShift is how far
+// the first spot is from the second.
 let statsInline = $state(false);
 let statsShift = $state(0);
 let headerInfoEl = $state();
@@ -951,10 +953,14 @@ function placeStats() {
 	];
 	// Leave some air on either side.
 	statsInline = right - left >= need + 64;
+	// The space the pills are centred in as things stand, and where they
+	// would rather be.
 	const top = sheetTopEl.getBoundingClientRect();
-	const shift = Math.round(top.left + top.width / 2 - (left + right) / 2);
-	const room = (right - left - need) / 2 - 24;
-	statsShift = statsInline && Math.abs(shift) <= room ? shift : 0;
+	const [from, to] = statsInline ? [left, right] : [top.left, top.right];
+	const column = (charBodyEl ?? sheetTopEl).getBoundingClientRect();
+	const shift = Math.round(column.left + column.width / 2 - (from + to) / 2);
+	const room = (to - from - need) / 2 - 24;
+	statsShift = Math.abs(shift) <= room ? shift : 0;
 }
 
 $effect(() => {
@@ -971,6 +977,7 @@ $effect(() => {
 $effect(() => {
 	void parsed;
 	void damageEntries;
+	void charBodyEl;
 	tick().then(placeStats);
 });
 
