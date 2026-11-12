@@ -296,11 +296,13 @@ export const navigation = [
 				homebrew: true,
 				srdSlug: 'druid-srd',
 				// The Druid casts nothing until they take the move for it, so
-				// even the Whispers start out as options.
+				// even the Whispers start out as options, and the empty list is
+				// kept out of the way.
 				spells: {
 					page: 'druid-bindings',
 					heading: 'Bindings',
 					emptyNote: 'Take the advanced move **God Amidst The Wastes** to cast Bindings.',
+					collapsed: true,
 				},
 			},
 			{

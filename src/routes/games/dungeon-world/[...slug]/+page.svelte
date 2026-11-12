@@ -417,7 +417,8 @@ function onArticleClick(e) {
 		vertical-align: middle;
 	}
 
-	:global(.dw-article .uses-icon) {
+	:global(.dw-article .uses-icon),
+	:global(.dw-article .charges-icon) {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
@@ -427,6 +428,7 @@ function onArticleClick(e) {
 		overflow: visible;
 	}
 
+	:global(.dw-article .ammo-icon),
 	:global(.dw-article .rations-icon) {
 		display: inline-block;
 		width: 24px;

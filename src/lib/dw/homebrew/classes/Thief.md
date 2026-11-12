@@ -69,8 +69,8 @@ Choose one for your arms: (?)
 [0 Weight] Dagger (hand) and [1 Weight] Short Sword (close)
 [1 Weight] Rapier (close, precise)
 Choose a ranged weapon: (?)
-[1 Weight] 3 Throwing Daggers (thrown, near) [3 uses]
-[2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows (ammo)
+[1 Weight] 3 Throwing Daggers (thrown, near) [3 charges]
+[2 Weight] Ragged Bow (near) and [1 Weight] Bundle of Arrows [3 ammo]
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]
 [1 Weight] Healing Potion [1 use]

@@ -13,6 +13,7 @@ import {
 } from '$lib/dw/encounterParse.js';
 import { formatHeading, parseHeading } from '$lib/dw/headings.js';
 import { commitHp as commitHpFn } from '$lib/dw/hpCommit.js';
+import { COUNTER_KINDS, carriedLoad, counterRe } from '$lib/dw/items.js';
 import { allMonsters } from '$lib/dw/monsters.js';
 import { collapseTooltips, renderMarkdown, splitMarkdownChunks } from '$lib/dw/renderMarkdown.js';
 import { userMonsters } from '$lib/dw/userMonsters.svelte.js';
@@ -282,23 +283,8 @@ const maxLoad = $derived(
 	parsed.baseLoad !== null ? parsed.baseLoad + (parsed.stats.STR ?? 0) : null,
 );
 
-// Carried weight and worn armor parsed from body in a single pass
-const bodyStats = $derived.by(() => {
-	const body = parsed.body;
-	let weight = 0,
-		coins = 0,
-		baseArmor = 0,
-		bonusArmor = 0;
-	for (const m of body.matchAll(/\[([+-]?)(\d+)\s+(Weight|Armor|Coin)\]/gi)) {
-		const val = (m[1] === '-' ? -1 : 1) * +m[2];
-		const type = m[3].toLowerCase();
-		if (type === 'weight') weight += val;
-		else if (type === 'coin') coins += val;
-		else if (type === 'armor' && m[1]) bonusArmor += val;
-		else if (type === 'armor') baseArmor = Math.max(baseArmor, val);
-	}
-	return { weight: weight + Math.floor(coins / 100), armor: baseArmor + bonusArmor };
-});
+// Carried weight and worn armor, from the items in the body
+const bodyStats = $derived(carriedLoad(parsed.body));
 const carriedWeight = $derived(bodyStats.weight);
 const wornArmor = $derived(bodyStats.armor);
 const totalArmor = $derived((parsed.armor ?? 0) + wornArmor);
@@ -460,13 +446,15 @@ $effect(() => {
 	}
 });
 
-// --- Consumable click-to-toggle (uses / rations) ---
+// --- Counter click-to-toggle (uses / charges / ammo / rations) ---
+const COUNTER_ICON_SEL = COUNTER_KINDS.map((k) => `.${k}-icon`).join(', ');
+// Used up, these go: the line fades out and is deleted. Charges and ammo are
+// had back, so their item stays.
+const CONSUMED = new Set(['uses', 'rations']);
+
 function handleConsumableClick(icon) {
-	const kind = icon.classList.contains('uses-icon')
-		? 'uses'
-		: icon.classList.contains('charges-icon')
-			? 'charges'
-			: 'rations';
+	const kind = COUNTER_KINDS.find((k) => icon.classList.contains(`${k}-icon`));
+	if (!kind) return;
 	// Per-render counters reset in every chunk and in recursive renders
 	// (blockquotes), so data-*-idx attributes aren't document-global. Derive
 	// the index from DOM order of this kind's groups instead, which matches
@@ -484,12 +472,7 @@ function handleConsumableClick(icon) {
 
 function toggleConsumable(kind, idx, delta) {
 	const lines = cs.value.split('\n');
-	const re =
-		kind === 'uses'
-			? /\[(\d+)(?:\/(\d+))?\s+(uses?)\]/gi
-			: kind === 'charges'
-				? /\[(\d+)(?:\/(\d+))?\s+(charges?)\]/gi
-				: /\[(\d+)(?:\/(\d+))?\s+(rations?)\]/gi;
+	const re = counterRe(kind);
 	let count = 0;
 	for (let i = headerLineCount(cs.value); i < lines.length; i++) {
 		const matches = [...lines[i].matchAll(re)];
@@ -507,7 +490,7 @@ function toggleConsumable(kind, idx, delta) {
 				lines[i] = before + replacement + after;
 				const newLineText = lines[i];
 				cs.value = lines.join('\n');
-				if (delta < 0 && newCur === 0 && kind !== 'charges') {
+				if (delta < 0 && newCur === 0 && CONSUMED.has(kind)) {
 					startFade(newLineText);
 				} else if (fadingLineKeys.has(oldLineText)) {
 					cancelFade(oldLineText);
@@ -1100,7 +1083,7 @@ function onArticlePointerDown(e) {
 	if (target.closest('.radial-btn')) return;
 	if (
 		target.closest(
-			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .choice-opt, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map, .battle-block',
+			'.circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .ammo-icon, .choice-opt, button, input, textarea, a, .sheet-editor, .char-tabs, .char-name, .dungeon-map, .battle-block',
 		)
 	) {
 		suppressRadialClick = true;
@@ -1122,7 +1105,7 @@ function onArticleClick(e) {
 	const target = e.target;
 	if (
 		target.closest(
-			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .choice-opt, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map, .battle-block',
+			'button, input, textarea, a, select, .circle, .armor-display, .circle-draggable, .uses-icon, .rations-icon, .charges-icon, .ammo-icon, .choice-opt, .sheet-editor, .char-tabs, .code-block, .copy-line, .char-name, .dungeon-map, .battle-block',
 		)
 	)
 		return;
@@ -1498,7 +1481,7 @@ function expandSection(sectionName) {
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div class="char-body" bind:this={charBodyEl} onmousedown={(e) => {
-					if (e.target.closest('.uses-icon, .rations-icon, .charges-icon')) e.preventDefault();
+					if (e.target.closest(COUNTER_ICON_SEL)) e.preventDefault();
 				}} onclick={(e) => {
 					const fading = e.target.closest('.copy-line.fading-line');
 					if (fading && fading.dataset.src) {
@@ -1514,7 +1497,7 @@ function expandSection(sectionName) {
 						pickOption(option);
 						return;
 					}
-					const icon = e.target.closest('.uses-icon, .rations-icon, .charges-icon');
+					const icon = e.target.closest(COUNTER_ICON_SEL);
 					if (icon) {
 						e.stopPropagation();
 						handleConsumableClick(icon);
@@ -2448,6 +2431,7 @@ function expandSection(sectionName) {
 
 	:global(.char-body .uses-icon),
 	:global(.char-body .charges-icon),
+	:global(.char-body .ammo-icon),
 	:global(.char-body .rations-icon) {
 		cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='black' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 54 Q34 76 46 80 Q58 50 84 22' fill='none' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 15 26, pointer;
 	}
@@ -2466,6 +2450,7 @@ function expandSection(sectionName) {
 		user-select: none;
 	}
 
+	:global(.char-body .ammo-icon),
 	:global(.char-body .rations-icon) {
 		display: inline-block;
 		width: 24px;
@@ -2484,6 +2469,7 @@ function expandSection(sectionName) {
 		transform: translateY(-2px) scale(1.15);
 	}
 
+	:global(.char-body .ammo-icon:hover),
 	:global(.char-body .rations-icon:hover) {
 		transform: translateY(-3px) scale(1.15);
 	}

@@ -58,7 +58,7 @@ You start with: (?*)
 Choose one for your arms: (?)
 [1 Weight] Rapier (close, precise)
 [1 Weight] Masterwork Short Sword (close, +1 damage)
-[1 Weight] Ornate Bow (near) and [0 Weight] Quiver of Masterwork Arrows (ammo)
+[1 Weight] Ornate Bow (near) and [0 Weight] Quiver of Masterwork Arrows [3 ammo]
 Choose one for your defenses: (?)
 [1 Weight] [1 Armor] Cloth Armor
 [0 Weight] A Loaf of Bread from Your Kingdom [3 rations] and [1 Weight] Healing Potion [1 use]

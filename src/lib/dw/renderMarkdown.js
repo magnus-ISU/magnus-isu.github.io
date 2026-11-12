@@ -1,13 +1,59 @@
 import { findInlineChoices, parseChoices } from './choices.js';
 import { headingBreaks, parseHeading, splitChoiceMarker } from './headings.js';
+import { counterRe, isSpent, weighedItem } from './items.js';
+import { collapseTooltips } from './tooltips.js';
 
-// Pre-pass shared by everything that splits a document into lines: a
-// [text](tooltip) whose tooltip spans several lines is folded onto one line
-// (newlines become \x01), so line-based parsing never cuts through it.
-export function collapseTooltips(src) {
-	return src.replace(/\[([^\]]+)\]\(([^)]*\n[^)]*)\)/g, (_, text, body) => {
-		return `[${text}](${body.replace(/\n/g, '\x01')})`;
-	});
+export { collapseTooltips };
+
+// --- Counter icons: [3 uses], [3 charges], [3 ammo], [5 rations] ---
+// Each draws one icon per unit; `spent` is whether that unit is gone.
+const TICK = 'M22 54 Q34 76 46 80 Q58 50 84 22';
+const tick = (stroke) =>
+	`<path transform="translate(10 -10)" d="${TICK}" fill="none" stroke="${stroke}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+const USE_BOX =
+	'<path d="M14 16 Q50 11 86 18 Q92 50 86 86 Q50 91 14 84 Q9 50 14 16 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
+const CHARGE_RING =
+	'<circle cx="50" cy="50" r="33" fill="none" stroke="currentColor" stroke-width="9"/>';
+const CHARGE_CORE = '<circle cx="50" cy="50" r="17" fill="currentColor"/>';
+const APPLE =
+	// stem
+	'<path d="M50 18 L52 4" stroke="#3a2008" stroke-width="6" stroke-linecap="round"/>' +
+	// leaf
+	'<path d="M52 12 C64 0 82 6 80 22 C70 22 56 18 52 14 Z" fill="#5da030" stroke="#2a5018" stroke-width="2" stroke-linejoin="round"/>' +
+	// body — two-lobed top, round bottom
+	'<path d="M50 30 C42 18 22 16 14 32 C6 50 10 78 28 90 C38 96 46 90 50 88 C54 90 62 96 72 90 C90 78 94 50 86 32 C78 16 58 18 50 30 Z" fill="#e02818" stroke="#5a0808" stroke-width="3" stroke-linejoin="round"/>' +
+	// shine
+	'<ellipse cx="32" cy="46" rx="6" ry="14" fill="#ff9080" opacity="0.6" transform="rotate(-20 32 46)"/>';
+// A quiver slung at an angle: three arrows in it, or none.
+const VANE = 'M50 2 L56 9 V22 L50 16 L44 22 V9 Z';
+const QUIVER_ARROWS =
+	'<path d="M43 50 L37 12 M50 50 V6 M57 50 L63 12" stroke="#6a4416" stroke-width="3.5" stroke-linecap="round"/>' +
+	'<g fill="#efe7d6" stroke="#4a2a0a" stroke-width="2.5" stroke-linejoin="round">' +
+	`<path transform="translate(-13.5 5) rotate(-9 50 2)" d="${VANE}"/>` +
+	`<path transform="translate(13.5 5) rotate(9 50 2)" d="${VANE}"/>` +
+	`<path d="${VANE}" fill="#d8402c"/></g>`;
+const QUIVER =
+	// strap
+	'<path d="M36 40 Q14 62 40 92" fill="none" stroke="#4a2a0a" stroke-width="4" stroke-linecap="round"/>' +
+	// tube, rim, stitching
+	'<path d="M37 44 H63 L59 92 Q50 99 41 92 Z" fill="#a8702f" stroke="#4a2a0a" stroke-width="4" stroke-linejoin="round"/>' +
+	'<rect x="33" y="38" width="34" height="11" rx="4.5" fill="#d09a52" stroke="#4a2a0a" stroke-width="4"/>' +
+	'<path d="M40.5 78 H59.5" stroke="#4a2a0a" stroke-width="3.5" opacity=".55"/>';
+
+const COUNTER_ICONS = {
+	uses: { size: 20, draw: (spent) => USE_BOX + (spent ? tick('currentColor') : '') },
+	charges: { size: 20, draw: (spent) => CHARGE_RING + (spent ? CHARGE_CORE : '') },
+	ammo: {
+		size: 24,
+		draw: (spent) =>
+			`<g transform="translate(50 54) rotate(24) scale(1.2) translate(-50 -52)"${spent ? ' opacity=".55"' : ''}>${spent ? '' : QUIVER_ARROWS}${QUIVER}</g>`,
+	},
+	rations: { size: 24, draw: (spent) => APPLE + (spent ? tick('#fff') : '') },
+};
+
+function weightIcon(value, spent) {
+	return `<svg class="weight-icon${spent ? ' weight-spent' : ''}" width="24" height="24" style="display:inline-block;vertical-align:middle;color:#444;transform:translateY(-2px)${spent ? ';opacity:.35' : ''}" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,-20)"><path d="M256 46c-45.074 0-82 36.926-82 82 0 25.812 12.123 48.936 30.938 64H128L32 480h448l-96-288h-76.938C325.877 176.936 338 153.812 338 128c0-45.074-36.926-82-82-82zm0 36c25.618 0 46 20.382 46 46s-20.382 46-46 46-46-20.382-46-46 20.382-46 46-46z" fill="currentColor"/></g><text x="256" y="400" text-anchor="middle" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">${value}</text></svg>`;
 }
 
 // Options that are taken or moved one by one (shown with a "+") rather than
@@ -64,9 +110,7 @@ export function renderMarkdown(src, opts = {}) {
 
 	let html = '';
 	let coinId = 0;
-	let usesIdx = 0;
-	let rationsIdx = 0;
-	let chargesIdx = 0;
+	const counterIdx = {};
 	let inList = false;
 	let listTag = '';
 	let paraLines = [];
@@ -107,6 +151,21 @@ export function renderMarkdown(src, opts = {}) {
 		}
 		pendingColumns = false;
 		_h2Collapsed = false;
+	}
+
+	// Replacer for one kind of counter: an icon per unit, the spent ones first.
+	function counterIcons(kind) {
+		const { size, draw } = COUNTER_ICONS[kind];
+		return (_, curStr, maxStr) => {
+			const max = maxStr ? +maxStr : +curStr;
+			const spent = max - Math.min(+curStr, max);
+			const groupIdx = (counterIdx[kind] = (counterIdx[kind] ?? -1) + 1);
+			let out = '<span class="consumable-group">';
+			for (let i = 0; i < max; i++) {
+				out += `<svg class="${kind}-icon" data-${kind}-idx="${groupIdx}" data-state="${i < spent ? 'used' : 'remaining'}" width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${draw(i < spent)}</svg>`;
+			}
+			return `${out}</span>`;
+		};
 	}
 
 	function flushBlockquote() {
@@ -187,7 +246,7 @@ export function renderMarkdown(src, opts = {}) {
 							.replace(/</g, '&lt;')
 							.replace(/>/g, '&gt;')
 							.replace(/"/g, '&quot;');
-						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.uses-icon,.rations-icon'))return;navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
+						rendered = `<span class="copy-line" data-copy="${esc}" data-src="${srcEsc}" onclick="if(this.classList.contains('fading-line'))return;if(event.target.closest('.consumable-group'))return;navigator.clipboard.writeText(this.dataset.copy);this.classList.add('copied');clearTimeout(this._t);this._t=setTimeout(()=>this.classList.remove('copied'),1200)">${rendered}</span>`;
 					}
 				}
 
@@ -273,67 +332,15 @@ export function renderMarkdown(src, opts = {}) {
 				/\[(\+?\d+) Armor\]/gi,
 				'<svg class="armor-icon" width="22" height="22" style="display:inline-block;vertical-align:middle;transform:translateY(-2px)" viewBox="0 0 512 559" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,47)"><path d="M256 16L48 96v160c0 138.5 89 229.3 208 240 119-10.7 208-101.5 208-240V96L256 16z" fill="#3a6faa" stroke="#2a4f7a" stroke-width="16"/><path d="M256 48L80 116v140c0 120 78 199 176 210 98-11 176-90 176-210V116L256 48z" fill="#5a8fd4"/></g><text x="256" y="305" text-anchor="middle" dominant-baseline="central" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
 			)
-			.replace(
-				/\[([^\]]+) Weight\]/gi,
-				'<svg class="weight-icon" width="24" height="24" style="display:inline-block;vertical-align:middle;color:#444;transform:translateY(-2px)" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,-20)"><path d="M256 46c-45.074 0-82 36.926-82 82 0 25.812 12.123 48.936 30.938 64H128L32 480h448l-96-288h-76.938C325.877 176.936 338 153.812 338 128c0-45.074-36.926-82-82-82zm0 36c25.618 0 46 20.382 46 46s-20.382 46-46 46-46-20.382-46-46 20.382-46 46-46z" fill="currentColor"/></g><text x="256" y="400" text-anchor="middle" font-size="240" font-weight="bold" fill="#fff" font-family="sans-serif">$1</text></svg>',
+			// The counters are still text here, so a weight can see whether the
+			// item it belongs to has run out.
+			.replace(/\[([^\]]+) Weight\]/gi, (m, value, at, whole) =>
+				weightIcon(value, isSpent(weighedItem(whole, at + m.length))),
 			)
-			.replace(/\[(\d+)(?:\/(\d+))?\s+uses?\]/gi, (_, curStr, maxStr) => {
-				const max = maxStr ? +maxStr : +curStr;
-				const cur = Math.min(+curStr, max);
-				const used = max - cur;
-				const groupIdx = usesIdx++;
-				const box =
-					'<path d="M14 16 Q50 11 86 18 Q92 50 86 86 Q50 91 14 84 Q9 50 14 16 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
-				const tick =
-					'<path transform="translate(10 -10)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
-				let out = '<span class="consumable-group">';
-				for (let i = 0; i < max; i++) {
-					const isUsed = i < used;
-					out += `<svg class="uses-icon" data-uses-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${box}${isUsed ? tick : ''}</svg>`;
-				}
-				out += '</span>';
-				return out;
-			})
-			.replace(/\[(\d+)(?:\/(\d+))?\s+charges?\]/gi, (_, curStr, maxStr) => {
-				const max = maxStr ? +maxStr : +curStr;
-				const cur = Math.min(+curStr, max);
-				const used = max - cur;
-				const groupIdx = chargesIdx++;
-				const ring =
-					'<circle cx="50" cy="50" r="33" fill="none" stroke="currentColor" stroke-width="9"/>';
-				const core = '<circle cx="50" cy="50" r="17" fill="currentColor"/>';
-				let out = '<span class="consumable-group">';
-				for (let i = 0; i < max; i++) {
-					const isUsed = i < used;
-					out += `<svg class="charges-icon" data-charges-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${ring}${isUsed ? core : ''}</svg>`;
-				}
-				out += '</span>';
-				return out;
-			})
-			.replace(/\[(\d+)(?:\/(\d+))?\s+rations?\]/gi, (_, curStr, maxStr) => {
-				const max = maxStr ? +maxStr : +curStr;
-				const cur = Math.min(+curStr, max);
-				const used = max - cur;
-				const groupIdx = rationsIdx++;
-				const apple =
-					// stem
-					'<path d="M50 18 L52 4" stroke="#3a2008" stroke-width="6" stroke-linecap="round"/>' +
-					// leaf
-					'<path d="M52 12 C64 0 82 6 80 22 C70 22 56 18 52 14 Z" fill="#5da030" stroke="#2a5018" stroke-width="2" stroke-linejoin="round"/>' +
-					// body — two-lobed top, round bottom
-					'<path d="M50 30 C42 18 22 16 14 32 C6 50 10 78 28 90 C38 96 46 90 50 88 C54 90 62 96 72 90 C90 78 94 50 86 32 C78 16 58 18 50 30 Z" fill="#e02818" stroke="#5a0808" stroke-width="3" stroke-linejoin="round"/>' +
-					// shine
-					'<ellipse cx="32" cy="46" rx="6" ry="14" fill="#ff9080" opacity="0.6" transform="rotate(-20 32 46)"/>';
-				const checkOverlay =
-					'<path transform="translate(10 -10)" d="M22 54 Q34 76 46 80 Q58 50 84 22" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
-				let out = '<span class="consumable-group">';
-				for (let i = 0; i < max; i++) {
-					const isUsed = i < used;
-					out += `<svg class="rations-icon" data-rations-idx="${groupIdx}" data-state="${isUsed ? 'used' : 'remaining'}" width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${apple}${isUsed ? checkOverlay : ''}</svg>`;
-				}
-				out += '</span>';
-				return out;
-			});
+			.replace(counterRe('uses'), counterIcons('uses'))
+			.replace(counterRe('charges'), counterIcons('charges'))
+			.replace(counterRe('ammo'), counterIcons('ammo'))
+			.replace(counterRe('rations'), counterIcons('rations'));
 
 		// eslint-disable-next-line no-control-regex
 		t = t.replace(/\x00HTML(\d+)\x00/g, (_, i) => htmlTags[+i]);

@@ -84,7 +84,7 @@ Choose your clothing: (?)
 Choose one for your armaments: (?)
 [2 Weight] An elaborately crafted longsword (close, +1 damage, precious)
 [0 Weight] A slender short sword (close, precise) and [1 Weight] An easily concealed dagger (hand, thrown)
-[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows (ammo), and [1 Weight] Short sword (close)
+[2 Weight] Worn bow (near), [1 Weight] Bundle of arrows [3 ammo], and [1 Weight] Short sword (close)
 [1 Weight] Your axe-guitar, with a sharp steel edge (close, musical)
 Choose one: (?)
 [1 Weight] Adventuring Gear [3 uses]

@@ -158,7 +158,7 @@ Get one move from another class. Treat your level as one lower, and your casting
 *Requires Spell Ripper*  
 On a 10+, you can choose to gain the Stunned (INT) debility. When you gain the Stunned debility from this move, Hold 1 Spell. Spend your spell to cast the same spell back at whatever target you choose. Lose your Spell when you are cured of the Stunned debility. [1 Charge]
 
-## Techniques
+## Techniques (?>Student of the Blade)
 
 - **Burning**  Your attack deals an extra 1d4 damage and lights anything flammable.
 - **Burst**  Your attack deals an additional 1d4 damage and gains the *forceful* tag.

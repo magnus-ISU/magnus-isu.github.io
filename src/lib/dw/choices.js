@@ -10,7 +10,12 @@
 //                                  a picked option moves to that section
 //
 // Picking keeps the option and deletes the markup and the options not taken.
-// A picked list item loses its bullet: it is no longer one of a list.
+// A picked list item loses its bullet: it is no longer one of a list. Moved to
+// another section it keeps it, to be one of the list of what was taken:
+//
+//   ## Techniques (?>Student of the Blade)
+//   - **Burning**  Your attack lights anything flammable.
+//
 // See headings.js for the marker itself. This module finds the groups in a
 // document (the renderer uses that to mark what is clickable) and rewrites the
 // text when an option is picked.
@@ -309,8 +314,10 @@ function applyGroup(lines, g, opt, parsed) {
 	const remaining = count - 1;
 	// `done`: this pick uses up the choice, so the options not taken go away.
 	const done = !(remaining > 0) || g.options.length <= 1;
-	// A list item that has been picked is no longer one of a list.
-	const unbullet = (l) => (g.kind === 'lines' ? l.replace(/^\s*(?:[-*]|\d+\.)\s+/, '') : l);
+	// A list item that has been picked is no longer one of a list, unless the
+	// picks gather in another section.
+	const unbullet = (l) =>
+		g.kind === 'lines' && !dest ? l.replace(/^\s*(?:[-*]|\d+\.)\s+/, '') : l;
 	const chosen = trimBlank(lines.slice(o.start, o.end)).map(unbullet);
 	const spanEnd = g.heading ? g.end : g.options[g.options.length - 1].end;
 	const before = lines.slice(0, g.prompt);

@@ -137,12 +137,12 @@ test('the cleric has Miracles: rotes to start with, tagged with where they came 
 test('the druid has Bindings: none to start with, whispers among the options', () => {
 	const note = 'Take the advanced move **God Amidst The Wastes** to cast Bindings.';
 	const text = sheet('homebrew/classes/Druidess.md', 'homebrew/spells/Druid_Bindings.md', {
-		spells: { heading: 'Bindings', emptyNote: note },
+		spells: { heading: 'Bindings', emptyNote: note, collapsed: true },
 	});
 	const druid = sections(text);
 	assert.deepEqual(
 		druid.get('Bindings').filter((l) => l.trim()),
-		['## Bindings', note],
+		['## Bindings ::', note],
 	);
 	const options = druid.get('Spell Options');
 	assert.equal(options[0], '## Spell Options (?>Bindings) ::');
@@ -165,7 +165,7 @@ test('the druid has Bindings: none to start with, whispers among the options', (
 			.get('Bindings')
 			.filter((l) => l.trim())
 			.slice(0, 3),
-		['## Bindings', note, '### Magnetize <span style="float:right">Whisper</span>'],
+		['## Bindings ::', note, '### Magnetize <span style="float:right">Whisper</span>'],
 	);
 });
 
@@ -189,6 +189,32 @@ test('the paladin has a collapsed, empty list of Miracles', () => {
 	const after = sections(['', '', '', '', ...pickChoice(body, group.id, 0)].join('\n'));
 	assert.deepEqual(spellNames(after.get('Miracles')), ['Light']);
 	assert.equal(after.get('Miracles')[0], '## Miracles ::');
+});
+
+test('the arcane duelist learns techniques into Student of the Blade', () => {
+	let body = sheet('homebrew/classes/Arcane_Duelist.md').split('\n').slice(4);
+	const learn = (name) => {
+		const g = [...parseChoices(body).groups.values()].find(
+			(x) => x.choice.dest === 'Student of the Blade',
+		);
+		const at = g.options.findIndex((o) => body[o.start].startsWith(`- **${name}**`));
+		assert.notEqual(at, -1, name);
+		body = pickChoice(body, g.id, at);
+	};
+	learn('Freezing');
+	learn('Burning');
+	const from = body.indexOf('### Student of the Blade');
+	const to = body.indexOf('### Arcane Bladework');
+	const move = body.slice(from, to).filter((l) => l.trim());
+	// After the description, as a list, in the order learned.
+	assert.match(move.at(-3), /^When you \*\*focus through a practiced kata\*\*/);
+	assert.match(move.at(-2), /^- \*\*Freezing\*\* /);
+	assert.match(move.at(-1), /^- \*\*Burning\*\* /);
+	// The others stay on offer, and the credit is not one of them.
+	const rest = body.slice(body.indexOf('## Techniques (?>Student of the Blade)'));
+	assert.ok(rest.length > 1);
+	assert.ok(rest.some((l) => l.startsWith('- **Quicksilver**')));
+	assert.ok(!rest.some((l) => /Freezing|Burning|playbook by/.test(l)));
 });
 
 test('an SRD caster works too', () => {
