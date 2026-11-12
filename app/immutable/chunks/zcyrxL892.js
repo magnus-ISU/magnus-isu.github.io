@@ -14,42 +14,6 @@ Gear keeps count of itself. Click a box, apple, ring or quiver to mark off a use
 
 This website will allow you to create any number of characters and store them in the browser. Press Sync with Google Drive at the bottom of the sidebar to also keep each character as a file in your Drive, shared between your devices. If the same character is changed on two devices at once, both versions are kept as separate sheets for you to sort out.
 
-### Writing Your Own Choices
-
-The sheet is plain text, and you can mark choices in anything you write. Put the options in brackets, separated by bars, followed by a question mark in parentheses:
-
-\`\`\`
-Range: [Hand | Close | Reach](?)
-\`\`\`
-
-Or end a line with the question mark, and the lines or list items below it, up to the next blank line or the next such line, are the options. A number chooses that many, and a star means they are all yours, taken one click at a time:
-
-\`\`\`
-You start with: (?*)
-[1 Weight] Dungeon Rations [5 rations]
-Choose two: (?2)
-[2 Weight] Shield
-[1 Weight] Rope
-[1 Weight] Torches
-\`\`\`
-
-On a heading, the headings beneath it are the options. With an arrow, a picked option moves to the named section instead, and the rest stay for later:
-
-\`\`\`
-## Background (?)
-## Advanced Moves (?>Starting Moves)
-\`\`\`
-
-With a second arrow, the options you did not take move on too, once you have made your picks. Here two go to Starting Moves, and the others then wait among the Advanced Moves:
-
-\`\`\`
-## Starting Choices (?2>Starting Moves>Advanced Moves)
-\`\`\`
-
-A line of three dashes among a section's moves or spells ends their columns and starts new ones below, which keeps one level's spells apart from the next.
-
-A backslash before the parenthesis, \\\\(?), writes one out plainly.
-
 ## Pen and Paper
 
 Making Dungeon World characters is quick and easy. You should all create your
