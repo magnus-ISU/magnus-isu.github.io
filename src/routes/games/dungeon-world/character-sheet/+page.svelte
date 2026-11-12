@@ -2080,14 +2080,16 @@ function expandSection(sectionName) {
 		border-bottom: none;
 	}
 
+	/* The space above an h2 is the one the class pages have (.dw-article h2). */
 	.char-body :global(h2) {
-		margin-top: 1.5rem;
 		cursor: n-resize;
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
-	.char-body :global(h2:first-child) {
+	/* Except above the first section showing, which sits under the header.
+	   Collapsed sections take up no room here, so they don't count. */
+	.char-body > :global(:nth-child(1 of .h2-group:not(:has(> h2.collapsed-heading))) > h2) {
 		margin-top: 0;
 	}
 
