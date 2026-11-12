@@ -25,29 +25,23 @@ const APPLE =
 	'<path d="M50 30 C42 18 22 16 14 32 C6 50 10 78 28 90 C38 96 46 90 50 88 C54 90 62 96 72 90 C90 78 94 50 86 32 C78 16 58 18 50 30 Z" fill="#e02818" stroke="#5a0808" stroke-width="3" stroke-linejoin="round"/>' +
 	// shine
 	'<ellipse cx="32" cy="46" rx="6" ry="14" fill="#ff9080" opacity="0.6" transform="rotate(-20 32 46)"/>';
-// A quiver slung at an angle: three arrows in it, or none.
-const VANE = 'M50 2 L56 9 V22 L50 16 L44 22 V9 Z';
-const QUIVER_ARROWS =
-	'<path d="M43 50 L37 12 M50 50 V6 M57 50 L63 12" stroke="#6a4416" stroke-width="3.5" stroke-linecap="round"/>' +
-	'<g fill="#efe7d6" stroke="#4a2a0a" stroke-width="2.5" stroke-linejoin="round">' +
-	`<path transform="translate(-13.5 5) rotate(-9 50 2)" d="${VANE}"/>` +
-	`<path transform="translate(13.5 5) rotate(9 50 2)" d="${VANE}"/>` +
-	`<path d="${VANE}" fill="#d8402c"/></g>`;
+// A quiver slung at an angle; a spent one is drawn dark.
 const QUIVER =
 	// strap
-	'<path d="M36 40 Q14 62 40 92" fill="none" stroke="#4a2a0a" stroke-width="4" stroke-linecap="round"/>' +
-	// tube, rim, stitching
-	'<path d="M37 44 H63 L59 92 Q50 99 41 92 Z" fill="#a8702f" stroke="#4a2a0a" stroke-width="4" stroke-linejoin="round"/>' +
-	'<rect x="33" y="38" width="34" height="11" rx="4.5" fill="#d09a52" stroke="#4a2a0a" stroke-width="4"/>' +
-	'<path d="M40.5 78 H59.5" stroke="#4a2a0a" stroke-width="3.5" opacity=".55"/>';
+	'<path d="M33 20 Q-2 52 37 90" fill="none" stroke="#4a2a0a" stroke-width="5" stroke-linecap="round"/>' +
+	// tube and its bands
+	'<path d="M30 17 H70 L63 88 Q50 100 37 88 Z" fill="#c98836" stroke="#4a2a0a" stroke-width="5" stroke-linejoin="round"/>' +
+	'<path d="M34.5 62 H65.5 M36 76 H64" stroke="#4a2a0a" stroke-width="4" opacity=".55"/>' +
+	// mouth and rim
+	'<ellipse cx="50" cy="17" rx="23" ry="9" fill="#5a3410" stroke="#4a2a0a" stroke-width="5"/>' +
+	'<path d="M28 24 Q50 38 72 24" fill="none" stroke="#f0c070" stroke-width="5" stroke-linecap="round"/>';
 
 const COUNTER_ICONS = {
 	uses: { size: 20, draw: (spent) => USE_BOX + (spent ? tick('currentColor') : '') },
 	charges: { size: 20, draw: (spent) => CHARGE_RING + (spent ? CHARGE_CORE : '') },
 	ammo: {
 		size: 24,
-		draw: (spent) =>
-			`<g transform="translate(50 54) rotate(24) scale(1.2) translate(-50 -52)"${spent ? ' opacity=".55"' : ''}>${spent ? '' : QUIVER_ARROWS}${QUIVER}</g>`,
+		draw: (spent) => `<g transform="rotate(28 50 52)"${spent ? ' opacity=".4"' : ''}>${QUIVER}</g>`,
 	},
 	rations: { size: 24, draw: (spent) => APPLE + (spent ? tick('#fff') : '') },
 };

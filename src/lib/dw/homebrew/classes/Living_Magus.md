@@ -66,6 +66,7 @@ Choose one for your weapon: (?)
 [0 Weight] Dagger (hand)
 [1 Weight] Staff (close, two-handed)
 [1 Weight] Orb of Magical Focus
+[0 Weight] Sling (near) and [3 Weight] Bag of Bullets [1 ammo]
 Choose one: (?)
 [1 Weight] Healing Potion [1 use]
 [1 Weight] Antitoxin [3 uses]

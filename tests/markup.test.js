@@ -311,3 +311,60 @@ test('a fighter can be built by clicking alone', () => {
 		/^## Gear\n\[0 Weight\] Your Signature Weapon\n\[1 Weight\] Dungeon Rations \[5 rations\]\n\[1 Weight\] \[1 Armor\] Chainmail/m,
 	);
 });
+
+test('a pick from one of several lists in a row lands above them all', () => {
+	const gear = [
+		'## Gear',
+		'Choose your items: (?*)',
+		'[0 Weight] Your Spellbook',
+		'[1 Weight] Dungeon Rations [5 rations]',
+		'Choose one for your defenses: (?)',
+		'[1 Weight] [1 Armor] Leather Armor',
+		'[2 Weight] Bag of Books [3 uses]',
+		'Choose one for your weapon: (?)',
+		'[0 Weight] Dagger (hand)',
+		'[1 Weight] Orb of Magical Focus',
+		'Choose one: (?)',
+		'[1 Weight] Healing Potion [1 use]',
+		'[1 Weight] Antitoxin [3 uses]',
+		'',
+		'## Stats',
+	];
+	const take = (lines, text) => {
+		for (const g of parseChoices(lines).groups.values()) {
+			const at = g.options?.findIndex((o) => lines[o.start] === text) ?? -1;
+			if (g.kind === 'lines' && at !== -1) return pickChoice(lines, g.id, at);
+		}
+		assert.fail(`not on offer: ${text}`);
+	};
+	// Bottom to top: every list still gets its pick.
+	let cur = take(gear, '[1 Weight] Antitoxin [3 uses]');
+	cur = take(cur, '[1 Weight] Orb of Magical Focus');
+	assert.deepEqual(cur.slice(0, 9), [
+		'## Gear',
+		'[1 Weight] Antitoxin [3 uses]',
+		'[1 Weight] Orb of Magical Focus',
+		'Choose your items: (?*)',
+		'[0 Weight] Your Spellbook',
+		'[1 Weight] Dungeon Rations [5 rations]',
+		'Choose one for your defenses: (?)',
+		'[1 Weight] [1 Armor] Leather Armor',
+		'[2 Weight] Bag of Books [3 uses]',
+	]);
+	cur = take(cur, '[1 Weight] [1 Armor] Leather Armor');
+	cur = take(cur, '[1 Weight] Dungeon Rations [5 rations]');
+	cur = take(cur, '[0 Weight] Your Spellbook');
+	assert.deepEqual(cur, [
+		'## Gear',
+		'[1 Weight] Antitoxin [3 uses]',
+		'[1 Weight] Orb of Magical Focus',
+		'[1 Weight] [1 Armor] Leather Armor',
+		'[1 Weight] Dungeon Rations [5 rations]',
+		'[0 Weight] Your Spellbook',
+		'',
+		'## Stats',
+	]);
+	// A blank line keeps lists apart: the pick stays above its own.
+	const apart = ['Choose: (?)', 'a', 'b', '', 'Pick: (?)', 'c', 'd'];
+	assert.deepEqual(pickChoice(apart, 4, 1), ['Choose: (?)', 'a', 'b', '', 'd']);
+});

@@ -10,6 +10,8 @@
 //                                  a picked option moves to that section
 //
 // Picking keeps the option and deletes the markup and the options not taken.
+// Picked from a list, it moves up above the list — above the first of them,
+// when several lists follow one another without a blank line between.
 // A picked list item loses its bullet: it is no longer one of a list. Moved to
 // another section it keeps it, to be one of the list of what was taken:
 //
@@ -360,8 +362,23 @@ function applyGroup(lines, g, opt, parsed) {
 	}
 
 	if (!h) {
-		// Line prompt: a pick moves above the prompt, out of the group.
-		return [...before, ...chosen, ...seam(withPrompt(leftover)), ...after];
+		// Line prompt: a pick moves above the prompt, out of the group — and
+		// above any lists that run straight into this one, or it would land
+		// among the options of the list before.
+		const listOf = new Map();
+		for (const x of parsed.groups.values()) {
+			if (x.kind !== 'lines' || x.heading) continue;
+			for (let j = x.prompt; j < x.end; j++) listOf.set(j, x);
+		}
+		let top = g.prompt;
+		while (listOf.has(top - 1)) top = listOf.get(top - 1).prompt;
+		return [
+			...lines.slice(0, top),
+			...chosen,
+			...lines.slice(top, g.prompt),
+			...seam(withPrompt(leftover)),
+			...after,
+		];
 	}
 
 	// Heading prompt, choosing several: picks collect in a twin section with
