@@ -29,6 +29,8 @@ const ATTACK_TIME: Record<RobotType, number> = {
 	overlord: 2.8,
 };
 const IMPACT = 0.6;
+/** warning before an attack starts; answering it in this window stops the attack completely */
+const WINDUP = 2;
 /** how long a dynamited robot takes to fall apart (and can still be shot) */
 const BLOWN_TIME = 1.6;
 
@@ -585,7 +587,8 @@ export class Game {
 				continue;
 			}
 			if (rb.attack) {
-				rb.attack.t += dt;
+				// a robot you start shooting during its wind-up never gets to attack
+				if (!(rb.targeted && rb.attack.t < 0)) rb.attack.t += dt;
 				const dur = ATTACK_TIME[rb.type];
 				if (!rb.attack.hit && rb.attack.t >= dur * IMPACT) this.impact(rb);
 				const lingering = this.ending && !this.ending.won && rb.attack.t < dur + LOSE_DELAY;
@@ -660,7 +663,7 @@ export class Game {
 			}
 			return;
 		}
-		rb.attack = { t: 0, hit: false };
+		rb.attack = { t: -WINDUP, hit: false };
 	}
 
 	impact(rb: Robot) {
@@ -946,7 +949,7 @@ function drawRobotAt(ctx: C2D, g: Game, rb: Robot) {
 	const walking = rb.drop >= 1 && !rb.targeted && !frozen && !g.ending;
 	const t = walking || rb.attack ? g.time * (rb.type === 'spider' ? 14 : 5) + rb.seed : rb.seed;
 	if (rb.attack) {
-		const f = Math.min(1, rb.attack.t / ATTACK_TIME[rb.type]);
+		const f = animFrac(rb);
 		const pose = attackPose(rb.type, f);
 		ctx.translate(pose.dx * s, pose.dy * s);
 		ctx.rotate(pose.rot);
@@ -1038,11 +1041,22 @@ function crack(ctx: C2D, x: number, y: number, r: number, seed: number) {
 	ctx.stroke();
 }
 
+/**
+ * How far through its attack animation a robot looks (0..1). The run-up to the hit is stretched
+ * over the wind-up window, so the attack starts moving right away but lands WINDUP seconds later.
+ */
+function animFrac(rb: Robot) {
+	const dur = ATTACK_TIME[rb.type];
+	const t = rb.attack!.t;
+	if (t >= IMPACT * dur) return Math.min(1, t / dur);
+	return (IMPACT * (t + WINDUP)) / (WINDUP + IMPACT * dur);
+}
+
 /** the per-robot attack effects that fly at the player */
 function drawAttack(ctx: C2D, g: Game, rb: Robot) {
 	const { W, FH } = g;
 	const dur = ATTACK_TIME[rb.type];
-	const f = rb.attack!.t / dur;
+	const f = animFrac(rb);
 	if (f >= 1) return;
 	const after = f >= IMPACT;
 	const pos = g.screen(1, rb.lane);
