@@ -3,12 +3,19 @@
 // changes, and renews the sign-in on your next click when it lapses.
 //
 // The whole save is one JSON file in a "PEMDAS Blaster" Drive folder. When
-// both this browser and Drive changed since the last sync, the two are merged
-// against the version both started from, so progress from either device is
-// never lost (money and items keep both sides' gains and spending).
+// both this browser and Drive changed since the last sync, the merge keeps the
+// best value of everything (most money, items, stars, best records, ...).
 import { googleAuth } from '$lib/google/auth.svelte.js';
 import { createDrive } from '$lib/google/drive.js';
-import { ARMOR, attemptScore, freshSave, ITEM_CAP, persistLocal, type Save } from './save';
+import {
+	ARMOR,
+	type Attempt,
+	attemptScore,
+	freshSave,
+	ITEM_CAP,
+	persistLocal,
+	type Save,
+} from './save';
 
 const STATE_KEY = 'pemdas-drive-v1';
 const DEBOUNCE_MS = 2000;
@@ -47,43 +54,33 @@ function saveState() {
 	} catch {}
 }
 
-/** three-way merge of two saves that both changed since `base` */
-export function mergeSaves(base: Save | null, mine: Save, theirs: Save): Save {
-	const b = base ?? freshSave();
+/** two saves that both changed: keep the best value of everything */
+export function mergeSaves(_base: Save | null, mine: Save, theirs: Save): Save {
 	const out: Save = structuredClone(theirs);
-	// with no common ancestor, assume the two are the same progress seen twice
-	out.money = base
-		? Math.max(0, theirs.money + mine.money - b.money)
-		: Math.max(mine.money, theirs.money);
-	for (const k of Object.keys(out.items) as (keyof Save['items'])[]) {
-		const v = base
-			? theirs.items[k] + mine.items[k] - b.items[k]
-			: Math.max(mine.items[k], theirs.items[k]);
-		out.items[k] = Math.max(0, Math.min(ITEM_CAP, v));
-	}
+	out.money = Math.max(mine.money, theirs.money);
+	for (const k of Object.keys(out.items) as (keyof Save['items'])[])
+		out.items[k] = Math.min(ITEM_CAP, Math.max(mine.items[k] ?? 0, theirs.items[k] ?? 0));
 	out.armor = {
 		owned: Math.min(ARMOR.length, Math.max(mine.armor.owned, theirs.armor.owned)),
-		on: mine.armor.on,
+		// wear the best armor either side was wearing
+		on: Math.max(mine.armor.on, theirs.armor.on),
 	};
-	for (const [k, on] of Object.entries(mine.upgrades))
-		out.upgrades[k as keyof Save['upgrades']] = on;
+	// owned on either side; switched on if either side has it on
+	for (const [k, on] of Object.entries(mine.upgrades)) {
+		const key = k as keyof Save['upgrades'];
+		out.upgrades[key] = !!on || !!theirs.upgrades[key];
+	}
 	for (const [k, v] of Object.entries(mine.stars)) out.stars[k] = Math.max(v, out.stars[k] ?? 0);
 	for (const [k, v] of Object.entries(mine.endlessBest))
 		out.endlessBest[k] = Math.max(v, out.endlessBest[k] ?? 0);
 	for (const [k, rec] of Object.entries(mine.records)) {
 		const other = out.records[k];
-		const changedHere = JSON.stringify(rec) !== JSON.stringify(b.records[k]);
-		if (!other) out.records[k] = rec;
-		else {
-			const endless = k.endsWith(':endless');
-			out.records[k] = {
-				last: changedHere ? rec.last : other.last,
-				best:
-					attemptScore(rec.best, endless) > attemptScore(other.best, endless)
-						? rec.best
-						: other.best,
-			};
-		}
+		const endless = k.endsWith(':endless');
+		const better = (a: Attempt, b: Attempt) =>
+			attemptScore(a, endless) >= attemptScore(b, endless) ? a : b;
+		out.records[k] = other
+			? { last: better(rec.last, other.last), best: better(rec.best, other.best) }
+			: rec;
 	}
 	return out;
 }

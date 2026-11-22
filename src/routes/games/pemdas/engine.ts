@@ -34,6 +34,8 @@ type Robot = {
 	id: number;
 	type: RobotType;
 	problem: Problem;
+	/** makes a fresh problem when a wrong answer lets this robot escape */
+	gen: () => Problem;
 	p: number;
 	lane: number;
 	/** 0..1 airdrop animation progress */
@@ -216,6 +218,7 @@ export class Game {
 			id: nextId++,
 			type: spawn.type,
 			problem: spawn.gen(),
+			gen: spawn.gen,
 			p,
 			lane: side * (boss ? 0.45 + Math.random() * 0.35 : 0.2 + Math.random() * 0.65),
 			landsAt: this.time + 0.9,
@@ -275,10 +278,17 @@ export class Game {
 		if (!found.length) {
 			this.solveTimes.push(took);
 			const escaped = this.fire?.targets.length ?? 0;
+			// escaped targets get new problems, so the answers you already typed must be re-solved
 			for (const t of this.fire?.targets ?? []) {
-				if (t.kind === 'robot') t.robot.targeted = false;
+				if (t.kind === 'robot') {
+					t.robot.targeted = false;
+					t.robot.problem = t.robot.gen();
+				}
 				if (t.kind === 'part') t.part.revealed = false;
-				if (t.kind === 'crate') t.crate.opening = false;
+				if (t.kind === 'crate') {
+					t.crate.opening = false;
+					t.crate.problem = this.level.crate();
+				}
 			}
 			this.fire = null;
 			this.jam(JAM_TIME * (this.up.targeting ? 0.5 : 1));
