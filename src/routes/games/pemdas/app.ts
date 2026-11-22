@@ -1,5 +1,5 @@
 import { type C2D, DRAW, plate } from './art';
-import { Game, type Result, render } from './engine';
+import { ACHIEVEMENTS, Game, type Result, render } from './engine';
 import { LEVELS, type LevelDef } from './levels';
 import {
 	ARMOR,
@@ -230,6 +230,12 @@ export class App {
 		this.save.money += money;
 		if (money > 0) this.gains.push({ amount: money, t: 0 });
 		this.save.items = { ...r.items };
+		// clearing a stage quietly adds one random consumable (wasted if that one is full)
+		if (r.won && !r.endless) {
+			const k = ITEMS[Math.floor(Math.random() * ITEMS.length)].key;
+			this.save.items[k] = Math.min(ITEM_CAP, this.save.items[k] + 1);
+		}
+		for (const a of r.achievements) this.save.achievements[a] = true;
 		persist(this.save);
 		this.game = null;
 		this.screen = 'title';
@@ -584,8 +590,13 @@ export class App {
 		bg.addColorStop(1, '#120c18');
 		ctx.fillStyle = bg;
 		ctx.fillRect(0, 0, W, TB);
-		if (title === 'logo') this.drawLogo(ctx, 16, TB / 2, Math.min(TB * 0.46, W * 0.06));
-		else
+		if (title === 'logo') {
+			this.drawLogo(ctx, 16, TB / 2, Math.min(TB * 0.46, W * 0.06));
+			// hidden achievements only appear once earned
+			const got = Object.keys(this.save.achievements ?? {}).filter((a) => ACHIEVEMENTS[a]);
+			if (got.length)
+				text(ctx, got.map((a) => `🏆 ${ACHIEVEMENTS[a]}`).join('  '), 18, TB - 10, 12, '#ffd84a');
+		} else
 			text(
 				ctx,
 				title,

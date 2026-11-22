@@ -58,6 +58,7 @@ function saveState() {
 export function mergeSaves(_base: Save | null, mine: Save, theirs: Save): Save {
 	const out: Save = structuredClone(theirs);
 	out.money = Math.max(mine.money, theirs.money);
+	out.achievements = { ...theirs.achievements, ...mine.achievements };
 	for (const k of Object.keys(out.items) as (keyof Save['items'])[])
 		out.items[k] = Math.min(ITEM_CAP, Math.max(mine.items[k] ?? 0, theirs.items[k] ?? 0));
 	out.armor = {

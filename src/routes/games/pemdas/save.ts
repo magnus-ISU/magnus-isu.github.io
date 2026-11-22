@@ -123,6 +123,8 @@ export type Save = {
 	endlessBest: Record<string, number>;
 	/** keyed by level id, plus `${id}:endless` */
 	records: Record<string, { last: Attempt; best: Attempt }>;
+	/** unlocked achievement ids */
+	achievements: Record<string, boolean>;
 };
 
 const SAVE_KEY = 'pemdas-save-v1';
@@ -130,11 +132,12 @@ const SAVE_KEY = 'pemdas-save-v1';
 export const freshSave = (): Save => ({
 	money: 0,
 	armor: { owned: 0, on: -1 },
-	items: { dynamite: 1, emp: 1, barrier: 0, shield: 0 },
+	items: { dynamite: 1, emp: 1, barrier: 1, shield: 1 },
 	upgrades: {},
 	stars: {},
 	endlessBest: {},
 	records: {},
+	achievements: {},
 });
 
 export function loadSave(): Save {

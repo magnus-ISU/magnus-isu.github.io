@@ -29,6 +29,8 @@ const ATTACK_TIME: Record<RobotType, number> = {
 	overlord: 2.8,
 };
 const IMPACT = 0.6;
+/** how long a dynamited robot takes to fall apart (and can still be shot) */
+const BLOWN_TIME = 1.6;
 
 type Robot = {
 	id: number;
@@ -49,6 +51,8 @@ type Robot = {
 	barrierId: number;
 	shielded: boolean;
 	attack: { t: number; hit: boolean } | null;
+	/** seconds left in a dynamite death; it can still be shot (for its bounty) until then */
+	blownT: number | null;
 	/** when it touched down, for boss kill timing */
 	landsAt: number;
 };
@@ -91,6 +95,12 @@ export type Result = {
 	/** average seconds from a boss landing to its death (null when not tracked or none killed) */
 	bossTime: number | null;
 	items: Record<ItemKey, number>;
+	/** achievement ids unlocked during this run */
+	achievements: string[];
+};
+
+export const ACHIEVEMENTS: Record<string, string> = {
+	mercy: 'Change of Heart',
 };
 
 export type Loadout = {
@@ -140,6 +150,7 @@ export class Game {
 	correct = 0;
 	solveTimes: number[] = [];
 	bossTimes: number[] = [];
+	achievements: string[] = [];
 	/** mixed levels time boss kills separately; all-boss rematches just count answers */
 	trackBoss: boolean;
 	readyAt = 0;
@@ -230,6 +241,7 @@ export class Game {
 			barrierId: 0,
 			shielded: false,
 			attack: null,
+			blownT: null,
 		});
 	}
 
@@ -262,10 +274,10 @@ export class Game {
 		this.shots++;
 		const found: { t: Target; p: number }[] = [];
 		for (const rb of this.robots) {
-			if (rb.attack) continue;
+			// attacking and blown-up robots can still be shot
 			if (!rb.targeted && rb.problem.answer === n)
 				found.push({ t: { kind: 'robot', robot: rb }, p: rb.p });
-			if (this.up.scope && rb.drop >= 1)
+			if (this.up.scope && rb.drop >= 1 && !rb.attack && rb.blownT === null)
 				for (const part of rb.problem.parts ?? [])
 					if (!part.revealed && part.answer === n)
 						found.push({ t: { kind: 'part', robot: rb, part }, p: rb.p - 0.001 });
@@ -283,6 +295,11 @@ export class Game {
 				if (t.kind === 'robot') {
 					t.robot.targeted = false;
 					t.robot.problem = t.robot.gen();
+					// blown up, shot at, then spared by a wrong answer
+					if (t.robot.blownT !== null) {
+						t.robot.blownT = null;
+						this.achieve('mercy');
+					}
 				}
 				if (t.kind === 'part') t.part.revealed = false;
 				if (t.kind === 'crate') {
@@ -394,8 +411,12 @@ export class Game {
 	useItem(key: ItemKey): boolean {
 		if (this.ending || this.items[key] <= 0) return false;
 		if (key === 'dynamite') {
-			if (!this.robots.length) return false;
-			const front = this.robots.reduce((a, b) => (a.p > b.p ? a : b));
+			const ok = this.robots.filter((r) => this.blastable(r));
+			if (!ok.length) {
+				this.flash('Nothing to blow up');
+				return false;
+			}
+			const front = ok.reduce((a, b) => (a.p > b.p ? a : b));
 			const pos = this.screen(front.p, front.lane);
 			this.blast(pos.x, pos.y, 160);
 		} else if (key === 'emp') {
@@ -423,16 +444,29 @@ export class Game {
 		return hit.length > 0;
 	}
 
+	/** dynamite skips bosses, robots already being shot or blown up, and ones that already hit you */
+	blastable(rb: Robot) {
+		return !ROBOTS[rb.type].boss && !rb.targeted && rb.blownT === null && !rb.attack?.hit;
+	}
+
 	blast(x: number, y: number, radius: number) {
 		this.effects.push({ x, y, t: 0, dur: 0.9, kind: 'big' });
 		this.shake = 0.4;
 		const k = this.k;
-		for (const rb of [...this.robots]) {
-			if (ROBOTS[rb.type].boss) continue;
+		for (const rb of this.robots) {
+			if (!this.blastable(rb)) continue;
 			const pos = this.screen(rb.p, rb.lane);
-			// dynamite kills don't pay bounties
-			if (Math.hypot(pos.x - x, pos.y - y) < radius * k * (0.6 + rb.p * 0.6)) this.kill(rb, 0);
+			if (Math.hypot(pos.x - x, pos.y - y) >= radius * k * (0.6 + rb.p * 0.6)) continue;
+			// a dying robot: no bounty unless you shoot it before it falls apart
+			rb.blownT = BLOWN_TIME;
+			rb.attack = null;
 		}
+	}
+
+	achieve(id: string) {
+		if (this.achievements.includes(id)) return;
+		this.achievements.push(id);
+		this.flash(`🏆 ${ACHIEVEMENTS[id]}`);
 	}
 
 	kill(rb: Robot, bountyMul = 1) {
@@ -490,7 +524,15 @@ export class Game {
 			this.hp = Math.min(this.maxHp, this.hp + 1);
 			text('+1 ♥', '#ff6b81');
 		} else if (reward === 'dynamite') {
-			this.blast(pos.x, pos.y, 200);
+			// always lands on a robot: centered on the one nearest the crate
+			const ok = this.robots.filter((r) => this.blastable(r));
+			const dist = (r: Robot) => {
+				const q = this.screen(r.p, r.lane);
+				return Math.hypot(q.x - pos.x, q.y - pos.y);
+			};
+			const near = ok.length ? ok.reduce((a, b) => (dist(a) < dist(b) ? a : b)) : null;
+			const at = near ? this.screen(near.p, near.lane) : pos;
+			this.blast(at.x, at.y, 200);
 			text('DYNAMITE!', '#ff9f43');
 		} else {
 			this.emp();
@@ -526,20 +568,26 @@ export class Game {
 			}
 		}
 
+		// everyone else holds still while a robot is hitting you
+		const attacking = this.robots.some((r) => r.attack && r.attack.t < ATTACK_TIME[r.type]);
 		for (const rb of [...this.robots]) {
 			rb.drop = Math.min(1, rb.drop + dt / 0.9);
+			if (rb.blownT !== null) {
+				// falling apart; a robot being shot waits for the bullets (and its bounty)
+				if (!rb.targeted && (rb.blownT -= dt) <= 0) this.kill(rb, 0);
+				continue;
+			}
 			if (rb.attack) {
 				rb.attack.t += dt;
 				const dur = ATTACK_TIME[rb.type];
 				if (!rb.attack.hit && rb.attack.t >= dur * IMPACT) this.impact(rb);
-				if (
-					rb.attack.t >= dur &&
-					!(this.ending && !this.ending.won && rb.attack.t < dur + LOSE_DELAY)
-				)
+				const lingering = this.ending && !this.ending.won && rb.attack.t < dur + LOSE_DELAY;
+				// stays put once done if you're shooting it, so typing its answer still pays
+				if (rb.attack.t >= dur && !lingering && !rb.targeted)
 					this.robots.splice(this.robots.indexOf(rb), 1);
 				continue;
 			}
-			if (this.ending || rb.targeted || rb.drop < 1) continue;
+			if (this.ending || rb.targeted || rb.drop < 1 || attacking) continue;
 			if (rb.freezeT > 0) {
 				rb.freezeT -= dt;
 				continue;
@@ -638,6 +686,7 @@ export class Game {
 				? this.bossTimes.reduce((a, b) => a + b, 0) / this.bossTimes.length
 				: null,
 			items: this.items,
+			achievements: this.achievements,
 		};
 	}
 
@@ -706,7 +755,7 @@ export function render(ctx: C2D, g: Game) {
 	}
 	for (const rb of g.robots) {
 		list.push({ p: rb.attack ? 2 : rb.p, draw: () => drawRobotAt(ctx, g, rb) });
-		if (!rb.attack) blocks.push(robotBlock(ctx, g, rb));
+		blocks.push(robotBlock(ctx, g, rb));
 	}
 	list.sort((a, b) => a.p - b.p);
 	for (const d of list) d.draw();
@@ -887,12 +936,20 @@ function drawRobotAt(ctx: C2D, g: Game, rb: Robot) {
 	const walking = rb.drop >= 1 && !rb.targeted && !frozen && !g.ending;
 	const t = walking || rb.attack ? g.time * (rb.type === 'spider' ? 14 : 5) + rb.seed : rb.seed;
 	if (rb.attack) {
-		const f = rb.attack.t / ATTACK_TIME[rb.type];
+		const f = Math.min(1, rb.attack.t / ATTACK_TIME[rb.type]);
 		const pose = attackPose(rb.type, f);
 		ctx.translate(pose.dx * s, pose.dy * s);
 		ctx.rotate(pose.rot);
 		s *= pose.sc;
-		if (rb.type === 'spider' && f > IMPACT) ctx.globalAlpha = clamp(1 - (f - IMPACT) * 3, 0, 1);
+		if (rb.type === 'spider' && f > IMPACT && !rb.targeted)
+			ctx.globalAlpha = clamp(1 - (f - IMPACT) * 3, 0, 1);
+	}
+	if (rb.blownT !== null) {
+		// staggering, sparking wreck
+		const k = 1 - rb.blownT / BLOWN_TIME;
+		ctx.translate((Math.random() - 0.5) * 6 * s, 0);
+		ctx.rotate(Math.sin(rb.seed) * 0.35 * k);
+		ctx.filter = `brightness(${1 - 0.5 * k}) sepia(${0.6 * k})`;
 	}
 	if (rb.targeted) {
 		ctx.translate((Math.random() - 0.5) * 4, 0);
@@ -901,6 +958,22 @@ function drawRobotAt(ctx: C2D, g: Game, rb: Robot) {
 	ctx.scale(s, s);
 	DRAW[rb.type](ctx, t);
 	ctx.restore();
+	if (rb.blownT !== null) {
+		const h = HEAD[rb.type] * s;
+		for (let i = 0; i < 4; i++) {
+			const fx = pos.x + (hash(rb.id + i) - 0.5) * 40 * s;
+			const fy = pos.y - hash(rb.id * 3 + i) * h;
+			const r = (5 + Math.random() * 7) * s;
+			ctx.fillStyle = `rgba(255,${120 + Math.random() * 100},40,0.8)`;
+			ctx.beginPath();
+			ctx.arc(fx, fy - Math.random() * 6 * s, r, 0, Math.PI * 2);
+			ctx.fill();
+		}
+		ctx.fillStyle = 'rgba(60,60,60,0.5)';
+		ctx.beginPath();
+		ctx.arc(pos.x, pos.y - h - 10 * s - ((g.time * 20) % (20 * s)), 12 * s, 0, Math.PI * 2);
+		ctx.fill();
+	}
 	if (frozen) {
 		// crackling EMP arcs
 		ctx.strokeStyle = `rgba(140,200,255,${0.5 + Math.random() * 0.5})`;
@@ -960,6 +1033,7 @@ function drawAttack(ctx: C2D, g: Game, rb: Robot) {
 	const { W, FH } = g;
 	const dur = ATTACK_TIME[rb.type];
 	const f = rb.attack!.t / dur;
+	if (f >= 1) return;
 	const after = f >= IMPACT;
 	const pos = g.screen(1, rb.lane);
 	const s = g.scale(1) * ROBOTS[rb.type].size;
