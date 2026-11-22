@@ -14,13 +14,13 @@ export const ROBOTS: Record<
 	RobotType,
 	{ speed: number; damage: number; bounty: number; size: number; boss: boolean }
 > = {
-	spider: { speed: 2.5, damage: 1, bounty: 3, size: 0.6, boss: false },
-	janitor: { speed: 1, damage: 1, bounty: 5, size: 0.85, boss: false },
+	spider: { speed: 2.5, damage: 1, bounty: 1, size: 0.6, boss: false },
+	janitor: { speed: 1, damage: 1, bounty: 2, size: 0.85, boss: false },
 	trooper: { speed: 1, damage: 2, bounty: 10, size: 1, boss: false },
-	brute: { speed: 0.85, damage: 3, bounty: 15, size: 1.2, boss: false },
-	juggernaut: { speed: 0.5, damage: 99, bounty: 50, size: 1.5, boss: true },
-	titan: { speed: 0.4, damage: 99, bounty: 100, size: 1.75, boss: true },
-	overlord: { speed: 0.3, damage: 99, bounty: 250, size: 2.1, boss: true },
+	brute: { speed: 0.85, damage: 3, bounty: 25, size: 1.2, boss: false },
+	juggernaut: { speed: 0.5, damage: 99, bounty: 100, size: 1.5, boss: true },
+	titan: { speed: 0.4, damage: 99, bounty: 250, size: 1.75, boss: true },
+	overlord: { speed: 0.3, damage: 99, bounty: 1000, size: 2.1, boss: true },
 };
 
 export type Spawn = { type: RobotType; gen: Gen; count: number };
@@ -36,10 +36,27 @@ export type LevelDef = {
 	waveTime: number;
 	crate: Gen;
 	waves: Wave[];
-	map: { x: number; y: number };
-	/** neighborhood shown on the level-select map (rematch levels share their parent's) */
+	/** region on the level-select map (main levels only; rematches live in their parent's region) */
+	cell?: [number, number];
+	/** neighborhood name, shown on the map and used for in-game scenery */
 	district?: string;
+	/** per-level bounty overrides; anything missing uses ROBOTS[type].bounty */
+	bounty?: Partial<Record<RobotType, number>>;
 };
+
+/**
+ * Regular-robot bounties grow level by level (never decreasing for any type) so a level's
+ * expected haul climbs steadily; boss bounties stay fixed in ROBOTS.
+ */
+const pay = (spider: number, janitor: number, trooper: number, brute: number) => ({
+	spider,
+	janitor,
+	trooper,
+	brute,
+});
+
+/** the main level whose district/scenery a level uses */
+export const themeOf = (lv: LevelDef) => (lv.id.includes('.') ? (lv.requires ?? lv.id) : lv.id);
 
 const s = (type: RobotType, gen: Gen, count = 1): Spawn => ({ type, gen, count });
 
@@ -48,15 +65,17 @@ export const LEVELS: LevelDef[] = [
 		id: '1',
 		name: 'Add & Subtract',
 		desc: 'Single digits. Last wave: two-digit ± one-digit.',
-		walkTime: 60,
+		// janitors only: they walk faster here to make up for the slower, weaker robot types removed
+		walkTime: 45,
 		waveTime: 40,
 		crate: P.addSub21,
-		map: { x: 8, y: 80 },
+		cell: [0, 0],
 		district: 'Suburbs',
+		bounty: pay(1, 1, 1, 1),
 		waves: [
-			[s('janitor', P.addSub1, 4), s('spider', P.addTiny, 2)],
-			[s('janitor', P.addSub1, 3), s('trooper', P.addSub1, 3), s('spider', P.addTiny, 3)],
-			[s('trooper', P.addSub1, 3), s('brute', P.addSub21, 4), s('spider', P.addTiny, 3)],
+			[s('janitor', P.addSub1, 4), s('janitor', P.addTiny, 2)],
+			[s('janitor', P.addSub1, 6), s('janitor', P.addTiny, 3)],
+			[s('janitor', P.addSub1, 3), s('janitor', P.addSub21, 4), s('janitor', P.addTiny, 3)],
 		],
 	},
 	{
@@ -64,15 +83,17 @@ export const LEVELS: LevelDef[] = [
 		name: 'Times & Divide',
 		desc: 'Factors under 10. Last wave: up to 16.',
 		requires: '1',
-		walkTime: 60,
+		// janitors + spiders only; faster walk makes up for the removed troopers and brutes
+		walkTime: 50,
 		waveTime: 40,
 		crate: P.mulDiv(16),
-		map: { x: 18, y: 60 },
+		cell: [1, 0],
 		district: 'Market Row',
+		bounty: pay(2, 5, 5, 5),
 		waves: [
 			[s('janitor', P.mulDiv(9), 4), s('spider', P.mulDiv(5), 2)],
-			[s('janitor', P.mulDiv(9), 3), s('trooper', P.mulDiv(9), 3), s('spider', P.mulDiv(5), 3)],
-			[s('trooper', P.mulDiv(9), 3), s('brute', P.mulDiv(16, 6), 4), s('spider', P.mulDiv(5), 3)],
+			[s('janitor', P.mulDiv(9), 6), s('spider', P.mulDiv(5), 3)],
+			[s('janitor', P.mulDiv(9), 3), s('janitor', P.mulDiv(16, 6), 4), s('spider', P.mulDiv(5), 3)],
 		],
 	},
 	{
@@ -83,12 +104,13 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 60,
 		waveTime: 45,
 		crate: P.mixed1Hard,
-		map: { x: 28, y: 78 },
+		cell: [2, 0],
 		district: 'Old Town',
+		bounty: pay(2, 6, 10, 10),
 		waves: [
 			[s('janitor', P.mixed1Easy, 4), s('spider', P.addSub1, 2)],
 			[s('janitor', P.mixed1, 3), s('trooper', P.mixed1, 3), s('spider', P.mulDiv(9), 3)],
-			[s('trooper', P.mixed1, 3), s('brute', P.mixed1Hard, 4), s('spider', P.mulDiv(9), 3)],
+			[s('trooper', P.mixed1, 3), s('trooper', P.mixed1Hard, 4), s('spider', P.mulDiv(9), 3)],
 		],
 	},
 	{
@@ -99,12 +121,13 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 70,
 		waveTime: 50,
 		crate: P.add4,
-		map: { x: 38, y: 55 },
+		cell: [2, 1],
 		district: 'Bank Quarter',
+		bounty: pay(2, 6, 16, 16),
 		waves: [
 			[s('janitor', P.add22, 4), s('spider', P.addSub21, 2)],
 			[s('janitor', P.add22, 2), s('trooper', P.add23, 4), s('spider', P.addSub21, 3)],
-			[s('trooper', P.add23, 3), s('brute', P.add4, 3), s('spider', P.add22, 3)],
+			[s('trooper', P.add23, 3), s('trooper', P.add4, 3), s('spider', P.add22, 3)],
 		],
 	},
 	{
@@ -115,8 +138,9 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 75,
 		waveTime: 55,
 		crate: P.mul(2, 1, 6),
-		map: { x: 48, y: 75 },
+		cell: [1, 1],
 		district: 'Factory District',
+		bounty: pay(3, 6, 28, 28),
 		waves: [
 			[s('janitor', P.mul(2, 1), 4), s('spider', P.mulDiv(9), 2)],
 			[s('trooper', P.mul(2, 1), 4), s('spider', P.mulDiv(9), 3)],
@@ -135,7 +159,6 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 75,
 		waveTime: 70,
 		crate: P.mul(2, 1),
-		map: { x: 52, y: 92 },
 		waves: [
 			[s('juggernaut', P.mulParts(2, 2, false))],
 			[s('juggernaut', P.mulParts(2, 2, false))],
@@ -150,8 +173,9 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 75,
 		waveTime: 55,
 		crate: P.mixed6Hard,
-		map: { x: 60, y: 55 },
+		cell: [0, 1],
 		district: 'Rail Yard',
+		bounty: pay(3, 6, 28, 33),
 		waves: [
 			[s('janitor', P.mixed6Easy, 4), s('spider', P.mulDiv(12), 2)],
 			[s('janitor', P.mixed6Easy, 2), s('trooper', P.mixed6, 4), s('spider', P.mulDiv(12), 3)],
@@ -166,8 +190,9 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 85,
 		waveTime: 60,
 		crate: P.mul(3, 1),
-		map: { x: 70, y: 75 },
+		cell: [0, 2],
 		district: 'Downtown',
+		bounty: pay(4, 7, 35, 40),
 		waves: [
 			[s('janitor', P.mul(2, 1), 3), s('trooper', P.mul(3, 1), 2), s('spider', P.mulDiv(12), 2)],
 			[s('trooper', P.mul(3, 1), 3), s('brute', P.mul(3, 1, 6), 2), s('spider', P.mulDiv(12), 3)],
@@ -186,7 +211,6 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 85,
 		waveTime: 90,
 		crate: P.mul(3, 1),
-		map: { x: 74, y: 92 },
 		waves: [
 			[s('titan', P.mulParts(3, 2, false))],
 			[s('titan', P.mulParts(3, 2, false))],
@@ -201,8 +225,9 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 70,
 		waveTime: 50,
 		crate: P.powersHard,
-		map: { x: 80, y: 55 },
+		cell: [1, 2],
 		district: 'Power Plant',
+		bounty: pay(4, 7, 36, 44),
 		waves: [
 			[s('janitor', P.squaresEasy, 4), s('spider', P.squaresEasy, 2)],
 			[s('janitor', P.powers, 2), s('trooper', P.powers, 4), s('spider', P.squaresEasy, 3)],
@@ -217,7 +242,7 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 90,
 		waveTime: 100,
 		crate: P.mul(3, 1),
-		map: { x: 90, y: 72 },
+		cell: [2, 2],
 		district: 'Robot Citadel',
 		waves: [
 			[s('titan', P.mulParts(3, 2, true))],
@@ -233,7 +258,6 @@ export const LEVELS: LevelDef[] = [
 		walkTime: 90,
 		waveTime: 180,
 		crate: P.mul(3, 1),
-		map: { x: 93, y: 90 },
 		waves: [[s('overlord', P.mulParts(3, 3, false))], [s('overlord', P.mulParts(3, 3, false))]],
 	},
 ];

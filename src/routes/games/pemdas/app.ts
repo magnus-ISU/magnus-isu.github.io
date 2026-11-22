@@ -1,0 +1,1221 @@
+import { type C2D, DRAW, plate } from './art';
+import { Game, type Result, render } from './engine';
+import { LEVELS, type LevelDef } from './levels';
+import {
+	ARMOR,
+	type Attempt,
+	attemptScore,
+	BASE_HP,
+	freshSave,
+	ITEM_CAP,
+	ITEMS,
+	loadSave,
+	maxHpOf,
+	persist,
+	type Save,
+	UPGRADES,
+} from './save';
+import { drawDistrict, drawIcon, hash, type IconKey, THEMES } from './scenery';
+
+type Rect = { x: number; y: number; w: number; h: number };
+type Hit = Rect & { down?: () => void; hold?: boolean; poly?: number[] };
+type Screen = 'title' | 'shop' | 'game';
+
+/** the logical canvas's shorter side; everything is laid out in these units */
+export const LOGICAL_MIN = 680;
+const QUIT_HOLD = 3;
+const MAIN = LEVELS.filter((l) => l.cell);
+const rematchOf = (lv: LevelDef) => LEVELS.find((l) => l.id.includes('.') && l.requires === lv.id);
+const parentOf = (lv: LevelDef) => (lv.cell ? lv : LEVELS.find((l) => l.id === lv.requires)!);
+
+const inRect = (r: Rect, x: number, y: number) =>
+	x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
+function inPoly(pts: number[], x: number, y: number) {
+	let inside = false;
+	for (let i = 0, j = pts.length - 2; i < pts.length; j = i, i += 2) {
+		const [xi, yi, xj, yj] = [pts[i], pts[i + 1], pts[j], pts[j + 1]];
+		if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+	}
+	return inside;
+}
+
+// ---------- text helpers ----------
+const FONT = 'system-ui, -apple-system, Segoe UI, sans-serif';
+function text(
+	ctx: C2D,
+	s: string,
+	x: number,
+	y: number,
+	size: number,
+	color: string,
+	align: CanvasTextAlign = 'left',
+	weight = 'bold',
+	font = FONT,
+) {
+	ctx.font = `${weight} ${size}px ${font}`;
+	ctx.fillStyle = color;
+	ctx.textAlign = align;
+	ctx.textBaseline = 'middle';
+	ctx.fillText(s, x, y);
+}
+function wrap(ctx: C2D, s: string, maxW: number, size: number, weight = 'normal') {
+	ctx.font = `${weight} ${size}px ${FONT}`;
+	const lines: string[] = [];
+	let line = '';
+	for (const word of s.split(' ')) {
+		const next = line ? `${line} ${word}` : word;
+		if (ctx.measureText(next).width > maxW && line) {
+			lines.push(line);
+			line = word;
+		} else line = next;
+	}
+	if (line) lines.push(line);
+	return lines;
+}
+function roundRect(
+	ctx: C2D,
+	r: Rect,
+	rad: number,
+	fill: string | CanvasGradient,
+	stroke?: string,
+	lw = 2,
+) {
+	ctx.beginPath();
+	ctx.roundRect(r.x, r.y, r.w, r.h, rad);
+	ctx.fillStyle = fill;
+	ctx.fill();
+	if (stroke) {
+		ctx.strokeStyle = stroke;
+		ctx.lineWidth = lw;
+		ctx.stroke();
+	}
+}
+const starStr = (n: number) => '★'.repeat(n) + '☆'.repeat(3 - n);
+
+export class App {
+	W = 1000;
+	H = LOGICAL_MIN;
+	save: Save;
+	screen: Screen = 'title';
+	selected: LevelDef = LEVELS[0];
+	game: Game | null = null;
+	input = '';
+	feedback: { kind: 'hit' | 'miss' | 'blocked'; t: number } | null = null;
+	hits: Hit[] = [];
+	time = 0;
+	shownMoney: number;
+	gains: { amount: number; t: number }[] = [];
+	quitT = 0;
+	escHeld = false;
+	quitPointer: number | null = null;
+	pressed: { r: Rect; t: number } | null = null;
+	confirmReset = 0;
+	newBest = false;
+	shopMsg = 'Welcome to Robo-Mart! Everything is salvaged.';
+	onExit: () => void;
+
+	constructor(onExit: () => void) {
+		this.save = loadSave();
+		this.shownMoney = this.save.money;
+		this.onExit = onExit;
+	}
+
+	resize(W: number, H: number) {
+		this.W = W;
+		this.H = H;
+	}
+	get landscape() {
+		return this.W >= this.H * 1.05;
+	}
+
+	// ---------- state helpers ----------
+	unlocked(lv: LevelDef) {
+		return !lv.requires || (this.save.stars[lv.requires] ?? 0) > 0;
+	}
+	beaten(lv: LevelDef) {
+		return (this.save.stars[lv.id] ?? 0) > 0;
+	}
+	get shopOpen() {
+		return (this.save.stars['2'] ?? 0) > 0;
+	}
+
+	start(lv: LevelDef, endless: boolean) {
+		const upgrades = Object.fromEntries(Object.entries(this.save.upgrades).filter(([, on]) => on));
+		this.game = new Game(
+			lv,
+			endless,
+			{ maxHp: maxHpOf(this.save), items: this.save.items, upgrades },
+			(r) => this.finish(r),
+		);
+		this.selected = lv;
+		this.input = '';
+		this.quitT = 0;
+		this.newBest = false;
+		this.screen = 'game';
+	}
+
+	finish(r: Result) {
+		const lv = this.selected;
+		let stars = 0;
+		const money = r.money;
+		if (!r.endless && r.won) {
+			// 3 stars = flawless: no damage taken and no wrong answers
+			stars = r.hp >= r.maxHp && r.accuracy >= 1 ? 3 : r.hp * 2 >= r.maxHp ? 2 : 1;
+			this.save.stars[lv.id] = Math.max(stars, this.save.stars[lv.id] ?? 0);
+		}
+		if (r.endless)
+			this.save.endlessBest[lv.id] = Math.max(r.wave, this.save.endlessBest[lv.id] ?? 0);
+		const attempt: Attempt = {
+			won: r.won,
+			stars,
+			hp: r.hp,
+			maxHp: r.maxHp,
+			accuracy: r.accuracy,
+			avgSolve: r.avgSolve,
+			bossTime: r.bossTime,
+			kills: r.kills,
+			money,
+			wave: r.wave,
+		};
+		const key = r.endless ? `${lv.id}:endless` : lv.id;
+		const rec = this.save.records[key];
+		this.newBest = !rec || attemptScore(attempt, r.endless) > attemptScore(rec.best, r.endless);
+		this.save.records[key] = { last: attempt, best: this.newBest ? attempt : rec.best };
+		this.save.money += money;
+		if (money > 0) this.gains.push({ amount: money, t: 0 });
+		this.save.items = { ...r.items };
+		persist(this.save);
+		this.game = null;
+		this.screen = 'title';
+	}
+
+	quit() {
+		const g = this.game;
+		if (!g || g.result) return;
+		g.result = g.makeResult(false);
+		this.finish(g.result);
+	}
+
+	type(ch: string) {
+		const g = this.game;
+		if (!g) return;
+		if (g.blocked) {
+			this.feedback = { kind: 'blocked', t: 0.3 };
+			return;
+		}
+		if (ch === '-' && this.input !== '') return;
+		if (this.input.length < 8) this.input += ch;
+	}
+	submit() {
+		const g = this.game;
+		if (!g) return;
+		const res = g.submit(this.input);
+		if (res === 'busy') return;
+		this.feedback = { kind: res, t: 0.35 };
+		this.input = '';
+	}
+	backspace() {
+		const g = this.game;
+		if (!g || g.blocked) return;
+		g.backspace();
+		this.input = '';
+	}
+
+	// ---------- input ----------
+	keyDown(code: string, repeat: boolean): boolean {
+		if (this.screen === 'game') {
+			if (code === 'Escape') {
+				this.escHeld = true;
+				return true;
+			}
+			if (repeat) return true;
+			const it = ITEMS.find((i) => i.code === code);
+			if (it) this.game?.useItem(it.key);
+			else if (/^(Digit|Numpad)\d$/.test(code)) this.type(code.slice(-1));
+			else if (code === 'Minus' || code === 'NumpadSubtract') this.type('-');
+			else if (code === 'Enter' || code === 'NumpadEnter' || code === 'Space') this.submit();
+			else if (code === 'Backspace' || code === 'Delete') this.backspace();
+			else return false;
+			return true;
+		}
+		if (this.screen === 'title' && (code === 'Enter' || code === 'NumpadEnter')) {
+			if (this.unlocked(this.selected)) this.start(this.selected, false);
+			return true;
+		}
+		if (this.screen === 'title' && (code === 'ArrowRight' || code === 'ArrowLeft')) {
+			const open = LEVELS.filter((l) => this.unlocked(l));
+			const i = open.indexOf(this.selected);
+			this.selected = open[(i + (code === 'ArrowRight' ? 1 : open.length - 1)) % open.length];
+			return true;
+		}
+		if (this.screen === 'shop' && (code === 'Escape' || code === 'Backspace')) {
+			this.screen = 'title';
+			return true;
+		}
+		return false;
+	}
+	keyUp(code: string) {
+		if (code === 'Escape') this.escHeld = false;
+	}
+	pointerDown(x: number, y: number, id: number) {
+		for (let i = this.hits.length - 1; i >= 0; i--) {
+			const h = this.hits[i];
+			if (h.poly ? inPoly(h.poly, x, y) : inRect(h, x, y)) {
+				if (h.hold) this.quitPointer = id;
+				if (!h.poly) this.pressed = { r: h, t: 0.12 };
+				h.down?.();
+				return;
+			}
+		}
+	}
+	pointerUp(id: number) {
+		if (this.quitPointer === id) this.quitPointer = null;
+	}
+
+	// ---------- frame ----------
+	frame(ctx: C2D, dt: number) {
+		this.time += dt;
+		if (this.feedback && (this.feedback.t -= dt) <= 0) this.feedback = null;
+		if (this.pressed && (this.pressed.t -= dt) <= 0) this.pressed = null;
+		this.confirmReset = Math.max(0, this.confirmReset - dt);
+		// count money up toward the real total
+		if (this.shownMoney < this.save.money) {
+			const rate = Math.max(40, (this.save.money - this.shownMoney) * 1.8);
+			this.shownMoney = Math.min(this.save.money, this.shownMoney + rate * dt);
+		} else this.shownMoney = this.save.money;
+		for (const gn of this.gains) gn.t += dt;
+		this.gains = this.gains.filter((gn) => gn.t < 2.2);
+
+		this.hits = [];
+		ctx.clearRect(0, 0, this.W, this.H);
+		if (this.screen === 'game' && this.game) {
+			const holding = this.escHeld || this.quitPointer !== null;
+			this.quitT = holding ? this.quitT + dt : 0;
+			if (this.quitT >= QUIT_HOLD) return this.quit();
+			this.game.update(dt);
+			if (this.game) this.drawGame(ctx, this.game);
+		} else if (this.screen === 'shop') this.drawShop(ctx);
+		else {
+			this.screen = 'title';
+			this.drawTitle(ctx);
+		}
+	}
+
+	button(
+		ctx: C2D,
+		r: Rect,
+		label: string,
+		opts: {
+			color?: string;
+			disabled?: boolean;
+			size?: number;
+			icon?: IconKey;
+			down?: () => void;
+			hold?: boolean;
+			sub?: string;
+		} = {},
+	) {
+		const pressed = this.pressed && this.pressed.r.x === r.x && this.pressed.r.y === r.y;
+		const base = opts.disabled ? '#3a3d44' : (opts.color ?? '#4a5262');
+		const g = ctx.createLinearGradient(0, r.y, 0, r.y + r.h);
+		g.addColorStop(0, pressed ? '#222' : lighten(base));
+		g.addColorStop(1, base);
+		ctx.save();
+		ctx.shadowColor = 'rgba(0,0,0,0.5)';
+		ctx.shadowOffsetY = pressed ? 0 : 3;
+		roundRect(ctx, r, Math.min(12, r.h / 3), g, '#0c0d10', 2.5);
+		ctx.restore();
+		const size = opts.size ?? Math.min(24, r.h * 0.42);
+		const fg = opts.disabled ? '#8a8d94' : '#fff';
+		if (opts.icon) {
+			const is = Math.min(r.h * 0.6, r.w * 0.4);
+			drawIcon(
+				ctx,
+				opts.icon,
+				r.x + r.w / 2,
+				r.y + r.h / 2 - (label ? size * 0.6 : 0),
+				is,
+				this.time,
+			);
+			if (label) text(ctx, label, r.x + r.w / 2, r.y + r.h - size * 0.8, size * 0.7, fg, 'center');
+		} else {
+			text(
+				ctx,
+				label,
+				r.x + r.w / 2,
+				r.y + r.h / 2 - (opts.sub ? size * 0.35 : 0),
+				size,
+				fg,
+				'center',
+			);
+			if (opts.sub)
+				text(
+					ctx,
+					opts.sub,
+					r.x + r.w / 2,
+					r.y + r.h / 2 + size * 0.6,
+					size * 0.55,
+					fg,
+					'center',
+					'normal',
+				);
+		}
+		if (!opts.disabled && (opts.down || opts.hold))
+			this.hits.push({ ...r, down: opts.down, hold: opts.hold });
+	}
+
+	// ================= game screen =================
+	drawGame(ctx: C2D, g: Game) {
+		const { W, H } = this;
+		const PH = Math.round(this.landscape ? Math.max(150, H * 0.27) : H * 0.4);
+		const FH = H - PH;
+		g.resize(W, FH);
+		render(ctx, g);
+		this.drawPanel(ctx, g, FH, PH);
+		if (this.quitT > 0) {
+			ctx.fillStyle = 'rgba(0,0,0,0.5)';
+			ctx.fillRect(0, 0, W, FH);
+			const cx = W / 2;
+			const cy = FH / 2;
+			ctx.strokeStyle = '#444';
+			ctx.lineWidth = 10;
+			ctx.beginPath();
+			ctx.arc(cx, cy, 50, 0, Math.PI * 2);
+			ctx.stroke();
+			ctx.strokeStyle = '#ff5a5a';
+			ctx.beginPath();
+			ctx.arc(cx, cy, 50, -Math.PI / 2, -Math.PI / 2 + (this.quitT / QUIT_HOLD) * Math.PI * 2);
+			ctx.stroke();
+			text(ctx, `${Math.ceil(QUIT_HOLD - this.quitT)}`, cx, cy, 36, '#fff', 'center');
+			text(ctx, 'Keep holding to quit', cx, cy + 80, 22, '#fff', 'center');
+		}
+	}
+
+	drawPanel(ctx: C2D, g: Game, y0: number, PH: number) {
+		const { W } = this;
+		const bg = ctx.createLinearGradient(0, y0, 0, y0 + PH);
+		bg.addColorStop(0, '#2c313a');
+		bg.addColorStop(1, '#16191e');
+		ctx.fillStyle = bg;
+		ctx.fillRect(0, y0, W, PH);
+		ctx.fillStyle = '#ffc61a';
+		ctx.fillRect(0, y0, W, 4);
+		ctx.fillStyle = '#1a1a1a';
+		for (let x = 0; x < W; x += 24) ctx.fillRect(x, y0, 10, 4);
+		const pad = 10;
+		let itemsR: Rect;
+		let keysR: Rect;
+		let ansR: Rect;
+		let quitR: Rect;
+		if (this.landscape) {
+			const side = Math.min(W * 0.3, 360);
+			itemsR = { x: pad, y: y0 + pad + 4, w: side, h: PH - 2 * pad - 4 };
+			keysR = { x: W - pad - side, y: y0 + pad + 4, w: side, h: PH - 2 * pad - 4 };
+			const cx0 = itemsR.x + side + pad;
+			const cw = keysR.x - pad - cx0;
+			const qs = Math.min(70, PH * 0.4);
+			ansR = {
+				x: cx0 + cw * 0.08,
+				y: y0 + pad + 4 + PH * 0.12,
+				w: cw * 0.84 - qs - pad,
+				h: PH * 0.38,
+			};
+			quitR = { x: ansR.x + ansR.w + pad, y: ansR.y, w: qs, h: qs };
+		} else {
+			const rowH = PH * 0.19;
+			ansR = { x: pad, y: y0 + pad + 4, w: W - 3 * pad - rowH, h: rowH - pad };
+			quitR = { x: W - pad - rowH, y: ansR.y, w: rowH, h: rowH - pad };
+			itemsR = { x: pad, y: y0 + rowH + pad, w: W - 2 * pad, h: rowH - pad };
+			keysR = { x: pad, y: y0 + 2 * rowH + pad, w: W - 2 * pad, h: PH - 2 * rowH - 2 * pad };
+		}
+		this.drawAnswer(ctx, g, ansR);
+		this.button(ctx, quitR, 'hold', { icon: 'quit', color: '#8a2a2a', hold: true, size: 18 });
+
+		// items
+		const cols = this.landscape ? 2 : 4;
+		const rows = this.landscape ? 2 : 1;
+		const gw = (itemsR.w - (cols - 1) * 8) / cols;
+		const gh = (itemsR.h - (rows - 1) * 8) / rows;
+		ITEMS.forEach((it, i) => {
+			const r = {
+				x: itemsR.x + (i % cols) * (gw + 8),
+				y: itemsR.y + Math.floor(i / cols) * (gh + 8),
+				w: gw,
+				h: gh,
+			};
+			const n = g.items[it.key];
+			this.button(ctx, r, '', {
+				disabled: n <= 0 || g.ending !== null,
+				down: () => g.useItem(it.key),
+			});
+			const is = Math.min(r.h * 0.6, r.w * 0.3);
+			ctx.globalAlpha = n > 0 ? 1 : 0.4;
+			drawIcon(ctx, it.key, r.x + is * 0.7 + 4, r.y + r.h / 2, is, this.time);
+			const tx = r.x + is * 1.4 + 8;
+			const fs = Math.min(17, r.h * 0.26, (r.w - is * 1.4) / 6);
+			text(ctx, it.name, tx, r.y + r.h * 0.36, fs, '#fff');
+			text(ctx, `×${n}  [${it.label}]`, tx, r.y + r.h * 0.68, fs * 0.85, '#bbb', 'left', 'normal');
+			ctx.globalAlpha = 1;
+		});
+
+		// keypad: digits in a phone grid, a tall FIRE key on the right
+		const kw = (keysR.w - 3 * 6) / 4;
+		const kh = (keysR.h - 3 * 6) / 4;
+		const key = (c: number, r: number, label: string, down: () => void, color?: string, h = 1) =>
+			this.button(
+				ctx,
+				{ x: keysR.x + c * (kw + 6), y: keysR.y + r * (kh + 6), w: kw, h: kh * h + (h - 1) * 6 },
+				label,
+				{
+					down,
+					color,
+					size: Math.min(28, kh * 0.5),
+				},
+			);
+		for (let d = 1; d <= 9; d++)
+			key((d - 1) % 3, Math.floor((d - 1) / 3), `${d}`, () => this.type(`${d}`));
+		key(0, 3, '−', () => this.type('-'));
+		key(1, 3, '0', () => this.type('0'));
+		key(2, 3, '⌫', () => this.backspace(), '#7a5a2a');
+		key(3, 0, 'FIRE', () => this.submit(), '#2d7d46', 4);
+	}
+
+	drawAnswer(ctx: C2D, g: Game, r: Rect) {
+		const fb = this.feedback?.kind;
+		const border =
+			fb === 'hit' ? '#3ad66a' : fb === 'miss' || fb === 'blocked' ? '#ff4a4a' : '#555b66';
+		roundRect(ctx, r, 10, fb === 'miss' ? '#3a1414' : '#0b0d10', border, 4);
+		const size = Math.min(r.h * 0.6, 44);
+		if (g.jamT > 0) {
+			const label = g.groundT > 0 ? 'WASTED VOLLEY' : 'JAMMED';
+			text(ctx, label, r.x + r.w / 2, r.y + r.h * 0.42, size * 0.6, '#ff7a6a', 'center');
+			roundRect(ctx, { x: r.x + 12, y: r.y + r.h * 0.72, w: r.w - 24, h: 8 }, 4, '#333');
+			roundRect(
+				ctx,
+				{ x: r.x + 12, y: r.y + r.h * 0.72, w: (r.w - 24) * (1 - g.jamT / g.jamDur), h: 8 },
+				4,
+				'#ff7a6a',
+			);
+		} else if (this.input) {
+			text(
+				ctx,
+				this.input,
+				r.x + r.w / 2,
+				r.y + r.h / 2,
+				size,
+				'#fff',
+				'center',
+				'bold',
+				'ui-monospace, Menlo, monospace',
+			);
+		} else {
+			const n = g.fire?.targets.length ?? 0;
+			text(
+				ctx,
+				n ? `firing at ${n} — keep answering!` : 'type an answer',
+				r.x + r.w / 2,
+				r.y + r.h / 2,
+				size * 0.42,
+				'#777',
+				'center',
+				'normal',
+			);
+		}
+		if (Math.floor(this.time * 2) % 2 && !g.blocked && this.input) {
+			ctx.font = `bold ${size}px ui-monospace, Menlo, monospace`;
+			const w = ctx.measureText(this.input).width;
+			ctx.fillStyle = '#fff';
+			ctx.fillRect(r.x + r.w / 2 + w / 2 + 3, r.y + r.h * 0.25, 3, r.h * 0.5);
+		}
+	}
+
+	// ================= title screen =================
+	topBar(ctx: C2D, title: 'logo' | string) {
+		const { W } = this;
+		const TB = this.landscape ? 86 : 96;
+		const bg = ctx.createLinearGradient(0, 0, 0, TB);
+		bg.addColorStop(0, '#1d1428');
+		bg.addColorStop(1, '#120c18');
+		ctx.fillStyle = bg;
+		ctx.fillRect(0, 0, W, TB);
+		if (title === 'logo') this.drawLogo(ctx, 16, TB / 2, Math.min(TB * 0.46, W * 0.06));
+		else
+			text(
+				ctx,
+				title,
+				20,
+				TB / 2,
+				34,
+				'#ffd84a',
+				'left',
+				'bold',
+				'Impact, Arial Black, sans-serif',
+			);
+		// money, counting up after a level
+		const mx = W - 20;
+		const money = `$${Math.floor(this.shownMoney)}`;
+		ctx.font = `bold 30px ${FONT}`;
+		const mw = ctx.measureText(money).width;
+		const btnW = 120;
+		const moneyRight = mx - btnW - 16;
+		text(ctx, money, moneyRight, TB / 2, 30, '#ffd84a', 'right');
+		ctx.fillStyle = '#ffd84a';
+		ctx.beginPath();
+		ctx.arc(moneyRight - mw - 18, TB / 2, 11, 0, Math.PI * 2);
+		ctx.fill();
+		text(ctx, '$', moneyRight - mw - 18, TB / 2 + 1, 14, '#8a6008', 'center');
+		for (const gn of this.gains) {
+			ctx.globalAlpha = Math.min(1, 2.2 - gn.t);
+			text(ctx, `+$${gn.amount}`, moneyRight, TB / 2 + 30 - gn.t * 14, 20, '#7aff9a', 'right');
+			ctx.globalAlpha = 1;
+		}
+		const r = { x: mx - btnW, y: TB * 0.18, w: btnW, h: TB * 0.64 };
+		if (title === 'logo')
+			this.button(ctx, r, this.shopOpen ? 'Shop' : 'Locked', {
+				icon: this.shopOpen ? 'shop' : 'lock',
+				disabled: !this.shopOpen,
+				color: '#7a4a1a',
+				size: 22,
+				down: () => (this.screen = 'shop'),
+			});
+		else this.button(ctx, r, 'Back', { color: '#4a5262', down: () => (this.screen = 'title') });
+		if (title === 'logo' && !this.shopOpen)
+			text(ctx, 'beat Market Row', r.x + r.w / 2, TB - 4, 11, '#aaa', 'center', 'normal');
+		return TB;
+	}
+
+	drawLogo(ctx: C2D, x: number, cy: number, size: number) {
+		ctx.save();
+		ctx.translate(x, cy);
+		ctx.rotate(-0.04);
+		ctx.font = `${size}px Impact, 'Arial Black', sans-serif`;
+		ctx.textBaseline = 'middle';
+		ctx.textAlign = 'left';
+		const w = ctx.measureText('PEMDAS BLASTER').width;
+		const g = ctx.createLinearGradient(0, -size / 2, 0, size / 2);
+		g.addColorStop(0, '#fff6c2');
+		g.addColorStop(0.55, '#ffb142');
+		g.addColorStop(1, '#d63031');
+		ctx.fillStyle = '#111';
+		ctx.fillText('PEMDAS BLASTER', 3, 3);
+		ctx.shadowColor = 'rgba(255,75,224,0.6)';
+		ctx.shadowBlur = 12;
+		ctx.fillStyle = g;
+		ctx.fillText('PEMDAS BLASTER', 0, 0);
+		ctx.shadowBlur = 0;
+		text(ctx, 'clone', w, size * 0.62, Math.max(11, size * 0.3), '#d8cfe8', 'right', 'italic 600');
+		ctx.restore();
+	}
+
+	regionPolys(map: Rect) {
+		const cols = 3;
+		const rows = 3;
+		const cw = map.w / cols;
+		const ch = map.h / rows;
+		const V = (i: number, j: number): [number, number] => {
+			const x = map.x + cw * i;
+			const y = map.y + ch * j;
+			if (i === 0 || j === 0 || i === cols || j === rows) return [x, y];
+			return [
+				x + (hash(i * 13 + j * 7) - 0.5) * cw * 0.45,
+				y + (hash(i * 5 + j * 11 + 3) - 0.5) * ch * 0.45,
+			];
+		};
+		// wobbly shared borders: each edge is jittered the same way for both neighbors
+		const edge = (a: [number, number], b: [number, number]) => {
+			const flip = a[0] * 10 + a[1] > b[0] * 10 + b[1];
+			const [p, q] = flip ? [b, a] : [a, b];
+			const P = V(...p);
+			const Q = V(...q);
+			const border =
+				(p[0] === q[0] && (p[0] === 0 || p[0] === cols)) ||
+				(p[1] === q[1] && (p[1] === 0 || p[1] === rows));
+			const pts: number[] = [...P];
+			if (!border) {
+				const len = Math.hypot(Q[0] - P[0], Q[1] - P[1]);
+				const nx = -(Q[1] - P[1]) / len;
+				const ny = (Q[0] - P[0]) / len;
+				for (const t of [0.33, 0.66]) {
+					const o = (hash(p[0] * 31 + p[1] * 17 + q[0] * 7 + q[1] * 3 + t) - 0.5) * len * 0.22;
+					pts.push(P[0] + (Q[0] - P[0]) * t + nx * o, P[1] + (Q[1] - P[1]) * t + ny * o);
+				}
+			}
+			if (flip) {
+				const out: number[] = [...Q];
+				for (let i = pts.length - 2; i >= 2; i -= 2) out.push(pts[i], pts[i + 1]);
+				return out;
+			}
+			return pts;
+		};
+		const polys = new Map<
+			string,
+			{ pts: number[]; cx: number; cy: number; cw: number; ch: number }
+		>();
+		for (const lv of MAIN) {
+			const [c, r] = lv.cell!;
+			const corners: [number, number][] = [
+				[c, r],
+				[c + 1, r],
+				[c + 1, r + 1],
+				[c, r + 1],
+			];
+			const pts: number[] = [];
+			for (let i = 0; i < 4; i++) pts.push(...edge(corners[i], corners[(i + 1) % 4]));
+			const cs = corners.map((v) => V(...v));
+			polys.set(lv.id, {
+				pts,
+				cx: cs.reduce((a, v) => a + v[0], 0) / 4,
+				cy: cs.reduce((a, v) => a + v[1], 0) / 4,
+				cw,
+				ch,
+			});
+		}
+		return polys;
+	}
+
+	drawTitle(ctx: C2D) {
+		const { W, H } = this;
+		const bg = ctx.createLinearGradient(0, 0, 0, H);
+		bg.addColorStop(0, '#140f26');
+		bg.addColorStop(1, '#2a1a2a');
+		ctx.fillStyle = bg;
+		ctx.fillRect(0, 0, W, H);
+		const TB = this.topBar(ctx, 'logo');
+		const pad = 12;
+		let map: Rect;
+		let info: Rect;
+		if (this.landscape) {
+			map = { x: pad, y: TB + pad, w: W * 0.64 - pad * 1.5, h: H - TB - pad * 2 };
+			info = { x: map.x + map.w + pad, y: map.y, w: W - map.w - pad * 3, h: map.h };
+		} else {
+			map = { x: pad, y: TB + pad, w: W - pad * 2, h: (H - TB) * 0.56 };
+			info = { x: pad, y: map.y + map.h + pad, w: W - pad * 2, h: H - map.y - map.h - pad * 2 };
+		}
+		this.drawMap(ctx, map);
+		this.drawInfo(ctx, info);
+	}
+
+	drawMap(ctx: C2D, map: Rect) {
+		roundRect(ctx, { x: map.x - 4, y: map.y - 4, w: map.w + 8, h: map.h + 8 }, 14, '#0c0910');
+		const polys = this.regionPolys(map);
+		const sel = parentOf(this.selected);
+		const later: (() => void)[] = [];
+		for (const lv of MAIN) {
+			const R = polys.get(lv.id)!;
+			const th = THEMES[lv.id];
+			const open = this.unlocked(lv);
+			const outline = () => {
+				ctx.beginPath();
+				ctx.moveTo(R.pts[0], R.pts[1]);
+				for (let i = 2; i < R.pts.length; i += 2) ctx.lineTo(R.pts[i], R.pts[i + 1]);
+				ctx.closePath();
+			};
+			ctx.save();
+			outline();
+			ctx.clip();
+			const g = ctx.createLinearGradient(0, R.cy - R.ch, 0, R.cy + R.ch);
+			g.addColorStop(0, th.sky[1]);
+			g.addColorStop(0.45, th.patch);
+			g.addColorStop(1, th.ground[0]);
+			ctx.fillStyle = g;
+			ctx.fillRect(R.cx - R.cw, R.cy - R.ch, R.cw * 2, R.ch * 2);
+			ctx.fillStyle = 'rgba(0,0,0,0.12)';
+			for (let i = 0; i < 30; i++)
+				ctx.fillRect(
+					R.cx + (hash(i + Number(lv.id) * 50) - 0.5) * R.cw * 1.2,
+					R.cy + (hash(i * 3 + Number(lv.id)) - 0.2) * R.ch * 0.7,
+					3,
+					2,
+				);
+			const sc = Math.min(R.cw / 36, R.ch / 48);
+			ctx.save();
+			ctx.translate(R.cx, R.cy + R.ch * 0.2);
+			ctx.scale(sc, sc);
+			ctx.fillStyle = 'rgba(0,0,0,0.3)';
+			ctx.beginPath();
+			ctx.ellipse(0, 0, 17, 3, 0, 0, Math.PI * 2);
+			ctx.fill();
+			drawDistrict(ctx, lv.id, this.time);
+			ctx.restore();
+			if (!open) {
+				ctx.fillStyle = 'rgba(8,6,14,0.62)';
+				ctx.fillRect(R.cx - R.cw, R.cy - R.ch, R.cw * 2, R.ch * 2);
+			}
+			ctx.restore();
+			outline();
+			ctx.strokeStyle = '#120c18';
+			ctx.lineWidth = 5;
+			ctx.stroke();
+			this.hits.push({
+				x: 0,
+				y: 0,
+				w: 0,
+				h: 0,
+				poly: R.pts,
+				down: () => open && (this.selected = lv),
+			});
+			later.push(() => {
+				if (sel === lv) {
+					outline();
+					ctx.strokeStyle = `rgba(255,216,74,${0.7 + 0.3 * Math.sin(this.time * 4)})`;
+					ctx.lineWidth = 4;
+					ctx.stroke();
+				}
+				const fs = Math.max(11, Math.min(16, R.cw / 11));
+				ctx.font = `bold ${fs}px ${FONT}`;
+				const name = (lv.district ?? '').toUpperCase();
+				const nw = ctx.measureText(name).width + 14;
+				roundRect(
+					ctx,
+					{ x: R.cx - nw / 2, y: R.cy + R.ch * 0.28, w: nw, h: fs * 1.6 },
+					5,
+					'rgba(10,8,20,0.75)',
+				);
+				text(
+					ctx,
+					name,
+					R.cx,
+					R.cy + R.ch * 0.28 + fs * 0.8,
+					fs,
+					open ? '#f2e8c8' : '#8a8494',
+					'center',
+				);
+				const bx = R.cx - R.cw * 0.3;
+				const by = R.cy - R.ch * 0.28;
+				const br = Math.max(15, Math.min(22, R.cw / 9));
+				this.badge(ctx, bx, by, br, lv, open, '#fff8dc');
+				const rem = rematchOf(lv);
+				if (rem) {
+					const rx = R.cx + R.cw * 0.3;
+					const ropen = this.unlocked(rem);
+					this.badge(ctx, rx, by, br * 0.8, rem, ropen, '#ffb0b0');
+					if (ropen)
+						this.hits.push({
+							x: rx - br,
+							y: by - br,
+							w: br * 2,
+							h: br * 2,
+							down: () => (this.selected = rem),
+						});
+				}
+				if (!open)
+					drawIcon(ctx, 'lock', R.cx, R.cy - R.ch * 0.02, Math.min(40, R.cw / 4), this.time);
+			});
+		}
+		for (const f of later) f();
+	}
+
+	badge(ctx: C2D, x: number, y: number, r: number, lv: LevelDef, open: boolean, color: string) {
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, Math.PI * 2);
+		ctx.fillStyle = !open ? '#555' : this.beaten(lv) ? '#9ff0a8' : color;
+		ctx.fill();
+		ctx.lineWidth = this.selected === lv ? 4 : 3;
+		ctx.strokeStyle = this.selected === lv ? '#ffd84a' : '#222';
+		ctx.stroke();
+		text(ctx, lv.id, x, y + 1, r * (lv.id.length > 1 ? 0.7 : 0.95), '#222', 'center');
+		const st = this.save.stars[lv.id] ?? 0;
+		if (st) text(ctx, '★'.repeat(st), x, y + r + 9, 13, '#ffd84a', 'center');
+	}
+
+	drawInfo(ctx: C2D, r: Rect) {
+		roundRect(ctx, r, 14, 'rgba(16,12,24,0.92)', '#3a3048', 2);
+		const lv = this.selected;
+		const th = THEMES[parentOf(lv).id];
+		const x = r.x + 18;
+		const w = r.w - 36;
+		let y = r.y + 30;
+		const big = Math.min(28, w / 14);
+		text(ctx, `Level ${lv.id}: ${lv.name}`, x, y, big, '#fff');
+		y += big * 1.1;
+		text(
+			ctx,
+			`${parentOf(lv).district}${lv.cell ? '' : ' · Rematch'}`.toUpperCase(),
+			x,
+			y,
+			13,
+			th.edge,
+		);
+		y += 22;
+		for (const line of wrap(ctx, lv.desc, w, 16)) {
+			text(ctx, line, x, y, 16, '#ccc', 'left', 'normal');
+			y += 21;
+		}
+		y += 6;
+		const rec = this.save.records[lv.id];
+		const attempt = (label: string, a: Attempt | undefined, hi: boolean) => {
+			const h = a ? 78 : 58;
+			roundRect(
+				ctx,
+				{ x: x - 6, y, w: w + 12, h },
+				8,
+				hi ? 'rgba(255,216,74,0.12)' : 'rgba(255,255,255,0.05)',
+				hi ? '#ffd84a' : undefined,
+			);
+			text(ctx, label, x + 4, y + 16, 12, '#aaa');
+			if (!a) text(ctx, '—', x + 4, y + 38, 16, '#666');
+			else {
+				text(
+					ctx,
+					`${starStr(a.stars)}  ${a.won ? 'Cleared' : 'Destroyed'}`,
+					x + 4,
+					y + 38,
+					18,
+					a.won ? '#ffd84a' : '#ff7675',
+				);
+				const boss = a.bossTime != null ? ` · boss ${a.bossTime.toFixed(1)}s` : '';
+				const stats = `${Math.round(a.accuracy * 100)}% acc · ${a.avgSolve.toFixed(1)}s/ans${boss} · ${a.kills} kills · $${a.money}`;
+				text(ctx, stats, x + 4, y + 62, Math.min(14, w / 24), '#ccc', 'left', 'normal');
+			}
+			y += h + 8;
+		};
+		attempt(
+			this.newBest && rec ? 'LAST ATTEMPT — NEW BEST!' : 'LAST ATTEMPT',
+			rec?.last,
+			this.newBest && !!rec,
+		);
+		attempt('BEST ATTEMPT', rec?.best, false);
+		const eb = this.save.endlessBest[lv.id];
+		if (eb) {
+			text(ctx, `Endless best: wave ${eb}`, x, y + 4, 15, '#9ad');
+			y += 22;
+		}
+		const bh = Math.min(64, Math.max(44, r.y + r.h - y - 60));
+		const by = Math.min(r.y + r.h - bh - 44, Math.max(y + 4, r.y + r.h - bh - 44));
+		const open = this.unlocked(lv);
+		this.button(ctx, { x, y: by, w: w * 0.6, h: bh }, open ? 'PLAY' : 'LOCKED', {
+			color: '#2d7d46',
+			disabled: !open,
+			size: 26,
+			sub: open ? 'Enter' : undefined,
+			down: () => this.start(lv, false),
+		});
+		this.button(ctx, { x: x + w * 0.63, y: by, w: w * 0.37, h: bh }, 'Endless', {
+			color: '#5a3a8a',
+			disabled: !this.beaten(lv),
+			size: 18,
+			sub: this.beaten(lv) ? undefined : 'beat it first',
+			down: () => this.start(lv, true),
+		});
+		const sy = r.y + r.h - 38;
+		this.button(ctx, { x, y: sy, w: 110, h: 28 }, '◀ Games', {
+			size: 13,
+			down: () => this.onExit(),
+		});
+		this.button(
+			ctx,
+			{ x: x + w - 150, y: sy, w: 150, h: 28 },
+			this.confirmReset > 0 ? 'Tap again to erase' : 'Reset progress',
+			{
+				size: 13,
+				color: this.confirmReset > 0 ? '#8a2a2a' : '#3a3d44',
+				down: () => {
+					if (this.confirmReset > 0) {
+						this.save = freshSave();
+						persist(this.save);
+						this.shownMoney = 0;
+						this.selected = LEVELS[0];
+						this.confirmReset = 0;
+					} else this.confirmReset = 3;
+				},
+			},
+		);
+	}
+
+	// ================= shop =================
+	drawShop(ctx: C2D) {
+		const { W, H } = this;
+		ctx.fillStyle = '#1a1218';
+		ctx.fillRect(0, 0, W, H);
+		const TB = this.topBar(ctx, 'ROBO-MART');
+		const scene: Rect = this.landscape
+			? { x: 0, y: TB, w: W * 0.3, h: H - TB }
+			: { x: 0, y: TB, w: W, h: (H - TB) * 0.24 };
+		this.drawShopScene(ctx, scene);
+		const area: Rect = this.landscape
+			? { x: scene.w + 12, y: TB + 12, w: W - scene.w - 24, h: H - TB - 24 }
+			: { x: 12, y: TB + scene.h + 12, w: W - 24, h: H - TB - scene.h - 24 };
+		type Card = {
+			icon: IconKey;
+			/** drawn over the icon (armor shows its HP) */
+			badge?: string;
+			name: string;
+			desc: string;
+			status: string;
+			/** price button text; omitted for owned toggles */
+			label?: string;
+			ok: boolean;
+			/** owned toggles: true = active (highlighted), false = off (greyed) */
+			on?: boolean;
+			locked?: boolean;
+			accent: string;
+			act: () => void;
+		};
+		const s = this.save;
+		const cards: Card[] = [];
+		for (const it of ITEMS) {
+			const n = s.items[it.key];
+			cards.push({
+				icon: it.key,
+				name: it.name,
+				desc: it.desc,
+				status: `Owned ${n}/${ITEM_CAP}`,
+				label: n >= ITEM_CAP ? 'FULL' : `$${it.price}`,
+				ok: n < ITEM_CAP && s.money >= it.price,
+				accent: '#ffd84a',
+				act: () => {
+					if (n >= ITEM_CAP) return (this.shopMsg = "You can't carry any more of those.");
+					if (s.money < it.price)
+						return (this.shopMsg = `${it.name} costs $${it.price}. Come back richer.`);
+					s.money -= it.price;
+					s.items[it.key]++;
+					this.shopMsg = `One ${it.name}, coming up!`;
+				},
+			});
+		}
+		// armor: bought left to right, one worn at a time
+		ARMOR.forEach((a, i) => {
+			const owned = i < s.armor.owned;
+			const locked = i > s.armor.owned;
+			const on = s.armor.on === i;
+			cards.push({
+				icon: 'hp',
+				badge: `${a.hp}`,
+				name: a.name,
+				desc: a.desc,
+				status: locked
+					? 'Buy the armor to the left first'
+					: owned
+						? on
+							? `Worn · ${a.hp} HP`
+							: 'Tap to wear'
+						: `${a.hp} HP`,
+				label: owned ? undefined : `$${a.price}`,
+				ok: !locked && s.money >= a.price,
+				on: owned ? on : undefined,
+				locked,
+				accent: '#ff6b81',
+				act: () => {
+					if (owned) {
+						s.armor.on = on ? -1 : i;
+						return (this.shopMsg = on
+							? `${a.name} off. Living dangerously (${BASE_HP} HP).`
+							: `${a.name} on: ${a.hp} HP.`);
+					}
+					if (locked) return (this.shopMsg = `Buy the ${ARMOR[i - 1].name} first.`);
+					if (s.money < a.price) return (this.shopMsg = `The ${a.name} costs $${a.price}.`);
+					s.money -= a.price;
+					s.armor = { owned: i + 1, on: i };
+					this.shopMsg = `${a.name} fitted. ${a.hp} HP!`;
+				},
+			});
+		});
+		for (const u of UPGRADES) {
+			const owned = u.key in s.upgrades;
+			const on = !!s.upgrades[u.key];
+			cards.push({
+				icon: u.key,
+				name: u.name,
+				desc: u.desc,
+				status: owned
+					? on
+						? 'Active · tap to turn off'
+						: 'Off · tap to turn on'
+					: 'Weapon upgrade',
+				label: owned ? undefined : `$${u.price}`,
+				ok: s.money >= u.price,
+				on: owned ? on : undefined,
+				accent: '#74e0ff',
+				act: () => {
+					if (owned) {
+						s.upgrades[u.key] = !on;
+						return (this.shopMsg = `${u.name} switched ${on ? 'off' : 'on'}.`);
+					}
+					if (s.money < u.price)
+						return (this.shopMsg = `The ${u.name} is $${u.price}. No haggling.`);
+					s.money -= u.price;
+					s.upgrades[u.key] = true;
+					this.shopMsg = `${u.name} installed!`;
+				},
+			});
+		}
+		// 3 rows of 4: consumables, armor, weapon upgrades
+		const cols = 4;
+		const gap = 8;
+		const cw = (area.w - gap * (cols - 1)) / cols;
+		const ch = Math.min(this.landscape ? 170 : 260, (area.h - gap * 2) / 3);
+		const tall = cw < 200;
+		cards.forEach((c, i) => {
+			const r = {
+				x: area.x + (i % cols) * (cw + gap),
+				y: area.y + Math.floor(i / cols) * (ch + gap),
+				w: cw,
+				h: ch,
+			};
+			const dim = c.on === false || c.locked;
+			const g = ctx.createLinearGradient(0, r.y, 0, r.y + r.h);
+			g.addColorStop(0, c.on ? '#4a3a52' : '#3a3240');
+			g.addColorStop(1, '#221c28');
+			ctx.save();
+			if (c.on) {
+				ctx.shadowColor = c.accent;
+				ctx.shadowBlur = 14;
+			}
+			roundRect(ctx, r, 10, g, c.accent, c.on ? 4 : 2);
+			ctx.restore();
+			ctx.globalAlpha = dim ? 0.4 : 1;
+			const dfs = Math.max(10, Math.min(13, ch * 0.09));
+			const btnH = 28;
+			let tx: number;
+			let tw: number;
+			let ty: number;
+			const is = tall ? Math.min(cw * 0.4, ch * 0.24, 56) : Math.min(ch * 0.45, cw * 0.22, 60);
+			const ix = tall ? r.x + r.w / 2 : r.x + 10 + is / 2;
+			const iy = tall ? r.y + 10 + is / 2 : r.y + ch / 2 - 8;
+			drawIcon(ctx, c.icon, ix, iy, is, this.time);
+			if (c.badge) text(ctx, c.badge, ix, iy, is * 0.36, '#fff', 'center');
+			if (tall) {
+				tx = r.x + 8;
+				tw = r.w - 16;
+				ty = r.y + is + 18;
+			} else {
+				tx = r.x + is + 20;
+				tw = r.w - is - 28;
+				ty = r.y + 10;
+			}
+			ctx.font = `bold 17px ${FONT}`;
+			const fs = Math.min(17, (17 * tw) / ctx.measureText(c.name).width);
+			text(ctx, c.name, tx, ty + fs / 2, fs, '#fff');
+			const room = r.y + ch - btnH - 14 - (ty + fs + 6);
+			const lines = wrap(ctx, c.desc, tw, dfs).slice(
+				0,
+				Math.max(0, Math.floor(room / (dfs * 1.25))),
+			);
+			for (const [j, l] of lines.entries())
+				text(ctx, l, tx, ty + fs + 8 + j * dfs * 1.25 + dfs / 2, dfs, '#bbb', 'left', 'normal');
+			const by = r.y + ch - btnH - 8;
+			if (c.label) {
+				const bw = Math.min(90, tw * (tall ? 1 : 0.45));
+				this.button(ctx, { x: r.x + r.w - bw - 8, y: by, w: bw, h: btnH }, c.label, {
+					color: c.ok ? '#2d7d46' : '#3a3d44',
+					size: 14,
+				});
+				if (!tall) text(ctx, c.status, tx, by + btnH / 2, dfs, '#999', 'left', 'normal');
+			} else
+				text(
+					ctx,
+					c.status,
+					tx,
+					by + btnH / 2,
+					dfs,
+					c.on ? c.accent : '#999',
+					'left',
+					c.on ? 'bold' : 'normal',
+				);
+			ctx.globalAlpha = 1;
+			this.hits.push({
+				...r,
+				down: () => {
+					c.act();
+					persist(s);
+				},
+			});
+		});
+	}
+
+	drawShopScene(ctx: C2D, r: Rect) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(r.x, r.y, r.w, r.h);
+		ctx.clip();
+		const wall = ctx.createLinearGradient(0, r.y, 0, r.y + r.h);
+		wall.addColorStop(0, '#4a2e3a');
+		wall.addColorStop(1, '#22141c');
+		ctx.fillStyle = wall;
+		ctx.fillRect(r.x, r.y, r.w, r.h);
+		// bricks
+		ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+		ctx.lineWidth = 1;
+		for (let y = r.y, row = 0; y < r.y + r.h; y += 18, row++)
+			for (let x = r.x - (row % 2) * 20; x < r.x + r.w; x += 40) ctx.strokeRect(x, y, 40, 18);
+		// neon sign
+		const flick = Math.sin(this.time * 13) > -0.95 ? 1 : 0.3;
+		const signSize = Math.min(28, r.w / 8, r.h / 5);
+		ctx.shadowColor = '#ff4be0';
+		ctx.shadowBlur = 16 * flick;
+		text(
+			ctx,
+			'ROBO-MART',
+			r.x + r.w / 2,
+			r.y + signSize * 1.1,
+			signSize,
+			`rgba(255,140,240,${flick})`,
+			'center',
+			'bold',
+			'Impact, sans-serif',
+		);
+		ctx.shadowBlur = 0;
+		const counterY = r.y + r.h * 0.72;
+		// shelves full of salvaged parts
+		const shelfTop = r.y + signSize * 2.2;
+		for (let s = 0; s < 3; s++) {
+			const sy = shelfTop + s * (counterY - shelfTop) * 0.3 + 26;
+			if (sy > counterY - 20) break;
+			ctx.fillStyle = '#6a4a30';
+			ctx.fillRect(r.x + 8, sy, r.w - 16, 5);
+			for (let i = 0; i < 6; i++) {
+				const ix = r.x + 22 + i * ((r.w - 44) / 5);
+				const kind = Math.floor(hash(s * 9 + i) * 4);
+				if (kind === 0) {
+					ctx.fillStyle = '#9aa3ad';
+					ctx.beginPath();
+					ctx.arc(ix, sy - 9, 8, 0, Math.PI * 2);
+					ctx.fill();
+					ctx.fillStyle = '#22141c';
+					ctx.beginPath();
+					ctx.arc(ix, sy - 9, 3, 0, Math.PI * 2);
+					ctx.fill();
+				} else if (kind === 1) drawIcon(ctx, 'dynamite', ix, sy - 12, 22, this.time);
+				else if (kind === 2) drawIcon(ctx, 'emp', ix, sy - 11, 20, this.time);
+				else plate(ctx, ix - 7, sy - 18, 14, 18, 3, ['#ffd84a', '#c9a02a', '#6a5008'], 1.5);
+			}
+		}
+		// shopkeeper (a retired janitor bot in a top hat)
+		const ks = Math.min(r.h / 260, r.w / 120);
+		ctx.save();
+		ctx.translate(r.x + r.w * 0.5, counterY + 18 * ks);
+		ctx.scale(ks, ks);
+		DRAW.janitor(ctx, this.time * 2);
+		ctx.fillStyle = '#15121a';
+		ctx.fillRect(-11, -84, 22, 16);
+		ctx.fillRect(-16, -70, 32, 4);
+		ctx.fillStyle = '#d63031';
+		ctx.fillRect(-11, -73, 22, 3);
+		ctx.restore();
+		// counter
+		const cg = ctx.createLinearGradient(0, counterY, 0, r.y + r.h);
+		cg.addColorStop(0, '#9a6a40');
+		cg.addColorStop(1, '#4a2e18');
+		ctx.fillStyle = cg;
+		ctx.fillRect(r.x, counterY, r.w, r.y + r.h - counterY);
+		ctx.fillStyle = '#c49a6a';
+		ctx.fillRect(r.x, counterY, r.w, 6);
+		ctx.restore();
+		// speech bubble
+		const fs = 14;
+		const bw = Math.min(r.w - 20, 300);
+		const lines = wrap(ctx, this.shopMsg, bw - 20, fs);
+		const bh = lines.length * fs * 1.3 + 16;
+		const bx = this.landscape ? r.x + 10 : r.x + r.w - bw - 10;
+		const by = this.landscape ? counterY + 20 : r.y + r.h - bh - 8;
+		roundRect(ctx, { x: bx, y: by, w: bw, h: bh }, 10, '#fff8e8', '#222', 2);
+		for (const [i, l] of lines.entries())
+			text(ctx, l, bx + 10, by + 8 + fs * 0.65 + i * fs * 1.3, fs, '#222', 'left', 'normal');
+	}
+}
+
+function lighten(hex: string) {
+	const n = Number.parseInt(hex.slice(1), 16);
+	const c = (v: number) => Math.min(255, Math.round(v + (255 - v) * 0.25));
+	return `rgb(${c(n >> 16)},${c((n >> 8) & 255)},${c(n & 255)})`;
+}

@@ -5,11 +5,7 @@ export type Gen = () => Problem;
 export const r = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
 export const pick = <T>(a: T[]): T => a[Math.floor(Math.random() * a.length)];
 
-const fmt = (s: string) =>
-	s
-		.replace(/\*/g, '×')
-		.replace(/\//g, '÷')
-		.replace(/([+\-×÷])/g, ' $1 ');
+const fmt = (s: string) => s.replace(/\*/g, '×').replace(/([+\-×/])/g, ' $1 ');
 
 function evalExpr(s: string): number {
 	return Function(`"use strict";return (${s})`)();
@@ -66,7 +62,7 @@ export const mulDiv =
 			b = r(min, max);
 		return Math.random() < 0.55
 			? { text: `${a} × ${b}`, answer: a * b }
-			: { text: `${a * b} ÷ ${b}`, answer: a };
+			: { text: `${a * b} / ${b}`, answer: a };
 	};
 
 // ---------- Level 3: mixed single digit ----------
