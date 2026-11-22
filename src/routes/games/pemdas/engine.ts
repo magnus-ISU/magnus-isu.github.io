@@ -97,6 +97,10 @@ export type Result = {
 	items: Record<ItemKey, number>;
 	/** achievement ids unlocked during this run */
 	achievements: string[];
+	/** took any damage (healing from crates doesn't undo this) */
+	damaged: boolean;
+	/** used any consumable */
+	usedItems: boolean;
 };
 
 export const ACHIEVEMENTS: Record<string, string> = {
@@ -151,6 +155,8 @@ export class Game {
 	solveTimes: number[] = [];
 	bossTimes: number[] = [];
 	achievements: string[] = [];
+	damaged = false;
+	usedItems = false;
 	/** mixed levels time boss kills separately; all-boss rematches just count answers */
 	trackBoss: boolean;
 	readyAt = 0;
@@ -429,6 +435,7 @@ export class Game {
 			this.barrierT = 10;
 		} else if (key === 'shield') this.shield++;
 		this.items[key]--;
+		this.usedItems = true;
 		return true;
 	}
 
@@ -661,6 +668,7 @@ export class Game {
 		this.shake = ROBOTS[rb.type].boss ? 0.9 : 0.5;
 		this.hurtT = 0.5;
 		this.hp = Math.max(0, this.hp - ROBOTS[rb.type].damage);
+		this.damaged = true;
 		if (this.hp <= 0 && !this.ending) {
 			const left = ATTACK_TIME[rb.type] * (1 - IMPACT);
 			this.ending = { won: false, at: this.time + left + LOSE_DELAY };
@@ -687,6 +695,8 @@ export class Game {
 				: null,
 			items: this.items,
 			achievements: this.achievements,
+			damaged: this.damaged,
+			usedItems: this.usedItems,
 		};
 	}
 

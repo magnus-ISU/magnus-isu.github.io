@@ -206,7 +206,10 @@ export class App {
 		const money = r.money;
 		if (!r.endless && r.won) {
 			// 3 stars = flawless: no damage taken and no wrong answers
-			stars = r.hp >= r.maxHp && r.accuracy >= 1 ? 3 : r.hp * 2 >= r.maxHp ? 2 : 1;
+			// any damage = 1 star; rematches also drop to 1 star for using a consumable.
+			// Otherwise a wrong answer costs the third star.
+			const rematch = lv.id.includes('.');
+			stars = r.damaged || (rematch && r.usedItems) ? 1 : r.accuracy >= 1 ? 3 : 2;
 			this.save.stars[lv.id] = Math.max(stars, this.save.stars[lv.id] ?? 0);
 		}
 		if (r.endless)
