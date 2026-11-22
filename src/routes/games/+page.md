@@ -9,3 +9,5 @@
 ## [Risk](/games/risk)
 
 ## [Polytopia Damage Calculator](/games/polytopia-calculator)
+
+## [PEMDAS Blaster Clone](/games/pemdas)
