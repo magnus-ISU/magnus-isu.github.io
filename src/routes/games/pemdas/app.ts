@@ -13,9 +13,11 @@ import {
 	maxHpOf,
 	persist,
 	type Save,
+	saveHooks,
 	UPGRADES,
 } from './save';
 import { drawDistrict, drawIcon, hash, type IconKey, THEMES } from './scenery';
+import { type DriveStatus, pemdasSync } from './sync';
 
 type Rect = { x: number; y: number; w: number; h: number };
 type Hit = Rect & { down?: () => void; hold?: boolean; poly?: number[] };
@@ -118,6 +120,50 @@ export class App {
 		this.save = loadSave();
 		this.shownMoney = this.save.money;
 		this.onExit = onExit;
+		saveHooks.changed = () => pemdasSync.changed();
+		pemdasSync.start(
+			() => this.save,
+			(s) => {
+				this.save = s;
+				// money from another device counts up like a level reward
+				this.shownMoney = Math.min(this.shownMoney, s.money);
+			},
+		);
+	}
+
+	/** Google Drive sync, styled like Dungeon World's button */
+	driveButton(ctx: C2D, r: Rect) {
+		const sync = pemdasSync;
+		const LABELS: Partial<Record<DriveStatus, string>> = {
+			off: 'Sync with Google Drive',
+			auth: 'Sign in to Drive again',
+			syncing: 'Syncing…',
+			saving: 'Saving…',
+			offline: 'Offline — saved here',
+			error: 'Sync error — retry',
+		};
+		const COLORS: Record<DriveStatus, string> = {
+			off: '#3a3d44',
+			auth: '#a04040',
+			error: '#a04040',
+			offline: '#5a5a5a',
+			saving: '#8a7a3a',
+			syncing: '#b8942e',
+			synced: '#b8942e',
+		};
+		const status = sync.status;
+		const label = LABELS[status] ?? (sync.account ? `Drive ✓ ${sync.account}` : 'Drive ✓');
+		const xw = sync.enabled ? 28 : 0;
+		this.button(ctx, { ...r, w: r.w - xw - (xw ? 4 : 0) }, label, {
+			size: 12,
+			color: COLORS[status],
+			down: () => void sync.syncNow(),
+		});
+		if (xw)
+			this.button(ctx, { x: r.x + r.w - xw, y: r.y, w: xw, h: r.h }, '✕', {
+				size: 13,
+				down: () => sync.disconnect(),
+			});
 	}
 
 	resize(W: number, H: number) {
@@ -880,8 +926,8 @@ export class App {
 			text(ctx, `Endless best: wave ${eb}`, x, y + 4, 15, '#9ad');
 			y += 22;
 		}
-		const bh = Math.min(64, Math.max(44, r.y + r.h - y - 60));
-		const by = Math.min(r.y + r.h - bh - 44, Math.max(y + 4, r.y + r.h - bh - 44));
+		const bh = Math.min(64, Math.max(44, r.y + r.h - y - 94));
+		const by = Math.min(r.y + r.h - bh - 78, Math.max(y + 4, r.y + r.h - bh - 78));
 		const open = this.unlocked(lv);
 		this.button(ctx, { x, y: by, w: w * 0.6, h: bh }, open ? 'PLAY' : 'LOCKED', {
 			color: '#2d7d46',
@@ -902,6 +948,7 @@ export class App {
 			size: 13,
 			down: () => this.onExit(),
 		});
+		this.driveButton(ctx, { x, y: sy - 34, w, h: 28 });
 		this.button(
 			ctx,
 			{ x: x + w - 150, y: sy, w: 150, h: 28 },

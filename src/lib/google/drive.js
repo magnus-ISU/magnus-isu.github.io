@@ -7,8 +7,6 @@
 // folder is only there to keep the user's Drive tidy.
 
 const API = 'https://www.googleapis.com';
-const APP = 'dungeon-world';
-const FOLDER_NAME = 'Dungeon World';
 const FILE_FIELDS =
 	'id,name,headRevisionId,md5Checksum,modifiedTime,createdTime,trashed,appProperties';
 
@@ -46,8 +44,14 @@ function describe(f) {
 	};
 }
 
-// getToken() returns a currently valid access token, or null.
-export function createDrive(getToken) {
+// getToken() returns a currently valid access token, or null. `app` tags every
+// file (so each app only ever sees its own); `folderName` is the Drive folder.
+export function createDrive(
+	getToken,
+	{ app = 'dungeon-world', folderName = 'Dungeon World' } = {},
+) {
+	const APP = app;
+	const FOLDER_NAME = folderName;
 	let folderPromise = null;
 
 	async function request(url, opts = {}) {

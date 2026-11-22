@@ -140,10 +140,19 @@ export function loadSave(): Save {
 	return freshSave();
 }
 
-export function persist(save: Save) {
+/** write to this browser only (used when a Drive download replaces the save) */
+export function persistLocal(save: Save) {
 	try {
 		localStorage.setItem(SAVE_KEY, JSON.stringify(save));
 	} catch {}
+}
+
+/** called after every local change, e.g. to schedule a Drive upload */
+export const saveHooks = { changed: () => {} };
+
+export function persist(save: Save) {
+	persistLocal(save);
+	saveHooks.changed();
 }
 
 /** higher is better */
