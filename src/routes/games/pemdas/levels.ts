@@ -154,15 +154,15 @@ export const LEVELS: LevelDef[] = [
 	{
 		id: '5.5',
 		name: 'Juggernaut Rematch',
-		desc: '2-digit × 2-digit bosses, no hints.',
+		desc: '2-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
 		requires: '5',
 		walkTime: 75,
 		waveTime: 70,
 		crate: P.mul(2, 1),
 		waves: [
-			[s('juggernaut', P.mulParts(2, 2, false))],
-			[s('juggernaut', P.mulParts(2, 2, false))],
-			[s('juggernaut', P.mulParts(2, 2, false), 2)],
+			[s('juggernaut', P.mulParts(2, 2, true))],
+			[s('juggernaut', P.mulParts(2, 2, true))],
+			[s('juggernaut', P.mulParts(2, 2, true), 2)],
 		],
 	},
 	{
@@ -206,15 +206,15 @@ export const LEVELS: LevelDef[] = [
 	{
 		id: '7.5',
 		name: 'Titan Rematch',
-		desc: '3-digit × 2-digit bosses, no hints.',
+		desc: '3-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
 		requires: '7',
 		walkTime: 85,
 		waveTime: 90,
 		crate: P.mul(3, 1),
 		waves: [
-			[s('titan', P.mulParts(3, 2, false))],
-			[s('titan', P.mulParts(3, 2, false))],
-			[s('titan', P.mulParts(3, 2, false), 2)],
+			[s('titan', P.mulParts(3, 2, true))],
+			[s('titan', P.mulParts(3, 2, true))],
+			[s('titan', P.mulParts(3, 2, true), 2)],
 		],
 	},
 	{
@@ -253,11 +253,11 @@ export const LEVELS: LevelDef[] = [
 	{
 		id: '9.5',
 		name: 'Overlord Rematch',
-		desc: '3-digit × 3-digit, no hints.',
+		desc: '3-digit × 3-digit. Use the Infrared Scope to see their sub-problems.',
 		requires: '9',
 		walkTime: 90,
 		waveTime: 180,
 		crate: P.mul(3, 1),
-		waves: [[s('overlord', P.mulParts(3, 3, false))], [s('overlord', P.mulParts(3, 3, false))]],
+		waves: [[s('overlord', P.mulParts(3, 3, true))], [s('overlord', P.mulParts(3, 3, true))]],
 	},
 ];

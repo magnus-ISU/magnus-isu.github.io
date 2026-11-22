@@ -76,18 +76,23 @@ export const UPGRADES: { key: UpgradeKey; name: string; price: number; desc: str
 export const BASE_HP = 2;
 /** bought left to right; at most one is worn at a time */
 export const ARMOR = [
-	{ name: 'Ballistic Vest', hp: 3, price: 100, desc: 'Kevlar plates. Shrugs off a spider bite.' },
+	{ name: 'Ballistic Vest', hp: 3, price: 250, desc: 'Kevlar plates. Shrugs off a spider bite.' },
 	{
 		name: 'Titanium Exoskeleton',
 		hp: 4,
-		price: 250,
+		price: 750,
 		desc: 'A lightweight metal frame that takes a punch.',
 	},
-	{ name: 'Power Armor', hp: 5, price: 750, desc: 'Servo-driven plating salvaged from a trooper.' },
+	{
+		name: 'Power Armor',
+		hp: 5,
+		price: 1500,
+		desc: 'Servo-driven plating salvaged from a trooper.',
+	},
 	{
 		name: 'Holtzman Field',
 		hp: 7,
-		price: 2000,
+		price: 3000,
 		desc: 'A personal shield that slows anything that hits it.',
 	},
 ];

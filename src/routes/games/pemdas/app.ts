@@ -944,10 +944,6 @@ export class App {
 			down: () => this.start(lv, true),
 		});
 		const sy = r.y + r.h - 38;
-		this.button(ctx, { x, y: sy, w: 110, h: 28 }, '◀ Games', {
-			size: 13,
-			down: () => this.onExit(),
-		});
 		this.driveButton(ctx, { x, y: sy - 34, w, h: 28 });
 		this.button(
 			ctx,
@@ -986,6 +982,8 @@ export class App {
 			icon: IconKey;
 			/** drawn over the icon (armor shows its HP) */
 			badge?: string;
+			/** how many you're carrying (consumables) */
+			count?: number;
 			name: string;
 			desc: string;
 			status: string;
@@ -1007,6 +1005,7 @@ export class App {
 				name: it.name,
 				desc: it.desc,
 				status: `Owned ${n}/${ITEM_CAP}`,
+				count: n,
 				label: n >= ITEM_CAP ? 'FULL' : `$${it.price}`,
 				ok: n < ITEM_CAP && s.money >= it.price,
 				accent: '#ffd84a',
@@ -1119,8 +1118,23 @@ export class App {
 			const is = tall ? Math.min(cw * 0.4, ch * 0.24, 56) : Math.min(ch * 0.45, cw * 0.22, 60);
 			const ix = tall ? r.x + r.w / 2 : r.x + 10 + is / 2;
 			const iy = tall ? r.y + 10 + is / 2 : r.y + ch / 2 - 8;
-			drawIcon(ctx, c.icon, ix, iy, is, this.time);
+			// only owned antimatter shimmers, and dynamite's fuse stays still in the shop
+			const still = c.icon === 'dynamite' || (c.icon === 'antimatter' && c.on === undefined);
+			drawIcon(ctx, c.icon, ix, iy, is, still ? 0 : this.time);
 			if (c.badge) text(ctx, c.badge, ix, iy, is * 0.36, '#fff', 'center');
+			if (c.count !== undefined) {
+				const bx = ix + is * 0.5;
+				const by0 = iy - is * 0.45;
+				const br = Math.max(10, is * 0.22);
+				ctx.beginPath();
+				ctx.arc(bx, by0, br, 0, Math.PI * 2);
+				ctx.fillStyle = c.count ? '#ffd84a' : '#555';
+				ctx.fill();
+				ctx.strokeStyle = '#111';
+				ctx.lineWidth = 2;
+				ctx.stroke();
+				text(ctx, `${c.count}`, bx, by0 + 1, br * 1.2, '#111', 'center');
+			}
 			if (tall) {
 				tx = r.x + 8;
 				tw = r.w - 16;
@@ -1222,7 +1236,7 @@ export class App {
 					ctx.beginPath();
 					ctx.arc(ix, sy - 9, 3, 0, Math.PI * 2);
 					ctx.fill();
-				} else if (kind === 1) drawIcon(ctx, 'dynamite', ix, sy - 12, 22, this.time);
+				} else if (kind === 1) drawIcon(ctx, 'dynamite', ix, sy - 12, 22, 0);
 				else if (kind === 2) drawIcon(ctx, 'emp', ix, sy - 11, 20, this.time);
 				else plate(ctx, ix - 7, sy - 18, 14, 18, 3, ['#ffd84a', '#c9a02a', '#6a5008'], 1.5);
 			}
