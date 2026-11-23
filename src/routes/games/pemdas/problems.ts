@@ -91,6 +91,13 @@ export const add23: Gen = () => {
 		? { text: `${a} + ${b}`, answer: a + b }
 		: { text: `${b} + ${a}`, answer: a + b };
 };
+/** add23, or the same sizes subtracted (bigger minus smaller, never negative) */
+export const addSub23: Gen = () => {
+	if (Math.random() < 0.5) return add23();
+	const a = r(100, 999),
+		b = Math.random() < 0.5 ? r(10, 99) : r(100, a);
+	return { text: `${a} − ${b}`, answer: a - b };
+};
 export const add4: Gen = () => {
 	const a = r(1000, 9999),
 		b = Math.random() < 0.5 ? r(100, 999) : r(1000, 9999);

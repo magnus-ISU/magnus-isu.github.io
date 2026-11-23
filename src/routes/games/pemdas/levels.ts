@@ -116,7 +116,7 @@ export const LEVELS: LevelDef[] = [
 	{
 		id: '4',
 		name: 'Big Sums',
-		desc: 'Two- and three-digit addition. Last wave: four digits.',
+		desc: 'Two- and three-digit addition and subtraction. Last wave: four-digit sums.',
 		requires: '3',
 		walkTime: 70,
 		waveTime: 50,
@@ -127,8 +127,8 @@ export const LEVELS: LevelDef[] = [
 		bounty: pay(2, 6, 12, 25),
 		waves: [
 			[s('janitor', P.add22, 4), s('spider', P.addSub21, 2)],
-			[s('janitor', P.add22, 2), s('trooper', P.add23, 4), s('spider', P.addSub21, 3)],
-			[s('trooper', P.add23, 3), s('brute', P.add4, 3), s('spider', P.add22, 3)],
+			[s('janitor', P.add22, 2), s('trooper', P.addSub23, 4), s('spider', P.addSub21, 3)],
+			[s('trooper', P.addSub23, 3), s('brute', P.add4, 3), s('spider', P.add22, 3)],
 		],
 	},
 	{
