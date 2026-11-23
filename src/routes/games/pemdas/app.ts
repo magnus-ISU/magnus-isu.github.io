@@ -26,6 +26,8 @@ type Screen = 'title' | 'shop' | 'game';
 /** the logical canvas's shorter side; everything is laid out in these units */
 export const LOGICAL_MIN = 680;
 const QUIT_HOLD = 3;
+/** holding backspace this long turns it into a quit (overlay appears) */
+const QUIT_SHOW = 1;
 const MAIN = LEVELS.filter((l) => l.cell);
 const rematchOf = (lv: LevelDef) => LEVELS.find((l) => l.id.includes('.') && l.requires === lv.id);
 const parentOf = (lv: LevelDef) => (lv.cell ? lv : LEVELS.find((l) => l.id === lv.requires)!);
@@ -324,7 +326,11 @@ export class App {
 		}
 	}
 	pointerUp(id: number) {
-		if (this.quitPointer === id) this.quitPointer = null;
+		if (this.quitPointer === id) {
+			this.quitPointer = null;
+			// a short press on the backspace/quit key is a backspace
+			if (this.quitT < QUIT_SHOW && !this.escHeld) this.backspace();
+		}
 	}
 
 	// ---------- frame ----------
@@ -427,7 +433,7 @@ export class App {
 		g.resize(W, FH);
 		render(ctx, g);
 		this.drawPanel(ctx, g, FH, PH);
-		if (this.quitT > 0) {
+		if (this.quitT >= QUIT_SHOW) {
 			ctx.fillStyle = 'rgba(0,0,0,0.5)';
 			ctx.fillRect(0, 0, W, FH);
 			const cx = W / 2;
@@ -461,30 +467,25 @@ export class App {
 		let itemsR: Rect;
 		let keysR: Rect;
 		let ansR: Rect;
-		let quitR: Rect;
 		if (this.landscape) {
 			const side = Math.min(W * 0.3, 360);
 			itemsR = { x: pad, y: y0 + pad + 4, w: side, h: PH - 2 * pad - 4 };
 			keysR = { x: W - pad - side, y: y0 + pad + 4, w: side, h: PH - 2 * pad - 4 };
 			const cx0 = itemsR.x + side + pad;
 			const cw = keysR.x - pad - cx0;
-			const qs = Math.min(70, PH * 0.4);
 			ansR = {
 				x: cx0 + cw * 0.08,
 				y: y0 + pad + 4 + PH * 0.12,
-				w: cw * 0.84 - qs - pad,
+				w: cw * 0.84,
 				h: PH * 0.38,
 			};
-			quitR = { x: ansR.x + ansR.w + pad, y: ansR.y, w: qs, h: qs };
 		} else {
 			const rowH = PH * 0.19;
-			ansR = { x: pad, y: y0 + pad + 4, w: W - 3 * pad - rowH, h: rowH - pad };
-			quitR = { x: W - pad - rowH, y: ansR.y, w: rowH, h: rowH - pad };
+			ansR = { x: pad, y: y0 + pad + 4, w: W - 2 * pad, h: rowH - pad };
 			itemsR = { x: pad, y: y0 + rowH + pad, w: W - 2 * pad, h: rowH - pad };
 			keysR = { x: pad, y: y0 + 2 * rowH + pad, w: W - 2 * pad, h: PH - 2 * rowH - 2 * pad };
 		}
 		this.drawAnswer(ctx, g, ansR);
-		this.button(ctx, quitR, 'hold', { icon: 'quit', color: '#8a2a2a', hold: true, size: 18 });
 
 		// items
 		const cols = this.landscape ? 2 : 4;
@@ -516,7 +517,15 @@ export class App {
 		// keypad: digits in a phone grid, a tall FIRE key on the right
 		const kw = (keysR.w - 3 * 6) / 4;
 		const kh = (keysR.h - 3 * 6) / 4;
-		const key = (c: number, r: number, label: string, down: () => void, color?: string, h = 1) =>
+		const key = (
+			c: number,
+			r: number,
+			label: string,
+			down: (() => void) | undefined,
+			color?: string,
+			h = 1,
+			extra: { icon?: IconKey; hold?: boolean } = {},
+		) =>
 			this.button(
 				ctx,
 				{ x: keysR.x + c * (kw + 6), y: keysR.y + r * (kh + 6), w: kw, h: kh * h + (h - 1) * 6 },
@@ -525,13 +534,15 @@ export class App {
 					down,
 					color,
 					size: Math.min(28, kh * 0.5),
+					...extra,
 				},
 			);
 		for (let d = 1; d <= 9; d++)
 			key((d - 1) % 3, Math.floor((d - 1) / 3), `${d}`, () => this.type(`${d}`));
 		key(0, 3, '−', () => this.type('-'));
 		key(1, 3, '0', () => this.type('0'));
-		key(2, 3, '⌫', () => this.backspace(), '#7a5a2a');
+		// tap: backspace (fires on release); hold: quit
+		key(2, 3, '', undefined, '#8a2a2a', 1, { icon: 'quit', hold: true });
 		key(3, 0, 'FIRE', () => this.submit(), '#2d7d46', 4);
 	}
 

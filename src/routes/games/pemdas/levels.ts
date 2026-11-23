@@ -16,7 +16,7 @@ export const ROBOTS: Record<
 > = {
 	spider: { speed: 2.5, damage: 1, bounty: 1, size: 0.6, boss: false },
 	janitor: { speed: 1, damage: 1, bounty: 2, size: 0.85, boss: false },
-	trooper: { speed: 1, damage: 2, bounty: 10, size: 1, boss: false },
+	trooper: { speed: 1, damage: 1, bounty: 10, size: 1, boss: false },
 	brute: { speed: 0.85, damage: 3, bounty: 25, size: 1.2, boss: false },
 	juggernaut: { speed: 0.5, damage: 99, bounty: 100, size: 1.5, boss: true },
 	titan: { speed: 0.4, damage: 99, bounty: 250, size: 1.75, boss: true },
@@ -123,11 +123,12 @@ export const LEVELS: LevelDef[] = [
 		crate: P.add4,
 		cell: [2, 1],
 		district: 'Bank Quarter',
-		bounty: pay(2, 6, 16, 16),
+		// brutes carry the 4-digit sums; trooper pay trimmed to keep the level's total near 212
+		bounty: pay(2, 6, 12, 25),
 		waves: [
 			[s('janitor', P.add22, 4), s('spider', P.addSub21, 2)],
 			[s('janitor', P.add22, 2), s('trooper', P.add23, 4), s('spider', P.addSub21, 3)],
-			[s('trooper', P.add23, 3), s('trooper', P.add4, 3), s('spider', P.add22, 3)],
+			[s('trooper', P.add23, 3), s('brute', P.add4, 3), s('spider', P.add22, 3)],
 		],
 	},
 	{
