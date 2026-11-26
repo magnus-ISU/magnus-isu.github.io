@@ -114,6 +114,7 @@ function fitWrap(ctx: C2D, s: string, maxW: number, maxH: number, max: number, m
 	}
 	return { size, lines: lines.slice(0, Math.max(0, Math.floor(maxH / (size * lh)))) };
 }
+const NUMPAD_KEY = 'pemdas-numpad';
 const starStr = (n: number) => '★'.repeat(n) + '☆'.repeat(3 - n);
 
 export class App {
@@ -138,6 +139,14 @@ export class App {
 	shopMsg = 'Welcome to Robo-Mart! Everything is salvaged.';
 	/** when the shop's neon sign next flickers */
 	signNext = 5 + Math.random() * 25;
+	/** in-game keypad laid out like a numpad (789 on top) instead of a phone (123 on top); per device */
+	numpad = (() => {
+		try {
+			return localStorage.getItem(NUMPAD_KEY) === '1';
+		} catch {
+			return false;
+		}
+	})();
 	onExit: () => void;
 
 	constructor(onExit: () => void) {
@@ -571,8 +580,10 @@ export class App {
 					...extra,
 				},
 			);
-		for (let d = 1; d <= 9; d++)
-			key((d - 1) % 3, Math.floor((d - 1) / 3), `${d}`, () => this.type(`${d}`));
+		for (let d = 1; d <= 9; d++) {
+			const row = Math.floor((d - 1) / 3);
+			key((d - 1) % 3, this.numpad ? 2 - row : row, `${d}`, () => this.type(`${d}`));
+		}
 		key(0, 3, '−', () => this.type('-'));
 		key(1, 3, '0', () => this.type('0'));
 		// tap: backspace (fires on release); hold: quit
@@ -1009,6 +1020,20 @@ export class App {
 		});
 		const sy = r.y + r.h - 38;
 		this.driveButton(ctx, { x, y: sy - 34, w, h: 28 });
+		this.button(
+			ctx,
+			{ x, y: sy, w: w - 158, h: 28 },
+			this.numpad ? 'Keypad: 789 on top' : 'Keypad: 123 on top',
+			{
+				size: 13,
+				down: () => {
+					this.numpad = !this.numpad;
+					try {
+						localStorage.setItem(NUMPAD_KEY, this.numpad ? '1' : '0');
+					} catch {}
+				},
+			},
+		);
 		this.button(
 			ctx,
 			{ x: x + w - 150, y: sy, w: 150, h: 28 },
