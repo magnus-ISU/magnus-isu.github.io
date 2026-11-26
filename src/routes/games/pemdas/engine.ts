@@ -169,6 +169,8 @@ export class Game {
 	/** empty patches of road a wasted volley hits */
 	groundAim: { p: number; lane: number }[] = [];
 	fire: { targets: Target[]; t: number; dur: number } | null = null;
+	/** backspace locked the volley in: the guns take no answers until it lands */
+	locked = false;
 	time = 0;
 	waveIdx = -1;
 	waveStart = 0;
@@ -227,7 +229,7 @@ export class Game {
 	}
 	/** guns can't take input (jammed, or the level is over) */
 	get blocked() {
-		return this.jamT > 0 || this.ending !== null;
+		return this.jamT > 0 || (this.locked && this.fire !== null) || this.ending !== null;
 	}
 
 	startWave() {
@@ -359,7 +361,10 @@ export class Game {
 		if (target.kind === 'robot') target.robot.targeted = true;
 		if (target.kind === 'crate') target.crate.opening = true;
 		if (target.kind === 'part') target.part.revealed = true;
-		if (!this.fire) this.fire = { targets: [], t: 0, dur: 0 };
+		if (!this.fire) {
+			this.fire = { targets: [], t: 0, dur: 0 };
+			this.locked = false;
+		}
 		this.fire.targets.push(target);
 		// the newest target always gets a pistol straight away (the one that's been on its target longest)
 		if (this.fire.targets.length === 1) {
@@ -377,11 +382,16 @@ export class Game {
 	}
 
 	/**
-	 * Backspace with something typed: while a volley is in the air it just lets that volley
-	 * finish in its own time; otherwise it wastes a volley into the ground.
+	 * Backspace with something typed: while a volley is in the air it locks that volley in
+	 * (no new answers, so its timer can't restart) until it lands; otherwise it wastes a
+	 * volley into the ground.
 	 */
 	backspace() {
-		if (this.blocked || this.fire) return;
+		if (this.blocked) return;
+		if (this.fire) {
+			this.locked = true;
+			return;
+		}
 		// a wasted volley takes as long as a normal kill (laser pointer halves it)
 		const t = FIRE_TIME * (this.up.antimatter ? 0.5 : 1) * (this.up.laser ? 0.5 : 1);
 		this.jam(t);
@@ -609,7 +619,10 @@ export class Game {
 			});
 		if (this.fire) {
 			this.fire.targets = this.fire.targets.filter((t) => t.kind === 'crate' || t.robot !== rb);
-			if (!this.fire.targets.length) this.fire = null;
+			if (!this.fire.targets.length) {
+				this.fire = null;
+				this.locked = false;
+			}
 		}
 	}
 
@@ -710,6 +723,11 @@ export class Game {
 			if (this.fire.t >= this.fire.dur) {
 				const targets = this.fire.targets;
 				this.fire = null;
+				if (this.locked) {
+					this.locked = false;
+					// time spent locked doesn't count toward the next answer's solve time
+					this.readyAt = this.time;
+				}
 				// multi-kills pay double for two robots, triple for three or more
 				const n = targets.filter((t) => t.kind === 'robot').length;
 				const mul = n >= 3 ? 3 : n;

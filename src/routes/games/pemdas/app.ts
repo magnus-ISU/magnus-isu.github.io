@@ -598,7 +598,22 @@ export class App {
 			fb === 'hit' ? '#3ad66a' : fb === 'miss' || fb === 'blocked' ? '#ff4a4a' : '#555b66';
 		roundRect(ctx, r, 10, fb === 'miss' ? '#3a1414' : '#0b0d10', border, 4);
 		const size = Math.min(r.h * 0.6, 44);
-		if (g.jamT > 0) {
+		if (g.locked && g.fire) {
+			// locked-in volley: guns busy until it lands
+			text(ctx, 'FIRING', r.x + r.w / 2, r.y + r.h * 0.42, size * 0.6, '#ffd84a', 'center');
+			roundRect(ctx, { x: r.x + 12, y: r.y + r.h * 0.72, w: r.w - 24, h: 8 }, 4, '#333');
+			roundRect(
+				ctx,
+				{
+					x: r.x + 12,
+					y: r.y + r.h * 0.72,
+					w: (r.w - 24) * Math.min(1, g.fire.t / g.fire.dur),
+					h: 8,
+				},
+				4,
+				'#ffd84a',
+			);
+		} else if (g.jamT > 0) {
 			const label = g.groundT > 0 ? 'WASTED VOLLEY' : 'JAMMED';
 			text(ctx, label, r.x + r.w / 2, r.y + r.h * 0.42, size * 0.6, '#ff7a6a', 'center');
 			roundRect(ctx, { x: r.x + 12, y: r.y + r.h * 0.72, w: r.w - 24, h: 8 }, 4, '#333');
