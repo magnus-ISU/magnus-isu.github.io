@@ -8,6 +8,7 @@ import {
 	BASE_HP,
 	freshSave,
 	ITEM_CAP,
+	ITEM_UPGRADES,
 	ITEMS,
 	loadSave,
 	maxHpOf,
@@ -15,6 +16,7 @@ import {
 	type Save,
 	saveHooks,
 	UPGRADES,
+	type Upgrade,
 } from './save';
 import { drawDistrict, drawIcon, hash, type IconKey, THEMES } from './scenery';
 import { type DriveStatus, pemdasSync } from './sync';
@@ -94,6 +96,24 @@ function roundRect(
 		ctx.stroke();
 	}
 }
+/** the largest size up to `max` (and at least `min`) at which `s` fits in `maxW` on one line */
+function fitSize(ctx: C2D, s: string, maxW: number, max: number, min = 7, weight = 'bold') {
+	ctx.font = `${weight} ${max}px ${FONT}`;
+	const w = ctx.measureText(s).width;
+	return Math.max(min, w > maxW && w > 0 ? (max * maxW) / w : max);
+}
+/** wrap `s` at the largest size up to `max` whose lines fit a `maxW` x `maxH` box (cut off below `min`) */
+function fitWrap(ctx: C2D, s: string, maxW: number, maxH: number, max: number, min = 7, lh = 1.25) {
+	let size = max;
+	let lines = wrap(ctx, s, maxW, size);
+	const over = () =>
+		lines.length * size * lh > maxH || lines.some((l) => ctx.measureText(l).width > maxW);
+	while (size > min && over()) {
+		size = Math.max(min, size - 0.5);
+		lines = wrap(ctx, s, maxW, size);
+	}
+	return { size, lines: lines.slice(0, Math.max(0, Math.floor(maxH / (size * lh)))) };
+}
 const starStr = (n: number) => '★'.repeat(n) + '☆'.repeat(3 - n);
 
 export class App {
@@ -116,6 +136,8 @@ export class App {
 	confirmReset = 0;
 	newBest = false;
 	shopMsg = 'Welcome to Robo-Mart! Everything is salvaged.';
+	/** when the shop's neon sign next flickers */
+	signNext = 5 + Math.random() * 25;
 	onExit: () => void;
 
 	constructor(onExit: () => void) {
@@ -206,6 +228,7 @@ export class App {
 		const lv = this.selected;
 		let stars = 0;
 		const money = r.money;
+		const wasOpen = new Set(LEVELS.filter((l) => this.unlocked(l)));
 		if (!r.endless && r.won) {
 			// 3 stars = flawless: no damage taken and no wrong answers
 			// any damage = 1 star; rematches also drop to 1 star for using a consumable.
@@ -230,8 +253,18 @@ export class App {
 		};
 		const key = r.endless ? `${lv.id}:endless` : lv.id;
 		const rec = this.save.records[key];
-		this.newBest = !rec || attemptScore(attempt, r.endless) > attemptScore(rec.best, r.endless);
-		this.save.records[key] = { last: attempt, best: this.newBest ? attempt : rec.best };
+		this.newBest =
+			!rec?.best || attemptScore(attempt, r.endless) > attemptScore(rec.best, r.endless);
+		this.save.records[key] = { last: attempt, best: this.newBest ? attempt : rec?.best };
+		// beating a level jumps to the one it unlocked (main levels before rematches), carrying this run's stats
+		const fresh = LEVELS.filter((l) => !wasOpen.has(l) && this.unlocked(l));
+		const next = fresh.find((l) => l.cell) ?? fresh[0];
+		if (next) {
+			this.selected = next;
+			this.newBest = false;
+			if (!this.save.records[next.id])
+				this.save.records[next.id] = { last: { ...attempt, from: lv.id } };
+		}
 		this.save.money += money;
 		if (money > 0) this.gains.push({ amount: money, t: 0 });
 		this.save.items = { ...r.items };
@@ -386,7 +419,8 @@ export class App {
 		ctx.shadowOffsetY = pressed ? 0 : 3;
 		roundRect(ctx, r, Math.min(12, r.h / 3), g, '#0c0d10', 2.5);
 		ctx.restore();
-		const size = opts.size ?? Math.min(24, r.h * 0.42);
+		// labels shrink rather than spill out of narrow buttons
+		const size = fitSize(ctx, label, r.w - 8, opts.size ?? Math.min(24, r.h * 0.42));
 		const fg = opts.disabled ? '#8a8d94' : '#fff';
 		if (opts.icon) {
 			const is = Math.min(r.h * 0.6, r.w * 0.4);
@@ -940,8 +974,13 @@ export class App {
 			}
 			y += h + 8;
 		};
+		const from = rec?.last.from ? LEVELS.find((l) => l.id === rec.last.from) : undefined;
 		attempt(
-			this.newBest && rec ? 'LAST ATTEMPT — NEW BEST!' : 'LAST ATTEMPT',
+			from
+				? `LAST ATTEMPT (on ${from.name})`
+				: this.newBest && rec
+					? 'LAST ATTEMPT — NEW BEST!'
+					: 'LAST ATTEMPT',
 			rec?.last,
 			this.newBest && !!rec,
 		);
@@ -1044,6 +1083,34 @@ export class App {
 				},
 			});
 		}
+		const upgradeCards = (list: Upgrade[], kind: string, accent: string) => {
+			for (const u of list) {
+				const owned = u.key in s.upgrades;
+				const on = !!s.upgrades[u.key];
+				cards.push({
+					icon: u.key,
+					name: u.name,
+					desc: u.desc,
+					status: owned ? (on ? 'Active · tap to turn off' : 'Off · tap to turn on') : kind,
+					label: owned ? undefined : `$${u.price}`,
+					ok: s.money >= u.price,
+					on: owned ? on : undefined,
+					accent,
+					act: () => {
+						if (owned) {
+							s.upgrades[u.key] = !on;
+							return (this.shopMsg = `${u.name} switched ${on ? 'off' : 'on'}.`);
+						}
+						if (s.money < u.price)
+							return (this.shopMsg = `The ${u.name} is $${u.price}. No haggling.`);
+						s.money -= u.price;
+						s.upgrades[u.key] = true;
+						this.shopMsg = `${u.name} installed!`;
+					},
+				});
+			}
+		};
+		upgradeCards(ITEM_UPGRADES, 'Item upgrade', '#ffb142');
 		// armor: bought left to right, one worn at a time
 		ARMOR.forEach((a, i) => {
 			const owned = i < s.armor.owned;
@@ -1081,40 +1148,13 @@ export class App {
 				},
 			});
 		});
-		for (const u of UPGRADES) {
-			const owned = u.key in s.upgrades;
-			const on = !!s.upgrades[u.key];
-			cards.push({
-				icon: u.key,
-				name: u.name,
-				desc: u.desc,
-				status: owned
-					? on
-						? 'Active · tap to turn off'
-						: 'Off · tap to turn on'
-					: 'Weapon upgrade',
-				label: owned ? undefined : `$${u.price}`,
-				ok: s.money >= u.price,
-				on: owned ? on : undefined,
-				accent: '#74e0ff',
-				act: () => {
-					if (owned) {
-						s.upgrades[u.key] = !on;
-						return (this.shopMsg = `${u.name} switched ${on ? 'off' : 'on'}.`);
-					}
-					if (s.money < u.price)
-						return (this.shopMsg = `The ${u.name} is $${u.price}. No haggling.`);
-					s.money -= u.price;
-					s.upgrades[u.key] = true;
-					this.shopMsg = `${u.name} installed!`;
-				},
-			});
-		}
-		// 3 rows of 4: consumables, armor, weapon upgrades
+		upgradeCards(UPGRADES, 'Weapon upgrade', '#74e0ff');
+		// 4 rows of 4: consumables, item upgrades, armor, weapon upgrades
 		const cols = 4;
+		const rows = Math.ceil(cards.length / cols);
 		const gap = 8;
 		const cw = (area.w - gap * (cols - 1)) / cols;
-		const ch = Math.min(this.landscape ? 170 : 260, (area.h - gap * 2) / 3);
+		const ch = Math.min(this.landscape ? 170 : 260, (area.h - gap * (rows - 1)) / rows);
 		const tall = cw < 200;
 		cards.forEach((c, i) => {
 			const r = {
@@ -1169,35 +1209,30 @@ export class App {
 				tw = r.w - is - 28;
 				ty = r.y + 10;
 			}
-			ctx.font = `bold 17px ${FONT}`;
-			const fs = Math.min(17, (17 * tw) / ctx.measureText(c.name).width);
+			// everything shrinks to fit rather than overflowing or disappearing
+			const fs = fitSize(ctx, c.name, tw, Math.min(17, ch * 0.13));
 			text(ctx, c.name, tx, ty + fs / 2, fs, '#fff');
 			const room = r.y + ch - btnH - 14 - (ty + fs + 6);
-			const lines = wrap(ctx, c.desc, tw, dfs).slice(
-				0,
-				Math.max(0, Math.floor(room / (dfs * 1.25))),
-			);
+			const { size: ds, lines } = fitWrap(ctx, c.desc, tw, room, dfs);
 			for (const [j, l] of lines.entries())
-				text(ctx, l, tx, ty + fs + 8 + j * dfs * 1.25 + dfs / 2, dfs, '#bbb', 'left', 'normal');
+				text(ctx, l, tx, ty + fs + 8 + j * ds * 1.25 + ds / 2, ds, '#bbb', 'left', 'normal');
 			const by = r.y + ch - btnH - 8;
 			if (c.label) {
 				const bw = Math.min(90, tw * (tall ? 1 : 0.45));
-				this.button(ctx, { x: r.x + r.w - bw - 8, y: by, w: bw, h: btnH }, c.label, {
+				const bx = r.x + r.w - bw - 8;
+				this.button(ctx, { x: bx, y: by, w: bw, h: btnH }, c.label, {
 					color: c.ok ? '#2d7d46' : '#3a3d44',
 					size: 14,
 				});
-				if (!tall) text(ctx, c.status, tx, by + btnH / 2, dfs, '#999', 'left', 'normal');
-			} else
-				text(
-					ctx,
-					c.status,
-					tx,
-					by + btnH / 2,
-					dfs,
-					c.on ? c.accent : '#999',
-					'left',
-					c.on ? 'bold' : 'normal',
-				);
+				if (!tall) {
+					const ss = fitSize(ctx, c.status, bx - 6 - tx, dfs, 7, 'normal');
+					text(ctx, c.status, tx, by + btnH / 2, ss, '#999', 'left', 'normal');
+				}
+			} else {
+				const weight = c.on ? 'bold' : 'normal';
+				const ss = fitSize(ctx, c.status, tw, dfs, 7, weight);
+				text(ctx, c.status, tx, by + btnH / 2, ss, c.on ? c.accent : '#999', 'left', weight);
+			}
 			ctx.globalAlpha = 1;
 			this.hits.push({
 				...r,
@@ -1225,7 +1260,10 @@ export class App {
 		for (let y = r.y, row = 0; y < r.y + r.h; y += 18, row++)
 			for (let x = r.x - (row % 2) * 20; x < r.x + r.w; x += 40) ctx.strokeRect(x, y, 40, 18);
 		// neon sign
-		const flick = Math.sin(this.time * 13) > -0.95 ? 1 : 0.3;
+		// one brief flicker every 5-30 seconds
+		if (this.time > this.signNext + 0.35) this.signNext = this.time + 5 + Math.random() * 25;
+		const ft = this.time - this.signNext;
+		const flick = ft >= 0 && Math.floor(ft / 0.07) % 2 === 0 ? 0.3 : 1;
 		const signSize = Math.min(28, r.w / 8, r.h / 5);
 		ctx.shadowColor = '#ff4be0';
 		ctx.shadowBlur = 16 * flick;
@@ -1288,9 +1326,11 @@ export class App {
 		ctx.fillRect(r.x, counterY, r.w, 6);
 		ctx.restore();
 		// speech bubble
-		const fs = 14;
 		const bw = Math.min(r.w - 20, 300);
-		const lines = wrap(ctx, this.shopMsg, bw - 20, fs);
+		const top = this.landscape ? counterY + 20 : r.y + 8;
+		const fit = fitWrap(ctx, this.shopMsg, bw - 20, r.y + r.h - 8 - top - 16, 14, 8, 1.3);
+		const fs = fit.size;
+		const lines = fit.lines;
 		const bh = lines.length * fs * 1.3 + 16;
 		const bx = this.landscape ? r.x + 10 : r.x + r.w - bw - 10;
 		const by = this.landscape ? counterY + 20 : r.y + r.h - bh - 8;

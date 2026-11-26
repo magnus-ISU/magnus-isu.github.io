@@ -77,10 +77,19 @@ export function mergeSaves(_base: Save | null, mine: Save, theirs: Save): Save {
 	for (const [k, rec] of Object.entries(mine.records)) {
 		const other = out.records[k];
 		const endless = k.endsWith(':endless');
-		const better = (a: Attempt, b: Attempt) =>
-			attemptScore(a, endless) >= attemptScore(b, endless) ? a : b;
+		const better = <T extends Attempt | undefined>(a: T, b: T): T =>
+			!a ? b : !b ? a : attemptScore(a, endless) >= attemptScore(b, endless) ? a : b;
 		out.records[k] = other
-			? { last: better(rec.last, other.last), best: better(rec.best, other.best) }
+			? {
+					// a real run on this level beats one carried over from the level that unlocked it
+					last:
+						!rec.last.from === !other.last.from
+							? better(rec.last, other.last)
+							: rec.last.from
+								? other.last
+								: rec.last,
+					best: better(rec.best, other.best),
+				}
 			: rec;
 	}
 	return out;

@@ -8,10 +8,19 @@ import { drawDistrict, drawIcon, drawSkyline, hash, THEMES } from './scenery';
 // ---------- Tuning ----------
 const FIRE_TIME = 2.5;
 const PART_FIRE_TIME = 0.5;
-const JAM_TIME = 2.5;
+/** 50% longer than a kill or a wasted volley */
+const JAM_TIME = FIRE_TIME * 1.5;
 /** seconds a pistol stays on one target before rotating to the next */
 const GUN_SWITCH = 0.625;
 const BARRIER_P = 0.82;
+/** force field: how far in front of its robot the barrier stands, and the furthest forward it goes */
+const BARRIER_GAP = 0.02;
+const BARRIER_MAX = 0.95;
+/** force field: seconds to fade out before jumping, and to fade back in */
+const BARRIER_OUT = 1;
+const BARRIER_IN = 0.5;
+const EMP_TIME = 5;
+const PULSE_BONUS = 3;
 const CRATE_INTERVAL = 25;
 const CRATE_LIFE = 18;
 /** seconds of walking a shield knocks a boss back */
@@ -135,6 +144,14 @@ export class Game {
 	shield = 0;
 	barrierT = 0;
 	barrierId = 0;
+	/** where the barrier stands (the force field moves it) */
+	barrierP = BARRIER_P;
+	/** force field: the robot it's parked in front of */
+	barrierFor: Robot | null = null;
+	/** force field: seconds left fading out before it jumps */
+	barrierOut = 0;
+	/** 0..1 fade-in after it appears */
+	barrierIn = 1;
 	jamT = 0;
 	jamDur = 1;
 	groundT = 0;
@@ -227,7 +244,8 @@ export class Game {
 
 	spawnRobot(spawn: Spawn) {
 		const boss = ROBOTS[spawn.type].boss;
-		const p = boss ? Math.random() * 0.15 : Math.random() * 0.5;
+		const [lo, hi] = this.level.spawn ?? [0, 0.5];
+		const p = boss ? Math.random() * 0.15 : lo + Math.random() * (hi - lo);
 		// drop on the opposite side of the road from robots already nearby so they don't overlap
 		let lean = 0;
 		for (const r of this.robots)
@@ -435,10 +453,60 @@ export class Game {
 		} else if (key === 'barrier') {
 			this.barrierId++;
 			this.barrierT = 10;
+			this.barrierOut = 0;
+			this.barrierIn = 0;
+			this.barrierP = BARRIER_P;
+			this.placeBarrier();
 		} else if (key === 'shield') this.shield++;
 		this.items[key]--;
 		this.usedItems = true;
 		return true;
+	}
+
+	/** the barrier is standing and blocks robots (not mid-jump) */
+	get barrierUp() {
+		return this.barrierT > 0 && this.barrierOut <= 0;
+	}
+	/** robots the current barrier may stop: walking, alive, and not held by an earlier barrier */
+	holdable(rb: Robot) {
+		return (
+			!rb.attack && rb.blownT === null && (rb.barrierId === 0 || rb.barrierId === this.barrierId)
+		);
+	}
+	/** force field: stand just in front of the closest robot it can hold (or stay put if none) */
+	placeBarrier() {
+		this.barrierFor = null;
+		if (!this.up.forcefield) return;
+		const ok = this.robots.filter((r) => this.holdable(r) && r.p < BARRIER_MAX);
+		if (!ok.length) return;
+		const front = ok.reduce((a, b) => (a.p > b.p ? a : b));
+		this.barrierFor = front;
+		this.barrierP = Math.min(BARRIER_MAX, front.p + BARRIER_GAP);
+	}
+	/** force field: jump (fade out, then in) once its robot dies or another robot gets in front */
+	moveBarrier(dt: number) {
+		if (this.barrierT <= 0) {
+			this.barrierFor = null;
+			this.barrierOut = 0;
+			return;
+		}
+		this.barrierIn = Math.min(1, this.barrierIn + dt / BARRIER_IN);
+		if (!this.up.forcefield) return;
+		if (this.barrierOut > 0) {
+			this.barrierOut -= dt;
+			if (this.barrierOut <= 0) {
+				this.barrierOut = 0;
+				this.barrierIn = 0;
+				this.placeBarrier();
+			}
+			return;
+		}
+		const gone = this.barrierFor !== null && !this.robots.includes(this.barrierFor);
+		const ahead = this.robots.some(
+			(r) => this.holdable(r) && r.p > this.barrierP && r.p < BARRIER_MAX,
+		);
+		const idle = this.barrierFor === null && this.robots.some((r) => this.holdable(r));
+		if (gone || ahead || idle) this.barrierOut = BARRIER_OUT;
 	}
 
 	/** freeze every robot that hasn't been EMP'd before */
@@ -446,26 +514,38 @@ export class Game {
 		const hit = this.robots.filter((r) => !r.emped && !r.attack);
 		for (const r of hit) {
 			r.emped = true;
-			r.freezeT = 5;
+			r.freezeT = EMP_TIME + (this.up.pulse ? PULSE_BONUS : 0);
 		}
 		if (hit.length)
 			this.effects.push({ x: this.W / 2, y: this.FH / 2, t: 0, dur: 0.8, kind: 'emp' });
 		return hit.length > 0;
 	}
 
-	/** dynamite skips bosses, robots already being shot or blown up, and ones that already hit you */
+	/** dynamite skips bosses (and brutes without frag grenades), robots already being shot or blown up, and ones that already hit you */
 	blastable(rb: Robot) {
-		return !ROBOTS[rb.type].boss && !rb.targeted && rb.blownT === null && !rb.attack?.hit;
+		return (
+			!ROBOTS[rb.type].boss &&
+			(this.up.frag || rb.type !== 'brute') &&
+			!rb.targeted &&
+			rb.blownT === null &&
+			!rb.attack?.hit
+		);
 	}
 
 	blast(x: number, y: number, radius: number) {
 		this.effects.push({ x, y, t: 0, dur: 0.9, kind: 'big' });
 		this.shake = 0.4;
 		const k = this.k;
-		for (const rb of this.robots) {
-			if (!this.blastable(rb)) continue;
+		const dist = (rb: Robot) => {
 			const pos = this.screen(rb.p, rb.lane);
-			if (Math.hypot(pos.x - x, pos.y - y) >= radius * k * (0.6 + rb.p * 0.6)) continue;
+			return Math.hypot(pos.x - x, pos.y - y);
+		};
+		let hit = this.robots.filter(
+			(rb) => this.blastable(rb) && dist(rb) < radius * k * (0.6 + rb.p * 0.6),
+		);
+		// plain dynamite only gets the one robot it lands on; frag grenades get everyone nearby
+		if (!this.up.frag && hit.length) hit = [hit.reduce((a, b) => (dist(a) <= dist(b) ? a : b))];
+		for (const rb of hit) {
 			// a dying robot: no bounty unless you shoot it before it falls apart
 			rb.blownT = BLOWN_TIME;
 			rb.attack = null;
@@ -555,6 +635,7 @@ export class Game {
 		this.jamT = Math.max(0, this.jamT - dt);
 		this.groundT = Math.max(0, this.groundT - dt);
 		this.barrierT = Math.max(0, this.barrierT - dt);
+		this.moveBarrier(dt);
 		this.shake = Math.max(0, this.shake - dt);
 		this.hurtT = Math.max(0, this.hurtT - dt);
 		this.messageT = Math.max(0, this.messageT - dt);
@@ -605,8 +686,8 @@ export class Game {
 			const before = rb.p;
 			rb.p += (dt / this.level.walkTime) * ROBOTS[rb.type].speed * this.speedMul;
 			const held = rb.barrierId === 0 || rb.barrierId === this.barrierId;
-			if (this.barrierT > 0 && held && before <= BARRIER_P && rb.p > BARRIER_P) {
-				rb.p = BARRIER_P;
+			if (this.barrierUp && held && before <= this.barrierP && rb.p > this.barrierP) {
+				rb.p = this.barrierP;
 				rb.barrierId = this.barrierId;
 			}
 			if (rb.p >= 1) this.arrive(rb);
@@ -651,6 +732,7 @@ export class Game {
 			const pos = this.screen(1, rb.lane);
 			this.effects.push({ x: pos.x, y: pos.y - 60 * this.k, t: 0, dur: 0.8, kind: 'shield' });
 			this.shake = 0.3;
+			if (this.up.reflect) this.repel(rb);
 			if (ROBOTS[rb.type].boss) {
 				rb.p = Math.max(
 					0,
@@ -664,6 +746,23 @@ export class Game {
 			return;
 		}
 		rb.attack = { t: -WINDUP, hit: false };
+	}
+
+	/** reflective shield: knock every other robot back (cancelling wind-ups) */
+	repel(except: Robot) {
+		for (const r of this.robots) {
+			if (r === except || r.blownT !== null || r.drop < 1) continue;
+			if (r.attack) {
+				if (r.attack.t >= 0) continue;
+				r.attack = null;
+			}
+			r.p = Math.max(
+				0,
+				r.p - (SHIELD_PUSH * ROBOTS[r.type].speed * this.speedMul) / this.level.walkTime,
+			);
+			const pos = this.screen(r.p, r.lane);
+			this.effects.push({ x: pos.x, y: pos.y - 40 * this.k, t: 0, dur: 0.6, kind: 'shield' });
+		}
 	}
 
 	impact(rb: Robot) {
@@ -758,9 +857,9 @@ export function render(ctx: C2D, g: Game) {
 	if (g.shake > 0)
 		ctx.translate((Math.random() - 0.5) * 16 * g.shake, (Math.random() - 0.5) * 16 * g.shake);
 	drawScene(ctx, g);
-	if (g.barrierT > 0) drawBarrier(ctx, g);
-
 	const list: { p: number; draw: () => void }[] = [];
+	// in the depth sort the barrier sits just in front of the robots it holds, behind any that got past
+	if (g.barrierT > 0) list.push({ p: g.barrierP + 1e-6, draw: () => drawBarrier(ctx, g) });
 	const blocks: LabelBlock[] = [];
 	for (const c of g.crates) {
 		list.push({ p: c.p, draw: () => drawCrate(ctx, g, c) });
@@ -883,10 +982,11 @@ function drawScene(ctx: C2D, g: Game) {
 }
 
 function drawBarrier(ctx: C2D, g: Game) {
-	const a = g.screen(BARRIER_P, -1.15);
-	const b = g.screen(BARRIER_P, 1.15);
-	const h = 60 * g.k;
-	const alpha = g.barrierT < 2 ? 0.4 + 0.4 * Math.sin(g.time * 20) : 0.8;
+	const a = g.screen(g.barrierP, -1.15);
+	const b = g.screen(g.barrierP, 1.15);
+	const h = 60 * g.k * (g.scale(g.barrierP) / g.scale(BARRIER_P));
+	const fade = g.barrierOut > 0 ? g.barrierOut / BARRIER_OUT : g.barrierIn;
+	const alpha = (g.barrierT < 2 ? 0.4 + 0.4 * Math.sin(g.time * 20) : 0.8) * fade;
 	ctx.fillStyle = `rgba(0,230,255,${alpha * 0.3})`;
 	ctx.fillRect(a.x, a.y - h, b.x - a.x, h);
 	ctx.strokeStyle = `rgba(120,240,255,${alpha})`;

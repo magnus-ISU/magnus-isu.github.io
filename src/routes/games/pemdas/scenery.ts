@@ -565,6 +565,69 @@ export function drawIcon(ctx: C2D, key: IconKey, x: number, y: number, size: num
 				dot(ctx, Math.cos(a) * 14, Math.sin(a) * 6, 1.8, '#e0a0ff');
 			}
 			break;
+		case 'frag':
+			// pineapple grenade: ribbed olive body, lever and pin ring
+			circ(ctx, 0, 4, 13, vgrad(ctx, -9, 17, ['#a8b86a', '#5a6a2a', '#2a3410']), lw);
+			ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+			ctx.lineWidth = 1.5;
+			for (const yy of [-2, 4, 10]) {
+				ctx.beginPath();
+				ctx.moveTo(-12, yy);
+				ctx.lineTo(12, yy);
+				ctx.stroke();
+			}
+			for (const xx of [-5, 5]) {
+				ctx.beginPath();
+				ctx.moveTo(xx, -8);
+				ctx.lineTo(xx, 16);
+				ctx.stroke();
+			}
+			plate(ctx, -5, -14, 10, 7, 2, GREY, 1.5);
+			plate(ctx, 3, -15, 12, 4, 1.5, GREY, 1.5);
+			ctx.strokeStyle = '#d9c35a';
+			ctx.lineWidth = 2;
+			ctx.beginPath();
+			ctx.arc(-9, -14, 4, 0, Math.PI * 2);
+			ctx.stroke();
+			break;
+		case 'pulse':
+			ctx.strokeStyle = '#74b9ff';
+			ctx.lineWidth = 2;
+			for (const [rad, a] of [
+				[19, 0.35 + 0.3 * Math.sin(t * 4)],
+				[15, 0.7],
+			]) {
+				ctx.globalAlpha = a;
+				ctx.beginPath();
+				ctx.arc(0, 0, rad, 0, Math.PI * 2);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			circ(ctx, 0, 0, 11, vgrad(ctx, -11, 11, ['#bfe6ff', '#3a8ad6', '#0e3a6a']), lw);
+			poly(ctx, [2, -9, -5, 1, -1, 1, -3, 9, 5, -2, 1, -2], '#ffd84a', 1.5);
+			break;
+		case 'forcefield': {
+			// a barrier with arrows: it moves
+			drawIcon(ctx, 'barrier', 0, 4, 32, t);
+			const dx = Math.sin(t * 3) * 1.5;
+			poly(ctx, [-19 + dx, -16, -11 + dx, -20, -11 + dx, -12], '#81ecec', 1.5);
+			poly(ctx, [19 - dx, -16, 11 - dx, -20, 11 - dx, -12], '#81ecec', 1.5);
+			break;
+		}
+		case 'reflect':
+			// shield with rays bouncing off it
+			ctx.strokeStyle = '#ffd84a';
+			ctx.lineWidth = 2;
+			for (const sd of [-1, 1]) {
+				ctx.beginPath();
+				ctx.moveTo(sd * 6, -6);
+				ctx.lineTo(sd * 19, -15);
+				ctx.moveTo(sd * 9, 4);
+				ctx.lineTo(sd * 20, 2);
+				ctx.stroke();
+			}
+			drawIcon(ctx, 'shield', 0, 0, 32, t);
+			break;
 		case 'lock':
 			ctx.strokeStyle = INK;
 			ctx.lineWidth = 6;

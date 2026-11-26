@@ -1,5 +1,14 @@
 export type ItemKey = 'dynamite' | 'emp' | 'barrier' | 'shield';
-export type UpgradeKey = 'laser' | 'scope' | 'targeting' | 'antimatter';
+export type UpgradeKey =
+	| 'laser'
+	| 'scope'
+	| 'targeting'
+	| 'antimatter'
+	| 'frag'
+	| 'pulse'
+	| 'forcefield'
+	| 'reflect';
+export type Upgrade = { key: UpgradeKey; name: string; price: number; desc: string };
 
 /** `code` is a KeyboardEvent.code, so hotkeys follow key position rather than layout */
 export const ITEMS: {
@@ -16,7 +25,7 @@ export const ITEMS: {
 		label: 'Q',
 		name: 'Dynamite',
 		price: 50,
-		desc: 'Blows up robots near the front one. Bosses are immune.',
+		desc: 'Blows up the front robot. Bosses and brutes are immune.',
 	},
 	{
 		key: 'emp',
@@ -45,7 +54,35 @@ export const ITEMS: {
 ];
 export const ITEM_CAP = 5;
 
-export const UPGRADES: { key: UpgradeKey; name: string; price: number; desc: string }[] = [
+/** switchable upgrades to the consumables (the shop's second row) */
+export const ITEM_UPGRADES: Upgrade[] = [
+	{
+		key: 'frag',
+		name: 'Frag Grenades',
+		price: 200,
+		desc: 'Dynamite blows up every robot near the front one, brutes included.',
+	},
+	{
+		key: 'pulse',
+		name: 'Pulse Amp',
+		price: 400,
+		desc: 'EMP freezes robots for 3 more seconds.',
+	},
+	{
+		key: 'forcefield',
+		name: 'Force Field',
+		price: 800,
+		desc: 'The barrier blocks the closest robot, jumping to the next one when it dies.',
+	},
+	{
+		key: 'reflect',
+		name: 'Reflective Shield',
+		price: 1600,
+		desc: 'When the shield blocks a robot, every other robot is knocked back.',
+	},
+];
+
+export const UPGRADES: Upgrade[] = [
 	{
 		key: 'laser',
 		name: 'Laser Pointer',
@@ -110,6 +147,8 @@ export type Attempt = {
 	kills: number;
 	money: number;
 	wave: number;
+	/** set when this is another level's run, carried onto the level it unlocked */
+	from?: string;
 };
 
 export type Save = {
@@ -122,7 +161,8 @@ export type Save = {
 	stars: Record<string, number>;
 	endlessBest: Record<string, number>;
 	/** keyed by level id, plus `${id}:endless` */
-	records: Record<string, { last: Attempt; best: Attempt }>;
+	/** best is missing on a level that only has a run carried over from the level that unlocked it */
+	records: Record<string, { last: Attempt; best?: Attempt }>;
 	/** unlocked achievement ids */
 	achievements: Record<string, boolean>;
 };

@@ -30,8 +30,10 @@ export type LevelDef = {
 	name: string;
 	desc: string;
 	requires?: string;
-	/** seconds for a speed-1 robot to walk the whole road */
+	/** seconds for a speed-1 robot to walk the whole road (WALK on every level) */
 	walkTime: number;
+	/** where regular robots drop in, 0 = far end of the road, 1 = you (default [0, 0.5]) */
+	spawn?: [number, number];
 	/** seconds before the next wave arrives even if this one isn't cleared */
 	waveTime: number;
 	crate: Gen;
@@ -58,6 +60,12 @@ const pay = (spider: number, janitor: number, trooper: number, brute: number) =>
 /** the main level whose district/scenery a level uses */
 export const themeOf = (lv: LevelDef) => (lv.id.includes('.') ? (lv.requires ?? lv.id) : lv.id);
 
+/**
+ * Robots walk at the same speed on every level; easier levels drop them in closer
+ * (and with less spread) instead of making them walk faster.
+ */
+export const WALK = 70;
+
 const s = (type: RobotType, gen: Gen, count = 1): Spawn => ({ type, gen, count });
 
 export const LEVELS: LevelDef[] = [
@@ -65,8 +73,8 @@ export const LEVELS: LevelDef[] = [
 		id: '1',
 		name: 'Add & Subtract',
 		desc: 'Single digits. Last wave: two-digit ± one-digit.',
-		// janitors only: they walk faster here to make up for the slower, weaker robot types removed
-		walkTime: 45,
+		walkTime: WALK,
+		spawn: [0.36, 0.68],
 		waveTime: 40,
 		crate: P.addSub21,
 		cell: [0, 0],
@@ -83,8 +91,8 @@ export const LEVELS: LevelDef[] = [
 		name: 'Times & Divide',
 		desc: 'Factors under 10. Last wave: up to 16.',
 		requires: '1',
-		// janitors + spiders only; faster walk makes up for the removed troopers and brutes
-		walkTime: 50,
+		walkTime: WALK,
+		spawn: [0.29, 0.64],
 		waveTime: 40,
 		crate: P.mulDiv(16),
 		cell: [1, 0],
@@ -101,7 +109,8 @@ export const LEVELS: LevelDef[] = [
 		name: 'Brackets',
 		desc: 'Mixed operators and brackets, single digits.',
 		requires: '2',
-		walkTime: 60,
+		walkTime: WALK,
+		spawn: [0.14, 0.57],
 		waveTime: 45,
 		crate: P.mixed1Hard,
 		cell: [2, 0],
@@ -118,7 +127,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'Big Sums',
 		desc: 'Two- and three-digit addition and subtraction. Last wave: four-digit sums.',
 		requires: '3',
-		walkTime: 70,
+		walkTime: WALK,
 		waveTime: 50,
 		crate: P.add4,
 		cell: [2, 1],
@@ -136,7 +145,8 @@ export const LEVELS: LevelDef[] = [
 		name: 'Hard Multiplication',
 		desc: '2-digit × 1-digit. Miniboss: 2-digit × 2-digit.',
 		requires: '4',
-		walkTime: 75,
+		walkTime: WALK,
+		spawn: [0, 0.46],
 		waveTime: 55,
 		crate: P.mul(2, 1, 6),
 		cell: [1, 1],
@@ -157,7 +167,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'Juggernaut Rematch',
 		desc: '2-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
 		requires: '5',
-		walkTime: 75,
+		walkTime: WALK,
 		waveTime: 70,
 		crate: P.mul(2, 1),
 		waves: [
@@ -171,7 +181,8 @@ export const LEVELS: LevelDef[] = [
 		name: 'Hard Mixed',
 		desc: '2-digit × 1-digit, division to 16, two-digit ±.',
 		requires: '5',
-		walkTime: 75,
+		walkTime: WALK,
+		spawn: [0, 0.46],
 		waveTime: 55,
 		crate: P.mixed6Hard,
 		cell: [0, 1],
@@ -188,7 +199,8 @@ export const LEVELS: LevelDef[] = [
 		name: 'Triple Digits',
 		desc: '3-digit × 1-digit. Boss: 3-digit × 2-digit.',
 		requires: '6',
-		walkTime: 85,
+		walkTime: WALK,
+		spawn: [0, 0.39],
 		waveTime: 60,
 		crate: P.mul(3, 1),
 		cell: [0, 2],
@@ -209,7 +221,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'Titan Rematch',
 		desc: '3-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
 		requires: '7',
-		walkTime: 85,
+		walkTime: WALK,
 		waveTime: 90,
 		crate: P.mul(3, 1),
 		waves: [
@@ -223,7 +235,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'Powers',
 		desc: 'Squares up to 40², cubes up to 10³.',
 		requires: '7',
-		walkTime: 70,
+		walkTime: WALK,
 		waveTime: 50,
 		crate: P.powersHard,
 		cell: [1, 2],
@@ -240,7 +252,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'The Overlord',
 		desc: 'Two titans with 3-digit × 2-digit. Overlord: 3-digit × 3-digit.',
 		requires: '8',
-		walkTime: 90,
+		walkTime: WALK,
 		waveTime: 100,
 		crate: P.mul(3, 1),
 		cell: [2, 2],
@@ -256,7 +268,7 @@ export const LEVELS: LevelDef[] = [
 		name: 'Overlord Rematch',
 		desc: '3-digit × 3-digit. Use the Infrared Scope to see their sub-problems.',
 		requires: '9',
-		walkTime: 90,
+		walkTime: WALK,
 		waveTime: 180,
 		crate: P.mul(3, 1),
 		waves: [[s('overlord', P.mulParts(3, 3, true))], [s('overlord', P.mulParts(3, 3, true))]],
