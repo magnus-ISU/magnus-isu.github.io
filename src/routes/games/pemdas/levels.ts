@@ -262,19 +262,15 @@ export const LEVELS: LevelDef[] = [
 		district: 'Robot Citadel',
 		bounty: pay(5, 8, 40, 50),
 		waves: [
-			[s('titan', P.partialSum), s('trooper', P.squareMinus, 3), s('spider', P.addSub33, 3)],
+			[s('titan', P.partialSum), s('trooper', P.citadelTrooper, 3), s('spider', P.addSub33, 3)],
 			[
 				s('titan', P.partialSum),
-				s('trooper', P.squareMinus, 2),
-				s('brute', P.mul(3, 1), 2),
+				s('trooper', P.citadelTrooper, 2),
+				s('brute', P.citadelBrute, 2),
 				s('spider', P.addSub33, 3),
 			],
-			[
-				s('overlord', P.mulParts(3, 3, true)),
-				s('trooper', P.squareMinus, 2),
-				s('brute', P.mul(3, 1), 2),
-				s('spider', P.addSub33, 3),
-			],
+			// the overlord comes alone, once the road is clear
+			[s('overlord', P.mulParts(3, 3, true))],
 		],
 	},
 	{

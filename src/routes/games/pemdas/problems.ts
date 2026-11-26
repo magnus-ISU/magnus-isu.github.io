@@ -1,11 +1,21 @@
 export type Part = { text: string; answer: number; revealed: boolean };
-export type Problem = { text: string; answer: number; parts?: Part[] };
+export type Problem = {
+	text: string;
+	answer: number;
+	parts?: Part[];
+	/** parts are shown and shot one at a time, in order */
+	sequential?: boolean;
+};
 export type Gen = () => Problem;
 
 export const r = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
 export const pick = <T>(a: T[]): T => a[Math.floor(Math.random() * a.length)];
 
-const fmt = (s: string) => s.replace(/\*/g, '×').replace(/([+\-×/])/g, ' $1 ');
+const fmt = (s: string) =>
+	s
+		.replace(/\*/g, '×')
+		.replace(/([+\-×/])/g, ' $1 ')
+		.replace(/-/g, '−');
 
 function evalExpr(s: string): number {
 	return Function(`"use strict";return (${s})`)();
@@ -166,14 +176,100 @@ export const addSub33: Gen = () => {
 	const [hi, lo] = a >= b ? [a, b] : [b, a];
 	return { text: `${hi} − ${lo}`, answer: hi - lo };
 };
-/** (small + small)² − big, never negative */
-export const squareMinus: Gen = () => {
-	const a = r(2, 12),
-		b = r(2, 12);
-	const sq = (a + b) ** 2;
-	const c = r(10, Math.min(300, sq));
-	return { text: `(${a} + ${b})² − ${c}`, answer: sq - c };
-};
+/** (a + b)² − c, never negative */
+const squareMinus =
+	(hi: number, cMax: number): Gen =>
+	() => {
+		const a = r(2, hi),
+			b = r(2, hi);
+		const sq = (a + b) ** 2;
+		const c = r(5, Math.min(cMax, sq));
+		return { text: `(${a} + ${b})² − ${c}`, answer: sq - c };
+	};
+/** gentler exponent combos (level 9 troopers) */
+const easyPowers: Gen[] = [
+	squareMinus(6, 50),
+	// a² + b²
+	() => {
+		const a = r(2, 9),
+			b = r(2, 9);
+		return { text: `${a}² + ${b}²`, answer: a * a + b * b };
+	},
+	// a² × d
+	() => {
+		const a = r(2, 9),
+			d = r(2, 5);
+		return { text: `${a}² × ${d}`, answer: a * a * d };
+	},
+	// (a × b)²
+	() => {
+		const a = r(2, 4),
+			b = r(2, 4);
+		return { text: `(${a} × ${b})²`, answer: (a * b) ** 2 };
+	},
+	// a³ + c
+	() => {
+		const a = r(2, 5),
+			c = r(1, 20);
+		return { text: `${a}³ + ${c}`, answer: a ** 3 + c };
+	},
+];
+/** harder exponent combos (level 9 brutes); every answer is a non-negative integer */
+const hardPowers: Gen[] = [
+	squareMinus(12, 300),
+	// a² − b²
+	() => {
+		const a = r(5, 20),
+			b = r(2, a - 1);
+		return { text: `${a}² − ${b}²`, answer: a * a - b * b };
+	},
+	// (a − b)² + c
+	() => {
+		const a = r(10, 25),
+			b = r(2, a - 2),
+			c = r(10, 99);
+		return { text: `(${a} − ${b})² + ${c}`, answer: (a - b) ** 2 + c };
+	},
+	// a² × d
+	() => {
+		const a = r(11, 15),
+			d = r(2, 9);
+		return { text: `${a}² × ${d}`, answer: a * a * d };
+	},
+	// a³ ± T
+	() => {
+		const a = r(3, 9),
+			t = r(10, 99);
+		return a ** 3 >= t && Math.random() < 0.5
+			? { text: `${a}³ − ${t}`, answer: a ** 3 - t }
+			: { text: `${a}³ + ${t}`, answer: a ** 3 + t };
+	},
+	// T × d + a²
+	() => {
+		const t = r(10, 99),
+			d = r(2, 9),
+			a = r(2, 15);
+		return { text: `${t} × ${d} + ${a}²`, answer: t * d + a * a };
+	},
+	// a² − T × d (only when it stays non-negative)
+	() => {
+		const a = r(12, 30),
+			d = r(2, 9),
+			t = r(10, Math.min(99, Math.floor((a * a) / d)));
+		return { text: `${a}² − ${t} × ${d}`, answer: a * a - t * d };
+	},
+	// a² / f, always whole
+	() => {
+		const f = pick([2, 3, 4, 5]),
+			a = f * r(2, Math.floor(20 / f));
+		return { text: `${a}² / ${f}`, answer: (a * a) / f };
+	},
+];
+/** level 9 troopers: half gentle exponent combos, half level 6 mixed problems */
+export const citadelTrooper: Gen = () =>
+	Math.random() < 0.5 ? pick(easyPowers)() : pick([mixed6, mixed6Hard])();
+/** level 9 brutes: half 3-digit × 1-digit, half hard exponent combos */
+export const citadelBrute: Gen = () => (Math.random() < 0.5 ? mul(3, 1)() : pick(hardPowers)());
 /**
  * A 3-digit × 3-digit product already split into its nine partial products, to add up:
  * (d+e+f)(a+b+c) with d, a hundreds, e, b tens, and f, c ones (no zero digits).
@@ -185,5 +281,13 @@ export const partialSum: Gen = () => {
 	const rows = [d, e, f].map((x) => [x * a, x * b, x * c]);
 	const answer = (d + e + f) * (a + b + c);
 	const text = rows.map((row, i) => (i ? '+ ' : '') + row.join(' + ')).join('\n');
-	return { text, answer };
+	// sub-problems keep a running total: first two terms, then total + the next term, ...
+	const terms = rows.flat();
+	const parts: Part[] = [];
+	let run = terms[0];
+	for (const t of terms.slice(1)) {
+		parts.push({ text: `${run} + ${t}`, answer: run + t, revealed: false });
+		run += t;
+	}
+	return { text, answer, parts, sequential: true };
 };

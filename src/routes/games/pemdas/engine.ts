@@ -127,6 +127,14 @@ export type Loadout = {
 
 let nextId = 1;
 
+/** the sub-problems on show: all of them, or just the next one for a running total */
+function shownParts(p: Problem): Part[] {
+	const parts = p.parts ?? [];
+	if (!p.sequential) return parts;
+	const next = parts.find((x) => !x.revealed);
+	return next ? [next] : [];
+}
+
 export class Game {
 	level: LevelDef;
 	endless: boolean;
@@ -208,6 +216,11 @@ export class Game {
 
 	get totalWaves() {
 		return this.endless ? Infinity : this.level.waves.length;
+	}
+	/** a wave that's only an overlord waits for the road to clear */
+	get nextAlone() {
+		const w = this.level.waves[(this.waveIdx + 1) % this.level.waves.length];
+		return w.every((sp) => sp.type === 'overlord');
 	}
 	get lastWave() {
 		return !this.endless && this.waveIdx >= this.level.waves.length - 1;
@@ -304,7 +317,7 @@ export class Game {
 			if (!rb.targeted && rb.problem.answer === n)
 				found.push({ t: { kind: 'robot', robot: rb }, p: rb.p });
 			if (this.up.scope && rb.drop >= 1 && !rb.attack && rb.blownT === null)
-				for (const part of rb.problem.parts ?? [])
+				for (const part of shownParts(rb.problem))
 					if (!part.revealed && part.answer === n)
 						found.push({ t: { kind: 'part', robot: rb, part }, p: rb.p - 0.001 });
 		}
@@ -431,7 +444,7 @@ export class Game {
 		if (this.queue.length) {
 			this.queue.sort((a, b) => a.at - b.at);
 			this.spawnRobot(this.queue.shift()!.spawn);
-		} else if (!this.lastWave) this.startWave();
+		} else if (!this.lastWave && !this.nextAlone) this.startWave();
 	}
 
 	useItem(key: ItemKey): boolean {
@@ -715,7 +728,10 @@ export class Game {
 		if (!this.ending) {
 			const cleared = this.queue.length === 0 && this.robots.length === 0;
 			if (cleared && this.lastWave) this.ending = { won: true, at: this.time + WIN_DELAY };
-			else if (!this.lastWave && (cleared || this.time - this.waveStart >= this.level.waveTime))
+			else if (
+				!this.lastWave &&
+				(cleared || (!this.nextAlone && this.time - this.waveStart >= this.level.waveTime))
+			)
 				this.startWave();
 		}
 		if (this.ending && this.time >= this.ending.at) {
@@ -1417,8 +1433,8 @@ function robotBlock(ctx: C2D, g: Game, rb: Robot): LabelBlock {
 		it.dy = -(lines.length - 1 - i) * it.h;
 	});
 	const mainH = items.length * items[0].h;
-	const parts = rb.problem.parts;
-	if (parts && rb.drop >= 1 && g.up.scope) {
+	const parts = shownParts(rb.problem);
+	if (parts.length && rb.drop >= 1 && g.up.scope) {
 		const pfs = Math.round((11 + (4 * s) / g.k) * lk);
 		const cols = parts.length > 4 ? 3 : 2;
 		const sub = parts.map((part) =>
@@ -1622,9 +1638,9 @@ function drawHud(ctx: C2D, g: Game, lk: number) {
 	);
 	if (!g.endless && !g.lastWave) {
 		const left = Math.max(0, Math.ceil(g.level.waveTime - (g.time - g.waveStart)));
-		ctx.fillStyle = left <= 5 ? '#ff7675' : '#bbb';
+		ctx.fillStyle = left <= 5 && !g.nextAlone ? '#ff7675' : '#bbb';
 		ctx.font = '14px sans-serif';
-		ctx.fillText(`next wave in ${left}s`, w - 16, 74);
+		ctx.fillText(g.nextAlone ? 'next wave when clear' : `next wave in ${left}s`, w - 16, 74);
 	}
 	ctx.textAlign = 'left';
 	ctx.font = 'bold 16px sans-serif';
