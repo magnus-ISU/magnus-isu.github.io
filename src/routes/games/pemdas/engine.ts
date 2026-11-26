@@ -376,13 +376,12 @@ export class Game {
 		return 'hit';
 	}
 
-	/** Backspace: finish off current targets instantly, or waste a volley into the ground. */
+	/**
+	 * Backspace with something typed: while a volley is in the air it just lets that volley
+	 * finish in its own time; otherwise it wastes a volley into the ground.
+	 */
 	backspace() {
-		if (this.blocked) return;
-		if (this.fire) {
-			this.fire.t = this.fire.dur;
-			return;
-		}
+		if (this.blocked || this.fire) return;
 		// a wasted volley takes as long as a normal kill (laser pointer halves it)
 		const t = FIRE_TIME * (this.up.antimatter ? 0.5 : 1) * (this.up.laser ? 0.5 : 1);
 		this.jam(t);

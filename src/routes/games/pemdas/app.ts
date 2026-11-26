@@ -313,9 +313,10 @@ export class App {
 		this.feedback = { kind: res, t: 0.35 };
 		this.input = '';
 	}
+	/** Backspace / X: does nothing with nothing typed; otherwise clears it (and may waste a volley) */
 	backspace() {
 		const g = this.game;
-		if (!g || g.blocked) return;
+		if (!g || g.blocked || this.input === '') return;
 		g.backspace();
 		this.input = '';
 	}
