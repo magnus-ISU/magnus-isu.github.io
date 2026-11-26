@@ -156,3 +156,34 @@ const cube = (n: number): Problem => ({ text: `${n}³`, answer: n ** 3 });
 export const squaresEasy: Gen = () => sq(r(2, 15));
 export const powers: Gen = () => (Math.random() < 0.65 ? sq(r(2, 40)) : cube(r(2, 10)));
 export const powersHard: Gen = () => (Math.random() < 0.6 ? sq(r(21, 40)) : cube(r(5, 10)));
+
+// ---------- Level 9: the citadel ----------
+/** 3-digit ± 3-digit (bigger minus smaller, never negative) */
+export const addSub33: Gen = () => {
+	const a = r(100, 999),
+		b = r(100, 999);
+	if (Math.random() < 0.5) return { text: `${a} + ${b}`, answer: a + b };
+	const [hi, lo] = a >= b ? [a, b] : [b, a];
+	return { text: `${hi} − ${lo}`, answer: hi - lo };
+};
+/** (small + small)² − big, never negative */
+export const squareMinus: Gen = () => {
+	const a = r(2, 12),
+		b = r(2, 12);
+	const sq = (a + b) ** 2;
+	const c = r(10, Math.min(300, sq));
+	return { text: `(${a} + ${b})² − ${c}`, answer: sq - c };
+};
+/**
+ * A 3-digit × 3-digit product already split into its nine partial products, to add up:
+ * (d+e+f)(a+b+c) with d, a hundreds, e, b tens, and f, c ones (no zero digits).
+ * Shown three terms per line, one line per digit of the first number.
+ */
+export const partialSum: Gen = () => {
+	const [d, e, f] = [r(1, 9) * 100, r(1, 9) * 10, r(1, 9)];
+	const [a, b, c] = [r(1, 9) * 100, r(1, 9) * 10, r(1, 9)];
+	const rows = [d, e, f].map((x) => [x * a, x * b, x * c]);
+	const answer = (d + e + f) * (a + b + c);
+	const text = rows.map((row, i) => (i ? '+ ' : '') + row.join(' + ')).join('\n');
+	return { text, answer };
+};

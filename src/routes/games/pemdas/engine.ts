@@ -1407,17 +1407,16 @@ function robotBlock(ctx: C2D, g: Game, rb: Robot): LabelBlock {
 	const def = ROBOTS[rb.type];
 	const ay = pos.y - HEAD[rb.type] * s * def.size;
 	const fs = Math.round(((def.boss ? 20 : 15) + (7 * s) / g.k) * lk);
-	const items = [
-		item(
-			ctx,
-			rb.problem.text,
-			fs,
-			rb.targeted ? 'rgba(255,60,60,0.95)' : LABEL_BG[rb.type],
-			'#fff',
-			0,
-			0,
-		),
-	];
+	// long problems come in several lines, stacked into one even-width box
+	const lines = rb.problem.text.split('\n');
+	const bg = rb.targeted ? 'rgba(255,60,60,0.95)' : LABEL_BG[rb.type];
+	const items = lines.map((l) => item(ctx, l, fs, bg, '#fff', 0, 0));
+	const lw = Math.max(...items.map((i) => i.w));
+	items.forEach((it, i) => {
+		it.w = lw;
+		it.dy = -(lines.length - 1 - i) * it.h;
+	});
+	const mainH = items.length * items[0].h;
 	const parts = rb.problem.parts;
 	if (parts && rb.drop >= 1 && g.up.scope) {
 		const pfs = Math.round((11 + (4 * s) / g.k) * lk);
@@ -1436,7 +1435,7 @@ function robotBlock(ctx: C2D, g: Game, rb: Robot): LabelBlock {
 		const colW = Math.max(...sub.map((i) => i.w)) + 6;
 		sub.forEach((it, i) => {
 			it.dx = ((i % cols) - (cols - 1) / 2) * colW;
-			it.dy = -items[0].h - 6 - Math.floor(i / cols) * (it.h + 4);
+			it.dy = -mainH - 6 - Math.floor(i / cols) * (it.h + 4);
 		});
 		items.push(...sub);
 	}

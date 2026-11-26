@@ -10,6 +10,15 @@ export type RobotType =
 	| 'titan'
 	| 'overlord';
 
+/**
+ * Robots walk at the same speed on every level; easier levels drop them in closer
+ * (and with less spread) instead of making them walk faster.
+ */
+export const WALK = 70;
+
+/** bosses walk the whole road in 3, 4 and 5 minutes */
+const bossSpeed = (seconds: number) => WALK / seconds;
+
 export const ROBOTS: Record<
 	RobotType,
 	{ speed: number; damage: number; bounty: number; size: number; boss: boolean }
@@ -18,9 +27,9 @@ export const ROBOTS: Record<
 	janitor: { speed: 1, damage: 1, bounty: 2, size: 0.85, boss: false },
 	trooper: { speed: 1, damage: 1, bounty: 10, size: 1, boss: false },
 	brute: { speed: 0.85, damage: 3, bounty: 25, size: 1.2, boss: false },
-	juggernaut: { speed: 0.5, damage: 99, bounty: 100, size: 1.5, boss: true },
-	titan: { speed: 0.4, damage: 99, bounty: 250, size: 1.75, boss: true },
-	overlord: { speed: 0.3, damage: 99, bounty: 1000, size: 2.1, boss: true },
+	juggernaut: { speed: bossSpeed(180), damage: 99, bounty: 100, size: 1.5, boss: true },
+	titan: { speed: bossSpeed(240), damage: 99, bounty: 250, size: 1.75, boss: true },
+	overlord: { speed: bossSpeed(300), damage: 99, bounty: 1000, size: 2.1, boss: true },
 };
 
 export type Spawn = { type: RobotType; gen: Gen; count: number };
@@ -59,12 +68,6 @@ const pay = (spider: number, janitor: number, trooper: number, brute: number) =>
 
 /** the main level whose district/scenery a level uses */
 export const themeOf = (lv: LevelDef) => (lv.id.includes('.') ? (lv.requires ?? lv.id) : lv.id);
-
-/**
- * Robots walk at the same speed on every level; easier levels drop them in closer
- * (and with less spread) instead of making them walk faster.
- */
-export const WALK = 70;
 
 const s = (type: RobotType, gen: Gen, count = 1): Spawn => ({ type, gen, count });
 
@@ -250,17 +253,28 @@ export const LEVELS: LevelDef[] = [
 	{
 		id: '9',
 		name: 'The Overlord',
-		desc: 'Two titans with 3-digit × 2-digit. Overlord: 3-digit × 3-digit.',
+		desc: 'Titans: add up nine partial products. Overlord: 3-digit × 3-digit.',
 		requires: '8',
 		walkTime: WALK,
 		waveTime: 100,
 		crate: P.mul(3, 1),
 		cell: [2, 2],
 		district: 'Robot Citadel',
+		bounty: pay(5, 8, 40, 50),
 		waves: [
-			[s('titan', P.mulParts(3, 2, true))],
-			[s('titan', P.mulParts(3, 2, true))],
-			[s('overlord', P.mulParts(3, 3, true))],
+			[s('titan', P.partialSum), s('trooper', P.squareMinus, 3), s('spider', P.addSub33, 3)],
+			[
+				s('titan', P.partialSum),
+				s('trooper', P.squareMinus, 2),
+				s('brute', P.mul(3, 1), 2),
+				s('spider', P.addSub33, 3),
+			],
+			[
+				s('overlord', P.mulParts(3, 3, true)),
+				s('trooper', P.squareMinus, 2),
+				s('brute', P.mul(3, 1), 2),
+				s('spider', P.addSub33, 3),
+			],
 		],
 	},
 	{
