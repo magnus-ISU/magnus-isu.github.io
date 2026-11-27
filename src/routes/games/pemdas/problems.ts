@@ -18,6 +18,8 @@ export type Problem = {
 	tex?: string;
 	/** a non-integer answer (fraction, complex, matrix, expression...) */
 	ans?: Ans;
+	/** one way to type the answer (tests check it's judged exactly right) */
+	sol?: string;
 	parts?: Part[];
 };
 export type Gen = () => Problem;

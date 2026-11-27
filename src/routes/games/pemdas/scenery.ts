@@ -186,6 +186,141 @@ export function drawDistrict(ctx: C2D, id: string, t: number) {
 			dot(ctx, -4.3, by - 1.3, 1, '#ffb0b0');
 			break;
 		}
+		case 'nt': {
+			// prime vault: a bank vault door with a big 7
+			box(ctx, -14, -22, 28, 22, '#3a4a4a');
+			path(ctx, 'M-16 -22 L0 -30 L16 -22Z', '#2a3636');
+			dot(ctx, 0, -11, 8.5, '#b8942e');
+			dot(ctx, 0, -11, 7, '#8a6a1e');
+			ctx.strokeStyle = '#e0c060';
+			ctx.lineWidth = 1;
+			for (let k = 0; k < 6; k++) {
+				const a = t * 0.4 + (k * Math.PI) / 3;
+				ctx.beginPath();
+				ctx.moveTo(0, -11);
+				ctx.lineTo(Math.cos(a) * 6, -11 + Math.sin(a) * 6);
+				ctx.stroke();
+			}
+			dot(ctx, 0, -11, 1.8, Y);
+			txt(ctx, '7', 11, -24, 7, Y);
+			break;
+		}
+		case 'casino': {
+			// casino strip: a neon-lit hall with a spinning die on the roof
+			box(ctx, -15, -16, 30, 16, '#4a1a4a');
+			box(ctx, -15, -18, 30, 2, '#ff4be0');
+			for (let k = 0; k < 5; k++) {
+				const on = Math.sin(t * 4 + k) > 0;
+				dot(ctx, -12 + k * 6, -12, 1.2, on ? Y : '#6a4a2a');
+			}
+			box(ctx, -4, -7, 8, 7, '#1a0a1a');
+			ctx.save();
+			ctx.translate(0, -25);
+			ctx.rotate(Math.sin(t) * 0.3);
+			box(ctx, -5, -5, 10, 10, '#f4f4f4');
+			dot(ctx, -2.5, -2.5, 1, '#d63031');
+			dot(ctx, 2.5, 2.5, 1, '#d63031');
+			dot(ctx, 0, 0, 1, '#d63031');
+			ctx.restore();
+			break;
+		}
+		case 'acad': {
+			// the academy: a columned hall under a dome, with a clock tower
+			box(ctx, -15, -12, 22, 12, '#e8e0cc');
+			path(ctx, 'M-16 -12 L-4 -18 L8 -12Z', '#c9bfa6');
+			for (let k = 0; k < 5; k++) box(ctx, -13 + k * 4.5, -11, 1.6, 10, '#b5ab92');
+			path(ctx, 'M-10 -18 A6 6 0 0 1 2 -18Z', '#6a8ab0');
+			box(ctx, 9, -26, 7, 26, '#d9cfb6');
+			path(ctx, 'M8 -26 L12.5 -32 L17 -26Z', '#4a6a90');
+			dot(ctx, 12.5, -21, 2.4, '#fff8e0');
+			ctx.strokeStyle = INK;
+			ctx.lineWidth = 0.5;
+			ctx.beginPath();
+			ctx.moveTo(12.5, -21);
+			ctx.lineTo(12.5 + Math.cos(t * 0.5) * 1.8, -21 + Math.sin(t * 0.5) * 1.8);
+			ctx.stroke();
+			break;
+		}
+		case 'grid': {
+			// grid works: a lattice tower beside a block of windows
+			box(ctx, -15, -16, 16, 16, '#4a5a6a');
+			for (let i = 0; i < 3; i++)
+				for (let j = 0; j < 3; j++)
+					box(
+						ctx,
+						-13 + i * 5,
+						-14 + j * 5,
+						3,
+						3,
+						(i + j + Math.floor(t)) % 3 ? '#9ad8ff' : '#2a3a4a',
+					);
+			ctx.strokeStyle = '#8a9aaa';
+			ctx.lineWidth = 0.8;
+			ctx.beginPath();
+			ctx.moveTo(4, 0);
+			ctx.lineTo(9, -32);
+			ctx.lineTo(14, 0);
+			for (let y = -4; y > -30; y -= 6) {
+				const w = ((y + 32) / 32) * 5;
+				ctx.moveTo(9 - w, y);
+				ctx.lineTo(9 + w, y - 6);
+				ctx.moveTo(9 + w, y);
+				ctx.lineTo(9 - w, y - 6);
+			}
+			ctx.stroke();
+			if (Math.sin(t * 3) > 0) dot(ctx, 9, -32, 1, '#ff4a4a');
+			break;
+		}
+		case 'obs': {
+			// observatory: a domed telescope on a hill
+			path(ctx, 'M-16 0 Q0 -10 16 0Z', '#3a4a3a');
+			box(ctx, -8, -14, 16, 8, '#c8ccd4');
+			path(ctx, 'M-9 -14 A9 9 0 0 1 9 -14Z', '#e0e4ec');
+			ctx.save();
+			ctx.translate(0, -18);
+			ctx.rotate(-0.7 + Math.sin(t * 0.3) * 0.15);
+			box(ctx, 0, -1.5, 14, 3, '#5a6070');
+			ctx.restore();
+			for (const [x, y] of [
+				[-13, -26],
+				[11, -30],
+				[-4, -32],
+			])
+				if (Math.sin(t * 2 + x) > -0.3) dot(ctx, x, y, 0.8, '#fff8c0');
+			break;
+		}
+		case 'tide': {
+			// tide works: a striped lighthouse over the waves
+			path(ctx, 'M-4 0 L-2.5 -26 L2.5 -26 L4 0Z', '#f4f4f4');
+			box(ctx, -3.6, -8, 7.2, 4, '#d63031');
+			box(ctx, -3, -18, 6, 4, '#d63031');
+			box(ctx, -3.5, -30, 7, 4, '#2a2a2a');
+			dot(ctx, 0, -28, 1.6, Y);
+			ctx.globalAlpha = 0.25 + 0.2 * Math.sin(t * 2);
+			path(ctx, `M0 -28 L${18 * Math.cos(t)} -32 L${18 * Math.cos(t)} -24Z`, '#fff8c0');
+			ctx.globalAlpha = 1;
+			for (let k = -2; k <= 2; k++) dot(ctx, k * 6 + Math.sin(t + k) * 1.5, 0, 3, '#4a90c0');
+			break;
+		}
+		case 'wind': {
+			// wind farm: two turning turbines
+			for (const [x, h, sp] of [
+				[-8, 26, 1.6],
+				[8, 20, 2.1],
+			]) {
+				box(ctx, x - 0.8, -h, 1.6, h, '#e8ecf0');
+				for (let k = 0; k < 3; k++) {
+					const a = t * sp + (k * Math.PI * 2) / 3;
+					ctx.save();
+					ctx.translate(x, -h);
+					ctx.rotate(a);
+					path(ctx, 'M0 -0.8 L9 0 L0 0.8Z', '#f8f8f8');
+					ctx.restore();
+				}
+				dot(ctx, x, -h, 1.2, '#b0b8c0');
+			}
+			break;
+		}
 	}
 }
 
@@ -290,6 +425,69 @@ export const THEMES: Record<string, Theme> = {
 		edge: '#ff4be0',
 		skyline: 'spikes',
 		silhouette: '#14081c',
+	},
+	nt: {
+		sky: ['#0e1a2a', '#3a6a7a'],
+		ground: ['#2a3a3a', '#3a4a4a'],
+		patch: '#4a6a6a',
+		road: '#2a3030',
+		edge: '#e0c060',
+		skyline: 'towers',
+		silhouette: '#142028',
+	},
+	casino: {
+		sky: ['#1a0a2a', '#7a2a6a'],
+		ground: ['#2a1a2a', '#3a2a3a'],
+		patch: '#6a2a5a',
+		road: '#241a26',
+		edge: '#ff4be0',
+		skyline: 'scrapers',
+		silhouette: '#12081a',
+	},
+	acad: {
+		sky: ['#2a3a6a', '#d0a080'],
+		ground: ['#5a6a4a', '#7a8a5a'],
+		patch: '#8aa070',
+		road: '#5a5650',
+		edge: '#e8e0cc',
+		skyline: 'spires',
+		silhouette: '#2a3048',
+	},
+	grid: {
+		sky: ['#10202a', '#4a7a8a'],
+		ground: ['#3a4a50', '#4a5a60'],
+		patch: '#5a7a80',
+		road: '#30383c',
+		edge: '#9ad8ff',
+		skyline: 'cranes',
+		silhouette: '#18242a',
+	},
+	obs: {
+		sky: ['#050818', '#2a2a5a'],
+		ground: ['#2a3a2a', '#3a4a3a'],
+		patch: '#4a5a4a',
+		road: '#262a2e',
+		edge: '#c8ccd4',
+		skyline: 'hills',
+		silhouette: '#101a14',
+	},
+	tide: {
+		sky: ['#2a5a8a', '#a0d0e0'],
+		ground: ['#c8b890', '#dccca0'],
+		patch: '#e0d0a0',
+		road: '#6a6460',
+		edge: '#f4f4f4',
+		skyline: 'low',
+		silhouette: '#3a5a6a',
+	},
+	wind: {
+		sky: ['#3a7ac0', '#c0e0f0'],
+		ground: ['#5a8a3a', '#7aaa4a'],
+		patch: '#8ac05a',
+		road: '#5a5a5a',
+		edge: '#f4f4f4',
+		skyline: 'hills',
+		silhouette: '#4a7a4a',
 	},
 	toy: {
 		sky: ['#4a7ad0', '#ffd0e8'],

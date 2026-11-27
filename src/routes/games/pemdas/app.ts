@@ -53,6 +53,7 @@ function ancestors(lv: LevelDef, out = new Set<LevelDef>()) {
 const REGIONS: { name: string; at: [number, number] }[] = [
 	{ name: 'THE CITY', at: [3, -0.95] },
 	{ name: 'TOY TOWN', at: [-3, -3.3] },
+	{ name: 'THE ACADEMY', at: [-0.4, 4.1] },
 ];
 
 const inRect = (r: Rect, x: number, y: number) =>
@@ -293,7 +294,8 @@ export class App {
 		this.selected = lv;
 		this.input = '';
 		this.cursor = 0;
-		if (lv.latex) void loadTex();
+		// typeset problems: LaTeX levels, and Academy levels with whole-number answers
+		if (lv.latex || lv.crate().tex) void loadTex();
 		this.quitT = 0;
 		this.newBest = false;
 		this.screen = 'game';
