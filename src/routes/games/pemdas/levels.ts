@@ -36,7 +36,8 @@ export const ROBOTS: Record<
 	overlord: { speed: bossSpeed(300), damage: 99, bounty: 1000, size: 2.1, boss: true },
 };
 
-export type Spawn = { type: RobotType; gen: Gen; count: number };
+/** `boss`: this robot is the wave's boss even if its type isn't (it drops in last) */
+export type Spawn = { type: RobotType; gen: Gen; count: number; boss?: boolean };
 export type PaletteKey =
 	| 'frac'
 	| 'sqrt'
@@ -149,8 +150,9 @@ function academy(
 }
 
 /**
- * Junior levels: three slow waves dropped in far away, each robot paying `n` (so every level
- * pays a little more, all well under Old Town's ~$158).
+ * Junior levels: three waves, each robot paying `n` (so every level pays a little more, all
+ * well under Old Town's ~$158). J1 drops robots in as close as level 1 does; each later level
+ * drops them further away (more time per problem as the problems get longer).
  */
 function junior(
 	id: string,
@@ -167,8 +169,8 @@ function junior(
 		badge: id.toUpperCase(),
 		requires: n > 1 ? [`j${n - 1}`] : undefined,
 		walkTime: WALK,
-		spawn: [0, 0.25],
-		waveTime: 55,
+		spawn: [0.36 - (n - 1) * 0.04, 0.68 - (n - 1) * 0.035],
+		waveTime: 40 + (n - 1) * 2,
 		crate: crate ?? waves[0][0].gen,
 		node: [n - 6.5, -2.6],
 		district: 'Toy Town',
@@ -408,7 +410,7 @@ export const LEVELS: LevelDef[] = [
 		[
 			[s('janitor', P.addUpTo(9), 4)],
 			[s('janitor', P.addUpTo(9), 5)],
-			[s('brute', P.add2Parts), s('janitor', P.addUpTo(9), 5)],
+			[{ ...s('brute', P.add2Parts), boss: true }, s('janitor', P.addUpTo(9), 5)],
 		],
 		P.add2Parts,
 	),

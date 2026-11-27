@@ -243,8 +243,9 @@ export class Game {
 		const spawns: Spawn[] = [];
 		for (const sp of wave) for (let i = 0; i < sp.count; i++) spawns.push(sp);
 		spawns.sort(() => Math.random() - 0.5);
-		// bosses drop first so their escorts surround them
-		spawns.sort((a, b) => Number(ROBOTS[b.type].boss) - Number(ROBOTS[a.type].boss));
+		// bosses are always the last to drop in a wave
+		const isBoss = (sp: Spawn) => ROBOTS[sp.type].boss || !!sp.boss;
+		spawns.sort((a, b) => Number(isBoss(a)) - Number(isBoss(b)));
 		let t = this.time + 0.5;
 		for (const spawn of spawns) {
 			this.queue.push({ at: t, spawn });
