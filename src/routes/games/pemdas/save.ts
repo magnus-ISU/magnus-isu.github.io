@@ -21,32 +21,32 @@ export const ITEMS: {
 }[] = [
 	{
 		key: 'dynamite',
-		code: 'KeyQ',
-		label: 'Q',
+		code: 'F1',
+		label: 'F1',
 		name: 'Dynamite',
 		price: 50,
 		desc: 'Blows up the front robot. Bosses and brutes are immune.',
 	},
 	{
 		key: 'emp',
-		code: 'KeyW',
-		label: 'W',
+		code: 'F2',
+		label: 'F2',
 		name: 'EMP',
 		price: 100,
 		desc: 'Freezes every robot for 5s. Each robot can only be frozen once.',
 	},
 	{
 		key: 'barrier',
-		code: 'KeyE',
-		label: 'E',
+		code: 'F3',
+		label: 'F3',
 		name: 'Barrier',
 		price: 150,
 		desc: 'A wall holds robots back for 10s. Each robot is only held once.',
 	},
 	{
 		key: 'shield',
-		code: 'KeyR',
-		label: 'R',
+		code: 'F4',
+		label: 'F4',
 		name: 'Shield',
 		price: 200,
 		desc: 'Blocks the next robot to reach you. Bosses get knocked back 15s instead.',
@@ -84,16 +84,16 @@ export const ITEM_UPGRADES: Upgrade[] = [
 
 export const UPGRADES: Upgrade[] = [
 	{
-		key: 'laser',
-		name: 'Laser Pointer',
-		price: 250,
-		desc: 'Halves the penalty for firing into the ground with Backspace.',
-	},
-	{
 		key: 'scope',
 		name: 'Infrared Scope',
-		price: 500,
+		price: 250,
 		desc: 'Reveals boss sub-problems you can shoot for partial answers.',
+	},
+	{
+		key: 'laser',
+		name: 'Laser Pointer',
+		price: 500,
+		desc: 'Halves the penalty for firing into the ground with Backspace.',
 	},
 	{
 		key: 'targeting',
@@ -165,6 +165,8 @@ export type Save = {
 	records: Record<string, { last: Attempt; best?: Attempt }>;
 	/** unlocked achievement ids */
 	achievements: Record<string, boolean>;
+	/** levels opened by winning a later level that was played while still locked */
+	unlocked: Record<string, boolean>;
 };
 
 const SAVE_KEY = 'pemdas-save-v1';
@@ -178,6 +180,7 @@ export const freshSave = (): Save => ({
 	endlessBest: {},
 	records: {},
 	achievements: {},
+	unlocked: {},
 });
 
 export function loadSave(): Save {

@@ -1,6 +1,6 @@
 import { type C2D, DRAW, plate } from './art';
 import { ACHIEVEMENTS, Game, type Result, render } from './engine';
-import { LEVELS, type LevelDef } from './levels';
+import { isRematch, LEVELS, type LevelDef, themeOf } from './levels';
 import {
 	ARMOR,
 	type Attempt,
@@ -30,9 +30,25 @@ export const LOGICAL_MIN = 680;
 const QUIT_HOLD = 3;
 /** holding backspace this long turns it into a quit (overlay appears) */
 const QUIT_SHOW = 1;
-const MAIN = LEVELS.filter((l) => l.cell);
-const rematchOf = (lv: LevelDef) => LEVELS.find((l) => l.id.includes('.') && l.requires === lv.id);
-const parentOf = (lv: LevelDef) => (lv.cell ? lv : LEVELS.find((l) => l.id === lv.requires)!);
+const byId = (id: string) => LEVELS.find((l) => l.id === id);
+/** shown on the map badge and in the info panel */
+const badgeOf = (lv: LevelDef) => lv.badge ?? lv.id;
+/** neighborhood name (rematches use their parent's) */
+const districtOf = (lv: LevelDef): string =>
+	lv.district ?? (lv.requires?.[0] ? districtOf(byId(lv.requires[0])!) : '');
+/** every level upstream of this one */
+function ancestors(lv: LevelDef, out = new Set<LevelDef>()) {
+	for (const id of lv.requires ?? []) {
+		const p = byId(id);
+		if (p && !out.has(p)) {
+			out.add(p);
+			ancestors(p, out);
+		}
+	}
+	return out;
+}
+/** big faint names over parts of the map */
+const REGIONS: { name: string; at: [number, number] }[] = [{ name: 'THE CITY', at: [2, -1.1] }];
 
 const inRect = (r: Rect, x: number, y: number) =>
 	x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
@@ -148,6 +164,12 @@ export class App {
 		}
 	})();
 	onExit: () => void;
+	dt = 0;
+	/** level map: camera centre (node units), whether it eases toward the selection, and drag-panning */
+	cam: { x: number; y: number } | null = null;
+	camFollow = true;
+	drag: { id: number; x: number; y: number; cx: number; cy: number; moved: boolean } | null = null;
+	mapR: Rect = { x: 0, y: 0, w: 0, h: 0 };
 
 	constructor(onExit: () => void) {
 		this.save = loadSave();
@@ -209,13 +231,29 @@ export class App {
 
 	// ---------- state helpers ----------
 	unlocked(lv: LevelDef) {
-		return !lv.requires || (this.save.stars[lv.requires] ?? 0) > 0;
+		return (
+			!lv.requires?.length ||
+			lv.requires.some((id) => (this.save.stars[id] ?? 0) > 0) ||
+			!!this.save.unlocked?.[lv.id]
+		);
+	}
+	/** a locked level needs a double tap to select (and then can be played early) */
+	lastTap: { lv: LevelDef; t: number } | null = null;
+	pick(lv: LevelDef) {
+		if (this.unlocked(lv) || (this.lastTap?.lv === lv && this.time - this.lastTap.t < 0.45))
+			this.select(lv);
+		this.lastTap = { lv, t: this.time };
+	}
+	select(lv: LevelDef) {
+		this.selected = lv;
+		this.camFollow = true;
 	}
 	beaten(lv: LevelDef) {
 		return (this.save.stars[lv.id] ?? 0) > 0;
 	}
+	/** the shop opens once any level is beaten */
 	get shopOpen() {
-		return (this.save.stars['2'] ?? 0) > 0;
+		return Object.values(this.save.stars).some((n) => n > 0);
 	}
 
 	start(lv: LevelDef, endless: boolean) {
@@ -238,11 +276,21 @@ export class App {
 		let stars = 0;
 		const money = r.money;
 		const wasOpen = new Set(LEVELS.filter((l) => this.unlocked(l)));
+		// playing a level early: a loss changes nothing (no money or records),
+		// a win also opens every level upstream of it
+		const early = !r.endless && !wasOpen.has(lv);
+		if (early && !r.won) {
+			this.save.items = { ...r.items };
+			persist(this.save);
+			this.game = null;
+			this.screen = 'title';
+			return;
+		}
 		if (!r.endless && r.won) {
 			// 3 stars = flawless: no damage taken and no wrong answers
 			// any damage = 1 star; rematches also drop to 1 star for using a consumable.
 			// Otherwise a wrong answer costs the third star.
-			const rematch = lv.id.includes('.');
+			const rematch = isRematch(lv);
 			stars = r.damaged || (rematch && r.usedItems) ? 1 : r.accuracy >= 1 ? 3 : 2;
 			this.save.stars[lv.id] = Math.max(stars, this.save.stars[lv.id] ?? 0);
 		}
@@ -267,9 +315,13 @@ export class App {
 		this.save.records[key] = { last: attempt, best: this.newBest ? attempt : rec?.best };
 		// beating a level jumps to the one it unlocked (main levels before rematches), carrying this run's stats
 		const fresh = LEVELS.filter((l) => !wasOpen.has(l) && this.unlocked(l));
-		const next = fresh.find((l) => l.cell) ?? fresh[0];
+		const next = fresh.find((l) => !isRematch(l)) ?? fresh[0];
+		if (early) {
+			this.save.unlocked ??= {};
+			for (const l of [lv, ...ancestors(lv)]) this.save.unlocked[l.id] = true;
+		}
 		if (next) {
-			this.selected = next;
+			this.select(next);
 			this.newBest = false;
 			if (!this.save.records[next.id])
 				this.save.records[next.id] = { last: { ...attempt, from: lv.id } };
@@ -277,11 +329,6 @@ export class App {
 		this.save.money += money;
 		if (money > 0) this.gains.push({ amount: money, t: 0 });
 		this.save.items = { ...r.items };
-		// clearing a stage quietly adds one random consumable (wasted if that one is full)
-		if (r.won && !r.endless) {
-			const k = ITEMS[Math.floor(Math.random() * ITEMS.length)].key;
-			this.save.items[k] = Math.min(ITEM_CAP, this.save.items[k] + 1);
-		}
 		for (const a of r.achievements) this.save.achievements[a] = true;
 		persist(this.save);
 		this.game = null;
@@ -339,13 +386,34 @@ export class App {
 			return true;
 		}
 		if (this.screen === 'title' && (code === 'Enter' || code === 'NumpadEnter')) {
-			if (this.unlocked(this.selected)) this.start(this.selected, false);
+			this.start(this.selected, false);
 			return true;
 		}
-		if (this.screen === 'title' && (code === 'ArrowRight' || code === 'ArrowLeft')) {
-			const open = LEVELS.filter((l) => this.unlocked(l));
-			const i = open.indexOf(this.selected);
-			this.selected = open[(i + (code === 'ArrowRight' ? 1 : open.length - 1)) % open.length];
+		const dirs: Record<string, [number, number]> = {
+			ArrowRight: [1, 0],
+			ArrowLeft: [-1, 0],
+			ArrowUp: [0, -1],
+			ArrowDown: [0, 1],
+		};
+		if (this.screen === 'title' && dirs[code]) {
+			// the nearest open level in that direction (straight ahead beats off to the side)
+			const [dx, dy] = dirs[code];
+			const [sx, sy] = this.selected.node;
+			let best: LevelDef | null = null;
+			let bestD = Infinity;
+			for (const l of LEVELS) {
+				if (l === this.selected || !this.unlocked(l)) continue;
+				const ox = l.node[0] - sx;
+				const oy = l.node[1] - sy;
+				const ahead = ox * dx + oy * dy;
+				if (ahead <= 0.05) continue;
+				const d = ahead + Math.abs(ox * dy - oy * dx) * 2;
+				if (d < bestD) {
+					bestD = d;
+					best = l;
+				}
+			}
+			if (best) this.select(best);
 			return true;
 		}
 		if (this.screen === 'shop' && (code === 'Escape' || code === 'Backspace')) {
@@ -358,6 +426,8 @@ export class App {
 		if (code === 'Escape') this.escHeld = false;
 	}
 	pointerDown(x: number, y: number, id: number) {
+		if (this.screen === 'title' && inRect(this.mapR, x, y) && this.cam)
+			this.drag = { id, x, y, cx: this.cam.x, cy: this.cam.y, moved: false };
 		for (let i = this.hits.length - 1; i >= 0; i--) {
 			const h = this.hits[i];
 			if (h.poly ? inPoly(h.poly, x, y) : inRect(h, x, y)) {
@@ -368,7 +438,23 @@ export class App {
 			}
 		}
 	}
+	pointerMove(x: number, y: number, id: number) {
+		const d = this.drag;
+		if (!d || d.id !== id || !this.cam) return;
+		if (!d.moved && Math.hypot(x - d.x, y - d.y) < 8) return;
+		d.moved = true;
+		this.camFollow = false;
+		const U = this.nodeUnit(this.mapR);
+		this.cam = { x: d.cx - (x - d.x) / U, y: d.cy - (y - d.y) / U };
+	}
+	wheel(dx: number, dy: number) {
+		if (this.screen !== 'title' || !this.cam) return;
+		this.camFollow = false;
+		const U = this.nodeUnit(this.mapR);
+		this.cam = { x: this.cam.x + dx / U, y: this.cam.y + dy / U };
+	}
 	pointerUp(id: number) {
+		if (this.drag?.id === id) this.drag = null;
 		if (this.quitPointer === id) {
 			this.quitPointer = null;
 			// a short press on the backspace/quit key is a backspace
@@ -379,6 +465,7 @@ export class App {
 	// ---------- frame ----------
 	frame(ctx: C2D, dt: number) {
 		this.time += dt;
+		this.dt = dt;
 		if (this.feedback && (this.feedback.t -= dt) <= 0) this.feedback = null;
 		if (this.pressed && (this.pressed.t -= dt) <= 0) this.pressed = null;
 		this.confirmReset = Math.max(0, this.confirmReset - dt);
@@ -712,7 +799,7 @@ export class App {
 			});
 		else this.button(ctx, r, 'Back', { color: '#4a5262', down: () => (this.screen = 'title') });
 		if (title === 'logo' && !this.shopOpen)
-			text(ctx, 'beat Market Row', r.x + r.w / 2, TB - 4, 11, '#aaa', 'center', 'normal');
+			text(ctx, 'beat any level', r.x + r.w / 2, TB - 4, 11, '#aaa', 'center', 'normal');
 		return TB;
 	}
 
@@ -739,72 +826,6 @@ export class App {
 		ctx.restore();
 	}
 
-	regionPolys(map: Rect) {
-		const cols = 3;
-		const rows = 3;
-		const cw = map.w / cols;
-		const ch = map.h / rows;
-		const V = (i: number, j: number): [number, number] => {
-			const x = map.x + cw * i;
-			const y = map.y + ch * j;
-			if (i === 0 || j === 0 || i === cols || j === rows) return [x, y];
-			return [
-				x + (hash(i * 13 + j * 7) - 0.5) * cw * 0.45,
-				y + (hash(i * 5 + j * 11 + 3) - 0.5) * ch * 0.45,
-			];
-		};
-		// wobbly shared borders: each edge is jittered the same way for both neighbors
-		const edge = (a: [number, number], b: [number, number]) => {
-			const flip = a[0] * 10 + a[1] > b[0] * 10 + b[1];
-			const [p, q] = flip ? [b, a] : [a, b];
-			const P = V(...p);
-			const Q = V(...q);
-			const border =
-				(p[0] === q[0] && (p[0] === 0 || p[0] === cols)) ||
-				(p[1] === q[1] && (p[1] === 0 || p[1] === rows));
-			const pts: number[] = [...P];
-			if (!border) {
-				const len = Math.hypot(Q[0] - P[0], Q[1] - P[1]);
-				const nx = -(Q[1] - P[1]) / len;
-				const ny = (Q[0] - P[0]) / len;
-				for (const t of [0.33, 0.66]) {
-					const o = (hash(p[0] * 31 + p[1] * 17 + q[0] * 7 + q[1] * 3 + t) - 0.5) * len * 0.22;
-					pts.push(P[0] + (Q[0] - P[0]) * t + nx * o, P[1] + (Q[1] - P[1]) * t + ny * o);
-				}
-			}
-			if (flip) {
-				const out: number[] = [...Q];
-				for (let i = pts.length - 2; i >= 2; i -= 2) out.push(pts[i], pts[i + 1]);
-				return out;
-			}
-			return pts;
-		};
-		const polys = new Map<
-			string,
-			{ pts: number[]; cx: number; cy: number; cw: number; ch: number }
-		>();
-		for (const lv of MAIN) {
-			const [c, r] = lv.cell!;
-			const corners: [number, number][] = [
-				[c, r],
-				[c + 1, r],
-				[c + 1, r + 1],
-				[c, r + 1],
-			];
-			const pts: number[] = [];
-			for (let i = 0; i < 4; i++) pts.push(...edge(corners[i], corners[(i + 1) % 4]));
-			const cs = corners.map((v) => V(...v));
-			polys.set(lv.id, {
-				pts,
-				cx: cs.reduce((a, v) => a + v[0], 0) / 4,
-				cy: cs.reduce((a, v) => a + v[1], 0) / 4,
-				cw,
-				ch,
-			});
-		}
-		return polys;
-	}
-
 	drawTitle(ctx: C2D) {
 		const { W, H } = this;
 		const bg = ctx.createLinearGradient(0, 0, 0, H);
@@ -827,114 +848,122 @@ export class App {
 		this.drawInfo(ctx, info);
 	}
 
+	/** px per node unit on the map */
+	nodeUnit(map: Rect) {
+		return Math.max(66, Math.min(110, Math.min(map.w, map.h) / 4));
+	}
+
 	drawMap(ctx: C2D, map: Rect) {
+		this.mapR = map;
 		roundRect(ctx, { x: map.x - 4, y: map.y - 4, w: map.w + 8, h: map.h + 8 }, 14, '#0c0910');
-		const polys = this.regionPolys(map);
-		const sel = parentOf(this.selected);
-		const later: (() => void)[] = [];
-		for (const lv of MAIN) {
-			const R = polys.get(lv.id)!;
-			const th = THEMES[lv.id];
-			const open = this.unlocked(lv);
-			const outline = () => {
-				ctx.beginPath();
-				ctx.moveTo(R.pts[0], R.pts[1]);
-				for (let i = 2; i < R.pts.length; i += 2) ctx.lineTo(R.pts[i], R.pts[i + 1]);
-				ctx.closePath();
-			};
-			ctx.save();
-			outline();
-			ctx.clip();
-			const g = ctx.createLinearGradient(0, R.cy - R.ch, 0, R.cy + R.ch);
-			g.addColorStop(0, th.sky[1]);
-			g.addColorStop(0.45, th.patch);
-			g.addColorStop(1, th.ground[0]);
-			ctx.fillStyle = g;
-			ctx.fillRect(R.cx - R.cw, R.cy - R.ch, R.cw * 2, R.ch * 2);
-			ctx.fillStyle = 'rgba(0,0,0,0.12)';
-			for (let i = 0; i < 30; i++)
-				ctx.fillRect(
-					R.cx + (hash(i + Number(lv.id) * 50) - 0.5) * R.cw * 1.2,
-					R.cy + (hash(i * 3 + Number(lv.id)) - 0.2) * R.ch * 0.7,
-					3,
-					2,
-				);
-			const sc = Math.min(R.cw / 36, R.ch / 48);
-			ctx.save();
-			ctx.translate(R.cx, R.cy + R.ch * 0.2);
-			ctx.scale(sc, sc);
-			ctx.fillStyle = 'rgba(0,0,0,0.3)';
-			ctx.beginPath();
-			ctx.ellipse(0, 0, 17, 3, 0, 0, Math.PI * 2);
-			ctx.fill();
-			drawDistrict(ctx, lv.id, this.time);
-			ctx.restore();
-			if (!open) {
-				ctx.fillStyle = 'rgba(8,6,14,0.62)';
-				ctx.fillRect(R.cx - R.cw, R.cy - R.ch, R.cw * 2, R.ch * 2);
-			}
-			ctx.restore();
-			outline();
-			ctx.strokeStyle = '#120c18';
-			ctx.lineWidth = 5;
-			ctx.stroke();
-			this.hits.push({
-				x: 0,
-				y: 0,
-				w: 0,
-				h: 0,
-				poly: R.pts,
-				down: () => open && (this.selected = lv),
-			});
-			later.push(() => {
-				if (sel === lv) {
-					outline();
-					ctx.strokeStyle = `rgba(255,216,74,${0.7 + 0.3 * Math.sin(this.time * 4)})`;
-					ctx.lineWidth = 4;
-					ctx.stroke();
-				}
-				const fs = Math.max(11, Math.min(16, R.cw / 11));
-				ctx.font = `bold ${fs}px ${FONT}`;
-				const name = (lv.district ?? '').toUpperCase();
-				const nw = ctx.measureText(name).width + 14;
-				roundRect(
-					ctx,
-					{ x: R.cx - nw / 2, y: R.cy + R.ch * 0.28, w: nw, h: fs * 1.6 },
-					5,
-					'rgba(10,8,20,0.75)',
-				);
-				text(
-					ctx,
-					name,
-					R.cx,
-					R.cy + R.ch * 0.28 + fs * 0.8,
-					fs,
-					open ? '#f2e8c8' : '#8a8494',
-					'center',
-				);
-				const bx = R.cx - R.cw * 0.3;
-				const by = R.cy - R.ch * 0.28;
-				const br = Math.max(15, Math.min(22, R.cw / 9));
-				this.badge(ctx, bx, by, br, lv, open, '#fff8dc');
-				const rem = rematchOf(lv);
-				if (rem) {
-					const rx = R.cx + R.cw * 0.3;
-					const ropen = this.unlocked(rem);
-					this.badge(ctx, rx, by, br * 0.8, rem, ropen, '#ffb0b0');
-					if (ropen)
-						this.hits.push({
-							x: rx - br,
-							y: by - br,
-							w: br * 2,
-							h: br * 2,
-							down: () => (this.selected = rem),
-						});
-				}
-				if (!open)
-					drawIcon(ctx, 'lock', R.cx, R.cy - R.ch * 0.02, Math.min(40, R.cw / 4), this.time);
-			});
+		const U = this.nodeUnit(map);
+		// camera: eases toward the selected level unless the player has panned away
+		const [tx, ty] = this.selected.node;
+		if (!this.cam) this.cam = { x: tx, y: ty };
+		if (this.camFollow) {
+			const e = Math.min(1, this.dt * 6);
+			this.cam.x += (tx - this.cam.x) * e;
+			this.cam.y += (ty - this.cam.y) * e;
 		}
-		for (const f of later) f();
+		const xs = LEVELS.map((l) => l.node[0]);
+		const ys = LEVELS.map((l) => l.node[1]);
+		const lim = (v: number, lo: number, hi: number, half: number) =>
+			hi - lo + 1.2 < half * 2
+				? (lo + hi) / 2
+				: Math.max(lo - 0.6 + half, Math.min(hi + 0.6 - half, v));
+		this.cam.x = lim(this.cam.x, Math.min(...xs), Math.max(...xs), map.w / 2 / U);
+		this.cam.y = lim(this.cam.y, Math.min(...ys), Math.max(...ys) + 0.3, map.h / 2 / U);
+		const cam = this.cam;
+		const P = (n: [number, number]) => ({
+			x: map.x + map.w / 2 + (n[0] - cam.x) * U,
+			y: map.y + map.h / 2 + (n[1] - cam.y) * U,
+		});
+		const visible = (p: { x: number; y: number }, m = 0) =>
+			p.x > map.x - m && p.x < map.x + map.w + m && p.y > map.y - m && p.y < map.y + map.h + m;
+
+		ctx.save();
+		ctx.beginPath();
+		ctx.roundRect(map.x, map.y, map.w, map.h, 12);
+		ctx.clip();
+		const bg = ctx.createLinearGradient(0, map.y, 0, map.y + map.h);
+		bg.addColorStop(0, '#1b1426');
+		bg.addColorStop(1, '#120d1a');
+		ctx.fillStyle = bg;
+		ctx.fillRect(map.x, map.y, map.w, map.h);
+		// faint grid that pans with the map
+		ctx.fillStyle = 'rgba(255,255,255,0.05)';
+		const o = P([0, 0]);
+		const step = U / 2;
+		for (let gx = ((o.x - map.x) % step) + map.x; gx < map.x + map.w; gx += step)
+			for (let gy = ((o.y - map.y) % step) + map.y; gy < map.y + map.h; gy += step)
+				ctx.fillRect(gx - 1, gy - 1, 2, 2);
+		for (const rg of REGIONS) {
+			const p = P(rg.at);
+			if (visible(p, 300))
+				text(ctx, rg.name, p.x, p.y, Math.min(30, U * 0.3), 'rgba(242,232,200,0.16)', 'center');
+		}
+		// roads between levels
+		for (const lv of LEVELS)
+			for (const id of lv.requires ?? []) {
+				const from = byId(id);
+				if (!from) continue;
+				const a = P(from.node);
+				const b = P(lv.node);
+				const open = this.unlocked(lv);
+				ctx.lineCap = 'round';
+				ctx.strokeStyle = isRematch(lv) ? '#2a2030' : '#2e2638';
+				ctx.lineWidth = U * (isRematch(lv) ? 0.06 : 0.12);
+				ctx.beginPath();
+				ctx.moveTo(a.x, a.y);
+				ctx.lineTo(b.x, b.y);
+				ctx.stroke();
+				ctx.strokeStyle = open ? 'rgba(255,216,74,0.75)' : 'rgba(120,110,140,0.4)';
+				ctx.lineWidth = 2;
+				ctx.setLineDash([6, 6]);
+				ctx.stroke();
+				ctx.setLineDash([]);
+			}
+		// levels
+		for (const lv of LEVELS) {
+			const p = P(lv.node);
+			if (!visible(p, U)) continue;
+			const open = this.unlocked(lv);
+			const rem = isRematch(lv);
+			const r = U * (rem ? 0.15 : 0.21);
+			if (!rem) {
+				// the district's landmark peeks out above its badge
+				const sc = (U * 0.62) / 34;
+				ctx.save();
+				ctx.globalAlpha = open ? 1 : 0.35;
+				ctx.translate(p.x, p.y - r * 0.95);
+				ctx.scale(sc, sc);
+				drawDistrict(ctx, themeOf(lv), this.time);
+				ctx.restore();
+			}
+			if (this.selected === lv) {
+				ctx.beginPath();
+				ctx.arc(p.x, p.y, r + 6, 0, Math.PI * 2);
+				ctx.strokeStyle = `rgba(255,216,74,${0.6 + 0.4 * Math.sin(this.time * 4)})`;
+				ctx.lineWidth = 3;
+				ctx.stroke();
+			}
+			this.badge(ctx, p.x, p.y, r, lv, open, rem ? '#ffb0b0' : '#fff8dc');
+			if (!open) drawIcon(ctx, 'lock', p.x + r * 0.75, p.y - r * 0.75, r * 0.9, this.time);
+			const st = this.save.stars[lv.id] ?? 0;
+			const ny = p.y + r + (st ? 20 : 9);
+			const name = rem ? 'Rematch' : lv.name;
+			const fs = fitSize(ctx, name, U * 0.98, Math.min(13, U * 0.14), 8);
+			text(ctx, name, p.x, ny, fs, open ? '#f2e8c8' : '#7a7484', 'center');
+			if (visible(p))
+				this.hits.push({
+					x: p.x - r - 4,
+					y: p.y - r - 4,
+					w: 2 * r + 8,
+					h: 2 * r + 8,
+					down: () => this.pick(lv),
+				});
+		}
+		ctx.restore();
 	}
 
 	badge(ctx: C2D, x: number, y: number, r: number, lv: LevelDef, open: boolean, color: string) {
@@ -945,7 +974,16 @@ export class App {
 		ctx.lineWidth = this.selected === lv ? 4 : 3;
 		ctx.strokeStyle = this.selected === lv ? '#ffd84a' : '#222';
 		ctx.stroke();
-		text(ctx, lv.id, x, y + 1, r * (lv.id.length > 1 ? 0.7 : 0.95), '#222', 'center');
+		const b = badgeOf(lv);
+		text(
+			ctx,
+			b,
+			x,
+			y + 1,
+			fitSize(ctx, b, r * 1.7, r * (b.length > 1 ? 0.8 : 0.95)),
+			'#222',
+			'center',
+		);
 		const st = this.save.stars[lv.id] ?? 0;
 		if (st) text(ctx, '★'.repeat(st), x, y + r + 9, 13, '#ffd84a', 'center');
 	}
@@ -953,16 +991,17 @@ export class App {
 	drawInfo(ctx: C2D, r: Rect) {
 		roundRect(ctx, r, 14, 'rgba(16,12,24,0.92)', '#3a3048', 2);
 		const lv = this.selected;
-		const th = THEMES[parentOf(lv).id];
+		const th = THEMES[themeOf(lv)] ?? THEMES['1'];
 		const x = r.x + 18;
 		const w = r.w - 36;
 		let y = r.y + 30;
 		const big = Math.min(28, w / 14);
-		text(ctx, `Level ${lv.id}: ${lv.name}`, x, y, big, '#fff');
+		const title = `Level ${badgeOf(lv)}: ${lv.name}`;
+		text(ctx, title, x, y, fitSize(ctx, title, w, big), '#fff');
 		y += big * 1.1;
 		text(
 			ctx,
-			`${parentOf(lv).district}${lv.cell ? '' : ' · Rematch'}`.toUpperCase(),
+			`${districtOf(lv)}${isRematch(lv) ? ' · Rematch' : ''}`.toUpperCase(),
 			x,
 			y,
 			13,
@@ -1020,11 +1059,10 @@ export class App {
 		const bh = Math.min(64, Math.max(44, r.y + r.h - y - 94));
 		const by = Math.min(r.y + r.h - bh - 78, Math.max(y + 4, r.y + r.h - bh - 78));
 		const open = this.unlocked(lv);
-		this.button(ctx, { x, y: by, w: w * 0.6, h: bh }, open ? 'PLAY' : 'LOCKED', {
-			color: '#2d7d46',
-			disabled: !open,
+		this.button(ctx, { x, y: by, w: w * 0.6, h: bh }, open ? 'PLAY' : 'PLAY EARLY', {
+			color: open ? '#2d7d46' : '#7a5a1a',
 			size: 26,
-			sub: open ? 'Enter' : undefined,
+			sub: open ? 'Enter' : 'win to unlock · loss pays $0',
 			down: () => this.start(lv, false),
 		});
 		this.button(ctx, { x: x + w * 0.63, y: by, w: w * 0.37, h: bh }, 'Endless', {
@@ -1062,7 +1100,7 @@ export class App {
 						this.save = freshSave();
 						persist(this.save);
 						this.shownMoney = 0;
-						this.selected = LEVELS[0];
+						this.select(LEVELS[0]);
 						this.confirmReset = 0;
 					} else this.confirmReset = 3;
 				},

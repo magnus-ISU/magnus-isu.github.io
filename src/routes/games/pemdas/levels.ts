@@ -38,7 +38,8 @@ export type LevelDef = {
 	id: string;
 	name: string;
 	desc: string;
-	requires?: string;
+	/** unlocked once ANY of these is beaten (none = open from the start) */
+	requires?: string[];
 	/** seconds for a speed-1 robot to walk the whole road (WALK on every level) */
 	walkTime: number;
 	/** where regular robots drop in, 0 = far end of the road, 1 = you (default [0, 0.5]) */
@@ -47,10 +48,14 @@ export type LevelDef = {
 	waveTime: number;
 	crate: Gen;
 	waves: Wave[];
-	/** region on the level-select map (main levels only; rematches live in their parent's region) */
-	cell?: [number, number];
-	/** neighborhood name, shown on the map and used for in-game scenery */
+	/** position on the level-select map, in node units */
+	node: [number, number];
+	/** short label on the map badge (default: the id) */
+	badge?: string;
+	/** neighborhood name, shown on the map; rematches use their parent's */
 	district?: string;
+	/** scenery theme (default: the id, or the parent's for rematches) */
+	theme?: string;
 	/** per-level bounty overrides; anything missing uses ROBOTS[type].bounty */
 	bounty?: Partial<Record<RobotType, number>>;
 };
@@ -67,7 +72,9 @@ const pay = (spider: number, janitor: number, trooper: number, brute: number) =>
 });
 
 /** the main level whose district/scenery a level uses */
-export const themeOf = (lv: LevelDef) => (lv.id.includes('.') ? (lv.requires ?? lv.id) : lv.id);
+export const isRematch = (lv: LevelDef) => lv.id.includes('.');
+export const themeOf = (lv: LevelDef): string =>
+	lv.theme ?? (isRematch(lv) ? (lv.requires?.[0] ?? lv.id) : lv.id);
 
 const s = (type: RobotType, gen: Gen, count = 1): Spawn => ({ type, gen, count });
 
@@ -80,7 +87,7 @@ export const LEVELS: LevelDef[] = [
 		spawn: [0.36, 0.68],
 		waveTime: 40,
 		crate: P.addSub21,
-		cell: [0, 0],
+		node: [0, 0],
 		district: 'Suburbs',
 		bounty: pay(1, 1, 1, 1),
 		waves: [
@@ -93,12 +100,12 @@ export const LEVELS: LevelDef[] = [
 		id: '2',
 		name: 'Times & Divide',
 		desc: 'Factors under 10. Last wave: up to 16.',
-		requires: '1',
+		requires: ['1'],
 		walkTime: WALK,
 		spawn: [0.29, 0.64],
 		waveTime: 40,
 		crate: P.mulDiv(16),
-		cell: [1, 0],
+		node: [1, 0],
 		district: 'Market Row',
 		bounty: pay(2, 5, 5, 5),
 		waves: [
@@ -111,12 +118,12 @@ export const LEVELS: LevelDef[] = [
 		id: '3',
 		name: 'Brackets',
 		desc: 'Mixed operators and brackets, single digits.',
-		requires: '2',
+		requires: ['2'],
 		walkTime: WALK,
 		spawn: [0.14, 0.57],
 		waveTime: 45,
 		crate: P.mixed1Hard,
-		cell: [2, 0],
+		node: [2, 0],
 		district: 'Old Town',
 		bounty: pay(2, 6, 10, 10),
 		waves: [
@@ -129,11 +136,11 @@ export const LEVELS: LevelDef[] = [
 		id: '4',
 		name: 'Big Sums',
 		desc: 'Two- and three-digit addition and subtraction. Last wave: four-digit sums.',
-		requires: '3',
+		requires: ['3'],
 		walkTime: WALK,
 		waveTime: 50,
 		crate: P.add4,
-		cell: [2, 1],
+		node: [3, 0],
 		district: 'Bank Quarter',
 		// brutes carry the 4-digit sums; trooper pay trimmed to keep the level's total near 212
 		bounty: pay(2, 6, 12, 25),
@@ -147,12 +154,12 @@ export const LEVELS: LevelDef[] = [
 		id: '5',
 		name: 'Hard Multiplication',
 		desc: '2-digit × 1-digit. Miniboss: 2-digit × 2-digit.',
-		requires: '4',
+		requires: ['4'],
 		walkTime: WALK,
 		spawn: [0, 0.46],
 		waveTime: 55,
 		crate: P.mul(2, 1, 6),
-		cell: [1, 1],
+		node: [4, 0],
 		district: 'Factory District',
 		bounty: pay(3, 6, 28, 28),
 		waves: [
@@ -167,9 +174,10 @@ export const LEVELS: LevelDef[] = [
 	},
 	{
 		id: '5.5',
+		node: [4, -1.2],
 		name: 'Juggernaut Rematch',
 		desc: '2-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
-		requires: '5',
+		requires: ['5'],
 		walkTime: WALK,
 		waveTime: 70,
 		crate: P.mul(2, 1),
@@ -183,12 +191,12 @@ export const LEVELS: LevelDef[] = [
 		id: '6',
 		name: 'Hard Mixed',
 		desc: '2-digit × 1-digit, division to 16, two-digit ±.',
-		requires: '5',
+		requires: ['5'],
 		walkTime: WALK,
 		spawn: [0, 0.46],
 		waveTime: 55,
 		crate: P.mixed6Hard,
-		cell: [0, 1],
+		node: [5, 0],
 		district: 'Rail Yard',
 		bounty: pay(3, 6, 28, 33),
 		waves: [
@@ -201,12 +209,12 @@ export const LEVELS: LevelDef[] = [
 		id: '7',
 		name: 'Triple Digits',
 		desc: '3-digit × 1-digit. Boss: 3-digit × 2-digit.',
-		requires: '6',
+		requires: ['6'],
 		walkTime: WALK,
 		spawn: [0, 0.39],
 		waveTime: 60,
 		crate: P.mul(3, 1),
-		cell: [0, 2],
+		node: [6, 0],
 		district: 'Downtown',
 		bounty: pay(4, 7, 35, 40),
 		waves: [
@@ -221,9 +229,10 @@ export const LEVELS: LevelDef[] = [
 	},
 	{
 		id: '7.5',
+		node: [6, -1.2],
 		name: 'Titan Rematch',
 		desc: '3-digit × 2-digit bosses. Use the Infrared Scope to see their sub-problems.',
-		requires: '7',
+		requires: ['7'],
 		walkTime: WALK,
 		waveTime: 90,
 		crate: P.mul(3, 1),
@@ -237,11 +246,11 @@ export const LEVELS: LevelDef[] = [
 		id: '8',
 		name: 'Powers',
 		desc: 'Squares up to 40², cubes up to 10³.',
-		requires: '7',
+		requires: ['7'],
 		walkTime: WALK,
 		waveTime: 50,
 		crate: P.powersHard,
-		cell: [1, 2],
+		node: [7, 0],
 		district: 'Power Plant',
 		bounty: pay(4, 7, 36, 44),
 		waves: [
@@ -254,11 +263,11 @@ export const LEVELS: LevelDef[] = [
 		id: '9',
 		name: 'The Overlord',
 		desc: 'Titans: add up nine partial products. Overlord: 3-digit × 3-digit.',
-		requires: '8',
+		requires: ['8'],
 		walkTime: WALK,
 		waveTime: 100,
 		crate: P.mul(3, 1),
-		cell: [2, 2],
+		node: [8, 0],
 		district: 'Robot Citadel',
 		bounty: pay(5, 8, 40, 50),
 		waves: [
@@ -275,9 +284,10 @@ export const LEVELS: LevelDef[] = [
 	},
 	{
 		id: '9.5',
+		node: [8, -1.2],
 		name: 'Overlord Rematch',
 		desc: '3-digit × 3-digit. Use the Infrared Scope to see their sub-problems.',
-		requires: '9',
+		requires: ['9'],
 		walkTime: WALK,
 		waveTime: 180,
 		crate: P.mul(3, 1),

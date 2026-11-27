@@ -42,6 +42,14 @@ function down(e: PointerEvent) {
 	app?.pointerDown(x, y, e.pointerId);
 }
 const up = (e: PointerEvent) => app?.pointerUp(e.pointerId);
+function move(e: PointerEvent) {
+	const [x, y] = pos(e);
+	app?.pointerMove(x, y, e.pointerId);
+}
+function wheel(e: WheelEvent) {
+	e.preventDefault();
+	app?.wheel(e.deltaX * unit, e.deltaY * unit);
+}
 function keydown(e: KeyboardEvent) {
 	if (e.metaKey || e.ctrlKey || e.altKey) return;
 	if (app?.keyDown(e.code, e.repeat)) e.preventDefault();
@@ -72,6 +80,8 @@ onDestroy(() => {
 	bind:this={canvas}
 	onpointerdown={down}
 	onpointerup={up}
+	onpointermove={move}
+	onwheel={wheel}
 	onpointercancel={up}
 	onpointerleave={up}
 	oncontextmenu={(e) => e.preventDefault()}
