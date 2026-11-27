@@ -166,6 +166,26 @@ export function drawDistrict(ctx: C2D, id: string, t: number) {
 			box(ctx, -0.2, -34, 0.4, 4, '#888');
 			if (Math.sin(t * 4) > 0) dot(ctx, 0, -34.3, 0.7, '#ff4be0');
 			break;
+		case 'toy': {
+			// toy town: a slide, stacked letter blocks and a balloon
+			box(ctx, -13, -14, 2, 14, '#e0457a');
+			box(ctx, -8, -14, 2, 14, '#e0457a');
+			box(ctx, -13, -15, 7, 2, '#ff8fb8');
+			path(ctx, 'M-6 -14 Q2 -12 6 0 L9 0 Q4 -14 -6 -16Z', '#4bc0ff');
+			box(ctx, 7, -6, 6, 6, '#7aea6a');
+			box(ctx, 10, -12, 6, 6, Y);
+			box(ctx, 13, -6, 6, 6, '#ff8fb8');
+			const by = -27 + Math.sin(t * 1.5) * 1.5;
+			ctx.strokeStyle = '#ddd';
+			ctx.lineWidth = 0.4;
+			ctx.beginPath();
+			ctx.moveTo(-3, by + 4);
+			ctx.lineTo(-1, -14);
+			ctx.stroke();
+			dot(ctx, -3, by, 4, '#ff5a5a');
+			dot(ctx, -4.3, by - 1.3, 1, '#ffb0b0');
+			break;
+		}
 	}
 }
 
@@ -270,6 +290,15 @@ export const THEMES: Record<string, Theme> = {
 		edge: '#ff4be0',
 		skyline: 'spikes',
 		silhouette: '#14081c',
+	},
+	toy: {
+		sky: ['#4a7ad0', '#ffd0e8'],
+		ground: ['#5a9a4a', '#7aba5a'],
+		patch: '#8ad07a',
+		road: '#6a6470',
+		edge: '#ff8fb8',
+		skyline: 'hills',
+		silhouette: '#3a6a4a',
 	},
 };
 

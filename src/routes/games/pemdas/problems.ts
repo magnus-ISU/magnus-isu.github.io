@@ -1,10 +1,9 @@
-export type Part = { text: string; answer: number; revealed: boolean };
+/** `stage`: parts show a stage at a time; the next stage appears once every part of this one is solved */
+export type Part = { text: string; answer: number; revealed: boolean; stage?: number };
 export type Problem = {
 	text: string;
 	answer: number;
 	parts?: Part[];
-	/** parts are shown and shot one at a time, in order */
-	sequential?: boolean;
 };
 export type Gen = () => Problem;
 
@@ -289,5 +288,117 @@ export const partialSum: Gen = () => {
 		parts.push({ text: `${run} + ${t}`, answer: run + t, revealed: false });
 		run += t;
 	}
-	return { text, answer, parts, sequential: true };
+	parts.forEach((p, i) => {
+		p.stage = i;
+	});
+	return { text, answer, parts };
+};
+
+// ---------- Junior track ----------
+const part = (text: string, answer: number, stage = 0): Part => ({
+	text,
+	answer,
+	revealed: false,
+	stage,
+});
+/** a + b with both from 1..max */
+export const addUpTo =
+	(max: number): Gen =>
+	() => {
+		const a = r(1, max),
+			b = r(1, max);
+		return { text: `${a} + ${b}`, answer: a + b };
+	};
+/** single-digit subtraction, never negative */
+export const subSingle: Gen = () => {
+	const a = r(1, 9),
+		b = r(0, a);
+	return { text: `${a} − ${b}`, answer: a - b };
+};
+/** a × b with both from 1..max (ones are rare) */
+export const mulUpTo =
+	(max: number): Gen =>
+	() => {
+		const f = () => (Math.random() < 0.1 ? 1 : r(2, max));
+		const a = f(),
+			b = f();
+		return { text: `${a} × ${b}`, answer: a * b };
+	};
+/** first number under 20, second under 10 */
+export const addSubTeens: Gen = () => {
+	const a = r(10, 19),
+		b = r(1, 9);
+	return Math.random() < 0.5
+		? { text: `${a} + ${b}`, answer: a + b }
+		: { text: `${a} − ${b}`, answer: a - b };
+};
+export const juniorMixed: Gen = () => pick([addUpTo(9), subSingle, mulUpTo(7)])();
+/** 2 to 4 terms, all + and − (never dipping below zero) or all × */
+export const juniorChain: Gen = () => {
+	const n = r(2, 4);
+	if (Math.random() < 0.5) {
+		let total = r(1, 9);
+		let text = `${total}`;
+		for (let i = 1; i < n; i++) {
+			const b = r(1, 9);
+			if (total - b >= 0 && Math.random() < 0.5) {
+				total -= b;
+				text += ` − ${b}`;
+			} else {
+				total += b;
+				text += ` + ${b}`;
+			}
+		}
+		return { text, answer: total };
+	}
+	const max = n === 2 ? 9 : n === 3 ? 5 : 3;
+	const fs = Array.from({ length: n }, () => r(n === 2 ? 2 : 1, max));
+	return { text: fs.join(' × '), answer: fs.reduce((a, b) => a * b, 1) };
+};
+const onesOk = (n: number) => n % 10 !== 0;
+/** 2-digit + 2-digit (sum under 100): tens first, then the ones */
+export const add2Parts: Gen = () => {
+	let a = 0,
+		b = 0;
+	do {
+		a = r(11, 79);
+		b = r(11, 89 - a > 11 ? 89 - a : 11);
+	} while (!onesOk(a) || !onesOk(b) || a + b > 99);
+	const tens = b - (b % 10);
+	return {
+		text: `${a} + ${b}`,
+		answer: a + b,
+		parts: [part(`${a} + ${tens}`, a + tens, 0), part(`${a + tens} + ${b % 10}`, a + b, 1)],
+	};
+};
+/** 2-digit − 2-digit (never negative): tens first, then the ones */
+export const sub2Parts: Gen = () => {
+	let a = 0,
+		b = 0;
+	do {
+		a = r(21, 99);
+		b = r(11, a - 1);
+	} while (!onesOk(a) || !onesOk(b));
+	const tens = b - (b % 10);
+	return {
+		text: `${a} − ${b}`,
+		answer: a - b,
+		parts: [part(`${a} − ${tens}`, a - tens, 0), part(`${a - tens} − ${b % 10}`, a - b, 1)],
+	};
+};
+/** a × b with 10 < a, b < 21: 10a + 10(b − 10) and (a − 10)(b − 10), then their sum */
+export const teenMulParts: Gen = () => {
+	const a = r(11, 20),
+		b = r(11, 20);
+	const big = 10 * a + 10 * (b - 10);
+	const small = (a - 10) * (b - 10);
+	return {
+		text: `${a} × ${b}`,
+		answer: a * b,
+		parts: [
+			part(`${10 * a} + ${10 * (b - 10)}`, big, 0),
+			part(`${a - 10} × ${b - 10}`, small, 0),
+			part(`${big} + ${small}`, a * b, 1),
+		],
+	};
 };

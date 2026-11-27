@@ -7,6 +7,7 @@ export type RobotType =
 	| 'trooper'
 	| 'brute'
 	| 'juggernaut'
+	| 'toybox'
 	| 'titan'
 	| 'overlord';
 
@@ -28,6 +29,8 @@ export const ROBOTS: Record<
 	trooper: { speed: 1, damage: 1, bounty: 10, size: 1, boss: false },
 	brute: { speed: 0.85, damage: 3, bounty: 25, size: 1.2, boss: false },
 	juggernaut: { speed: bossSpeed(180), damage: 99, bounty: 100, size: 1.5, boss: true },
+	/** a toy chest on wheels: walks and fights like the juggernaut */
+	toybox: { speed: bossSpeed(180), damage: 99, bounty: 60, size: 1.45, boss: true },
 	titan: { speed: bossSpeed(240), damage: 99, bounty: 250, size: 1.75, boss: true },
 	overlord: { speed: bossSpeed(300), damage: 99, bounty: 1000, size: 2.1, boss: true },
 };
@@ -78,6 +81,36 @@ export const themeOf = (lv: LevelDef): string =>
 
 const s = (type: RobotType, gen: Gen, count = 1): Spawn => ({ type, gen, count });
 
+/**
+ * Junior levels: three slow waves dropped in far away, each robot paying `n` (so every level
+ * pays a little more, all well under Old Town's ~$158).
+ */
+function junior(
+	id: string,
+	name: string,
+	desc: string,
+	n: number,
+	waves: Wave[],
+	crate?: Gen,
+): LevelDef {
+	return {
+		id,
+		name,
+		desc,
+		badge: id.toUpperCase(),
+		requires: n > 1 ? [`j${n - 1}`] : undefined,
+		walkTime: WALK,
+		spawn: [0, 0.25],
+		waveTime: 55,
+		crate: crate ?? waves[0][0].gen,
+		node: [n - 6.5, -2.6],
+		district: 'Toy Town',
+		theme: 'toy',
+		bounty: pay(n, n, n, 15),
+		waves,
+	};
+}
+
 export const LEVELS: LevelDef[] = [
 	{
 		id: '1',
@@ -100,7 +133,7 @@ export const LEVELS: LevelDef[] = [
 		id: '2',
 		name: 'Times & Divide',
 		desc: 'Factors under 10. Last wave: up to 16.',
-		requires: ['1'],
+		requires: ['1', 'j8'],
 		walkTime: WALK,
 		spawn: [0.29, 0.64],
 		waveTime: 40,
@@ -293,4 +326,67 @@ export const LEVELS: LevelDef[] = [
 		crate: P.mul(3, 1),
 		waves: [[s('overlord', P.mulParts(3, 3, true))], [s('overlord', P.mulParts(3, 3, true))]],
 	},
+
+	// ---------- Junior track: slow, gentle, no spiders; leads into level 2 ----------
+	junior('j1', 'Tiny Sums', 'Adding numbers up to 5.', 1, [
+		[s('janitor', P.addUpTo(5), 4)],
+		[s('janitor', P.addUpTo(5), 5)],
+		[s('janitor', P.addUpTo(5), 6)],
+	]),
+	junior(
+		'j2',
+		'Adding Up',
+		'Adding numbers up to 9. Boss: a brute with two-digit addition.',
+		2,
+		[
+			[s('janitor', P.addUpTo(9), 4)],
+			[s('janitor', P.addUpTo(9), 5)],
+			[s('brute', P.add2Parts), s('janitor', P.addUpTo(9), 5)],
+		],
+		P.add2Parts,
+	),
+	junior('j3', 'Take Away', 'Subtracting single digits.', 3, [
+		[s('janitor', P.subSingle, 4)],
+		[s('janitor', P.subSingle, 5)],
+		[s('janitor', P.subSingle, 6)],
+	]),
+	junior('j4', 'Little Times', 'Multiplying numbers up to 7.', 4, [
+		[s('janitor', P.mulUpTo(7), 4)],
+		[s('janitor', P.mulUpTo(7), 3), s('trooper', P.mulUpTo(7), 2)],
+		[s('janitor', P.mulUpTo(7), 3), s('trooper', P.mulUpTo(7), 3)],
+	]),
+	junior(
+		'j5',
+		'Mix It Up',
+		'Adding, taking away and times. Boss: the Toybox, with two-digit subtraction.',
+		5,
+		[
+			[s('janitor', P.juniorMixed, 4)],
+			[s('janitor', P.juniorMixed, 3), s('trooper', P.juniorMixed, 2)],
+			[s('toybox', P.sub2Parts), s('janitor', P.juniorMixed, 3), s('trooper', P.juniorMixed, 2)],
+		],
+		P.sub2Parts,
+	),
+	junior('j6', 'Teen Sums', 'A number under 20 plus or minus one under 10.', 6, [
+		[s('janitor', P.addSubTeens, 4)],
+		[s('janitor', P.addSubTeens, 3), s('trooper', P.addSubTeens, 2)],
+		[s('janitor', P.addSubTeens, 3), s('trooper', P.addSubTeens, 3)],
+	]),
+	junior('j7', 'Times Tables', 'Multiplying numbers up to 11.', 7, [
+		[s('janitor', P.mulUpTo(11), 4)],
+		[s('janitor', P.mulUpTo(11), 3), s('trooper', P.mulUpTo(11), 2)],
+		[s('janitor', P.mulUpTo(11), 3), s('trooper', P.mulUpTo(11), 3)],
+	]),
+	junior(
+		'j8',
+		'Long Problems',
+		'Two to four numbers, all adding and taking away, or all times. Boss: the Toybox, with teen × teen.',
+		8,
+		[
+			[s('janitor', P.juniorChain, 4)],
+			[s('janitor', P.juniorChain, 3), s('trooper', P.juniorChain, 2)],
+			[s('toybox', P.teenMulParts), s('janitor', P.juniorChain, 3), s('trooper', P.juniorChain, 2)],
+		],
+		P.teenMulParts,
+	),
 ];

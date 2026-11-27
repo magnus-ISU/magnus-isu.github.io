@@ -154,6 +154,7 @@ export const HEAD: Record<RobotType, number> = {
 	trooper: 104,
 	brute: 96,
 	juggernaut: 100,
+	toybox: 112,
 	titan: 150,
 	overlord: 182,
 };
@@ -407,6 +408,86 @@ export const DRAW: Record<RobotType, (ctx: C2D, t: number) => void> = {
 		visor(ctx, -12, -93, 24, 8, '#ff3b3b');
 		eye(ctx, -6, -89, 2.8);
 		eye(ctx, 6, -89, 2.8);
+	},
+	toybox(ctx, t) {
+		// wheels
+		for (const x of [-30, 30]) {
+			circ(ctx, x, -12, 12, vgrad(ctx, -24, 0, ['#ffe066', '#e0a800', '#7a5a00']), 2);
+			circ(ctx, x, -12, 4, '#7a2a8a', 1.5);
+			ctx.strokeStyle = INK;
+			ctx.lineWidth = 1.5;
+			ctx.beginPath();
+			ctx.moveTo(x + Math.cos(t * 2) * 10, -12 + Math.sin(t * 2) * 10);
+			ctx.lineTo(x - Math.cos(t * 2) * 10, -12 - Math.sin(t * 2) * 10);
+			ctx.stroke();
+		}
+		// open lid, propped up behind the chest
+		ctx.save();
+		ctx.translate(-40, -64);
+		ctx.rotate(-0.3 - Math.sin(t * 1.3) * 0.05);
+		plate(ctx, 0, -30, 80, 30, 4, ['#ff8fb8', '#c0305e', '#5a0e2a'], 2);
+		ctx.restore();
+		// the chest, with letter blocks painted on
+		plate(ctx, -42, -66, 84, 46, 6, ['#ff8fb8', '#e0457a', '#7a1a40'], 2.5);
+		const blocks: [string, string][] = [
+			['A', '#4bc0ff'],
+			['B', '#7aea6a'],
+			['C', '#ffd84a'],
+		];
+		for (const [i, [ch, c]] of blocks.entries()) {
+			const x = -33 + i * 23;
+			plate(ctx, x, -58, 20, 20, 3, [c, c, '#333'], 1.5);
+			ctx.fillStyle = INK;
+			ctx.font = 'bold 15px sans-serif';
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.fillText(ch, x + 10, -47);
+		}
+		hazard(ctx, -38, -28, 76, 4);
+		// toy cannons on the corners (shots launch from here)
+		for (const side of [-1, 1]) {
+			plate(
+				ctx,
+				side * 38 - 9,
+				-78,
+				18,
+				14,
+				4,
+				side < 0 ? ['#7ad8ff', '#2a8ac0', '#0e3a5a'] : ['#b6ff8a', '#4aa02a', '#1a4a0e'],
+				2,
+			);
+			circ(ctx, side * 38, -71, 3.5, '#111', 1);
+		}
+		// spring neck
+		const bounce = Math.sin(t * 3) * 3;
+		ctx.strokeStyle = '#c7ced8';
+		ctx.lineWidth = 3;
+		ctx.beginPath();
+		for (let i = 0; i <= 12; i++) {
+			const y = -66 - (i / 12) * (18 + bounce);
+			const x = (i % 2 ? 7 : -7) * (i === 0 || i === 12 ? 0 : 1);
+			if (i === 0) ctx.moveTo(x, y);
+			else ctx.lineTo(x, y);
+		}
+		ctx.stroke();
+		// grinning robot head
+		const hy = -84 - bounce;
+		plate(ctx, -16, hy - 24, 32, 26, 9, ['#fff1c2', '#e8c070', '#7a5a20'], 2);
+		visor(ctx, -11, hy - 18, 22, 7, '#ff3b8a');
+		eye(ctx, -5, hy - 14.5, 2.5);
+		eye(ctx, 5, hy - 14.5, 2.5);
+		ctx.strokeStyle = INK;
+		ctx.lineWidth = 1.8;
+		ctx.beginPath();
+		ctx.arc(0, hy - 8, 6, 0.15 * Math.PI, 0.85 * Math.PI);
+		ctx.stroke();
+		// propeller cap
+		poly(ctx, [-6, hy - 24, 6, hy - 24, 0, hy - 30], '#4bc0ff', 1.5);
+		ctx.save();
+		ctx.translate(0, hy - 31);
+		ctx.scale(Math.cos(t * 9), 1);
+		plate(ctx, -12, -2, 24, 4, 2, ['#ffd84a', '#e0a800', '#7a5a00'], 1);
+		ctx.restore();
 	},
 	titan(ctx, t) {
 		const l = Math.sin(t) * 6;

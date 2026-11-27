@@ -34,6 +34,7 @@ const ATTACK_TIME: Record<RobotType, number> = {
 	trooper: 1.5,
 	brute: 1.4,
 	juggernaut: 1.8,
+	toybox: 1.8,
 	titan: 2.2,
 	overlord: 2.8,
 };
@@ -127,12 +128,13 @@ export type Loadout = {
 
 let nextId = 1;
 
-/** the sub-problems on show: all of them, or just the next one for a running total */
+/** the sub-problems on show: those of the earliest stage that still has one unsolved */
 function shownParts(p: Problem): Part[] {
 	const parts = p.parts ?? [];
-	if (!p.sequential) return parts;
-	const next = parts.find((x) => !x.revealed);
-	return next ? [next] : [];
+	const open = parts.filter((x) => !x.revealed).map((x) => x.stage ?? 0);
+	if (!open.length) return parts.filter((x) => (x.stage ?? 0) === 0);
+	const stage = Math.min(...open);
+	return parts.filter((x) => (x.stage ?? 0) === stage);
 }
 
 export class Game {
@@ -1054,6 +1056,7 @@ function attackPose(type: RobotType, f: number) {
 				rot: f < 0.3 ? -f : 0,
 			};
 		case 'juggernaut':
+		case 'toybox':
 			return {
 				dx: 0,
 				dy: Math.max(0, Math.sin(f * 30)) * (f > 0.4 && f < 0.7 ? 3 : 0),
@@ -1294,6 +1297,7 @@ function drawAttack(ctx: C2D, g: Game, rb: Robot) {
 			}
 			break;
 		case 'juggernaut':
+		case 'toybox':
 			for (const side of [-1, 1]) {
 				const from = { x: pos.x + side * 38 * s, y: pos.y - 67 * s };
 				const to = { x: cx + side * W * 0.22, y: FH * 0.85 };
@@ -1429,6 +1433,7 @@ const LABEL_BG: Record<RobotType, string> = {
 	trooper: 'rgba(50,90,45,0.9)',
 	brute: 'rgba(150,100,20,0.92)',
 	juggernaut: 'rgba(90,50,140,0.95)',
+	toybox: 'rgba(200,60,120,0.95)',
 	titan: 'rgba(150,40,40,0.95)',
 	overlord: 'rgba(130,30,110,0.95)',
 };

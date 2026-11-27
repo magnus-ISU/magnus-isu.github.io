@@ -48,7 +48,10 @@ function ancestors(lv: LevelDef, out = new Set<LevelDef>()) {
 	return out;
 }
 /** big faint names over parts of the map */
-const REGIONS: { name: string; at: [number, number] }[] = [{ name: 'THE CITY', at: [2, -1.1] }];
+const REGIONS: { name: string; at: [number, number] }[] = [
+	{ name: 'THE CITY', at: [3, -0.95] },
+	{ name: 'TOY TOWN', at: [-3, -3.3] },
+];
 
 const inRect = (r: Rect, x: number, y: number) =>
 	x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
