@@ -1,8 +1,23 @@
+import type { Ans } from './mathin';
+
 /** `stage`: parts show a stage at a time; the next stage appears once every part of this one is solved */
-export type Part = { text: string; answer: number; revealed: boolean; stage?: number };
-export type Problem = {
+export type Part = {
 	text: string;
 	answer: number;
+	revealed: boolean;
+	stage?: number;
+	tex?: string;
+	ans?: Ans;
+};
+export type Problem = {
+	/** plain-text form (also the fallback when LaTeX can't be shown) */
+	text: string;
+	/** whole-number answer (unused when `ans` is set) */
+	answer: number;
+	/** typeset form, on LaTeX levels */
+	tex?: string;
+	/** a non-integer answer (fraction, complex, matrix, expression...) */
+	ans?: Ans;
 	parts?: Part[];
 };
 export type Gen = () => Problem;

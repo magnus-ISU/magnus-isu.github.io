@@ -1,6 +1,7 @@
 import { type C2D, DRAW, plate } from './art';
 import { ACHIEVEMENTS, Game, type Result, render } from './engine';
-import { isRematch, LEVELS, type LevelDef, themeOf } from './levels';
+import { isRematch, LEVELS, type LevelDef, type PaletteKey, themeOf } from './levels';
+import { inputTex } from './mathin';
 import {
 	ARMOR,
 	type Attempt,
@@ -20,6 +21,7 @@ import {
 } from './save';
 import { drawDistrict, drawIcon, hash, type IconKey, THEMES } from './scenery';
 import { type DriveStatus, pemdasSync } from './sync';
+import { loadTex, texHost } from './tex';
 
 type Rect = { x: number; y: number; w: number; h: number };
 type Hit = Rect & { down?: () => void; hold?: boolean; poly?: number[] };
@@ -134,6 +136,25 @@ function fitWrap(ctx: C2D, s: string, maxW: number, maxH: number, max: number, m
 	return { size, lines: lines.slice(0, Math.max(0, Math.floor(maxH / (size * lh)))) };
 }
 const NUMPAD_KEY = 'pemdas-numpad';
+/** template keys over the keypad on LaTeX levels; □ marks a box to fill */
+const PALETTE: Record<PaletteKey, { label: string; ins: string }> = {
+	frac: { label: 'a/b', ins: '\\frac{□}{□}' },
+	sqrt: { label: '√', ins: '\\sqrt{□}' },
+	pi: { label: 'π', ins: '\\pi ' },
+	i: { label: 'i', ins: 'i' },
+	x: { label: 'x', ins: 'x' },
+	pow: { label: 'xⁿ', ins: '^{□}' },
+	paren: { label: '( )', ins: '(□)' },
+	plus: { label: '+', ins: '+' },
+	comma: { label: ',', ins: ', ' },
+	vec2: { label: '(a,b)', ins: '(□, □)' },
+	vec3: { label: '(a,b,c)', ins: '(□, □, □)' },
+	mat2: { label: '2×2', ins: '\\begin{pmatrix}□&□\\\\□&□\\end{pmatrix}' },
+	mat3: {
+		label: '3×3',
+		ins: '\\begin{pmatrix}□&□&□\\\\□&□&□\\\\□&□&□\\end{pmatrix}',
+	},
+};
 const starStr = (n: number) => '★'.repeat(n) + '☆'.repeat(3 - n);
 
 export class App {
@@ -144,6 +165,8 @@ export class App {
 	selected: LevelDef = LEVELS[0];
 	game: Game | null = null;
 	input = '';
+	/** where typing goes in `input` (LaTeX levels); a □ right here is the box being filled */
+	cursor = 0;
 	feedback: { kind: 'hit' | 'miss' | 'blocked'; t: number } | null = null;
 	hits: Hit[] = [];
 	time = 0;
@@ -269,6 +292,8 @@ export class App {
 		);
 		this.selected = lv;
 		this.input = '';
+		this.cursor = 0;
+		if (lv.latex) void loadTex();
 		this.quitT = 0;
 		this.newBest = false;
 		this.screen = 'game';
@@ -352,16 +377,38 @@ export class App {
 			this.feedback = { kind: 'blocked', t: 0.3 };
 			return;
 		}
+		if (g.level.latex) return this.insert(ch);
 		if (ch === '-' && this.input !== '') return;
 		if (this.input.length < 8) this.input += ch;
+	}
+	/** LaTeX levels: put text (or a template) at the cursor, filling the box there if there is one */
+	insert(s: string) {
+		if (this.input.length + s.length > 120) return;
+		const at = this.cursor;
+		const fill = this.input[at] === '□' ? 1 : 0;
+		this.input = this.input.slice(0, at) + s + this.input.slice(at + fill);
+		// a template puts the cursor on its first box; anything else leaves it just after
+		const box = s.indexOf('□');
+		this.cursor = box >= 0 ? at + box : at + s.length;
+	}
+	/** jump to the next empty box (wrapping around), or to the end once they're all filled */
+	nextSlot() {
+		const after = this.input.indexOf('□', this.cursor + 1);
+		const first = this.input.indexOf('□');
+		this.cursor = after >= 0 ? after : first >= 0 ? first : this.input.length;
 	}
 	submit() {
 		const g = this.game;
 		if (!g) return;
 		const res = g.submit(this.input);
 		if (res === 'busy') return;
+		if (res === 'unreadable') {
+			this.feedback = { kind: 'blocked', t: 0.35 };
+			return;
+		}
 		this.feedback = { kind: res, t: 0.35 };
 		this.input = '';
+		this.cursor = 0;
 	}
 	/** Backspace / X: does nothing with nothing typed; otherwise clears it (and may waste a volley) */
 	backspace() {
@@ -369,10 +416,11 @@ export class App {
 		if (!g || g.blocked || this.input === '') return;
 		g.backspace();
 		this.input = '';
+		this.cursor = 0;
 	}
 
 	// ---------- input ----------
-	keyDown(code: string, repeat: boolean): boolean {
+	keyDown(code: string, repeat: boolean, key = ''): boolean {
 		if (this.screen === 'game') {
 			if (code === 'Escape') {
 				this.escHeld = true;
@@ -381,7 +429,14 @@ export class App {
 			if (repeat) return true;
 			const it = ITEMS.find((i) => i.code === code);
 			if (it) this.game?.useItem(it.key);
-			else if (/^(Digit|Numpad)\d$/.test(code)) this.type(code.slice(-1));
+			else if (this.game?.level.latex) {
+				// LaTeX levels take any typed character; Enter fires, Tab jumps to the next box
+				if (code === 'Enter' || code === 'NumpadEnter') this.submit();
+				else if (code === 'Tab') this.nextSlot();
+				else if (code === 'Backspace' || code === 'Delete') this.backspace();
+				else if (key.length === 1) this.type(key);
+				else return false;
+			} else if (/^(Digit|Numpad)\d$/.test(code)) this.type(code.slice(-1));
 			else if (code === 'Minus' || code === 'NumpadSubtract') this.type('-');
 			else if (code === 'Enter' || code === 'NumpadEnter' || code === 'Space') this.submit();
 			else if (code === 'Backspace' || code === 'Delete') this.backspace();
@@ -481,6 +536,7 @@ export class App {
 		this.gains = this.gains.filter((gn) => gn.t < 2.2);
 
 		this.hits = [];
+		texHost.layer?.begin();
 		ctx.clearRect(0, 0, this.W, this.H);
 		if (this.screen === 'game' && this.game) {
 			const holding = this.escHeld || this.quitPointer !== null;
@@ -493,6 +549,7 @@ export class App {
 			this.screen = 'title';
 			this.drawTitle(ctx);
 		}
+		texHost.layer?.end();
 	}
 
 	button(
@@ -562,7 +619,12 @@ export class App {
 	// ================= game screen =================
 	drawGame(ctx: C2D, g: Game) {
 		const { W, H } = this;
-		const PH = Math.round(this.landscape ? Math.max(150, H * 0.27) : H * 0.4);
+		// LaTeX levels need room for the template keys over the keypad
+		const PH = Math.round(
+			this.landscape
+				? Math.max(150, H * (g.level.latex ? 0.37 : 0.27))
+				: H * (g.level.latex ? 0.44 : 0.4),
+		);
 		const FH = H - PH;
 		g.resize(W, FH);
 		render(ctx, g);
@@ -648,6 +710,30 @@ export class App {
 			ctx.globalAlpha = 1;
 		});
 
+		// LaTeX levels: a row (or two) of template keys over the keypad, then → to the next box
+		const pal = g.level.latex?.palette;
+		if (pal) {
+			const keys = [...pal.map((k) => PALETTE[k]), { label: '→', ins: '' }];
+			const rows = keys.length > 7 ? 2 : 1;
+			const per = Math.ceil(keys.length / rows);
+			const ph = Math.min(44, (keysR.h - 6 * (3 + rows)) / (4 + rows * 0.8)) * 0.8;
+			const pw = (keysR.w - (per - 1) * 5) / per;
+			keys.forEach((k, i) => {
+				const r = {
+					x: keysR.x + (i % per) * (pw + 5),
+					y: keysR.y + Math.floor(i / per) * (ph + 5),
+					w: pw,
+					h: ph,
+				};
+				this.button(ctx, r, k.label, {
+					color: k.ins ? '#3a4a6a' : '#6a5a2a',
+					size: Math.min(18, ph * 0.5),
+					down: () => (k.ins ? this.type(k.ins) : this.nextSlot()),
+				});
+			});
+			const used = rows * (ph + 5) + 3;
+			keysR = { ...keysR, y: keysR.y + used, h: keysR.h - used };
+		}
 		// keypad: digits in a phone grid, a tall FIRE key on the right
 		const kw = (keysR.w - 3 * 6) / 4;
 		const kh = (keysR.h - 3 * 6) / 4;
@@ -713,6 +799,13 @@ export class App {
 				4,
 				'#ff7a6a',
 			);
+		} else if (this.input && g.level.latex && texHost.layer?.ready) {
+			// typeset as it's typed, shrunk to fit the box
+			const layer = texHost.layer;
+			const tex = inputTex(this.input, this.cursor);
+			const m = layer.measure(tex, size * 0.8);
+			const fit = m ? Math.min(1, (r.w - 24) / m.w, (r.h - 10) / m.h) : 1;
+			layer.place(tex, r.x + r.w / 2, r.y + r.h / 2, size * 0.8 * fit, '#fff');
 		} else if (this.input) {
 			text(
 				ctx,
@@ -738,7 +831,7 @@ export class App {
 				'normal',
 			);
 		}
-		if (Math.floor(this.time * 2) % 2 && !g.blocked && this.input) {
+		if (Math.floor(this.time * 2) % 2 && !g.blocked && this.input && !g.level.latex) {
 			ctx.font = `bold ${size}px ui-monospace, Menlo, monospace`;
 			const w = ctx.measureText(this.input).width;
 			ctx.fillStyle = '#fff';

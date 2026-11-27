@@ -1,6 +1,7 @@
 import { type C2D, DARK, DRAW, eye, GREY, HEAD, plate, rr } from './art';
 import { block, clamp, drawLabels, item, type LabelBlock, type Rect } from './labels';
 import { type LevelDef, ROBOTS, type RobotType, type Spawn, themeOf } from './levels';
+import { judge, judgeInt, type Node, parse, type Verdict } from './mathin';
 import { type Part, type Problem, pick } from './problems';
 import type { ItemKey, UpgradeKey } from './save';
 import { drawDistrict, drawIcon, drawSkyline, hash, THEMES } from './scenery';
@@ -310,24 +311,39 @@ export class Game {
 	 * A correct answer adds a target (splitting fire and restarting the kill timer for all of them).
 	 * A wrong one jams the guns and lets every current target go.
 	 */
-	submit(raw: string): 'hit' | 'miss' | 'busy' {
+	submit(raw: string): 'hit' | 'miss' | 'busy' | 'unreadable' {
 		if (this.blocked) return 'busy';
-		const n = Number(raw.trim());
-		if (raw.trim() === '' || raw.trim() === '-' || Number.isNaN(n)) return 'busy';
+		// LaTeX levels read typed math; the others want a plain whole number
+		let check: (p: Problem | Part) => Verdict;
+		if (this.level.latex) {
+			if (raw.trim() === '') return 'busy';
+			const node: Node | null = parse(raw);
+			if (!node) {
+				this.flash(raw.includes('□') ? 'Fill in every box' : "Can't read that answer");
+				return 'unreadable';
+			}
+			check = (p) => (p.ans ? judge(p.ans, node) : judgeInt(p.answer, node));
+		} else {
+			const n = Number(raw.trim());
+			if (raw.trim() === '' || raw.trim() === '-' || Number.isNaN(n)) return 'busy';
+			check = (p) => (p.answer === n ? 'exact' : false);
+		}
 		this.shots++;
-		const found: { t: Target; p: number }[] = [];
+		const found: { t: Target; p: number; v: Verdict }[] = [];
 		for (const rb of this.robots) {
 			// attacking and blown-up robots can still be shot
-			if (!rb.targeted && rb.problem.answer === n)
-				found.push({ t: { kind: 'robot', robot: rb }, p: rb.p });
+			const v = rb.targeted ? false : check(rb.problem);
+			if (v) found.push({ t: { kind: 'robot', robot: rb }, p: rb.p, v });
 			if (this.up.scope && rb.drop >= 1 && !rb.attack && rb.blownT === null)
-				for (const part of shownParts(rb.problem))
-					if (!part.revealed && part.answer === n)
-						found.push({ t: { kind: 'part', robot: rb, part }, p: rb.p - 0.001 });
+				for (const part of shownParts(rb.problem)) {
+					const pv = part.revealed ? false : check(part);
+					if (pv) found.push({ t: { kind: 'part', robot: rb, part }, p: rb.p - 0.001, v: pv });
+				}
 		}
-		for (const c of this.crates)
-			if (!c.opening && c.drop >= 1 && c.problem.answer === n)
-				found.push({ t: { kind: 'crate', crate: c }, p: c.p });
+		for (const c of this.crates) {
+			const v = !c.opening && c.drop >= 1 ? check(c.problem) : false;
+			if (v) found.push({ t: { kind: 'crate', crate: c }, p: c.p, v });
+		}
 		const took = this.time - this.readyAt;
 		this.readyAt = this.time;
 		if (!found.length) {
@@ -357,6 +373,8 @@ export class Game {
 		}
 		found.sort((a, b) => b.p - a.p);
 		const target = found[0].t;
+		// right but not fully simplified (2/4, √8): the volley takes twice as long and locks the guns
+		const loose = found[0].v === 'loose';
 		this.correct++;
 		const bossShot = target.kind === 'robot' && ROBOTS[target.robot.type].boss;
 		if (!(this.trackBoss && bossShot)) this.solveTimes.push(took);
@@ -379,6 +397,11 @@ export class Game {
 		}
 		this.fire.t = 0;
 		this.fire.dur = Math.max(...this.fire.targets.map((t) => this.killTime(t)));
+		if (loose) {
+			this.fire.dur *= 2;
+			this.locked = true;
+			this.flash('Not simplified! Slow volley');
+		}
 		this.sendReinforcements();
 		return 'hit';
 	}
@@ -1446,9 +1469,10 @@ function robotBlock(ctx: C2D, g: Game, rb: Robot): LabelBlock {
 	const ay = pos.y - HEAD[rb.type] * s * def.size;
 	const fs = Math.round(((def.boss ? 20 : 15) + (7 * s) / g.k) * lk);
 	// long problems come in several lines, stacked into one even-width box
-	const lines = rb.problem.text.split('\n');
+	const tex = rb.problem.tex;
+	const lines = tex ? [rb.problem.text] : rb.problem.text.split('\n');
 	const bg = rb.targeted ? 'rgba(255,60,60,0.95)' : LABEL_BG[rb.type];
-	const items = lines.map((l) => item(ctx, l, fs, bg, '#fff', 0, 0));
+	const items = lines.map((l) => item(ctx, l, fs, bg, '#fff', 0, 0, tex));
 	const lw = Math.max(...items.map((i) => i.w));
 	items.forEach((it, i) => {
 		it.w = lw;
@@ -1468,6 +1492,7 @@ function robotBlock(ctx: C2D, g: Game, rb: Robot): LabelBlock {
 				part.revealed ? '#fff' : '#ff9a9a',
 				0,
 				0,
+				part.revealed ? undefined : part.tex,
 			),
 		);
 		const colW = Math.max(...sub.map((i) => i.w)) + 6;
@@ -1485,7 +1510,7 @@ function crateBlock(ctx: C2D, g: Game, c: Crate): LabelBlock {
 	const s = g.scale(c.p);
 	const bg = c.opening ? 'rgba(255,60,60,0.95)' : 'rgba(200,160,40,0.95)';
 	const fs = Math.round((14 + (6 * s) / g.k) * labelK(g));
-	const main = item(ctx, c.problem.text, fs, bg, '#111', 0, 0);
+	const main = item(ctx, c.problem.text, fs, bg, '#111', 0, 0, c.problem.tex);
 	return block(c, pos.x, pos.y - 42 * s, [main], 1, c.p);
 }
 

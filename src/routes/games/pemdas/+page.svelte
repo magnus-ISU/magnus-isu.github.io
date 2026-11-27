@@ -2,6 +2,7 @@
 import { onDestroy, onMount } from 'svelte';
 import { goto } from '$app/navigation';
 import { App, LOGICAL_MIN } from './app';
+import { TexLayer, texHost } from './tex';
 
 let canvas: HTMLCanvasElement | undefined = $state();
 let app: App | null = null;
@@ -16,6 +17,7 @@ function fit() {
 	const h = window.innerHeight;
 	const dpr = window.devicePixelRatio || 1;
 	unit = LOGICAL_MIN / Math.min(w, h);
+	if (texHost.layer) texHost.layer.unit = unit;
 	canvas.width = Math.round(w * dpr);
 	canvas.height = Math.round(h * dpr);
 	app.resize(w * unit, h * unit);
@@ -52,11 +54,12 @@ function wheel(e: WheelEvent) {
 }
 function keydown(e: KeyboardEvent) {
 	if (e.metaKey || e.ctrlKey || e.altKey) return;
-	if (app?.keyDown(e.code, e.repeat)) e.preventDefault();
+	if (app?.keyDown(e.code, e.repeat, e.key)) e.preventDefault();
 }
 const keyup = (e: KeyboardEvent) => app?.keyUp(e.code);
 
 onMount(() => {
+	texHost.layer = new TexLayer(document.body);
 	app = new App(() => goto('/games'));
 	fit();
 	last = performance.now();
@@ -66,6 +69,8 @@ onMount(() => {
 onDestroy(() => {
 	if (typeof window === 'undefined') return;
 	cancelAnimationFrame(raf);
+	texHost.layer?.destroy();
+	texHost.layer = null;
 	document.documentElement.style.overflow = '';
 });
 </script>

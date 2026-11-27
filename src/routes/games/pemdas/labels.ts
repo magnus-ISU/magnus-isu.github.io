@@ -1,7 +1,11 @@
 // ---------- Problem labels: placed so they stay on-screen and never cover each other ----------
+import { texHost } from './tex';
+
 type C2D = CanvasRenderingContext2D;
 export type LabelItem = {
 	text: string;
+	/** typeset with KaTeX over the canvas when the layer is up (`text` is the canvas fallback) */
+	tex?: string;
 	size: number;
 	bg: string;
 	fg: string;
@@ -35,7 +39,21 @@ export function item(
 	fg: string,
 	dx: number,
 	dy: number,
+	tex?: string,
 ): LabelItem {
+	const m = tex ? texHost.layer?.measure(tex, size) : null;
+	if (m)
+		return {
+			text,
+			tex,
+			size,
+			bg,
+			fg,
+			dx,
+			dy,
+			w: m.w + size * 0.8,
+			h: Math.max(size * 1.35, m.h + size * 0.4),
+		};
 	ctx.font = labelFont(size);
 	return {
 		text,
@@ -154,7 +172,19 @@ export function drawLabels(
 			ctx.arc(b.ax, b.ay, 2.5, 0, Math.PI * 2);
 			ctx.fill();
 		}
-		for (const it of b.items) labelBox(ctx, it.text, x + it.dx, y + it.dy, it.size, it.bg, it.fg);
+		for (const it of b.items) {
+			const layer = it.tex ? texHost.layer : null;
+			if (layer?.ready) {
+				// the box on the canvas, the formula in the layer above it
+				const bx = x + it.dx;
+				const by = y + it.dy;
+				ctx.fillStyle = it.bg;
+				ctx.beginPath();
+				ctx.roundRect(bx - it.w / 2, by - it.h, it.w, it.h, 5);
+				ctx.fill();
+				layer.place(it.tex!, bx, by - it.h / 2, it.size, it.fg, ctx.globalAlpha);
+			} else labelBox(ctx, it.text, x + it.dx, y + it.dy, it.size, it.bg, it.fg);
+		}
 	}
 	ctx.globalAlpha = 1;
 }

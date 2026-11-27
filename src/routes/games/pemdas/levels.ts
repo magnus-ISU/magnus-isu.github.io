@@ -36,6 +36,20 @@ export const ROBOTS: Record<
 };
 
 export type Spawn = { type: RobotType; gen: Gen; count: number };
+export type PaletteKey =
+	| 'frac'
+	| 'sqrt'
+	| 'pi'
+	| 'i'
+	| 'x'
+	| 'pow'
+	| 'paren'
+	| 'plus'
+	| 'comma'
+	| 'vec2'
+	| 'vec3'
+	| 'mat2'
+	| 'mat3';
 export type Wave = Spawn[];
 export type LevelDef = {
 	id: string;
@@ -59,6 +73,11 @@ export type LevelDef = {
 	district?: string;
 	/** scenery theme (default: the id, or the parent's for rematches) */
 	theme?: string;
+	/**
+	 * answers are typed as LaTeX or plain-text math (judged for value and form) instead of
+	 * whole numbers; `palette` lists the template keys shown over the keypad
+	 */
+	latex?: { palette: PaletteKey[] };
 	/** per-level bounty overrides; anything missing uses ROBOTS[type].bounty */
 	bounty?: Partial<Record<RobotType, number>>;
 };
